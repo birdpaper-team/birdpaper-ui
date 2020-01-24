@@ -1,0 +1,146 @@
+/*
+ * @Author: Sam
+ * @Date: 2020-01-21 17:09:21
+ * @Last Modified by: Sam
+ * @Last Modified time: 2020-01-22 19:36:50
+ */
+@import "../../common/less/theme.less";
+
+.bp-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  box-sizing: border-box;
+  z-index: 1010;
+  padding: 20px;
+  pointer-events: none;
+
+  .message-container {
+    margin-bottom: 10px;
+    
+    .message-icon {
+      display: inline-block;
+
+      i {
+        font-size: 1.8rem;
+        font-weight: 400;
+        margin-top: -3px;
+        margin-right: 10px;
+        display: inline-block;
+        box-sizing: border-box;
+        vertical-align: middle;
+      }
+
+      .ri-checkbox-circle-fill {
+        color: @success;
+      }
+
+      .ri-error-warning-fill {
+        color: @warning;
+      }
+
+      .ri-close-circle-fill {
+        color: @danger;
+      }
+
+      // 加载图标
+      .ri-loader-5-fill {
+        display: inline-block;
+        animation: rotating 1s ease-in-out infinite;
+        -webkit-animation: rotating 1s ease-in-out infinite;
+        color: @primary;
+      }
+
+      @keyframes rotating {
+        0% {
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+        }
+
+
+        100% {
+          -webkit-transform: rotate(359deg);
+          transform: rotate(359deg);
+        }
+      }
+
+    }
+
+    .message-content {
+      display: inline-block;
+      padding: 12px 15px;
+      color: @blackNormal;
+      font-size: 1.2rem;
+      font-weight: 500;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 1px 6px rgba(0, 0, 0, .15);
+      max-width: 500px;
+
+      span {
+        pointer-events: none;
+        moz-user-select: -moz-none;
+        -moz-user-select: none;
+        -o-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      .option {
+        display: inline-block;
+        pointer-events: all;
+        margin-left: 15px;
+
+        i {
+          font-size: 1.3rem;
+          font-weight: 600;
+          margin-top: -3px;
+          display: inline-block;
+          box-sizing: border-box;
+          vertical-align: middle;
+          cursor: pointer;
+          color: @blackMinor;
+          transition: color 0.2s ease;
+          -o-transition: color 0.2s ease;
+          -moz-transition: color 0.2s ease;
+          -webkit-transition: color 0.2s ease;
+
+          &:hover {
+            color: @danger;
+            transition: color 0.2s ease;
+            -o-transition: color 0.2s ease;
+            -moz-transition: color 0.2s ease;
+            -webkit-transition: color 0.2s ease;
+          }
+        }
+      }
+    }
+
+  }
+
+  .message-list-item {
+    display: inline-block;
+  }
+
+  .message-list-enter-active,
+  .message-list-leave-active {
+    transition: all .3s ease-in-out;
+  }
+
+  .message-list-leave-active {
+    margin-bottom: 20px;
+  }
+
+  .message-list-enter,
+  .message-list-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}

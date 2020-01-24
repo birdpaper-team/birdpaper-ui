@@ -1,0 +1,204 @@
+/*
+ * @Author: Sam
+ * @Date: 2019-12-16 11:05:47
+ * @Last Modified by: Sam
+ * @Last Modified time: 2020-01-17 14:35:29
+ */
+@import "../../common/less/theme.less";
+
+button {
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+  text-align: center;
+  box-sizing: border-box;
+  display: inline-block;
+  white-space: nowrap;
+  border-radius: 3px;
+  font-weight: 500;
+  opacity: 1;
+  -webkit-appearance: none;
+  moz-user-select: -moz-none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: background .2s, color .2s, border .2s, opacity .2s;
+  -o-transition: background .2s, color .2s, border .2s, opacity .2s;
+  -moz-transition: background .2s, color .2s, border .2s, opacity .2s;
+  -webkit-transition: background .2s, color .2s, border .2s, opacity .2s;
+  transition-timing-function: ease;
+  -moz-transition-timing-function: ease;
+  -webkit-transition-timing-function: ease;
+  -o-transition-timing-function: ease;
+}
+
+.btn-full {
+  width: 100% !important;
+  display: block !important;
+}
+
+.bp-button {
+  position: relative;
+  display: inline-block;
+
+  // 按钮尺寸
+  .btn-size-large {
+    padding: 10px 22px;
+    font-size: 1.3rem;
+  }
+
+  .btn-size-normal {
+    padding: 8px 18px;
+    font-size: 1.2rem;
+  }
+
+  .btn-size-small {
+    padding: 6px 14px;
+    font-size: 1.1rem;
+  }
+
+  .btn-size-mini {
+    padding: 4px 10px;
+    font-size: 1rem;
+  }
+
+  button:disabled {
+    opacity: .618;
+    cursor: not-allowed;
+    transition: opacity .2s ease;
+    -o-transition: opacity .2s ease;
+    -moz-transition: opacity .2s ease;
+    -webkit-transition: opacity .2s ease;
+  }
+
+  // 文字按钮
+  .btn-text {
+    font-size: 1.1rem;
+    color: #379BFF;
+    out-line: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    -o-transition: color 0.2s ease;
+    -moz-transition: color 0.2s ease;
+    -webkit-transition: color 0.2s ease;
+  }
+
+  // 默认按钮
+  .btn-default {
+    border: 1px solid #DCDFE6;
+    background: #FFF;
+    color: #606266;
+
+    &:hover {
+      border: 1px solid #DCDFE6;
+      color: @primary;
+      background: #ECF5FF;
+    }
+
+    &:active {
+      border: 1px solid @primary;
+      background: #ECF5FF;
+    }
+  }
+
+
+  // 主要按钮
+  .btn-primary {
+    border: 1px solid @primary;
+    background: @primary;
+    color: #FFF;
+
+    &:hover {
+      border: 1px solid @primaryLight;
+      background: @primaryLight;
+    }
+
+    &:active {
+      border: 1px solid @primaryDark;
+      background: @primaryDark;
+    }
+  }
+
+
+  // 成功按钮
+  .btn-success {
+    border: 1px solid @success;
+    background: @success;
+    color: #FFF;
+
+    &:hover {
+      border: 1px solid @successLight;
+      background: @successLight;
+    }
+
+    &:active {
+      border: 1px solid @successDark;
+      background: @successDark;
+    }
+  }
+
+
+  // 警告按钮
+  .btn-warning {
+    border: 1px solid @warning;
+    background: @warning;
+    color: #FFF;
+
+    &:hover {
+      border: 1px solid @warningLight;
+      background: @warningLight;
+    }
+
+    &:active {
+      border: 1px solid @warningDark;
+      background: @warningDark;
+    }
+  }
+
+
+  // 危险按钮
+  .btn-danger {
+    border: 1px solid @danger;
+    background: @danger;
+    color: #FFF;
+
+    &:hover {
+      border: 1px solid @dangerLight;
+      background: @dangerLight;
+    }
+
+    &:active {
+      border: 1px solid @dangerDark;
+      background: @dangerDark;
+    }
+  }
+
+}
+
+.round {
+  button {
+    border-radius: 25px;
+  }
+}
+
+// 加载
+.bp-icon-loading {
+  display: inline-block;
+  animation: rotating 1s ease-in-out infinite;
+  -webkit-animation: rotating 1s ease-in-out infinite;
+}
+
+@keyframes rotating {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
+  }
+}

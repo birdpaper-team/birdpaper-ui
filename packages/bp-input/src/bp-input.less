@@ -1,0 +1,123 @@
+/*
+ * @Author: Sam
+ * @Date: 2019-11-07 14:07:32
+ * @Last Modified by: Sam
+ * @Last Modified time: 2019-12-26 14:57:30
+ */
+
+.bp-input {
+  width: 100%;
+  height: 40px;
+  position: relative;
+  font-size: 15px;
+  display: inline-block;
+  margin-bottom: 15px;
+  border: 1px solid #DCDFE6;
+  border-radius: 3px;
+  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+  .bp-input-inner {
+    width: 100%;
+    height: 40px;
+    -webkit-appearance: none;
+    background-color: #fff;
+    background-image: none;
+    box-sizing: border-box;
+    color: #606266;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    border: none;
+    display: inline-block;
+    padding: 0 15px;
+  }
+
+  .bp-input-right {
+    // background: #b5ddfffa;
+    position: absolute;
+    right: 0;
+    top: 0px;
+    width: 35px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+
+    i {
+      cursor: pointer;
+    }
+  }
+
+}
+
+.focus-border {
+  border: 1px solid #379BFF;
+  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+}
+
+input {
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  outline: none;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei";
+}
+
+::-webkit-input-placeholder {
+  color: #C0C4CC;
+  font-weight: 400;
+}
+
+/* Firefox 4-18 */
+:-moz-placeholder {
+  color: #C0C4CC;
+  font-weight: 400;
+}
+
+/* Firefox 19-50 */
+::-moz-placeholder {
+  color: #C0C4CC;
+  font-weight: 400;
+}
+
+/* - Internet Explorer 10–11
+   - Internet Explorer Mobile 10-11 */
+:-ms-input-placeholder {
+  color: #C0C4CC !important;
+  font-weight: 400 !important;
+}
+
+/* Edge (also supports ::-webkit-input-placeholder) */
+::-ms-input-placeholder {
+  color: #C0C4CC;
+  font-weight: 400;
+}
+
+.bp-fade-in-enter,
+.bp-fade-in-leave-active,
+.bp-fade-in-linear-enter,
+.bp-fade-in-linear-leave,
+.bp-fade-in-linear-leave-active,
+.fade-in-linear-enter,
+.fade-in-linear-leave,
+.fade-in-linear-leave-active {
+    opacity: 0
+}
+
+.fade-in-linear-enter-active,
+.fade-in-linear-leave-active {
+    -webkit-transition: opacity .2s linear;
+    transition: opacity .2s linear
+}
+
+.bp-fade-in-linear-enter-active,
+.bp-fade-in-linear-leave-active {
+    -webkit-transition: opacity .2s linear;
+    transition: opacity .2s linear
+}
+
+.bp-fade-in-enter-active,
+.bp-fade-in-leave-active {
+    -webkit-transition: all .3s cubic-bezier(.55, 0, .1, 1);
+    transition: all .3s cubic-bezier(.55, 0, .1, 1)
+}
