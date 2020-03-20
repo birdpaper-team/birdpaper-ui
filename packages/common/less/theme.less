@@ -2,31 +2,57 @@
  * @Author: Sam
  * @Date: 2020-01-17 12:33:32
  * @Last Modified by: Sam
- * @Last Modified time: 2020-01-17 14:39:33
+ * @Last Modified time: 2020-03-19 16:26:49
  */
 
+// 我们目前约定主色(primary)和三个辅助色(success,warning,danger)和中性色(black,bg,border)
+
+// 主色和辅助色释义:
+// [primary]-主色调,[success]-成功色,[warning]-警告色,[danger]-危险色
+// 每个色调对应匹配5个色板，一般来说，我们采用第三个色板作为常用色
+
+// 中性色释义:
+// [gary]-分为0到12个级别
+
 //  主色
-@primary: #379BFF;
-@primaryLight: #50ABFF;
-@primaryDark: #0089EB;
+@primary-1: #f0faff;
+@primary-2: #b3e0ff;
+@primary-3: #61b5ff;
+@primary-4: #379bff;
+@primary-5: #2579d9;
 
 // 成功色
-@success: #58C05B;
-@successLight: #64CC65;
-@successDark: #4AB24E;
+@success-1: #f2fff0;
+@success-2: #abd9a9;
+@success-3: #7ecc7e;
+@success-4: #58c05b;
+@success-5: #3f9945;
 
 // 警告色
-@warning: #E5A43C;
-@warningLight: #F7B24B;
-@warningDark: #D99830;
+@warning-1: #fffcf0;
+@warning-2: #ffdd94;
+@warning-3: #f2c166;
+@warning-4: #e5a43c;
+@warning-5: #bf8028;
 
 // 危险色
-@danger: #F56462;
-@dangerLight: #FF726F;
-@dangerDark: #E65657;
+@danger-1: #fff2f0;
+@danger-2: #ffcdc7;
+@danger-3: #ff7c75;
+@danger-4: #fd4f4d;
+@danger-5: #d63638;
 
-// 黑色
-@blackPrimary: #303133;
-@blackNormal: #606266;
-@blackMinor: #909399;
-@blackPlaceholder: #C0C4CC;
+// 中性色
+@gary-0: #ffffff;
+@gary-1: #fafafa;
+@gary-2: #f5f5f5;
+@gary-3: #f0f0f0;
+@gary-4: #d9d9d9;
+@gary-5: #bfbfbf;
+@gary-6: #8c8c8c;
+@gary-7: #595959;
+@gary-8: #434343;
+@gary-9: #262626;
+@gary-10: #1f1f1f;
+@gary-11: #141414;
+@gary-12: #000000;

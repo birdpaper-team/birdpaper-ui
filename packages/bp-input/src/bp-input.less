@@ -2,95 +2,138 @@
  * @Author: Sam
  * @Date: 2019-11-07 14:07:32
  * @Last Modified by: Sam
- * @Last Modified time: 2019-12-26 14:57:30
+ * @Last Modified time: 2020-03-17 10:11:28
  */
+@import "../../common/less/theme.less";
 
 .bp-input {
-  width: 100%;
-  height: 40px;
-  position: relative;
-  font-size: 15px;
-  display: inline-block;
-  margin-bottom: 15px;
-  border: 1px solid #DCDFE6;
-  border-radius: 3px;
-  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
-
-  .bp-input-inner {
     width: 100%;
-    height: 40px;
-    -webkit-appearance: none;
-    background-color: #fff;
-    background-image: none;
-    box-sizing: border-box;
-    color: #606266;
-    letter-spacing: 1px;
-    border-radius: 3px;
-    border: none;
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 40px;
+    position: relative;
+    font-size: 15px;
     display: inline-block;
-    padding: 0 15px;
-  }
+    border: 1px solid @gary-4;
+    border-radius: 4px;
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
 
-  .bp-input-right {
-    // background: #b5ddfffa;
-    position: absolute;
-    right: 0;
-    top: 0px;
-    width: 35px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
+    .bp-input-inner {
+        width: 100%;
+        height: 40px;
+        -webkit-appearance: none;
+        background-color: @gary-0;
+        background-image: none;
+        box-sizing: border-box;
+        color: @gary-7;
+        letter-spacing: 1px;
+        border-radius: 4px;
+        border: none;
+        display: inline-block;
+        padding: 0 30px 0 15px;
 
-    i {
-      cursor: pointer;
+        &:disabled {
+            background-color: @gary-2;
+            cursor: no-drop;
+        }
+
+        &:read-only {
+            background-color: @gary-1;
+            cursor: no-drop;
+        }
     }
-  }
 
+    .bp-input-right {
+        position: absolute;
+        right: 0;
+        top: 0px;
+        width: 35px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+
+        i {
+            cursor: pointer;
+        }
+    }
+
+    // 多行文本
+    .bp-textarea-inner {
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        min-height: 60px;
+        -webkit-appearance: none;
+        background-color: @gary-0;
+        background-image: none;
+        box-sizing: border-box;
+        color: @gary-7;
+        letter-spacing: 1px;
+        border-radius: 4px;
+        border: none;
+        display: block;
+        padding: 10px 15px;
+
+        &:disabled {
+            background-color: @gary-2;
+            cursor: no-drop;
+        }
+
+        &:read-only {
+            background-color: @gary-1;
+            cursor: no-drop;
+        }
+    }
+
+    .resize-none {
+        resize: none;
+    }
 }
 
 .focus-border {
-  border: 1px solid #379BFF;
-  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    border: 1px solid @primary-3;
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
 }
 
-input {
-  letter-spacing: normal;
-  word-spacing: normal;
-  text-transform: none;
-  text-indent: 0px;
-  text-shadow: none;
-  outline: none;
-  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei";
+input,
+textarea {
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    outline: none;
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei";
 }
 
 ::-webkit-input-placeholder {
-  color: #C0C4CC;
-  font-weight: 400;
+    color: @gary-5;
+    font-weight: 400;
 }
 
 /* Firefox 4-18 */
 :-moz-placeholder {
-  color: #C0C4CC;
-  font-weight: 400;
+    color: @gary-5;
+    font-weight: 400;
 }
 
 /* Firefox 19-50 */
 ::-moz-placeholder {
-  color: #C0C4CC;
-  font-weight: 400;
+    color: @gary-5;
+    font-weight: 400;
 }
 
 /* - Internet Explorer 10–11
    - Internet Explorer Mobile 10-11 */
 :-ms-input-placeholder {
-  color: #C0C4CC !important;
-  font-weight: 400 !important;
+    color: @gary-5 !important;
+    font-weight: 400 !important;
 }
 
 /* Edge (also supports ::-webkit-input-placeholder) */
 ::-ms-input-placeholder {
-  color: #C0C4CC;
-  font-weight: 400;
+    color: @gary-5;
+    font-weight: 400;
 }
 
 .bp-fade-in-enter,

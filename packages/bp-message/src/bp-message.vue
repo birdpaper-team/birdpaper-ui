@@ -53,7 +53,7 @@ export default {
       );
 
       // 指定时间后移除消息
-      if(config.delayed!=0){
+      if (config.delayed != 0) {
         setTimeout(() => {
           this.remove(name);
         }, config.delayed * 1000);

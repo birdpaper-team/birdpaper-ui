@@ -2,12 +2,12 @@
  * @Author: Sam
  * @Date: 2019-12-16 11:06:00
  * @Last Modified by: Sam
- * @Last Modified time: 2019-12-26 14:09:23
+ * @Last Modified time: 2020-03-19 17:04:42
  */
 <template>
   <div :class="button_div_class">
     <!-- 文字按钮 -->
-    <span v-if="type=='text'" class="btn-text">
+    <span v-if="type=='text'" class="btn-text" @click="$emit('click')">
       <slot></slot>
     </span>
     <!-- 非文字按钮 -->
@@ -31,6 +31,11 @@ export default {
     },
     // 是否禁用
     disabled: {
+      type: Boolean,
+      default: false
+    },
+    // 是否幽灵按钮
+    plain: {
       type: Boolean,
       default: false
     },
@@ -81,7 +86,9 @@ export default {
     },
     // 非文字按钮样式
     button_class() {
-      let className = [`btn-${this.type}`]; // 按钮类型
+      let className = this.plain
+        ? [`btn-${this.type}-plain`]
+        : [`btn-${this.type}`]; // 按钮类型
       className.push(`btn-size-${this.size}`); // 按钮尺寸
       this.full ? className.push("btn-full") : null; // 宽度是否撑满父级元素
 

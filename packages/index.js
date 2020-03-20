@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-11 10:30:29
  * @Last Modified by: Sam
- * @Last Modified time: 2020-01-22 20:12:51
+ * @Last Modified time: 2020-01-29 10:35:55
  */
 import Vue from 'vue';
 // 导入组件
@@ -11,12 +11,16 @@ import bpInput from './bp-input';
 import bpRow from './bp-row';
 import bpCol from './bp-col';
 import msg from './bp-message';
+import bpSelect from './bp-select';
+import bpOption from './bp-option';
 
 Vue.prototype.$message = msg;
 
 const components = [
   bpButton,
   bpInput,
+  bpSelect,
+  bpOption,
   bpRow,
   bpCol
 ];
@@ -46,6 +50,8 @@ export default {
   install,
   // 具体的组件列表
   bpButton,
+  bpSelect,
+  bpOption,
   bpInput,
   bpRow,
   bpCol,

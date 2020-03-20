@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-21 17:09:21
  * @Last Modified by: Sam
- * @Last Modified time: 2020-01-22 19:36:50
+ * @Last Modified time: 2020-03-17 10:21:17
  */
 @import "../../common/less/theme.less";
 
@@ -22,7 +22,7 @@
 
   .message-container {
     margin-bottom: 10px;
-    
+
     .message-icon {
       display: inline-block;
 
@@ -37,15 +37,15 @@
       }
 
       .ri-checkbox-circle-fill {
-        color: @success;
+        color: @success-3;
       }
 
       .ri-error-warning-fill {
-        color: @warning;
+        color: @warning-3;
       }
 
       .ri-close-circle-fill {
-        color: @danger;
+        color: @danger-3;
       }
 
       // 加载图标
@@ -53,7 +53,7 @@
         display: inline-block;
         animation: rotating 1s ease-in-out infinite;
         -webkit-animation: rotating 1s ease-in-out infinite;
-        color: @primary;
+        color: @primary-3;
       }
 
       @keyframes rotating {
@@ -74,10 +74,10 @@
     .message-content {
       display: inline-block;
       padding: 12px 15px;
-      color: @blackNormal;
+      color: @gary-7;
       font-size: 1.2rem;
       font-weight: 500;
-      border-radius: 3px;
+      border-radius: 4px;
       background: rgba(255, 255, 255, 0.95);
       box-shadow: 0 1px 6px rgba(0, 0, 0, .15);
       max-width: 500px;
@@ -106,14 +106,14 @@
           box-sizing: border-box;
           vertical-align: middle;
           cursor: pointer;
-          color: @blackMinor;
+          color: @gary-5;
           transition: color 0.2s ease;
           -o-transition: color 0.2s ease;
           -moz-transition: color 0.2s ease;
           -webkit-transition: color 0.2s ease;
 
           &:hover {
-            color: @danger;
+            color: @danger-3;
             transition: color 0.2s ease;
             -o-transition: color 0.2s ease;
             -moz-transition: color 0.2s ease;

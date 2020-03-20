@@ -1,0 +1,131 @@
+/*
+ * @Author: Sam
+ * @Date: 2020-01-28 16:51:37
+ * @Last Modified by: Sam
+ * @Last Modified time: 2020-03-17 10:05:43
+ */
+@import "../../common/less/theme.less";
+
+.bp-select {
+    position: relative;
+    -webkit-appearance: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    .select-size-normal {
+        height: 40px;
+        line-height: 40px;
+    }
+
+    .select-size-small {
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .select-input {
+        position: relative;
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 10px;
+        border: 1px solid @gary-4;
+        border-radius: 4px;
+        text-align: left;
+        background-color: @gary-0;
+        cursor: pointer;
+        transition: border-color .2s ease;
+
+        span {
+            padding-left: 15px;
+            font-weight: 400;
+            font-size: 1.1rem;
+            color: @gary-5;
+        }
+
+        .select-value {
+            color: @gary-7;
+        }
+
+        .option {
+            position: absolute;
+            top: 0;
+            right: 15px;
+
+            i {
+                display: block;
+                font-size: 1.6rem;
+                color: @gary-5;
+                transform: rotate(0deg);
+                transition: transform .3s ease;
+            }
+
+            .open {
+                transform: rotate(-180deg);
+                transition: transform .3s ease;
+            }
+        }
+    }
+
+    .active {
+        border: 1px solid @primary-3;
+        transition: border-color .2s ease;
+
+        &:hover {
+            border: 1px solid @primary-3;
+            transition: border-color .2s ease;
+        }
+    }
+
+    .select-item-box {
+        position: absolute;
+        width: 100%;
+        height: auto;
+        background: @gary-0;
+        border: 1px solid @gary-4;
+        border-radius: 4px;
+        padding: 5px 0;
+        box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1);
+        max-width: 300px;
+        max-height: 200px;
+        overflow-x: hidden;
+        z-index: 500;
+    }
+
+    .scro-1::-webkit-scrollbar {
+        width: 3px;
+        height: 1px;
+    }
+
+    .scro-1::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background: @gary-5;
+    }
+
+    .scro-1::-webkit-scrollbar-track {
+        border-radius: 4px;
+        background: @gary-3;
+    }
+}
+
+.bp-zoom-in-top-enter-active,
+.bp-zoom-in-top-leave-active {
+    opacity: 1;
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    -webkit-transition: opacity .2s cubic-bezier(.23, 1, .32, 1), -webkit-transform .2s cubic-bezier(.23, 1, .32, 1);
+    transition: opacity .2s cubic-bezier(.23, 1, .32, 1), -webkit-transform .2s cubic-bezier(.23, 1, .32, 1);
+    transition: transform .2s cubic-bezier(.23, 1, .32, 1), opacity .2s cubic-bezier(.23, 1, .32, 1);
+    transition: transform .2s cubic-bezier(.23, 1, .32, 1), opacity .2s cubic-bezier(.23, 1, .32, 1), -webkit-transform .2s cubic-bezier(.23, 1, .32, 1);
+    -webkit-transform-origin: center top;
+    transform-origin: center top
+}
+
+.bp-zoom-in-top-enter,
+.bp-zoom-in-top-leave-active {
+    opacity: 0;
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0)
+}
