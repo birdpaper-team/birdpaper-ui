@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-12-16 11:05:47
  * @Last Modified by: Sam
- * @Last Modified time: 2020-03-17 10:20:21
+ * @Last Modified time: 2020-03-30 22:42:29
  */
 @import "../../common/less/theme.less";
 
@@ -10,11 +10,13 @@ button {
   cursor: pointer;
   outline: none;
   white-space: nowrap;
+  max-width: 100%;
+  min-height: 20px;
   text-align: center;
   box-sizing: border-box;
   display: inline-block;
   white-space: nowrap;
-  border-radius: 3.5px;
+  border-radius: 4px;
   font-weight: 500;
   opacity: 1;
   -webkit-appearance: none;
@@ -24,10 +26,10 @@ button {
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  transition: background .2s, color .2s, border .2s, opacity .2s;
-  -o-transition: background .2s, color .2s, border .2s, opacity .2s;
-  -moz-transition: background .2s, color .2s, border .2s, opacity .2s;
-  -webkit-transition: background .2s, color .2s, border .2s, opacity .2s;
+  transition: background .2s, color .2s, border .2s, opacity .2s, width .2s;
+  -o-transition: background .2s, color .2s, border .2s, opacity .2s, width .2s;
+  -moz-transition: background .2s, color .2s, border .2s, opacity .2s, width .2s;
+  -webkit-transition: background .2s, color .2s, border .2s, opacity .2s, width .2s;
   transition-timing-function: ease;
   -moz-transition-timing-function: ease;
   -webkit-transition-timing-function: ease;
@@ -45,23 +47,27 @@ button {
 
   // 按钮尺寸
   .btn-size-large {
-    padding: 10px 22px;
-    font-size: 1.2rem;
+    height: 50px;
+    padding: 0 22px;
+    font-size: 16px;
   }
 
   .btn-size-normal {
-    padding: 8px 18px;
-    font-size: 1.1rem;
+    height: 40px;
+    padding: 0 18px;
+    font-size: 14px;
   }
 
   .btn-size-small {
-    padding: 6px 14px;
-    font-size: 1rem;
+    height: 30px;
+    padding: 0 14px;
+    font-size: 12px;
   }
 
   .btn-size-mini {
-    padding: 2px 6px;
-    font-size: 0.9rem;
+    height: 20px;
+    padding: 0 6px;
+    font-size: 10px;
   }
 
   button:disabled {
@@ -76,7 +82,7 @@ button {
 
   // 文字按钮
   .btn-text {
-    font-size: 1.1rem;
+    font-size: 14px;
     color: @primary-3;
     out-line: none;
     cursor: pointer;
@@ -87,10 +93,20 @@ button {
   }
 
   // 默认按钮
-  .btn-default {
+  .default-style {
     border: 1px solid @gary-5;
     background: @gary-0;
     color: @gary-7;
+  }
+
+  .btn-default {
+    .default-style;
+
+    &:disabled {
+      &:hover {
+        .default-style;
+      }
+    }
 
     &:hover {
       border: 1px solid @gary-5;
@@ -104,10 +120,21 @@ button {
     }
   }
 
-  .btn-default-plain {
+  // 默认幽灵按钮
+  .default-plain-style {
     border: 1px solid @gary-5;
     background: @gary-0;
     color: @gary-7;
+  }
+
+  .btn-default-plain {
+    .default-plain-style;
+
+    &:disabled {
+      &:hover {
+        .default-plain-style;
+      }
+    }
 
     &:hover {
       border: 1px solid @gary-5;
@@ -122,10 +149,20 @@ button {
   }
 
   // 主要按钮
-  .btn-primary {
+  .primary-style {
     border: 1px solid @primary-3;
     background: @primary-3;
     color: @gary-0;
+  }
+
+  .btn-primary {
+    .primary-style;
+
+    &:disabled {
+      &:hover {
+        .primary-style;
+      }
+    }
 
     &:hover {
       border: 1px solid @primary-4;
@@ -138,10 +175,21 @@ button {
     }
   }
 
-  .btn-primary-plain {
+  // 主要幽灵按钮
+  .primary-plain-style {
     border: 1px solid @primary-3;
     background: @primary-1;
     color: @primary-3;
+  }
+
+  .btn-primary-plain {
+    .primary-plain-style;
+
+    &:disabled {
+      &:hover {
+        .primary-plain-style;
+      }
+    }
 
     &:hover {
       border: 1px solid @primary-4;
@@ -157,10 +205,20 @@ button {
   }
 
   // 成功按钮
-  .btn-success {
+  .success-style {
     border: 1px solid @success-3;
     background: @success-3;
     color: @gary-0;
+  }
+
+  .btn-success {
+    .success-style;
+
+    &:disabled {
+      &:hover {
+        .success-style;
+      }
+    }
 
     &:hover {
       border: 1px solid @success-4;
@@ -173,10 +231,21 @@ button {
     }
   }
 
-  .btn-success-plain {
+  // 成功幽灵按钮
+  .success-plain-style {
     border: 1px solid @success-3;
     background: @success-1;
     color: @success-3;
+  }
+
+  .btn-success-plain {
+    .success-plain-style;
+
+    &:disabled {
+      &:hover {
+        .success-plain-style;
+      }
+    }
 
     &:hover {
       border: 1px solid @success-4;
@@ -193,10 +262,20 @@ button {
 
 
   // 警告按钮
-  .btn-warning {
+  .warning-style {
     border: 1px solid @warning-3;
     background: @warning-3;
     color: @gary-0;
+  }
+
+  .btn-warning {
+    .warning-style;
+
+    &:disabled {
+      &:hover {
+        .warning-style;
+      }
+    }
 
     &:hover {
       border: 1px solid @warning-4;
@@ -209,10 +288,21 @@ button {
     }
   }
 
-  .btn-warning-plain {
+  // 警告幽灵按钮
+  .warning-plain-style {
     border: 1px solid @warning-3;
     background: @warning-1;
     color: @warning-3;
+  }
+
+  .btn-warning-plain {
+    .warning-plain-style;
+
+    &:disabled {
+      &:hover {
+        .warning-plain-style;
+      }
+    }
 
     &:hover {
       border: 1px solid @warning-4;
@@ -229,10 +319,20 @@ button {
 
 
   // 危险按钮
-  .btn-danger {
+  .danger-style {
     border: 1px solid @danger-3;
     background: @danger-3;
     color: @gary-0;
+  }
+
+  .btn-danger {
+    .danger-style;
+
+    &:disabled {
+      &:hover {
+        .danger-style;
+      }
+    }
 
     &:hover {
       border: 1px solid @danger-4;
@@ -245,10 +345,21 @@ button {
     }
   }
 
-  .btn-danger-plain {
+  // 危险幽灵按钮
+  .danger-plain-style {
     border: 1px solid @danger-3;
     background: @danger-1;
     color: @danger-3;
+  }
+
+  .btn-danger-plain {
+    .danger-plain-style;
+
+    &:disabled {
+      &:hover {
+        .danger-plain-style;
+      }
+    }
 
     &:hover {
       border: 1px solid @danger-4;
@@ -273,6 +384,7 @@ button {
 // 加载
 .bp-icon-loading {
   display: inline-block;
+  margin-right: 10px;
   animation: rotating 1s ease-in-out infinite;
   -webkit-animation: rotating 1s ease-in-out infinite;
 }

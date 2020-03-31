@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-11-07 14:07:32
  * @Last Modified by: Sam
- * @Last Modified time: 2020-03-17 10:11:28
+ * @Last Modified time: 2020-03-30 15:04:45
  */
 @import "../../common/less/theme.less";
 
@@ -12,7 +12,6 @@
     min-width: 100%;
     min-height: 40px;
     position: relative;
-    font-size: 15px;
     display: inline-block;
     border: 1px solid @gary-4;
     border-radius: 4px;
@@ -24,6 +23,7 @@
         -webkit-appearance: none;
         background-color: @gary-0;
         background-image: none;
+        font-size: 14px;
         box-sizing: border-box;
         color: @gary-7;
         letter-spacing: 1px;
@@ -54,6 +54,7 @@
 
         i {
             cursor: pointer;
+            font-size: 16px;
         }
     }
 
@@ -67,6 +68,7 @@
         background-color: @gary-0;
         background-image: none;
         box-sizing: border-box;
+        font-size: 14px;
         color: @gary-7;
         letter-spacing: 1px;
         border-radius: 4px;
@@ -161,6 +163,6 @@ textarea {
 
 .bp-fade-in-enter-active,
 .bp-fade-in-leave-active {
-    -webkit-transition: all .3s cubic-bezier(.55, 0, .1, 1);
-    transition: all .3s cubic-bezier(.55, 0, .1, 1)
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease
 }
