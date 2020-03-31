@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-28 16:52:14
  * @Last Modified by: Sam
- * @Last Modified time: 2020-01-29 19:19:11
+ * @Last Modified time: 2020-03-30 17:17:18
  */
 <template>
   <!-- 选择器选项 -->
@@ -50,6 +50,6 @@ export default {
   }
 };
 </script>
-<style lang="less" scoped>
+<style lang="less">
 @import "./bp-option.less";
 </style>

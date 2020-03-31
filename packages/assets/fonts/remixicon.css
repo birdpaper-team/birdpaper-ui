@@ -1,0 +1,147 @@
+
+/*
+* https://remixicon.com
+* https://github.com/Remix-Design/RemixIcon
+* Copyright RemixIcon.com
+* Released under the Apache License Version 2.0
+*/
+
+@font-face {
+    font-family: "remixicon";
+    src: url('remixicon.eot?t=1585563015608'); /* IE9*/
+    src: url('remixicon.eot?t=1585563015608#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url("remixicon.woff2?t=1585563015608") format("woff2"),
+    url("remixicon.woff?t=1585563015608") format("woff"),
+    url('remixicon.ttf?t=1585563015608') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('remixicon.svg?t=1585563015608#remixicon') format('svg'); /* iOS 4.1- */
+    font-display: swap;
+}
+
+[class^="ri-"], [class*="ri-"] {
+    font-family: 'remixicon' !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.ri-lg { font-size: 1.3333em; line-height: 0.75em; vertical-align: -.0667em; }
+.ri-xl { font-size: 1.5em; line-height: 0.6666em; vertical-align: -.075em; }
+.ri-xxs { font-size: .5em; }
+.ri-xs { font-size: .75em; }
+.ri-sm { font-size: .875em }
+.ri-1x { font-size: 1em; }
+.ri-2x { font-size: 2em; }
+.ri-3x { font-size: 3em; }
+.ri-4x { font-size: 4em; }
+.ri-5x { font-size: 5em; }
+.ri-6x { font-size: 6em; }
+.ri-7x { font-size: 7em; }
+.ri-8x { font-size: 8em; }
+.ri-9x { font-size: 9em; }
+.ri-10x { font-size: 10em; }
+.ri-fw { text-align: center; width: 1.25em; }
+
+.ri-home-line:before { content: "\edd6"; }
+.ri-home-fill:before { content: "\edd1"; }
+.ri-store-2-line:before { content: "\f0f1"; }
+.ri-store-2-fill:before { content: "\f0f0"; }
+.ri-building-line:before { content: "\eb09"; }
+.ri-building-fill:before { content: "\eb08"; }
+.ri-mail-line:before { content: "\ee8b"; }
+.ri-mail-fill:before { content: "\ee88"; }
+.ri-inbox-archive-line:before { content: "\edf4"; }
+.ri-inbox-archive-fill:before { content: "\edf3"; }
+.ri-bookmark-line:before { content: "\eae3"; }
+.ri-bookmark-fill:before { content: "\eae2"; }
+.ri-customer-service-2-line:before { content: "\ebee"; }
+.ri-customer-service-2-fill:before { content: "\ebed"; }
+.ri-slideshow-2-line:before { content: "\f0a6"; }
+.ri-slideshow-2-fill:before { content: "\f0a5"; }
+.ri-chat-2-line:before { content: "\eb41"; }
+.ri-chat-2-fill:before { content: "\eb40"; }
+.ri-discuss-line:before { content: "\ec16"; }
+.ri-discuss-fill:before { content: "\ec15"; }
+.ri-pencil-line:before { content: "\ef5e"; }
+.ri-pencil-fill:before { content: "\ef5d"; }
+.ri-layout-3-line:before { content: "\ee20"; }
+.ri-layout-3-fill:before { content: "\ee1f"; }
+.ri-bug-line:before { content: "\eb01"; }
+.ri-bug-fill:before { content: "\eb00"; }
+.ri-code-s-slash-line:before { content: "\eb93"; }
+.ri-code-s-slash-fill:before { content: "\eb92"; }
+.ri-html5-line:before { content: "\edea"; }
+.ri-html5-fill:before { content: "\ede9"; }
+.ri-computer-line:before { content: "\ebae"; }
+.ri-computer-fill:before { content: "\ebad"; }
+.ri-file-line:before { content: "\ecb1"; }
+.ri-file-fill:before { content: "\ecaa"; }
+.ri-file-copy-line:before { content: "\ec9f"; }
+.ri-file-copy-fill:before { content: "\ec9e"; }
+.ri-wechat-line:before { content: "\f1e4"; }
+.ri-wechat-fill:before { content: "\f1e3"; }
+.ri-qq-line:before { content: "\efaf"; }
+.ri-qq-fill:before { content: "\efae"; }
+.ri-vuejs-line:before { content: "\f1d4"; }
+.ri-vuejs-fill:before { content: "\f1d3"; }
+.ri-weibo-fill:before { content: "\f1e7"; }
+.ri-map-pin-line:before { content: "\eea9"; }
+.ri-map-pin-fill:before { content: "\eea8"; }
+.ri-image-line:before { content: "\edf2"; }
+.ri-image-fill:before { content: "\edf1"; }
+.ri-more-fill:before { content: "\eefe"; }
+.ri-more-2-fill:before { content: "\eefc"; }
+.ri-heart-line:before { content: "\edbe"; }
+.ri-heart-fill:before { content: "\edbd"; }
+.ri-error-warning-line:before { content: "\ec6b"; }
+.ri-error-warning-fill:before { content: "\ec6a"; }
+.ri-settings-3-line:before { content: "\f048"; }
+.ri-settings-3-fill:before { content: "\f047"; }
+.ri-star-line:before { content: "\f0db"; }
+.ri-star-fill:before { content: "\f0d6"; }
+.ri-question-line:before { content: "\efb9"; }
+.ri-question-fill:before { content: "\efb8"; }
+.ri-checkbox-circle-line:before { content: "\eb69"; }
+.ri-checkbox-circle-fill:before { content: "\eb68"; }
+.ri-close-circle-line:before { content: "\eb7f"; }
+.ri-close-circle-fill:before { content: "\eb7e"; }
+.ri-add-circle-line:before { content: "\ea0f"; }
+.ri-add-circle-fill:before { content: "\ea0e"; }
+.ri-indeterminate-circle-line:before { content: "\edfe"; }
+.ri-indeterminate-circle-fill:before { content: "\edfd"; }
+.ri-check-line:before { content: "\eb63"; }
+.ri-close-line:before { content: "\eb81"; }
+.ri-upload-line:before { content: "\f18a"; }
+.ri-download-line:before { content: "\ec28"; }
+.ri-arrow-up-s-line:before { content: "\ea76"; }
+.ri-arrow-down-s-line:before { content: "\ea4c"; }
+.ri-arrow-right-s-line:before { content: "\ea6c"; }
+.ri-arrow-left-s-line:before { content: "\ea62"; }
+.ri-search-line:before { content: "\f037"; }
+.ri-loader-fill:before { content: "\ee64"; }
+.ri-loader-2-fill:before { content: "\ee5c"; }
+.ri-loader-3-fill:before { content: "\ee5e"; }
+.ri-loader-4-line:before { content: "\ee61"; }
+.ri-loader-5-line:before { content: "\ee63"; }
+.ri-fingerprint-line:before { content: "\ecf3"; }
+.ri-eye-line:before { content: "\ec7f"; }
+.ri-eye-fill:before { content: "\ec7e"; }
+.ri-eye-off-line:before { content: "\ec81"; }
+.ri-eye-off-fill:before { content: "\ec80"; }
+.ri-eye-close-line:before { content: "\ec7d"; }
+.ri-eye-close-fill:before { content: "\ec7c"; }
+.ri-user-3-line:before { content: "\f18e"; }
+.ri-account-circle-line:before { content: "\ea07"; }
+.ri-account-circle-fill:before { content: "\ea06"; }
+.ri-share-line:before { content: "\f060"; }
+.ri-share-fill:before { content: "\f059"; }
+.ri-delete-bin-7-line:before { content: "\ec06"; }
+.ri-delete-bin-7-fill:before { content: "\ec05"; }
+.ri-earth-line:before { content: "\ec46"; }
+.ri-shopping-cart-line:before { content: "\f080"; }
+.ri-shopping-cart-fill:before { content: "\f07f"; }
+.ri-vip-line:before { content: "\f1c2"; }
+.ri-vip-fill:before { content: "\f1c1"; }
+.ri-external-link-line:before { content: "\ec79"; }
+.ri-alipay-line:before { content: "\ea2a"; }
+.ri-wechat-pay-line:before { content: "\f1e6"; }
+.ri-menu-3-line:before { content: "\eec5"; }

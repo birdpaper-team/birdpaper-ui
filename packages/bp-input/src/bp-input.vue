@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-11-07 14:05:54
  * @Last Modified by: Sam
- * @Last Modified time: 2020-03-15 09:26:47
+ * @Last Modified time: 2020-03-30 16:23:59
  */
 <template>
   <div :class="[is_focus ? 'focus-border' : '', 'bp-input']">
@@ -141,8 +141,9 @@ export default {
     },
     // 清空输入框触发
     handelClear() {
-      this.$emit("clear", this.input_value);
       this.input_value = "";
+      this.$emit("input", this.input_value);
+      this.$emit("clear", this.input_value);
     },
     // 密码显示/隐藏
     showPassword() {
@@ -156,6 +157,11 @@ export default {
       // 设置高度
       el.target.style.height = `${el.target.scrollTop +
         el.target.scrollHeight}px`;
+    }
+  },
+  watch:{
+    value(){
+      this.input_value = this.value;
     }
   }
 };

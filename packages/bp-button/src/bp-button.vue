@@ -2,20 +2,21 @@
  * @Author: Sam
  * @Date: 2019-12-16 11:06:00
  * @Last Modified by: Sam
- * @Last Modified time: 2020-03-19 17:04:42
+ * @Last Modified time: 2020-03-31 10:34:51
  */
 <template>
-  <div :class="button_div_class">
+  <div :class="buttonDivClass">
     <!-- 文字按钮 -->
-    <span v-if="type=='text'" class="btn-text" @click="$emit('click')">
+    <span v-if="type=='text'" class="btn-text" @click="handelClick">
       <slot></slot>
     </span>
     <!-- 非文字按钮 -->
-    <button v-else :class="button_class" :disabled="disabled" @click="$emit('click')">
+    <button v-else :class="buttonClass" :disabled="disabled" @click="handelClick">
+      <!-- 加载状态 -->
       <span v-if="loading" class="bp-icon-loading">
-        <i class="ri-loader-5-fill"></i>
+        <i class="ri-loader-5-line"></i>
       </span>
-      <slot v-if="!loading"></slot>
+      <slot></slot>
     </button>
   </div>
 </template>
@@ -77,7 +78,7 @@ export default {
   },
   computed: {
     // 外层 div 样式
-    button_div_class() {
+    buttonDivClass() {
       let className = ["bp-button"];
       // 圆角样式
       this.round ? className.push("round") : null;
@@ -85,7 +86,7 @@ export default {
       return className;
     },
     // 非文字按钮样式
-    button_class() {
+    buttonClass() {
       let className = this.plain
         ? [`btn-${this.type}-plain`]
         : [`btn-${this.type}`]; // 按钮类型
@@ -93,6 +94,12 @@ export default {
       this.full ? className.push("btn-full") : null; // 宽度是否撑满父级元素
 
       return className;
+    }
+  },
+  methods:{
+    // 点击事件触发
+    handelClick(){
+      this.$emit('click');
     }
   }
 };
