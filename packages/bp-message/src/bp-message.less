@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-21 17:09:21
  * @Last Modified by: Sam
- * @Last Modified time: 2020-03-30 16:00:29
+ * @Last Modified time: 2020-04-09 17:06:17
  */
 @import "../../common/less/theme.less";
 
@@ -16,12 +16,12 @@
   -ms-flex-align: center;
   align-items: center;
   box-sizing: border-box;
-  z-index: 1010;
+  z-index: 9999;
   padding: 20px;
   pointer-events: none;
 
   .message-container {
-    margin-bottom: 10px;
+    margin-bottom: 14px;
 
     .message-icon {
       display: inline-block;
@@ -37,19 +37,19 @@
       }
 
       .ri-checkbox-circle-fill {
-        color: @success-3;
+        color: @success-4;
       }
 
       .ri-error-warning-fill {
-        color: @warning-3;
+        color: @warning-4;
       }
 
       .ri-close-circle-fill {
-        color: @danger-3;
+        color: @danger-4;
       }
 
       // 加载图标
-      .ri-loader-5-fill {
+      .ri-loader-5-line {
         display: inline-block;
         animation: rotating 1s ease-in-out infinite;
         -webkit-animation: rotating 1s ease-in-out infinite;
@@ -62,29 +62,28 @@
           transform: rotate(0deg);
         }
 
-
         100% {
           -webkit-transform: rotate(359deg);
           transform: rotate(359deg);
         }
       }
-
     }
 
     .message-content {
       display: inline-block;
-      padding: 12px 15px;
-      color: @gary-7;
+      padding: 0 24px;
+      height: 46px;
+      line-height: 46px;
       font-size: 14px;
       font-weight: 400;
       border-radius: 4px;
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 1px 6px rgba(0, 0, 0, .15);
+      color: @gary-7;
+      border: 1px solid @gary-4;
+      background: @gary-0;
       max-width: 500px;
 
       span {
         pointer-events: none;
-        moz-user-select: -moz-none;
         -moz-user-select: none;
         -o-user-select: none;
         -khtml-user-select: none;
@@ -96,17 +95,17 @@
       .option {
         display: inline-block;
         pointer-events: all;
-        margin-left: 15px;
+        margin-left: 18px;
 
         i {
-          font-size: 16px;
-          font-weight: 600;
+          font-size: 20px;
+          font-weight: 400;
           margin-top: -3px;
           display: inline-block;
           box-sizing: border-box;
           vertical-align: middle;
           cursor: pointer;
-          color: @gary-5;
+          color: @gary-4;
           transition: color 0.2s ease;
           -o-transition: color 0.2s ease;
           -moz-transition: color 0.2s ease;
@@ -121,6 +120,30 @@
           }
         }
       }
+    }
+
+    .message-text-immersive {
+      color: @primary-4;
+      border: 1px solid @primary-2;
+      background: @primary-1;
+    }
+
+    .message-success-immersive {
+      color: @success-4;
+      border: 1px solid @success-2;
+      background: @success-1;
+    }
+
+    .message-warning-immersive {
+      color: @warning-4;
+      border: 1px solid @warning-2;
+      background: @warning-1;
+    }
+
+    .message-error-immersive {
+      color: @danger-4;
+      border: 1px solid @danger-2;
+      background: @danger-1;
     }
 
   }

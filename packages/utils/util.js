@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-11 10:27:23
  * @Last Modified by: Sam
- * @Last Modified time: 2020-01-29 16:58:03
+ * @Last Modified time: 2020-04-02 11:31:07
  */
 
 /**
@@ -23,7 +23,7 @@ export const clickOutside = {
   bind(el, binding, vnode) {
     function handleClick(e) {
       // 如果为元素本身，则返回
-      if (el.contains(e.target)) {
+      if (el.contains(e.target) || e.target.className.includes(binding.arg)) {
         return false;
       }
       // 如果绑定了函数，则返回执行
