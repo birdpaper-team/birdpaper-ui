@@ -2,17 +2,19 @@
  * @Author: Sam
  * @Date: 2020-01-21 16:12:26
  * @Last Modified by: Sam
- * @Last Modified time: 2020-03-30 18:31:47
+ * @Last Modified time: 2020-04-01 11:26:28
  */
 <template>
   <div class="bp-message">
     <!-- 消息列表 -->
-    <transition-group name="message-list" tag="span">
-      <div class="message-container" v-for="(item,index) in message_list" :key="index">
+    <transition-group name="message-list" tag="div">
+      <div class="message-container" v-for="(item,index) in message_list" :key="`msg-${index}`">
         <!-- 内容 -->
-        <div class="message-content">
+        <div
+          :class="['message-content',message_list[index].immersive?`message-${message_list[index].type}-immersive`:'']"
+        >
           <!-- 消息类型图标 -->
-          <div class="message-icon">
+          <div class="message-icon" v-show="item.icon">
             <i :class="item.icon"></i>
           </div>
           <span>{{ item.content }}</span>
@@ -56,7 +58,7 @@ export default {
       if (config.delayed != 0) {
         setTimeout(() => {
           this.remove(name);
-        }, config.delayed * 1000);
+        }, config.delayed);
       }
     },
     // 根据 name 移除消息

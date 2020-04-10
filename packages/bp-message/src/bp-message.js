@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-21 21:17:22
  * @Last Modified by: Sam
- * @Last Modified time: 2020-01-22 15:54:22
+ * @Last Modified time: 2020-04-01 10:27:02
  */
 import Notification from './notification.js';
 
@@ -17,7 +17,8 @@ function setMessageInstance() {
 function message({
   type = "text",
   icon = "",
-  delayed = 3,
+  delayed = 3000,
+  immersive = false,
   content = "",
   close = true
 }) {
@@ -27,6 +28,7 @@ function message({
     type: type, // 消息类型
     icon: icon, // 消息图标
     content: content, // 消息内容
+    immersive: immersive, // 沉浸式显示
     delayed: delayed, // 自动关闭延迟时间
     close: close // 是否显示手动关闭按钮
   });
@@ -94,10 +96,10 @@ export default {
     let cfg = typeof config == 'string' ? {
       content: config,
       type: "loading",
-      icon: "ri-loader-5-fill",
+      icon: "ri-loader-5-line",
     } : Object.assign({
         type: "loading",
-        icon: "ri-loader-5-fill",
+        icon: "ri-loader-5-line",
       },
       config
     );

@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-21 21:19:51
  * @Last Modified by: Sam
- * @Last Modified time: 2020-01-21 22:41:29
+ * @Last Modified time: 2020-04-01 15:20:29
  */
 import Vue from 'vue';
 import bpMessage from './bp-message.vue';
