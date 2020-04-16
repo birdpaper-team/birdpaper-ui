@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-04-01 15:06:27
  * @Last Modified by: Sam
- * @Last Modified time: 2020-04-03 09:29:42
+ * @Last Modified time: 2020-04-16 15:01:24
  */
 <template>
   <transition name="bp-dialog-fade">
@@ -16,14 +16,16 @@
       >
         <!-- 头部 -->
         <div class="header">
-          <!-- 标题 -->
-          <div class="title">
-            <p v-text="title"></p>
-          </div>
-          <!-- 操作项 -->
-          <div class="option">
-            <i class="ri-close-line" @click="closeDialog"></i>
-          </div>
+          <slot name="header">
+            <!-- 标题 -->
+            <div class="title">
+              <p v-text="title"></p>
+            </div>
+            <!-- 操作项 -->
+            <div class="option">
+              <i class="ri-close-line" @click="closeDialog"></i>
+            </div>
+          </slot>
         </div>
         <!-- Dialog 内容 -->
         <div class="content">
