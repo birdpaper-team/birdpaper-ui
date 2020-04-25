@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-12-16 11:06:00
  * @Last Modified by: Sam
- * @Last Modified time: 2020-03-31 10:34:51
+ * @Last Modified time: 2020-04-23 10:45:40
  */
 <template>
   <div :class="buttonDivClass">
@@ -74,6 +74,11 @@ export default {
     full: {
       type: Boolean,
       default: false
+    },
+    // 是否去除边框
+    noBorder:{
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -83,6 +88,7 @@ export default {
       // 圆角样式
       this.round ? className.push("round") : null;
       this.full ? className.push("btn-full") : null; // 宽度是否撑满父级元素
+      this.noBorder ? className.push("btn-no-border") : null; // 是否去除边框
       return className;
     },
     // 非文字按钮样式

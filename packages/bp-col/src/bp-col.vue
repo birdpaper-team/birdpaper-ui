@@ -5,7 +5,7 @@
  * @Last Modified time: 2020-01-11 10:49:33
  */
 <template>
-  <div :class="col_class_name">
+  <div :class="colClassName">
     <slot></slot>
   </div>
 </template>
@@ -53,7 +53,7 @@ export default {
   },
   computed: {
     // class 样式名
-    col_class_name() {
+    colClassName() {
       // 默认样式和前缀
       let prefix = "bp-col";
       let className = [prefix];

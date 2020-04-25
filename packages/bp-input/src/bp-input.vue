@@ -2,12 +2,12 @@
  * @Author: Sam
  * @Date: 2019-11-07 14:05:54
  * @Last Modified by: Sam
- * @Last Modified time: 2020-03-30 16:23:59
+ * @Last Modified time: 2020-04-19 21:13:20
  */
 <template>
-  <div :class="[is_focus ? 'focus-border' : '', 'bp-input']">
+  <div :class="[isFocus ? 'focus-border' : '', 'bp-input']">
     <!-- 普通文本类型 -->
-    <template v-if="type!='textarea'">
+    <template v-if="type != 'textarea'">
       <input
         ref="inp"
         class="bp-input-inner"
@@ -18,7 +18,7 @@
         :name="name"
         :disabled="disabled"
         :readonly="readonly"
-        v-model="input_value"
+        v-model="inputValue"
         @input="handelInput"
         @focus="handelFocus"
         @blur="handelBlur"
@@ -27,11 +27,11 @@
       <div class="bp-input-right">
         <transition name="bp-fade-in">
           <!-- 密码显示/隐藏按钮 -->
-          <span v-if="type=='password'&&input_value!=''&&show_right_icon" @click="showPassword">
-            <i :class="['text-minor', show_password?'ri-eye-fill':'ri-eye-line']"></i>
+          <span v-if="type == 'password' && inputValue != '' && showRightIcon" @click="showPassword">
+            <i :class="['text-minor', showPassword ? 'ri-eye-fill' : 'ri-eye-line']"></i>
           </span>
           <!-- 清空按钮 -->
-          <span v-if="type=='text'&&input_value!=''&&show_right_icon" @click="handelClear">
+          <span v-if="type == 'text' && inputValue != '' && showRightIcon" @click="handelClear">
             <i class="text-minor ri-close-circle-fill"></i>
           </span>
         </transition>
@@ -43,12 +43,12 @@
         ref="inp"
         spellcheck="false"
         :name="name"
-        :class="['bp-textarea-inner',resize?'':'resize-none']"
+        :class="['bp-textarea-inner',resize ? '' : 'resize-none']"
         :disabled="disabled"
         :readonly="readonly"
         :rows="rows"
         :placeholder="placeholder"
-        v-model="input_value"
+        v-model="inputValue"
         @input="handelInput"
         @focus="handelFocus"
         @blur="handelBlur"
@@ -112,16 +112,16 @@ export default {
   },
   data() {
     return {
-      input_value: this.value,
-      is_focus: false,
-      show_password: false,
-      show_right_icon: false
+      inputValue: this.value,
+      isFocus: false,
+      showPassword: false,
+      showRightIcon: false
     };
   },
   methods: {
     // 输入触发
     handelInput(el) {
-      this.$emit("input", this.input_value);
+      this.$emit("input", this.inputValue);
       // 多行文本下操作
       if (this.type === "textarea" && this.autosize) {
         this.autoTextAreaHeight(el);
@@ -130,25 +130,25 @@ export default {
     // 获取焦点触发
     handelFocus(e) {
       this.$emit("focus", e);
-      this.is_focus = true;
-      this.show_right_icon = true;
+      this.isFocus = true;
+      this.showRightIcon = true;
     },
     // 失去焦点触发
     handelBlur(e) {
       this.$emit("blur", e);
-      this.is_focus = false;
-      this.show_right_icon = false;
+      this.isFocus = false;
+      this.showRightIcon = false;
     },
     // 清空输入框触发
     handelClear() {
-      this.input_value = "";
-      this.$emit("input", this.input_value);
-      this.$emit("clear", this.input_value);
+      this.inputValue = "";
+      this.$emit("input", this.inputValue);
+      this.$emit("clear", this.inputValue);
     },
     // 密码显示/隐藏
     showPassword() {
-      this.show_password = !this.show_password;
-      this.show_password
+      this.showPassword = !this.showPassword;
+      this.showPassword
         ? (this.$refs.inp.type = "text")
         : (this.$refs.inp.type = "password");
     },
@@ -161,7 +161,7 @@ export default {
   },
   watch:{
     value(){
-      this.input_value = this.value;
+      this.inputValue = this.value;
     }
   }
 };
