@@ -8,13 +8,58 @@
 npm i birdpaper-ui // npm
 yarn add birdpaper-ui // yarn
 ```
+## 引入 birdpaper-ui
+你不仅可以完整的引入整个包，还可以根据实际使用需求，进行按需加载部分组件。
 
-### 使用，在 main.js 中写入
+### 完整引入
+在`main.js`中写入：
 
 ``` javascript
-import birdpaperUI from 'birdpaper-ui/lib/birdpaper-ui.common.js'
-import 'birdpaper-ui/lib/birdpaper-ui.css'
+// 引入所有组件
+import birdpaperUI from 'birdpaper-ui'
 Vue.use(birdpaperUI)
+```
+或者引入`lib`目录下的脚本
+``` javascript
+// lib 包方式引入
+import birdpaperUI from 'birdpaper-ui/lib/birdpaper-ui.common.js'
+Vue.use(birdpaperUI)
+```
+
+### 按需加载
+使用`babel-plugin-component`可以只引入部分组件，从而减少打包体积。
+
+在使用前，你需要安装此插件：
+```
+npm install babel-plugin-component -D
+```
+
+然后，在项目根目录新建或修改`.babelrc`文件，修改以下内容：
+```
+{
+    "plugins": [
+        [
+            "component",
+            {
+                "libraryName": "birdpaper-ui",
+                "libDir": "packages",
+                "style": false
+            }
+        ]
+    ]
+}
+```
+
+接下来，你就可以根据业务需要引入部分组件
+
+例如：你只需要引入`Button`和`Input`组件，则在`main.js`中写入：
+```
+import { bpButton, bpInput } from "birdpaper-ui"
+Vue.use(bpButton)
+Vue.use(bpInput)
+// 或
+Vue.component(bpButton.name, bpButton);
+Vue.component(bpButton.name, bpButton);
 ```
 
 ## 源码构建

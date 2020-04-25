@@ -1,6 +1,6 @@
 {
   "name": "birdpaper-ui",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "小纸鹤UI框架",
   "private": false,
   "main": "packages/index.js",
