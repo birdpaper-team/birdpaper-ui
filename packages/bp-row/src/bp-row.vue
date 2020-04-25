@@ -2,10 +2,10 @@
  * @Author: Sam
  * @Date: 2019-12-22 10:31:59
  * @Last Modified by: Sam
- * @Last Modified time: 2019-12-26 14:06:51
+ * @Last Modified time: 2020-04-20 16:14:05
  */
 <template>
-  <div class="bp-row" ref="row" :style="inline_style">
+  <div class="bp-row" ref="row">
     <slot></slot>
   </div>
 </template>
@@ -20,12 +20,6 @@ export default {
       default: 0
     }
   },
-  data() {
-    return {
-      row_gutter: "", // 间隔
-      inline_style: "" // row 行内样式
-    };
-  },
   mounted() {
     this.setGutter();
   },
@@ -35,7 +29,6 @@ export default {
       if (this.gutter == 0) {
         return;
       }
-      // this.inline_style = `margin-left: ${this.gutter}px; margin-right: ${this.gutter}px;`;
       this.setColGutter();
     },
     // 设置 col 间隔

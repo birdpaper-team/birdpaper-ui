@@ -2,40 +2,44 @@
  * @Author: Sam
  * @Date: 2020-01-28 16:52:14
  * @Last Modified by: Sam
- * @Last Modified time: 2020-04-02 14:35:33
+ * @Last Modified time: 2020-04-20 08:55:43
  */
 <template>
   <div class="bp-select" v-click-outside="closeOption">
     <!-- 选择器层 -->
     <div
       :class="selectClassName"
-      @click="option_show = !option_show"
+      @click="optionShow = !optionShow"
       @mouseenter="handleSelectMouseEnter"
       @mouseleave="handleSelectMouseLeave"
     >
       <!-- 占位文本 -->
-      <span v-show="select.label==''">{{placeholder}}</span>
-      <span v-show="select.label!=''" class="select-value">{{select.label}}</span>
+      <span v-show="select.label == ''">{{placeholder}}</span>
+      <span v-show="select.label != ''" class="select-value">{{select.label}}</span>
       <!-- 操作图标区域 -->
       <div class="option">
         <!-- 展示/收起 -->
         <i
           class="ri-arrow-down-s-line"
-          :class="{'open':option_show}"
-          v-if="select.value==''||!clearable_icon_show"
+          :class="{'open':optionShow}"
+          v-if="select.value == '' || !clearableIconShow"
         ></i>
         <!-- 清除 -->
-        <i class="ri-close-circle-fill" v-if="clearable_icon_show&&select.value!=''" @click="clear"></i>
+        <i
+          class="ri-close-circle-fill"
+          v-if="clearableIconShow && select.value != ''"
+          @click="clear"
+        ></i>
       </div>
     </div>
     <!-- 下拉选项列表 -->
     <transition name="bp-zoom-in-top">
       <div
         class="select-item-box scro scro-1"
-        v-show="option_show"
-        @mouseenter="option_show_scroll_bar = true"
-        @mouseleave="option_show_scroll_bar = false"
-        :style="`overflow-y:${option_show_scroll_bar?'auto':'hidden'}`"
+        v-show="optionShow"
+        @mouseenter="optionShowScrollBar = true"
+        @mouseleave="optionShowScrollBar = false"
+        :style="`overflow-y:${optionShowScrollBar ? 'auto' : 'hidden'}`"
       >
         <slot></slot>
       </div>
@@ -79,19 +83,19 @@ export default {
         value: this.value
       },
       // 选项菜单展示
-      option_show: false,
+      optionShow: false,
       // 选项菜单滚动条
-      option_show_scroll_bar: false,
+      optionShowScrollBar: false,
       // 选项数据列表
-      option_list: [],
-      clearable_icon_show: false
+      optionList: [],
+      clearableIconShow: false
     };
   },
   computed: {
     selectClassName() {
       let name = ["select-input"];
       name.push(`select-size-${this.size}`);
-      this.option_show ? name.push("active") : "";
+      this.optionShow ? name.push("active") : "";
       return name;
     }
   },
@@ -108,7 +112,7 @@ export default {
       if (data.value === this.value) {
         this.select.label = data.label;
       }
-      this.option_list.push(data);
+      this.optionList.push(data);
     },
     // 选项改变触发
     handleOptionChange(data) {
@@ -118,7 +122,7 @@ export default {
     },
     // 收起选项列表
     closeOption() {
-      this.option_show = false;
+      this.optionShow = false;
     },
     // 清除
     clear() {
@@ -130,13 +134,13 @@ export default {
     // 鼠标移入选择框
     handleSelectMouseEnter() {
       if (this.clearable) {
-        this.clearable_icon_show = true;
+        this.clearableIconShow = true;
       }
     },
     // 鼠标移出选择框
     handleSelectMouseLeave() {
       if (this.clearable) {
-        this.clearable_icon_show = false;
+        this.clearableIconShow = false;
       }
     }
   }
