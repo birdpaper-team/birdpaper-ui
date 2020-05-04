@@ -1,0 +1,72 @@
+/*
+ * @Author: Sam
+ * @Date: 2020-04-21 12:33:51
+ * @Last Modified by: Sam
+ * @Last Modified time: 2020-04-22 17:10:10
+ */
+@import "../../common/less/theme.less";
+
+.bp-item-bar {
+    position: relative;
+
+    .bp-item-bar-list {
+        width: 100%;
+        // height: 44px;
+        // line-height: 44px;
+        background-color: @gary-0;
+        border-radius: 4px;
+
+        ul {
+            width: 100%;
+            // height: 44px;
+            overflow-x: auto;
+            overflow-y: hidden;
+
+            li {
+                margin: 0;
+                height: 44px;
+                line-height: 44px;
+                list-style: none;
+                display: inline-block;
+                // float: left;
+                padding: 0 0 0 20px;
+                font-size: 14px;
+                color: @gary-7;
+                cursor: pointer;
+                transition: color 0.2s ease;
+                -o-transition: color 0.2s ease;
+                -moz-transition: color 0.2s ease;
+                -webkit-transition: color 0.2s ease;
+
+                &:hover {
+                    color: @primary-3;
+                    transition: color 0.2s ease;
+                    -o-transition: color 0.2s ease;
+                    -moz-transition: color 0.2s ease;
+                    -webkit-transition: color 0.2s ease;
+                }
+
+                span {
+                    height: 22px;
+                    line-height: 22px;
+                    border-right: 1px solid @gary-3;
+                    padding-right: 20px;
+                }
+
+                &:last-child {
+                    span {
+                        border-right: none;
+                    }
+                }
+            }
+
+            .active {
+                color: @primary-3;
+                transition: color 0.2s ease;
+                -o-transition: color 0.2s ease;
+                -moz-transition: color 0.2s ease;
+                -webkit-transition: color 0.2s ease;
+            }
+        }
+    }
+}

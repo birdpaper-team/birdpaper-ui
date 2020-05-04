@@ -8,10 +8,10 @@
   <div class="bp-message">
     <!-- 消息列表 -->
     <transition-group name="message-list" tag="div">
-      <div class="message-container" v-for="(item,index) in message_list" :key="`msg-${index}`">
+      <div class="message-container" v-for="(item,index) in messageList" :key="`msg-${index}`">
         <!-- 内容 -->
         <div
-          :class="['message-content',message_list[index].immersive?`message-${message_list[index].type}-immersive`:'']"
+          :class="['message-content',messageList[index].immersive ? `message-${messageList[index].type}-immersive` : '']"
         >
           <!-- 消息类型图标 -->
           <div class="message-icon" v-show="item.icon">
@@ -31,7 +31,7 @@
 export default {
   data() {
     return {
-      message_list: []
+      messageList: []
     };
   },
   methods: {
@@ -45,7 +45,7 @@ export default {
       const name = this.setMessageName();
 
       // 追加数组
-      let index = this.message_list.push(
+      let index = this.messageList.push(
         Object.assign(
           {
             name: name
@@ -63,9 +63,9 @@ export default {
     },
     // 根据 name 移除消息
     remove(name) {
-      for (let i = 0; i < this.message_list.length; i++) {
-        if (this.message_list[i].name === name) {
-          this.message_list.splice(i, 1);
+      for (let i = 0; i < this.messageList.length; i++) {
+        if (this.messageList[i].name === name) {
+          this.messageList.splice(i, 1);
           break;
         }
       }

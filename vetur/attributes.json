@@ -1,0 +1,230 @@
+{
+    "bp-button/type": {
+        "options": [
+            "text",
+            "default",
+            "primary",
+            "success",
+            "warning",
+            "danger"
+        ],
+        "description": "按钮类型 | String | default"
+    },
+    "bp-button/size": {
+        "options": [
+            "large",
+            "normal",
+            "small",
+            "mini"
+        ],
+        "description": "按钮尺寸 | String | normal"
+    },
+    "bp-button/loading": {
+        "description": "是否加载 | Boolean | false"
+    },
+    "bp-button/disabled": {
+        "description": "是否禁用 | Boolean | false"
+    },
+    "bp-button/plain": {
+        "description": "是否幽灵按钮 | Boolean | false"
+    },
+    "bp-button/round": {
+        "description": "是否圆角 | Boolean | false"
+    },
+    "bp-button/full": {
+        "description": "宽度是否撑满父级元素 | Boolean | false"
+    },
+    "bp-button/no-border": {
+        "description": "是否去除边框 | Boolean | false"
+    },
+    "bp-input/disabled": {
+        "description": "是否禁用 | Boolean | false"
+    },
+    "bp-input/placeholder": {
+        "description": "占位文本 | String | ''"
+    },
+    "bp-input/type": {
+        "options": [
+            "text",
+            "password",
+            "textarea"
+        ],
+        "description": "输入框类型 | String | text"
+    },
+    "bp-input/readonly": {
+        "description": "是否设置为只读 | Boolean | false"
+    },
+    "bp-input/name": {
+        "description": "输入框 name 标识 | String | ''"
+    },
+    "bp-input/autosize": {
+        "description": "多行文本下高度是否自动撑开 | Boolean | false"
+    },
+    "bp-input/size": {
+        "options": [
+            "normal",
+            "large",
+            "small",
+            "mini"
+        ],
+        "description": "输入框尺寸 | String | normal"
+    },
+    "bp-input/border-color": {
+        "options": [
+            "default",
+            "primary",
+            "success",
+            "warning",
+            "danger"
+        ],
+        "description": "边框颜色 | String | default"
+    },
+    "bp-input/resize": {
+        "description": "多行文本下是否允许拖动 | Boolean | false"
+    },
+    "bp-input/rows": {
+        "description": "多行文本的行数 | [Number, String] | 2"
+    },
+    "bp-input/max-length": {
+        "description": "最大输入长度 | [Number, String] | ''"
+    },
+    "bp-input/show-limit": {
+        "description": "是否展示字数限制 | Boolean | false"
+    },
+    "bp-avatar/size": {
+        "options": [
+            "normal",
+            "large",
+            "small",
+            "mini"
+        ],
+        "description": "头像尺寸 | String | normal"
+    },
+    "bp-avatar/shape": {
+        "options": [
+            "circle",
+            "square"
+        ],
+        "description": "头像形状 | String | circle"
+    },
+    "bp-avatar/icon": {
+        "description": "图标展示类名 | String | ''"
+    },
+    "bp-avatar/fit": {
+        "description": "图片适应类型 | String | cover"
+    },
+    "bp-avatar/alt": {
+        "description": "图片 Alt 属性 | String | ''"
+    },
+    "bp-dialog/visible": {
+        "description": "对话框显示/隐藏，支持.sync修饰符 | Boolean | false"
+    },
+    "bp-dialog/title": {
+        "description": "对话框标题栏文案 | String | 提示"
+    },
+    "bp-dialog/width": {
+        "description": "对话框宽度 | String | 30%"
+    },
+    "bp-dialog/top": {
+        "description": "对话框距离顶部的距离 | String | 15vh"
+    },
+    "bp-dialog/append-to-body": {
+        "description": "是否挂在到body | Boolean | false"
+    },
+    "bp-dialog/lock-scroll": {
+        "description": "是否锁定背景滚动 | Boolean | true"
+    },
+    "bp-dialog/close-on-click-mask": {
+        "description": "是否点击遮罩关闭对话框 | Boolean | true"
+    },
+    "bp-dialog/close-on-press-escape": {
+        "description": "是否开启ESC按键关闭 | Boolean | false"
+    },
+    "bp-image/src": {
+        "description": "图片资源地址 | String | ''"
+    },
+    "bp-image/alt": {
+        "description": "图片 Alt 属性 | String | ''"
+    },
+    "bp-image/fit": {
+        "description": "图片适应类型 | String | cover"
+    },
+    "bp-image/lazy": {
+        "description": "是否开启懒加载 | Boolean | false"
+    },
+    "bp-item-bar/item-ist": {
+        "description": "栏目项 | Array | []"
+    },
+    "bp-item-bar/active-index": {
+        "description": "激活的栏目下标 | Number | 0"
+    },
+    "bp-select/placeholder": {
+        "description": "选择器占位文本 | String | 请选择"
+    },
+    "bp-select/clearable": {
+        "description": "是否可清空 | Boolean | false"
+    },
+    "bp-select/size": {
+        "options": [
+            "normal",
+            "large",
+            "small",
+            "mini"
+        ],
+        "description": "选择器尺寸 | String | normal"
+    },
+    "bp-option/label": {
+        "description": "选项文字 | String | ''"
+    },
+    "bp-option/value": {
+        "description": "选项值 | [String, Number] | ''"
+    },
+    "bp-row/gutter": {
+        "description": "分栏间隔 | Number | 0"
+    },
+    "bp-col/span": {
+        "description": "栏位数 | Number | 0"
+    },
+    "bp-col/offset": {
+        "description": "偏移量 | Number | 0"
+    },
+    "bp-col/xs": {
+        "description": "<768px 响应式栅格数或者栅格属性对象 | [Object, Number] | {}"
+    },
+    "bp-col/sm": {
+        "description": "≥768px 响应式栅格数或者栅格属性对象 | [Object, Number] | {}"
+    },
+    "bp-col/md": {
+        "description": "≥992px 响应式栅格数或者栅格属性对象 | [Object, Number] | {}"
+    },
+    "bp-col/lg": {
+        "description": "≥1200px 响应式栅格数或者栅格属性对象 | [Object, Number] | {}"
+    },
+    "bp-col/xl": {
+        "description": "≥1920px 响应式栅格数或者栅格属性对象 | [Object, Number] | {}"
+    },
+    "bp-alert/visible": {
+        "description": "提示框显示/隐藏，支持.sync修饰符 | Boolean | false"
+    },
+    "bp-alert/title": {
+        "description": "标题 | String | ''"
+    },
+    "bp-alert/type": {
+        "options": [
+            "primary",
+            "success",
+            "warning",
+            "danger"
+        ],
+        "description": "提示框类型 | String | danger"
+    },
+    "bp-alert/light": {
+        "description": "是否采用明亮主题 | Boolean | false"
+    },
+    "bp-alert/closeable": {
+        "description": "是否可关闭 | Boolean | true"
+    },
+    "bp-alert/close-text": {
+        "description": "自定义关闭文本 | String | ''"
+    }
+}
