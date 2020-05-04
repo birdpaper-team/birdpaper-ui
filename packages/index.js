@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-11 10:30:29
  * @Last Modified by: Sam
- * @Last Modified time: 2020-04-21 12:34:50
+ * @Last Modified time: 2020-05-04 23:19:47
  */
 import Vue from 'vue';
 // 导入组件
@@ -17,6 +17,7 @@ import bpDialog from './bp-dialog';
 import bpMask from './bp-mask';
 import bpAvatar from './bp-avatar';
 import bpImage from './bp-image';
+import bpAlert from './bp-alert';
 import bpItemBar from './bp-item-bar';
 
 Vue.prototype.$message = msg;
@@ -31,6 +32,7 @@ const components = [
   bpAvatar,
   bpOption,
   bpItemBar,
+  bpAlert,
   bpRow,
   bpCol
 ];
@@ -66,6 +68,7 @@ export default {
   bpItemBar,
   bpDialog,
   bpAvatar,
+  bpAlert,
   bpInput,
   bpMask,
   bpRow,

@@ -2,28 +2,29 @@
  * @Author: Sam
  * @Date: 2019-11-07 14:07:32
  * @Last Modified by: Sam
- * @Last Modified time: 2020-03-30 15:04:45
+ * @Last Modified time: 2020-04-29 17:13:11
  */
 @import "../../common/less/theme.less";
 
 .bp-input {
     width: 100%;
     max-width: 100%;
-    min-width: 100%;
-    min-height: 40px;
+    min-height: 20px;
     position: relative;
     display: inline-block;
-    border: 1px solid @gary-4;
     border-radius: 4px;
+    border: 1px solid @gary-4;
     transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+    &:hover {
+        border: 1px solid @gary-5;
+    }
 
     .bp-input-inner {
         width: 100%;
-        height: 40px;
         -webkit-appearance: none;
         background-color: @gary-0;
         background-image: none;
-        font-size: 14px;
         box-sizing: border-box;
         color: @gary-7;
         letter-spacing: 1px;
@@ -47,14 +48,24 @@
         position: absolute;
         right: 0;
         top: 0px;
-        width: 35px;
-        height: 40px;
-        line-height: 40px;
+        padding: 0 10px;
         text-align: center;
+        background-color: @gary-0;
+        border-radius: 4px;
+        -webkit-appearance: none;
+        -moz-user-select: none;
+        -o-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        span {
+            color: @gary-6;
+        }
 
         i {
             cursor: pointer;
-            font-size: 16px;
         }
     }
 
@@ -90,11 +101,124 @@
     .resize-none {
         resize: none;
     }
+
+    .bp-textarea-num-limit {
+        position: absolute;
+        right: 4px;
+        bottom: 4px;
+        color: @gary-6;
+    }
+}
+
+// 输入框尺寸
+.bp-input-large {
+    .bp-input-inner {
+        height: 50px;
+        font-size: 16px;
+    }
+
+    .bp-input-right {
+        height: 50px;
+        line-height: 50px;
+
+        i {
+            font-size: 16px;
+        }
+    }
+}
+
+.bp-input-normal {
+    .bp-input-inner {
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .bp-input-right {
+        height: 40px;
+        line-height: 40px;
+
+        i {
+            font-size: 14px;
+        }
+    }
+}
+
+.bp-input-small {
+    .bp-input-inner {
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .bp-input-right {
+        height: 30px;
+        line-height: 30px;
+
+        i {
+            font-size: 12px;
+        }
+    }
+}
+
+.bp-input-mini {
+    .bp-input-inner {
+        height: 20px;
+        font-size: 10px;
+    }
+
+    .bp-input-right {
+        height: 20px;
+        line-height: 20px;
+
+        i {
+            font-size: 10px;
+        }
+    }
 }
 
 .focus-border {
     border: 1px solid @primary-3;
     transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+}
+
+.bp-border-primary {
+    border: 1px solid @primary-4;
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+    &:hover {
+        border: 1px solid @primary-5;
+    }
+}
+
+.bp-border-success {
+    border: 1px solid @success-4;
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+    &:hover {
+        border: 1px solid @success-5;
+    }
+}
+
+.bp-border-warning {
+    border: 1px solid @warning-4;
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+    &:hover {
+        border: 1px solid @warning-5;
+    }
+}
+
+.bp-border-danger {
+    border: 1px solid @danger-4;
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+    &:hover {
+        border: 1px solid @danger-5;
+    }
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px @gary-0 inset;
+    border: 1px solid @gary-0  !important;
 }
 
 input,
@@ -128,7 +252,7 @@ textarea {
 /* - Internet Explorer 10–11
    - Internet Explorer Mobile 10-11 */
 :-ms-input-placeholder {
-    color: @gary-5 !important;
+    color: @gary-5  !important;
     font-weight: 400 !important;
 }
 

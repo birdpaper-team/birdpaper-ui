@@ -126,6 +126,20 @@
         "defaults": [
             "gutter"
         ],
-        "description": "bp-col | 布局组件-Row"
+        "description": "bp-col | 布局组件-Col"
+    },
+    "bp-alert": {
+        "attributes": [
+            "visible",
+            "title",
+            "type",
+            "light",
+            "closeable",
+            "closeText"
+        ],
+        "defaults": [
+            "visible"
+        ],
+        "description": "bp-alert | 提示框组件"
     }
 }

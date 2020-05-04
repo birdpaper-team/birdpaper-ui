@@ -60,11 +60,36 @@
     "bp-input/autosize": {
         "description": "多行文本下高度是否自动撑开 | Boolean | false"
     },
+    "bp-input/size": {
+        "options": [
+            "normal",
+            "large",
+            "small",
+            "mini"
+        ],
+        "description": "输入框尺寸 | String | normal"
+    },
+    "bp-input/border-color": {
+        "options": [
+            "default",
+            "primary",
+            "success",
+            "warning",
+            "danger"
+        ],
+        "description": "边框颜色 | String | default"
+    },
     "bp-input/resize": {
         "description": "多行文本下是否允许拖动 | Boolean | false"
     },
     "bp-input/rows": {
         "description": "多行文本的行数 | [Number, String] | 2"
+    },
+    "bp-input/max-length": {
+        "description": "最大输入长度 | [Number, String] | ''"
+    },
+    "bp-input/show-limit": {
+        "description": "是否展示字数限制 | Boolean | false"
     },
     "bp-avatar/size": {
         "options": [
@@ -140,6 +165,12 @@
         "description": "是否可清空 | Boolean | false"
     },
     "bp-select/size": {
+        "options": [
+            "normal",
+            "large",
+            "small",
+            "mini"
+        ],
         "description": "选择器尺寸 | String | normal"
     },
     "bp-option/label": {
@@ -171,5 +202,29 @@
     },
     "bp-col/xl": {
         "description": "≥1920px 响应式栅格数或者栅格属性对象 | [Object, Number] | {}"
+    },
+    "bp-alert/visible": {
+        "description": "提示框显示/隐藏，支持.sync修饰符 | Boolean | false"
+    },
+    "bp-alert/title": {
+        "description": "标题 | String | ''"
+    },
+    "bp-alert/type": {
+        "options": [
+            "primary",
+            "success",
+            "warning",
+            "danger"
+        ],
+        "description": "提示框类型 | String | danger"
+    },
+    "bp-alert/light": {
+        "description": "是否采用明亮主题 | Boolean | false"
+    },
+    "bp-alert/closeable": {
+        "description": "是否可关闭 | Boolean | true"
+    },
+    "bp-alert/close-text": {
+        "description": "自定义关闭文本 | String | ''"
     }
 }

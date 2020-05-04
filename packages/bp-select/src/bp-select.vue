@@ -71,7 +71,10 @@ export default {
     // 选择器尺寸
     size: {
       type: String,
-      default: "normal"
+      default: "normal",
+      validator: function(value) {
+        return ["mini", "small", "normal", "large"].indexOf(value) !== -1;
+      }
     }
   },
   directives: { clickOutside },
