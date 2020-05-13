@@ -141,5 +141,15 @@
             "visible"
         ],
         "description": "bp-alert | 提示框组件"
+    },
+    "bp-checkbox": {
+        "attributes": [
+            "name",
+            "disabled"
+        ],
+        "defaults": [
+            "name"
+        ],
+        "description": "bp-checkbox | 复选框组件"
     }
 }

@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-12-16 11:06:00
  * @Last Modified by: Sam
- * @Last Modified time: 2020-04-23 10:45:40
+ * @Last Modified time: 2020-05-12 16:21:07
  */
 <template>
   <div :class="buttonDivClass">
@@ -14,7 +14,7 @@
     <button v-else :class="buttonClass" :disabled="disabled" @click="handelClick">
       <!-- 加载状态 -->
       <span v-if="loading" class="bp-icon-loading">
-        <i class="ri-loader-5-line"></i>
+        <i class="ri-loader-fill"></i>
       </span>
       <slot></slot>
     </button>

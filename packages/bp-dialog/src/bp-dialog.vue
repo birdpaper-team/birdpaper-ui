@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-04-01 15:06:27
  * @Last Modified by: Sam
- * @Last Modified time: 2020-04-16 15:01:24
+ * @Last Modified time: 2020-05-12 16:24:25
  */
 <template>
   <transition name="bp-dialog-fade">
@@ -23,7 +23,7 @@
             </div>
             <!-- 操作项 -->
             <div class="option">
-              <i class="ri-close-line" @click="closeDialog"></i>
+              <i class="ri-close-fill" @click="closeDialog"></i>
             </div>
           </slot>
         </div>

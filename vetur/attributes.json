@@ -226,5 +226,11 @@
     },
     "bp-alert/close-text": {
         "description": "自定义关闭文本 | String | ''"
+    },
+    "bp-checkbox/disabled": {
+        "description": "是否禁用 | Boolean | false"
+    },
+    "bp-checkbox/name": {
+        "description": "name 属性 | String | ''"
     }
 }

@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-04-28 11:05:14
  * @Last Modified by: Sam
- * @Last Modified time: 2020-05-04 22:57:00
+ * @Last Modified time: 2020-05-12 16:25:29
  */
 <template>
   <div class="bp-alert" v-if="show">
@@ -14,7 +14,7 @@
         <p class="bp-alert-header-title">{{title}}</p>
         <!-- 关闭按钮 -->
         <p class="bp-alert-header-close" v-if="closeable" @click="handleClose">
-          <i class="ri-close-line" v-if="closeText == ''"></i>
+          <i class="ri-close-fill" v-if="closeText == ''"></i>
           <span v-if="closeText != ''">{{closeText}}</span>
         </p>
       </div>

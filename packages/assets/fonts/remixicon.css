@@ -8,12 +8,12 @@
 
 @font-face {
     font-family: "remixicon";
-    src: url('remixicon.eot?t=1587886366494'); /* IE9*/
-    src: url('remixicon.eot?t=1587886366494#iefix') format('embedded-opentype'), /* IE6-IE8 */
-    url("remixicon.woff2?t=1587886366494") format("woff2"),
-    url("remixicon.woff?t=1587886366494") format("woff"),
-    url('remixicon.ttf?t=1587886366494') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
-    url('remixicon.svg?t=1587886366494#remixicon') format('svg'); /* iOS 4.1- */
+    src: url('remixicon.eot?t=1589270648725'); /* IE9*/
+    src: url('remixicon.eot?t=1589270648725#iefix') format('embedded-opentype'), /* IE6-IE8 */
+    url("remixicon.woff2?t=1589270648725") format("woff2"),
+    url("remixicon.woff?t=1589270648725") format("woff"),
+    url('remixicon.ttf?t=1589270648725') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+    url('remixicon.svg?t=1589270648725#remixicon') format('svg'); /* iOS 4.1- */
     font-display: swap;
 }
 
@@ -67,9 +67,7 @@
 .ri-layout-3-fill:before { content: "\ee41"; }
 .ri-bug-line:before { content: "\eb05"; }
 .ri-bug-fill:before { content: "\eb04"; }
-.ri-code-s-slash-line:before { content: "\eba5"; }
 .ri-code-s-slash-fill:before { content: "\eba4"; }
-.ri-html5-line:before { content: "\ee0c"; }
 .ri-html5-fill:before { content: "\ee0b"; }
 .ri-computer-line:before { content: "\ebc0"; }
 .ri-computer-fill:before { content: "\ebbf"; }
@@ -108,8 +106,6 @@
 .ri-add-circle-fill:before { content: "\ea0e"; }
 .ri-indeterminate-circle-line:before { content: "\ee20"; }
 .ri-indeterminate-circle-fill:before { content: "\ee1f"; }
-.ri-check-line:before { content: "\eb75"; }
-.ri-close-line:before { content: "\eb93"; }
 .ri-download-line:before { content: "\ec3e"; }
 .ri-arrow-up-s-line:before { content: "\ea76"; }
 .ri-arrow-down-s-line:before { content: "\ea4c"; }
@@ -119,8 +115,6 @@
 .ri-loader-fill:before { content: "\ee8a"; }
 .ri-loader-2-fill:before { content: "\ee82"; }
 .ri-loader-3-fill:before { content: "\ee84"; }
-.ri-loader-4-line:before { content: "\ee87"; }
-.ri-loader-5-line:before { content: "\ee89"; }
 .ri-fingerprint-line:before { content: "\ed0d"; }
 .ri-eye-line:before { content: "\ec95"; }
 .ri-eye-fill:before { content: "\ec94"; }
@@ -140,9 +134,30 @@
 .ri-shopping-cart-fill:before { content: "\f0b9"; }
 .ri-vip-line:before { content: "\f21c"; }
 .ri-vip-fill:before { content: "\f21b"; }
-.ri-external-link-line:before { content: "\ec8f"; }
 .ri-alipay-line:before { content: "\ea2a"; }
 .ri-wechat-pay-line:before { content: "\f240"; }
 .ri-menu-3-line:before { content: "\eeef"; }
 .ri-upload-cloud-2-line:before { content: "\f1da"; }
 .ri-upload-cloud-2-fill:before { content: "\f1d9"; }
+.ri-at-line:before { content: "\ea81"; }
+.ri-calendar-2-line:before { content: "\eb1d"; }
+.ri-command-fill:before { content: "\ebad"; }
+.ri-restart-line:before { content: "\f021"; }
+.ri-rss-fill:before { content: "\f03e"; }
+.ri-pushpin-line:before { content: "\efdf"; }
+.ri-pushpin-2-line:before { content: "\efdd"; }
+.ri-forbid-2-line:before { content: "\ed6c"; }
+.ri-forbid-2-fill:before { content: "\ed6b"; }
+.ri-information-fill:before { content: "\ee21"; }
+.ri-information-line:before { content: "\ee22"; }
+.ri-alert-line:before { content: "\ea1f"; }
+.ri-alert-fill:before { content: "\ea1e"; }
+.ri-close-fill:before { content: "\eb92"; }
+.ri-check-fill:before { content: "\eb74"; }
+.ri-share-circle-fill:before { content: "\f091"; }
+.ri-loader-4-fill:before { content: "\ee86"; }
+.ri-loader-5-fill:before { content: "\ee88"; }
+.ri-external-link-fill:before { content: "\ec8e"; }
+.ri-sun-line:before { content: "\f155"; }
+.ri-moon-line:before { content: "\ef25"; }
+.ri-lock-line:before { content: "\ee8f"; }

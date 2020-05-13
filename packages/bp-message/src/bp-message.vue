@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-21 16:12:26
  * @Last Modified by: Sam
- * @Last Modified time: 2020-04-01 11:26:28
+ * @Last Modified time: 2020-05-12 16:24:32
  */
 <template>
   <div class="bp-message">
@@ -20,7 +20,7 @@
           <span>{{ item.content }}</span>
           <div class="option" v-if="item.close">
             <!-- 手动关闭消息 -->
-            <i class="ri-close-line" @click="remove(item.name)"></i>
+            <i class="ri-close-fill" @click="remove(item.name)"></i>
           </div>
         </div>
       </div>
