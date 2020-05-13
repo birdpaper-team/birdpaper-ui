@@ -21,31 +21,30 @@ export default {
     }
   },
   mounted() {
-    this.setGutter();
+    this.setColGutter();
   },
   methods: {
-    // 设置 row 间隔
-    setGutter() {
-      if (this.gutter == 0) {
-        return;
-      }
-      this.setColGutter();
-    },
     // 设置 col 间隔
     setColGutter() {
       if (this.gutter == 0) {
         return;
       }
       let children = this.$refs.row.children; // 获取 row 下所有 col。
-      for (let i = 0; i < children.length; i++) {
-        children[i].style.paddingLeft = `${this.gutter}px`;
-        children[i].style.paddingRight = `${this.gutter}px`;
+      let len = children.length;
+      // 首尾元素不做两边 padding 处理
+      for (let i = 0; i < len; i++) {
+        if (i != 0) {
+          children[i].style.paddingLeft = `${this.gutter}px`;
+        }
+        if (i != len - 1) {
+          children[i].style.paddingRight = `${this.gutter}px`;
+        }
       }
     }
   },
   watch: {
     gutter() {
-      this.setGutter();
+      this.setColGutter();
     }
   }
 };

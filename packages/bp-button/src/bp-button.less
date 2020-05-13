@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-12-16 11:05:47
  * @Last Modified by: Sam
- * @Last Modified time: 2020-04-23 10:48:12
+ * @Last Modified time: 2020-05-12 16:23:07
  */
 @import "../../common/less/theme.less";
 
@@ -42,7 +42,7 @@ button {
 }
 
 .btn-no-border {
-  button{
+  button {
     border: none !important;
   }
 }
@@ -388,20 +388,25 @@ button {
 
 // 加载
 .bp-icon-loading {
-  display: inline-block;
-  margin-right: 10px;
-  animation: rotating 1s ease-in-out infinite;
-  -webkit-animation: rotating 1s ease-in-out infinite;
+  margin-right: 8px;
+  box-sizing: border-box;
+  vertical-align: middle;
+
+  i {
+    display: inline-block;
+    animation: rotating .8s linear infinite;
+    -webkit-animation: rotating .8s linear infinite;
+  }
 }
 
 @keyframes rotating {
-  0% {
-    -webkit-transform: rotate(0deg);
+  from {
     transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
   }
 
-  100% {
-    -webkit-transform: rotate(359deg);
-    transform: rotate(359deg);
+  to {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(365deg);
   }
 }

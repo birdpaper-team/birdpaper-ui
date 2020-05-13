@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-04-15 09:52:25
  * @Last Modified by: Sam
- * @Last Modified time: 2020-04-16 14:39:37
+ * @Last Modified time: 2020-05-07 17:28:04
  */
 <template>
   <div :id="id" class="bp-image" v-cloak>
@@ -20,7 +20,7 @@
     </div>
     <!-- 加载失败 -->
     <div class="bp-image-error" v-if="loadError">
-      <slot name="error">加载失败</slot>
+      <slot name="error">{{alt}}</slot>
     </div>
   </div>
 </template>
@@ -37,7 +37,7 @@ export default {
     // 图片 Alt 属性
     alt: {
       type: String,
-      default: ""
+      default: "加载失败"
     },
     // 图片适应类型
     fit: {
@@ -63,9 +63,6 @@ export default {
       url: "" // 图片地址
     };
   },
-  destroyed() {
-    window.removeEventListener("scroll", this.pageScroll, false);
-  },
   mounted() {
     this.$nextTick(() => {
       if (!this.lazy) {
@@ -74,7 +71,7 @@ export default {
       }
       // 懒加载处理
       this.pageScroll();
-      window.addEventListener("scroll", this.pageScroll, true);
+      window.addEventListener("scroll", this.pageScroll(), true);
     });
   },
   methods: {
@@ -112,6 +109,13 @@ export default {
       if (elOffsetTop + 10 < window.innerHeight && !this.loadLock) {
         this.loadImage();
       }
+    }
+  },
+  watch: {
+    src() {
+      this.loadError = false;
+      this.loadLock = false;
+      this.loadImage();
     }
   }
 };
