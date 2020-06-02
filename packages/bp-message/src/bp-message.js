@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-21 21:17:22
  * @Last Modified by: Sam
- * @Last Modified time: 2020-04-01 10:27:02
+ * @Last Modified time: 2020-06-02 14:32:32
  */
 import Notification from './notification.js';
 
@@ -96,10 +96,10 @@ export default {
     let cfg = typeof config == 'string' ? {
       content: config,
       type: "loading",
-      icon: "ri-loader-5-line",
+      icon: "ri-loader-5-fill",
     } : Object.assign({
         type: "loading",
-        icon: "ri-loader-5-line",
+        icon: "ri-loader-5-fill",
       },
       config
     );

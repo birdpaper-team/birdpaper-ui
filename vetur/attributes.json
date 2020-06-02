@@ -232,5 +232,11 @@
     },
     "bp-checkbox/name": {
         "description": "name 属性 | String | ''"
+    },
+    "bp-table/cols": {
+        "description": "表格列 | Array | []"
+    },
+    "bp-table/data": {
+        "description": "表格数据 | Array | []"
     }
 }

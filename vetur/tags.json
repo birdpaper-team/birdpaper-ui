@@ -151,5 +151,15 @@
             "name"
         ],
         "description": "bp-checkbox | 复选框组件"
+    },
+    "bp-table": {
+        "attributes": [
+            "cols",
+            "data"
+        ],
+        "defaults": [
+            "cols"
+        ],
+        "description": "bp-table | 基础表格组件"
     }
 }
