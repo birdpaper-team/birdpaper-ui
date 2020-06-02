@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-04-15 09:52:25
  * @Last Modified by: Sam
- * @Last Modified time: 2020-05-07 17:28:04
+ * @Last Modified time: 2020-06-02 14:27:04
  */
 <template>
   <div :id="id" class="bp-image" v-cloak>
@@ -71,7 +71,13 @@ export default {
       }
       // 懒加载处理
       this.pageScroll();
-      window.addEventListener("scroll", this.pageScroll(), true);
+      window.addEventListener(
+        "scroll",
+        () => {
+          this.pageScroll();
+        },
+        true
+      );
     });
   },
   methods: {
@@ -102,6 +108,7 @@ export default {
     },
     // 页面滑动
     async pageScroll() {
+      console.log("scroll");
       const el = document.getElementById(this.id);
 
       const elOffsetTop = Number(el.getBoundingClientRect().top);
