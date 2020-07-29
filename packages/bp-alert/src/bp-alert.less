@@ -1,8 +1,8 @@
 /*
  * @Author: Sam
  * @Date: 2020-04-28 11:13:03
- * @Last Modified by:   Sam
- * @Last Modified time: 2020-04-28 11:13:03
+ * @Last Modified by: Sam
+ * @Last Modified time: 2020-07-28 10:52:01
  */
 @import "../../common/less/theme.less";
 
@@ -18,17 +18,33 @@
             padding: 0 14px;
 
             .bp-alert-header-title {
+                position: relative;
+                top: 6px;
                 width: 84%;
-                float: left;
-                font-size: 14px;
-                line-height: 36px;
                 margin: 0;
-                letter-spacing: 0.5px;
-                text-align: left;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                overflow: hidden;
-                word-break: break-all;
+                float: left;
+
+                .icon {
+                    position: relative;
+                    top: -1px;
+                    font-size: 18px;
+                    margin-right: 4px;
+                    display: inline-block;
+                    box-sizing: border-box;
+                    vertical-align: middle;
+                    opacity: .9;
+                }
+
+                .text {
+                    font-size: 14px;
+                    box-sizing: border-box;
+                    letter-spacing: 0.5px;
+                    text-align: left;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    word-break: break-all;
+                }
             }
 
             .bp-alert-header-close {

@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-21 16:12:26
  * @Last Modified by: Sam
- * @Last Modified time: 2020-05-12 16:24:32
+ * @Last Modified time: 2020-07-28 14:33:09
  */
 <template>
   <div class="bp-message">
@@ -38,7 +38,7 @@ export default {
     // 生成 message name
     setMessageName() {
       let timestamp = new Date().getTime();
-      return "msg-" + timestamp;
+      return `msg-${timestamp}`;
     },
     // 添加消息通知
     add(config) {
@@ -55,7 +55,7 @@ export default {
       );
 
       // 指定时间后移除消息
-      if (config.delayed != 0) {
+      if (config.delayed !== 0) {
         setTimeout(() => {
           this.remove(name);
         }, config.delayed);

@@ -1,19 +1,19 @@
 /*
  * @Author: Sam
- * @Date: 2020-05-07 14:51:55
+ * @Date: 2020-07-06 10:18:43
  * @Last Modified by: Sam
- * @Last Modified time: 2020-05-12 17:12:56
+ * @Last Modified time: 2020-07-06 14:08:09
  */
 <template>
   <div :class="className" @click="handleClick">
-    <!-- 多选框内容 -->
+    <!-- 单选框内容 -->
     <div :class="innerClassName">
-      <div class="bp-checkbox-inner"></div>
+      <div class="bp-radio-inner"></div>
     </div>
-    <!-- Checkbox -->
-    <input ref="checkbox" type="checkbox" :name="name" v-model="inputValue" />
+    <!-- radio -->
+    <input ref="radio" type="radio" :name="name" :value="label" v-model="inputValue" />
     <!-- 选项标签文本 -->
-    <span class="bp-checkbox-inner-text">
+    <span class="bp-radio-inner-text">
       <slot></slot>
     </span>
   </div>
@@ -21,12 +21,17 @@
 
 <script>
 export default {
-  name: "bp-checkbox",
+  name: "bp-radio",
   props: {
     // 多选框值
     value: {
-      type: Boolean,
+      type: [String, Number],
       default: false
+    },
+    // 单选框值
+    label: {
+      type: [Boolean, String, Number],
+      default: ""
     },
     // name
     name: {
@@ -39,48 +44,43 @@ export default {
       default: false
     }
   },
-  data() {
-    return {
-      inputValue: this.value
-    };
-  },
   computed: {
     className() {
-      let name = ["bp-checkbox"];
+      let name = ["bp-radio"];
       if (this.disabled) {
-        name.push("bp-checkbox-disabled");
+        name.push("bp-radio-disabled");
       }
       return name;
     },
     innerClassName() {
       let name = this.disabled
-        ? ["bp-checkbox-inner-box-disabled"]
-        : ["bp-checkbox-inner-box"];
+        ? ["bp-radio-inner-box-disabled"]
+        : ["bp-radio-inner-box"];
 
-      if (this.value) {
+      if (this.value === this.label) {
         name.push("checked");
       }
 
       return name;
     }
   },
+  data() {
+    return {
+      inputValue: this.value
+    };
+  },
   methods: {
-    handleClick(event) {
+    handleClick() {
       if (this.disabled) {
         return;
       }
-      this.inputValue = !this.inputValue;
+      this.inputValue = this.label;
       this.$emit("input", this.inputValue);
-    }
-  },
-  watch: {
-    value() {
-      this.inputValue = this.value;
     }
   }
 };
 </script>
 
 <style lang="less">
-@import url("./bp-checkbox.less");
+@import "./bp-radio.less";
 </style>

@@ -7,11 +7,11 @@
 <template>
   <div :class="buttonDivClass">
     <!-- 文字按钮 -->
-    <span v-if="type=='text'" class="btn-text" @click="handelClick">
+    <span v-if="type=='text'" class="btn-text" @click="handleClick">
       <slot></slot>
     </span>
     <!-- 非文字按钮 -->
-    <button v-else :class="buttonClass" :disabled="disabled" @click="handelClick">
+    <button v-else :class="buttonClass" :disabled="disabled" @click="handleClick">
       <!-- 加载状态 -->
       <span v-if="loading" class="bp-icon-loading">
         <i class="ri-loader-fill"></i>
@@ -104,7 +104,7 @@ export default {
   },
   methods:{
     // 点击事件触发
-    handelClick(){
+    handleClick(){
       this.$emit('click');
     }
   }

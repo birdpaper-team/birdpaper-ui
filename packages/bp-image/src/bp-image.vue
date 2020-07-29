@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-04-15 09:52:25
  * @Last Modified by: Sam
- * @Last Modified time: 2020-06-02 14:27:04
+ * @Last Modified time: 2020-07-29 10:43:20
  */
 <template>
   <div :id="id" class="bp-image" v-cloak>
@@ -62,6 +62,9 @@ export default {
       loadLock: false, // 加载锁
       url: "" // 图片地址
     };
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.pageScroll, true);
   },
   mounted() {
     this.$nextTick(() => {

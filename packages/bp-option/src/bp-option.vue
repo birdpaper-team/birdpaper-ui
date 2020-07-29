@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-28 16:52:14
  * @Last Modified by: Sam
- * @Last Modified time: 2020-04-20 08:56:14
+ * @Last Modified time: 2020-07-28 09:06:26
  */
 <template>
   <!-- 选择器选项 -->
@@ -15,7 +15,6 @@
 </template>
 
 <script>
-import { globalBus } from "../../globalBus";
 export default {
   name: "bp-option",
   props: {

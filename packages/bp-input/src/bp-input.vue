@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-11-07 14:05:54
  * @Last Modified by: Sam
- * @Last Modified time: 2020-06-02 14:34:03
+ * @Last Modified time: 2020-07-29 10:43:35
  */
 <template>
   <div :class="inputClassName" v-click-outside="handleClickOutside">
@@ -20,9 +20,11 @@
         :disabled="disabled"
         :readonly="readonly"
         v-model="inputValue"
-        @input="handelInput"
-        @focus="handelFocus"
-        @blur="handelBlur"
+        @keyup="handleKeyup"
+        @keydown="handleKeydown"
+        @input="handleInput"
+        @focus="handleFocus"
+        @blur="handleBlur"
       />
       <!-- 右侧区域 -->
       <div class="bp-input-right" v-if="!disabled && !readonly">
@@ -37,7 +39,7 @@
           <!-- 清空按钮 -->
           <span
             v-if="type == 'text' && inputValue != '' && showRightIcon && !showLimit"
-            @click="handelClear"
+            @click="handleClear"
           >
             <i class="ri-close-circle-fill"></i>
           </span>
@@ -59,9 +61,11 @@
         :maxlength="maxLength"
         :placeholder="placeholder"
         v-model="inputValue"
-        @input="handelInput"
-        @focus="handelFocus"
-        @blur="handelBlur"
+        @input="handleInput"
+        @keyup="handleKeyup"
+        @keydown="handleKeydown"
+        @focus="handleFocus"
+        @blur="handleBlur"
       />
       <!-- 字数限制 -->
       <span
@@ -183,7 +187,7 @@ export default {
   },
   methods: {
     // 输入触发
-    handelInput(el) {
+    handleInput(el) {
       this.$emit("input", this.inputValue);
       // 多行文本下操作
       if (this.type === "textarea" && this.autosize) {
@@ -191,22 +195,30 @@ export default {
       }
     },
     // 获取焦点触发
-    handelFocus(e) {
+    handleFocus(e) {
       this.$emit("focus", e);
       this.isFocus = true;
       this.showRightIcon = true;
     },
     // 失去焦点触发
-    handelBlur(e) {
+    handleBlur(e) {
       this.$emit("blur", e);
       this.isFocus = false;
+    },
+    // 键入触发
+    handleKeyup(e){
+      this.$emit("keyup", e);
+    },
+    // 键松触发
+    handleKeydown(e){
+      this.$emit("keydown", e);
     },
     // 点击输入框外部触发
     handleClickOutside() {
       this.showRightIcon = false;
     },
     // 清空输入框触发
-    handelClear() {
+    handleClear() {
       this.inputValue = "";
       this.$emit("input", this.inputValue);
       this.$emit("clear", this.inputValue);
