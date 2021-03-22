@@ -2,30 +2,29 @@
  * @Author: Sam
  * @Date: 2020-01-11 10:30:29
  * @Last Modified by: Sam
- * @Last Modified time: 2020-07-29 11:23:56
+ * @Last Modified time: 2021-03-13 13:58:57
  */
-import Vue from 'vue';
 // 导入组件
 import bpButton from './bp-button';
 import bpInput from './bp-input';
 import bpRow from './bp-row';
 import bpCol from './bp-col';
-import msg from './bp-message';
 import bpSelect from './bp-select';
-import bpOption from './bp-option';
 import bpDialog from './bp-dialog';
 import bpMask from './bp-mask';
 import bpAvatar from './bp-avatar';
 import bpImage from './bp-image';
-import bpAlert from './bp-alert';
 import bpItemBar from './bp-item-bar';
+import bpBadge from './bp-badge';
+import bpSpin from './bp-spin';
+import message from './bp-message';
+// import bpAlert from './bp-alert';
 import bpCheckbox from './bp-checkbox';
 import bpTable from './bp-table';
-import bpRadio from './bp-radio';
+// import bpRadio from './bp-radio';
 import bpSwitch from './bp-switch';
-import bpBadge from './bp-badge';
 
-Vue.prototype.$message = msg;
+// Vue.prototype.$message = message;
 
 const components = [
   bpButton,
@@ -35,16 +34,16 @@ const components = [
   bpMask,
   bpSelect,
   bpAvatar,
-  bpOption,
   bpItemBar,
-  bpCheckbox,
-  bpAlert,
-  bpTable,
-  bpRadio,
-  bpSwitch,
   bpBadge,
   bpRow,
-  bpCol
+  bpCol,
+  bpSpin,
+  bpCheckbox,
+  // bpAlert,
+  bpTable,
+  // bpRadio,
+  bpSwitch,
 ];
 
 // install 方法，接收 Vue 作为参数。如果使用 use 注册插件，则所有的组件都将被注册
@@ -73,22 +72,22 @@ export default {
   // 具体的组件列表
   bpButton,
   bpSelect,
-  bpOption,
   bpImage,
   bpItemBar,
   bpDialog,
   bpAvatar,
-  bpAlert,
+  // bpAlert,
   bpInput,
   bpMask,
   bpTable,
+  bpSpin,
   bpCheckbox,
-  bpRadio,
+  // bpRadio,
   bpSwitch,
   bpBadge,
   bpRow,
   bpCol,
 }
-export const Message = {
-  msg
+export {
+  message
 }

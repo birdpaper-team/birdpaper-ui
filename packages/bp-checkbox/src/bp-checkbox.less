@@ -2,174 +2,213 @@
  * @Author: Sam
  * @Date: 2020-05-07 14:51:30
  * @Last Modified by: Sam
- * @Last Modified time: 2020-07-06 13:50:53
+ * @Last Modified time: 2021-03-17 08:50:40
  */
-@import "../../common/less/theme.less";
 
 .bp-checkbox {
-    display: inline-block;
-    -webkit-appearance: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  position: relative;
+  display: inline-block;
+  -webkit-appearance: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  // background-color: @primary-2;
+  user-select: none;
+  cursor: pointer;
+
+  .bp-checkbox-inner-box {
+    outline: none;
+    width: 16px;
+    height: 16px;
+    white-space: nowrap;
+    vertical-align: middle;
+    float: left;
     cursor: pointer;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
 
-    .bp-checkbox-inner-box {
-        display: inline-block;
-        outline: none;
-        white-space: nowrap;
-        position: relative;
-        vertical-align: middle;
-        cursor: pointer;
+    .bp-checkbox-inner {
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+      border-radius: 2px;
+      box-sizing: border-box;
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      top: 50%;
+      margin-top: -8px;
+      background-color: @gary-0;
+      border: 1px solid @gary-4;
+      z-index: 1;
+      transition: border-color .2s ease, background-color .2s ease;
 
-        .bp-checkbox-inner {
-            display: inline-block;
-            position: relative;
-            border-radius: 2px;
-            box-sizing: border-box;
-            width: 16px;
-            height: 16px;
-            background-color: @gary-0;
-            border: 1px solid @gary-4;
-            z-index: 1;
-            transition: border-color .2s ease, background-color .2s ease;
-            -o-transition: border-color .2s ease, background-color .2s ease;
-            -moz-transition: border-color .2s ease, background-color .2s ease;
-            -webkit-transition: border-color .2s ease, background-color .2s ease;
-
-
-            &::after {
-                position: absolute;
-                left: 5px;
-                top: 2px;
-                width: 3px;
-                height: 7px;
-                content: "";
-                border: 1px solid @gary-0;
-                border-left: 0;
-                border-top: 0;
-                box-sizing: content-box;
-                transform: rotate(45deg) scaleY(0);
-                transform-origin: center;
-            }
-        }
-    }
-
-    &:hover {
-        .bp-checkbox-inner-box {
-            .bp-checkbox-inner {
-                border: 1px solid @primary-3;
-                transition: border-color .2s ease;
-                -o-transition: border-color .2s ease;
-                -moz-transition: border-color .2s ease;
-                -webkit-transition: border-color .2s ease;
-            }
-        }
-    }
-
-
-    .bp-checkbox-inner-text {
-        margin-left: 8px;
-        font-size: 14px;
-        font-weight: 500;
-        letter-spacing: .5px;
-        color: @gary-7;
-    }
-
-    // 选中后样式
-    .checked {
-        .bp-checkbox-inner {
-            background-color: @primary-3 ;
-            border-color: @primary-3 ;
-        }
-
-        .bp-checkbox-inner::after {
-            transform: rotate(45deg) scaleY(1);
-        }
-    }
-
-    input[type="checkbox"] {
-        opacity: 0;
-        outline: none;
+      &::after {
         position: absolute;
-        margin: 0;
-        width: 0;
-        height: 0;
-        z-index: -1;
+        left: 5px;
+        top: 2px;
+        width: 3px;
+        height: 7px;
+        content: "";
+        border: 1px solid @gary-0;
+        border-left: 0;
+        border-top: 0;
+        box-sizing: content-box;
+        transform: rotate(45deg) scaleY(0);
+        transform-origin: center;
+      }
+
+      &::before {
+        position: absolute;
+        display: block;
+        content: "";
+        background-color: #fff;
+        height: 2px;
+        left: 0;
+        right: 0;
+        top: 6px;
+        transform: scale(.5);
+      }
     }
+  }
+
+  &:hover {
+    .bp-checkbox-inner-box {
+      .bp-checkbox-inner {
+        border: 1px solid @primary-3;
+        transition: border-color .2s ease;
+        -o-transition: border-color .2s ease;
+        -moz-transition: border-color .2s ease;
+        -webkit-transition: border-color .2s ease;
+      }
+    }
+  }
+
+  .bp-checkbox-inner-text {
+    margin-left: 22px;
+    font-size: inherit;
+    letter-spacing: .5px;
+    color: @gary-7;
+    float: left;
+  }
+
+  // 选中后样式
+  .checked {
+    .bp-checkbox-inner {
+      background-color: @primary-3 ;
+      border-color: @primary-3 ;
+    }
+
+    .bp-checkbox-inner::after {
+      transform: rotate(45deg) scaleY(1);
+    }
+
+    .bp-checkbox-inner::before {
+      display: none;
+    }
+  }
+
+  // 选中后样式
+  .indeterminate {
+    .bp-checkbox-inner {
+      background-color: @primary-3 ;
+      border-color: @primary-3 ;
+    }
+
+    .bp-checkbox-inner::after {
+      transform: rotate(45deg) scaleY(0);
+    }
+  }
+
+  input[type="checkbox"] {
+    opacity: 0;
+    outline: none;
+    position: absolute;
+    margin: 0;
+    width: 0;
+    height: 0;
+    z-index: -1;
+  }
 }
 
 .bp-checkbox-disabled {
+  cursor: no-drop;
+
+  .bp-checkbox-inner-box-disabled {
+    width: 16px;
+    height: 16px;
     cursor: no-drop;
+    outline: none;
+    white-space: nowrap;
+    vertical-align: middle;
+    float: left;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
 
-    .bp-checkbox-inner-box-disabled {
-        display: inline-block;
-        outline: none;
-        line-height: 1;
-        white-space: nowrap;
-        position: relative;
-        vertical-align: middle;
-        cursor: no-drop;
-
-        .bp-checkbox-inner {
-            display: inline-block;
-            position: relative;
-            border-radius: 2px;
-            box-sizing: border-box;
-            width: 16px;
-            height: 16px;
-            background-color: @gary-3;
-            border: 1px solid @gary-4;
-            z-index: 1;
-            transition: border-color .2s ease, background-color .2s ease;
-            -o-transition: border-color .2s ease, background-color .2s ease;
-            -moz-transition: border-color .2s ease, background-color .2s ease;
-            -webkit-transition: border-color .2s ease, background-color .2s ease;
+    .bp-checkbox-inner {
+      display: inline-block;
+      position: relative;
+      border-radius: 2px;
+      box-sizing: border-box;
+      width: 16px;
+      height: 16px;
+      background-color: @gary-3;
+      border: 1px solid @gary-4;
+      z-index: 1;
+      transition: border-color .2s ease, background-color .2s ease;
+      -o-transition: border-color .2s ease, background-color .2s ease;
+      -moz-transition: border-color .2s ease, background-color .2s ease;
+      -webkit-transition: border-color .2s ease, background-color .2s ease;
 
 
-            &::after {
-                position: absolute;
-                left: 5px;
-                top: 2px;
-                width: 3px;
-                height: 7px;
-                content: "";
-                border: 1px solid @gary-6;
-                border-left: 0;
-                border-top: 0;
-                box-sizing: content-box;
-                transform: rotate(45deg) scaleY(0);
-                transform-origin: center;
-            }
-        }
-    }
-
-    .bp-checkbox-inner-text {
-        color: @gary-6;
-    }
-
-    // 选中后样式
-    .checked {
-        .bp-checkbox-inner {
-            background-color: @gary-3 ;
-            border-color: @gary-4;
-        }
-
-        .bp-checkbox-inner::after {
-            transform: rotate(45deg) scaleY(1);
-        }
-    }
-
-    input[type="checkbox"] {
-        opacity: 0;
-        outline: none;
+      &::after {
         position: absolute;
-        margin: 0;
-        width: 0;
-        height: 0;
-        z-index: -1;
+        left: 5px;
+        top: 2px;
+        width: 3px;
+        height: 7px;
+        content: "";
+        border: 1px solid @gary-6;
+        border-left: 0;
+        border-top: 0;
+        box-sizing: content-box;
+        transform: rotate(45deg) scaleY(0);
+        transform-origin: center;
+      }
     }
+  }
+
+  .bp-checkbox-inner-text {
+    color: @gary-6;
+  }
+
+  // 选中后样式
+  .checked {
+    .bp-checkbox-inner {
+      background-color: @gary-3 ;
+      border-color: @gary-4;
+    }
+
+    .bp-checkbox-inner::after {
+      transform: rotate(45deg) scaleY(1);
+    }
+  }
+
+  input[type="checkbox"] {
+    opacity: 0;
+    outline: none;
+    position: absolute;
+    margin: 0;
+    width: 0;
+    height: 0;
+    z-index: -1;
+  }
 }

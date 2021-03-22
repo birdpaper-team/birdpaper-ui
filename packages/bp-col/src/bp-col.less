@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-12-22 10:31:34
  * @Last Modified by: Sam
- * @Last Modified time: 2019-12-22 11:39:46
+ * @Last Modified time: 2021-02-11 21:52:34
  */
 [class*=bp-col-] {
   float: left;
@@ -24,6 +24,7 @@
   // ============= 分栏 ===============
   .bp-col-@{i} {
     width: @width / (24 / @i);
+    display: block;
   }
 
   // ============= 偏移 ===============
@@ -47,6 +48,7 @@
 
     // ============= 分栏 ===============
     .bp-col-xs-@{i} {
+      display: block;
       width: @width / (24 / @i);
     }
 
@@ -60,7 +62,7 @@
 }
 
 // sm部分
-@media only screen and (min-width:760px) {
+@media only screen and (min-width:760px) and (max-width:991px) {
   .bp-col-sm-0 {
     display: none;
     width: 0%
@@ -72,6 +74,7 @@
 
     // ============= 分栏 ===============
     .bp-col-sm-@{i} {
+      display: block;
       width: @width / (24 / @i);
     }
 
@@ -97,6 +100,7 @@
 
     // ============= 分栏 ===============
     .bp-col-md-@{i} {
+      display: block;
       width: @width / (24 / @i);
     }
 
@@ -122,6 +126,7 @@
 
     // ============= 分栏 ===============
     .bp-col-lg-@{i} {
+      display: block;
       width: @width / (24 / @i);
     }
 
@@ -147,6 +152,7 @@
 
     // ============= 分栏 ===============
     .bp-col-xl-@{i} {
+      display: block;
       width: @width / (24 / @i);
     }
 

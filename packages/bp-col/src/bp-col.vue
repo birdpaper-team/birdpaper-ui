@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-12-22 10:31:59
  * @Last Modified by: Sam
- * @Last Modified time: 2020-01-11 10:49:33
+ * @Last Modified time: 2021-01-20 14:32:09
  */
 <template>
   <div :class="colClassName">
@@ -12,86 +12,87 @@
 
 <script>
 import { isNull } from "../../utils/util";
+import { computed } from "vue";
 export default {
   name: "bp-col",
   props: {
     // 栏位数
     span: {
-      type: Number,
-      default: 0
+      type: [Number, String],
+      default: 0,
     },
     // 偏移量
     offset: {
-      type: Number,
-      default: 0
+      type: [Number, String],
+      default: 0,
     },
     // <768px 响应式栅格数或者栅格属性对象
     xs: {
       type: [Object, Number],
-      default: () => {}
+      default: () => {},
     },
     // ≥768px 响应式栅格数或者栅格属性对象
     sm: {
       type: [Object, Number],
-      default: () => {}
+      default: () => {},
     },
     // ≥992px 响应式栅格数或者栅格属性对象
     md: {
       type: [Object, Number],
-      default: () => {}
+      default: () => {},
     },
     // ≥1200px 响应式栅格数或者栅格属性对象
     lg: {
       type: [Object, Number],
-      default: () => {}
+      default: () => {},
     },
     // ≥1920px 响应式栅格数或者栅格属性对象
     xl: {
       type: [Object, Number],
-      default: () => {}
-    }
+      default: () => {},
+    },
   },
-  computed: {
-    // class 样式名
-    colClassName() {
+  setup(props) {
+    let colClassName = computed(() => {
       // 默认样式和前缀
       let prefix = "bp-col";
       let className = [prefix];
-      this.span != 0 ? className.push(`${prefix}-${this.span}`) : "";
+      Number(props.span) !== 0 ? className.push(`${prefix}-${props.span}`) : "";
 
       // 偏移量
-      this.offset != 0 ? className.push(`${prefix}-offset-${this.offset}`) : "";
+      Number(props.offset) !== 0
+        ? className.push(`${prefix}-offset-${props.offset}`)
+        : "";
 
+      // 自适应尺寸
       let arr = ["xs", "sm", "md", "lg", "xl"];
-      let self = this.$props;
 
       for (let i = 0; i < arr.length; i++) {
         let name = arr[i];
         // 传入栏位
-        if (typeof self[name] == "number") {
-          className.push(`${prefix}-${name}-${self[name]}`);
+        if (typeof props[name] === "number") {
+          className.push(`${prefix}-${name}-${props[name]}`);
           continue;
         }
         // 传入栅格属性
-        if (!isNull(self[name])) {
+        if (!isNull(props[name])) {
           // 栏位
-          !isNull(self[name].span)
-            ? className.push(`${prefix}-${name}-${self[name].span}`)
+          !isNull(props[name].span)
+            ? className.push(`${prefix}-${name}-${props[name].span}`)
             : null;
 
           // 偏移量
-          !isNull(self[name].offset)
-            ? className.push(`${prefix}-${name}-offset-${self[name].offset}`)
+          !isNull(props[name].offset)
+            ? className.push(`${prefix}-${name}-offset-${props[name].offset}`)
             : null;
         }
       }
-
       return className;
-    }
-  }
+    });
+
+    return {
+      colClassName,
+    };
+  },
 };
 </script>
-
-<style lang="less">
-@import "./bp-col";
-</style>

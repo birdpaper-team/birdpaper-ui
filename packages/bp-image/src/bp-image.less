@@ -4,27 +4,33 @@
  * @Last Modified by: Sam
  * @Last Modified time: 2020-04-15 17:04:12
  */
-@import "../../common/less/theme.less";
+
 
 .bp-image {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
 
-    .bp-image-inner,
-    .bp-image-error,
-    .bp-image-placeholder {
-        width: 100%;
-        height: 100%;
-    }
+  img {
+    width: 100%;
+    height: 100%;
+  }
 
-    .bp-image-error {
-        display: flex;
-        font-size: 14px;
-        color: @gary-5;
-        background-color: @gary-2;
-        align-items: center;
-        justify-content: center;
-        vertical-align: middle;
-    }
+  .bp-image-inner,
+  .bp-image-error,
+  .bp-image-placeholder {
+    // width: 100%;
+    height: 100%;
+  }
+
+  .bp-image-error,
+  .bp-image-placeholder {
+    display: flex;
+    font-size: 14px;
+    color: @gary-5;
+    background-color: @gary-2;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+  }
 }

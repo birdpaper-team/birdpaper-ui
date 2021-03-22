@@ -2,9 +2,14 @@
  * @Author: Sam
  * @Date: 2019-12-16 11:05:47
  * @Last Modified by: Sam
- * @Last Modified time: 2020-07-27 16:15:29
+ * @Last Modified time: 2021-03-13 11:16:23
  */
-@import "../../common/less/theme.less";
+
+@radius: 4px;
+@largeHeight: 46px;
+@normalHeight: 34px;
+@smallHeight: 24px;
+@miniHeight: 18px;
 
 button {
   cursor: pointer;
@@ -16,8 +21,7 @@ button {
   box-sizing: border-box;
   display: inline-block;
   white-space: nowrap;
-  border-radius: 4px;
-  font-weight: 500;
+  border-radius: @radius;
   opacity: 1;
   -webkit-appearance: none;
   -moz-user-select: none;
@@ -36,7 +40,7 @@ button {
   -o-transition-timing-function: ease;
 }
 
-.btn-full {
+.btn-block {
   width: 100% !important;
   display: block !important;
 }
@@ -51,29 +55,74 @@ button {
   position: relative;
   display: inline-block;
 
+  .bp-icon {
+    font-style: normal;
+    font-weight: 400;
+    margin-right: 4px;
+    font-variant: normal;
+    font-size: 14px;
+    text-transform: none;
+    vertical-align: middle;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .btn-icon {
+    position: relative;
+    top: -2px;
+    border-radius: @radius;
+    font-size: inherit;
+    height: auto;
+    padding: 0 4px !important;
+    cursor: pointer;
+
+    i {
+      font-style: normal;
+      font-weight: 400;
+      font-variant: normal;
+      font-size: 14px;
+      text-transform: none;
+      vertical-align: middle;
+      display: inline-block;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      color: @gary-8;
+      transition: color .2s ease;
+    }
+
+    &:hover {
+      i {
+        color: @primary-3;
+        transition: color .2s ease;
+      }
+    }
+  }
+
+
   // 按钮尺寸
   .btn-size-large {
-    height: 50px;
-    padding: 0 24px;
+    height: @largeHeight;
+    padding: 0 32px;
     font-size: 16px;
   }
 
   .btn-size-normal {
-    height: 40px;
-    padding: 0 20px;
+    height: @normalHeight;
+    padding: 0 24px;
     font-size: 14px;
   }
 
   .btn-size-small {
-    height: 30px;
+    height: @smallHeight;
     padding: 0 16px;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .btn-size-mini {
-    height: 20px;
+    height: @miniHeight;
     padding: 0 8px;
-    font-size: 10px;
+    font-size: 12px;
   }
 
   button:disabled {
@@ -87,19 +136,15 @@ button {
 
   // 文字按钮
   .btn-text {
-    font-size: 14px;
-    color: @primary-3;
-    out-line: none;
+    font-size: inherit;
+    color: @primary-3 !important;
     cursor: pointer;
-    transition: color 0.2s ease;
-    -o-transition: color 0.2s ease;
-    -moz-transition: color 0.2s ease;
-    -webkit-transition: color 0.2s ease;
+    transition: color .2s ease;
   }
 
   // 默认按钮
   .default-style {
-    border: 1px solid @gary-5;
+    border: 1px solid @gary-4;
     background: @gary-0;
     color: @gary-7;
   }
@@ -388,7 +433,7 @@ button {
 
 // 加载
 .bp-icon-loading {
-  margin-right: 8px;
+  margin-right: 4px;
   box-sizing: border-box;
   vertical-align: middle;
 

@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-07-06 10:18:43
  * @Last Modified by: Sam
- * @Last Modified time: 2020-07-06 14:08:09
+ * @Last Modified time: 2021-01-20 14:37:09
  */
 <template>
   <div :class="className" @click="handleClick">
@@ -23,12 +23,12 @@
 export default {
   name: "bp-radio",
   props: {
-    // 多选框值
+    // 单选框值
     value: {
       type: [String, Number],
       default: false
     },
-    // 单选框值
+    // 单选框标签
     label: {
       type: [Boolean, String, Number],
       default: ""
@@ -80,7 +80,3 @@ export default {
   }
 };
 </script>
-
-<style lang="less">
-@import "./bp-radio.less";
-</style>

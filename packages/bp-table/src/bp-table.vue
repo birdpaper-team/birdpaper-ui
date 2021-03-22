@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-05-25 13:40:52
  * @Last Modified by: Sam
- * @Last Modified time: 2020-05-26 14:33:43
+ * @Last Modified time: 2021-03-12 15:17:02
  */
 <template>
   <div class="bp-table">
@@ -11,7 +11,13 @@
         <!-- 表头部分 -->
         <thead>
           <tr>
-            <th v-for="(item,index) in cols" :key="`bp-table-thead${index}`">{{item.title}}</th>
+            <th
+              v-for="(item, index) in cols"
+              :key="`bp-table-thead-${index}`"
+              :style="`width:${item.width}`"
+            >
+              {{ item.title }}
+            </th>
           </tr>
         </thead>
         <!-- 数据部分 -->
@@ -19,13 +25,30 @@
           <!-- 空数据缺省展示 -->
           <template v-if="data.length == 0">
             <tr class="bp-table-empty-tr">
-              <td :colspan="data.length">暂无数据</td>
+              <td :colspan="cols.length">暂无数据</td>
             </tr>
           </template>
+
           <!-- 数据渲染 -->
           <template v-else>
-            <tr v-for="(item,index) in data" :key="`bp-table-tbody-tr-${index}`">
-              <td v-for="(v,k) in cols" :key="`bp-table-tbody-tr-${index}-${k}`">{{item[v.key]}}</td>
+            <tr
+              v-for="(item, index) in data"
+              :key="`bp-table-tbody-tr-${index}`"
+            >
+              <td
+                v-for="(v, k) in cols"
+                :key="`bp-table-tbody-td-${index}-${k}`"
+              >
+                <template v-if="!v.scopedSlots">{{ item[v.key] }}</template>
+                <!-- 自定义渲染 -->
+                <template v-else>
+                  <slot
+                    :name="v.scopedSlots.customRender"
+                    :row="item"
+                    :data="item[v.key]"
+                  ></slot>
+                </template>
+              </td>
             </tr>
           </template>
         </tbody>
@@ -38,22 +61,20 @@
 export default {
   name: "bp-table",
   props: {
+    // 表格头
     cols: {
       type: Array,
       default: () => {
         return [];
-      }
+      },
     },
+    // 表格数据
     data: {
       type: Array,
       default: () => {
         return [];
-      }
-    }
-  }
+      },
+    },
+  },
 };
 </script>
-
-<style lang="less">
-@import "./bp-table.less";
-</style>

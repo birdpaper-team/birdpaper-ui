@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-07-13 15:21:48
  * @Last Modified by: Sam
- * @Last Modified time: 2020-07-27 11:20:30
+ * @Last Modified time: 2021-01-20 14:37:57
  */
 <template>
   <div class="bp-switch">
@@ -90,6 +90,3 @@ export default {
   },
 };
 </script>
-<style lang="less">
-@import "./bp-switch.less";
-</style>

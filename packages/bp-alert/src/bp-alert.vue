@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-04-28 11:05:14
  * @Last Modified by: Sam
- * @Last Modified time: 2020-07-28 09:59:53
+ * @Last Modified time: 2021-01-20 14:30:51
  */
 <template>
   <div class="bp-alert" v-if="show">
@@ -123,7 +123,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-@import url("./bp-alert.less");
-</style>
