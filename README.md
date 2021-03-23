@@ -26,9 +26,13 @@ yarn add birdpaper-ui // yarn
 ### 使用，在 main.js 中写入
 
 ```javascript
-import birdpaperUI from "birdpaper-ui/lib/birdpaper-ui.common.js";
+import birdpaperUI from "birdpaper-ui";
 import "birdpaper-ui/lib/birdpaper-ui.css";
-Vue.use(birdpaperUI);
+
+const app = createApp(App)
+
+app.use(birdpaperUI)
+  .mount("#app");
 ```
 
 ## 源码构建
@@ -43,30 +47,4 @@ git clone https://gitee.com/liluanhui/birdpaper-ui
 
 ```javascript
 npm install
-```
-
-打包构建
-
-```javascript
-npm run lib
-```
-
-将构建后的 `lib` 目录移动或者覆盖你项目 `node_modules` 中的 `birdpaper-ui` 即可。
-
-## CDN 引入
-
-在此之前，你必须先引入 Vue 框架，以官方提供的生产环境版本为例：
-
-```javascript
-// 引入 Vue 框架
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-```
-
-你可以通过 unpkg 获取并引入最新版本的资源
-
-```javascript
-// 引入样式
-<link rel="stylesheet" href="https://unpkg.com/birdpaper-ui@0.7.0/lib/birdpaper-ui.css">
-// 引入组件
-<script src="https://unpkg.com/birdpaper-ui@0.7.0/lib/birdpaper-ui.common.js"></script>
 ```
