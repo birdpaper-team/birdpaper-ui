@@ -69,20 +69,3 @@ npm run lib
 // 引入组件
 <script src="https://unpkg.com/birdpaper-ui@0.7.0/lib/birdpaper-ui.common.js"></script>
 ```
-
-你也可以使用小纸鹤提供的 CDN 服务
-
-```html
-https://cos.birdpaper.com/birdpaper-ui/v0.7.0/birdpaper-ui.css
-https://cos.birdpaper.com/birdpaper-ui/v0.7.0/birdpaper-ui.common.js
-```
-
-## 使用预发布版本
-
-预发布环境包含有不稳定或正在开发阶段的组件和特性，请谨慎使用
-
-#### 安装预发布依赖包
-
-```
-npm install birdpaper-ui --registry=https://birdpaper-npm.pkg.coding.net/birdpaper-ui-pre/coding/
-```
