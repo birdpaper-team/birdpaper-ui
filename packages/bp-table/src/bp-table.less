@@ -1,0 +1,85 @@
+/*
+ * @Author: Sam
+ * @Date: 2020-05-25 13:41:25
+ * @Last Modified by: Sam
+ * @Last Modified time: 2021-03-12 11:13:41
+ */
+
+ .bp-table {
+  .bp-table-inner {
+    font-feature-settings: "tnum";
+    position: relative;
+    clear: both;
+
+    table {
+      width: 100%;
+      border: none;
+      border-radius: 4px 4px 0 0;
+      border-spacing: 0;
+
+      td,
+      th {
+        border-bottom: 1px solid @gary-3;
+      }
+
+      // 表头样式
+      thead {
+        display: table-header-group;
+        width: 100%;
+        height: 40px;
+        line-height: 40px;
+        background-color: @gary-1;
+        text-align: left;
+        -moz-user-select: none;
+        -o-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+        tr {
+          display: table-row;
+          vertical-align: inherit;
+          border-color: inherit;
+
+          th {
+            overflow-wrap: break-word;
+            display: table-cell;
+            padding-left: 10px;
+            font-size: inherit;
+            font-weight: 400;
+            color: @gary-9;
+
+            &:first-child {
+              border-top-left-radius: 4px;
+            }
+
+            &:last-child {
+              border-top-right-radius: 4px;
+            }
+          }
+        }
+
+      }
+
+      tbody {
+        td {
+          height: 40px;
+          line-height: 40px;
+          padding-left: 10px;
+          font-size: inherit;
+          color: @gary-7;
+          font-weight: 400;
+        }
+
+        .bp-table-empty-tr {
+          text-align: center;
+
+          td {
+            color: @gary-5;
+          }
+        }
+      }
+    }
+  }
+}

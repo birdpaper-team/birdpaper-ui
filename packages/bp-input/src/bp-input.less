@@ -1,0 +1,318 @@
+/*
+ * @Author: Sam
+ * @Date: 2019-11-07 14:07:32
+ * @Last Modified by: Sam
+ * @Last Modified time: 2021-03-10 20:44:16
+ */
+
+@radius: 4px;
+@largeHeight: 46px;
+@normalHeight: 34px;
+@smallHeight: 24px;
+@miniHeight: 18px;
+
+.bp-input {
+  width: 100%;
+  max-width: 100%;
+  min-height: 20px;
+  position: relative;
+  display: inline-block;
+  border-radius: @radius;
+  border: 1px solid @gary-4;
+  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+  &:hover {
+    border: 1px solid @gary-5;
+  }
+
+  .bp-input-inner {
+    width: 100%;
+    -webkit-appearance: none;
+    background-color: @gary-0;
+    background-image: none;
+    box-sizing: border-box;
+    font-weight: 400;
+    color: @gary-7;
+    border-radius: @radius;
+    border: none;
+    display: inline-block;
+    padding: 0 30px 0 10px;
+
+    &:disabled {
+      background-color: @gary-2;
+      cursor: no-drop;
+    }
+
+    &:read-only {
+      background-color: @gary-1;
+      cursor: no-drop;
+    }
+  }
+
+  .bp-input-right {
+    position: absolute;
+    right: 0;
+    top: 0px;
+    padding: 0 10px;
+    text-align: center;
+    background-color: @gary-0;
+    border-radius: @radius;
+    -webkit-appearance: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    span {
+      color: @gary-6;
+    }
+
+    i {
+      cursor: pointer;
+    }
+  }
+
+  // 多行文本
+  .bp-textarea-inner {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    min-height: 60px;
+    -webkit-appearance: none;
+    background-color: @gary-0;
+    background-image: none;
+    box-sizing: border-box;
+    font-size: inherit;
+    color: @gary-7;
+    letter-spacing: 1px;
+    border-radius: @radius;
+    border: none;
+    display: block;
+    padding: 10px 15px;
+
+    &:disabled {
+      background-color: @gary-2;
+      cursor: no-drop;
+    }
+
+    &:read-only {
+      background-color: @gary-1;
+      cursor: no-drop;
+    }
+  }
+
+  .resize-none {
+    resize: none;
+  }
+
+  .bp-textarea-num-limit {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    color: @gary-6;
+  }
+}
+
+// 输入框尺寸
+.bp-input-large {
+  .bp-input-inner {
+    height: @largeHeight;
+    font-size: 16px;
+  }
+
+  .bp-input-right {
+    height: @largeHeight;
+    line-height: @largeHeight;
+
+    i {
+      font-size: 18px;
+    }
+  }
+}
+
+.bp-input-normal {
+  .bp-input-inner {
+    height: @normalHeight;
+    font-size: inherit;
+  }
+
+  .bp-input-right {
+    height: @normalHeight;
+    line-height: @normalHeight;
+
+    i {
+      font-size: inherit;
+    }
+  }
+}
+
+.bp-input-small {
+  .bp-input-inner {
+    height: @smallHeight;
+    font-size: 12px;
+  }
+
+  .bp-input-right {
+    height: @smallHeight;
+    line-height: @smallHeight;
+
+    i {
+      font-size: 12px;
+    }
+  }
+}
+
+.bp-input-mini {
+  .bp-input-inner {
+    height: @miniHeight;
+    font-size: 12px;
+  }
+
+  .bp-input-right {
+    height: @miniHeight;
+    line-height: @miniHeight;
+
+    i {
+      font-size: 12px;
+    }
+  }
+}
+
+.focus-border {
+  border: 1px solid @primary-3  !important;
+  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+}
+
+.bp-border-primary {
+  border: 1px solid @primary-4;
+  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+  &:hover {
+    border: 1px solid @primary-5;
+  }
+}
+
+.bp-border-success {
+  border: 1px solid @success-4;
+  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+  &:hover {
+    border: 1px solid @success-5;
+  }
+}
+
+.bp-border-warning {
+  border: 1px solid @warning-4;
+  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+  &:hover {
+    border: 1px solid @warning-5;
+  }
+}
+
+.bp-border-danger {
+  border: 1px solid @danger-4;
+  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+
+  &:hover {
+    border: 1px solid @danger-5;
+  }
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px @gary-0 inset;
+  border: 1px solid @gary-0  !important;
+}
+
+input,
+textarea {
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  outline: none;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei";
+}
+
+textarea::placeholder {
+  color: @gary-5;
+  font-weight: normal;
+}
+
+textarea::-webkit-input-placeholder {
+  color: @gary-5;
+  font-weight: normal;
+}
+
+/* Firefox 4-18 */
+textarea::-moz-placeholder {
+  color: @gary-5;
+  font-weight: normal;
+}
+
+/* Firefox 19-50 */
+textarea::-moz-placeholder {
+  color: @gary-5;
+  font-weight: normal;
+}
+
+/* - Internet Explorer 10–11
+    - Internet Explorer Mobile 10-11 */
+textarea::-ms-input-placeholder {
+  color: @gary-5  !important;
+  font-weight: normal !important;
+}
+
+/* Edge (also supports -webkit-input-placeholder) */
+textarea::-ms-input-placeholder {
+  color: @gary-5;
+  font-weight: normal;
+}
+
+input::placeholder {
+  color: @gary-5;
+  font-weight: normal;
+}
+
+input::-webkit-input-placeholder {
+  color: @gary-5;
+  font-weight: normal;
+}
+
+/* Firefox 4-18 */
+input::-moz-placeholder {
+  color: @gary-5;
+  font-weight: normal;
+}
+
+/* Firefox 19-50 */
+input::-moz-placeholder {
+  color: @gary-5;
+  font-weight: normal;
+}
+
+/* - Internet Explorer 10–11
+    - Internet Explorer Mobile 10-11 */
+input::-ms-input-placeholder {
+  color: @gary-5  !important;
+  font-weight: normal !important;
+}
+
+/* Edge (also supports -webkit-input-placeholder) */
+input::-ms-input-placeholder {
+  color: @gary-5;
+  font-weight: normal;
+}
+
+.bp-fade-in-enter,
+.bp-fade-in-leave-active {
+  opacity: 0;
+}
+
+.bp-fade-in-enter-active,
+.bp-fade-in-leave-active {
+  transition: opacity .2s ease;
+}

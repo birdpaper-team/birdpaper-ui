@@ -1,0 +1,222 @@
+/*
+ * @Author: Sam
+ * @Date: 2020-04-28 11:13:03
+ * @Last Modified by: Sam
+ * @Last Modified time: 2021-01-20 14:30:51
+ */
+.bp-alert {
+    .bp-alert-content {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+
+        .bp-alert-header {
+            height: 36px;
+            padding: 0 14px;
+
+            .bp-alert-header-title {
+                position: relative;
+                top: 6px;
+                width: 84%;
+                margin: 0;
+                float: left;
+
+                .icon {
+                    position: relative;
+                    top: -1px;
+                    font-size: 18px;
+                    margin-right: 4px;
+                    display: inline-block;
+                    box-sizing: border-box;
+                    vertical-align: middle;
+                    opacity: .9;
+                }
+
+                .text {
+                    font-size: 14px;
+                    box-sizing: border-box;
+                    letter-spacing: 0.5px;
+                    text-align: left;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    word-break: break-all;
+                }
+            }
+
+            .bp-alert-header-close {
+                width: 16%;
+                float: left;
+                color: @gary-0;
+                height: 36px;
+                line-height: 36px;
+                text-align: right;
+                margin: 0;
+
+                i {
+                    cursor: pointer;
+                    font-size: 18px;
+                    box-sizing: border-box;
+                    vertical-align: middle;
+                }
+
+                span {
+                    cursor: pointer;
+                    font-size: 14px;
+                }
+
+                i,
+                span {
+                    opacity: .6;
+                    transition: opacity 0.2s ease;
+                    -o-transition: opacity 0.2s ease;
+                    -moz-transition: opacity 0.2s ease;
+                    -webkit-transition: opacity 0.2s ease;
+
+                    &:hover {
+                        opacity: 1;
+                        transition: opacity 0.2s ease;
+                        -o-transition: opacity 0.2s ease;
+                        -moz-transition: opacity 0.2s ease;
+                        -webkit-transition: opacity 0.2s ease;
+                    }
+                }
+            }
+        }
+
+        .bp-alert-description {
+            width: 100%;
+            text-align: left;
+
+            .bp-alert-description-content {
+                margin: 0;
+                line-height: 20px;
+                padding: 0 14px 10px 14px;
+                color: @gary-2;
+                font-weight: 300;
+                font-size: 13px;
+            }
+        }
+    }
+
+    .alert-primary {
+        background-color: @primary-3;
+
+        .bp-alert-header {
+            .bp-alert-header-title {
+                color: @gary-0;
+            }
+        }
+    }
+
+    .alert-success {
+        background-color: @success-3;
+
+        .bp-alert-header {
+            .bp-alert-header-title {
+                color: @gary-0;
+            }
+        }
+    }
+
+    .alert-warning {
+        background-color: @warning-3;
+
+        .bp-alert-header {
+            .bp-alert-header-title {
+                color: @gary-0;
+            }
+        }
+    }
+
+    .alert-danger {
+        background-color: @danger-3;
+
+        .bp-alert-header {
+            .bp-alert-header-title {
+                color: @gary-0;
+            }
+        }
+    }
+
+    .alert-primary-light {
+        background-color: @primary-1;
+
+        .bp-alert-header {
+            .bp-alert-header-title {
+                color: @primary-3;
+            }
+
+            .bp-alert-header-close {
+                color: @gary-6;
+            }
+        }
+
+        .bp-alert-description {
+            .bp-alert-description-content {
+                color: @primary-3;
+            }
+        }
+    }
+
+    .alert-success-light {
+        background-color: @success-1;
+
+        .bp-alert-header {
+            .bp-alert-header-title {
+                color: @success-3;
+            }
+
+            .bp-alert-header-close {
+                color: @gary-6;
+            }
+        }
+
+        .bp-alert-description {
+            .bp-alert-description-content {
+                color: @success-3;
+            }
+        }
+    }
+
+    .alert-warning-light {
+        background-color: @warning-1;
+
+        .bp-alert-header {
+            .bp-alert-header-title {
+                color: @warning-3;
+            }
+
+            .bp-alert-header-close {
+                color: @gary-6;
+            }
+        }
+
+        .bp-alert-description {
+            .bp-alert-description-content {
+                color: @warning-3;
+            }
+        }
+    }
+
+    .alert-danger-light {
+        background-color: @danger-1;
+
+        .bp-alert-header {
+            .bp-alert-header-title {
+                color: @danger-3;
+            }
+
+            .bp-alert-header-close {
+                color: @gary-6;
+            }
+        }
+
+        .bp-alert-description {
+            .bp-alert-description-content {
+                color: @danger-3;
+            }
+        }
+    }
+}

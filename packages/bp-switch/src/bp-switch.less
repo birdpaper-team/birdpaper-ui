@@ -1,0 +1,87 @@
+/*
+ * @Author: Sam
+ * @Date: 2020-07-13 15:22:18
+ * @Last Modified by: Sam
+ * @Last Modified time: 2020-07-13 17:45:00
+ */
+
+
+.bp-switch {
+    position: relative;
+    cursor: pointer;
+
+    .bp-switch-inner {
+        position: relative;
+        display: block;
+        width: 52px;
+        height: 24px;
+        border: 1px solid @gary-4;
+        outline: none;
+        border-radius: 16px;
+        box-sizing: border-box;
+        background-color: @gary-4;
+        transition: background-color .4s, border .4s;
+    }
+
+    .bp-switch-inner:before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50px;
+        height: 22px;
+        border-radius: 15px;
+        background-color: @gary-0;
+        transition: background-color .4s, transform 0.4s cubic-bezier(0.4, 0.4, 0.1, 1);
+    }
+
+    .bp-switch-inner:after {
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 22px;
+        height: 22px;
+        border-radius: 15px;
+        background-color: @gary-0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+        transition: background-color .4s, transform .4s cubic-bezier(0.4, 0.4, 0.1, 1);
+    }
+
+    .switch-disabled{
+        cursor: no-drop !important;
+        opacity: .5 !important;
+    }
+
+    .switch-primary,
+    .switch-primary:before {
+        border-color: @primary-3;
+        background-color: @primary-3;
+    }
+
+    .switch-success,
+    .switch-success:before {
+        border-color: @success-3;
+        background-color: @success-3;
+    }
+
+    .switch-warning,
+    .switch-warning:before {
+        border-color: @warning-3;
+        background-color: @warning-3;
+    }
+
+    .switch-danger,
+    .switch-danger:before {
+        border-color: @danger-3;
+        background-color: @danger-3;
+    }
+
+    .bp-switch-on {
+        transition: background-color .4s, border .4s;
+    }
+
+    .bp-switch-on:after {
+        transform: translateX(28px);
+    }
+}

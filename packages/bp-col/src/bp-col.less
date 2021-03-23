@@ -1,0 +1,166 @@
+/*
+ * @Author: Sam
+ * @Date: 2019-12-22 10:31:34
+ * @Last Modified by: Sam
+ * @Last Modified time: 2021-02-11 21:52:34
+ */
+[class*=bp-col-] {
+  float: left;
+  box-sizing: border-box;
+}
+
+.bp-col {
+  box-sizing: border-box;
+}
+
+// 总宽
+@width : 100%;
+
+// 总栏数
+.total-nums(24);
+
+.total-nums(@n, @i: 1) when (@i =< @n) {
+
+  // ============= 分栏 ===============
+  .bp-col-@{i} {
+    width: @width / (24 / @i);
+    display: block;
+  }
+
+  // ============= 偏移 ===============
+  .bp-col-offset-@{i} {
+    margin-left: @width / (24 / @i);
+  }
+
+  .total-nums(@n, (@i + 1));
+}
+
+// xs部分
+@media only screen and (max-width:759px) {
+  .bp-col-xs-0 {
+    display: none;
+    width: 0%
+  }
+
+  .total-nums(24);
+
+  .total-nums(@n, @i: 1) when (@i =< @n) {
+
+    // ============= 分栏 ===============
+    .bp-col-xs-@{i} {
+      display: block;
+      width: @width / (24 / @i);
+    }
+
+    // ============= 偏移 ===============
+    .bp-col-xs-offset-@{i} {
+      margin-left: @width / (24 / @i);
+    }
+
+    .total-nums(@n, (@i + 1));
+  }
+}
+
+// sm部分
+@media only screen and (min-width:760px) and (max-width:991px) {
+  .bp-col-sm-0 {
+    display: none;
+    width: 0%
+  }
+
+  .total-nums(24);
+
+  .total-nums(@n, @i: 1) when (@i =< @n) {
+
+    // ============= 分栏 ===============
+    .bp-col-sm-@{i} {
+      display: block;
+      width: @width / (24 / @i);
+    }
+
+    // ============= 偏移 ===============
+    .bp-col-sm-offset-@{i} {
+      margin-left: @width / (24 / @i);
+    }
+
+    .total-nums(@n, (@i + 1));
+  }
+}
+
+// md部分
+@media only screen and (min-width:992px) {
+  .bp-col-md-0 {
+    display: none;
+    width: 0%
+  }
+
+  .total-nums(24);
+
+  .total-nums(@n, @i: 1) when (@i =< @n) {
+
+    // ============= 分栏 ===============
+    .bp-col-md-@{i} {
+      display: block;
+      width: @width / (24 / @i);
+    }
+
+    // ============= 偏移 ===============
+    .bp-col-md-offset-@{i} {
+      margin-left: @width / (24 / @i);
+    }
+
+    .total-nums(@n, (@i + 1));
+  }
+}
+
+// lg部分
+@media only screen and (min-width:1200px) {
+  .bp-col-lg-0 {
+    display: none;
+    width: 0%
+  }
+
+  .total-nums(24);
+
+  .total-nums(@n, @i: 1) when (@i =< @n) {
+
+    // ============= 分栏 ===============
+    .bp-col-lg-@{i} {
+      display: block;
+      width: @width / (24 / @i);
+    }
+
+    // ============= 偏移 ===============
+    .bp-col-lg-offset-@{i} {
+      margin-left: @width / (24 / @i);
+    }
+
+    .total-nums(@n, (@i + 1));
+  }
+}
+
+// xl部分
+@media only screen and (min-width:1920px) {
+  .bp-col-xl-0 {
+    display: none;
+    width: 0%
+  }
+
+  .total-nums(24);
+
+  .total-nums(@n, @i: 1) when (@i =< @n) {
+
+    // ============= 分栏 ===============
+    .bp-col-xl-@{i} {
+      display: block;
+      width: @width / (24 / @i);
+    }
+
+    // ============= 偏移 ===============
+    .bp-col-xl-offset-@{i} {
+      margin-left: @width / (24 / @i);
+    }
+
+    .total-nums(@n, (@i + 1));
+  }
+}

@@ -1,0 +1,27 @@
+/*
+ * @Author: Sam
+ * @Date: 2020-04-02 14:26:48
+ * @Last Modified by: Sam
+ * @Last Modified time: 2021-02-26 23:48:42
+ */
+
+.bp-mask {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 997;
+  transform: translateZ(997px);
+  background-color: rgba(89, 89, 89, 0.55);
+}
+
+.mask-fade-enter,
+.mask-fade-leave-active {
+  opacity: 0;
+}
+
+.mask-fade-enter-active,
+.mask-fade-leave-active {
+  transition: opacity .4s ease;
+}
