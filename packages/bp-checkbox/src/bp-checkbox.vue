@@ -2,85 +2,79 @@
  * @Author: Sam
  * @Date: 2020-05-07 14:51:55
  * @Last Modified by: Sam
- * @Last Modified time: 2020-05-12 17:12:56
+ * @Last Modified time: 2021-03-17 08:38:00
  */
 <template>
   <div :class="className" @click="handleClick">
     <!-- 多选框内容 -->
-    <div :class="innerClassName">
+    <div
+      :class="[
+        innerClassName,
+        { checked: modelValue || value, indeterminate: indeterminate },
+      ]"
+    >
       <div class="bp-checkbox-inner"></div>
     </div>
     <!-- Checkbox -->
     <input ref="checkbox" type="checkbox" :name="name" v-model="inputValue" />
     <!-- 选项标签文本 -->
-    <span class="bp-checkbox-inner-text">
+    <div class="bp-checkbox-inner-text">
       <slot></slot>
-    </span>
+    </div>
   </div>
 </template>
 
 <script>
+import { computed, ref } from "vue";
 export default {
   name: "bp-checkbox",
   props: {
     // 多选框值
-    value: {
-      type: Boolean,
-      default: false
-    },
+    modelValue: { type: Boolean, default: false },
     // name
-    name: {
-      type: String,
-      default: ""
-    },
+    name: { type: String, default: "" },
     // 是否禁用
-    disabled: {
-      type: Boolean,
-      default: false
-    }
+    disabled: { type: Boolean, default: false },
+    customClick: { type: Boolean, default: false },
+    indeterminate: { type: Boolean, default: false },
+    value: { type: Boolean, default: false },
   },
-  data() {
-    return {
-      inputValue: this.value
-    };
-  },
-  computed: {
-    className() {
+  emits: ["update:modelValue", "click"],
+  setup(props, { emit }) {
+    const inputValue = ref("");
+    const className = computed(() => {
       let name = ["bp-checkbox"];
-      if (this.disabled) {
+      if (props.disabled) {
         name.push("bp-checkbox-disabled");
       }
       return name;
-    },
-    innerClassName() {
-      let name = this.disabled
+    });
+
+    const innerClassName = computed(() => {
+      let name = props.disabled
         ? ["bp-checkbox-inner-box-disabled"]
         : ["bp-checkbox-inner-box"];
 
-      if (this.value) {
-        name.push("checked");
-      }
-
       return name;
-    }
-  },
-  methods: {
-    handleClick(event) {
-      if (this.disabled) {
+    });
+
+    const handleClick = (e) => {
+      if (props.disabled) {
         return;
       }
-      this.inputValue = !this.inputValue;
-      this.$emit("input", this.inputValue);
-    }
+      if (props.customClick) {
+        emit("click");
+        return;
+      }
+      emit("update:modelValue", e.target.value);
+    };
+
+    return {
+      className,
+      innerClassName,
+      handleClick,
+      inputValue,
+    };
   },
-  watch: {
-    value() {
-      this.inputValue = this.value;
-    }
-  }
 };
 </script>
-
-<style lang="less">
-@import url("./bp-checkbox.less");
-</style>

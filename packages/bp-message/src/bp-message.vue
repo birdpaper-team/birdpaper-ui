@@ -2,77 +2,77 @@
  * @Author: Sam
  * @Date: 2020-01-21 16:12:26
  * @Last Modified by: Sam
- * @Last Modified time: 2020-07-28 14:33:09
+ * @Last Modified time: 2021-03-22 10:57:55
  */
 <template>
-  <div class="bp-message">
-    <!-- 消息列表 -->
-    <transition-group name="message-list" tag="div">
-      <div class="message-container" v-for="(item,index) in messageList" :key="`msg-${index}`">
-        <!-- 内容 -->
-        <div
-          :class="['message-content',messageList[index].immersive ? `message-${messageList[index].type}-immersive` : '']"
-        >
-          <!-- 消息类型图标 -->
-          <div class="message-icon" v-show="item.icon">
-            <i :class="item.icon"></i>
-          </div>
-          <span>{{ item.content }}</span>
-          <div class="option" v-if="item.close">
-            <!-- 手动关闭消息 -->
-            <i class="ri-close-fill" @click="remove(item.name)"></i>
-          </div>
+  <!-- 消息列表 -->
+  <transition name="slide-fade">
+    <div class="message-container" v-show="visibled">
+      <!-- 内容 -->
+      <div :class="['message-content']">
+        <!-- 消息类型图标 -->
+        <div class="message-icon" v-if="config.icon">
+          <i :class="config.icon"></i>
+        </div>
+        <span v-text="config.content"></span>
+        <div class="option" v-if="config.close">
+          <!-- 手动关闭消息 -->
+          <i class="ri-close-fill" @click="onClose"></i>
         </div>
       </div>
-    </transition-group>
-  </div>
+    </div>
+  </transition>
 </template>
 <script>
+import { reactive, ref, toRefs } from "vue";
 export default {
-  data() {
-    return {
-      messageList: []
-    };
-  },
-  methods: {
-    // 生成 message name
-    setMessageName() {
-      let timestamp = new Date().getTime();
-      return `msg-${timestamp}`;
+  props: {
+    // 消息配置项
+    config: {
+      type: Object,
+      default: () => {},
     },
-    // 添加消息通知
-    add(config) {
-      const name = this.setMessageName();
+    // 取消挂载回调
+    remove: {
+      type: Function,
+      default: () => {},
+    },
+  },
+  setup(props) {
+    const { config } = props;
+    const state = reactive({
+      visibled: false,
+    });
 
-      // 追加数组
-      let index = this.messageList.push(
-        Object.assign(
-          {
-            name: name
-          },
-          config
-        )
-      );
+    // 打开消息
+    const onOpen = (config) => {
+      setTimeout(() => {
+        state.visibled = true;
+      }, 10);
 
       // 指定时间后移除消息
-      if (config.delayed !== 0) {
+      if (config.duration !== 0) {
         setTimeout(() => {
-          this.remove(name);
-        }, config.delayed);
+          onClose();
+        }, config.duration);
       }
-    },
-    // 根据 name 移除消息
-    remove(name) {
-      for (let i = 0; i < this.messageList.length; i++) {
-        if (this.messageList[i].name === name) {
-          this.messageList.splice(i, 1);
-          break;
-        }
-      }
-    }
-  }
+    };
+
+    onOpen(props.config);
+
+    // 消息关闭
+    const onClose = () => {
+      state.visibled = false;
+      setTimeout(() => {
+        props.remove();
+      }, 200);
+    };
+
+    return {
+      ...toRefs(state),
+      onOpen,
+      onClose,
+    };
+  },
 };
 </script>
-<style lang="less">
-@import "./bp-message";
-</style>

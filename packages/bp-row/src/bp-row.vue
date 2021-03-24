@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-12-22 10:31:59
  * @Last Modified by: Sam
- * @Last Modified time: 2020-04-20 16:14:05
+ * @Last Modified time: 2021-03-13 11:25:58
  */
 <template>
   <div class="bp-row" ref="row">
@@ -11,46 +11,45 @@
 </template>
 
 <script>
+import { watch, onMounted, watchEffect, getCurrentInstance } from "vue";
 export default {
   name: "bp-row",
   props: {
     // 分栏间隔
     gutter: {
-      type: Number,
-      default: 0
-    }
+      type: [Number, String],
+      default: 0,
+    },
   },
-  mounted() {
-    this.setColGutter();
-  },
-  methods: {
+  setup(props) {
     // 设置 col 间隔
-    setColGutter() {
-      if (this.gutter == 0) {
+    const setColGutter = () => {
+      if (props.gutter === 0) {
         return;
       }
-      let children = this.$refs.row.children; // 获取 row 下所有 col。
-      let len = children.length;
+
+      // 获取 row 下所有 col
+      const row = getCurrentInstance().refs.row.children;
+
+      let len = row.length;
       // 首尾元素不做两边 padding 处理
       for (let i = 0; i < len; i++) {
-        if (i != 0) {
-          children[i].style.paddingLeft = `${this.gutter}px`;
+        if (i !== 0) {
+          row[i].style.paddingLeft = `${props.gutter}px`;
         }
-        if (i != len - 1) {
-          children[i].style.paddingRight = `${this.gutter}px`;
+        if (i !== len - 1) {
+          row[i].style.paddingRight = `${props.gutter}px`;
         }
       }
-    }
+    };
+
+    onMounted(() => {
+      setColGutter();
+    });
+
+    return {
+      setColGutter,
+    };
   },
-  watch: {
-    gutter() {
-      this.setColGutter();
-    }
-  }
 };
 </script>
-
-<style lang="less">
-@import "./bp-row";
-@import "./display";
-</style>

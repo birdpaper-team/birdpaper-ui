@@ -2,82 +2,93 @@
  * @Author: Sam
  * @Date: 2020-07-14 10:06:16
  * @Last Modified by: Sam
- * @Last Modified time: 2020-07-14 15:51:35
+ * @Last Modified time: 2020-11-10 15:36:19
  */
-@import "../../common/less/theme.less";
+
 
 .bp-badge {
-    position: relative;
-    vertical-align: middle;
+  position: relative;
+  vertical-align: middle;
+  display: inline-block;
+
+  span {
+    -webkit-appearance: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  .bp-badge-value {
+    position: absolute;
+    top: 2px;
+    right: 10px;
+    transform: translateY(-50%) translateX(100%);
+    border-radius: 10px;
     display: inline-block;
+    font-size: 12px;
+    height: 18px;
+    line-height: 18px;
+    padding: 0 6px;
+    color: @gary-0;
+    text-align: center;
+    white-space: nowrap;
+    border: 1px solid @gary-0;
+    z-index: 499;
+  }
 
-    .bp-badge-value {
-        position: absolute;
-        right: 10px;
-        transform: translateY(-50%) translateX(100%);
-        border-radius: 10px;
-        display: inline-block;
-        font-size: 12px;
-        height: 18px;
-        line-height: 18px;
-        padding: 0 6px;
-        color: @gary-0;
-        text-align: center;
-        white-space: nowrap;
-        border: 1px solid @gary-0;
-        z-index: 499;
-    }
-
-    .bp-badge-dot {
-        position: absolute;
-        right: 6px;
-        transform: translateY(-50%) translateX(100%);
-        border-radius: 50%;
-        display: inline-block;
-        font-size: 12px;
-        line-height: 18px;
-        padding: 4px;
-        border: 1px solid @gary-0;
-        z-index: 499;
-    }
+  .bp-badge-dot {
+    position: absolute;
+    right: 6px;
+    transform: translateY(-50%) translateX(100%);
+    border-radius: 50%;
+    display: inline-block;
+    font-size: 12px;
+    line-height: 18px;
+    padding: 4px;
+    border: 1px solid @gary-0;
+    z-index: 499;
+  }
 }
 
 .bp-badge-danger {
-    .bp-badge-value {
-        background-color: @danger-3;
-    }
+  .bp-badge-value {
+    background-color: @danger-3;
+  }
 
-    .bp-badge-dot {
-        background-color: @danger-3;
-    }
+  .bp-badge-dot {
+    background-color: @danger-3;
+  }
 }
 
 .bp-badge-primary {
-    .bp-badge-value {
-        background-color: @primary-3;
-    }
+  .bp-badge-value {
+    background-color: @primary-3;
+  }
 
-    .bp-badge-dot {
-        background-color: @primary-3;
-    }
+  .bp-badge-dot {
+    background-color: @primary-3;
+  }
 }
 
 .bp-badge-warning {
-    .bp-badge-value {
-        background-color: @warning-3;
-    }
+  .bp-badge-value {
+    background-color: @warning-3;
+  }
 
-    .bp-badge-dot {
-        background-color: @warning-3;
-    }
+  .bp-badge-dot {
+    background-color: @warning-3;
+  }
 }
 
 .bp-badge-success {
-    .bp-badge-value {
-        background-color: @success-3;
-    }
+  .bp-badge-value {
+    background-color: @success-3;
+  }
 
-    .bp-badge-dot {
-        background-color: @success-3;
-    }
+  .bp-badge-dot {
+    background-color: @success-3;
+  }
 }

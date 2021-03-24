@@ -2,107 +2,91 @@
  * @Author: Sam
  * @Date: 2020-01-21 21:17:22
  * @Last Modified by: Sam
- * @Last Modified time: 2020-06-02 14:32:32
+ * @Last Modified time: 2021-03-04 20:14:11
  */
-import Notification from './notification.js';
+import createInstance from './instance.js';
 
+/**
+ * 读取配置并渲染 Message
+ * @param {Object} typeCfg 类型配置
+ * @param {Object/String} cfg 自定义配置
+ */
+function renderMsg(typeCfg = {}, cfg = '') {
+  // 允许直接传入消息内容，因此要判断传入的 cfg 类型
+  const isContent = typeof cfg === 'string';
 
-let instance;
+  // 整合自定义配置
+  cfg = isContent ? {
+    content: cfg
+  } : cfg;
 
-function setMessageInstance() {
-  instance = instance || Notification.newInstance();
-  return instance;
-}
+  const config = Object.assign({}, typeCfg, cfg); // 合并配置
 
-function message({
-  type = "text",
-  icon = "",
-  delayed = 3000,
-  immersive = false,
-  content = "",
-  close = true
-}) {
-  let instance = setMessageInstance();
+  const {
+    type = 'text', // 消息类型
+      icon = '', // 消息图标
+      content = '', // 消息内容
+      immersive = false, // 沉浸式显示
+      duration = 3000, // 自动关闭延迟时间
+      close = false // 是否显示关闭按钮
+  } = config;
 
-  instance.add({
-    type: type, // 消息类型
-    icon: icon, // 消息图标
-    content: content, // 消息内容
-    immersive: immersive, // 沉浸式显示
-    delayed: delayed, // 自动关闭延迟时间
-    close: close // 是否显示手动关闭按钮
+  // 创建实例
+  return createInstance({
+    type,
+    icon,
+    content,
+    immersive,
+    duration,
+    close
   });
 }
 
 export default {
   // 纯文本消息
-  text(config) {
-    let cfg = typeof config == 'string' ? {
-      content: config,
+  text(cfg = "") {
+    const textCfg = {
       type: "text",
-      icon: ""
-    } : Object.assign({
-        type: "text",
-        icon: ""
-      },
-      config
-    );
-    return message(cfg);
+      icon: ''
+    }
+
+    return renderMsg(textCfg, cfg);
   },
   // 成功提示
-  success(config) {
-    let cfg = typeof config == 'string' ? {
-      content: config,
+  success(cfg = "") {
+    const successCfg = {
       type: "success",
-      icon: "ri-checkbox-circle-fill",
-    } : Object.assign({
-        type: "success",
-        icon: "ri-checkbox-circle-fill",
-      },
-      config
-    );
-    return message(cfg);
+      icon: 'ri-checkbox-circle-fill'
+    }
+
+    return renderMsg(successCfg, cfg);
   },
   // 警告提示
-  warning(config) {
-    let cfg = typeof config == 'string' ? {
-      content: config,
+  warning(cfg = "") {
+    const warningCfg = {
       type: "warning",
-      icon: "ri-error-warning-fill",
-    } : Object.assign({
-        type: "warning",
-        icon: "ri-error-warning-fill",
-      },
-      config
-    );
-    return message(cfg);
+      icon: 'ri-error-warning-fill'
+    }
+
+    return renderMsg(warningCfg, cfg);
   },
   // 错误提示
-  error(config) {
-    let cfg = typeof config == 'string' ? {
-      content: config,
+  error(cfg = "") {
+    const errorCfg = {
       type: "error",
-      icon: "ri-close-circle-fill",
-    } : Object.assign({
-        type: "error",
-        icon: "ri-close-circle-fill",
-      },
-      config
-    );
-    return message(cfg);
+      icon: 'ri-close-circle-fill'
+    }
+
+    return renderMsg(errorCfg, cfg);
   },
   // 加载提示
-  loading(config) {
-    let cfg = typeof config == 'string' ? {
-      content: config,
+  loading(cfg = "") {
+    const loadingCfg = {
       type: "loading",
-      icon: "ri-loader-5-fill",
-    } : Object.assign({
-        type: "loading",
-        icon: "ri-loader-5-fill",
-      },
-      config
-    );
-    return message(cfg);
+      icon: 'ri-loader-5-fill',
+      duration: 0
+    }
+
+    return renderMsg(loadingCfg, cfg);
   },
 }

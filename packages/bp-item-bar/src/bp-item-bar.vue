@@ -2,19 +2,19 @@
  * @Author: Sam
  * @Date: 2020-04-21 12:33:36
  * @Last Modified by: Sam
- * @Last Modified time: 2020-04-23 10:37:40
+ * @Last Modified time: 2021-01-20 14:34:03
  */
 <template>
   <div class="bp-item-bar">
     <div class="bp-item-bar-list">
       <ul>
         <li
-          v-for="(item,index) in itemList"
+          v-for="(item, index) in itemList"
           :key="`bp-item-${index}`"
-          @click="handleItemClick(item,index)"
-          :class="{'active':activeItemIndex==index}"
+          @click="handleItemClick(item, index)"
+          :class="{ active: activeItemIndex == index }"
         >
-          <span>{{item}}</span>
+          <span>{{ item }}</span>
         </li>
       </ul>
     </div>
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { reactive, ref, toRefs, watch } from "vue";
 export default {
   name: "bp-item-bar",
   props: {
@@ -30,42 +31,43 @@ export default {
       type: Array,
       default: () => {
         return [];
-      }
+      },
     },
     // 激活的栏目下标
     activeIndex: {
       type: Number,
-      default: 0
-    }
+      default: 0,
+    },
   },
-  data() {
+  emits: {
+    change: {},
+  },
+  setup(props, { emit }) {
+    const activeItemIndex = ref(0); // 当前激活的栏目项
+
+    activeItemIndex.value = props.activeIndex;
+
+    // 栏目点击触发
+    const handleItemClick = (item, index) => {
+      activeItemIndex.value = index;
+    };
+
+    watch(activeItemIndex, () => {
+      emit("change", {
+        item: props.itemList[activeItemIndex.value],
+        index: activeItemIndex.value,
+      });
+    });
+
     return {
-      activeItemIndex: 0 // 当前激活的栏目项
+      activeItemIndex,
+      handleItemClick,
     };
   },
-  created(){
-      this.activeItemIndex = this.activeIndex;
-  },
-  methods: {
-    // 栏目点击触发
-    handleItemClick(item, index) {
-      this.activeItemIndex = index;
-    }
-  },
-  watch: {
-    activeItemIndex() {
-      this.$emit("change", {
-        item: this.itemList[this.activeItemIndex],
-        index: this.activeItemIndex
-      });
-    },
-    activeIndex(){
-      this.activeItemIndex = this.activeIndex;
-    }
-  }
+  // watch: {
+  //   activeIndex() {
+  //     this.activeItemIndex = this.activeIndex;
+  //   },
+  // },
 };
 </script>
-
-<style lang="less">
-@import "./bp-item-bar";
-</style>

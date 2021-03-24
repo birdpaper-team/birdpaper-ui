@@ -2,135 +2,150 @@
  * @Author: Sam
  * @Date: 2020-04-15 09:52:25
  * @Last Modified by: Sam
- * @Last Modified time: 2020-07-29 10:43:20
+ * @Last Modified time: 2021-01-20 14:33:43
  */
 <template>
   <div :id="id" class="bp-image" v-cloak>
-    <!-- 图片 -->
-    <img
-      class="bp-image-inner"
-      v-if="url !== '' && !loadError"
-      :src="url"
-      :alt="alt"
-      :style="`object-fit:${fit}`"
-    />
     <!-- 占位区域 -->
-    <div class="bp-image-placeholder" v-if="url === '' && !loadError">
-      <slot name="placeholder"></slot>
+    <div class="bp-image-placeholder" v-if="loading">
+      <slot name="placeholder">加载中</slot>
     </div>
     <!-- 加载失败 -->
-    <div class="bp-image-error" v-if="loadError">
-      <slot name="error">{{alt}}</slot>
+    <div class="bp-image-error" v-else-if="isLoadError">
+      <slot name="error">加载失败</slot>
     </div>
+    <!-- 图片 -->
+    <img
+      v-else
+      class="bp-image-inner"
+      :src="src"
+      :style="`width:${imgWidth};height:${imgHeight};object-fit:${fit};border-radius:${radius}`"
+    />
   </div>
 </template>
 
 <script>
+import {
+  reactive,
+  toRefs,
+  computed,
+  watch,
+  onMounted,
+  onBeforeUnmount,
+  ref,
+  nextTick,
+} from "vue";
+import { throttle } from "../../utils/util.js";
 export default {
   name: "bp-image",
   props: {
     // 图片资源地址
     src: {
       type: String,
-      default: ""
-    },
-    // 图片 Alt 属性
-    alt: {
-      type: String,
-      default: "加载失败"
+      default: "",
     },
     // 图片适应类型
     fit: {
       type: String,
-      default: "cover"
+      default: "cover",
     },
     // 是否开启懒加载
     lazy: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
+    // 图片圆角大小
+    radius: {
+      type: String,
+      default: "",
+    },
   },
-  data() {
-    return {
-      id:
-        "image-" +
-        Math.random()
-          .toString(36)
-          .substr(2), // 组件 ID
-      loadError: false,
-      bpImage: null, // 图片实体
-      loadLock: false, // 加载锁
-      url: "" // 图片地址
-    };
-  },
-  destroyed() {
-    window.removeEventListener("scroll", this.pageScroll, true);
-  },
-  mounted() {
-    this.$nextTick(() => {
-      if (!this.lazy) {
-        this.loadImage();
+  emits: ["load", "error"],
+  setup(props, { emit }) {
+    const state = reactive({
+      id: "image-" + Math.random().toString(36).substr(2), // 组件 ID
+    });
+
+    const isLoadError = ref(false); // 是否加载失败
+    const loading = ref(true); // 加载状态
+    const imgWidth = ref(0);
+    const imgHeight = ref(0);
+
+    onMounted(() => {
+      if (!props.lazy) {
+        loadImage();
         return;
       }
       // 懒加载处理
-      this.pageScroll();
-      window.addEventListener(
-        "scroll",
-        () => {
-          this.pageScroll();
-        },
-        true
-      );
+      nextTick(() => {
+        handleLazyLoad();
+        window.addEventListener("scroll", throttle(handleLazyLoad, 400));
+      });
     });
-  },
-  methods: {
+
+    onBeforeUnmount(() => {
+      props.lazy && removeLazyLoadListener();
+    });
+
     // 加载图片
-    loadImage() {
-      this.bpImage = new Image();
-      this.bpImage.src = this.src;
-      this.bpImage.onerror = () => {
-        // 图片加载失败触发
-        this.handleError();
-      };
-      // 加载完成将图片资源赋给 url
-      this.bpImage.onload = () => {
-        this.handleload();
-      };
-    },
-    // 图片加载完成回调
-    handleload() {
-      this.url = this.bpImage.src;
-      this.loadLock = true;
-      this.$emit("load");
-    },
-    // 图片加载失败回调
-    handleError() {
-      this.loadError = true;
-      this.loadLock = true;
-      this.$emit("error");
-    },
-    // 页面滑动
-    async pageScroll() {
-      console.log("scroll");
-      const el = document.getElementById(this.id);
+    const loadImage = () => {
+      loading.value = true;
+      isLoadError.value = false;
 
-      const elOffsetTop = Number(el.getBoundingClientRect().top);
+      const image = new Image();
+      image.onload = (e) => handleload(e, image);
+      image.onerror = () => handleError(image);
+      image.src = props.src;
+    };
 
-      if (elOffsetTop + 10 < window.innerHeight && !this.loadLock) {
-        this.loadImage();
+    // 资源地址改变重载图片
+    watch(
+      () => props.src,
+      () => {
+        loadImage();
       }
-    }
+    );
+
+    // 图片加载完成回调
+    const handleload = (e, image) => {
+      imgWidth.value = image.width;
+      imgHeight.value = image.height;
+      loading.value = false;
+      emit("load");
+    };
+
+    // 图片加载失败回调
+    const handleError = (image) => {
+      loading.value = false;
+      isLoadError.value = true;
+      emit("error");
+    };
+
+    // 添加懒加载监听
+    const handleLazyLoad = () => {
+      const el = document.getElementById(state.id);
+
+      let rest = el.getBoundingClientRect();
+      let clientHeight = document.documentElement.clientHeight;
+
+      if (rest.bottom >= 0 && rest.top < clientHeight) {
+        loadImage();
+        removeLazyLoadListener();
+      }
+    };
+
+    // 移除懒加载监听
+    const removeLazyLoadListener = () => {
+      window.removeEventListener("scroll", handleLazyLoad);
+    };
+
+    return {
+      ...toRefs(state),
+      isLoadError,
+      loading,
+      imgWidth,
+      imgHeight,
+    };
   },
-  watch: {
-    src() {
-      this.loadError = false;
-      this.loadLock = false;
-      this.loadImage();
-    }
-  }
 };
 </script>
-
-<style lang="less">
-@import url("./bp-image.less");
-</style>
