@@ -1,0 +1,51 @@
+/*
+ * @Author: Sam
+ * @Date: 2021-03-29 14:26:18
+ * @Last Modified by: Sam
+ * @Last Modified time: 2021-03-30 08:28:54
+ */
+@radius: 4px;
+@largeHeight: 46px;
+@normalHeight: 34px;
+@smallHeight: 24px;
+@miniHeight: 18px;
+
+.bp-tag {
+  position: relative;
+  outline: none;
+  white-space: nowrap;
+  max-width: 100%;
+  padding: 0 10px;
+  text-align: center;
+  box-sizing: border-box;
+  display: inline-block;
+  white-space: nowrap;
+  border-radius: @radius;
+  opacity: 1;
+  -webkit-appearance: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  p {
+    height: @smallHeight;
+    line-height: @smallHeight;
+  }
+}
+
+// 默认样式
+.tag-light-default {
+  border: 1px solid @gary-3;
+  background: @gary-1;
+  color: @gary-6;
+}
+
+// 主要样式
+.tag-light-primary {
+  border: 1px solid @primary-3;
+  background: @primary-1;
+  color: @primary-3;
+}

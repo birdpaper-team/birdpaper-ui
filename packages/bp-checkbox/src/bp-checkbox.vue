@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-05-07 14:51:55
  * @Last Modified by: Sam
- * @Last Modified time: 2021-03-17 08:38:00
+ * @Last Modified time: 2021-04-16 09:59:03
  */
 <template>
   <div :class="className" @click="handleClick">
@@ -58,7 +58,7 @@ export default {
       return name;
     });
 
-    const handleClick = (e) => {
+    const handleClick = () => {
       if (props.disabled) {
         return;
       }
@@ -66,7 +66,7 @@ export default {
         emit("click");
         return;
       }
-      emit("update:modelValue", e.target.value);
+      emit("update:modelValue", !props.modelValue);
     };
 
     return {
