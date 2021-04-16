@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-05-25 13:40:52
  * @Last Modified by: Sam
- * @Last Modified time: 2021-03-12 15:17:02
+ * @Last Modified time: 2021-04-08 16:53:44
  */
 <template>
   <div class="bp-table">
@@ -14,7 +14,7 @@
             <th
               v-for="(item, index) in cols"
               :key="`bp-table-thead-${index}`"
-              :style="`width:${item.width}`"
+              :style="`width:${item.width};min-width:${item.minWidth}`"
             >
               {{ item.title }}
             </th>

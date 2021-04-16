@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-04-01 15:06:27
  * @Last Modified by: Sam
- * @Last Modified time: 2021-03-22 20:23:27
+ * @Last Modified time: 2021-03-10 20:34:07
  */
 <template>
   <bp-mask v-model="maskShow"></bp-mask>
@@ -70,6 +70,11 @@ export default {
     top: {
       type: String,
       default: "15vh",
+    },
+    // 是否挂载到body
+    appendToBody: {
+      type: Boolean,
+      default: false,
     },
     // 不显示底部操作区域
     noFooter: {

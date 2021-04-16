@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-21 16:12:26
  * @Last Modified by: Sam
- * @Last Modified time: 2021-03-22 10:57:55
+ * @Last Modified time: 2021-03-10 18:22:46
  */
 <template>
   <!-- 消息列表 -->
@@ -15,7 +15,7 @@
           <i :class="config.icon"></i>
         </div>
         <span v-text="config.content"></span>
-        <div class="option" v-if="config.close">
+        <div class="option" v-if="!config.close">
           <!-- 手动关闭消息 -->
           <i class="ri-close-fill" @click="onClose"></i>
         </div>
