@@ -2,11 +2,11 @@
  * @Author: Sam
  * @Date: 2021-03-29 14:25:48
  * @Last Modified by: Sam
- * @Last Modified time: 2021-03-30 08:28:22
+ * @Last Modified time: 2021-04-19 14:50:24
  */
 <template>
   <div :class="tagClazz">
-    <p><slot></slot></p>
+    <p class="bp-tag-inner"><slot></slot></p>
   </div>
 </template>
 

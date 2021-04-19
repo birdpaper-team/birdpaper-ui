@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-11 10:30:29
  * @Last Modified by: Sam
- * @Last Modified time: 2021-04-13 08:28:21
+ * @Last Modified time: 2021-04-19 15:06:26
  */
 // 导入组件
 import bpButton from './bp-button';
@@ -21,13 +21,11 @@ import message from './bp-message';
 import bpPopconfirm from './bp-popconfirm';
 import bpTag from './bp-tag';
 import bpDropdown from './bp-dropdown';
-// import bpAlert from './bp-alert';
+import bpAlert from './bp-alert';
 import bpCheckbox from './bp-checkbox';
 import bpTable from './bp-table';
 // import bpRadio from './bp-radio';
 import bpSwitch from './bp-switch';
-
-// Vue.prototype.$message = message;
 
 const components = [
   bpButton,
@@ -46,7 +44,7 @@ const components = [
   bpPopconfirm,
   bpTag,
   bpDropdown,
-  // bpAlert,
+  bpAlert,
   bpTable,
   // bpRadio,
   bpSwitch,
@@ -82,7 +80,7 @@ export default {
   bpItemBar,
   bpDialog,
   bpAvatar,
-  // bpAlert,
+  bpAlert,
   bpInput,
   bpMask,
   bpTable,

@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-04-01 15:06:27
  * @Last Modified by: Sam
- * @Last Modified time: 2021-03-10 20:34:07
+ * @Last Modified time: 2021-04-19 15:09:49
  */
 <template>
   <bp-mask v-model="maskShow"></bp-mask>
@@ -51,7 +51,7 @@ export default {
   name: "bp-dialog",
   directives: { clickOutside },
   props: {
-    // 对话框显示/隐藏，支持.sync修饰符
+    // 对话框显示/隐藏
     modelValue: {
       type: Boolean,
       default: false,
