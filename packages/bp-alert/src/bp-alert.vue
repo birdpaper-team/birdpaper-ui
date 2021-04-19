@@ -2,23 +2,23 @@
  * @Author: Sam
  * @Date: 2020-04-28 11:05:14
  * @Last Modified by: Sam
- * @Last Modified time: 2021-01-20 14:30:51
+ * @Last Modified time: 2021-04-19 15:15:19
  */
 <template>
-  <div class="bp-alert" v-if="show">
+  <div class="bp-alert" v-if="visible">
     <!-- 提示框内容 -->
     <div :class="alertClassName">
       <!-- 提示框头部 -->
       <div class="bp-alert-header">
         <p class="bp-alert-header-title">
-          <span :class="['icon',`${iconType[type]}`]" v-if="showIcon"></span>
+          <span :class="['icon', `${iconType[type]}`]" v-if="showIcon"></span>
           <!-- 标题 -->
           <span class="text" v-text="title"></span>
         </p>
         <!-- 关闭按钮 -->
-        <p class="bp-alert-header-close" v-if="closeable" @click="handleClose">
+        <p class="bp-alert-header-close" v-if="closeable" @click="onClose">
           <i class="ri-close-fill" v-if="closeText == ''"></i>
-          <span v-if="closeText != ''">{{closeText}}</span>
+          <span v-if="closeText != ''">{{ closeText }}</span>
         </p>
       </div>
       <span v-if="$slots.default">
@@ -33,11 +33,12 @@
 </template>
 
 <script>
+import { nextTick, onMounted, reactive, ref, toRefs, watch } from "vue";
 export default {
   name: "bp-alert",
   props: {
-    // 提示框显示/隐藏，支持.sync修饰符
-    visible: {
+    // 对话框显示/隐藏
+    modelValue: {
       type: Boolean,
       default: false,
     },
@@ -79,13 +80,45 @@ export default {
   },
   data() {
     return {
-      iconType:{
-        primary:"ri-information-fill",
-        success:"ri-checkbox-circle-fill",
-        warning:"ri-error-warning-fill",
-        danger:"ri-close-circle-fill",
+      iconType: {
+        primary: "ri-information-fill",
+        success: "ri-checkbox-circle-fill",
+        warning: "ri-error-warning-fill",
+        danger: "ri-close-circle-fill",
       },
-      show: false, // 提示框显示/隐藏
+    };
+  },
+  emits: ["update:modelValue"],
+  setup(props, { emit }) {
+    const state = reactive({
+      visible: false,
+    });
+
+    const onOpen = () => {
+      if (state.visible) return;
+      state.visible = true;
+    };
+
+    const onClose = function () {
+      if (!state.visible) return;
+      setTimeout(() => {
+        emit("update:modelValue", false);
+      }, 10);
+    };
+
+    watch(
+      () => props.modelValue,
+      (val) => {
+        val ? onOpen() : (state.visible = false);
+      },
+      {
+        immediate: true,
+      }
+    );
+
+    return {
+      ...toRefs(state),
+      onClose,
     };
   },
   computed: {
@@ -98,27 +131,6 @@ export default {
         : (typeName = `alert-${this.type}`);
       className.push(typeName);
       return className;
-    },
-  },
-  methods: {
-    // 关闭提示框
-    handleClose() {
-      this.$emit("close");
-      this.show = false;
-      this.$emit("update:visible", false);
-    },
-  },
-  watch: {
-    visible: {
-      handler: function (oldValue, newValue) {
-        // 关闭处理，先关闭遮罩，后关闭对话框
-        if (!this.visible) {
-          this.$emit("update:visible", false);
-          return;
-        }
-        this.show = this.visible;
-      },
-      immediate: true,
     },
   },
 };

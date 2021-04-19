@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-11-07 14:05:54
  * @Last Modified by: Sam
- * @Last Modified time: 2021-02-11 23:06:46
+ * @Last Modified time: 2021-03-28 23:12:55
  */
 <template>
   <div :class="[inputClass, isFocus ? 'focus-border' : '']">

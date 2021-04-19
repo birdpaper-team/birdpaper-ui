@@ -1,0 +1,69 @@
+/*
+ * @Author: Sam
+ * @Date: 2021-03-29 14:26:18
+ * @Last Modified by: Sam
+ * @Last Modified time: 2021-04-19 14:55:06
+ */
+@radius: 4px;
+@largeHeight: 46px;
+@normalHeight: 34px;
+@smallHeight: 24px;
+@miniHeight: 18px;
+
+.bp-tag {
+  position: relative;
+  outline: none;
+  white-space: nowrap;
+  max-width: 100%;
+  padding: 0 10px;
+  text-align: center;
+  box-sizing: border-box;
+  display: inline-block;
+  white-space: nowrap;
+  border-radius: @radius;
+  opacity: 1;
+  -webkit-appearance: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  .bp-tag-inner {
+    margin: 0 !important;
+    line-height: 1;
+  }
+}
+
+// 默认样式
+.tag-light-default {
+  border: 1px solid @gary-3;
+  background: @gary-1;
+  color: @gary-6;
+}
+
+// 主要样式
+.tag-light-primary {
+  border: 1px solid @primary-3;
+  background: @primary-1;
+  color: @primary-3;
+}
+
+.tag-light-success {
+  border: 1px solid @success-3;
+  background: @success-1;
+  color: @success-3;
+}
+
+.tag-light-warning {
+  border: 1px solid @warning-3;
+  background: @warning-1;
+  color: @warning-3;
+}
+
+.tag-light-danger {
+  border: 1px solid @danger-3;
+  background: @danger-1;
+  color: @danger-3;
+}
