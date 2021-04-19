@@ -1,0 +1,49 @@
+/*
+ * @Author: Sam
+ * @Date: 2021-03-25 11:09:22
+ * @Last Modified by: Sam
+ * @Last Modified time: 2021-03-25 17:01:59
+ */
+.bp-popconfirm {
+  position: relative;
+  display: initial;
+
+  .bp-popconfirm-content {
+    position: absolute;
+    min-width: 100px;
+    border: 1px solid @gary-3;
+    background-color: @gary-0;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
+  }
+
+  .popconfirm-arrow {
+    position: absolute;
+    display: initial;
+    left: 50%;
+    // margin-bottom: 6px;
+    width: 0;
+    height: 0;
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    // border-top: 5px solid @danger-3;
+    border-top: 5px solid @gary-3;
+
+    &::after {
+      content: "";
+      width: 0;
+      height: 0;
+      position: absolute;
+      bottom: -8px;
+      left: -6px;
+      border-width: 5px 0 5px 5px;
+      border-style: solid;
+      border-color: transparent transparent @gary-0;
+    }
+  }
+
+  .bp-popconfirm-container {
+    display: initial;
+  }
+}

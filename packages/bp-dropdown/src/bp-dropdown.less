@@ -1,8 +1,8 @@
 /*
  * @Author: Sam
- * @Date: 2020-01-28 16:51:37
+ * @Date: 2021-04-13 17:04:41
  * @Last Modified by: Sam
- * @Last Modified time: 2021-04-15 22:47:31
+ * @Last Modified time: 2021-04-16 08:00:10
  */
 
 @radius: 4px;
@@ -11,7 +11,7 @@
 @smallHeight: 24px;
 @miniHeight: 18px;
 
-.bp-select {
+.bp-dropdown {
   position: relative;
   -webkit-appearance: none;
   -moz-user-select: none;
@@ -20,61 +20,30 @@
   -webkit-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  max-width: 200px;
+  width: auto;
+  cursor: pointer;
+  font-size: inherit;
 
-  .select-size-large {
-    height: @largeHeight;
-    line-height: @largeHeight;
-    font-size: inherit;
-  }
+  .bp-dropdown-inner {
+    height: 100%;
 
-  .select-size-normal {
-    height: @normalHeight;
-    line-height: @normalHeight;
-    font-size: inherit;
-  }
-
-  .select-size-small {
-    height: @smallHeight;
-    line-height: @smallHeight;
-    font-size: inherit;
-  }
-
-  .select-size-mini {
-    height: @miniHeight;
-    line-height: @miniHeight;
-    font-size: inherit;
-  }
-
-  .select-input {
-    position: relative;
-    width: 100%;
-    display: inline-block;
-    border: 1px solid @gary-4;
-    border-radius: @radius;
-    text-align: left;
-    background-color: @gary-0;
-    cursor: pointer;
-    transition: border-color .2s ease;
-
-    span {
-      padding-left: 10px;
-      font-weight: 400;
-      color: @gary-5;
-    }
-
-    .select-value {
+    .bp-dropdown-inner-text {
       color: @gary-7;
-    }
+      padding: 0 6px;
+      font-size: 14px;
+      line-height: 1;
+      margin: 0;
+      cursor: pointer;
+      transition: all .2s ease-in-out;
 
-    .option {
-      position: absolute;
-      top: 0;
-      right: 15px;
-
-      i {
-        display: block;
-        font-size: 16px;
+      .ri-arrow-down-s-line {
         color: @gary-5;
+        font-size: 16px;
+        line-height: 1;
+        text-transform: none;
+        vertical-align: middle;
+        display: inline-block;
         transform: rotate(0deg);
         transition: transform .3s ease;
       }
@@ -86,19 +55,10 @@
     }
   }
 
-  .active {
-    border: 1px solid @primary-3;
-    transition: border-color .2s ease;
-
-    &:hover {
-      border: 1px solid @primary-3;
-      transition: border-color .2s ease;
-    }
-  }
 
   .select-item-box {
     position: absolute;
-    width: 100%;
+    width: auto;
     z-index: 500;
 
     .option-arrow {
@@ -125,7 +85,7 @@
       }
     }
 
-    .option-container {
+    .bp-dropdown-option-container {
       background: @gary-0;
       border: 1px solid @gary-3;
       border-radius: @radius;
@@ -135,8 +95,8 @@
       overflow-x: hidden;
       box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
 
-      .bp-option {
-        width: 100%;
+      .bp-dropdown-option {
+        width: auto;
         height: @normalHeight;
         line-height: @normalHeight;
         cursor: pointer;
@@ -150,9 +110,10 @@
         }
 
         .item {
-          padding-left: 15px;
+          padding: 0 15px;
           font-size: 14px;
           color: @gary-7;
+          max-width: 200px;
           font-size: inherit;
 
           span {
@@ -164,29 +125,7 @@
         }
       }
     }
-
   }
-
-  .scro-1::-webkit-scrollbar {
-    width: 3px;
-    height: 1px;
-  }
-
-  .scro-1::-webkit-scrollbar-thumb {
-    border-radius: @radius;
-    background: @gary-5;
-  }
-
-  .scro-1::-webkit-scrollbar-track {
-    border-radius: @radius;
-    background: @gary-3;
-  }
-}
-
-.bp-select-disabled {
-  opacity: .618;
-  background-color: @gary-2  !important;
-  cursor: no-drop;
 }
 
 .option-slide-enter-active {
