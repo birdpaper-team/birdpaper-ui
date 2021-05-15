@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-04-01 15:06:27
  * @Last Modified by: Sam
- * @Last Modified time: 2021-04-19 15:09:49
+ * @Last Modified time: 2021-04-29 14:50:27
  */
 <template>
   <bp-mask v-model="maskShow"></bp-mask>
@@ -51,51 +51,14 @@ export default {
   name: "bp-dialog",
   directives: { clickOutside },
   props: {
-    // 对话框显示/隐藏
-    modelValue: {
-      type: Boolean,
-      default: false,
-    },
-    // 对话框标题栏文案
-    title: {
-      type: String,
-      default: "提示",
-    },
-    // 对话框宽度
-    width: {
-      type: String,
-      default: "35%",
-    },
-    // 对话框距离顶部的距离
-    top: {
-      type: String,
-      default: "15vh",
-    },
-    // 是否挂载到body
-    appendToBody: {
-      type: Boolean,
-      default: false,
-    },
-    // 不显示底部操作区域
-    noFooter: {
-      type: Boolean,
-      default: false,
-    },
-    // 是否锁定背景滚动
-    lockScroll: {
-      type: Boolean,
-      default: true,
-    },
-    // 是否点击遮罩关闭对话框
-    closeOnClickMask: {
-      type: Boolean,
-      default: true,
-    },
-    // 是否开启ESC按键关闭
-    closeOnPressEscape: {
-      type: Boolean,
-      default: false,
-    },
+    modelValue: { type: Boolean, default: false }, // 对话框显示/隐藏
+    title: { type: String, default: "提示" }, // 对话框标题栏文案
+    width: { type: String, default: "35%" }, // 对话框宽度
+    top: { type: String, default: "15vh" }, // 对话框距离顶部的距离
+    noFooter: { type: Boolean, default: false }, // 不显示底部操作区域
+    lockScroll: { type: Boolean, default: true }, // 是否锁定背景滚动
+    closeOnClickMask: { type: Boolean, default: true }, // 是否点击遮罩关闭对话框
+    closeOnPressEscape: { type: Boolean, default: false }, // 是否开启ESC按键关闭
   },
   emits: ["confirm", "cancel", "update:modelValue"],
   setup(props, { emit }) {
