@@ -2,20 +2,59 @@
  * @Author: Sam
  * @Date: 2019-12-22 10:31:34
  * @Last Modified by: Sam
- * @Last Modified time: 2019-12-25 16:17:57
+ * @Last Modified time: 2021-05-03 20:36:01
  */
 .bp-row {
-    position: relative;
-    box-sizing: border-box;
-    display: block;
+  position: relative;
+  box-sizing: border-box;
+  display: block;
 }
 
 .bp-row:after,
 .bp-row:before {
-    display: table;
-    content: ""
+  display: table;
+  content: ""
 }
 
 .bp-row:after {
-    clear: both
+  clear: both
+}
+
+// flex 布局
+.bp-row-flex {
+  display: flex;
+}
+
+.bp-row-flex-justify-start {
+  justify-content: flex-start;
+}
+
+.bp-row-flex-justify-end {
+  justify-content: flex-end;
+}
+
+.bp-row-flex-justify-center {
+  justify-content: center;
+}
+
+.bp-row-flex-justify-space-around {
+  justify-content: space-around;
+}
+
+.bp-row-flex-justify-space-between {
+  justify-content: space-between;
+}
+
+.bp-row-flex-justify-space-evenly {
+  justify-content: space-evenly;
+}
+
+.bp-row-flex-align-top {
+  align-items: flex-start;
+}
+.bp-row-flex-align-middle {
+  align-items: center;
+}
+.bp-row-flex-align-bottom {
+  align-items: flex-end;
 }

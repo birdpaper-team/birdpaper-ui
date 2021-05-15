@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-12-16 11:05:47
  * @Last Modified by: Sam
- * @Last Modified time: 2021-04-19 14:49:46
+ * @Last Modified time: 2021-05-07 20:42:06
  */
 
 @radius: 4px;
@@ -56,72 +56,88 @@ button {
   display: inline-block;
 
   .bp-icon {
-    font-style: normal;
-    font-weight: 400;
-    margin-right: 4px;
-    font-variant: normal;
-    font-size: 14px;
-    text-transform: none;
-    vertical-align: middle;
-    display: inline-block;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    align-content: center;
 
-  .btn-icon {
-    position: relative;
-    top: -2px;
-    border-radius: @radius;
-    font-size: inherit;
-    height: auto;
-    padding: 0 4px !important;
-    cursor: pointer;
-
-    i {
+    .bp-icon-inner {
       font-style: normal;
       font-weight: 400;
       font-variant: normal;
-      font-size: 14px;
       text-transform: none;
-      vertical-align: middle;
-      display: inline-block;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      color: @gary-8;
-      transition: color .2s ease;
     }
+  }
 
-    &:hover {
-      i {
-        color: @primary-3;
-        transition: color .2s ease;
-      }
+  .btn-text-inner {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    align-content: center;
+    font-size: 14px;
+
+    .btn-text-inner-i {
+      margin-right: 4px;
     }
   }
 
   // 按钮尺寸
   .btn-size-large {
     height: @largeHeight;
-    padding: 0 32px;
-    font-size: 16px;
+
+    .bp-icon-inner {
+      padding: 0 12px;
+      font-size: 20px;
+    }
+
+    .btn-text-inner {
+      padding: 0 18px;
+      font-size: 16px;
+    }
   }
 
   .btn-size-normal {
     height: @normalHeight;
-    padding: 0 24px;
-    font-size: 14px;
+
+    .bp-icon-inner {
+      padding: 0 8px;
+      font-size: 16px;
+    }
+
+    .btn-text-inner {
+      padding: 0 16px;
+      font-size: 14px;
+    }
   }
 
   .btn-size-small {
     height: @smallHeight;
-    padding: 0 16px;
-    font-size: 14px;
+
+    .bp-icon-inner {
+      padding: 0 4px;
+      font-size: 14px;
+    }
+
+    .btn-text-inner {
+      padding: 0 14px;
+      font-size: 14px;
+    }
   }
 
   .btn-size-mini {
     height: @miniHeight;
-    padding: 0 8px;
-    font-size: 12px;
+
+    .bp-icon-inner {
+      padding: 0 3px;
+      font-size: 12px;
+    }
+
+    .btn-text-inner {
+      padding: 0 10px;
+      font-size: 12px;
+    }
   }
 
   button:disabled {
@@ -136,7 +152,7 @@ button {
   // 文字按钮
   .btn-text {
     font-size: inherit;
-    color: @primary-3 !important;
+    color: @primary-3  !important;
     cursor: pointer;
     transition: color .2s ease;
   }
@@ -171,7 +187,7 @@ button {
 
   // 默认幽灵按钮
   .default-plain-style {
-    border: 1px solid @gary-5;
+    border: 1px solid @gary-4;
     background: @gary-0;
     color: @gary-7;
   }
@@ -309,7 +325,6 @@ button {
     }
   }
 
-
   // 警告按钮
   .warning-style {
     border: 1px solid @warning-3;
@@ -365,7 +380,6 @@ button {
       color: @gary-0;
     }
   }
-
 
   // 危险按钮
   .danger-style {
@@ -424,23 +438,16 @@ button {
   }
 }
 
-.round {
+.btn-round {
   button {
-    border-radius: 25px;
+    border-radius: 45px;
   }
 }
 
 // 加载
 .bp-icon-loading {
-  margin-right: 4px;
-  box-sizing: border-box;
-  vertical-align: middle;
-
-  i {
-    display: inline-block;
-    animation: rotating .8s linear infinite;
-    -webkit-animation: rotating .8s linear infinite;
-  }
+  animation: rotating .8s linear infinite;
+  -webkit-animation: rotating .8s linear infinite;
 }
 
 @keyframes rotating {
