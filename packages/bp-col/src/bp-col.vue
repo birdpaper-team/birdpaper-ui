@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-12-22 10:31:59
  * @Last Modified by: Sam
- * @Last Modified time: 2021-01-20 14:32:09
+ * @Last Modified time: 2021-05-03 08:14:52
  */
 <template>
   <div :class="colClassName">
@@ -17,46 +17,25 @@ export default {
   name: "bp-col",
   props: {
     // 栏位数
-    span: {
-      type: [Number, String],
-      default: 0,
-    },
+    span: { type: [Number, String], default: 0 },
     // 偏移量
-    offset: {
-      type: [Number, String],
-      default: 0,
-    },
+    offset: { type: [Number, String], default: 0 },
     // <768px 响应式栅格数或者栅格属性对象
-    xs: {
-      type: [Object, Number],
-      default: () => {},
-    },
+    xs: { type: [Object, Number], default: () => {} },
     // ≥768px 响应式栅格数或者栅格属性对象
-    sm: {
-      type: [Object, Number],
-      default: () => {},
-    },
+    sm: { type: [Object, Number], default: () => {} },
     // ≥992px 响应式栅格数或者栅格属性对象
-    md: {
-      type: [Object, Number],
-      default: () => {},
-    },
+    md: { type: [Object, Number], default: () => {} },
     // ≥1200px 响应式栅格数或者栅格属性对象
-    lg: {
-      type: [Object, Number],
-      default: () => {},
-    },
+    lg: { type: [Object, Number], default: () => {} },
     // ≥1920px 响应式栅格数或者栅格属性对象
-    xl: {
-      type: [Object, Number],
-      default: () => {},
-    },
+    xl: { type: [Object, Number], default: () => {} },
   },
   setup(props) {
     let colClassName = computed(() => {
       // 默认样式和前缀
       let prefix = "bp-col";
-      let className = [prefix];
+      let className = [];
       Number(props.span) !== 0 ? className.push(`${prefix}-${props.span}`) : "";
 
       // 偏移量
