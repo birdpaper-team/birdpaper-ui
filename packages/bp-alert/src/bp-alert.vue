@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-04-28 11:05:14
  * @Last Modified by: Sam
- * @Last Modified time: 2021-04-19 15:15:19
+ * @Last Modified time: 2021-04-20 08:43:33
  */
 <template>
   <div class="bp-alert" v-if="visible">
@@ -33,25 +33,22 @@
 </template>
 
 <script>
-import { nextTick, onMounted, reactive, ref, toRefs, watch } from "vue";
+import { computed, reactive, ref, toRefs, watch } from "vue";
 export default {
   name: "bp-alert",
   props: {
-    // 对话框显示/隐藏
-    modelValue: {
-      type: Boolean,
-      default: false,
-    },
+    // 提示框显示/隐藏
+    modelValue: { type: Boolean, default: false },
     // 标题
-    title: {
-      type: String,
-      default: "",
-    },
+    title: { type: String, default: "" },
     // 是否显示 Icon
-    showIcon: {
-      type: Boolean,
-      default: false,
-    },
+    showIcon: { type: Boolean, default: false },
+    // 是否采用明亮主题
+    light: { type: Boolean, default: false },
+    // 是否可关闭
+    closeable: { type: Boolean, default: true },
+    // 自定义关闭文本
+    closeText: { type: String, default: "" },
     // 提示框类型
     type: {
       type: String,
@@ -62,31 +59,6 @@ export default {
         );
       },
     },
-    // 是否采用明亮主题
-    light: {
-      type: Boolean,
-      default: false,
-    },
-    // 是否可关闭
-    closeable: {
-      type: Boolean,
-      default: true,
-    },
-    // 自定义关闭文本
-    closeText: {
-      type: String,
-      default: "",
-    },
-  },
-  data() {
-    return {
-      iconType: {
-        primary: "ri-information-fill",
-        success: "ri-checkbox-circle-fill",
-        warning: "ri-error-warning-fill",
-        danger: "ri-close-circle-fill",
-      },
-    };
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
@@ -94,17 +66,36 @@ export default {
       visible: false,
     });
 
+    // 图标类型映射
+    const iconType = ref({
+      primary: "ri-information-fill",
+      success: "ri-checkbox-circle-fill",
+      warning: "ri-error-warning-fill",
+      danger: "ri-close-circle-fill",
+    });
+
+    // 显示提示框
     const onOpen = () => {
       if (state.visible) return;
       state.visible = true;
     };
 
+    // 关闭提示框
     const onClose = function () {
       if (!state.visible) return;
-      setTimeout(() => {
-        emit("update:modelValue", false);
-      }, 10);
+      emit("update:modelValue", false);
     };
+
+    // 外层样式
+    const alertClassName = computed(() => {
+      let className = ["bp-alert-content"];
+      let typeName = "";
+      props.light
+        ? (typeName = `alert-${props.type}-light`)
+        : (typeName = `alert-${props.type}`);
+      className.push(typeName);
+      return className;
+    });
 
     watch(
       () => props.modelValue,
@@ -119,19 +110,9 @@ export default {
     return {
       ...toRefs(state),
       onClose,
+      iconType,
+      alertClassName,
     };
-  },
-  computed: {
-    // 提示框类名
-    alertClassName() {
-      let className = ["bp-alert-content"];
-      let typeName = "";
-      this.light
-        ? (typeName = `alert-${this.type}-light`)
-        : (typeName = `alert-${this.type}`);
-      className.push(typeName);
-      return className;
-    },
   },
 };
 </script>
