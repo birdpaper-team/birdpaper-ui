@@ -2,87 +2,93 @@
  * @Author: Sam
  * @Date: 2021-04-12 11:05:01
  * @Last Modified by: Sam
- * @Last Modified time: 2021-04-16 08:38:39
+ * @Last Modified time: 2021-06-04 09:25:37
  */
 <template>
-  <div class="bp-dropdown">
-    <div
-      class="bp-dropdown-inner"
-      @click="handleSelectClick"
-      v-click-outside="onClickOutside"
-    >
+  <div class="bp-dropdown" v-click-outside="onClose" @mouseleave="onMouseLeave">
+    <div class="bp-dropdown-inner" @click="onClick" @mouseenter="onMouseEnter">
       <p class="bp-dropdown-inner-text">
         <slot></slot>
         <i class="ri-arrow-down-s-line" :class="{ open: optionShow }"></i>
       </p>
     </div>
     <!-- 选项 -->
-    <transition name="option-slide">
-      <div class="select-item-box scro scro-1" v-show="optionShow">
-        <div class="option-arrow"></div>
-        <div class="bp-dropdown-option-container">
-          <div
-            class="bp-dropdown-option"
-            v-for="(item, index) in options"
-            :key="`option-${index}`"
-            :title="item[label]"
-            @click="handleOptionItemClick(item)"
-          >
-            <!-- 选项内容 -->
-            <div class="item">
-              <span>{{ item[label] }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </transition>
+    <bp-dropdown-option
+      v-model="optionShow"
+      :source="options"
+      :label="label"
+      :value="value"
+      @click="onOptionClick"
+    ></bp-dropdown-option>
   </div>
 </template>
 
 <script>
-import { computed, reactive, toRefs, watch } from "vue";
+import { ref } from "vue";
+import bpDropdownOption from "./components/bp-dropdown-option.vue";
 import { clickOutside } from "../../utils/util.js";
+
+const triggerList = ["click", "hover"]; // 可用触发方式
+
 export default {
   name: "bp-dropdown",
   directives: { clickOutside },
+  components: { bpDropdownOption },
   props: {
-    options: { type: Array, default: [] },
-    label: { type: String, default: "label" },
-    value: { type: String, default: "value" },
+    theme: { type: String, default: "default" },
+    options: { type: Array, default: [] }, // 菜单
+    label: { type: String, default: "label" }, // 展示文本字段
+    value: { type: String, default: "value" }, // 选项值字段
+    hideOnClick: { type: Boolean, default: true }, // 是否在点击菜单项后收起菜单
+    trigger: {
+      type: String,
+      default: "click",
+      validator: (value) => triggerList.indexOf(value) !== -1,
+    }, // 触发方式
   },
-  emits: ["change"],
+  emits: ["change", "visible-change"],
   setup(props, { emit }) {
-    const state = reactive({
-      optionShow: false, // 选项菜单展示
-      optionShowScrollBar: false, // 选项菜单滚动条
-    });
-
-    const handleSelectClick = () => {
-      state.optionShow = !state.optionShow;
-    };
+    const optionShow = ref(false);
 
     // 收起选项列表
-    const closeOption = () => {
-      if (!state.optionShow) return;
-      state.optionShow = false;
+    const onClose = () => {
+      if (!optionShow.value) return;
+      optionShow.value = false;
+      emit("visible-change", optionShow.value);
     };
 
-    const handleOptionItemClick = (item) => {
+    // 展开选项列表
+    const onOpen = () => {
+      if (optionShow.value) return;
+      optionShow.value = true;
+      emit("visible-change", optionShow.value);
+    };
+
+    const onClick = () => {
+      if (props.trigger === "hover") return;
+      optionShow.value ? onClose() : onOpen();
+    };
+    const onMouseEnter = () => {
+      if (props.trigger === "click") return;
+      onOpen();
+    };
+    const onMouseLeave = () => {
+      if (props.trigger === "click") return;
+      onClose();
+    };
+
+    const onOptionClick = (item) => {
       emit("change", item);
-      state.optionShow = false;
-    };
-
-    // 点击外部触发
-    const onClickOutside = () => {
-      state.optionShow = false;
+      if (props.hideOnClick) onClose();
     };
 
     return {
-      ...toRefs(state),
-      handleSelectClick,
-      closeOption,
-      handleOptionItemClick,
-      onClickOutside,
+      optionShow,
+      onClick,
+      onClose,
+      onMouseEnter,
+      onMouseLeave,
+      onOptionClick,
     };
   },
 };

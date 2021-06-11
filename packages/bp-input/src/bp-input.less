@@ -2,19 +2,30 @@
  * @Author: Sam
  * @Date: 2019-11-07 14:07:32
  * @Last Modified by: Sam
- * @Last Modified time: 2021-03-10 20:44:16
+ * @Last Modified time: 2021-05-29 21:20:11
  */
-
 @radius: 4px;
 @largeHeight: 46px;
 @normalHeight: 34px;
 @smallHeight: 24px;
 @miniHeight: 18px;
 
+.bp-uninput {
+  &:disabled {
+    background-color: @gary-2;
+    cursor: no-drop;
+  }
+
+  &:read-only {
+    background-color: @gary-1;
+    cursor: no-drop;
+  }
+}
+
 .bp-input {
   width: 100%;
   max-width: 100%;
-  min-height: 20px;
+  min-height: @miniHeight;
   position: relative;
   display: inline-block;
   border-radius: @radius;
@@ -26,6 +37,8 @@
   }
 
   .bp-input-inner {
+    .bp-uninput;
+
     width: 100%;
     -webkit-appearance: none;
     background-color: @gary-0;
@@ -36,71 +49,129 @@
     border-radius: @radius;
     border: none;
     display: inline-block;
-    padding: 0 30px 0 10px;
-
-    &:disabled {
-      background-color: @gary-2;
-      cursor: no-drop;
-    }
-
-    &:read-only {
-      background-color: @gary-1;
-      cursor: no-drop;
-    }
+    padding: 0 30px 0 15px;
   }
 
+  // 输入框后置内容
   .bp-input-right {
     position: absolute;
     right: 0;
-    top: 0px;
-    padding: 0 10px;
+    top: 0;
     text-align: center;
     background-color: @gary-0;
     border-radius: @radius;
-    -webkit-appearance: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    .no-select;
 
-    span {
-      color: @gary-6;
+    // 后置按钮需要特殊的样式定制，以符合 Input 风格
+    .bp-button {
+      top: -1px;
+
+      button {
+        border: 1px solid @gary-2;
+        border-radius: 0 @radius @radius 0;
+        padding: 0 15px !important;
+        color: @gary-6;
+        background: @gary-2;
+
+        .bp-icon,
+        .bp-icon-inner {
+          padding: 0 !important;
+        }
+
+        .btn-text-inner {
+          display: block;
+          width: 100%;
+          padding: 0 !important;
+        }
+      }
     }
 
-    i {
-      cursor: pointer;
+    // 后置文本的公用 inner 样式
+    .bp-input-right-common-inner {
+      display: block;
+      color: @gary-6;
+      border: 1px solid @gary-0;
+      border-radius: 0 @radius @radius 0;
+
+
+      i,
+      span {
+        padding: 0 15px;
+      }
+
+      .bp-button;
+    }
+
+    .input-right-common-inner-hover {
+      .bp-button {
+        button {
+          color: @gary-7;
+        }
+      }
+    }
+
+    .bp-input-suffix {
+      .bp-input-suffix-inner {
+        .bp-input-right-common-inner;
+
+        // suffix 下的按钮不需要边框和背景色
+        .bp-button {
+          button {
+            border: 1px solid @gary-0;
+            background: @gary-0;
+          }
+        }
+
+        .ri-close-circle-fill,
+        .ri-eye-fill,
+        .ri-eye-line {
+          position: relative;
+          top: -1px;
+          display: block;
+          cursor: pointer;
+
+          &:hover {
+            color: @gary-7;
+          }
+        }
+      }
+
+      &:hover {
+        .bp-input-suffix-inner {
+          .input-right-common-inner-hover;
+        }
+      }
+    }
+
+    // append 下需要额外定制背景色和边框
+    .bp-input-append {
+      border-left: 1px solid @gary-4;
+
+      .bp-input-append-inner {
+        .bp-input-right-common-inner;
+
+        background-color: @gary-2;
+        border: 1px solid @gary-2;
+      }
+
+      &:hover {
+        .bp-input-append-inner {
+          .input-right-common-inner-hover;
+        }
+      }
     }
   }
 
   // 多行文本
   .bp-textarea-inner {
-    width: 100%;
+    .bp-input-inner;
+
     max-width: 100%;
     min-width: 100%;
     min-height: 60px;
-    -webkit-appearance: none;
-    background-color: @gary-0;
-    background-image: none;
-    box-sizing: border-box;
     font-size: inherit;
-    color: @gary-7;
-    letter-spacing: 1px;
-    border-radius: @radius;
-    border: none;
     display: block;
     padding: 10px 15px;
-
-    &:disabled {
-      background-color: @gary-2;
-      cursor: no-drop;
-    }
-
-    &:read-only {
-      background-color: @gary-1;
-      cursor: no-drop;
-    }
   }
 
   .resize-none {
@@ -126,8 +197,20 @@
     height: @largeHeight;
     line-height: @largeHeight;
 
-    i {
-      font-size: 18px;
+    .bp-input-suffix-inner,
+    .bp-input-append-inner {
+      height: @largeHeight - 2;
+
+      button {
+        height: @largeHeight;
+      }
+
+      i,
+      span,
+      .bp-icon,
+      .bp-icon-inner {
+        font-size: 18px;
+      }
     }
   }
 }
@@ -142,8 +225,20 @@
     height: @normalHeight;
     line-height: @normalHeight;
 
-    i {
-      font-size: inherit;
+    .bp-input-suffix-inner,
+    .bp-input-append-inner {
+      height: @normalHeight - 2;
+
+      button {
+        height: @normalHeight;
+      }
+
+      i,
+      span,
+      .bp-icon,
+      .bp-icon-inner {
+        font-size: inherit;
+      }
     }
   }
 }
@@ -158,8 +253,20 @@
     height: @smallHeight;
     line-height: @smallHeight;
 
-    i {
-      font-size: 12px;
+    .bp-input-suffix-inner,
+    .bp-input-append-inner {
+      height: @smallHeight - 2;
+
+      button {
+        height: @smallHeight;
+      }
+
+      i,
+      span,
+      .bp-icon,
+      .bp-icon-inner {
+        font-size: 12px;
+      }
     }
   }
 }
@@ -174,8 +281,20 @@
     height: @miniHeight;
     line-height: @miniHeight;
 
-    i {
-      font-size: 12px;
+    .bp-input-suffix-inner,
+    .bp-input-append-inner {
+      height: @miniHeight - 2;
+
+      button {
+        height: @miniHeight;
+      }
+
+      i,
+      span,
+      .bp-icon,
+      .bp-icon-inner {
+        font-size: 12px;
+      }
     }
   }
 }
@@ -237,82 +356,76 @@ textarea {
   font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei";
 }
 
-textarea::placeholder {
+.bp-input-placeholder {
   color: @gary-5;
   font-weight: normal;
+}
+
+textarea::placeholder {
+  .bp-input-placeholder;
 }
 
 textarea::-webkit-input-placeholder {
-  color: @gary-5;
-  font-weight: normal;
+  .bp-input-placeholder;
 }
 
 /* Firefox 4-18 */
 textarea::-moz-placeholder {
-  color: @gary-5;
-  font-weight: normal;
+  .bp-input-placeholder;
 }
 
 /* Firefox 19-50 */
 textarea::-moz-placeholder {
-  color: @gary-5;
-  font-weight: normal;
+  .bp-input-placeholder;
 }
 
 /* - Internet Explorer 10–11
     - Internet Explorer Mobile 10-11 */
 textarea::-ms-input-placeholder {
-  color: @gary-5  !important;
-  font-weight: normal !important;
+  .bp-input-placeholder;
 }
 
 /* Edge (also supports -webkit-input-placeholder) */
 textarea::-ms-input-placeholder {
-  color: @gary-5;
-  font-weight: normal;
+  .bp-input-placeholder;
 }
 
 input::placeholder {
-  color: @gary-5;
-  font-weight: normal;
+  .bp-input-placeholder;
 }
 
 input::-webkit-input-placeholder {
-  color: @gary-5;
-  font-weight: normal;
+  .bp-input-placeholder;
 }
 
 /* Firefox 4-18 */
 input::-moz-placeholder {
-  color: @gary-5;
-  font-weight: normal;
+  .bp-input-placeholder;
 }
 
 /* Firefox 19-50 */
 input::-moz-placeholder {
-  color: @gary-5;
-  font-weight: normal;
+  .bp-input-placeholder;
 }
 
 /* - Internet Explorer 10–11
     - Internet Explorer Mobile 10-11 */
 input::-ms-input-placeholder {
-  color: @gary-5  !important;
-  font-weight: normal !important;
+  .bp-input-placeholder;
 }
 
 /* Edge (also supports -webkit-input-placeholder) */
 input::-ms-input-placeholder {
-  color: @gary-5;
-  font-weight: normal;
+  .bp-input-placeholder;
 }
 
-.bp-fade-in-enter,
-.bp-fade-in-leave-active {
+.bp-fade-in-enter-from,
+.bp-fade-in-leave-to {
   opacity: 0;
 }
 
 .bp-fade-in-enter-active,
 .bp-fade-in-leave-active {
+  -webkit-transition: opacity .2s ease;
   transition: opacity .2s ease;
 }

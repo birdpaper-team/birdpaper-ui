@@ -2,10 +2,13 @@
  * @Author: Sam
  * @Date: 2019-11-07 14:05:54
  * @Last Modified by: Sam
- * @Last Modified time: 2021-05-15 08:24:19
+ * @Last Modified time: 2021-06-01 08:55:29
  */
 <template>
-  <div :class="[inputClass, isFocus ? 'focus-border' : '']">
+  <div
+    :class="[inputClass, { 'focus-border': isFocus }]"
+    v-click-outside="onClickOutside"
+  >
     <!-- 普通文本类型 -->
     <template v-if="type !== 'textarea'">
       <input
@@ -28,12 +31,17 @@
       />
       <!-- 右侧区域 -->
       <div class="bp-input-right" v-if="rightOption.show">
-        <the-input-option
-          v-model="rightOption.visibled"
-          :icon="rightOption.icon"
-          :text="rightOption.text"
-          @click="onRightOptionClick"
-        ></the-input-option>
+        <bp-input-suffix v-model="isSuffix" @click="onRightOptionClick">
+          <slot name="suffix">
+            <i v-if="rightOption.icon !== ''" :class="rightOption.icon"></i>
+            <span v-if="rightOption.text !== ''">
+              {{ rightOption.text }}
+            </span>
+          </slot>
+        </bp-input-suffix>
+        <bp-input-append v-model="isAppend">
+          <slot name="append"> </slot>
+        </bp-input-append>
       </div>
     </template>
     <!-- 多行文本 -->
@@ -56,34 +64,34 @@
         @blur="onBlur"
       />
       <!-- 字数限制 -->
-      <the-input-option
-        v-model="rightOption.visibled"
-        is-textarea
-        :icon="rightOption.icon"
-        :text="rightOption.text"
-        @click="onRightOptionClick"
-      ></the-input-option>
+      <div class="bp-textarea-num-limit" v-if="rightOption.show">
+        <div class="bp-input-suffix">
+          <span class="bp-input-suffix-inner">
+            <span v-if="rightOption.text !== ''">
+              {{ rightOption.text }}
+            </span>
+          </span>
+        </div>
+      </div>
     </template>
   </div>
 </template>
 
 <script>
-import {
-  computed,
-  getCurrentInstance,
-  reactive,
-  ref,
-  toRefs,
-  watch,
-} from "vue";
-import TheInputOption from "./components/the-input-option.vue";
+import { computed, ref, watch } from "vue";
+import { clickOutside } from "../../utils/util.js";
+import { useInputRight } from "./inputRight.js";
+import bpInputSuffix from "./components/bp-input-suffix.vue";
+import bpInputAppend from "./components/bp-input-append.vue";
 
 const inpTypeList = ["text", "password", "textarea"]; // 输入框可用类型
 const sizeList = ["mini", "small", "normal", "large"]; // 可用尺寸
-const bdColorList = ["default", "primary", "success", "warning", "danger"]; // 可用边框颜色
+const themeList = ["default", "primary", "success", "warning", "danger"]; // 可用边框颜色
 
 export default {
   name: "bp-input",
+  directives: { clickOutside },
+  components: { bpInputSuffix, bpInputAppend },
   props: {
     modelValue: { type: [String, Number], default: "" }, // 输入框文本值
     placeholder: { type: String, default: "" }, // 占位文本
@@ -92,10 +100,11 @@ export default {
     clearable: { type: Boolean, default: false }, // 是否展示清空按钮
     name: { type: String, default: "" }, // 输入框 name 标识
     showLimit: { type: Boolean, default: false }, // 是否展示字数限制
-    maxLength: { type: [Number, String], default: "" }, // 最大输入长度
+    maxLength: { type: Number, default: null }, // 最大输入长度
     autosize: { type: Boolean, default: false }, // 多行文本下高度是否自动撑开
     resize: { type: Boolean, default: false }, // 多行文本下是否允许拖动
-    rows: { type: [Number, String], default: 2 }, // 多行文本的行数
+    rows: { type: Number, default: 2 }, // 多行文本的行数
+    suffixIcon: { type: String, default: "" }, // 输入框尾部图标
     type: {
       type: String,
       default: "text",
@@ -109,13 +118,10 @@ export default {
     borderColor: {
       type: String,
       default: "default",
-      validator: (value) => bdColorList.indexOf(value) !== -1,
+      validator: (value) => themeList.indexOf(value) !== -1,
     }, // 边框颜色
   },
-  components: {
-    TheInputOption,
-  },
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const isFocus = ref(false);
     // 样式
     const inputClass = computed(() => {
@@ -129,10 +135,38 @@ export default {
       return className;
     });
 
+    const isSuffix = computed(() => {
+      return (rightOption.visibled && !slots.append) || slots.suffix;
+    });
+    const isAppend = computed(() => {
+      return slots.append;
+    });
+
     // 右侧显示
-    const { rightOption, onRightOptionClick, showRightArea } = useRightOption(
-      props,
-      emit
+    const {
+      rightOption,
+      onRightOptionClick,
+      showRightArea,
+      renderRightArea,
+    } = useInputRight(props, emit);
+
+    watch(
+      () => [props.showLimit, props.clearable, props.suffixIcon],
+      () => {
+        renderRightArea();
+        // showRightArea();
+      }
+    );
+    watch(
+      () => props.suffixIcon,
+      () => {
+        rightOption.icon = props.suffixIcon;
+        showRightArea();
+        renderRightArea();
+      },
+      {
+        immediate: true,
+      }
     );
 
     showRightArea();
@@ -154,16 +188,20 @@ export default {
     // 失去焦点触发
     const onBlur = (e) => {
       isFocus.value = false;
-      if (props.clearable || props.type === "password") {
+      emit("blur", e);
+    };
+
+    // 点击外部触发
+    const onClickOutside = () => {
+      if (props.clearable && props.type !== "password") {
         rightOption.visibled = false;
       }
-      emit("blur", e);
     };
 
     // 键入触发
     const onKeyup = (e) => {
       emit("keyup", e);
-      showRightArea(e.target.value);
+      renderRightArea();
     };
 
     // 键松触发
@@ -176,82 +214,21 @@ export default {
 
     return {
       rightOption,
-      onRightOptionClick,
       isFocus,
       inputClass,
+      isSuffix,
+      isAppend,
       showRightArea,
+      onRightOptionClick,
       onInput,
       onFocus,
       onBlur,
       onKeyup,
+      onClickOutside,
       onKeydown,
     };
   },
 
   emits: ["update:modelValue", "focus", "blur", "keyup", "keydown", "clear"],
 };
-
-// 右侧操作显示
-// 优先级：slot > clearable > showLimit > props
-function useRightOption(props, emit) {
-  const { proxy } = getCurrentInstance();
-  const rightOptionShow = ref(false);
-
-  const rightOption = reactive({
-    show: false,
-    visibled: false,
-    icon: "",
-    text: "",
-    theme: "gary", // todo
-    bgTheme: "default", // todo
-  });
-
-  rightOption.show = computed(() => !props.disabled && !props.readonly);
-
-  // 控制展示右侧区域
-  const showRightArea = (inpVal = "") => {
-    if (props.showLimit) {
-      rightOption.text = computed(
-        () => `${props.modelValue.length}/${props.maxLength}`
-      );
-
-      rightOption.icon = "";
-      rightOption.visibled = true;
-      return;
-    }
-
-    rightOption.text = "";
-    rightOption.visibled = inpVal !== "";
-
-    if (props.clearable) {
-      rightOption.icon = "ri-close-circle-fill";
-      return;
-    }
-    if (props.type === "password") rightOption.icon = "ri-eye-fill";
-    return;
-  };
-
-  const onRightOptionClick = (e) => {
-    // 清空值
-    if (props.clearable) {
-      e.target.value = "";
-      emit("update:modelValue", e.target.value);
-      rightOption.visibled = false;
-      emit("clear", e.target.value);
-      return;
-    }
-    // 密码输入框下文本显示切换
-    if (props.type === "password") {
-      const isText = proxy.$refs.inp.type === "text";
-      rightOption.icon = isText ? "ri-eye-fill" : "ri-eye-line";
-      proxy.$refs.inp.type = !isText ? "text" : "password";
-    }
-  };
-
-  return {
-    rightOption,
-    onRightOptionClick,
-    showRightArea,
-  };
-}
 </script>
