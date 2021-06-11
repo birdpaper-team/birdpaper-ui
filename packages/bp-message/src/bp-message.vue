@@ -9,7 +9,7 @@
   <transition name="slide-fade">
     <div class="message-container" v-show="visibled">
       <!-- 内容 -->
-      <div :class="['message-content']">
+      <div class="message-content">
         <!-- 消息类型图标 -->
         <div class="message-icon" v-if="config.icon">
           <i :class="config.icon"></i>
@@ -24,22 +24,13 @@
   </transition>
 </template>
 <script>
-import { reactive, ref, toRefs } from "vue";
+import { reactive, toRefs } from "vue";
 export default {
   props: {
-    // 消息配置项
-    config: {
-      type: Object,
-      default: () => {},
-    },
-    // 取消挂载回调
-    remove: {
-      type: Function,
-      default: () => {},
-    },
+    config: { type: Object, default: () => {} }, // 消息配置项
+    remove: { type: Function, default: () => {} }, // 取消挂载回调
   },
   setup(props) {
-    const { config } = props;
     const state = reactive({
       visibled: false,
     });
