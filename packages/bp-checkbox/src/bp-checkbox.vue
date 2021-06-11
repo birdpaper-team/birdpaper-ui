@@ -2,10 +2,10 @@
  * @Author: Sam
  * @Date: 2020-05-07 14:51:55
  * @Last Modified by: Sam
- * @Last Modified time: 2021-04-16 09:59:03
+ * @Last Modified time: 2021-06-04 13:53:23
  */
 <template>
-  <div :class="className" @click="handleClick">
+  <div :class="className" @click="onClick">
     <!-- 多选框内容 -->
     <div
       :class="[
@@ -29,14 +29,11 @@ import { computed, ref } from "vue";
 export default {
   name: "bp-checkbox",
   props: {
-    // 多选框值
-    modelValue: { type: Boolean, default: false },
-    // name
-    name: { type: String, default: "" },
-    // 是否禁用
-    disabled: { type: Boolean, default: false },
-    customClick: { type: Boolean, default: false },
-    indeterminate: { type: Boolean, default: false },
+    modelValue: { type: Boolean, default: false }, // 绑定值
+    name: { type: String, default: "" }, // name
+    disabled: { type: Boolean, default: false }, // 是否禁用
+    customClick: { type: Boolean, default: false }, // 是否使用自定义点击，为true不会触发绑定值更新
+    indeterminate: { type: Boolean, default: false }, // 样式上控制不确定状态
     value: { type: Boolean, default: false },
   },
   emits: ["update:modelValue", "click"],
@@ -58,7 +55,7 @@ export default {
       return name;
     });
 
-    const handleClick = () => {
+    const onClick = () => {
       if (props.disabled) {
         return;
       }
@@ -72,7 +69,7 @@ export default {
     return {
       className,
       innerClassName,
-      handleClick,
+      onClick,
       inputValue,
     };
   },
