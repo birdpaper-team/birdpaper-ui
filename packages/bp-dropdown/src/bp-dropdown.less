@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2021-04-13 17:04:41
  * @Last Modified by: Sam
- * @Last Modified time: 2021-04-16 08:00:10
+ * @Last Modified time: 2021-06-03 11:00:23
  */
 
 @radius: 4px;
@@ -12,62 +12,62 @@
 @miniHeight: 18px;
 
 .bp-dropdown {
+  .no-select;
   position: relative;
-  -webkit-appearance: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  display: inline-block;
   max-width: 200px;
   width: auto;
-  cursor: pointer;
   font-size: inherit;
+  cursor: pointer;
 
   .bp-dropdown-inner {
-    height: 100%;
+    display: inline-block;
+    padding: 0 12px;
+    height: @normalHeight;
 
     .bp-dropdown-inner-text {
+      display: inline-block;
       color: @gary-7;
       padding: 0 6px;
       font-size: 14px;
-      line-height: 1;
+      line-height: @normalHeight;
       margin: 0;
-      cursor: pointer;
       transition: all .2s ease-in-out;
 
       .ri-arrow-down-s-line {
+        position: relative;
+        left: -4px;
+        display: inline-block;
         color: @gary-5;
         font-size: 16px;
         line-height: 1;
         text-transform: none;
         vertical-align: middle;
-        display: inline-block;
         transform: rotate(0deg);
-        transition: transform .3s ease;
+        transition: transform .2s ease;
       }
 
       .open {
         transform: rotate(-180deg);
-        transition: transform .3s ease;
+        transition: transform .2s ease;
       }
     }
   }
 
-
   .select-item-box {
     position: absolute;
     width: auto;
+    margin: 0 auto;
     z-index: 500;
 
     .option-arrow {
       position: relative;
-      left: 20px;
+      left: 50%;
       bottom: -1px;
       width: 0;
       height: 0;
-      margin-top: 6px;
+      margin-top: -4px;
+      margin-left: -8px;
       border-width: 0 8px 8px;
       border-style: solid;
       border-color: transparent transparent @gary-3;
@@ -97,8 +97,6 @@
 
       .bp-dropdown-option {
         width: auto;
-        height: @normalHeight;
-        line-height: @normalHeight;
         cursor: pointer;
         background: @gary-0;
         text-align: left;
@@ -113,14 +111,22 @@
           padding: 0 15px;
           font-size: 14px;
           color: @gary-7;
-          max-width: 200px;
           font-size: inherit;
 
-          span {
+          .item-content {
             display: block;
+            max-width: 120px;
+            line-height: @normalHeight;
+            margin: 0;
+            padding: 0;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+          }
+
+          .item-disabled {
+            opacity: .5;
+            cursor: no-drop;
           }
         }
       }
