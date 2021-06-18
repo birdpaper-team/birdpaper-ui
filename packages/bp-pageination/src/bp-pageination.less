@@ -1,0 +1,100 @@
+/*
+ * @Author: Sam
+ * @Date: 2021-06-12 19:08:03
+ * @Last Modified by: Sam
+ * @Last Modified time: 2021-06-13 21:20:29
+ */
+@radius: 4px;
+
+.bp-pageination {
+  position: relative;
+
+  .bp-pageination-total {
+    margin-right: 12px;
+    float: left;
+
+    p {
+      height: 32px;
+      line-height: 32px;
+      margin: 0;
+      color: @gary-7;
+
+      span {
+        margin: 0 2px;
+      }
+    }
+  }
+
+  .bp-pageination-container {
+    float: left;
+    margin: 0 !important;
+    height: 32px;
+
+    .active {
+      border: 1px solid @primary-3;
+      color: @primary-3;
+      transition: all .2s;
+    }
+
+    .bp-pageination-item {
+      list-style: none;
+      float: left;
+      height: 30px;
+      width: 30px;
+      min-width: 30px;
+      line-height: 30px;
+      text-align: center;
+      border: 1px solid @gary-4;
+      border-radius: @radius;
+      color: @gary-7;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all .2s;
+      .no-select;
+
+      &:hover {
+        .active;
+      }
+
+      &:not(:first-child) {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      &:not(:last-child) {
+        margin-left: 0;
+        margin-right: 6px;
+      }
+    }
+
+    .bp-prev-page,
+    .bp-next-page {
+      width: auto;
+      min-width: 30px;
+
+      .ri-arrow-left-s-line,
+      .ri-arrow-right-s-line {
+        font-size: 18px;
+        color: @gary-6;
+      }
+
+      span {
+        padding: 0 8px;
+      }
+    }
+
+    .pageination-item-active {
+      .active;
+    }
+
+    .pageination-item-disabled {
+      cursor: no-drop;
+      opacity: .618;
+
+      &:hover {
+        border: 1px solid @gary-4;
+        color: @gary-7;
+      }
+    }
+  }
+}
