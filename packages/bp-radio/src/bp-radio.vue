@@ -1,17 +1,17 @@
-/*
- * @Author: Sam
- * @Date: 2020-07-06 10:18:43
- * @Last Modified by: Sam
- * @Last Modified time: 2021-01-20 14:37:09
- */
 <template>
-  <div :class="className" @click="handleClick">
+  <div :class="className" @click="onClick">
     <!-- 单选框内容 -->
     <div :class="innerClassName">
       <div class="bp-radio-inner"></div>
     </div>
-    <!-- radio -->
-    <input ref="radio" type="radio" :name="name" :value="label" v-model="inputValue" />
+    <input
+      ref="radio"
+      type="radio"
+      :name="name"
+      :value="label"
+      v-model="modelValue"
+      aria-hidden="true"
+    />
     <!-- 选项标签文本 -->
     <span class="bp-radio-inner-text">
       <slot></slot>
@@ -20,63 +20,45 @@
 </template>
 
 <script>
+import { computed } from "vue";
 export default {
   name: "bp-radio",
   props: {
-    // 单选框值
-    value: {
-      type: [String, Number],
-      default: false
-    },
-    // 单选框标签
-    label: {
-      type: [Boolean, String, Number],
-      default: ""
-    },
-    // name
-    name: {
-      type: String,
-      default: ""
-    },
-    // 是否禁用
-    disabled: {
-      type: Boolean,
-      default: false
-    }
+    modelValue: { type: [String, Number], default: "" }, // 单选框绑定值
+    label: { type: [Boolean, String, Number], default: "" }, // 单选框标签
+    name: { type: String, default: "" }, // 相当于原生 name 属性
+    disabled: { type: Boolean, default: false }, // 是否禁用
   },
-  computed: {
-    className() {
+  emits: ["update:modelValue"],
+  setup(props, { emit }) {
+    const className = computed(() => {
       let name = ["bp-radio"];
-      if (this.disabled) {
+      if (props.disabled) {
         name.push("bp-radio-disabled");
       }
       return name;
-    },
-    innerClassName() {
-      let name = this.disabled
+    });
+
+    const innerClassName = computed(() => {
+      let name = props.disabled
         ? ["bp-radio-inner-box-disabled"]
         : ["bp-radio-inner-box"];
-
-      if (this.value === this.label) {
+      if (props.modelValue === props.label) {
         name.push("checked");
       }
-
       return name;
-    }
-  },
-  data() {
+    });
+
+    const onClick = () => {
+      if (props.disabled) return;
+      emit("update:modelValue", props.label);
+    };
+
     return {
-      inputValue: this.value
+      onClick,
+      className,
+      innerClassName,
     };
   },
-  methods: {
-    handleClick() {
-      if (this.disabled) {
-        return;
-      }
-      this.inputValue = this.label;
-      this.$emit("input", this.inputValue);
-    }
-  }
 };
 </script>
