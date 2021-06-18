@@ -1,11 +1,5 @@
-/*
- * @Author: Sam
- * @Date: 2019-12-16 11:06:00
- * @Last Modified by: Sam
- * @Last Modified time: 2021-05-07 20:36:27
- */
 <template>
-  <div :class="btnDivClass" @click="onClick">
+  <div :class="btnDivClass" @click="onClick" v-if="to === ''">
     <!-- 纯文本按钮 -->
     <p v-if="isTextBtn" class="btn-text"><slot></slot></p>
 
@@ -17,11 +11,28 @@
       </span>
       <!-- 按钮文本内容 -->
       <span class="btn-text-inner" v-if="$slots.default">
-        <i :class="['btn-text-inner-i', btnIcon]" v-show="btnIcon !== ''"></i>
+        <i :class="['btn-text-inner-i', btnIcon]" v-if="btnIcon !== ''"></i>
         <slot></slot>
       </span>
     </button>
   </div>
+  <a
+    v-else
+    :class="[btnClass, { 'bp-button-disabled': isDisabled }]"
+    :disabled="isDisabled"
+    :href="to"
+    :target="target"
+  >
+    <!-- 按钮图标 -->
+    <span class="bp-icon" v-if="btnIcon !== '' && !$slots.default">
+      <i :class="['bp-icon-inner', btnIcon]"></i>
+    </span>
+    <!-- 按钮文本内容 -->
+    <span class="btn-text-inner" v-if="$slots.default">
+      <i :class="['btn-text-inner-i', btnIcon]" v-if="btnIcon !== ''"></i>
+      <slot></slot>
+    </span>
+  </a>
 </template>
 
 <script>
@@ -36,10 +47,12 @@ export default {
     round: { type: Boolean, default: false }, // 是否圆角
     block: { type: Boolean, default: false }, // 宽度是否撑满父级元素
     noBorder: { type: Boolean, default: false }, // 是否去除边框
+    target: { type: String, default: "_self" }, // 是否去除边框
+    to: { type: String, default: "" }, // 跳转链接
     type: {
       type: String,
       default: "primary",
-      validator: function (value) {
+      validator: function(value) {
         return (
           [
             "text",
@@ -55,7 +68,7 @@ export default {
     size: {
       type: String,
       default: "normal",
-      validator: function (value) {
+      validator: function(value) {
         return ["mini", "small", "normal", "large"].indexOf(value) !== -1;
       },
     }, // 按钮尺寸
@@ -65,7 +78,7 @@ export default {
     const btnIcon = ref(""); // 按钮图标
 
     // 是否为纯文本类型按钮
-    const isTextBtn = computed(() => props.type === "text");
+    const isTextBtn = computed(() => props.type === "text" && props.t0 !== "");
 
     // 外层Div样式，控制Radius、Display、Border等属性
     const btnDivClass = computed(() => {
@@ -81,6 +94,7 @@ export default {
     // 非纯文本按钮下的内层样式
     const btnClass = computed(() => {
       let name = [
+        `bp-button-inner`,
         `btn-${props.type}${props.plain ? "-plain" : ""}`,
         `btn-size-${props.size}`,
       ]; // 按钮类型和尺寸
@@ -106,7 +120,7 @@ export default {
     // 禁用状态，除了传入属性外，还应考虑加载中的情况
     const isDisabled = computed(() => props.disabled || props.loading);
 
-    const { onClick } = useButtonEvent(emit);
+    const { onClick } = useButtonEvent(props, emit);
 
     return {
       btnDivClass,
@@ -120,8 +134,12 @@ export default {
 };
 
 // 按钮事件
-function useButtonEvent(emit) {
-  const onClick = () => emit("click"); // 点击触发
+function useButtonEvent(props, emit) {
+  // 点击触发
+  const onClick = () => {
+    const { to } = props;
+    if (!to) return emit("click");
+  };
 
   return {
     onClick,

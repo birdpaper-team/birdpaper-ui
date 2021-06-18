@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-12-16 11:05:47
  * @Last Modified by: Sam
- * @Last Modified time: 2021-05-07 20:42:06
+ * @Last Modified time: 2021-06-15 09:58:01
  */
 
 @radius: 4px;
@@ -11,25 +11,26 @@
 @smallHeight: 24px;
 @miniHeight: 18px;
 
-button {
+.bp-button-inner {
+  display: inline-block;
+  line-height: 2;
   cursor: pointer;
   outline: none;
   white-space: nowrap;
   max-width: 100%;
   min-height: @miniHeight;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
   text-align: center;
   box-sizing: border-box;
-  display: inline-block;
   white-space: nowrap;
   border-radius: @radius;
   opacity: 1;
-  -webkit-appearance: none;
-  -moz-user-select: none;
-  -o-user-select: none;
-  -khtml-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  .no-select;
   transition: background .2s, color .2s, border .2s, opacity .2s, width .2s;
   -o-transition: background .2s, color .2s, border .2s, opacity .2s, width .2s;
   -moz-transition: background .2s, color .2s, border .2s, opacity .2s, width .2s;
@@ -40,13 +41,24 @@ button {
   -o-transition-timing-function: ease;
 }
 
+a {
+  vertical-align: middle;
+
+  .btn-text-inner {
+    vertical-align: middle;
+    display: inline-block;
+  }
+}
+
 .btn-block {
   width: 100% !important;
   display: block !important;
 }
 
 .btn-no-border {
-  button {
+
+  button,
+  a {
     border: none !important;
   }
 }
@@ -54,398 +66,342 @@ button {
 .bp-button {
   position: relative;
   display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
 
-  .bp-icon {
-    display: flex;
-    align-items: center;
-    justify-self: center;
-    align-content: center;
+.bp-icon {
+  line-height: 1;
 
-    .bp-icon-inner {
-      font-style: normal;
-      font-weight: 400;
-      font-variant: normal;
-      text-transform: none;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+  .bp-icon-inner {
+    vertical-align: middle;
+    line-height: 2;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.btn-text-inner {
+  line-height: 1;
+
+  .btn-text-inner-i {
+    line-height: 1;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+}
+
+// 按钮尺寸
+.btn-size-large {
+  height: @largeHeight;
+
+  .bp-icon-inner {
+    padding: 0 12px;
+    font-size: 20px;
   }
 
   .btn-text-inner {
-    display: flex;
-    align-items: center;
-    justify-self: center;
-    align-content: center;
+    padding: 0 18px;
+    font-size: 16px;
+  }
+}
+
+.btn-size-normal {
+  height: @normalHeight;
+
+  .bp-icon-inner {
+    padding: 0 8px;
+    font-size: 16px;
+  }
+
+  .btn-text-inner {
+    padding: 0 16px;
     font-size: 14px;
+  }
+}
 
-    .btn-text-inner-i {
-      margin-right: 4px;
-    }
+.btn-size-small {
+  height: @smallHeight;
+  line-height: 1;
+
+  .bp-icon-inner {
+    padding: 0 4px;
+    font-size: 14px;
   }
 
-  // 按钮尺寸
-  .btn-size-large {
-    height: @largeHeight;
+  .btn-text-inner {
+    padding: 0 14px;
+    font-size: 14px;
+  }
+}
 
-    .bp-icon-inner {
-      padding: 0 12px;
-      font-size: 20px;
-    }
+.btn-size-mini {
+  height: @miniHeight;
+  line-height: 1;
 
-    .btn-text-inner {
-      padding: 0 18px;
-      font-size: 16px;
-    }
+  .bp-icon-inner {
+    padding: 0 3px;
+    font-size: 12px;
   }
 
-  .btn-size-normal {
-    height: @normalHeight;
+  .btn-text-inner {
+    padding: 0 10px;
+    font-size: 12px;
+  }
+}
 
-    .bp-icon-inner {
-      padding: 0 8px;
-      font-size: 16px;
-    }
+button:disabled,
+.bp-button-disabled {
+  opacity: .618;
+  cursor: no-drop;
+  pointer-events: none;
+  transition: opacity .2s ease;
+  -o-transition: opacity .2s ease;
+  -moz-transition: opacity .2s ease;
+  -webkit-transition: opacity .2s ease;
+}
 
-    .btn-text-inner {
-      padding: 0 16px;
-      font-size: 14px;
-    }
+// 文字按钮
+.btn-text {
+  font-size: inherit;
+  color: @primary-3  !important;
+  cursor: pointer;
+  transition: color .2s ease;
+}
+
+// 默认按钮
+.default-style {
+  border: 1px solid @gary-4;
+  background: @gary-0;
+  color: @gary-7;
+}
+
+.btn-default {
+  .default-style;
+
+  &:hover {
+    border: 1px solid @gary-5;
+    color: @primary-3;
+    background: @primary-1;
   }
 
-  .btn-size-small {
-    height: @smallHeight;
-
-    .bp-icon-inner {
-      padding: 0 4px;
-      font-size: 14px;
-    }
-
-    .btn-text-inner {
-      padding: 0 14px;
-      font-size: 14px;
-    }
+  &:active {
+    border: 1px solid @primary-3;
+    background: @primary-1;
   }
+}
 
-  .btn-size-mini {
-    height: @miniHeight;
+// 默认幽灵按钮
+.default-plain-style {
+  border: 1px solid @gary-4;
+  background: @gary-0;
+  color: @gary-7;
+}
 
-    .bp-icon-inner {
-      padding: 0 3px;
-      font-size: 12px;
-    }
+.btn-default-plain {
+  .default-plain-style;
 
-    .btn-text-inner {
-      padding: 0 10px;
-      font-size: 12px;
-    }
-  }
-
-  button:disabled {
-    opacity: .618;
-    cursor: no-drop;
-    transition: opacity .2s ease;
-    -o-transition: opacity .2s ease;
-    -moz-transition: opacity .2s ease;
-    -webkit-transition: opacity .2s ease;
-  }
-
-  // 文字按钮
-  .btn-text {
-    font-size: inherit;
-    color: @primary-3  !important;
-    cursor: pointer;
-    transition: color .2s ease;
-  }
-
-  // 默认按钮
-  .default-style {
-    border: 1px solid @gary-4;
+  &:hover {
+    border: 1px solid @gary-5;
+    color: @primary-3;
     background: @gary-0;
-    color: @gary-7;
   }
 
-  .btn-default {
-    .default-style;
-
-    &:disabled {
-      &:hover {
-        .default-style;
-      }
-    }
-
-    &:hover {
-      border: 1px solid @gary-5;
-      color: @primary-3;
-      background: @primary-1;
-    }
-
-    &:active {
-      border: 1px solid @primary-3;
-      background: @primary-1;
-    }
-  }
-
-  // 默认幽灵按钮
-  .default-plain-style {
-    border: 1px solid @gary-4;
+  &:active {
+    border: 1px solid @primary-3;
     background: @gary-0;
-    color: @gary-7;
+  }
+}
+
+// 主要按钮
+.primary-style {
+  border: 1px solid @primary-3;
+  background: @primary-3;
+  color: @gary-0;
+}
+
+.btn-primary {
+  .primary-style;
+
+  &:hover {
+    border: 1px solid @primary-4;
+    background: @primary-4;
   }
 
-  .btn-default-plain {
-    .default-plain-style;
+  &:active {
+    border: 1px solid @primary-3;
+    background: @primary-3;
+  }
+}
 
-    &:disabled {
-      &:hover {
-        .default-plain-style;
-      }
-    }
+// 主要幽灵按钮
+.primary-plain-style {
+  border: 1px solid @primary-3;
+  background: @primary-1;
+  color: @primary-3;
+}
 
-    &:hover {
-      border: 1px solid @gary-5;
-      color: @primary-3;
-      background: @gary-0;
-    }
+.btn-primary-plain {
+  .primary-plain-style;
 
-    &:active {
-      border: 1px solid @primary-3;
-      background: @gary-0;
-    }
+  &:hover {
+    border: 1px solid @primary-4;
+    background: @primary-4;
+    color: @gary-0;
   }
 
-  // 主要按钮
-  .primary-style {
+  &:active {
     border: 1px solid @primary-3;
     background: @primary-3;
     color: @gary-0;
   }
+}
 
-  .btn-primary {
-    .primary-style;
+// 成功按钮
+.success-style {
+  border: 1px solid @success-3;
+  background: @success-3;
+  color: @gary-0;
+}
 
-    &:disabled {
-      &:hover {
-        .primary-style;
-      }
-    }
+.btn-success {
+  .success-style;
 
-    &:hover {
-      border: 1px solid @primary-4;
-      background: @primary-4;
-    }
-
-    &:active {
-      border: 1px solid @primary-3;
-      background: @primary-3;
-    }
+  &:hover {
+    border: 1px solid @success-4;
+    background: @success-4;
   }
 
-  // 主要幽灵按钮
-  .primary-plain-style {
-    border: 1px solid @primary-3;
-    background: @primary-1;
-    color: @primary-3;
+  &:active {
+    border: 1px solid @success-3;
+    background: @success-3;
+  }
+}
+
+// 成功幽灵按钮
+.success-plain-style {
+  border: 1px solid @success-3;
+  background: @success-1;
+  color: @success-3;
+}
+
+.btn-success-plain {
+  .success-plain-style;
+
+  &:hover {
+    border: 1px solid @success-4;
+    background: @success-4;
+    color: @gary-0;
   }
 
-  .btn-primary-plain {
-    .primary-plain-style;
-
-    &:disabled {
-      &:hover {
-        .primary-plain-style;
-      }
-    }
-
-    &:hover {
-      border: 1px solid @primary-4;
-      background: @primary-4;
-      color: @gary-0;
-    }
-
-    &:active {
-      border: 1px solid @primary-3;
-      background: @primary-3;
-      color: @gary-0;
-    }
-  }
-
-  // 成功按钮
-  .success-style {
+  &:active {
     border: 1px solid @success-3;
     background: @success-3;
     color: @gary-0;
   }
+}
 
-  .btn-success {
-    .success-style;
+// 警告按钮
+.warning-style {
+  border: 1px solid @warning-3;
+  background: @warning-3;
+  color: @gary-0;
+}
 
-    &:disabled {
-      &:hover {
-        .success-style;
-      }
-    }
+.btn-warning {
+  .warning-style;
 
-    &:hover {
-      border: 1px solid @success-4;
-      background: @success-4;
-    }
-
-    &:active {
-      border: 1px solid @success-3;
-      background: @success-3;
-    }
+  &:hover {
+    border: 1px solid @warning-4;
+    background: @warning-4;
   }
 
-  // 成功幽灵按钮
-  .success-plain-style {
-    border: 1px solid @success-3;
-    background: @success-1;
-    color: @success-3;
+  &:active {
+    border: 1px solid @warning-3;
+    background: @warning-3;
+  }
+}
+
+// 警告幽灵按钮
+.warning-plain-style {
+  border: 1px solid @warning-3;
+  background: @warning-1;
+  color: @warning-3;
+}
+
+.btn-warning-plain {
+  .warning-plain-style;
+
+  &:hover {
+    border: 1px solid @warning-4;
+    background: @warning-4;
+    color: @gary-0;
   }
 
-  .btn-success-plain {
-    .success-plain-style;
-
-    &:disabled {
-      &:hover {
-        .success-plain-style;
-      }
-    }
-
-    &:hover {
-      border: 1px solid @success-4;
-      background: @success-4;
-      color: @gary-0;
-    }
-
-    &:active {
-      border: 1px solid @success-3;
-      background: @success-3;
-      color: @gary-0;
-    }
-  }
-
-  // 警告按钮
-  .warning-style {
+  &:active {
     border: 1px solid @warning-3;
     background: @warning-3;
     color: @gary-0;
   }
+}
 
-  .btn-warning {
-    .warning-style;
+// 危险按钮
+.danger-style {
+  border: 1px solid @danger-3;
+  background: @danger-3;
+  color: @gary-0;
+}
 
-    &:disabled {
-      &:hover {
-        .warning-style;
-      }
-    }
+.btn-danger {
+  .danger-style;
 
-    &:hover {
-      border: 1px solid @warning-4;
-      background: @warning-4;
-    }
-
-    &:active {
-      border: 1px solid @warning-3;
-      background: @warning-3;
-    }
+  &:hover {
+    border: 1px solid @danger-4;
+    background: @danger-4;
   }
 
-  // 警告幽灵按钮
-  .warning-plain-style {
-    border: 1px solid @warning-3;
-    background: @warning-1;
-    color: @warning-3;
+  &:active {
+    border: 1px solid @danger-3;
+    background: @danger-3;
+  }
+}
+
+// 危险幽灵按钮
+.danger-plain-style {
+  border: 1px solid @danger-3;
+  background: @danger-1;
+  color: @danger-3;
+}
+
+.btn-danger-plain {
+  .danger-plain-style;
+
+  &:hover {
+    border: 1px solid @danger-4;
+    background: @danger-4;
+    color: @gary-0;
   }
 
-  .btn-warning-plain {
-    .warning-plain-style;
-
-    &:disabled {
-      &:hover {
-        .warning-plain-style;
-      }
-    }
-
-    &:hover {
-      border: 1px solid @warning-4;
-      background: @warning-4;
-      color: @gary-0;
-    }
-
-    &:active {
-      border: 1px solid @warning-3;
-      background: @warning-3;
-      color: @gary-0;
-    }
-  }
-
-  // 危险按钮
-  .danger-style {
+  &:active {
     border: 1px solid @danger-3;
     background: @danger-3;
     color: @gary-0;
   }
-
-  .btn-danger {
-    .danger-style;
-
-    &:disabled {
-      &:hover {
-        .danger-style;
-      }
-    }
-
-    &:hover {
-      border: 1px solid @danger-4;
-      background: @danger-4;
-    }
-
-    &:active {
-      border: 1px solid @danger-3;
-      background: @danger-3;
-    }
-  }
-
-  // 危险幽灵按钮
-  .danger-plain-style {
-    border: 1px solid @danger-3;
-    background: @danger-1;
-    color: @danger-3;
-  }
-
-  .btn-danger-plain {
-    .danger-plain-style;
-
-    &:disabled {
-      &:hover {
-        .danger-plain-style;
-      }
-    }
-
-    &:hover {
-      border: 1px solid @danger-4;
-      background: @danger-4;
-      color: @gary-0;
-    }
-
-    &:active {
-      border: 1px solid @danger-3;
-      background: @danger-3;
-      color: @gary-0;
-    }
-  }
 }
 
 .btn-round {
-  button {
+  .bp-button-inner {
     border-radius: 45px;
   }
 }
 
 // 加载
 .bp-icon-loading {
+  display: inline-block;
   animation: rotating .8s linear infinite;
   -webkit-animation: rotating .8s linear infinite;
 }

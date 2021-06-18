@@ -2,17 +2,45 @@
  * @Author: Sam
  * @Date: 2020-01-11 10:27:23
  * @Last Modified by: Sam
- * @Last Modified time: 2021-03-02 09:04:59
+ * @Last Modified time: 2021-06-12 16:03:48
  */
 
 /**
- * isNull
  * 判断是否为 null
  * @param {*} data
+ * @returns
  */
-export const isNull = (data) => {
-  return !data && data != 0;
-};
+export const isNull = (data) => !data && data != 0;
+
+/**
+ * 判断变量是否为字符串
+ * @param {*} data
+ * @returns {Boolean}
+ */
+export const isString = (data) => typeof data === 'string';
+
+/**
+ * 空格处理
+ * @param {String} str
+ * @returns
+ */
+export const trim = (str) => (str || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
+
+/**
+ * 将字符串转换成对象格式
+ * @param {String} str
+ * @returns {Object} null
+ */
+ export const strToObject = (str) => {
+  var finalObj = null;
+  try {
+    finalObj = JSON.parse(str);
+  } catch (e) {
+    finalObj = null;
+  }
+
+  return finalObj;
+}
 
 /**
  * clickOutside
@@ -62,5 +90,31 @@ export const throttle = (fn, delay) => {
       lastTime = nowTime;
       fn.apply(this, args);
     }
+  }
+}
+
+/**
+ * 新增事件监听
+ * @param {*} element
+ * @param {*} event
+ * @param {*} handler
+ * @param {*} useCapture
+ */
+export const on = function (element, event, handler, useCapture = false) {
+  if (element && event && handler) {
+    element.addEventListener(event, handler, useCapture);
+  }
+}
+
+/**
+ * 移除事件监听
+ * @param {*} element
+ * @param {*} event
+ * @param {*} handler
+ * @param {*} useCapture
+ */
+export const off = function (element, event, handler, useCapture = false) {
+  if (element && event && handler) {
+    element.removeEventListener(event, handler, useCapture);
   }
 }

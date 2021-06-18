@@ -2,163 +2,149 @@
  * @Author: Sam
  * @Date: 2020-07-06 10:19:24
  * @Last Modified by: Sam
- * @Last Modified time: 2020-07-06 13:56:47
+ * @Last Modified time: 2021-06-15 11:12:22
  */
 
-
 .bp-radio {
+  display: inline-block;
+  margin-right: 10px;
+  cursor: pointer;
+  .no-select;
+
+  .bp-radio-inner-box {
     display: inline-block;
-    -webkit-appearance: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+    outline: none;
+    white-space: nowrap;
+    position: relative;
+    vertical-align: middle;
     cursor: pointer;
 
-    .bp-radio-inner-box {
-        display: inline-block;
-        outline: none;
-        white-space: nowrap;
-        position: relative;
-        vertical-align: middle;
-        cursor: pointer;
+    .bp-radio-inner {
+      display: inline-block;
+      position: relative;
+      border-radius: 50%;
+      box-sizing: border-box;
+      width: 16px;
+      height: 16px;
+      background-color: @gary-0;
+      border: 1px solid @gary-4;
+      z-index: 1;
+      transition: border-color .2s ease, background-color .2s ease;
 
-        .bp-radio-inner {
-            display: inline-block;
-            position: relative;
-            border-radius: 50%;
-            box-sizing: border-box;
-            width: 16px;
-            height: 16px;
-            background-color: @gary-0;
-            border: 1px solid @gary-4;
-            z-index: 1;
-            transition: border-color .2s ease, background-color .2s ease;
-            -o-transition: border-color .2s ease, background-color .2s ease;
-            -moz-transition: border-color .2s ease, background-color .2s ease;
-            -webkit-transition: border-color .2s ease, background-color .2s ease;
-
-            &::after {
-                position: absolute;
-                left: 50%;
-                top: 50%;
-                width: 4px;
-                height: 4px;
-                margin-left: -2px;
-                margin-top: -2px;
-                content: "";
-                background-color: @gary-0;
-                border-radius: 50%;
-                box-sizing: content-box;
-            }
-        }
-    }
-
-    &:hover {
-        .bp-radio-inner-box {
-            .bp-radio-inner {
-                border: 1px solid @primary-3;
-                transition: border-color .2s ease;
-                -o-transition: border-color .2s ease;
-                -moz-transition: border-color .2s ease;
-                -webkit-transition: border-color .2s ease;
-            }
-        }
-    }
-
-    .bp-radio-inner-text {
-        margin-left: 8px;
-        font-size: 14px;
-        font-weight: 500;
-        letter-spacing: .5px;
-        color: @gary-7;
-    }
-
-    // 选中后样式
-    .checked {
-        .bp-radio-inner {
-            background-color: @primary-3;
-            border-color: @primary-3;
-            transition: border-color .2s ease, background-color .2s ease;
-            -o-transition: border-color .2s ease, background-color .2s ease;
-            -moz-transition: border-color .2s ease, background-color .2s ease;
-            -webkit-transition: border-color .2s ease, background-color .2s ease;
-        }
-    }
-
-    input[type="radio"] {
-        opacity: 0;
-        outline: none;
+      &::after {
         position: absolute;
-        margin: 0;
-        width: 0;
-        height: 0;
-        z-index: -1;
+        left: 50%;
+        top: 50%;
+        width: 4px;
+        height: 4px;
+        margin-left: -2px;
+        margin-top: -2px;
+        content: "";
+        background-color: @gary-0;
+        border-radius: 50%;
+        box-sizing: content-box;
+      }
     }
+  }
+
+  &:hover {
+    .bp-radio-inner-box {
+      .bp-radio-inner {
+        border: 1px solid @primary-3;
+        transition: border-color .2s ease;
+      }
+    }
+  }
+
+  .bp-radio-inner-text {
+    margin-left: 4px;
+    font-size: 14px;
+    color: @gary-7;
+  }
+
+  // 选中后样式
+  .checked {
+    .bp-radio-inner {
+      background-color: @primary-3;
+      border-color: @primary-3;
+      transition: border-color .2s ease, background-color .2s ease;
+    }
+  }
+
+  input[type="radio"] {
+    opacity: 0;
+    outline: none;
+    position: absolute;
+    margin: 0;
+    width: 0;
+    height: 0;
+    z-index: -1;
+  }
 }
 
 .bp-radio-disabled {
+  cursor: no-drop;
+
+  .bp-radio-inner-box-disabled {
+    display: inline-block;
+    outline: none;
+    white-space: nowrap;
+    position: relative;
+    vertical-align: middle;
     cursor: no-drop;
 
-    .bp-radio-inner-box-disabled {
-        display: inline-block;
-        outline: none;
-        white-space: nowrap;
-        position: relative;
-        vertical-align: middle;
-        cursor: no-drop;
-
-        .bp-radio-inner {
-            display: inline-block;
-            position: relative;
-            border-radius: 50%;
-            box-sizing: border-box;
-            width: 16px;
-            height: 16px;
-            background-color: @gary-3;
-            border: 1px solid @gary-4;
-            z-index: 1;
-            transition: border-color .2s ease, background-color .2s ease;
-            -o-transition: border-color .2s ease, background-color .2s ease;
-            -moz-transition: border-color .2s ease, background-color .2s ease;
-            -webkit-transition: border-color .2s ease, background-color .2s ease;
+    .bp-radio-inner {
+      display: inline-block;
+      position: relative;
+      border-radius: 50%;
+      box-sizing: border-box;
+      width: 16px;
+      height: 16px;
+      background-color: @gary-3;
+      border: 1px solid @gary-4;
+      z-index: 1;
+      transition: border-color .2s ease, background-color .2s ease;
 
 
-            &::after {
-                position: absolute;
-                border-left: 0;
-                border-top: 0;
-                box-sizing: content-box;
-                content: "";
-            }
-        }
-    }
-
-    .bp-radio-inner-text {
-        color: @gary-6;
-    }
-
-    // 选中后样式
-    .checked {
-        .bp-radio-inner {
-            background-color: @gary-3 ;
-            border-color: @gary-4;
-        }
-
-        .bp-radio-inner::after {
-            transform: rotate(45deg) scaleY(1);
-        }
-    }
-
-    input[type="radio"] {
-        opacity: 0;
-        outline: none;
+      &::after {
         position: absolute;
-        margin: 0;
-        width: 0;
-        height: 0;
-        z-index: -1;
+        left: 50%;
+        top: 50%;
+        width: 4px;
+        height: 4px;
+        margin-left: -2px;
+        margin-top: -2px;
+        content: "";
+        // background-color: @gary-0;
+        border-radius: 50%;
+        box-sizing: content-box;
+      }
     }
+  }
+
+  .bp-radio-inner-text {
+    color: @gary-6;
+  }
+
+  // 选中后样式
+  .checked {
+    .bp-radio-inner {
+      background-color: @gary-3 ;
+      border-color: @gary-4;
+    }
+
+    .bp-radio-inner::after {
+      transform: rotate(45deg) scaleY(1);
+    }
+  }
+
+  input[type="radio"] {
+    opacity: 0;
+    outline: none;
+    position: absolute;
+    margin: 0;
+    width: 0;
+    height: 0;
+    z-index: -1;
+  }
 }
