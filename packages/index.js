@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-11 10:30:29
  * @Last Modified by: Sam
- * @Last Modified time: 2021-04-19 15:06:26
+ * @Last Modified time: 2021-06-15 08:54:04
  */
 // 导入组件
 import bpButton from './bp-button';
@@ -24,7 +24,9 @@ import bpDropdown from './bp-dropdown';
 import bpAlert from './bp-alert';
 import bpCheckbox from './bp-checkbox';
 import bpTable from './bp-table';
-// import bpRadio from './bp-radio';
+import bpButtongroup from './bp-buttongroup';
+import bpPageination from './bp-pageination';
+import bpRadio from './bp-radio';
 import bpSwitch from './bp-switch';
 
 const components = [
@@ -46,8 +48,10 @@ const components = [
   bpDropdown,
   bpAlert,
   bpTable,
-  // bpRadio,
+  bpRadio,
   bpSwitch,
+  bpButtongroup,
+  bpPageination
 ];
 
 // install 方法，接收 Vue 作为参数。如果使用 use 注册插件，则所有的组件都将被注册
@@ -89,11 +93,13 @@ export default {
   bpPopconfirm,
   bpTag,
   bpDropdown,
-  // bpRadio,
+  bpRadio,
   bpSwitch,
   bpBadge,
   bpRow,
   bpCol,
+  bpButtongroup,
+  bpPageination
 }
 export {
   message
