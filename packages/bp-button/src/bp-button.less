@@ -1,19 +1,15 @@
-/*
+/**
  * @Author: Sam
- * @Date: 2019-12-16 11:05:47
- * @Last Modified by: Sam
- * @Last Modified time: 2021-06-15 09:58:01
+ * @Date: 2021-10-20 13:44:26
+ * @LastModifiedBy:   Sam
+ * @LastModifiedTime: 2021-10-20 13:44:26
  */
 
-@radius: 4px;
-@largeHeight: 46px;
-@normalHeight: 34px;
-@smallHeight: 24px;
-@miniHeight: 18px;
-
 .bp-button-inner {
-  display: inline-block;
-  line-height: 2;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
   cursor: pointer;
   outline: none;
   white-space: nowrap;
@@ -66,16 +62,16 @@ a {
 .bp-button {
   position: relative;
   display: inline-block;
-  vertical-align: middle;
   line-height: 1;
 }
 
 .bp-icon {
-  line-height: 1;
+  line-height: 2;
 
   .bp-icon-inner {
     vertical-align: middle;
-    line-height: 2;
+    // line-height: 2;
+    font-size: 12px;
     font-style: normal;
     font-weight: 400;
     font-variant: normal;
@@ -89,6 +85,8 @@ a {
   line-height: 1;
 
   .btn-text-inner-i {
+    position: relative;
+    top: -1px;
     line-height: 1;
     vertical-align: middle;
     margin-right: 4px;
@@ -97,50 +95,50 @@ a {
 
 // 按钮尺寸
 .btn-size-large {
-  height: @largeHeight;
+  height: @largeHeight + 2;
 
   .bp-icon-inner {
     padding: 0 12px;
-    font-size: 20px;
+    font-size: 13px;
   }
 
   .btn-text-inner {
     padding: 0 18px;
-    font-size: 16px;
+    font-size: 13px;
   }
 }
 
 .btn-size-normal {
-  height: @normalHeight;
+  height: @normalHeight + 2;
 
   .bp-icon-inner {
     padding: 0 8px;
-    font-size: 16px;
+     font-size: 14px;
   }
 
   .btn-text-inner {
     padding: 0 16px;
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
 .btn-size-small {
-  height: @smallHeight;
+  height: @smallHeight + 2;
   line-height: 1;
 
   .bp-icon-inner {
     padding: 0 4px;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .btn-text-inner {
     padding: 0 14px;
-    font-size: 14px;
+    font-size: 13px;
   }
 }
 
 .btn-size-mini {
-  height: @miniHeight;
+  height: @miniHeight + 2;
   line-height: 1;
 
   .bp-icon-inner {
@@ -168,9 +166,24 @@ button:disabled,
 // 文字按钮
 .btn-text {
   font-size: inherit;
-  color: @primary-3  !important;
   cursor: pointer;
   transition: color .2s ease;
+}
+
+.btn-theme-primary {
+  color: @primary-3  !important;
+}
+
+.btn-theme-success {
+  color: @success-3  !important;
+}
+
+.btn-theme-warning {
+  color: @warning-3  !important;
+}
+
+.btn-theme-danger {
+  color: @danger-3  !important;
 }
 
 // 默认按钮
@@ -184,14 +197,16 @@ button:disabled,
   .default-style;
 
   &:hover {
-    border: 1px solid @gary-5;
+    border: 1px solid @primary-3;
     color: @primary-3;
     background: @primary-1;
+    opacity: 1;
   }
 
   &:active {
     border: 1px solid @primary-3;
     background: @primary-1;
+    opacity: .8;
   }
 }
 
@@ -228,13 +243,13 @@ button:disabled,
   .primary-style;
 
   &:hover {
-    border: 1px solid @primary-4;
-    background: @primary-4;
+    opacity: .8;
   }
 
   &:active {
     border: 1px solid @primary-3;
     background: @primary-3;
+    opacity: 1;
   }
 }
 
@@ -249,15 +264,17 @@ button:disabled,
   .primary-plain-style;
 
   &:hover {
-    border: 1px solid @primary-4;
-    background: @primary-4;
+    border: 1px solid @primary-3;
+    background: @primary-3;
     color: @gary-0;
+    opacity: 1;
   }
 
   &:active {
     border: 1px solid @primary-3;
     background: @primary-3;
     color: @gary-0;
+    opacity: .8;
   }
 }
 
@@ -272,13 +289,13 @@ button:disabled,
   .success-style;
 
   &:hover {
-    border: 1px solid @success-4;
-    background: @success-4;
+    opacity: .8;
   }
 
   &:active {
     border: 1px solid @success-3;
     background: @success-3;
+    opacity: 1;
   }
 }
 
@@ -293,15 +310,17 @@ button:disabled,
   .success-plain-style;
 
   &:hover {
-    border: 1px solid @success-4;
-    background: @success-4;
-    color: @gary-0;
-  }
-
-  &:active {
     border: 1px solid @success-3;
     background: @success-3;
     color: @gary-0;
+    opacity: 1;
+  }
+
+  &:active {
+    border: 1px solid @success-2;
+    background: @success-2;
+    color: @gary-0;
+    opacity: .8;
   }
 }
 
@@ -316,13 +335,13 @@ button:disabled,
   .warning-style;
 
   &:hover {
-    border: 1px solid @warning-4;
-    background: @warning-4;
+    opacity: .8;
   }
 
   &:active {
     border: 1px solid @warning-3;
     background: @warning-3;
+    opacity: 1;
   }
 }
 
@@ -337,15 +356,17 @@ button:disabled,
   .warning-plain-style;
 
   &:hover {
-    border: 1px solid @warning-4;
-    background: @warning-4;
+    border: 1px solid @warning-3;
+    background: @warning-3;
     color: @gary-0;
+    opacity: 1;
   }
 
   &:active {
     border: 1px solid @warning-3;
     background: @warning-3;
     color: @gary-0;
+    opacity: .8;
   }
 }
 
@@ -360,13 +381,13 @@ button:disabled,
   .danger-style;
 
   &:hover {
-    border: 1px solid @danger-4;
-    background: @danger-4;
+    opacity: .8;
   }
 
   &:active {
-    border: 1px solid @danger-3;
-    background: @danger-3;
+    border: 1px solid @danger-2;
+    background: @danger-2;
+    opacity: 1;
   }
 }
 
@@ -381,15 +402,17 @@ button:disabled,
   .danger-plain-style;
 
   &:hover {
-    border: 1px solid @danger-4;
-    background: @danger-4;
+    border: 1px solid @danger-3;
+    background: @danger-3;
     color: @gary-0;
+    opacity: 1;
   }
 
   &:active {
     border: 1px solid @danger-3;
     background: @danger-3;
     color: @gary-0;
+    opacity: .8;
   }
 }
 

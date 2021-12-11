@@ -1,13 +1,7 @@
-/*
- * @Author: Sam
- * @Date: 2021-06-03 08:54:09
- * @Last Modified by: Sam
- * @Last Modified time: 2021-06-04 08:41:17
- */
 <template>
   <transition name="option-slide">
     <div class="select-item-box scro scro-1" v-show="modelValue">
-      <div class="option-arrow"></div>
+      <div class="option-arrow" :style="`left:${optionArrowLeft}%`"></div>
       <div class="bp-dropdown-option-container">
         <div
           class="bp-dropdown-option"
@@ -36,6 +30,7 @@ export default {
     source: { type: Array, default: () => [] },
     label: { type: String, default: "label" }, // 展示文本字段
     value: { type: String, default: "value" }, // 选项值字段
+    optionArrowLeft: { type: Number, default: 24 }, // 菜单箭头向左的偏移量
   },
   emits: ["click"],
   setup(props, { emit }) {

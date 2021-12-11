@@ -1,20 +1,19 @@
-/*
- * @Author: Sam
- * @Date: 2021-04-12 11:05:01
- * @Last Modified by: Sam
- * @Last Modified time: 2021-06-04 09:25:37
- */
 <template>
   <div class="bp-dropdown" v-click-outside="onClose" @mouseleave="onMouseLeave">
     <div class="bp-dropdown-inner" @click="onClick" @mouseenter="onMouseEnter">
       <p class="bp-dropdown-inner-text">
         <slot></slot>
-        <i class="ri-arrow-down-s-line" :class="{ open: optionShow }"></i>
+        <i
+          class="ri-arrow-down-s-line"
+          v-if="!hideArrow"
+          :class="{ open: optionShow }"
+        ></i>
       </p>
     </div>
     <!-- 选项 -->
     <bp-dropdown-option
       v-model="optionShow"
+      :optionArrowLeft="optionArrowLeft"
       :source="options"
       :label="label"
       :value="value"
@@ -35,11 +34,12 @@ export default {
   directives: { clickOutside },
   components: { bpDropdownOption },
   props: {
-    theme: { type: String, default: "default" },
     options: { type: Array, default: [] }, // 菜单
     label: { type: String, default: "label" }, // 展示文本字段
     value: { type: String, default: "value" }, // 选项值字段
     hideOnClick: { type: Boolean, default: true }, // 是否在点击菜单项后收起菜单
+    hideArrow: { type: Boolean, default: false }, // 是否隐藏箭头
+    optionArrowLeft: { type: Number, default: 24 }, // 菜单箭头向左的偏移量
     trigger: {
       type: String,
       default: "click",

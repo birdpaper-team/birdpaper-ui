@@ -1,9 +1,3 @@
-/*
- * @Author: Sam
- * @Date: 2020-04-01 15:06:27
- * @Last Modified by: Sam
- * @Last Modified time: 2021-04-29 14:50:27
- */
 <template>
   <bp-mask v-model="maskShow"></bp-mask>
   <transition name="bp-dialog-fade">
@@ -19,7 +13,7 @@
           <slot name="header">
             <!-- 标题 -->
             <div class="title">
-              <p v-text="title"></p>
+              <p class="title-content" v-text="title"></p>
             </div>
             <!-- 操作项 -->
             <div class="option">

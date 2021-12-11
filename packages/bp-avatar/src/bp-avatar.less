@@ -2,120 +2,130 @@
  * @Author: Sam
  * @Date: 2020-04-11 18:37:11
  * @Last Modified by: Sam
- * @Last Modified time: 2021-01-20 14:31:24
+ * @Last Modified time: 2021-09-26 13:55:20
  */
 
 .bp-avatar {
-    background-color: @gary-5;
-    text-align: center;
-    display: inline-block;
-    box-sizing: border-box;
-    overflow: hidden;
-    -webkit-appearance: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+  background-color: @gary-5;
+  text-align: center;
+  display: inline-block;
+  box-sizing: border-box;
+  overflow: hidden;
+  -webkit-appearance: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
-    span {
-        display: block;
-        color: @gary-0;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+  span {
+    // display: block;
+    color: @gary-0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+
+    i {
+      line-height: 1;
     }
+  }
 }
 
 .bp-avatar-circle {
-    border-radius: 50%;
+  border-radius: 50%;
 }
 
 .bp-avatar-square {
-    border-radius: 12%;
+  border-radius: 12%;
 }
 
 // 大型尺寸
 .bp-avatar-large {
+  width: 58px;
+  height: 58px;
+  line-height: 58px;
+
+  span {
+    width: 58px;
+    font-size: 16px;
+  }
+
+  .avatar-icon {
+    font-size: 24px;
+  }
+
+  img {
     width: 58px;
     height: 58px;
-    line-height: 58px;
-
-    span {
-        width: 58px;
-        font-size: 16px;
-    }
-
-    .avatar-icon {
-        font-size: 24px;
-    }
-
-    img {
-        width: 58px;
-        height: 58px;
-    }
+  }
 }
 
 // 正常尺寸
 .bp-avatar-normal {
+  width: 42px;
+  height: 42px;
+  line-height: 42px;
+
+  span {
     width: 42px;
     height: 42px;
-    line-height: 42px;
+    font-size: 14px;
+  }
 
-    span {
-        width: 42px;
-        font-size: 14px;
-    }
+  .avatar-icon {
+    font-size: 18px;
+  }
 
-    .avatar-icon {
-        font-size: 18px;
-    }
-
-    img {
-        width: 42px;
-        height: 42px;
-    }
+  img {
+    width: 42px;
+    height: 42px;
+  }
 }
 
 // 小型尺寸
 .bp-avatar-small {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+
+  span {
     width: 32px;
     height: 32px;
-    line-height: 32px;
+    font-size: 14px;
+  }
 
-    span {
-        width: 32px;
-        font-size: 14px;
-    }
+  .avatar-icon {
+    font-size: 16px;
+  }
 
-    .avatar-icon {
-        font-size: 16px;
-    }
-
-    img {
-        width: 32px;
-        height: 32px;
-    }
+  img {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 // 超小尺寸
 .bp-avatar-mini {
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+
+  span {
+    width: 24px;
+    font-size: 10px;
+  }
+
+  .avatar-icon {
+    font-size: 14px;
+  }
+
+  img {
     width: 24px;
     height: 24px;
-    line-height: 24px;
-
-    span {
-        width: 24px;
-        font-size: 10px;
-    }
-
-    .avatar-icon {
-        font-size: 14px;
-    }
-
-    img {
-        width: 24px;
-        height: 24px;
-    }
+  }
 }

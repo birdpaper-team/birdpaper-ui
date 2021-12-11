@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-11 10:27:23
  * @Last Modified by: Sam
- * @Last Modified time: 2021-06-12 16:03:48
+ * @Last Modified time: 2021-10-30 06:35:26
  */
 
 /**
@@ -31,7 +31,7 @@ export const trim = (str) => (str || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '
  * @param {String} str
  * @returns {Object} null
  */
- export const strToObject = (str) => {
+export const strToObject = (str) => {
   var finalObj = null;
   try {
     finalObj = JSON.parse(str);
@@ -117,4 +117,8 @@ export const off = function (element, event, handler, useCapture = false) {
   if (element && event && handler) {
     element.removeEventListener(event, handler, useCapture);
   }
+}
+
+export const firstToUpper = (str) => {
+  return str.trim().toLowerCase().replace(str[0], str[0].toUpperCase());
 }

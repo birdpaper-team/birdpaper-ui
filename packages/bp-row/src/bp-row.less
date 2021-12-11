@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2019-12-22 10:31:34
  * @Last Modified by: Sam
- * @Last Modified time: 2021-05-03 20:36:01
+ * @Last Modified time: 2021-09-15 09:27:49
  */
 .bp-row {
   position: relative;
@@ -52,9 +52,39 @@
 .bp-row-flex-align-top {
   align-items: flex-start;
 }
+
 .bp-row-flex-align-middle {
   align-items: center;
 }
+
 .bp-row-flex-align-bottom {
   align-items: flex-end;
+}
+
+.bp-row-hide-gutter-xl>.bp-col {
+  @media only screen and (max-width:1920px) {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.bp-row-hide-gutter-lg>.bp-col {
+  @media only screen and (max-width:1200px) {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.bp-row-hide-gutter-md>.bp-col {
+  @media only screen and (max-width:992px) {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+.bp-row-hide-gutter-sm>.bp-col {
+  @media only screen and (max-width:760px) {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
 }

@@ -1,15 +1,9 @@
-/*
+/**
  * @Author: Sam
  * @Date: 2021-04-13 17:04:41
- * @Last Modified by: Sam
- * @Last Modified time: 2021-06-03 11:00:23
+ * @LastModifiedBy:   Sam
+ * @LastModifiedTime: 2021-11-03 15:14:15
  */
-
-@radius: 4px;
-@largeHeight: 46px;
-@normalHeight: 34px;
-@smallHeight: 24px;
-@miniHeight: 18px;
 
 .bp-dropdown {
   .no-select;
@@ -22,7 +16,7 @@
 
   .bp-dropdown-inner {
     display: inline-block;
-    padding: 0 12px;
+    // padding: 0 12px;
     height: @normalHeight;
 
     .bp-dropdown-inner-text {
@@ -36,7 +30,7 @@
 
       .ri-arrow-down-s-line {
         position: relative;
-        left: -4px;
+        left: 4px;
         display: inline-block;
         color: @gary-5;
         font-size: 16px;
@@ -56,13 +50,13 @@
 
   .select-item-box {
     position: absolute;
+    right: 0;
     width: auto;
     margin: 0 auto;
     z-index: 500;
 
     .option-arrow {
       position: relative;
-      left: 50%;
       bottom: -1px;
       width: 0;
       height: 0;
@@ -108,13 +102,13 @@
         }
 
         .item {
-          padding: 0 15px;
-          font-size: 14px;
+          padding: 2px 15px;
           color: @gary-7;
           font-size: inherit;
 
           .item-content {
             display: block;
+            font-size: 14px;
             max-width: 120px;
             line-height: @normalHeight;
             margin: 0;

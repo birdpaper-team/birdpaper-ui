@@ -1,9 +1,10 @@
-/*
+/**
  * @Author: Sam
- * @Date: 2021-03-05 09:40:26
- * @Last Modified by: Sam
- * @Last Modified time: 2021-04-16 14:42:36
+ * @Date: 2021-12-01 20:26:36
+ * @LastModifiedBy:   Sam
+ * @LastModifiedTime: 2021-12-01 20:26:36
  */
+
 .bp-spin {
   position: absolute;
   top: 0;
@@ -26,16 +27,21 @@
   }
 
   // 加载
-  .bp-icon-loading {
-    margin-right: 8px;
+  .bp-icon-spin {
     box-sizing: border-box;
     vertical-align: middle;
 
-    i {
+    .ri-loader-fill {
+      font-size: 20px;
       display: inline-block;
       animation: rotating .8s linear infinite;
       -webkit-animation: rotating .8s linear infinite;
     }
+  }
+
+  .bp-spon-text {
+    font-size: 14px;
+    letter-spacing: .2px;
   }
 
   @keyframes rotating {
