@@ -1,8 +1,8 @@
 {
   "name": "birdpaper-ui",
-  "version": "0.9.5",
-  "scripts": {
-  },
+  "version": "1.0.0-beat",
+  "description": "提供基于Vue3的UI组件库",
+  "scripts": {},
   "dependencies": {
     "vue": "^3.2.11"
   },
