@@ -1,5 +1,3 @@
-/* * @Author: Sam * @Date: 2021-06-11 20:33:52 * @Last Modified by: Sam * @Last
-Modified time: 2021-06-11 20:35:06 */
 <template>
   <div
     :id="id"
@@ -9,11 +7,11 @@ Modified time: 2021-06-11 20:35:06 */
     v-cloak
   >
     <!-- 占位区域 -->
-    <div class="bp-image-placeholder" v-if="loading">
+    <div class="bp-image-placeholder bp-image-inner" v-if="loading">
       <slot name="placeholder">加载中</slot>
     </div>
     <!-- 加载失败 -->
-    <div class="bp-image-error" v-else-if="isLoadError">
+    <div class="bp-image-error bp-image-inner" v-else-if="isLoadError">
       <slot name="error">加载失败</slot>
     </div>
     <!-- 图片 -->
@@ -41,8 +39,8 @@ import {
 export default {
   name: "bp-image",
   props: {
-    width: { type: [Number, Object, String], default: null }, // 容器宽度
-    height: { type: [Number, Object, String], default: null }, // 容器高度
+    width: { type: [Number, String], default: null }, // 容器宽度
+    height: { type: [Number, String], default: null }, // 容器高度
     src: { type: String, default: "" }, // 图片资源地址
     fit: { type: String, default: "cover" }, // 图片适应类型
     lazy: { type: Boolean, default: false }, // 是否开启懒加载
@@ -52,11 +50,7 @@ export default {
   emits: ["load", "error"],
   setup(props, { emit }) {
     const state = reactive({
-      id:
-        "bp-image-" +
-        Math.random()
-          .toString(36)
-          .substr(2), // 组件 ID
+      id: "bp-image-" + Math.random().toString(36).substr(2), // 组件 ID
       isLoadError: false, // 是否加载失败
       loading: true, // 加载状态
       imgWidth: 0,
@@ -72,7 +66,7 @@ export default {
       state.loading = true;
       state.isLoadError = false;
 
-      const image = new Image();
+      var image = new Image();
       image.onload = (e) => onComplete(e, image);
       image.onerror = () => onError(image);
       image.src = props.src;

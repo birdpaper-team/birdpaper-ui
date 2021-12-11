@@ -1,79 +1,89 @@
 <p align="center">
-  <a href="https://ui.birdpaper.com">
-    <img src="https://cos.birdpaper.com/birdpaper-ui/logo/birdpaperui%2Bvue3.png"/>
+  <a href="https://www.birdpaper.design">
+    <img class="logo" src="https://birdpaper-1251999712.file.myqcloud.com/design/assets/birdpaperui%2Bvue3-min.png"/>
   </a>
 </p>
 
-<p align="center">birdpaper-ui，A Vue3 UI Library</p>
+<p align="center">birdpaper-ui is a library that provides UI components based on Vue3.</p>
 
 <p align="center">
   <a href="https://gitee.com/liluanhui/birdpaper-ui.git" target="_blank">
-    <img src="https://gitee.com/liluanhui/birdpaper-ui/badge/star.svg?theme=dark">
+    <img class="tag" src="https://gitee.com/liluanhui/birdpaper-ui/badge/star.svg?theme=dark">
   </a>
   <a href="https://www.npmjs.com/package/birdpaper-ui" target="_blank">
-     <img src="https://img.shields.io/npm/v/birdpaper-ui.svg?style=badge"/>
+     <img class="tag" src="https://img.shields.io/npm/v/birdpaper-ui.svg?style=badge"/>
   </a>
   <a href="https://npmcharts.com/compare/birdpaper-ui?minimal=true">
-    <img src="http://img.shields.io/npm/dm/birdpaper-ui.svg"/>
+    <img class="tag" src="http://img.shields.io/npm/dm/birdpaper-ui.svg"/>
   </a>
    <a href="https://ui.birdpaper.com">
-    <img src="https://img.shields.io/badge/platform-web-61B5FF.svg"/>
+    <img class="tag" src="https://img.shields.io/badge/platform-web-61B5FF.svg"/>
   </a>
    <a href="https://ui.birdpaper.com">
-    <img src="https://img.shields.io/badge/license-MIT-red.svg"/>
+    <img class="tag" src="https://img.shields.io/badge/license-MIT-red.svg"/>
   </a>
 </p>
 
+
 English | [简体中文](./README-CN.md)
+
+
+<h2>Version</h2>
+
+- The latest:<img class="li-img" src="https://img.shields.io/npm/v/birdpaper-ui.svg?style=badge"/>
+
+For more version information, see [update log](https://www.birdpaper.design/components/version_c) and [version specification](https://www.birdpaper.design/design/version_m)
 
 ## Features
 
-- 🛠 Quickly learning with Vue.js components
-- 🎉 Based on Vue3 Composition API
-- 🐬 Conformist interaction and visual style
+- 🛠 Provides Vue3 components for personal maintenance
+- 🎉 Composition API based on Vue3
+- 🐬 proper interaction and visual style
 
-## Document
+## Use npm or yarn
 
-You can find more components, API documentation, and project updates on the [https://ui.birdpaper.com](https://ui.birdpaper.com/)
-
-You can also follow the project on the [Yuque](https://www.yuque.com/birdpaper/)
-
-The documents will be improved gradually. Thank you for your understanding...
-
-## Using npm or yarn
-
-I recommend you use the npm or yarn installation to incorporate Webpack packaging into your project
+You are advised to use NPM or YARN to better integrate with the packaging tool.
 
 ```bash
-$ npm install birdpaper-ui
-```
-
-```bash
+$ npm i birdpaper-ui -S
 $ yarn add birdpaper-ui
 ```
-You can also use cnpm when your network is down
 
-```bash
-$ cnpm install birdpaper-ui
-```
+If the network is not good, cnpm is recommended
 
-## Use
+## Import
+
+Not only can you import the whole package in its entirety, but you can also load components on demand based on actual usage requirements.
+
+In `main.js` write:
 
 ```javascript
-import birdpaperUI from "birdpaper-ui";
-import "birdpaper-ui/lib/birdpaper-ui.css";
+import birdpaperUI from "birdpaper-ui/packages";
+import "birdpaper-ui/packages/style/index.less";
 
-const app = createApp(App);
-
-app.use(birdpaperUI).mount("#app");
+const app = createApp(App)
+app.use(birdpaperUI).mount("#app")
 ```
 
+## Documents & Community
+
+Since this is a project developed and maintained by the author personally, there are usually many shortcomings in the document, such as imperfections and poor experience, which will be repaired and improved in future iterations. Please kindly understand. In the future, Little Paper Crane will release its own technical community, which will provide a friendly platform to support the growth of the project. Wait and see~
+
+At present, you can be [Birdpaper-Design website](https://www.birdpaper.design) for more components, API documentation, Can also be on the [Yuque](https://www.yuque.com/birdpaper.design) and pay attention to the latest dynamic feedback problem.
+
+> If you have a Bug or something that annoys you, Can [Gitee Issue](https://gitee.com/liluanhui/birdpaper-ui/issues/new) or [Github Issue](https://gitee.com/liluanhui/birdpaper-ui/issues/new) to feedback Issue.
+
 ## Link
-- [The official documentation](https://ui.birdpaper.com/)
-- [Yuque](https://www.yuque.com/birdpaper/)
+
+- [Component](https://www.birdpaper.design/components/install_m)
+- [Gitee](https://gitee.com/liluanhui/birdpaper-ui)
+- [Github](https://github.com/liluanhui/birdpaper-ui)
+- [Npm](https://www.npmjs.com/package/birdpaper-ui)
+- [Yuque](https://www.yuque.com/birdpaper.design)
 - [Vue](https://v3.cn.vuejs.org)
 
-## Donation
-birdpaper-ui is a project developed and maintained by an individual under the MIT open source license. You can use it for free. If you are an individual user, you can support the project by donating, and your donation history and nickname will be publicly displayed. If you run a business or organization, your giving will make business sense.
+## Donate
 
-[Donation Link](https://ui.birdpaper.com/donate/index)
+birdpaper-ui is developed and maintained by individuals under an MIT open Source license. You can use birdpaper-UI for free and receive donations to better support the development of the project. If you are an individual, you can support the growth of the project by donating, and your donation history and nickname will be displayed publicly. If you are the operator of a business or organization, your donation will make business sense.
+
+[Donate](https://www.birdpaper.design/donate)

@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-07-13 15:21:48
  * @Last Modified by: Sam
- * @Last Modified time: 2021-01-20 14:37:57
+ * @Last Modified time: 2021-07-25 15:36:15
  */
 <template>
   <div class="bp-switch">

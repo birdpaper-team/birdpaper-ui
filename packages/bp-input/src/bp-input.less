@@ -1,14 +1,9 @@
-/*
+/**
  * @Author: Sam
  * @Date: 2019-11-07 14:07:32
- * @Last Modified by: Sam
- * @Last Modified time: 2021-05-29 21:20:11
+ * @LastModifiedBy:   Sam
+ * @LastModifiedTime: 2021-11-03 15:11:09
  */
-@radius: 4px;
-@largeHeight: 46px;
-@normalHeight: 34px;
-@smallHeight: 24px;
-@miniHeight: 18px;
 
 .bp-uninput {
   &:disabled {
@@ -23,11 +18,13 @@
 }
 
 .bp-input {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   max-width: 100%;
   min-height: @miniHeight;
-  position: relative;
-  display: inline-block;
   border-radius: @radius;
   border: 1px solid @gary-4;
   transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
@@ -41,137 +38,70 @@
 
     width: 100%;
     -webkit-appearance: none;
-    background-color: @gary-0;
+    //background-color: @gary-0;
     background-image: none;
     box-sizing: border-box;
     font-weight: 400;
     color: @gary-7;
-    border-radius: @radius;
+    border-top-left-radius: @radius;
+    border-bottom-left-radius: @radius;
     border: none;
-    display: inline-block;
-    padding: 0 30px 0 15px;
+    padding-left: 8px;
   }
 
-  // 输入框后置内容
   .bp-input-right {
-    position: absolute;
-    right: 0;
-    top: 0;
-    text-align: center;
-    background-color: @gary-0;
-    border-radius: @radius;
-    .no-select;
+    min-width: 50px;
+    line-height: 1;
+    color: @gary-6;
 
-    // 后置按钮需要特殊的样式定制，以符合 Input 风格
-    .bp-button {
-      top: -1px;
-
-      button {
-        border: 1px solid @gary-2;
-        border-radius: 0 @radius @radius 0;
-        padding: 0 15px !important;
-        color: @gary-6;
-        background: @gary-2;
-
-        .bp-icon,
-        .bp-icon-inner {
-          padding: 0 !important;
-        }
-
-        .btn-text-inner {
-          display: block;
-          width: 100%;
-          padding: 0 !important;
-        }
-      }
-    }
-
-    // 后置文本的公用 inner 样式
-    .bp-input-right-common-inner {
-      display: block;
-      color: @gary-6;
-      border: 1px solid @gary-0;
-      border-radius: 0 @radius @radius 0;
-
-
-      i,
-      span {
-        padding: 0 15px;
-      }
-
-      .bp-button;
-    }
-
-    .input-right-common-inner-hover {
-      .bp-button {
-        button {
-          color: @gary-7;
-        }
-      }
-    }
-
-    .bp-input-suffix {
-      .bp-input-suffix-inner {
-        .bp-input-right-common-inner;
-
-        // suffix 下的按钮不需要边框和背景色
-        .bp-button {
-          button {
-            border: 1px solid @gary-0;
-            background: @gary-0;
-          }
-        }
-
-        .ri-close-circle-fill,
-        .ri-eye-fill,
-        .ri-eye-line {
-          position: relative;
-          top: -1px;
-          display: block;
-          cursor: pointer;
-
-          &:hover {
-            color: @gary-7;
-          }
-        }
-      }
-
-      &:hover {
-        .bp-input-suffix-inner {
-          .input-right-common-inner-hover;
-        }
-      }
-    }
-
-    // append 下需要额外定制背景色和边框
+    .bp-input-suffix,
     .bp-input-append {
-      border-left: 1px solid @gary-4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      width: 100%;
+      height: 100%;
 
-      .bp-input-append-inner {
-        .bp-input-right-common-inner;
+      .bp-button {
+        position: relative;
+        right: -1px;
+        width: 100%;
 
-        background-color: @gary-2;
-        border: 1px solid @gary-2;
+        .bp-button-inner {
+          width: 100%;
+          border-bottom-left-radius: 0;
+          border-top-left-radius: 0;
+        }
       }
+    }
 
-      &:hover {
-        .bp-input-append-inner {
-          .input-right-common-inner-hover;
+    .bp-input-append {
+      width: calc(100% - 1px);
+      border-left: 1px solid @gary-4;
+      //background-color: @gary-2;
+      border-top-right-radius: @radius;
+      border-bottom-right-radius: @radius;
+
+      .bp-button {
+        .bp-button-inner {
+          background-color: @gary-2;
+          border-left: none;
         }
       }
     }
   }
 
-  // 多行文本
   .bp-textarea-inner {
     .bp-input-inner;
 
     max-width: 100%;
     min-width: 100%;
     min-height: 60px;
-    font-size: inherit;
+    border-radius: @radius;
+    font-size: 14px;
     display: block;
-    padding: 10px 15px;
+    padding: 10px;
   }
 
   .resize-none {
@@ -186,32 +116,20 @@
   }
 }
 
-// 输入框尺寸
 .bp-input-large {
   .bp-input-inner {
     height: @largeHeight;
-    font-size: 16px;
+    font-size: inherit;
   }
 
   .bp-input-right {
     height: @largeHeight;
-    line-height: @largeHeight;
 
-    .bp-input-suffix-inner,
-    .bp-input-append-inner {
-      height: @largeHeight - 2;
-
-      button {
-        height: @largeHeight;
-      }
-
-      i,
-      span,
-      .bp-icon,
-      .bp-icon-inner {
-        font-size: 18px;
-      }
-    }
+    //.bp-button {
+    //  .bp-button-inner {
+    //    height: @largeHeight + 2;
+    //  }
+    //}
   }
 }
 
@@ -223,79 +141,28 @@
 
   .bp-input-right {
     height: @normalHeight;
-    line-height: @normalHeight;
-
-    .bp-input-suffix-inner,
-    .bp-input-append-inner {
-      height: @normalHeight - 2;
-
-      button {
-        height: @normalHeight;
-      }
-
-      i,
-      span,
-      .bp-icon,
-      .bp-icon-inner {
-        font-size: inherit;
-      }
-    }
   }
 }
 
 .bp-input-small {
   .bp-input-inner {
     height: @smallHeight;
-    font-size: 12px;
+    font-size: inherit;
   }
 
   .bp-input-right {
     height: @smallHeight;
-    line-height: @smallHeight;
-
-    .bp-input-suffix-inner,
-    .bp-input-append-inner {
-      height: @smallHeight - 2;
-
-      button {
-        height: @smallHeight;
-      }
-
-      i,
-      span,
-      .bp-icon,
-      .bp-icon-inner {
-        font-size: 12px;
-      }
-    }
   }
 }
 
 .bp-input-mini {
   .bp-input-inner {
     height: @miniHeight;
-    font-size: 12px;
+    font-size: inherit;
   }
 
   .bp-input-right {
     height: @miniHeight;
-    line-height: @miniHeight;
-
-    .bp-input-suffix-inner,
-    .bp-input-append-inner {
-      height: @miniHeight - 2;
-
-      button {
-        height: @miniHeight;
-      }
-
-      i,
-      span,
-      .bp-icon,
-      .bp-icon-inner {
-        font-size: 12px;
-      }
-    }
   }
 }
 
@@ -341,7 +208,6 @@
 }
 
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0px 1000px @gary-0 inset;
   border: 1px solid @gary-0  !important;
 }
 

@@ -1,9 +1,3 @@
-/*
- * @Author: Sam
- * @Date: 2019-11-07 14:05:54
- * @Last Modified by: Sam
- * @Last Modified time: 2021-06-01 08:55:29
- */
 <template>
   <div
     :class="[inputClass, { 'focus-border': isFocus }]"
@@ -103,7 +97,7 @@ export default {
     maxLength: { type: Number, default: null }, // 最大输入长度
     autosize: { type: Boolean, default: false }, // 多行文本下高度是否自动撑开
     resize: { type: Boolean, default: false }, // 多行文本下是否允许拖动
-    rows: { type: Number, default: 2 }, // 多行文本的行数
+    rows: { type: Number, default: 3 }, // 多行文本的行数
     suffixIcon: { type: String, default: "" }, // 输入框尾部图标
     type: {
       type: String,

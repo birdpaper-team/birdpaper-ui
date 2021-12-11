@@ -1,11 +1,6 @@
-/*
- * @Author: Sam
- * @Date: 2020-05-25 13:40:52
- * @Last Modified by: Sam
- * @Last Modified time: 2021-05-28 11:17:07
- */
 <template>
   <div class="bp-table">
+    <bp-spin :spinning="loading"></bp-spin>
     <div class="bp-table-inner">
       <table>
         <!-- 表头部分 -->
@@ -45,6 +40,7 @@
                   <slot
                     :name="v.scopedSlots.customRender"
                     :row="item"
+                    :index="index"
                     :data="item[v.key]"
                   ></slot>
                 </template>
@@ -74,6 +70,10 @@ export default {
       default: () => {
         return [];
       },
+    },
+    loading: {
+      type: Boolean,
+      default: false,
     },
   },
 };

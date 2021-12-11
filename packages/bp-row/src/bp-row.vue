@@ -1,9 +1,3 @@
-/*
- * @Author: Sam
- * @Date: 2019-12-22 10:31:59
- * @Last Modified by: Sam
- * @Last Modified time: 2021-05-03 20:45:53
- */
 <template>
   <div :class="clazzName" ref="row">
     <slot></slot>
@@ -11,11 +5,18 @@
 </template>
 
 <script>
-import { watch, onMounted, getCurrentInstance, computed } from "vue";
+import { onMounted, getCurrentInstance, computed } from "vue";
 export default {
   name: "bp-row",
   props: {
     gutter: { type: [Number, String], default: 0 }, // 分栏间隔
+    hideGutter: {
+      type: String,
+      default: "",
+      validator: function (value) {
+        return ["", "xs", "sm", "md", "lg", "xl"].indexOf(value) !== -1;
+      },
+    }, // 在对应的尺寸下隐藏间隔
     type: {
       type: String,
       default: "",
@@ -65,11 +66,15 @@ export default {
 
     const clazzName = computed(() => {
       const isFlex = props.type === "flex";
+      const isHideGutter = props.hideGutter !== "";
       const prefix = isFlex ? "bp-row-flex" : "bp-row";
       const name = [prefix];
-      if(isFlex){
-        name.push(`bp-row-flex-justify-${props.justify}`)
-        name.push(`bp-row-flex-align-${props.align}`)
+      if (isFlex) {
+        name.push(`bp-row-flex-justify-${props.justify}`);
+        name.push(`bp-row-flex-align-${props.align}`);
+      }
+      if (isHideGutter) {
+        name.push(`bp-row-hide-gutter-${props.hideGutter}`);
       }
       return name;
     });

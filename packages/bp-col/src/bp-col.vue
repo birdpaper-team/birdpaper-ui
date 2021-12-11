@@ -1,9 +1,3 @@
-/*
- * @Author: Sam
- * @Date: 2019-12-22 10:31:59
- * @Last Modified by: Sam
- * @Last Modified time: 2021-05-03 08:14:52
- */
 <template>
   <div :class="colClassName">
     <slot></slot>

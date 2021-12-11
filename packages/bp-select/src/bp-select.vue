@@ -1,9 +1,3 @@
-/*
- * @Author: Sam
- * @Date: 2020-01-28 16:52:14
- * @Last Modified by: Sam
- * @Last Modified time: 2021-04-13 17:39:31
- */
 <template>
   <div class="bp-select">
     <!-- 选择器层 -->
@@ -15,7 +9,7 @@
       v-click-outside="onClickOutside"
     >
       <!-- 占位文本 -->
-      <span v-show="select.label === ''">{{ placeholder }}</span>
+      <span v-show="!select.label">{{ placeholder }}</span>
       <span v-show="select.label !== ''" class="select-value">{{
         select.label
       }}</span>
@@ -66,7 +60,7 @@
 </template>
 
 <script>
-import { computed, reactive, toRefs, watch } from "vue";
+import { computed, reactive, toRefs, watch, ref } from "vue";
 import { clickOutside } from "../../utils/util.js";
 export default {
   name: "bp-select",
@@ -93,6 +87,7 @@ export default {
       },
     },
   },
+  emits: ["update:modelValue"],
   setup(props, { emit }) {
     const state = reactive({
       // 当前值和对应 label
@@ -105,21 +100,30 @@ export default {
       clearableIconShow: false, // 清空图标展示
     });
 
+    const labelList = ref({});
+
     const render = () => {
       for (let i = 0; i < props.optionList.length; i++) {
-        if (props.optionList[i][props.value] === props.modelValue) {
-          state.select.label = props.optionList[i][props.label];
-        }
+        labelList.value[props.optionList[i][props.value]] =
+          props.optionList[i][props.label];
       }
     };
 
-    render();
+    watch(
+      () => props.modelValue,
+      () => {
+        state.select.label = labelList.value[props.modelValue];
+      },
+      { immediate: true }
+    );
 
     watch(
       () => props.optionList,
       () => {
         render();
-      }
+        state.select.label = labelList.value[props.modelValue];
+      },
+      { immediate: true }
     );
 
     // 属性样式控制
@@ -174,7 +178,7 @@ export default {
     // 选项点击触发
     const handleOptionItemClick = (item) => {
       emit("update:modelValue", item[props.value]);
-      state.select.label = item[props.label];
+      // state.select.label = item[props.label];
       state.optionShow = false;
     };
 

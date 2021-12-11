@@ -1,16 +1,13 @@
-/*
- * @Author: Sam
- * @Date: 2021-03-05 09:37:44
- * @Last Modified by: Sam
- * @Last Modified time: 2021-04-16 14:43:57
- */
 <template>
   <transition name="bp-fade-in">
-    <div class="bp-spin" v-if="loading">
+    <div class="bp-spin" v-if="loading" :style="`border-radius:${radius}px`">
       <div class="bp-spin-main">
-        <span class="bp-icon-loading">
+        <span class="bp-icon-spin">
           <i class="ri-loader-fill"></i>
         </span>
+        <p class="bp-spon-text">
+          <slot></slot>
+        </p>
       </div>
     </div>
   </transition>
@@ -23,6 +20,7 @@ export default {
   props: {
     spinning: { type: Boolean, default: false },
     delay: { type: Number, default: 0 },
+    radius: { type: [Number, String], default: 0 },
   },
   setup(props) {
     const loading = ref(false);

@@ -1,0 +1,88 @@
+/**
+ * @Author: Sam
+ * @Date: 2021-10-20 08:22:10
+ * @LastModifiedBy:   Sam
+ * @LastModifiedTime: 2021-10-20 08:22:10
+ */
+
+
+.bp-form {
+  .bp-form-item {
+    min-height: 30px;
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    .bp-form-item-label {
+      position: relative;
+      top: 6px;
+      text-align: right;
+
+      .bp-form-item-label-text {
+        color: @gary-7;
+        opacity: .9;
+      }
+
+      .require-label::before {
+        content: "*";
+        color: @danger-3;
+        margin-right: 2px;
+      }
+    }
+
+    .bp-form-item-inner {
+      min-height: 30px;
+
+      p {
+        display: inline-block;
+        color: @gary-7;
+        line-height: 30px;
+        margin-right: 4px;
+      }
+
+      .bp-button {
+        &:not(:first-child) {
+          margin-left: 4px;
+        }
+
+        &:not(:last-child) {
+          margin-right: 4px;
+        }
+      }
+
+      .bp-buttongroup {
+        .bp-button {
+          &:not(:first-child) {
+            margin-left: -1px;
+          }
+
+          &:not(:last-child) {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.bp-form-inline {
+  .bp-form-item {
+    margin-right: 20px;
+    margin-bottom: 10px;
+    display: flex;
+    float: left;
+
+    .bp-form-item-label {
+      width: auto;
+      display: inline-block;
+      clear: both;
+    }
+
+    .bp-form-item-inner {
+      width: auto;
+      display: inline-block;
+      clear: both;
+    }
+  }
+}
