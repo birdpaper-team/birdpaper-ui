@@ -113,7 +113,7 @@ a {
 
   .bp-icon-inner {
     padding: 0 8px;
-     font-size: 14px;
+    font-size: 14px;
   }
 
   .btn-text-inner {
@@ -167,6 +167,13 @@ button:disabled,
 .btn-text {
   font-size: inherit;
   cursor: pointer;
+  transition: color .2s ease;
+}
+
+.btn-text-disabled {
+  opacity: .618;
+  cursor: no-drop;
+  pointer-events: none;
   transition: color .2s ease;
 }
 

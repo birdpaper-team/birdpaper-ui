@@ -56,11 +56,11 @@ $ yarn add birdpaper-ui
 在`main.js`中写入：
 
 ```javascript
-import birdpaperUI from "birdpaper-ui/packages";
-import "birdpaper-ui/packages/style/index.less";
+import BirdpaperUI from "birdpaper-ui"
+import "birdpaper-ui/dist/index.css"
 
 const app = createApp(App)
-app.use(birdpaperUI).mount("#app")
+app.use(BirdpaperUI).mount("#app")
 ```
 
 ## 文档&社区

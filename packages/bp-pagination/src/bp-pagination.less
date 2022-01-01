@@ -14,8 +14,8 @@
     float: left;
 
     p {
-      height: 32px;
-      line-height: 32px;
+      height: @normalHeight;
+      line-height: @normalHeight;
       margin: 0;
       color: @gary-7;
 
@@ -26,9 +26,9 @@
   }
 
   .bp-pagination-container {
-    // margin: 0 !important;
+    margin-right: 10px;
     display: flex;
-    height: 32px;
+    height: @normalHeight;
 
     .active {
       border: 1px solid @primary-3;
@@ -39,10 +39,10 @@
     .bp-pagination-item {
       list-style: none;
       float: left;
-      height: 30px;
-      width: 30px;
-      min-width: 30px;
-      line-height: 30px;
+      height: @normalHeight;
+      width: @normalHeight;
+      min-width: @normalHeight;
+      line-height: @normalHeight;
       text-align: center;
       border: 1px solid @gary-4;
       border-radius: @radius;
@@ -70,7 +70,7 @@
     .bp-prev-page,
     .bp-next-page {
       width: auto;
-      min-width: 30px;
+      min-width: @normalHeight;
 
       .ri-arrow-left-s-line,
       .ri-arrow-right-s-line {
@@ -96,5 +96,9 @@
         color: @gary-7;
       }
     }
+  }
+
+  .select-input{
+    width: 100px;
   }
 }
