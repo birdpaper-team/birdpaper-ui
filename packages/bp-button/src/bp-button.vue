@@ -1,12 +1,24 @@
 <template>
   <div :class="btnDivClass" @click="onClick">
     <!-- 纯文本按钮 -->
-    <p v-if="isTextBtn" :class="['btn-text', `btn-theme-${theme}`]">
+    <p
+      v-if="isTextBtn"
+      :class="[
+        'btn-text',
+        `btn-theme-${theme}`,
+        { 'btn-text-disabled': isDisabled },
+      ]"
+    >
       <slot></slot>
     </p>
 
     <!-- 非文字按钮 -->
-    <button v-else :class="btnClass" :disabled="isDisabled">
+    <button
+      v-else
+      :class="btnClass"
+      :disabled="isDisabled"
+      :style="`min-width:${minWidth}px`"
+    >
       <!-- 按钮图标 -->
       <span class="bp-icon" v-if="btnIcon !== '' && !$slots.default">
         <i :class="['bp-icon-inner', btnIcon]"></i>
@@ -34,6 +46,7 @@ export default {
     noBorder: { type: Boolean, default: false }, // 是否去除边框
     theme: { type: String, default: "primary" }, //  主题色，text 下使用
     to: { type: String, default: "" }, // 跳转链接
+    minWidth: { type: [String, Number], default: "" }, // 最小宽度，单位 px
     type: {
       type: String,
       default: "default",

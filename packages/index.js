@@ -18,7 +18,7 @@ import bpImage from './bp-image';
 import bpItemBar from './bp-item-bar';
 import bpBadge from './bp-badge';
 import bpSpin from './bp-spin';
-import message from './bp-message';
+// import message from './bp-message';
 import bpPopconfirm from './bp-popconfirm';
 import bpTag from './bp-tag';
 import bpDropdown from './bp-dropdown';
@@ -76,11 +76,6 @@ const install = function (Vue) {
 
 }
 
-// 判断是否是直接引入文件
-if (typeof window !== 'undefined' && window.Vue) {
-  install(window.Vue);
-}
-
 export default {
   // 导出的对象必须具有 install，才能被 Vue.use() 方法安装
   install,
@@ -110,7 +105,4 @@ export default {
   bpDatePicker,
   bpForm,
   bpFormItem
-}
-export {
-  message
 }
