@@ -5,8 +5,8 @@ const e={},i=`<p align="center">
 </p>
 <p align="center">birdpaper-ui is a library that provides UI components based on Vue3.</p>
 <p align="center">
-  <a href="https://gitee.com/liluanhui/birdpaper-ui.git" target="_blank">
-    <img class="tag" src="https://gitee.com/liluanhui/birdpaper-ui/badge/star.svg?theme=dark">
+  <a href="https://gitee.com/birdpaper/birdpaper-ui.git" target="_blank">
+    <img class="tag" src="https://gitee.com/birdpaper/birdpaper-ui/badge/star.svg?theme=dark">
   </a>
   <a href="https://www.npmjs.com/package/birdpaper-ui" target="_blank">
      <img class="tag" src="https://img.shields.io/npm/v/birdpaper-ui.svg?style=badge"/>
@@ -36,12 +36,12 @@ const e={},i=`<p align="center">
 <p>Since this is a project developed and maintained by the author personally, there are usually many shortcomings in the document, such as imperfections and poor experience, which will be repaired and improved in future iterations. Please kindly understand. In the future, Little Paper Crane will release its own technical community, which will provide a friendly platform to support the growth of the project. Wait and see~</p>
 <p>At present, you can be <a href="https://www.birdpaper.design">Birdpaper-Design website</a> for more components, API documentation, Can also be on the <a href="https://www.yuque.com/birdpaper.design">Yuque</a> and pay attention to the latest dynamic feedback problem.</p>
 <blockquote>
-<p>If you have a Bug or something that annoys you, Can <a href="https://gitee.com/liluanhui/birdpaper-ui/issues/new">Gitee Issue</a> or <a href="https://gitee.com/liluanhui/birdpaper-ui/issues/new">Github Issue</a> to feedback Issue.</p>
+<p>If you have a Bug or something that annoys you, Can <a href="https://gitee.com/birdpaper/birdpaper-ui/issues/new">Gitee Issue</a> or <a href="https://gitee.com/birdpaper/birdpaper-ui/issues/new">Github Issue</a> to feedback Issue.</p>
 </blockquote>
 <h2>Link</h2>
 <ul>
 <li><a href="https://www.birdpaper.design/components/install_m">Component</a></li>
-<li><a href="https://gitee.com/liluanhui/birdpaper-ui">Gitee</a></li>
+<li><a href="https://gitee.com/birdpaper/birdpaper-ui">Gitee</a></li>
 <li><a href="https://github.com/liluanhui/birdpaper-ui">Github</a></li>
 <li><a href="https://www.npmjs.com/package/birdpaper-ui">Npm</a></li>
 <li><a href="https://www.yuque.com/birdpaper.design">Yuque</a></li>
