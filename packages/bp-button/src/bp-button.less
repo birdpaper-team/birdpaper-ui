@@ -5,8 +5,10 @@
  * @LastModifiedTime: 2021-10-20 13:44:26
  */
 
-.bp-button-inner {
-  display: flex;
+.bp-button {
+  position: relative;
+  display: inline-block;
+  line-height: 1;
   align-items: center;
   align-content: center;
   justify-content: center;
@@ -14,6 +16,7 @@
   outline: none;
   white-space: nowrap;
   max-width: 100%;
+  box-sizing: content-box;
   min-height: @miniHeight;
   text-rendering: auto;
   letter-spacing: normal;
@@ -22,167 +25,60 @@
   text-indent: 0px;
   text-shadow: none;
   text-align: center;
-  box-sizing: border-box;
-  white-space: nowrap;
   border-radius: @radius;
   opacity: 1;
+  -webkit-appearance: none;
   .no-select;
-  transition: background .2s, color .2s, border .2s, opacity .2s, width .2s;
-  -o-transition: background .2s, color .2s, border .2s, opacity .2s, width .2s;
-  -moz-transition: background .2s, color .2s, border .2s, opacity .2s, width .2s;
-  -webkit-transition: background .2s, color .2s, border .2s, opacity .2s, width .2s;
-  transition-timing-function: ease;
-  -moz-transition-timing-function: ease;
-  -webkit-transition-timing-function: ease;
-  -o-transition-timing-function: ease;
-}
+  .transition-all-2-ease();
 
-a {
-  vertical-align: middle;
+  [class*=ri-]+a,
+  [class*=ri-]+span,
+  .bp-icon-right {
+    margin-left: 4px;
+  }
 
-  .btn-text-inner {
-    vertical-align: middle;
-    display: inline-block;
+  [class^="ri-"],
+  [class*="ri-"] {
+    position: relative;
+    top: 1px;
   }
 }
 
-.btn-block {
+.bp-btn-block {
   width: 100% !important;
   display: block !important;
 }
 
-.btn-no-border {
-
-  button,
-  a {
-    border: none !important;
-  }
+.bp-btn-no-border {
+  border: none !important;
 }
 
-.bp-button {
-  position: relative;
-  display: inline-block;
-  line-height: 1;
-}
-
-.bp-icon {
-  line-height: 2;
-
-  .bp-icon-inner {
-    vertical-align: middle;
-    // line-height: 2;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    font-variant: normal;
-    text-transform: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-}
-
-.btn-text-inner {
-  line-height: 1;
-
-  .btn-text-inner-i {
-    position: relative;
-    top: -1px;
-    line-height: 1;
-    vertical-align: middle;
-    margin-right: 4px;
-  }
-}
-
-// 按钮尺寸
-.btn-size-large {
-  height: @largeHeight + 2;
-
-  .bp-icon-inner {
-    padding: 0 12px;
-    font-size: 13px;
-  }
-
-  .btn-text-inner {
-    padding: 0 18px;
-    font-size: 13px;
-  }
-}
-
-.btn-size-normal {
-  height: @normalHeight + 2;
-
-  .bp-icon-inner {
-    padding: 0 8px;
-     font-size: 14px;
-  }
-
-  .btn-text-inner {
-    padding: 0 16px;
-    font-size: 13px;
-  }
-}
-
-.btn-size-small {
-  height: @smallHeight + 2;
-  line-height: 1;
-
-  .bp-icon-inner {
-    padding: 0 4px;
-    font-size: 13px;
-  }
-
-  .btn-text-inner {
-    padding: 0 14px;
-    font-size: 13px;
-  }
-}
-
-.btn-size-mini {
-  height: @miniHeight + 2;
-  line-height: 1;
-
-  .bp-icon-inner {
-    padding: 0 3px;
-    font-size: 12px;
-  }
-
-  .btn-text-inner {
-    padding: 0 10px;
-    font-size: 12px;
-  }
+.bp-btn-text-style {
+  .bp-btn-no-border;
+  background: none;
 }
 
 button:disabled,
 .bp-button-disabled {
   opacity: .618;
-  cursor: no-drop;
   pointer-events: none;
-  transition: opacity .2s ease;
-  -o-transition: opacity .2s ease;
-  -moz-transition: opacity .2s ease;
-  -webkit-transition: opacity .2s ease;
+  cursor: no-drop;
+  .transition-all-2-ease();
 }
 
-// 文字按钮
-.btn-text {
-  font-size: inherit;
-  cursor: pointer;
-  transition: color .2s ease;
-}
-
-.btn-theme-primary {
+.bp-btn-theme-primary {
   color: @primary-3  !important;
 }
 
-.btn-theme-success {
+.bp-btn-theme-success {
   color: @success-3  !important;
 }
 
-.btn-theme-warning {
+.bp-btn-theme-warning {
   color: @warning-3  !important;
 }
 
-.btn-theme-danger {
+.bp-btn-theme-danger {
   color: @danger-3  !important;
 }
 
@@ -193,7 +89,7 @@ button:disabled,
   color: @gary-7;
 }
 
-.btn-default {
+.bp-btn-default {
   .default-style;
 
   &:hover {
@@ -217,7 +113,7 @@ button:disabled,
   color: @gary-7;
 }
 
-.btn-default-plain {
+.bp-btn-default-plain {
   .default-plain-style;
 
   &:hover {
@@ -239,7 +135,7 @@ button:disabled,
   color: @gary-0;
 }
 
-.btn-primary {
+.bp-btn-primary {
   .primary-style;
 
   &:hover {
@@ -260,7 +156,7 @@ button:disabled,
   color: @primary-3;
 }
 
-.btn-primary-plain {
+.bp-btn-primary-plain {
   .primary-plain-style;
 
   &:hover {
@@ -285,7 +181,7 @@ button:disabled,
   color: @gary-0;
 }
 
-.btn-success {
+.bp-btn-success {
   .success-style;
 
   &:hover {
@@ -306,7 +202,7 @@ button:disabled,
   color: @success-3;
 }
 
-.btn-success-plain {
+.bp-btn-success-plain {
   .success-plain-style;
 
   &:hover {
@@ -331,7 +227,7 @@ button:disabled,
   color: @gary-0;
 }
 
-.btn-warning {
+.bp-btn-warning {
   .warning-style;
 
   &:hover {
@@ -352,7 +248,7 @@ button:disabled,
   color: @warning-3;
 }
 
-.btn-warning-plain {
+.bp-btn-warning-plain {
   .warning-plain-style;
 
   &:hover {
@@ -377,7 +273,7 @@ button:disabled,
   color: @gary-0;
 }
 
-.btn-danger {
+.bp-btn-danger {
   .danger-style;
 
   &:hover {
@@ -398,7 +294,7 @@ button:disabled,
   color: @danger-3;
 }
 
-.btn-danger-plain {
+.bp-btn-danger-plain {
   .danger-plain-style;
 
   &:hover {
@@ -416,10 +312,30 @@ button:disabled,
   }
 }
 
-.btn-round {
-  .bp-button-inner {
-    border-radius: 45px;
+.bp-btn-round {
+  border-radius: 45px;
+}
+
+.bp-btn-dashed {
+  border-style: dashed;
+
+  &:hover {
+    border-style: dashed;
   }
+}
+
+// 文字按钮
+.bp-btn-text {
+  font-size: inherit;
+  cursor: pointer;
+  transition: color .2s ease;
+}
+
+.bp-btn-text-disabled {
+  opacity: .618;
+  cursor: no-drop;
+  pointer-events: none;
+  transition: color .2s ease;
 }
 
 // 加载

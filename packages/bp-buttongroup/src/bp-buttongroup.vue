@@ -8,7 +8,7 @@
 export default {
   name: "bp-buttongroup",
   props: {
-    round: { type: Boolean, default: false }, // 是否圆角
+    round: { type: Boolean, default: false }, // 是否圆角 Rounded or not
   },
 };
 </script>
