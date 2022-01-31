@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <button
     :type="htmlType"
     :class="btnClass"
@@ -34,6 +35,83 @@ const props = defineProps({
   htmlType: { type: String, default: "button" }, // 原生 Type 属性 Native Type attribute
 });
 const emit = defineEmits(["click"]);
+=======
+  <div :class="btnDivClass" @click="onClick">
+    <!-- 纯文本按钮 -->
+    <p
+      v-if="isTextBtn"
+      :class="[
+        'btn-text',
+        `btn-theme-${theme}`,
+        { 'btn-text-disabled': isDisabled },
+      ]"
+    >
+      <slot></slot>
+    </p>
+
+    <!-- 非文字按钮 -->
+    <button
+      v-else
+      :class="btnClass"
+      :disabled="isDisabled"
+      :style="`min-width:${minWidth}px`"
+    >
+      <!-- 按钮图标 -->
+      <span class="bp-icon" v-if="btnIcon !== '' && !$slots.default">
+        <i :class="['bp-icon-inner', btnIcon]"></i>
+      </span>
+      <!-- 按钮文本内容 -->
+      <span class="btn-text-inner" v-if="$slots.default">
+        <i :class="['btn-text-inner-i', btnIcon]" v-if="btnIcon !== ''"></i>
+        <slot></slot>
+      </span>
+    </button>
+  </div>
+</template>
+
+<script>
+import { computed, ref, watch } from "vue";
+export default {
+  name: "bp-button",
+  props: {
+    loading: { type: Boolean, default: false }, // 是否加载
+    disabled: { type: Boolean, default: false }, // 是否禁用
+    plain: { type: Boolean, default: false }, // 是否幽灵按钮
+    icon: { type: String, default: "" }, // 按钮图标
+    round: { type: Boolean, default: false }, // 是否圆角
+    block: { type: Boolean, default: false }, // 宽度是否撑满父级元素
+    noBorder: { type: Boolean, default: false }, // 是否去除边框
+    theme: { type: String, default: "primary" }, //  主题色，text 下使用
+    to: { type: String, default: "" }, // 跳转链接
+    minWidth: { type: [String, Number], default: "" }, // 最小宽度，单位 px
+    type: {
+      type: String,
+      default: "default",
+      validator: function (value) {
+        return (
+          [
+            "text",
+            "default",
+            "primary",
+            "success",
+            "warning",
+            "danger",
+          ].indexOf(value) !== -1
+        );
+      },
+    }, // 按钮类型
+    size: {
+      type: String,
+      default: "normal",
+      validator: function (value) {
+        return ["mini", "small", "normal", "large"].indexOf(value) !== -1;
+      },
+    }, // 按钮尺寸
+  },
+  emits: ["click"],
+  setup(props, { emit }) {
+    const btnIcon = ref(""); // 按钮图标
+>>>>>>> 19274d2f9fdf23803f99b7894fc5ee03af26629b
 
 const icon = ref(""); // 按钮图标
 const hasSlotDefault = !!useSlots().default;
