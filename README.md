@@ -58,11 +58,11 @@ Not only can you import the whole package in its entirety, but you can also load
 In `main.js` write:
 
 ```javascript
-import birdpaperUI from "birdpaper-ui/packages";
-import "birdpaper-ui/packages/style/index.less";
+import BirdpaperUI from "birdpaper-ui"
+import "birdpaper-ui/dist/index.css"
 
 const app = createApp(App)
-app.use(birdpaperUI).mount("#app")
+app.use(BirdpaperUI).mount("#app")
 ```
 
 ## Documents & Community
