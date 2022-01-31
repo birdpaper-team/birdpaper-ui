@@ -1,8 +1,8 @@
-/*
+/**
  * @Author: Sam
  * @Date: 2021-05-28 15:21:34
  * @Last Modified by: Sam
- * @Last Modified time: 2021-05-29 21:08:16
+ * @Last Modified time: 2022-01-29 21:16:13
  */
 .no-select {
   -webkit-appearance: none;
@@ -14,25 +14,86 @@
   user-select: none;
 }
 
-
-.for(@i, @n) {.-each(@i)}
-.for(@n)     when (isnumber(@n)) {.for(1, @n)}
-.for(@i, @n) when not (@i = @n)  {
-    .for((@i + (@n - @i) / abs(@n - @i)), @n);
+.transition-all-2-ease {
+  transition: all .2s ease;
+  -o-transition: all .2s ease;
+  -moz-transition: all .2s ease;
+  -webkit-transition: all .2s ease;
 }
 
-// ............................................................
-// .for-each
+.bp-large-height {
+  height: @size-large;
+  line-height: @size-large;
+  min-height: @size-large;
+  min-width: @size-large;
+  font-size: 15px;
+}
 
-.for(@array)   when (default()) {.for-impl_(length(@array))}
-.for-impl_(@i) when (@i > 1)    {.for-impl_((@i - 1))}
-.for-impl_(@i) when (@i > 0)    {.-each(extract(@array, @i))}
+.bp-normal-height {
+  height: @size-normal;
+  line-height: @size-normal;
+  min-height: @size-normal;
+  min-width: @size-normal;
+  font-size: 14px;
+}
 
-// ex:
-// .for(@bpBorderType);
+.bp-small-height {
+  height: @size-small;
+  line-height: @size-small;
+  min-height: @size-small;
+  min-width: @size-small;
+  font-size: 13px;
+}
 
-// .-each(@name) {
-//   .bp-border-@{name} {
-//     border: 1px solid @name;
-//   }
-// }
+.bp-mini-height {
+  height: @size-mini;
+  line-height: @size-mini;
+  height: @size-mini;
+  min-height: @size-mini;
+  min-width: @size-mini;
+  font-size: 12px;
+}
+
+.bp-btn-padding-large {
+  padding: 0 18px;
+}
+
+.bp-btn-padding-normal {
+  padding: 0 16px;
+}
+
+.bp-btn-padding-small {
+  padding: 0 12px;
+}
+
+.bp-btn-padding-mini {
+  padding: 0 10px;
+}
+
+.bp-icon-right {
+  margin-left: 4px;
+}
+
+.for(@i, @n) {
+  .-each(@i)
+}
+
+.for(@n) when (isnumber(@n)) {
+  .for(1, @n)
+}
+
+.for(@i, @n) when not (@i =@n) {
+  .for((@i + (@n - @i) / abs(@n - @i)), @n);
+}
+
+.for(@array) when (default()) {
+  .for-impl_(length(@array))
+}
+
+.for-impl_(@i) when (@i > 1) {
+  .for-impl_((@i - 1))
+}
+
+.for-impl_(@i) when (@i > 0) {
+  .-each(extract(@array, @i))
+}
