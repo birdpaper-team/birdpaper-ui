@@ -30,7 +30,7 @@
 
 - 最新：<img class="li-img" src="https://img.shields.io/npm/v/birdpaper-ui.svg?style=badge"/>
 
-更多的版本信息，请参阅 [更新日志](https://www.birdpaper.design/components/version_c) 以及 [版本规范](https://www.birdpaper.design/design/version_m)
+更多的版本信息，请参阅 [更新日志](https://www.birdpaper.design/#/components/version_c) 以及 [版本规范](https://www.birdpaper.design/#/design/version_m)
 
 ## 特性
 
@@ -73,7 +73,7 @@ app.use(BirdpaperUI).mount("#app")
 
 ## 相关链接
 
-- [组件文档](https://www.birdpaper.design/components/install_m)
+- [组件文档](https://www.birdpaper.design/#/components/install_m)
 - [Gitee 地址](https://gitee.com/liluanhui/birdpaper-ui)
 - [Github 地址](https://github.com/liluanhui/birdpaper-ui)
 - [Npm 地址](https://www.npmjs.com/package/birdpaper-ui)
@@ -84,4 +84,4 @@ app.use(BirdpaperUI).mount("#app")
 
 birdpaper-ui 采用 MIT 开源许可协议，是由个人开发并维护的项目，你可以免费的使用它，同时也接受捐赠的形式去更好的支持项目的发展；如果你是个人用户，可以通过捐赠的形式支持项目成长，你的捐赠记录和昵称也会得到公开展示；如果你是企业或组织的经营者，那么你的捐赠将具有商业意义。
 
-[捐赠地址](https://www.birdpaper.design/donate)
+[捐赠地址](https://www.birdpaper.design/#/donate)
