@@ -7,8 +7,8 @@
 <p align="center">birdpaper-ui 是一个提供基于 Vue3 的 UI 组件库</p>
 
 <p align="center">
-  <a href="https://gitee.com/liluanhui/birdpaper-ui.git" target="_blank">
-    <img class="tag" src="https://gitee.com/liluanhui/birdpaper-ui/badge/star.svg?theme=dark">
+  <a href="https://gitee.com/birdpaper/birdpaper-ui.git" target="_blank">
+    <img class="tag" src="https://gitee.com/birdpaper/birdpaper-ui/badge/star.svg?theme=dark">
   </a>
   <a href="https://www.npmjs.com/package/birdpaper-ui" target="_blank">
      <img class="tag" src="https://img.shields.io/npm/v/birdpaper-ui.svg?style=badge"/>

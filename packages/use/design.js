@@ -28,6 +28,7 @@ export const useDesign = () => {
 
   return {
     DESIGN_SIZE_LIST,
+    DESIGN_THEME_LIST,
     sizeValidator,
     themeValidator
   }

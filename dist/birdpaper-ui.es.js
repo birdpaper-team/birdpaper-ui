@@ -17,7 +17,7 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-import { ref, useSlots, computed, watch, openBlock, createElementBlock, normalizeClass, unref, normalizeStyle, createCommentVNode, renderSlot, getCurrentInstance, reactive as reactive$1, createBlock, Transition, withCtx, resolveComponent, resolveDirective, withDirectives, Fragment, createElementVNode, createVNode, toDisplayString, onMounted, toRefs as toRefs$1, vShow, renderList, nextTick, createTextVNode, Teleport, onBeforeUnmount, vModelCheckbox, vModelRadio, isRef as isRef$1 } from "vue";
+import { ref, useSlots, computed, watch, openBlock, createElementBlock, normalizeClass, unref, normalizeStyle, createCommentVNode, renderSlot, withDirectives, toDisplayString, vShow, createElementVNode, reactive as reactive$1, Fragment, createVNode, withCtx, onMounted, getCurrentInstance, toRefs as toRefs$1, resolveDirective, Transition, renderList, nextTick, resolveComponent, createTextVNode, createBlock, Teleport, onBeforeUnmount, vModelCheckbox, vModelRadio, isRef as isRef$1 } from "vue";
 const useButton = () => {
   const BUTTON_TYPE_LIST = ["text", "default", "primary", "success", "warning", "danger"];
   const typeValidator2 = (v) => BUTTON_TYPE_LIST.includes(v);
@@ -41,19 +41,20 @@ const useDesign = () => {
   const themeValidator2 = (v) => DESIGN_THEME_LIST.includes(v);
   return {
     DESIGN_SIZE_LIST,
+    DESIGN_THEME_LIST,
     sizeValidator: sizeValidator2,
     themeValidator: themeValidator2
   };
 };
-const _hoisted_1$m = ["type", "disabled"];
-const _hoisted_2$h = { key: 1 };
-const __default__$1 = { name: "bp-button" };
-const { typeValidator, clickByLink } = useButton();
-const { sizeValidator, themeValidator } = useDesign();
-const _sfc_main$s = /* @__PURE__ */ Object.assign(__default__$1, {
+const _hoisted_1$n = ["type", "disabled"];
+const _hoisted_2$j = { key: 1 };
+const __default__$4 = { name: "bp-button" };
+const { typeValidator: typeValidator$1, clickByLink } = useButton();
+const { sizeValidator: sizeValidator$1, themeValidator } = useDesign();
+const _sfc_main$s = /* @__PURE__ */ Object.assign(__default__$4, {
   props: {
-    type: { type: String, default: "default", validator: typeValidator },
-    size: { type: String, default: "normal", validator: sizeValidator },
+    type: { type: String, default: "default", validator: typeValidator$1 },
+    size: { type: String, default: "normal", validator: sizeValidator$1 },
     loading: { type: Boolean, default: false },
     disabled: { type: Boolean, default: false },
     plain: { type: Boolean, default: false },
@@ -65,7 +66,7 @@ const _sfc_main$s = /* @__PURE__ */ Object.assign(__default__$1, {
     theme: { type: String, default: "primary", validator: themeValidator },
     href: { type: String, default: "" },
     target: { type: String, default: "_self" },
-    minWidth: { type: [String, Number], default: "52" },
+    minWidth: { type: [String, Number], default: "" },
     htmlType: { type: String, default: "button" }
   },
   emits: ["click"],
@@ -76,19 +77,26 @@ const _sfc_main$s = /* @__PURE__ */ Object.assign(__default__$1, {
     const isTextBtn = computed(() => props.type === "text");
     const hasIcon = computed(() => !!icon.value);
     const isLinkButton = computed(() => !!props.href);
-    const btnElStyle = computed(() => `min-width:${props.minWidth}px`);
+    const btnElStyle = computed(() => props.minWidth && `min-width:${props.minWidth}px`);
     const isDisabled = computed(() => props.disabled || props.loading);
     computed(() => {
-      let name = ["bp-button", "bp-btn-text", `bp-${props.size}-height`];
-      props.block && name.push("bp-btn-block");
-      props.disabled && name.push("bp-btn-text-disabled");
+      let name = [
+        "bp-button",
+        "bp-btn-text",
+        `bp-${props.size}-height`,
+        { "bp-btn-block": props.block },
+        { "bp-btn-text-disabled": props.disabled }
+      ];
       hasSlotDefault && name.push(`bp-btn-padding-${props.size}`);
       return name;
     });
     const btnClass = computed(() => {
-      let name = [`bp-button`, `bp-${props.size}-height`];
+      let name = [
+        `bp-button`,
+        `bp-${props.size}-height`,
+        { "bp-btn-block": props.block }
+      ];
       hasSlotDefault && name.push(`bp-btn-padding-${props.size}`);
-      props.block && name.push("bp-btn-block");
       if (isTextBtn.value) {
         name.push(`bp-btn-theme-${props.theme} bp-btn-text-style`);
         return name;
@@ -118,155 +126,375 @@ const _sfc_main$s = /* @__PURE__ */ Object.assign(__default__$1, {
           key: 0,
           class: normalizeClass(icon.value)
         }, null, 2)) : createCommentVNode("", true),
-        hasSlotDefault ? (openBlock(), createElementBlock("span", _hoisted_2$h, [
+        hasSlotDefault ? (openBlock(), createElementBlock("span", _hoisted_2$j, [
           renderSlot(_ctx.$slots, "default")
         ])) : createCommentVNode("", true)
-      ], 14, _hoisted_1$m);
+      ], 14, _hoisted_1$n);
     };
   }
 });
 _sfc_main$s.install = function(Vue) {
   Vue.component(_sfc_main$s.name, _sfc_main$s);
 };
-const isNull = (data) => !data && data != 0;
-const clickOutside = {
-  beforeMount(el, binding, vnode) {
-    function handleClick(e) {
-      if (el.contains(e.target) || e.target.className.includes(binding.arg)) {
-        return false;
+const useInput = () => {
+  const INPUT_TYPE_LIST = ["text", "password", "textarea"];
+  const EMITS2 = ["update:modelValue", "focus", "blur", "keyup", "keydown", "clear", "suffix-click", "input"];
+  const typeValidator2 = (v) => INPUT_TYPE_LIST.includes(v);
+  const initSuffixType2 = ({ type, showPassword, clearable, showLimit, maxLength }) => {
+    if (type === "password" && showPassword) {
+      return "psw-eye-line";
+    }
+    if (clearable) {
+      return "clearable";
+    }
+    if (showLimit && maxLength) {
+      return "word-limit";
+    }
+    return "custom";
+  };
+  const autoHeight2 = (ele) => {
+    var timer = null;
+    const setStyle = (auto = false) => {
+      if (auto)
+        ele.style.height = "auto";
+      ele.style.height = ele.scrollHeight + "px";
+    };
+    const delayedResize = () => {
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
       }
-      binding.value(e);
+      timer = setTimeout(() => setStyle(), 200);
+    };
+    if (ele.addEventListener) {
+      ele.addEventListener("input", () => setStyle(), false);
+      setStyle();
+    } else if (ele.attachEvent) {
+      ele.attachEvent("onpropertychange", () => setStyle());
+      setStyle();
     }
-    el.__vueClickOutside__ = handleClick;
-    document.addEventListener("click", handleClick);
-  },
-  unmounted(el, binding) {
-    document.removeEventListener("click", el.__vueClickOutside__);
-    delete el.__vueClickOutside__;
-  }
-};
-const throttle = (fn, delay) => {
-  var lastTime;
-  var timer;
-  var delay = delay || 200;
-  return function() {
-    var args = arguments;
-    var nowTime = Date.now();
-    if (lastTime && nowTime - lastTime < delay) {
-      clearTimeout(timer);
-      timer = setTimeout(function() {
-        lastTime = nowTime;
-        fn.apply(this, args);
-      }, delay);
-    } else {
-      lastTime = nowTime;
-      fn.apply(this, args);
-    }
-  };
-};
-const on = function(element, event, handler, useCapture = false) {
-  if (element && event && handler) {
-    element.addEventListener(event, handler, useCapture);
-  }
-};
-const off = function(element, event, handler, useCapture = false) {
-  if (element && event && handler) {
-    element.removeEventListener(event, handler, useCapture);
-  }
-};
-const useInputRight = (props, emit) => {
-  const {
-    proxy
-  } = getCurrentInstance();
-  const rightOption = reactive$1({
-    show: false,
-    visibled: false,
-    icon: "",
-    text: ""
-  });
-  const isPassword = props.type === "password";
-  const isClearable = props.clearable;
-  const isShowLimit = props.showLimit;
-  const hasSuffixIcon = props.suffixIcon !== "";
-  rightOption.show = computed(() => !props.disabled && !props.readonly);
-  const getCurrentInputType = () => {
-    const input = proxy.$refs.inp || {};
-    const {
-      type = "password"
-    } = input;
-    return type;
-  };
-  const setCurrentInputType = (type = "text") => {
-    return new Promise((resolve, reject2) => {
-      proxy.$refs.inp.type = type;
-      resolve(type);
-    }).catch((err) => {
-      reject(err);
-    });
-  };
-  const PSW_ICON_OBJ = {
-    text: "ri-eye-line",
-    password: "ri-eye-fill"
-  };
-  const PSW_TYPE_OBJ = {
-    text: "password",
-    password: "text"
-  };
-  const showRightArea = (inpVal = "") => {
-    if (isPassword) {
-      rightOption.visibled = true;
-      return;
-    }
-    if (isClearable) {
-      rightOption.visibled = inpVal !== "";
-      return;
-    }
-    if (hasSuffixIcon || isShowLimit) {
-      rightOption.visibled = true;
-      return;
-    }
-  };
-  const renderRightArea = () => {
-    rightOption.text = computed(() => {
-      return isShowLimit ? `${props.modelValue.length}/${props.maxLength}` : "";
-    });
-    if (isPassword) {
-      rightOption.icon = PSW_ICON_OBJ[getCurrentInputType()];
-      return;
-    }
-    if (isClearable) {
-      rightOption.icon = "ri-close-circle-fill";
-      return;
-    }
-    if (isShowLimit) {
-      rightOption.icon = "";
-      return;
-    }
-    if (hasSuffixIcon) {
-      rightOption.icon = props.suffixIcon;
-      return;
-    }
-  };
-  const onRightOptionClick = (e) => {
-    if (isPassword) {
-      return setCurrentInputType(PSW_TYPE_OBJ[getCurrentInputType()]).then((type) => {
-        rightOption.icon = PSW_ICON_OBJ[type];
+    if (window.VBArray && window.addEventListener) {
+      ele.attachEvent("onkeydown", function() {
+        var key = window.event.keyCode;
+        if (key == 8 || key == 46)
+          delayedResize();
       });
-    }
-    if (isClearable) {
-      e.target.value = "";
-      rightOption.visibled = false;
-      emit("update:modelValue", "");
-      emit("clear", "");
-      return;
+      ele.attachEvent("oncut", () => delayedResize());
     }
   };
   return {
-    rightOption,
-    onRightOptionClick,
-    showRightArea,
-    renderRightArea
+    EMITS: EMITS2,
+    typeValidator: typeValidator2,
+    initSuffixType: initSuffixType2,
+    autoHeight: autoHeight2
   };
+};
+const _hoisted_1$m = { key: 1 };
+const _hoisted_2$i = {
+  key: 1,
+  class: "bp-input-append"
+};
+const __default__$3 = { name: "bp-input-tail" };
+const _sfc_main$r = /* @__PURE__ */ Object.assign(__default__$3, {
+  props: {
+    render: { type: Boolean, default: false },
+    mode: { type: String, default: "suffix" },
+    type: { type: String, default: "custom" },
+    icon: { type: String, default: "" },
+    size: { type: String, default: "normal" },
+    maxLength: { type: Number, default: null },
+    inpValue: { type: String, default: "" },
+    disabled: { type: Boolean, default: false },
+    readonly: { type: Boolean, default: false },
+    isClick: { type: Boolean, default: false }
+  },
+  emits: ["click"],
+  setup(__props, { emit }) {
+    const props = __props;
+    const cfg = ref(null);
+    const CLOSE_ICON = "ri-close-circle-fill";
+    class bpInputTail {
+      constructor(icon, text, isClick, show) {
+        this.icon = icon;
+        this.text = text;
+        this.isClick = isClick;
+        this.show = show;
+      }
+    }
+    const unInput = computed(() => props.disabled || props.readonly);
+    const init = () => {
+      if (props.mode === "append" || !props.render)
+        return;
+      switch (props.type) {
+        case "psw-eye-line":
+          cfg.value = new bpInputTail("ri-eye-line", "", !unInput.value, true);
+          break;
+        case "psw-eye-fill":
+          cfg.value = new bpInputTail("ri-eye-fill", "", !unInput.value, true);
+          break;
+        case "clearable":
+          const show = computed(() => !!props.inpValue);
+          cfg.value = new bpInputTail(CLOSE_ICON, "", !unInput.value, show);
+          break;
+        case "word-limit":
+          const text = computed(() => `${props.inpValue.length}/${props.maxLength}`);
+          cfg.value = new bpInputTail("", text, false, true);
+          break;
+        case "custom":
+          const { icon, isClick } = props;
+          cfg.value = new bpInputTail(icon, "", isClick, true);
+          break;
+      }
+    };
+    const onClick = () => {
+      if (!cfg.value.isClick || unInput.value)
+        return;
+      emit("click");
+    };
+    watch(() => [props.type, props.size, props.icon, props.maxLength, props.isClick], () => init(), { immediate: true });
+    return (_ctx, _cache) => {
+      return __props.render ? (openBlock(), createElementBlock("div", {
+        key: 0,
+        class: normalizeClass(`bp-input-tail bp-${props.size}-height`)
+      }, [
+        __props.mode === "suffix" ? withDirectives((openBlock(), createElementBlock("div", {
+          key: 0,
+          class: normalizeClass(["bp-input-suffix", { "suffix-is-click": cfg.value.isClick }]),
+          onClick
+        }, [
+          !!cfg.value.icon ? (openBlock(), createElementBlock("i", {
+            key: 0,
+            class: normalizeClass(cfg.value.icon)
+          }, null, 2)) : (openBlock(), createElementBlock("span", _hoisted_1$m, toDisplayString(cfg.value.text), 1))
+        ], 2)), [
+          [vShow, cfg.value.show]
+        ]) : (openBlock(), createElementBlock("div", _hoisted_2$i, [
+          renderSlot(_ctx.$slots, "default")
+        ]))
+      ], 2)) : createCommentVNode("", true);
+    };
+  }
+});
+const _hoisted_1$l = {
+  key: 0,
+  class: "bp-input-prefix"
+};
+const _hoisted_2$h = {
+  key: 1,
+  class: "bp-input-prepend"
+};
+const __default__$2 = { name: "bp-input-first" };
+const _sfc_main$q = /* @__PURE__ */ Object.assign(__default__$2, {
+  props: {
+    render: { type: Boolean, default: false },
+    mode: { type: String, default: "prefix" },
+    icon: { type: String, default: "" },
+    size: { type: String, default: "normal" }
+  },
+  setup(__props) {
+    const props = __props;
+    return (_ctx, _cache) => {
+      return __props.render ? (openBlock(), createElementBlock("div", {
+        key: 0,
+        class: normalizeClass(`bp-input-first bp-${props.size}-height`)
+      }, [
+        __props.mode === "prefix" ? (openBlock(), createElementBlock("div", _hoisted_1$l, [
+          createElementVNode("i", {
+            class: normalizeClass(__props.icon)
+          }, null, 2)
+        ])) : (openBlock(), createElementBlock("div", _hoisted_2$h, [
+          renderSlot(_ctx.$slots, "default")
+        ]))
+      ], 2)) : createCommentVNode("", true);
+    };
+  }
+});
+const _hoisted_1$k = ["name", "placeholder", "disabled", "readonly", "value", "type", "maxlength", "autocomplete"];
+const _hoisted_2$g = ["name", "placeholder", "disabled", "autocomplete", "readonly", "rows", "value", "maxlength"];
+const _hoisted_3$d = {
+  key: 0,
+  class: "bp-textarea-word-limit"
+};
+const __default__$1 = { name: "bp-input" };
+const { EMITS, typeValidator, initSuffixType, autoHeight } = useInput();
+const { sizeValidator } = useDesign();
+const _sfc_main$p = /* @__PURE__ */ Object.assign(__default__$1, {
+  props: {
+    modelValue: { type: [String, Number], default: "", require: true },
+    type: { type: String, default: "text", validator: typeValidator },
+    size: { type: String, default: "normal", validator: sizeValidator },
+    placeholder: { type: String, default: "" },
+    disabled: { type: Boolean, default: false },
+    readonly: { type: Boolean, default: false },
+    clearable: { type: Boolean, default: false },
+    showLimit: { type: Boolean, default: false },
+    showPassword: { type: Boolean, default: false },
+    maxlength: { type: Number, default: null },
+    autosize: { type: Boolean, default: false },
+    resize: { type: String, default: "none" },
+    rows: { type: Number, default: 3 },
+    name: { type: String, default: "" },
+    form: { type: String, default: "" },
+    autofocus: { type: Boolean, default: false },
+    autocomplete: { type: String, default: "" },
+    suffixIcon: { type: String, default: "" },
+    suffixClickable: { type: Boolean, default: false },
+    prefixIcon: { type: String, default: "" }
+  },
+  emits: EMITS,
+  setup(__props, { expose, emit }) {
+    const props = __props;
+    const inp = ref(null);
+    const isFocus = ref(false);
+    const inpType = ref("text");
+    const inputClass = computed(() => {
+      let name = ["bp-input"];
+      props.type !== "textarea" && name.push(`bp-${props.size}-height`);
+      return name;
+    });
+    const inputInnerClass = computed(() => [
+      "bp-input-inner",
+      {
+        "focus-border": isFocus.value,
+        "bp-has-append": hasAppend.value,
+        "bp-has-prefix": hasPrefix.value,
+        "bp-has-prepend": hasPrepend.value
+      }
+    ]);
+    const textareaInnerClass = computed(() => ["bp-textarea-inner", `resize-${props.resize}`, { "focus-border": isFocus.value }]);
+    const first = reactive$1({ isRender: false, mode: "" }), tail = reactive$1({ isRender: false, type: "", mode: "" });
+    const showLimit = computed(() => props.showLimit && !!props.maxLength);
+    const hasSuffix = computed(() => props.type === "password" && props.showPassword || showLimit.value || props.clearable || !!props.suffixIcon);
+    const hasAppend = computed(() => !!useSlots().append);
+    const hasPrefix = computed(() => !!props.prefixIcon && !hasPrepend.value);
+    const hasPrepend = computed(() => !!useSlots().prepend);
+    first.isRender = computed(() => hasPrefix.value || hasPrepend.value);
+    tail.isRender = computed(() => hasSuffix.value || hasAppend.value);
+    const init = () => {
+      inpType.value = props.type;
+      first.isRender && (first.mode = hasPrepend.value ? "prepend" : "prefix");
+      if (tail.isRender) {
+        tail.mode = hasAppend.value ? "append" : "suffix";
+        !hasAppend.value && (tail.type = initSuffixType(props));
+      }
+    };
+    const onSuffixClick = () => {
+      if (props.type === "password") {
+        inpType.value = inpType.value === "text" ? "password" : "text";
+        tail.type = tail.type === "psw-eye-line" ? "psw-eye-fill" : "psw-eye-line";
+        return;
+      }
+      props.clearable && clearValue();
+      emit("suffix-click");
+    };
+    const clearValue = () => {
+      emit("update:modelValue", "");
+      emit("clear");
+    };
+    const onInput = (e) => {
+      emit("update:modelValue", e.target.value);
+      emit("input", e.target.value);
+    };
+    const focus = (e) => {
+      isFocus.value = true;
+      emit("focus", e);
+    };
+    const blur = (e) => {
+      isFocus.value = false;
+      emit("blur", e);
+    };
+    const keyup = (e) => emit("keyup", e);
+    const keydown = (e) => emit("keydown", e);
+    const select = () => inp.value.select();
+    watch(() => props.modelValue, () => {
+      if (props.type === "textarea" && props.autosize)
+        autoHeight(inp.value);
+    });
+    watch(() => [props.showPassword, props.type, hasAppend.value, hasSuffix.value], () => init(), { immediate: true });
+    expose({ blur, focus, select });
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        class: normalizeClass(unref(inputClass))
+      }, [
+        inpType.value !== "textarea" ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
+          createVNode(_sfc_main$q, {
+            mode: unref(first).mode,
+            render: unref(first).isRender,
+            icon: __props.prefixIcon,
+            size: __props.size
+          }, {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "prepend")
+            ]),
+            _: 3
+          }, 8, ["mode", "render", "icon", "size"]),
+          createElementVNode("input", {
+            ref_key: "inp",
+            ref: inp,
+            spellcheck: "false",
+            name: __props.name,
+            placeholder: __props.placeholder,
+            disabled: __props.disabled,
+            readonly: __props.readonly,
+            class: normalizeClass(unref(inputInnerClass)),
+            value: __props.modelValue,
+            type: inpType.value,
+            maxlength: _ctx.maxLength,
+            autocomplete: __props.autocomplete,
+            onKeyup: keyup,
+            onKeydown: keydown,
+            onInput,
+            onFocus: focus,
+            onBlur: blur
+          }, null, 42, _hoisted_1$k),
+          createVNode(_sfc_main$r, {
+            mode: unref(tail).mode,
+            render: unref(tail).isRender,
+            type: unref(tail).type,
+            size: __props.size,
+            disabled: __props.disabled,
+            readonly: __props.readonly,
+            "inp-value": __props.modelValue,
+            "max-length": _ctx.maxLength,
+            icon: __props.suffixIcon,
+            "is-click": __props.suffixClickable,
+            onClick: onSuffixClick
+          }, {
+            default: withCtx(() => [
+              renderSlot(_ctx.$slots, "append")
+            ]),
+            _: 3
+          }, 8, ["mode", "render", "type", "size", "disabled", "readonly", "inp-value", "max-length", "icon", "is-click"])
+        ], 64)) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
+          createElementVNode("textarea", {
+            ref_key: "inp",
+            ref: inp,
+            spellcheck: "false",
+            name: __props.name,
+            placeholder: __props.placeholder,
+            disabled: __props.disabled,
+            autocomplete: __props.autocomplete,
+            readonly: __props.readonly,
+            class: normalizeClass(unref(textareaInnerClass)),
+            rows: !__props.autosize && __props.rows,
+            value: __props.modelValue,
+            maxlength: _ctx.maxLength,
+            onInput,
+            onKeyup: keyup,
+            onKeydown: keydown,
+            onFocus: focus,
+            onBlur: blur
+          }, null, 42, _hoisted_2$g),
+          unref(showLimit) ? (openBlock(), createElementBlock("div", _hoisted_3$d, [
+            createElementVNode("span", null, toDisplayString(__props.modelValue.length) + "/" + toDisplayString(_ctx.maxLength), 1)
+          ])) : createCommentVNode("", true)
+        ], 64))
+      ], 2);
+    };
+  }
+});
+_sfc_main$p.install = function(Vue) {
+  Vue.component(_sfc_main$p.name, _sfc_main$p);
 };
 var _export_sfc = (sfc, props) => {
   const target = sfc.__vccOpts || sfc;
@@ -274,274 +502,6 @@ var _export_sfc = (sfc, props) => {
     target[key] = val;
   }
   return target;
-};
-const _sfc_main$r = {
-  name: "bp-input-suffix",
-  props: {
-    modelValue: {
-      type: [Object, Array, String, Function, Boolean],
-      default: () => false
-    }
-  },
-  emits: ["click"],
-  setup(props, { emit }) {
-    const onClick = (e) => {
-      emit("click", e);
-    };
-    return {
-      onClick
-    };
-  }
-};
-function _sfc_render$q(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createBlock(Transition, { name: "bp-fade-in" }, {
-    default: withCtx(() => [
-      $props.modelValue ? (openBlock(), createElementBlock("div", {
-        key: 0,
-        class: "bp-input-suffix",
-        onClick: _cache[0] || (_cache[0] = (...args) => $setup.onClick && $setup.onClick(...args))
-      }, [
-        renderSlot(_ctx.$slots, "default")
-      ])) : createCommentVNode("", true)
-    ]),
-    _: 3
-  });
-}
-var bpInputSuffix = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$q]]);
-const _sfc_main$q = {
-  name: "bp-input-append",
-  props: {
-    modelValue: {
-      type: [Object, Array, String, Function, Boolean],
-      default: () => false
-    }
-  }
-};
-const _hoisted_1$l = {
-  key: 0,
-  class: "bp-input-append"
-};
-function _sfc_render$p(_ctx, _cache, $props, $setup, $data, $options) {
-  return $props.modelValue ? (openBlock(), createElementBlock("div", _hoisted_1$l, [
-    renderSlot(_ctx.$slots, "default")
-  ])) : createCommentVNode("", true);
-}
-var bpInputAppend = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$p]]);
-const inpTypeList = ["text", "password", "textarea"];
-const sizeList = ["mini", "small", "normal", "large"];
-const themeList = ["default", "primary", "success", "warning", "danger"];
-const _sfc_main$p = {
-  name: "bp-input",
-  directives: { clickOutside },
-  components: { bpInputSuffix, bpInputAppend },
-  props: {
-    modelValue: { type: [String, Number], default: "" },
-    placeholder: { type: String, default: "" },
-    disabled: { type: Boolean, default: false },
-    readonly: { type: Boolean, default: false },
-    clearable: { type: Boolean, default: false },
-    name: { type: String, default: "" },
-    showLimit: { type: Boolean, default: false },
-    maxLength: { type: Number, default: null },
-    autosize: { type: Boolean, default: false },
-    resize: { type: Boolean, default: false },
-    rows: { type: Number, default: 3 },
-    suffixIcon: { type: String, default: "" },
-    type: {
-      type: String,
-      default: "text",
-      validator: (value) => inpTypeList.indexOf(value) !== -1
-    },
-    size: {
-      type: String,
-      default: "normal",
-      validator: (value) => sizeList.indexOf(value) !== -1
-    },
-    borderColor: {
-      type: String,
-      default: "default",
-      validator: (value) => themeList.indexOf(value) !== -1
-    }
-  },
-  setup(props, { emit, slots }) {
-    const isFocus = ref(false);
-    const inputClass = computed(() => {
-      let className = ["bp-input"];
-      if (props.borderColor !== "default")
-        className.push(`bp-border-${props.borderColor}`);
-      if (props.type !== "textarea")
-        className.push(`bp-input-${props.size}`);
-      return className;
-    });
-    const isSuffix = computed(() => {
-      return rightOption.visibled && !slots.append || slots.suffix;
-    });
-    const isAppend = computed(() => {
-      return slots.append;
-    });
-    const {
-      rightOption,
-      onRightOptionClick,
-      showRightArea,
-      renderRightArea
-    } = useInputRight(props, emit);
-    watch(() => [props.showLimit, props.clearable, props.suffixIcon], () => {
-      renderRightArea();
-    });
-    watch(() => props.suffixIcon, () => {
-      rightOption.icon = props.suffixIcon;
-      showRightArea();
-      renderRightArea();
-    }, {
-      immediate: true
-    });
-    showRightArea();
-    const onInput = (e) => {
-      emit("update:modelValue", e.target.value);
-      showRightArea(e.target.value);
-      if (props.type === "textarea" && props.autosize)
-        autoHeight(e);
-    };
-    const onFocus = (e) => {
-      isFocus.value = true;
-      showRightArea(e.target.value);
-      emit("focus", e);
-    };
-    const onBlur = (e) => {
-      isFocus.value = false;
-      emit("blur", e);
-    };
-    const onClickOutside = () => {
-      if (props.clearable && props.type !== "password") {
-        rightOption.visibled = false;
-      }
-    };
-    const onKeyup = (e) => {
-      emit("keyup", e);
-      renderRightArea();
-    };
-    const onKeydown = (e) => emit("keydown", e);
-    const autoHeight = (e) => {
-      e.target.style.height = `${e.target.scrollTop + e.target.scrollHeight}px`;
-    };
-    return {
-      rightOption,
-      isFocus,
-      inputClass,
-      isSuffix,
-      isAppend,
-      showRightArea,
-      onRightOptionClick,
-      onInput,
-      onFocus,
-      onBlur,
-      onKeyup,
-      onClickOutside,
-      onKeydown
-    };
-  },
-  emits: ["update:modelValue", "focus", "blur", "keyup", "keydown", "clear"]
-};
-const _hoisted_1$k = ["type", "placeholder", "name", "maxlength", "disabled", "readonly", "value"];
-const _hoisted_2$g = {
-  key: 0,
-  class: "bp-input-right"
-};
-const _hoisted_3$d = { key: 1 };
-const _hoisted_4$b = ["name", "disabled", "readonly", "rows", "maxlength", "placeholder", "value"];
-const _hoisted_5$6 = {
-  key: 0,
-  class: "bp-textarea-num-limit"
-};
-const _hoisted_6$6 = { class: "bp-input-suffix" };
-const _hoisted_7$3 = { class: "bp-input-suffix-inner" };
-const _hoisted_8$3 = { key: 0 };
-function _sfc_render$o(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_bp_input_suffix = resolveComponent("bp-input-suffix");
-  const _component_bp_input_append = resolveComponent("bp-input-append");
-  const _directive_click_outside = resolveDirective("click-outside");
-  return withDirectives((openBlock(), createElementBlock("div", {
-    class: normalizeClass([$setup.inputClass, { "focus-border": $setup.isFocus }])
-  }, [
-    $props.type !== "textarea" ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
-      createElementVNode("input", {
-        ref: "inp",
-        class: "bp-input-inner",
-        spellcheck: "false",
-        type: $props.type,
-        placeholder: $props.placeholder,
-        autocomplete: "new-password",
-        name: $props.name,
-        maxlength: $props.maxLength,
-        disabled: $props.disabled,
-        readonly: $props.readonly,
-        value: $props.modelValue,
-        onKeyup: _cache[0] || (_cache[0] = (...args) => $setup.onKeyup && $setup.onKeyup(...args)),
-        onKeydown: _cache[1] || (_cache[1] = (...args) => $setup.onKeydown && $setup.onKeydown(...args)),
-        onInput: _cache[2] || (_cache[2] = (...args) => $setup.onInput && $setup.onInput(...args)),
-        onFocus: _cache[3] || (_cache[3] = (...args) => $setup.onFocus && $setup.onFocus(...args)),
-        onBlur: _cache[4] || (_cache[4] = (...args) => $setup.onBlur && $setup.onBlur(...args))
-      }, null, 40, _hoisted_1$k),
-      $setup.rightOption.show ? (openBlock(), createElementBlock("div", _hoisted_2$g, [
-        createVNode(_component_bp_input_suffix, {
-          modelValue: $setup.isSuffix,
-          "onUpdate:modelValue": _cache[5] || (_cache[5] = ($event) => $setup.isSuffix = $event),
-          onClick: $setup.onRightOptionClick
-        }, {
-          default: withCtx(() => [
-            renderSlot(_ctx.$slots, "suffix", {}, () => [
-              $setup.rightOption.icon !== "" ? (openBlock(), createElementBlock("i", {
-                key: 0,
-                class: normalizeClass($setup.rightOption.icon)
-              }, null, 2)) : createCommentVNode("", true),
-              $setup.rightOption.text !== "" ? (openBlock(), createElementBlock("span", _hoisted_3$d, toDisplayString($setup.rightOption.text), 1)) : createCommentVNode("", true)
-            ])
-          ]),
-          _: 3
-        }, 8, ["modelValue", "onClick"]),
-        createVNode(_component_bp_input_append, {
-          modelValue: $setup.isAppend,
-          "onUpdate:modelValue": _cache[6] || (_cache[6] = ($event) => $setup.isAppend = $event)
-        }, {
-          default: withCtx(() => [
-            renderSlot(_ctx.$slots, "append")
-          ]),
-          _: 3
-        }, 8, ["modelValue"])
-      ])) : createCommentVNode("", true)
-    ], 64)) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
-      createElementVNode("textarea", {
-        ref: "inp",
-        spellcheck: "false",
-        name: $props.name,
-        class: normalizeClass(["bp-textarea-inner", $props.resize ? "" : "resize-none"]),
-        disabled: $props.disabled,
-        readonly: $props.readonly,
-        rows: $props.rows,
-        maxlength: $props.maxLength,
-        placeholder: $props.placeholder,
-        value: $props.modelValue,
-        onInput: _cache[7] || (_cache[7] = (...args) => $setup.onInput && $setup.onInput(...args)),
-        onKeyup: _cache[8] || (_cache[8] = (...args) => $setup.onKeyup && $setup.onKeyup(...args)),
-        onKeydown: _cache[9] || (_cache[9] = (...args) => $setup.onKeydown && $setup.onKeydown(...args)),
-        onFocus: _cache[10] || (_cache[10] = (...args) => $setup.onFocus && $setup.onFocus(...args)),
-        onBlur: _cache[11] || (_cache[11] = (...args) => $setup.onBlur && $setup.onBlur(...args))
-      }, null, 42, _hoisted_4$b),
-      $setup.rightOption.show ? (openBlock(), createElementBlock("div", _hoisted_5$6, [
-        createElementVNode("div", _hoisted_6$6, [
-          createElementVNode("span", _hoisted_7$3, [
-            $setup.rightOption.text !== "" ? (openBlock(), createElementBlock("span", _hoisted_8$3, toDisplayString($setup.rightOption.text), 1)) : createCommentVNode("", true)
-          ])
-        ])
-      ])) : createCommentVNode("", true)
-    ], 64))
-  ], 2)), [
-    [_directive_click_outside, $setup.onClickOutside]
-  ]);
-}
-var bpInput = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$o]]);
-bpInput.install = function(Vue) {
-  Vue.component(bpInput.name, bpInput);
 };
 const _sfc_main$o = {
   name: "bp-row",
@@ -626,6 +586,52 @@ function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
 var bpRow = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$n]]);
 bpRow.install = function(Vue) {
   Vue.component(bpRow.name, bpRow);
+};
+const isNull = (data) => !data && data != 0;
+const clickOutside = {
+  beforeMount(el, binding, vnode) {
+    function handleClick(e) {
+      if (el.contains(e.target) || e.target.className.includes(binding.arg)) {
+        return false;
+      }
+      binding.value(e);
+    }
+    el.__vueClickOutside__ = handleClick;
+    document.addEventListener("click", handleClick);
+  },
+  unmounted(el, binding) {
+    document.removeEventListener("click", el.__vueClickOutside__);
+    delete el.__vueClickOutside__;
+  }
+};
+const throttle = (fn, delay) => {
+  var lastTime;
+  var timer;
+  var delay = delay || 200;
+  return function() {
+    var args = arguments;
+    var nowTime = Date.now();
+    if (lastTime && nowTime - lastTime < delay) {
+      clearTimeout(timer);
+      timer = setTimeout(function() {
+        lastTime = nowTime;
+        fn.apply(this, args);
+      }, delay);
+    } else {
+      lastTime = nowTime;
+      fn.apply(this, args);
+    }
+  };
+};
+const on = function(element, event, handler, useCapture = false) {
+  if (element && event && handler) {
+    element.addEventListener(event, handler, useCapture);
+  }
+};
+const off = function(element, event, handler, useCapture = false) {
+  if (element && event && handler) {
+    element.removeEventListener(event, handler, useCapture);
+  }
 };
 const _sfc_main$n = {
   name: "bp-col",
@@ -3368,7 +3374,7 @@ bpFormItem.install = function(Vue) {
 };
 const components = [
   _sfc_main$s,
-  bpInput,
+  _sfc_main$p,
   bpDialog,
   bpImage,
   bpMask,
@@ -3410,7 +3416,7 @@ var index = {
   bpDialog,
   bpAvatar,
   bpAlert,
-  bpInput,
+  bpInput: _sfc_main$p,
   bpMask,
   bpTable,
   bpSpin,
