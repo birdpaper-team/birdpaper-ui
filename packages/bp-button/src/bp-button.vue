@@ -30,7 +30,7 @@ const props = defineProps({
   theme: { type: String, default: "primary", validator: themeValidator }, // 主题色，text下生效 The theme color(This parameter is valid only when type is text)
   href: { type: String, default: "" }, // 跳转链接 Skip links
   target: { type: String, default: "_self" }, // 跳转方式 Target of links
-  minWidth: { type: [String, Number], default: "52" }, // 最小宽度，单位px Minimum width, px
+  minWidth: { type: [String, Number], default: "" }, // 最小宽度，单位px Minimum width, px
   htmlType: { type: String, default: "button" }, // 原生 Type 属性 Native Type attribute
 });
 const emit = defineEmits(["click"]);
@@ -41,24 +41,33 @@ const hasSlotDefault = !!useSlots().default;
 const isTextBtn = computed(() => props.type === "text"); // 是否为「纯文本」类型按钮
 const hasIcon = computed(() => !!icon.value); // 是否有图标显示
 const isLinkButton = computed(() => !!props.href); // 是否为「点击跳转」类型的按钮
-const btnElStyle = computed(() => `min-width:${props.minWidth}px`); // 控制按钮的行内样式
+const btnElStyle = computed(
+  () => props.minWidth && `min-width:${props.minWidth}px`
+); // 控制按钮的行内样式
 const isDisabled = computed(() => props.disabled || props.loading); // 禁用状态，除了传入属性外，还应考虑「加载中」的情况
 
 // 纯文本按钮样式
 const textBtnClass = computed(() => {
-  let name = ["bp-button", "bp-btn-text", `bp-${props.size}-height`];
-  props.block && name.push("bp-btn-block"); // 宽度是否撑满父级元素
-  props.disabled && name.push("bp-btn-text-disabled");
+  let name = [
+    "bp-button",
+    "bp-btn-text",
+    `bp-${props.size}-height`,
+    { "bp-btn-block": props.block },
+    { "bp-btn-text-disabled": props.disabled },
+  ];
   hasSlotDefault && name.push(`bp-btn-padding-${props.size}`); // 尺寸边框设置
   return name;
 });
 
 // 非纯文本按钮样式
 const btnClass = computed(() => {
-  let name = [`bp-button`, `bp-${props.size}-height`]; // 按钮类型和尺寸
+  let name = [
+    `bp-button`,
+    `bp-${props.size}-height`,
+    { "bp-btn-block": props.block },
+  ]; // 按钮类型和尺寸
 
   hasSlotDefault && name.push(`bp-btn-padding-${props.size}`); // 尺寸边距设置
-  props.block && name.push("bp-btn-block"); // 宽度是否撑满父级元素
 
   // 文字按钮下需要单独考虑自身的主题颜色，以及控制独有的样式（去除边框和背景）
   if (isTextBtn.value) {
@@ -76,13 +85,13 @@ const btnClass = computed(() => {
 
 watch(
   () => props.icon,
-  v => (icon.value = v),
+  (v) => (icon.value = v),
   { immediate: true }
 );
 
 watch(
   () => props.loading,
-  v => (icon.value = v ? "ri-loader-5-fill bp-icon-loading" : props.icon),
+  (v) => (icon.value = v ? "ri-loader-5-fill bp-icon-loading" : props.icon),
   { immediate: true }
 );
 

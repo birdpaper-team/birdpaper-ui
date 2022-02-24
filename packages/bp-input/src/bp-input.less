@@ -6,17 +6,24 @@
  */
 
 .bp-uninput {
-  &:disabled {
-    background-color: @gary-2;
-    border-radius: @radius;
+  &:read-only {
     cursor: no-drop;
+    background-color: @gary-1;
+
+    &:hover {
+      border: 1px solid @gary-4;
+    }
   }
 
-  &:read-only {
-    background-color: @gary-1;
-    border-radius: @radius;
+  &:disabled {
+    background-color: @gary-2;
     cursor: no-drop;
+
+    &:hover {
+      border: 1px solid @gary-4;
+    }
   }
+
 }
 
 .bp-input {
@@ -24,267 +31,293 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  max-width: 100%;
-  min-height: @miniHeight;
-  border-radius: @radius;
-  border: 1px solid @gary-4;
-  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
-
-  &:hover {
-    border: 1px solid @gary-5;
-  }
 
   .bp-input-inner {
-    .bp-uninput;
-
     width: 100%;
-    -webkit-appearance: none;
-    //background-color: @gary-0;
-    background-image: none;
+    height: 100%;
+    min-height: @miniHeight;
     box-sizing: border-box;
+    border: 1px solid @gary-4;
+    -webkit-appearance: none;
+    background-image: none;
     font-weight: 400;
     color: @gary-7;
     border-top-left-radius: @radius;
     border-bottom-left-radius: @radius;
-    border: none;
-    padding-left: 8px;
+    padding: 0 10px;
+    border-radius: @radius;
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
+    .bp-uninput;
+
+    &:hover {
+      border: 1px solid @gary-5;
+    }
   }
 
-  .bp-input-right {
-    min-width: 50px;
-    line-height: 1;
-    color: @gary-6;
+  .bp-has-append {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
 
-    .bp-input-suffix,
-    .bp-input-append {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      align-content: center;
-      width: 100%;
+  .bp-has-prepend {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .bp-has-prefix {
+    padding-left: 30px;
+  }
+
+  .bp-input-prefix,
+  .bp-input-prepend,
+  .bp-input-suffix,
+  .bp-input-append {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+  }
+
+  .bp-input-prefix,
+  .bp-input-suffix {
+    position: absolute;
+    width: auto;
+    height: calc(100% - 2px);
+    background-color: @gary-0;
+  }
+
+  .bp-input-prepend,
+  .bp-input-append {
+    background-color: @gary-2;
+    width: 100%;
+    height: 100%;
+
+    .bp-button {
+      border: 1px solid @gary-4;
+      background-color: @gary-2;
+      border-radius: @radius;
+      color: @gary-6;
       height: 100%;
+      min-height: @miniHeight;
+      padding: 0 16px;
+      font-size: 14px;
 
-      .bp-button {
-        position: relative;
-        right: -1px;
-        width: 100%;
-
-        .bp-button-inner {
-          width: 100%;
-          border-bottom-left-radius: 0;
-          border-top-left-radius: 0;
-        }
+      span {
+        padding: 0;
+        border: none;
       }
     }
 
+    span {
+      border: 1px solid @gary-4;
+      color: @gary-6;
+      padding: 0 16px;
+      height: 100%;
+      display: inline-flex;
+      box-sizing: border-box;
+      align-items: center;
+    }
+  }
+
+  .bp-input-first,
+  .bp-input-tail {
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    color: @gary-5;
+  }
+
+  .bp-input-first {
+    .bp-input-prefix {
+      left: 1px;
+      top: 1px;
+      border-top-left-radius: @radius;
+      border-bottom-left-radius: @radius;
+      padding: 0 8px 0 10px;
+    }
+
+    .bp-input-prepend {
+      border-top-left-radius: @radius;
+      border-bottom-left-radius: @radius;
+
+      .bp-button {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        border-right: none;
+      }
+
+      span {
+        border-bottom-right-radius: 0;
+        border-top-right-radius: 0;
+        border-top-left-radius: @radius;
+        border-bottom-left-radius: @radius;
+        border-right: none;
+      }
+    }
+  }
+
+  .bp-input-tail {
+    .suffix-is-click {
+      color: @gary-5;
+      cursor: pointer;
+      .transition-all-2-ease;
+
+      &:hover {
+        color: @gary-6;
+        .transition-all-2-ease;
+      }
+    }
+
+    .bp-input-suffix {
+      right: 1px;
+      top: 1px;
+      border-top-right-radius: @radius;
+      border-bottom-right-radius: @radius;
+      padding: 0 10px;
+    }
+
     .bp-input-append {
-      width: calc(100% - 1px);
-      border-left: 1px solid @gary-4;
-      //background-color: @gary-2;
       border-top-right-radius: @radius;
       border-bottom-right-radius: @radius;
 
       .bp-button {
-        .bp-button-inner {
-          background-color: @gary-2;
-          border-left: none;
-        }
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        border-left: none;
+      }
+
+      span {
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: @radius;
+        border-bottom-right-radius: @radius;
+        border-left: none;
       }
     }
   }
 
   .bp-textarea-inner {
-    .bp-input-inner;
-
     max-width: 100%;
     min-width: 100%;
-    min-height: 60px;
     border-radius: @radius;
     font-size: 14px;
     display: block;
-    padding: 10px;
+    .bp-input-inner;
+    min-height: 80px;
+    padding: 6px 10px;
+  }
+
+  .bp-textarea-word-limit {
+    position: absolute;
+    right: 10px;
+    bottom: 6px;
+    padding: 2px 4px;
+    color: @gary-6;
+    background-color: @gary-0;
+    border-radius: @radius;
   }
 
   .resize-none {
     resize: none;
   }
 
-  .bp-textarea-num-limit {
-    position: absolute;
-    right: 4px;
-    bottom: 4px;
-    color: @gary-6;
-  }
-}
-
-.bp-input-large {
-  .bp-input-inner {
-    height: @largeHeight;
-    font-size: inherit;
+  .resize-both {
+    resize: both;
   }
 
-  .bp-input-right {
-    height: @largeHeight;
-
-    //.bp-button {
-    //  .bp-button-inner {
-    //    height: @largeHeight + 2;
-    //  }
-    //}
-  }
-}
-
-.bp-input-normal {
-  .bp-input-inner {
-    height: @normalHeight;
-    font-size: inherit;
+  .resize-horizontal {
+    resize: horizontal;
   }
 
-  .bp-input-right {
-    height: @normalHeight;
-  }
-}
-
-.bp-input-small {
-  .bp-input-inner {
-    height: @smallHeight;
-    font-size: inherit;
+  .resize-vertical {
+    resize: vertical;
   }
 
-  .bp-input-right {
-    height: @smallHeight;
-  }
-}
-
-.bp-input-mini {
-  .bp-input-inner {
-    height: @miniHeight;
-    font-size: inherit;
+  .focus-border {
+    border: 1px solid @primary-3  !important;
+    transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
   }
 
-  .bp-input-right {
-    height: @miniHeight;
+  input:-webkit-autofill {
+    border: 1px solid @gary-4  !important;
+    background: none;
   }
-}
 
-.focus-border {
-  border: 1px solid @primary-3  !important;
-  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
-}
-
-.bp-border-primary {
-  border: 1px solid @primary-4;
-  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
-
-  &:hover {
-    border: 1px solid @primary-5;
+  input,
+  textarea {
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    outline: none;
+    font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei";
   }
-}
 
-.bp-border-success {
-  border: 1px solid @success-4;
-  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
-
-  &:hover {
-    border: 1px solid @success-5;
+  .bp-input-placeholder {
+    color: @gary-5;
+    font-weight: normal;
+    font-size: in;
   }
-}
 
-.bp-border-warning {
-  border: 1px solid @warning-4;
-  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
-
-  &:hover {
-    border: 1px solid @warning-5;
+  textarea::placeholder {
+    .bp-input-placeholder;
   }
-}
 
-.bp-border-danger {
-  border: 1px solid @danger-4;
-  transition: border-color .2s cubic-bezier(.645, .045, .355, 1);
-
-  &:hover {
-    border: 1px solid @danger-5;
+  textarea::-webkit-input-placeholder {
+    .bp-input-placeholder;
   }
-}
 
-input:-webkit-autofill {
-  border: 1px solid @gary-0  !important;
-}
+  /* Firefox 4-18 */
+  textarea::-moz-placeholder {
+    .bp-input-placeholder;
+  }
 
-input,
-textarea {
-  letter-spacing: normal;
-  word-spacing: normal;
-  text-transform: none;
-  text-indent: 0px;
-  text-shadow: none;
-  outline: none;
-  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei";
-}
+  /* Firefox 19-50 */
+  textarea::-moz-placeholder {
+    .bp-input-placeholder;
+  }
 
-.bp-input-placeholder {
-  color: @gary-5;
-  font-weight: normal;
-}
-
-textarea::placeholder {
-  .bp-input-placeholder;
-}
-
-textarea::-webkit-input-placeholder {
-  .bp-input-placeholder;
-}
-
-/* Firefox 4-18 */
-textarea::-moz-placeholder {
-  .bp-input-placeholder;
-}
-
-/* Firefox 19-50 */
-textarea::-moz-placeholder {
-  .bp-input-placeholder;
-}
-
-/* - Internet Explorer 10–11
+  /* - Internet Explorer 10–11
     - Internet Explorer Mobile 10-11 */
-textarea::-ms-input-placeholder {
-  .bp-input-placeholder;
-}
+  textarea::-ms-input-placeholder {
+    .bp-input-placeholder;
+  }
 
-/* Edge (also supports -webkit-input-placeholder) */
-textarea::-ms-input-placeholder {
-  .bp-input-placeholder;
-}
+  /* Edge (also supports -webkit-input-placeholder) */
+  textarea::-ms-input-placeholder {
+    .bp-input-placeholder;
+  }
 
-input::placeholder {
-  .bp-input-placeholder;
-}
+  input::placeholder {
+    .bp-input-placeholder;
+  }
 
-input::-webkit-input-placeholder {
-  .bp-input-placeholder;
-}
+  input::-webkit-input-placeholder {
+    .bp-input-placeholder;
+  }
 
-/* Firefox 4-18 */
-input::-moz-placeholder {
-  .bp-input-placeholder;
-}
+  /* Firefox 4-18 */
+  input::-moz-placeholder {
+    .bp-input-placeholder;
+  }
 
-/* Firefox 19-50 */
-input::-moz-placeholder {
-  .bp-input-placeholder;
-}
+  /* Firefox 19-50 */
+  input::-moz-placeholder {
+    .bp-input-placeholder;
+  }
 
-/* - Internet Explorer 10–11
+  /* - Internet Explorer 10–11
     - Internet Explorer Mobile 10-11 */
-input::-ms-input-placeholder {
-  .bp-input-placeholder;
-}
+  input::-ms-input-placeholder {
+    .bp-input-placeholder;
+  }
 
-/* Edge (also supports -webkit-input-placeholder) */
-input::-ms-input-placeholder {
-  .bp-input-placeholder;
+  /* Edge (also supports -webkit-input-placeholder) */
+  input::-ms-input-placeholder {
+    .bp-input-placeholder;
+  }
+
 }
 
 .bp-fade-in-enter-from,

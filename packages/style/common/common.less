@@ -2,8 +2,28 @@
  * @Author: Sam
  * @Date: 2021-05-28 15:21:34
  * @Last Modified by: Sam
- * @Last Modified time: 2022-01-29 21:16:13
+ * @Last Modified time: 2022-02-16 09:14:38
  */
+::-webkit-scrollbar-track-piece {
+  background-color: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #DDD;
+  background-clip: padding-box;
+  min-height: 28px;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #BBB;
+}
+
 .no-select {
   -webkit-appearance: none;
   -moz-user-select: none;
@@ -23,34 +43,26 @@
 
 .bp-large-height {
   height: @size-large;
-  line-height: @size-large;
   min-height: @size-large;
-  min-width: @size-large;
   font-size: 15px;
 }
 
 .bp-normal-height {
   height: @size-normal;
-  line-height: @size-normal;
   min-height: @size-normal;
-  min-width: @size-normal;
   font-size: 14px;
 }
 
 .bp-small-height {
   height: @size-small;
-  line-height: @size-small;
   min-height: @size-small;
-  min-width: @size-small;
   font-size: 13px;
 }
 
 .bp-mini-height {
   height: @size-mini;
-  line-height: @size-mini;
   height: @size-mini;
   min-height: @size-mini;
-  min-width: @size-mini;
   font-size: 12px;
 }
 

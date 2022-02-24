@@ -1,228 +1,230 @@
 <template>
-  <div
-    :class="[inputClass, { 'focus-border': isFocus }]"
-    v-click-outside="onClickOutside"
-  >
-    <!-- 普通文本类型 -->
-    <template v-if="type !== 'textarea'">
+  <div :class="inputClass">
+    <!-- 普通文本输入框，含有头部和尾部 -->
+    <template v-if="inpType !== 'textarea'">
+      <!-- 头部区域 -->
+      <bp-input-first :mode="first.mode" :render="first.isRender" :icon="prefixIcon" :size="size">
+        <slot name="prepend"></slot>
+      </bp-input-first>
       <input
         ref="inp"
-        class="bp-input-inner"
         spellcheck="false"
-        :type="type"
-        :placeholder="placeholder"
-        :autocomplete="'new-password'"
         :name="name"
-        :maxlength="maxLength"
+        :placeholder="placeholder"
         :disabled="disabled"
         :readonly="readonly"
+        :class="inputInnerClass"
         :value="modelValue"
-        @keyup="onKeyup"
-        @keydown="onKeydown"
+        :type="inpType"
+        :maxlength="maxLength"
+        :autocomplete="autocomplete"
+        @keyup="keyup"
+        @keydown="keydown"
         @input="onInput"
-        @focus="onFocus"
-        @blur="onBlur"
+        @focus="focus"
+        @blur="blur"
       />
-      <!-- 右侧区域 -->
-      <div class="bp-input-right" v-if="rightOption.show">
-        <bp-input-suffix v-model="isSuffix" @click="onRightOptionClick">
-          <slot name="suffix">
-            <i v-if="rightOption.icon !== ''" :class="rightOption.icon"></i>
-            <span v-if="rightOption.text !== ''">
-              {{ rightOption.text }}
-            </span>
-          </slot>
-        </bp-input-suffix>
-        <bp-input-append v-model="isAppend">
-          <slot name="append"> </slot>
-        </bp-input-append>
-      </div>
+      <!-- 尾部区域 -->
+      <bp-input-tail
+        :mode="tail.mode"
+        :render="tail.isRender"
+        :type="tail.type"
+        :size="size"
+        :disabled="disabled"
+        :readonly="readonly"
+        :inp-value="modelValue"
+        :max-length="maxLength"
+        :icon="suffixIcon"
+        :is-click="suffixClickable"
+        @click="onSuffixClick"
+      >
+        <slot name="append"></slot>
+      </bp-input-tail>
     </template>
+
     <!-- 多行文本 -->
     <template v-else>
       <textarea
         ref="inp"
         spellcheck="false"
         :name="name"
-        :class="['bp-textarea-inner', resize ? '' : 'resize-none']"
-        :disabled="disabled"
-        :readonly="readonly"
-        :rows="rows"
-        :maxlength="maxLength"
         :placeholder="placeholder"
+        :disabled="disabled"
+        :autocomplete="autocomplete"
+        :readonly="readonly"
+        :class="textareaInnerClass"
+        :rows="!autosize && rows"
         :value="modelValue"
+        :maxlength="maxLength"
         @input="onInput"
-        @keyup="onKeyup"
-        @keydown="onKeydown"
-        @focus="onFocus"
-        @blur="onBlur"
+        @keyup="keyup"
+        @keydown="keydown"
+        @focus="focus"
+        @blur="blur"
       />
-      <!-- 字数限制 -->
-      <div class="bp-textarea-num-limit" v-if="rightOption.show">
-        <div class="bp-input-suffix">
-          <span class="bp-input-suffix-inner">
-            <span v-if="rightOption.text !== ''">
-              {{ rightOption.text }}
-            </span>
-          </span>
-        </div>
+      <div class="bp-textarea-word-limit" v-if="showLimit">
+        <span>{{ modelValue.length }}/{{ maxLength }}</span>
       </div>
     </template>
   </div>
 </template>
 
-<script>
-import { computed, ref, watch } from "vue";
-import { clickOutside } from "../../utils/util.js";
-import { useInputRight } from "./inputRight.js";
-import bpInputSuffix from "./components/bp-input-suffix.vue";
-import bpInputAppend from "./components/bp-input-append.vue";
+<script setup>
+import { computed, ref, useSlots, watch, defineProps, defineEmits, reactive } from "vue";
+import { useInput } from "../../use/input";
+import { useDesign } from "../../use/design";
+import bpInputTail from "./components/bp-input-tail.vue";
+import bpInputFirst from "./components/bp-input-first.vue";
 
-const inpTypeList = ["text", "password", "textarea"]; // 输入框可用类型
-const sizeList = ["mini", "small", "normal", "large"]; // 可用尺寸
-const themeList = ["default", "primary", "success", "warning", "danger"]; // 可用边框颜色
+const props = defineProps({
+  modelValue: { type: [String, Number], default: "", require: true }, // 绑定值 Binding values
+  type: { type: String, default: "text", validator: typeValidator }, //  输入框类型 Type of the input
+  size: { type: String, default: "normal", validator: sizeValidator }, // 输入框尺寸 Size of the input
+  placeholder: { type: String, default: "" }, // 占位文本 The placeholder text
+  disabled: { type: Boolean, default: false }, // 是否禁用 Disabled or not
+  readonly: { type: Boolean, default: false }, // 是否只读 Read-only or not
+  clearable: { type: Boolean, default: false }, // 是否可清空 Can be empty or not
+  showLimit: { type: Boolean, default: false }, // 是否展示字数限制 Show word limit or not
+  showPassword: { type: Boolean, default: false }, // 是否展示密码切换图标 Show password trigger icon or not
+  maxlength: { type: Number, default: null }, // 最大输入长度 Maximum input length
+  autosize: { type: Boolean, default: false }, // 高度是否自适应（type = 'textarea'） The height is adaptive or not (type = 'textarea')
+  resize: { type: String, default: "none" }, // 控制能否被缩放（type = 'textarea'） Can be scaled or not (type = 'textarea')
+  rows: { type: Number, default: 3 }, // 输入框的行数（type = 'textarea'） The number of lines in the input (type = 'textarea')
+  name: { type: String, default: "" }, // 原生属性 Native attributes
+  form: { type: String, default: "" }, // 原生属性 Native attributes
+  autofocus: { type: Boolean, default: false }, // 原生属性，自动获取焦点 Native property, automatically gets focus
+  autocomplete: { type: String, default: "" }, // 原生属性，自动补全 Native property, automatic completion
+  suffixIcon: { type: String, default: "" }, // 自定义后缀图标 Custom suffix icon
+  suffixClickable: { type: Boolean, default: false }, // 自定义后缀图标是否可点击 Custom suffix icon is clickable or not
+  prefixIcon: { type: String, default: "" }, // 自定义前缀图标 Custom prefix icon
+});
 
-export default {
-  name: "bp-input",
-  directives: { clickOutside },
-  components: { bpInputSuffix, bpInputAppend },
-  props: {
-    modelValue: { type: [String, Number], default: "" }, // 输入框文本值
-    placeholder: { type: String, default: "" }, // 占位文本
-    disabled: { type: Boolean, default: false }, // 是否禁用
-    readonly: { type: Boolean, default: false }, // 是否只读
-    clearable: { type: Boolean, default: false }, // 是否展示清空按钮
-    name: { type: String, default: "" }, // 输入框 name 标识
-    showLimit: { type: Boolean, default: false }, // 是否展示字数限制
-    maxLength: { type: Number, default: null }, // 最大输入长度
-    autosize: { type: Boolean, default: false }, // 多行文本下高度是否自动撑开
-    resize: { type: Boolean, default: false }, // 多行文本下是否允许拖动
-    rows: { type: Number, default: 3 }, // 多行文本的行数
-    suffixIcon: { type: String, default: "" }, // 输入框尾部图标
-    type: {
-      type: String,
-      default: "text",
-      validator: (value) => inpTypeList.indexOf(value) !== -1,
-    }, // 输入框类型
-    size: {
-      type: String,
-      default: "normal",
-      validator: (value) => sizeList.indexOf(value) !== -1,
-    }, // 输入框尺寸
-    borderColor: {
-      type: String,
-      default: "default",
-      validator: (value) => themeList.indexOf(value) !== -1,
-    }, // 边框颜色
+const emit = defineEmits(EMITS);
+
+const inp = ref(null); // 当前 Input 实例
+const isFocus = ref(false); // 是否处于聚焦状态
+const inpType = ref("text"); // 当前 Input 类型
+
+// Input 外层样式，控制尺寸等
+const inputClass = computed(() => {
+  let name = ["bp-input"];
+  props.type !== "textarea" && name.push(`bp-${props.size}-height`);
+  return name;
+});
+
+// Input 内层样式
+const inputInnerClass = computed(() => [
+  "bp-input-inner",
+  {
+    "focus-border": isFocus.value,
+    "bp-has-append": hasAppend.value,
+    "bp-has-prefix": hasPrefix.value,
+    "bp-has-prepend": hasPrepend.value,
   },
-  setup(props, { emit, slots }) {
-    const isFocus = ref(false);
-    // 样式
-    const inputClass = computed(() => {
-      let className = ["bp-input"];
+]);
 
-      if (props.borderColor !== "default")
-        className.push(`bp-border-${props.borderColor}`);
+// type = 'textarea' 下的样式处理
+const textareaInnerClass = computed(() => ["bp-textarea-inner", `resize-${props.resize}`, { "focus-border": isFocus.value }]);
 
-      if (props.type !== "textarea") className.push(`bp-input-${props.size}`);
+// 头部和尾部区域
+const first = reactive({ isRender: false, mode: "" }),
+  tail = reactive({ isRender: false, type: "", mode: "" });
 
-      return className;
-    });
+// 展示输入字数统计和限制，需要传入最大长度限制并开启 showLimit 属性
+const showLimit = computed(() => props.showLimit && !!props.maxLength);
 
-    const isSuffix = computed(() => {
-      return (rightOption.visibled && !slots.append) || slots.suffix;
-    });
-    const isAppend = computed(() => {
-      return slots.append;
-    });
+// 是否含有后缀内容，除了预设（密码切换、长度限制、清空外，还有自定义后缀图标展示的情况）
+const hasSuffix = computed(
+  () => (props.type === "password" && props.showPassword) || showLimit.value || props.clearable || !!props.suffixIcon
+);
 
-    // 右侧显示
-    const {
-      rightOption,
-      onRightOptionClick,
-      showRightArea,
-      renderRightArea,
-    } = useInputRight(props, emit);
+// 是否含有后置内容的插槽
+const hasAppend = computed(() => !!useSlots().append);
 
-    watch(
-      () => [props.showLimit, props.clearable, props.suffixIcon],
-      () => {
-        renderRightArea();
-        // showRightArea();
-      }
-    );
-    watch(
-      () => props.suffixIcon,
-      () => {
-        rightOption.icon = props.suffixIcon;
-        showRightArea();
-        renderRightArea();
-      },
-      {
-        immediate: true,
-      }
-    );
+// 是否含有头部的前缀内容，判断是否有用户自定义的前缀图标和插槽
+const hasPrefix = computed(() => !!props.prefixIcon && !hasPrepend.value);
+const hasPrepend = computed(() => !!useSlots().prepend);
 
-    showRightArea();
+// 头部和尾部的渲染判断
+first.isRender = computed(() => hasPrefix.value || hasPrepend.value);
+tail.isRender = computed(() => hasSuffix.value || hasAppend.value);
 
-    const onInput = (e) => {
-      emit("update:modelValue", e.target.value);
-      showRightArea(e.target.value);
-      // 多行文本下高度自适应
-      if (props.type === "textarea" && props.autosize) autoHeight(e);
-    };
+// 初始化输入框，获取传入的类型，并判断头尾展示
+const init = () => {
+  inpType.value = props.type;
 
-    // 获取焦点触发
-    const onFocus = (e) => {
-      isFocus.value = true;
-      showRightArea(e.target.value);
-      emit("focus", e);
-    };
+  first.isRender && (first.mode = hasPrepend.value ? "prepend" : "prefix");
 
-    // 失去焦点触发
-    const onBlur = (e) => {
-      isFocus.value = false;
-      emit("blur", e);
-    };
-
-    // 点击外部触发
-    const onClickOutside = () => {
-      if (props.clearable && props.type !== "password") {
-        rightOption.visibled = false;
-      }
-    };
-
-    // 键入触发
-    const onKeyup = (e) => {
-      emit("keyup", e);
-      renderRightArea();
-    };
-
-    // 键松触发
-    const onKeydown = (e) => emit("keydown", e);
-
-    // 高度自动撑开
-    const autoHeight = (e) => {
-      e.target.style.height = `${e.target.scrollTop + e.target.scrollHeight}px`;
-    };
-
-    return {
-      rightOption,
-      isFocus,
-      inputClass,
-      isSuffix,
-      isAppend,
-      showRightArea,
-      onRightOptionClick,
-      onInput,
-      onFocus,
-      onBlur,
-      onKeyup,
-      onClickOutside,
-      onKeydown,
-    };
-  },
-
-  emits: ["update:modelValue", "focus", "blur", "keyup", "keydown", "clear"],
+  if (tail.isRender) {
+    tail.mode = hasAppend.value ? "append" : "suffix";
+    // 根据传入的属性判断所属的 suffix 类型
+    !hasAppend.value && (tail.type = initSuffixType(props));
+  }
 };
+
+// 后缀图标点击触发
+const onSuffixClick = () => {
+  // 切换密码图标，需要设置输入框类型以及更改尾部 suffix 的类型
+  if (props.type === "password") {
+    inpType.value = inpType.value === "text" ? "password" : "text";
+    tail.type = tail.type === "psw-eye-line" ? "psw-eye-fill" : "psw-eye-line";
+    return;
+  }
+  props.clearable && clearValue();
+  emit("suffix-click");
+};
+
+// 清空值
+const clearValue = () => {
+  emit("update:modelValue", "");
+  emit("clear");
+};
+
+const onInput = (e) => {
+  emit("update:modelValue", e.target.value);
+  emit("input", e.target.value);
+};
+
+// 获取焦点触发
+const focus = (e) => {
+  isFocus.value = true;
+  emit("focus", e);
+};
+
+// 失去焦点触发
+const blur = (e) => {
+  isFocus.value = false;
+  emit("blur", e);
+};
+
+// 键入触发
+const keyup = (e) => emit("keyup", e);
+
+// 键松触发
+const keydown = (e) => emit("keydown", e);
+
+// 聚焦并选中输入框的值
+const select = () => inp.value.select();
+
+watch(
+  () => props.modelValue,
+  () => {
+    // 多行文本下高度自适应
+    if (props.type === "textarea" && props.autosize) autoHeight(inp.value);
+  }
+);
+watch(
+  () => [props.showPassword, props.type, hasAppend.value, hasSuffix.value],
+  () => init(),
+  { immediate: true }
+);
+
+defineExpose({ blur, focus, select });
+</script>
+
+<script>
+export default { name: "bp-input" };
+
+const { EMITS, typeValidator, initSuffixType, autoHeight } = useInput();
+const { sizeValidator } = useDesign();
 </script>

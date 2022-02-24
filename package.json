@@ -1,6 +1,6 @@
 {
   "name": "birdpaper-ui",
-  "version": "1.0.0-beat.7",
+  "version": "1.0.0-beat.7.5",
   "description": "提供基于Vue3的UI组件库",
   "scripts": {
     "gulp": "gulp -f build/gulpStyle.js",
