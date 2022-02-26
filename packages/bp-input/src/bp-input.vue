@@ -16,7 +16,7 @@
         :class="inputInnerClass"
         :value="modelValue"
         :type="inpType"
-        :maxlength="maxLength"
+        :maxlength="maxlength"
         :autocomplete="autocomplete"
         @keyup="keyup"
         @keydown="keydown"
@@ -33,7 +33,7 @@
         :disabled="disabled"
         :readonly="readonly"
         :inp-value="modelValue"
-        :max-length="maxLength"
+        :max-length="maxlength"
         :icon="suffixIcon"
         :is-click="suffixClickable"
         @click="onSuffixClick"
@@ -55,7 +55,7 @@
         :class="textareaInnerClass"
         :rows="!autosize && rows"
         :value="modelValue"
-        :maxlength="maxLength"
+        :maxlength="maxlength"
         @input="onInput"
         @keyup="keyup"
         @keydown="keydown"
@@ -63,7 +63,7 @@
         @blur="blur"
       />
       <div class="bp-textarea-word-limit" v-if="showLimit">
-        <span>{{ modelValue.length }}/{{ maxLength }}</span>
+        <span>{{ modelValue.length }}/{{ maxlength }}</span>
       </div>
     </template>
   </div>
@@ -131,7 +131,7 @@ const first = reactive({ isRender: false, mode: "" }),
   tail = reactive({ isRender: false, type: "", mode: "" });
 
 // 展示输入字数统计和限制，需要传入最大长度限制并开启 showLimit 属性
-const showLimit = computed(() => props.showLimit && !!props.maxLength);
+const showLimit = computed(() => props.showLimit && !!props.maxlength);
 
 // 是否含有后缀内容，除了预设（密码切换、长度限制、清空外，还有自定义后缀图标展示的情况）
 const hasSuffix = computed(

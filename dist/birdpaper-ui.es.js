@@ -363,7 +363,7 @@ const _sfc_main$p = /* @__PURE__ */ Object.assign(__default__$1, {
     ]);
     const textareaInnerClass = computed(() => ["bp-textarea-inner", `resize-${props.resize}`, { "focus-border": isFocus.value }]);
     const first = reactive$1({ isRender: false, mode: "" }), tail = reactive$1({ isRender: false, type: "", mode: "" });
-    const showLimit = computed(() => props.showLimit && !!props.maxLength);
+    const showLimit = computed(() => props.showLimit && !!props.maxlength);
     const hasSuffix = computed(() => props.type === "password" && props.showPassword || showLimit.value || props.clearable || !!props.suffixIcon);
     const hasAppend = computed(() => !!useSlots().append);
     const hasPrefix = computed(() => !!props.prefixIcon && !hasPrepend.value);
@@ -439,7 +439,7 @@ const _sfc_main$p = /* @__PURE__ */ Object.assign(__default__$1, {
             class: normalizeClass(unref(inputInnerClass)),
             value: __props.modelValue,
             type: inpType.value,
-            maxlength: _ctx.maxLength,
+            maxlength: __props.maxlength,
             autocomplete: __props.autocomplete,
             onKeyup: keyup,
             onKeydown: keydown,
@@ -455,7 +455,7 @@ const _sfc_main$p = /* @__PURE__ */ Object.assign(__default__$1, {
             disabled: __props.disabled,
             readonly: __props.readonly,
             "inp-value": __props.modelValue,
-            "max-length": _ctx.maxLength,
+            "max-length": __props.maxlength,
             icon: __props.suffixIcon,
             "is-click": __props.suffixClickable,
             onClick: onSuffixClick
@@ -478,7 +478,7 @@ const _sfc_main$p = /* @__PURE__ */ Object.assign(__default__$1, {
             class: normalizeClass(unref(textareaInnerClass)),
             rows: !__props.autosize && __props.rows,
             value: __props.modelValue,
-            maxlength: _ctx.maxLength,
+            maxlength: __props.maxlength,
             onInput,
             onKeyup: keyup,
             onKeydown: keydown,
@@ -486,7 +486,7 @@ const _sfc_main$p = /* @__PURE__ */ Object.assign(__default__$1, {
             onBlur: blur
           }, null, 42, _hoisted_2$g),
           unref(showLimit) ? (openBlock(), createElementBlock("div", _hoisted_3$d, [
-            createElementVNode("span", null, toDisplayString(__props.modelValue.length) + "/" + toDisplayString(_ctx.maxLength), 1)
+            createElementVNode("span", null, toDisplayString(__props.modelValue.length) + "/" + toDisplayString(__props.maxlength), 1)
           ])) : createCommentVNode("", true)
         ], 64))
       ], 2);
