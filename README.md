@@ -7,8 +7,8 @@
 <p align="center">birdpaper-ui is a library that provides UI components based on Vue3.</p>
 
 <p align="center">
-  <a href="https://gitee.com/liluanhui/birdpaper-ui.git" target="_blank">
-    <img class="tag" src="https://gitee.com/liluanhui/birdpaper-ui/badge/star.svg?theme=dark">
+  <a href="https://gitee.com/birdpaper/birdpaper-ui.git" target="_blank">
+    <img class="tag" src="https://gitee.com/birdpaper/birdpaper-ui/badge/star.svg?theme=dark">
   </a>
   <a href="https://www.npmjs.com/package/birdpaper-ui" target="_blank">
      <img class="tag" src="https://img.shields.io/npm/v/birdpaper-ui.svg?style=badge"/>
@@ -32,7 +32,7 @@ English | [简体中文](./README-CN.md)
 
 - The latest:<img class="li-img" src="https://img.shields.io/npm/v/birdpaper-ui.svg?style=badge"/>
 
-For more version information, see [update log](https://www.birdpaper.design/components/version_c) and [version specification](https://www.birdpaper.design/design/version_m)
+For more version information, see [update log](https://www.birdpaper.design/#/components/version_c) and [version specification](https://www.birdpaper.design/#/design/version_m)
 
 ## Features
 
@@ -75,7 +75,7 @@ At present, you can be [Birdpaper-Design website](https://www.birdpaper.design) 
 
 ## Link
 
-- [Component](https://www.birdpaper.design/components/install_m)
+- [Component](https://www.birdpaper.design/#/components/install_m)
 - [Gitee](https://gitee.com/liluanhui/birdpaper-ui)
 - [Github](https://github.com/liluanhui/birdpaper-ui)
 - [Npm](https://www.npmjs.com/package/birdpaper-ui)
@@ -86,4 +86,4 @@ At present, you can be [Birdpaper-Design website](https://www.birdpaper.design) 
 
 birdpaper-ui is developed and maintained by individuals under an MIT open Source license. You can use birdpaper-UI for free and receive donations to better support the development of the project. If you are an individual, you can support the growth of the project by donating, and your donation history and nickname will be displayed publicly. If you are the operator of a business or organization, your donation will make business sense.
 
-[Donate](https://www.birdpaper.design/donate)
+[Donate](https://www.birdpaper.design/#/donate)

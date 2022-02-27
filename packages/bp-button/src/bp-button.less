@@ -16,8 +16,8 @@
   outline: none;
   white-space: nowrap;
   max-width: 100%;
-  box-sizing: content-box;
   min-height: @miniHeight;
+  min-width: 52px;
   text-rendering: auto;
   letter-spacing: normal;
   word-spacing: normal;
@@ -41,6 +41,10 @@
   [class*="ri-"] {
     position: relative;
     top: 1px;
+  }
+
+  span {
+    display: inline-flex;
   }
 }
 
