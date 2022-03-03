@@ -14,8 +14,7 @@
     float: left;
 
     p {
-      height: @normalHeight;
-      line-height: @normalHeight;
+      .bp-normal-height;
       margin: 0;
       color: @gary-7;
 
@@ -28,7 +27,7 @@
   .bp-pagination-container {
     margin-right: 10px;
     display: flex;
-    height: @normalHeight;
+    .bp-normal-height;
 
     .active {
       border: 1px solid @primary-3;
@@ -39,10 +38,14 @@
     .bp-pagination-item {
       list-style: none;
       float: left;
-      height: @normalHeight;
+      .bp-normal-height;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
       width: @normalHeight;
       min-width: @normalHeight;
-      line-height: @normalHeight;
+      box-sizing: border-box;
       text-align: center;
       border: 1px solid @gary-4;
       border-radius: @radius;
