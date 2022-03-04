@@ -1,39 +1,26 @@
 <template>
   <div class="bp-pagination">
-    <!--<div class="bp-pagination-total" v-if="showTotal">
-      <p>
-        共
-        <span>
-          {{ total }}
-        </span>
-        条
-      </p>
-    </div>-->
-
-    <bp-pagination-ul
-      :disabled="disabled"
-      :total="total"
-      :pageSize="pageSize"
-      :current-page="currentPage"
-      :prev-text="prevText"
-      :next-text="nextText"
-      @click="onPageClick"
-    ></bp-pagination-ul>
-
-    <!--<bp-select v-model="pageSize" :option-list="sizeOption"> </bp-select>-->
+    <template v-for="(item, index) in layoutsComponents" :key="`p-${index}`">
+      <component
+        :is="item.component"
+        :disabled="disabled"
+        v-bind="item.bind"
+        @[item.event]="item.eventName"
+      ></component>
+    </template>
   </div>
 </template>
 
 <script setup>
-import { ref, watch, defineProps, defineEmits } from "vue";
-import bpPaginationUl from "./components/bp-pagination-ul.vue";
+import { defineProps, defineEmits, watchEffect } from "vue";
+import { usePagination } from "./pagination"
 
 const props = defineProps({
   total: { type: [Number, String], default: 0 }, // 总条目数
   pageSize: { type: [Number, String], default: () => 20 }, // 每页显示条数
   current: { type: [Number, String], default: 1 }, // 当前页数，支持 v-model
   disabled: { type: Boolean, default: false }, // 是否禁用
-  layout: { type: String, default: "" }, // 自定义分页布局
+  layout: { type: String, default: "pager" }, // 自定义分页布局，total,prev,pager,next,jumper,sizes
   prevText: { type: String, default: "" }, // 替代图标显示的上一页文字
   nextText: { type: String, default: "" }, // 替代图标显示的下一页文字
   sizesList: { type: Array, default: () => [10, 20, 50, 100] }, // 每页显示个数选择器的选项设置
@@ -43,37 +30,13 @@ const props = defineProps({
   hideOnSinglePage: { type: Boolean, default: false }, // 只有一页时隐藏
 });
 const emit = defineEmits(["pageChange"]);
-const currentPage = ref(1); // 当前页
 
-// 点击页码切换
-const onPageClick = (pageNum = 1) => {
-  currentPage.value = pageNum;
-  emit("pageChange", pageNum);
-};
+const { layoutsComponents, currentPage } = usePagination(props, emit);
 
-const sizeOption = ref([]);
-
-watch(
-  () => props.current,
+watchEffect(
   () => {
     currentPage.value = Number(props.current);
   },
-  {
-    immediate: true,
-  }
-);
-watch(
-  () => props.sizesList,
-  () => {
-    sizeOption.value = [];
-    for (let i = 0; i < props.sizesList.length; i++) {
-      const item = props.sizesList[i];
-      sizeOption.value.push({ label: `${item}条/页`, value: item });
-    }
-  },
-  {
-    immediate: true,
-  }
 );
 </script>
 
