@@ -5,22 +5,20 @@
  * @LastModifiedTime: 2021-11-03 15:14:39
  */
 
- .bp-pagination {
+.bp-pagination {
   position: relative;
   display: flex;
 
-  .bp-pagination-total {
-    margin-right: 12px;
-    float: left;
+  .bp-pagination-total,
+  .bp-pagination-totalPages {
+    .bp-normal-height;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
 
-    p {
-      .bp-normal-height;
+    .pagination-total-text {
       margin: 0;
-      color: @gary-7;
-
-      span {
-        margin: 0 2px;
-      }
+      color: @gary-6;
     }
   }
 
@@ -101,7 +99,7 @@
     }
   }
 
-  .select-input{
+  .select-input {
     width: 100px;
   }
 }
