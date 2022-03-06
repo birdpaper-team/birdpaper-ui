@@ -14,7 +14,7 @@
 </template>
 
 <script setup>
-import { computed, ref, watch, defineProps } from "vue";
+import { defineProps, defineEmits } from "vue";
 
 const props = defineProps({
   currentPage: { type: [Number, String], default: 1 }, // 当前激活页
