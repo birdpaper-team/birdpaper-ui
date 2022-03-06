@@ -26,7 +26,7 @@ const props = defineProps({
   icon: { type: String, default: "" }, // suffix 下的尾部图标
   size: { type: String, default: "normal" }, // 输入框尺寸
   maxLength: { type: Number, default: null }, // 最大输入长度
-  inpValue: { type: String, default: "" }, // 输入框的内容值
+  inpValue: { type: [String, Number], default: "" }, // 输入框的内容值
   disabled: { type: Boolean, default: false }, // 是否禁用
   readonly: { type: Boolean, default: false }, // 是否只读
   isClick: { type: Boolean, default: false }, // suffix 下尾部内容是否可点击

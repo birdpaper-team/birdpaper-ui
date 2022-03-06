@@ -10,6 +10,7 @@ import totalPages from "./components/totalPages.vue";
 import prev from "./components/prev.vue";
 import pager from "./components/pager.vue";
 import next from "./components/next.vue";
+import jumper from "./components/jumper.vue";
 
 export const usePagination = (props, emit) => {
   const LAYOUT_MAP = {
@@ -17,7 +18,8 @@ export const usePagination = (props, emit) => {
     pager,
     next,
     total,
-    totalPages
+    totalPages,
+    jumper
   };
 
   const currentPage = ref(1); // 当前页
@@ -25,9 +27,22 @@ export const usePagination = (props, emit) => {
 
   // 点击页码切换
   const onPageClick = (type, pageNum = 1) => {
-    type === 'prev' && (currentPage.value--);
-    type === 'next' && (currentPage.value++);
-    type === 'page' && (currentPage.value = pageNum);
+    let num = currentPage.value;
+    switch (type) {
+      case 'prev':
+        num--;
+        break;
+      case 'next':
+        num++;
+        break;
+
+      default:
+        num = Number(pageNum)
+        break;
+    }
+    num < 1 && (num = 1);
+    num > totalPagesNum.value && (num = totalPagesNum.value)
+    currentPage.value = num;
     emit("pageChange", currentPage.value);
   };
 
@@ -79,6 +94,14 @@ export const usePagination = (props, emit) => {
             value: totalPagesNum.value,
             tmpString: props.pagesTmpString
           },
+        },
+        'jumper': {
+          bind: {
+            pages: totalPagesNum.value,
+            currentPage: currentPage.value,
+          },
+          event: "change",
+          eventName: onPageClick,
         },
       };
 
