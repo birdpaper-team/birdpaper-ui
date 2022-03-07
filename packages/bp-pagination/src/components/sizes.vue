@@ -13,17 +13,13 @@ const props = defineProps({
 });
 const emit = defineEmits(["change"]);
 
-const sizeValue = ref("");
+const sizeValue = ref(props.currentPageSize);
 const sizeList = ref([]);
 
 watch(
   () => sizeValue.value,
-  (val) => emit("change", sizeValue.value)
+  (val) => emit("change", val)
 );
-
-watchEffect(() => {
-  sizeValue.value = props.currentPageSize;
-});
 
 watchEffect(() => {
   let arr = [];

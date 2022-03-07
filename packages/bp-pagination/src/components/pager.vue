@@ -27,7 +27,6 @@ const onClick = (pageNum = "") => {
   if (props.disabled || pageNum === "") return;
   emit("click", 'page', pageNum);
 };
-
 </script>
 
 <script>
