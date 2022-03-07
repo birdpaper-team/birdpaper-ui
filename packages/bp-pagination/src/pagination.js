@@ -14,114 +14,160 @@ import jumper from "./components/jumper.vue";
 import sizes from "./components/sizes.vue";
 
 export const usePagination = (props, emit) => {
-  const LAYOUT_MAP = { prev, pager, next, total, totalPages, jumper, sizes };
+  /**
+   * 分页器包含的组件：
+   * total-总条数，totalPages-总页数，prev-上一页
+   * pager-页码列表，next-下一页，jumper-页面输入跳转，size-每页条数选择器
+   */
+  const layout_map = { total, totalPages, prev, pager, next, jumper, sizes };
 
-  const currentPage = ref(1); // 当前页
-  const currentPageSize = ref(10); // 当前页条数
-  const totalPagesNum = ref(0); // 页数
+  /**
+   * 当前激活的页码
+   */
+  const currentPage = ref(Number(props.pageNum));
 
-  // 点击页码切换
-  const onPageClick = (type, pageNum = 1) => {
+  /**
+   * 每页显示的条数
+   */
+  const currentPageSize = ref(Number(props.pageSize));
+
+  /**
+   * 总页数
+   */
+  const totalPagesNum = ref(0);
+
+  /**
+   * 设置当前激活的页码
+   * @param {Stirng} type 'prev', 'next', 'page'
+   * @param {Number} pageNum
+   */
+  const setCurrentPage = (type, pageNum = 1) => {
     let num = currentPage.value;
-    switch (type) {
-      case "prev":
-        num--;
-        break;
-      case "next":
-        num++;
-        break;
+    type === "prev" ? num-- : type === "next" ? num++ : (num = Number(pageNum));
 
-      default:
-        num = Number(pageNum);
-        break;
-    }
-    num < 1 && (num = 1);
-    num > totalPagesNum.value && (num = totalPagesNum.value);
-    currentPage.value = num;
+    // 限制页码的边界值，最小为 1，最大不超过总页数
+    currentPage.value = num < 1 ? 1 : num > totalPagesNum.value ? totalPagesNum.value : num;
     emit("pageChange", currentPage.value);
   };
 
-  const sizeChange = (size) => {
-    currentPageSize.value = size;
-  };
+  /**
+   * 设置当前一页显示的条数
+   * @param {Number} v
+   */
+  const setCurrentPageSize = (v) => (currentPageSize.value = Number(v));
 
   watchEffect(() => {
     const { total, pageSize } = props;
+
+    // 根据传入的 total 计算总页数
     totalPagesNum.value = Math.ceil(total / currentPageSize.value);
+
+    // 相应的，在每页条数和总页数有变化时，需要重新设定当前激活页，以防止溢出边界值的情况
+    setCurrentPage("page", currentPage.value);
   });
 
-  // 布局组件，返回一个包含组件模板、属性以及事件的 Array
-  const layoutsComponents = computed(() => {
-    const { layout } = props;
-    const LAYOUT_LIST = layout.split(","); // 可自定义的分页布局配置
+  /**
+   * 上一页
+   */
+  const prevComponents = computed(() => {
+    return {
+      bind: {
+        text: props.prevText,
+        disabled: props.disabled || currentPage.value === 1,
+      },
+      event: "click",
+      eventName: setCurrentPage,
+    };
+  });
+
+  const pagerComponents = computed(() => {
+    return {
+      bind: {
+        pages: totalPagesNum.value,
+        currentPage: currentPage.value,
+      },
+      event: "click",
+      eventName: setCurrentPage,
+    };
+  });
+
+  const nextComponents = computed(() => {
+    return {
+      bind: {
+        text: props.nextText,
+        disabled: props.disabled || currentPage.value === totalPagesNum.value,
+      },
+      event: "click",
+      eventName: setCurrentPage,
+    };
+  });
+
+  const totalComponents = computed(() => {
+    return {
+      bind: {
+        value: props.total,
+        tmpString: props.totalTmpString,
+      },
+    };
+  });
+
+  const jumperComponents = computed(() => {
+    return {
+      bind: {
+        pages: totalPagesNum.value,
+        currentPage: currentPage.value,
+      },
+      event: "change",
+      eventName: setCurrentPage,
+    };
+  });
+
+  const totalPagesComponents = computed(() => {
+    return {
+      bind: {
+        value: totalPagesNum.value,
+        tmpString: props.pagesTmpString,
+      },
+    };
+  });
+
+  const sizesComponents = computed(() => {
+    return {
+      bind: {
+        currentPageSize: currentPageSize.value,
+        pageSize: props.pageSize,
+        sizesList: props.sizesList,
+      },
+      event: "change",
+      eventName: setCurrentPageSize,
+    };
+  });
+
+  // 返回一个包含组件模板、属性以及事件的组件列表
+  const componentsList = computed(() => {
+    const layout_list = props.layout.split(","); // 可自定义的分页布局配置
+
+    const components = [];
 
     // 各组件的属性以及事件配置
-    const components = [],
-      componentTmplete = {
-        prev: {
-          bind: {
-            text: props.prevText,
-            disabled: props.disabled || currentPage.value === 1,
-          },
-          event: "click",
-          eventName: onPageClick,
-        },
-        pager: {
-          bind: {
-            pages: totalPagesNum.value,
-            currentPage: currentPage.value,
-          },
-          event: "click",
-          eventName: onPageClick,
-        },
-        next: {
-          bind: {
-            text: props.nextText,
-            disabled: props.disabled || currentPage.value === totalPagesNum.value,
-          },
-          event: "click",
-          eventName: onPageClick,
-        },
-        total: {
-          bind: {
-            value: props.total,
-            tmpString: props.totalTmpString,
-          },
-        },
-        totalPages: {
-          bind: {
-            value: totalPagesNum.value,
-            tmpString: props.pagesTmpString,
-          },
-        },
-        jumper: {
-          bind: {
-            pages: totalPagesNum.value,
-            currentPage: currentPage.value,
-          },
-          event: "change",
-          eventName: onPageClick,
-        },
-        sizes: {
-          bind: {
-            currentPageSize: currentPageSize.value,
-            pageSize: props.pageSize,
-            sizesList: props.sizesList,
-          },
-          event: "change",
-          eventName: sizeChange,
-        },
-      };
+    const component_map = {
+      total: totalComponents.value,
+      totalPages: totalPagesComponents.value,
+      prev: prevComponents.value,
+      pager: pagerComponents.value,
+      next: nextComponents.value,
+      jumper: jumperComponents.value,
+      sizes: sizesComponents.value,
+    };
 
-    LAYOUT_LIST.map((name) => {
-      components.push({ name, component: LAYOUT_MAP[name], ...componentTmplete[name] });
+    layout_list.map((name) => {
+      components.push({ name, component: layout_map[name], ...component_map[name] });
     });
 
     return components;
   });
 
   return {
-    layoutsComponents,
-    currentPage,
+    componentsList,
   };
 };
