@@ -1,6 +1,8 @@
 <template>
   <div class="bp-pagination-jumper">
+    <span>跳至</span>
     <bp-input v-model.number="jumperValue" :disabled="disabled" @blur="handleJumperBlur"></bp-input>
+    <span>页</span>
   </div>
 </template>
 

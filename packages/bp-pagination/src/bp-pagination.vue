@@ -19,10 +19,10 @@ import { usePagination } from "./pagination";
 
 const props = defineProps({
   total: { type: [Number, String], default: 0 }, // 总条目数
-  pageSize: { type: [Number, String], default: () => 20 }, // 每页显示条数
+  pageSize: { type: [Number, String], default: () => 10 }, // 每页显示条数
   current: { type: [Number, String], default: 1 }, // 当前页数，支持 v-model
   disabled: { type: Boolean, default: false }, // 是否禁用
-  layout: { type: String, default: "total,prev,pager,next,jumper" }, // 自定义分页布局，totalPages,total,prev,pager,next,jumper,sizes
+  layout: { type: String, default: "total,prev,pager,next,sizes" }, // 自定义分页布局，totalPages,total,prev,pager,next,jumper,sizes
   prevText: { type: String, default: "" }, // 替代图标显示的上一页文字
   nextText: { type: String, default: "" }, // 替代图标显示的下一页文字
   totalTmpString: { type: String, default: "共 {total} 条" },
