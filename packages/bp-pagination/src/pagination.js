@@ -11,44 +11,43 @@ import prev from "./components/prev.vue";
 import pager from "./components/pager.vue";
 import next from "./components/next.vue";
 import jumper from "./components/jumper.vue";
+import sizes from "./components/sizes.vue";
 
 export const usePagination = (props, emit) => {
-  const LAYOUT_MAP = {
-    prev,
-    pager,
-    next,
-    total,
-    totalPages,
-    jumper
-  };
+  const LAYOUT_MAP = { prev, pager, next, total, totalPages, jumper, sizes };
 
   const currentPage = ref(1); // 当前页
+  const currentPageSize = ref(10); // 当前页条数
   const totalPagesNum = ref(0); // 页数
 
   // 点击页码切换
   const onPageClick = (type, pageNum = 1) => {
     let num = currentPage.value;
     switch (type) {
-      case 'prev':
+      case "prev":
         num--;
         break;
-      case 'next':
+      case "next":
         num++;
         break;
 
       default:
-        num = Number(pageNum)
+        num = Number(pageNum);
         break;
     }
     num < 1 && (num = 1);
-    num > totalPagesNum.value && (num = totalPagesNum.value)
+    num > totalPagesNum.value && (num = totalPagesNum.value);
     currentPage.value = num;
     emit("pageChange", currentPage.value);
   };
 
+  const sizeChange = (size) => {
+    currentPageSize.value = size;
+  };
+
   watchEffect(() => {
     const { total, pageSize } = props;
-    totalPagesNum.value = Math.ceil(total / pageSize);
+    totalPagesNum.value = Math.ceil(total / currentPageSize.value);
   });
 
   // 布局组件，返回一个包含组件模板、属性以及事件的 Array
@@ -59,15 +58,15 @@ export const usePagination = (props, emit) => {
     // 各组件的属性以及事件配置
     const components = [],
       componentTmplete = {
-        'prev': {
+        prev: {
           bind: {
             text: props.prevText,
-            disabled: props.disabled || currentPage.value === 1
+            disabled: props.disabled || currentPage.value === 1,
           },
           event: "click",
           eventName: onPageClick,
         },
-        'pager': {
+        pager: {
           bind: {
             pages: totalPagesNum.value,
             currentPage: currentPage.value,
@@ -75,33 +74,42 @@ export const usePagination = (props, emit) => {
           event: "click",
           eventName: onPageClick,
         },
-        'next': {
+        next: {
           bind: {
             text: props.nextText,
-            disabled: props.disabled || currentPage.value === totalPagesNum.value
+            disabled: props.disabled || currentPage.value === totalPagesNum.value,
           },
           event: "click",
           eventName: onPageClick,
         },
-        'total': {
+        total: {
           bind: {
             value: props.total,
-            tmpString: props.totalTmpString
+            tmpString: props.totalTmpString,
           },
         },
-        'totalPages': {
+        totalPages: {
           bind: {
             value: totalPagesNum.value,
-            tmpString: props.pagesTmpString
+            tmpString: props.pagesTmpString,
           },
         },
-        'jumper': {
+        jumper: {
           bind: {
             pages: totalPagesNum.value,
             currentPage: currentPage.value,
           },
           event: "change",
           eventName: onPageClick,
+        },
+        sizes: {
+          bind: {
+            currentPageSize: currentPageSize.value,
+            pageSize: props.pageSize,
+            sizesList: props.sizesList,
+          },
+          event: "change",
+          eventName: sizeChange,
         },
       };
 
