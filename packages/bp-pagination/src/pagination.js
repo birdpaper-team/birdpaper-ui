@@ -37,6 +37,11 @@ export const usePagination = (props, emit) => {
   const totalPagesNum = ref(0);
 
   /**
+   * 隐藏分页组件，在开启`hideOnSinglePage`并只有一页时触发
+   */
+  const hidePagination = props.hideOnSinglePage && totalPagesNum.value === 1;
+
+  /**
    * 设置当前激活的页码
    * @param {Stirng} type 'prev', 'next', 'page'
    * @param {Number} pageNum
@@ -57,18 +62,34 @@ export const usePagination = (props, emit) => {
   const setCurrentPageSize = (v) => (currentPageSize.value = Number(v));
 
   watchEffect(() => {
-    const { total, pageSize } = props;
-
     // 根据传入的 total 计算总页数
-    totalPagesNum.value = Math.ceil(total / currentPageSize.value);
+    totalPagesNum.value = Math.ceil(props.total / currentPageSize.value);
 
     // 相应的，在每页条数和总页数有变化时，需要重新设定当前激活页，以防止溢出边界值的情况
     setCurrentPage("page", currentPage.value);
   });
 
-  /**
-   * 上一页
-   */
+  // 总条数
+  const totalComponents = computed(() => {
+    return {
+      bind: {
+        value: props.total,
+        tmpString: props.totalTmpString,
+      },
+    };
+  });
+
+  // 总页数
+  const totalPagesComponents = computed(() => {
+    return {
+      bind: {
+        value: totalPagesNum.value,
+        tmpString: props.pagesTmpString,
+      },
+    };
+  });
+
+  // 上一页
   const prevComponents = computed(() => {
     return {
       bind: {
@@ -80,6 +101,7 @@ export const usePagination = (props, emit) => {
     };
   });
 
+  // 页码列表
   const pagerComponents = computed(() => {
     return {
       bind: {
@@ -91,6 +113,7 @@ export const usePagination = (props, emit) => {
     };
   });
 
+  // 下一页
   const nextComponents = computed(() => {
     return {
       bind: {
@@ -102,15 +125,7 @@ export const usePagination = (props, emit) => {
     };
   });
 
-  const totalComponents = computed(() => {
-    return {
-      bind: {
-        value: props.total,
-        tmpString: props.totalTmpString,
-      },
-    };
-  });
-
+  // 页面输入跳转
   const jumperComponents = computed(() => {
     return {
       bind: {
@@ -122,21 +137,14 @@ export const usePagination = (props, emit) => {
     };
   });
 
-  const totalPagesComponents = computed(() => {
-    return {
-      bind: {
-        value: totalPagesNum.value,
-        tmpString: props.pagesTmpString,
-      },
-    };
-  });
-
+  // 每页条数选择器
   const sizesComponents = computed(() => {
     return {
       bind: {
         currentPageSize: currentPageSize.value,
         pageSize: props.pageSize,
         sizesList: props.sizesList,
+        tmpString: props.sizesTmpString
       },
       event: "change",
       eventName: setCurrentPageSize,
@@ -169,5 +177,6 @@ export const usePagination = (props, emit) => {
 
   return {
     componentsList,
+    hidePagination
   };
 };
