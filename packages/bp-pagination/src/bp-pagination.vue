@@ -1,8 +1,13 @@
 <template>
-  <div class="bp-pagination">
+  <div class="bp-pagination" v-show="!hidePagination">
     <ul class="bp-pagination-container">
       <template v-for="(item, index) in componentsList" :key="`p-${index}`">
-        <component :is="item.component" :disabled="disabled" v-bind="item.bind" @[item.event]="item.eventName"></component>
+        <component
+          :is="item.component"
+          :disabled="disabled"
+          v-bind="item.bind"
+          @[item.event]="item.eventName"
+        ></component>
       </template>
     </ul>
   </div>
@@ -22,6 +27,7 @@ const props = defineProps({
   nextText: { type: String, default: "" }, // 替代图标显示的下一页文字
   totalTmpString: { type: String, default: "共 {total} 条" },
   pagesTmpString: { type: String, default: "共 {totalPages} 页" },
+  sizesTmpString: { type: String, default: "{value}条/页" },
   sizesList: { type: Array, default: () => [10, 20, 50, 100] }, // 每页显示个数选择器的选项设置
   pagerCount: { type: Number, default: 7 }, //
   background: { type: Boolean, default: false }, // 背景色支持
@@ -30,7 +36,7 @@ const props = defineProps({
 });
 const emit = defineEmits(["pageChange"]);
 
-const { componentsList } = usePagination(props, emit);
+const { componentsList, hidePagination } = usePagination(props, emit);
 </script>
 
 <script>
