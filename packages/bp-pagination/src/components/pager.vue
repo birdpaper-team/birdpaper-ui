@@ -9,7 +9,7 @@
     ]"
     @click="onClick(item)"
   >
-    <span>{{ index + 1 }}</span>
+    <span class="pagination-text">{{ index + 1 }}</span>
   </li>
 </template>
 

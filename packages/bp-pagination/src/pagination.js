@@ -12,14 +12,15 @@ import pager from "./components/pager.vue";
 import next from "./components/next.vue";
 import jumper from "./components/jumper.vue";
 import sizes from "./components/sizes.vue";
+import simple from "./components/simple.vue";
 
 export const usePagination = (props, emit) => {
   /**
    * 分页器包含的组件：
-   * total-总条数，totalPages-总页数，prev-上一页
-   * pager-页码列表，next-下一页，jumper-页面输入跳转，size-每页条数选择器
+   * total-总条数，totalPages-总页数，prev-上一页，pager-页码列表
+   * next-下一页，jumper-页面输入跳转，size-每页条数选择器，simple-简洁分页
    */
-  const layout_map = { total, totalPages, prev, pager, next, jumper, sizes };
+  const layout_map = { total, totalPages, prev, pager, next, jumper, sizes, simple };
 
   /**
    * 当前激活的页码
@@ -144,16 +145,31 @@ export const usePagination = (props, emit) => {
         currentPageSize: currentPageSize.value,
         pageSize: props.pageSize,
         sizesList: props.sizesList,
-        tmpString: props.sizesTmpString
+        tmpString: props.sizesTmpString,
       },
       event: "change",
       eventName: setCurrentPageSize,
     };
   });
 
+  // 精简的分页组件
+  const simpleComponents = computed(() => {
+    return {
+      bind: {
+        pages: totalPagesNum.value,
+        currentPageSize: currentPageSize.value,
+        currentPage: currentPage.value,
+        pageSize: props.pageSize,
+      },
+      event: "change",
+      eventName: setCurrentPage,
+    };
+  });
+
   // 返回一个包含组件模板、属性以及事件的组件列表
   const componentsList = computed(() => {
-    const layout_list = props.layout.split(","); // 可自定义的分页布局配置
+    const { layout, simple } = props;
+    const layout_list = simple ? ["prev", "simple", "next"] : layout.split(","); // 可自定义的分页布局配置
 
     const components = [];
 
@@ -166,6 +182,7 @@ export const usePagination = (props, emit) => {
       next: nextComponents.value,
       jumper: jumperComponents.value,
       sizes: sizesComponents.value,
+      simple: simpleComponents.value,
     };
 
     layout_list.map((name) => {
@@ -177,6 +194,6 @@ export const usePagination = (props, emit) => {
 
   return {
     componentsList,
-    hidePagination
+    hidePagination,
   };
 };

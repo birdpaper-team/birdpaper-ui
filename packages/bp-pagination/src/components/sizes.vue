@@ -1,5 +1,5 @@
 <template>
-  <bp-select v-model="sizeValue" :disabled="disabled" :option-list="sizeList"></bp-select>
+  <bp-select v-model="sizeValue" size="small" :disabled="disabled" :option-list="sizeList"></bp-select>
 </template>
 
 <script setup>

@@ -1,7 +1,7 @@
 <template>
   <li :class="className" @click="onClick">
-    <span v-if="text">{{ text }}</span>
-    <i v-else class="ri-arrow-right-s-line"></i>
+    <span v-if="text" class="pagination-text">{{ text }}</span>
+    <i v-else class="pagination-icon ri-arrow-right-s-line"></i>
   </li>
 </template>
 
