@@ -7,7 +7,8 @@
 
 .bp-select {
   position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   // max-width: 200px;
   // min-width: 160px;
   width: auto;
@@ -37,6 +38,7 @@
     line-height: @smallHeight;
     font-size: inherit;
   }
+
   .select-size-mini {
     height: @miniHeight;
     line-height: @miniHeight;
@@ -98,6 +100,7 @@
 
   .select-item-box {
     position: absolute;
+    top: 30px;
     width: 100%;
     z-index: 500;
 
