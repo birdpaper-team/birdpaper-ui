@@ -1,6 +1,6 @@
 <template>
-  <div class="bp-pagination-totalPages">
-    <p class="pagination-total-text">{{ text }}</p>
+  <div class="bp-page-totalPages">
+    <p class="page-total-text">{{ text }}</p>
   </div>
 </template>
 
@@ -21,5 +21,5 @@ watchEffect(() => {
 </script>
 
 <script>
-export default { name: "bp-pagination-totalPages" };
+export default { name: "bp-page-totalPages" };
 </script>

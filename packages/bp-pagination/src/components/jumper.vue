@@ -1,8 +1,8 @@
 <template>
-  <div class="bp-pagination-jumper">
-    <span v-if="jumperText.prefix">{{ jumperText.prefix }}</span>
+  <div class="bp-page-jumper">
+    <span v-if="jumperText.prefix" class="page-text">{{ jumperText.prefix }}</span>
     <bp-input v-model.number="jumperValue" :size="size" :disabled="disabled" @blur="handleJumperBlur"></bp-input>
-    <span v-if="jumperText.suffix">{{ jumperText.suffix }}</span>
+    <span v-if="jumperText.suffix" class="page-text">{{ jumperText.suffix }}</span>
   </div>
 </template>
 

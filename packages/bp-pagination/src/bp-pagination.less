@@ -9,45 +9,52 @@
   position: relative;
   display: flex;
 
-  .bp-pagination-container {
+  .bp-page-layout {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  // 分页容器
+  .bp-page-container {
     display: flex;
     .bp-small-height;
 
-    .bp-pagination-item {
+    // 单个分页按钮
+    .bp-page-item {
       .bp-small-height;
+      .bp-page-layout;
       list-style: none;
       float: left;
-      display: flex;
-      align-content: center;
-      justify-content: center;
-      align-items: center;
       width: @smallHeight;
       min-width: @smallHeight;
       box-sizing: border-box;
       text-align: center;
-      margin: 0 3px;
+      margin: 0 4px;
       border-radius: @radius;
-      color: @gary-7;
       font-size: 14px;
       cursor: pointer;
-      transition: all .2s;
       .no-select;
 
-      .pagination-icon {
-        font-size: 18px;
-        color: @gary-6;
+      .page-icon,
+      .page-text {
+        color: @gary-7;
       }
 
-      .pagination-text {
+      .page-icon {
+        font-size: 16px;
+      }
+
+      .page-text {
         padding: 0 8px;
       }
 
       &:hover {
 
-        .pagination-text,
-        .pagination-icon {
+        .page-text,
+        .page-icon {
           color: @primary-3;
-          transition: all .2s;
         }
       }
 
@@ -56,52 +63,54 @@
       }
 
       &:last-child {
-        margin-left: 0;
+        margin-right: 0;
       }
     }
 
-    .pagination-item-active {
+    // 激活状态
+    .page-item-active {
 
-      .pagination-text,
-      .pagination-icon {
+      .page-text,
+      .page-icon {
         color: @primary-3;
         font-weight: bold;
-        transition: all .2s;
       }
     }
 
-    .pagination-item-disabled {
+    // 禁用状态
+    .page-item-disabled {
       cursor: no-drop;
-      opacity: .618;
-      transition: all .2s;
+      opacity: .5;
 
       &:hover {
 
-        .pagination-text,
-        .pagination-icon {
+        .page-text,
+        .page-icon {
           color: @gary-7;
         }
       }
     }
 
-    .bp-pagination-total,
-    .bp-pagination-totalPages {
+    // 总数
+    .bp-page-total,
+    .bp-page-totalPages {
       .bp-small-height;
       padding: 0 10px;
       display: flex;
       align-items: center;
 
-      .pagination-total-text {
+      .page-text {
         margin: 0;
         color: @gary-6;
       }
     }
 
-    .bp-pagination-jumper {
+    // 跳转组件
+    .bp-page-jumper {
       display: flex;
       align-items: center;
 
-      span {
+      .page-text {
         margin: 0 8px;
         color: @gary-6;
       }
@@ -114,14 +123,89 @@
         }
       }
     }
+  }
 
-    .bp-paginoation-simple {
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  // 带背景
+  .container-background {
+    .bp-page-item {
+      border: 1px solid @gary-4;
 
-      .bp-pagination-item {
+      &:hover {
+        border: 1px solid @primary-3;
+      }
+    }
+
+    .ri-more-fill {
+      .bp-small-height;
+      .bp-page-layout;
+      list-style: none;
+      float: left;
+      width: @smallHeight;
+      font-size: 14px;
+      cursor: pointer;
+      .no-select;
+      color: @gary-6;
+    }
+
+    // 激活状态
+    .page-item-active {
+      background-color: @primary-3;
+      border: 1px solid @primary-3;
+
+      .page-text,
+      .page-icon {
+        color: @gary-0;
+        font-weight: bold;
+      }
+
+      &:hover {
+
+        .page-text,
+        .page-icon {
+          color: @gary-0;
+          font-weight: bold;
+        }
+      }
+    }
+
+    // 禁用状态
+    .page-item-disabled {
+      cursor: no-drop;
+      opacity: .5;
+
+      &:hover {
+        border: 1px solid @gary-4;
+
+        .page-text,
+        .page-icon {
+          color: @gary-7;
+        }
+      }
+    }
+  }
+
+  // 简洁分页
+  .container-simple {
+    .bp-page-layout;
+
+    .bp-page-item {
+      .bp-mini-height;
+      width: @miniHeight;
+      min-width: @miniHeight;
+
+      .page-icon {
+        font-size: 14px;
+        color: @gary-6;
+      }
+    }
+
+    .bp-page-simple {
+      .bp-page-layout;
+
+      .bp-page-item {
         .bp-mini-height;
+        width: @miniHeight;
+        min-width: @miniHeight;
       }
 
       .simple-separator {
@@ -131,7 +215,7 @@
       }
 
       .bp-input {
-        width: @miniHeight;
+        width: @smallHeight;
 
         .bp-input-inner {
           padding: 0;

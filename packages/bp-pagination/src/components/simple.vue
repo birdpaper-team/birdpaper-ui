@@ -1,8 +1,8 @@
 <template>
-  <div class="bp-paginoation-simple">
+  <div class="bp-page-simple">
     <jumper size="mini" :pages="pages" :currentPage="currentPage" :disabled="disabled" tmpString="{jumper}" @change="change"></jumper>
-    <li class="bp-pagination-item simple-separator">/</li>
-    <li class="bp-pagination-item">
+    <li class="bp-page-item simple-separator">/</li>
+    <li class="bp-page-item">
       {{ pages }}
     </li>
   </div>

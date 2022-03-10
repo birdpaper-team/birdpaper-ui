@@ -107,6 +107,7 @@ export const usePagination = (props, emit) => {
     return {
       bind: {
         pages: totalPagesNum.value,
+        pagerCount: props.pagerCount,
         currentPage: currentPage.value,
       },
       event: "click",
