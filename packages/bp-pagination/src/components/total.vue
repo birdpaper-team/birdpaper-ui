@@ -1,6 +1,6 @@
 <template>
-  <div class="bp-pagination-total">
-    <p class="pagination-total-text">{{ text }}</p>
+  <div class="bp-page-total">
+    <p class="page-text">{{ text }}</p>
   </div>
 </template>
 

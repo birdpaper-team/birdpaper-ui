@@ -16,8 +16,9 @@ const props = defineProps({
   total: { type: [Number, String], default: 0 }, // 总条目数
   pageSize: { type: [Number, String], default: () => 10 }, // 每页显示条数
   pageNum: { type: [Number, String], default: 1 }, // 当前页数
+  pagerCount: { type: [Number, String], default: 11 }, // 最大页码数 大于等于 5 且小于等于 21 的奇数
   disabled: { type: Boolean, default: false }, // 是否禁用
-  layout: { type: String, default: "total,prev,pager,next,jumper,sizes" }, // 自定义分页布局，totalPages,total,prev,pager,next,jumper,sizes
+  layout: { type: String, default: "total,prev,pager,next" }, // 自定义分页布局，totalPages,total,prev,pager,next,jumper,sizes
   prevText: { type: String, default: "" }, // 替代图标显示的上一页文字
   nextText: { type: String, default: "" }, // 替代图标显示的下一页文字
   totalTmpString: { type: String, default: "共 {total} 条" },
@@ -33,12 +34,7 @@ const emit = defineEmits(["pageChange"]);
 const { componentsList, hidePagination } = usePagination(props, emit);
 
 const className = computed(() => {
-  let name = [
-    "bp-pagination-container",
-    {
-      "pagination-background": props.background,
-    },
-  ];
+  let name = ["bp-page-container", { "container-background": props.background && !props.simple}, { "container-simple": props.simple }];
   return name;
 });
 </script>

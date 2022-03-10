@@ -1,7 +1,7 @@
 <template>
   <li :class="className" @click="onClick">
-    <span v-if="text" class="pagination-text">{{ text }}</span>
-    <i v-else class="pagination-icon ri-arrow-left-s-line"></i>
+    <span v-if="text" class="page-text">{{ text }}</span>
+    <i v-else class="page-icon ri-arrow-left-s-line"></i>
   </li>
 </template>
 
@@ -16,8 +16,8 @@ const props = defineProps({
 const emit = defineEmits(["click"]);
 
 const className = computed(() => {
-  let name = ["bp-pagination-item", "bp-prev-page"];
-  if (props.disabled) name.push("pagination-item-disabled");
+  let name = ["bp-page-item", "bp-prev-page"];
+  if (props.disabled) name.push("page-item-disabled");
   return name;
 });
 
