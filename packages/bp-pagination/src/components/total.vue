@@ -1,6 +1,6 @@
 <template>
   <div class="bp-page-total">
-    <p class="page-text">{{ text }}</p>
+    <p class="page-text" v-text="text"></p>
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <li :class="className" @click="onClick">
-    <span v-if="text" class="page-text">{{ text }}</span>
+    <span v-if="text" class="page-text" v-text="text"></span>
     <i v-else class="page-icon ri-arrow-right-s-line"></i>
   </li>
 </template>
@@ -9,15 +9,14 @@
 import { defineProps, defineEmits, computed } from "vue";
 
 const props = defineProps({
-  text: { type: String, default: "" }, // 替代图标显示的上一页文字
-  disabled: { type: Boolean, default: false }, // 是否禁用
+  text: { type: String, default: "" },
+  disabled: { type: Boolean, default: false },
 });
 
 const emit = defineEmits(["click"]);
 
 const className = computed(() => {
-  let name = ["bp-page-item", "bp-next-page"];
-  if (props.disabled) name.push("page-item-disabled");
+  let name = ["bp-page-item", "bp-next-page", { "page-item-disabled": props.disabled }];
   return name;
 });
 

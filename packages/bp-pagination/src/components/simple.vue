@@ -2,9 +2,7 @@
   <div class="bp-page-simple">
     <jumper size="mini" :pages="pages" :currentPage="currentPage" :disabled="disabled" tmpString="{jumper}" @change="change"></jumper>
     <li class="bp-page-item simple-separator">/</li>
-    <li class="bp-page-item">
-      {{ pages }}
-    </li>
+    <li class="bp-page-item" v-text="pages"></li>
   </div>
 </template>
 
@@ -13,9 +11,9 @@ import { defineProps, defineEmits } from "vue";
 import jumper from "./jumper.vue";
 
 const props = defineProps({
-  currentPage: { type: [Number, String], default: 1 }, // 当前激活页
+  currentPage: { type: [Number, String], default: 1 },
   pages: { type: [Number, String], default: 0 },
-  disabled: { type: Boolean, default: false }, // 是否禁用
+  disabled: { type: Boolean, default: false },
 });
 
 const emit = defineEmits(["change"]);

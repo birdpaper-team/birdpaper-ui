@@ -13,6 +13,7 @@ import next from "./components/next.vue";
 import jumper from "./components/jumper.vue";
 import sizes from "./components/sizes.vue";
 import simple from "./components/simple.vue";
+import { isEvnetNum, warn } from "../../utils/util";
 
 export const usePagination = (props, emit) => {
   /**
@@ -53,14 +54,17 @@ export const usePagination = (props, emit) => {
 
     // 限制页码的边界值，最小为 1，最大不超过总页数
     currentPage.value = num < 1 ? 1 : num > totalPagesNum.value ? totalPagesNum.value : num;
-    emit("pageChange", currentPage.value);
+    emit("page-change", currentPage.value);
   };
 
   /**
    * 设置当前一页显示的条数
    * @param {Number} v
    */
-  const setCurrentPageSize = (v) => (currentPageSize.value = Number(v));
+  const setCurrentPageSize = (v) => {
+    currentPageSize.value = Number(v);
+    emit("size-change", currentPageSize.value);
+  };
 
   watchEffect(() => {
     // 根据传入的 total 计算总页数
@@ -196,5 +200,34 @@ export const usePagination = (props, emit) => {
   return {
     componentsList,
     hidePagination,
+  };
+};
+
+export const usePaginationValidator = () => {
+  /**
+   * 最大页码数验证
+   * @param {Number,String} v
+   * @returns Boolean
+   */
+  const pagerCountValidator = (v) => {
+    if (isEvnetNum(v) || v < 5 || v > 21) {
+      warn(
+        "PaginationValidator",
+        "属性 `pager-count` 须为大于等于 5 且小于等于 21 的奇数 The props of `pager-count` must be an odd number greater than or equal to 5 and less than or equal to 21"
+      );
+    }
+    return true;
+  };
+
+  /**
+   * 自定义布局配置验证
+   * @param {String} v
+   * @returns Boolean
+   */
+  const layoutValidator = (v) => v.split(",").length !== 0;
+
+  return {
+    pagerCountValidator,
+    layoutValidator,
   };
 };

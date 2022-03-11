@@ -14,10 +14,10 @@
 import { defineProps, defineEmits, watchEffect, ref } from "vue";
 
 const props = defineProps({
-  currentPage: { type: [Number, String], default: 1 }, // 当前激活页
+  currentPage: { type: [Number, String], default: 1 },
   pages: { type: [Number, String], default: 0 },
   pagerCount: { type: [Number, String], default: 0 },
-  disabled: { type: Boolean, default: false }, // 是否禁用
+  disabled: { type: Boolean, default: false },
 });
 const emit = defineEmits(["click"]);
 
