@@ -7,9 +7,9 @@ import { defineProps, defineEmits, ref, watchEffect, watch } from "vue";
 
 const props = defineProps({
   currentPageSize: { type: [String, Number], default: 10 },
-  disabled: { type: Boolean, default: false }, // 是否禁用
-  pageSize: { type: [Number, String], default: () => 10 }, // 每页显示条数
-  sizesList: { type: Array, default: () => [10, 20, 50, 100] }, // 每页显示个数选择器的选项设置
+  disabled: { type: Boolean, default: false },
+  pageSize: { type: [Number, String], default: () => 10 },
+  sizesList: { type: Array, default: () => [10, 20, 50, 100] },
   tmpString: { type: String, default: "" },
 });
 const emit = defineEmits(["change"]);

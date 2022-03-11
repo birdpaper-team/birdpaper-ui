@@ -1,20 +1,20 @@
 <template>
   <div class="bp-page-jumper">
     <span v-if="jumperText.prefix" class="page-text">{{ jumperText.prefix }}</span>
-    <bp-input v-model.number="jumperValue" :size="size" :disabled="disabled" @blur="handleJumperBlur"></bp-input>
+    <bp-input v-model.number="jumperValue" size="small" :disabled="disabled" @blur="handleJumperBlur"></bp-input>
     <span v-if="jumperText.suffix" class="page-text">{{ jumperText.suffix }}</span>
   </div>
 </template>
 
 <script setup>
 import { defineEmits, defineProps, reactive, ref, watchEffect } from "vue";
+import { beInteger } from "../../../utils/util";
 
 const props = defineProps({
-  currentPage: { type: [Number, String], default: 1 }, // 当前激活页
+  currentPage: { type: [Number, String], default: 1 },
   pages: { type: [Number, String], default: 0 },
-  disabled: { type: Boolean, default: false }, // 是否禁用
+  disabled: { type: Boolean, default: false },
   tmpString: { type: String, default: "跳至{jumper}页" },
-  size: { type: String, default: "small" },
 });
 
 const emit = defineEmits(["change"]);
@@ -26,12 +26,11 @@ const jumperText = reactive({ prefix: "", suffix: "" });
 const handleJumperBlur = () => {
   if (props.disabled) return;
 
-  let val = jumperValue.value + "";
-  val = val.replace(/\D/g, "");
-
+  let val = beInteger(jumperValue.value);
   val < 1 && (jumperValue.value = 1);
   val > props.pages && (jumperValue.value = props.pages);
-  emit("change", "page", Number(jumperValue.value));
+
+  emit("change", "page", jumperValue.value);
 };
 
 watchEffect(() => {
