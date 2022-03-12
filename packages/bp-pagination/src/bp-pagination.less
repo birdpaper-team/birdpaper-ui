@@ -74,9 +74,15 @@
       float: left;
       width: @smallHeight;
       font-size: 14px;
+      font-weight: normalF;
       cursor: pointer;
-      .no-select;
       color: @gary-6;
+      .no-select;
+
+      &:hover {
+        color: @primary-3;
+        font-weight: bold;
+      }
     }
 
     // 激活状态
@@ -92,15 +98,8 @@
     // 禁用状态
     .page-item-disabled {
       cursor: no-drop;
+      pointer-events: none;
       opacity: .5;
-
-      &:hover {
-
-        .page-text,
-        .page-icon {
-          color: @gary-7;
-        }
-      }
     }
 
     // 总数
@@ -114,6 +113,7 @@
       .page-text {
         margin: 0;
         color: @gary-6;
+        font-size: 13px;
       }
     }
 
@@ -183,6 +183,10 @@
         }
       }
     }
+  }
+
+  .bp-page-sizes{
+    margin: 0 8px;
   }
 
   // 简洁分页

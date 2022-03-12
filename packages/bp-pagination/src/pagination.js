@@ -111,7 +111,7 @@ export const usePagination = (props, emit) => {
     return {
       bind: {
         pages: totalPagesNum.value,
-        pagerCount: props.pagerCount,
+        pagerCount: Number(props.pagerCount),
         currentPage: currentPage.value,
       },
       event: "click",
@@ -137,6 +137,7 @@ export const usePagination = (props, emit) => {
       bind: {
         pages: totalPagesNum.value,
         currentPage: currentPage.value,
+        tmpString: props.jumperTmpString
       },
       event: "change",
       eventName: setCurrentPage,
@@ -210,7 +211,8 @@ export const usePaginationValidator = () => {
    * @returns Boolean
    */
   const pagerCountValidator = (v) => {
-    if (isEvnetNum(v) || v < 5 || v > 21) {
+    const num = Number(v);
+    if (isEvnetNum(num) || num < 5 || num > 21) {
       warn(
         "PaginationValidator",
         "属性 `pager-count` 须为大于等于 5 且小于等于 21 的奇数 The props of `pager-count` must be an odd number greater than or equal to 5 and less than or equal to 21"

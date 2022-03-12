@@ -1,7 +1,7 @@
 <template>
   <div class="bp-page-jumper">
     <span v-if="jumperText.prefix" class="page-text">{{ jumperText.prefix }}</span>
-    <bp-input v-model.number="jumperValue" size="small" :disabled="disabled" @blur="handleJumperBlur"></bp-input>
+    <bp-input v-model.number="jumperValue" :size="size" :disabled="disabled" @blur="handleJumperBlur"></bp-input>
     <span v-if="jumperText.suffix" class="page-text">{{ jumperText.suffix }}</span>
   </div>
 </template>
@@ -15,6 +15,7 @@ const props = defineProps({
   pages: { type: [Number, String], default: 0 },
   disabled: { type: Boolean, default: false },
   tmpString: { type: String, default: "跳至{jumper}页" },
+  size: { type: String, default: "small" }
 });
 
 const emit = defineEmits(["change"]);
