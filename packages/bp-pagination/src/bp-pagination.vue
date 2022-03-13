@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, watchEffect, computed } from "vue";
+import { defineProps, defineEmits, computed } from "vue";
 import { usePagination, usePaginationValidator } from "./pagination";
 
 const props = defineProps({

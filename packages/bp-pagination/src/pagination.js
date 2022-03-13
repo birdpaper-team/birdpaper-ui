@@ -41,7 +41,7 @@ export const usePagination = (props, emit) => {
   /**
    * 隐藏分页组件，在开启`hideOnSinglePage`并只有一页时触发
    */
-  const hidePagination = props.hideOnSinglePage && totalPagesNum.value === 1;
+  const hidePagination = computed(() => props.hideOnSinglePage && totalPagesNum.value === 1);
 
   /**
    * 设置当前激活的页码

@@ -1,23 +1,13 @@
-/*
- * @Author: Sam
- * @Date: 2020-07-13 15:21:48
- * @Last Modified by: Sam
- * @Last Modified time: 2021-07-25 15:36:15
- */
 <template>
   <div class="bp-switch">
-    <span :class="innerClassName" :value="value" @click="handleSwitchClick"></span>
+    <span :class="innerClassName" :value="modelValue" @click="handleSwitchClick"></span>
   </div>
 </template>
 <script>
 export default {
   name: "bp-switch",
   props: {
-    // 开关的值
-    value: {
-      type: [Boolean, String, Number],
-      default: true,
-    },
+    modelValue: { type: Boolean, default: false, require: true }, // 绑定值 Binding values
     // 是否禁用
     disabled: {
       type: Boolean,
@@ -86,6 +76,7 @@ export default {
         return;
       }
       this.isChecked = !this.isChecked;
+      this.$emit("update:modelValue", !this.modelValue);
     },
   },
 };
