@@ -1,0 +1,22 @@
+<template>
+  <colgroup>
+    <col
+      v-for="(item, index) in cols"
+      :key="`bp-table-tr-${index}`"
+      :name="`bp_table_tr_${index}`"
+      :width="item.width"
+    />
+  </colgroup>
+</template>
+
+<script setup>
+import { defineProps } from 'vue';
+
+const props = defineProps({
+  cols: { type: Array, default: () => [] }
+});
+</script>
+
+<script>
+export default { name: "bp-table-columns" }
+</script>
