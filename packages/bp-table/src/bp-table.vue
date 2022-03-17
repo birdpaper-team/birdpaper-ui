@@ -1,80 +1,82 @@
 <template>
-  <div class="bp-table">
+  <div class="bp-table" ref="bpTable">
     <bp-spin :spinning="loading"></bp-spin>
-    <div class="bp-table-inner">
-      <table>
-        <!-- 表头部分 -->
-        <thead>
-          <tr>
-            <th
-              v-for="(item, index) in cols"
-              :key="`bp-table-thead-${index}`"
-              :style="`width:${item.width};min-width:${item.minWidth}`"
-            >
-              {{ item.title }}
-            </th>
-          </tr>
-        </thead>
-        <!-- 数据部分 -->
-        <tbody>
-          <!-- 空数据缺省展示 -->
-          <template v-if="dataSource.length == 0">
-            <tr class="bp-table-empty-tr">
-              <td :colspan="cols.length">暂无数据</td>
-            </tr>
-          </template>
 
-          <!-- 数据渲染 -->
-          <template v-else>
-            <tr
-              v-for="(item, index) in dataSource"
-              :key="`bp-table-tbody-tr-${index}`"
-            >
-              <td
-                v-for="(v, k) in cols"
-                :key="`bp-table-tbody-td-${index}-${k}`"
-              >
-                <template v-if="!v.scopedSlots">{{ item[v.key] }}</template>
-                <!-- 自定义渲染 -->
-                <template v-else>
+    <div :class="innerClass">
+      <table-header :header-list="columns" :width="_table_width"></table-header>
+
+      <div class="bp-table-body-area" :style="bodyAreaStyle">
+        <div class="scrollbar"></div>
+
+        <table class="bp-table-body" :style="`width:${_table_width}px`">
+          <col-group :cols="columns"></col-group>
+
+          <tbody class="bp-table-body-tbody">
+            <table-empty v-if="isEmpty" :colspan="columns.length"></table-empty>
+
+            <template v-else>
+              <tr v-for="(item, index) in dataSource" :key="`bp-table-tbody-tr-${index}`">
+                <td v-for="(v, k) in columns" :key="`bp-table-tbody-td-${index}-${k}`">
+                  <template v-if="!v.scope">{{ item[v.key] }}</template>
+
                   <slot
-                    :name="v.scopedSlots.customRender"
+                    v-else
+                    :name="v.scope.customRender"
                     :row="item"
                     :index="index"
                     :data="item[v.key]"
                   ></slot>
-                </template>
-              </td>
-            </tr>
-          </template>
-        </tbody>
-      </table>
+                </td>
+              </tr>
+            </template>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </template>
 
+<script setup>
+import { defineProps, computed, onMounted, nextTick } from 'vue';
+import { useTable } from '../table';
+import TableHeader from "./components/table-header.vue";
+import TableEmpty from "./components/empty.vue";
+import ColGroup from "./components/col-group.vue";
+
+const props = defineProps({
+  cols: { type: Array, default: () => [] },
+  dataSource: { type: Array, default: () => [] },
+  height: { type: String, default: "" },
+  loading: { type: Boolean, default: false }, // 加载状态
+  border: { type: Boolean, default: true },// 边框展示
+  stripe: { type: Boolean, default: true },// 斑马纹
+});
+
+const { bpTable, columns, _table_width } = useTable(props);
+
+const isEmpty = computed(() => props.dataSource.length === 0);
+const hasBorder = computed(() => props.border);
+const isStripe = computed(() => props.stripe);
+const fixedHeight = computed(() => props.height);
+
+const bodyAreaStyle = computed(() => {
+  if (props.height) {
+    return `width:${_table_width.value}px;max-height:${props.height}px;height:${props.height}px;overflow-y:auto`
+  }
+  return `width:${_table_width.value}px`;
+});
+
+const innerClass = computed(() => {
+  let name = ["bp-table-inner",
+    { "bp-table-border": hasBorder.value },
+    { "bp-table-stripe": isStripe.value },
+    { "bp-table-fixed-header": fixedHeight.value }
+  ];
+  return name;
+});
+
+</script>
+
 <script>
-export default {
-  name: "bp-table",
-  props: {
-    // 表格头
-    cols: {
-      type: Array,
-      default: () => {
-        return [];
-      },
-    },
-    // 表格数据
-    dataSource: {
-      type: Array,
-      default: () => {
-        return [];
-      },
-    },
-    loading: {
-      type: Boolean,
-      default: false,
-    },
-  },
-};
+export default { name: "bp-table" };
 </script>
