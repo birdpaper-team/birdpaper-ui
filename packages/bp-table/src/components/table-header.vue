@@ -4,7 +4,11 @@
 
     <thead class="bp-table-header-thead">
       <tr>
-        <th v-for="(item, index) in headerList" :key="`bp-table-thead-${index}`">{{ item.label }}</th>
+        <th
+          v-for="(item, index) in headerList"
+          :key="`bp-table-thead-${index}`"
+          :class="thClass(item)"
+        >{{ item.label }}</th>
       </tr>
     </thead>
   </table>
@@ -18,6 +22,13 @@ const props = defineProps({
   headerList: { type: Array, default: () => [] },
   width: { type: [String, Number], default: "" }
 });
+
+const thClass = (item) => {
+  let align = `text-${item['headerAlign'] || item['align'] || 'left'}`;
+
+  let name = [align];
+  return name;
+}
 </script>
 
 <script>
