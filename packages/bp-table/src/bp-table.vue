@@ -16,7 +16,11 @@
 
             <template v-else>
               <tr v-for="(item, index) in dataSource" :key="`bp-table-tbody-tr-${index}`">
-                <td v-for="(v, k) in columns" :key="`bp-table-tbody-td-${index}-${k}`">
+                <td
+                  v-for="(v, k) in columns"
+                  :key="`bp-table-tbody-td-${index}-${k}`"
+                  :class="tdClass(v)"
+                >
                   <template v-if="!v.scope">{{ item[v.key] }}</template>
 
                   <slot
@@ -48,8 +52,8 @@ const props = defineProps({
   dataSource: { type: Array, default: () => [] },
   height: { type: String, default: "" },
   loading: { type: Boolean, default: false }, // 加载状态
-  border: { type: Boolean, default: true },// 边框展示
-  stripe: { type: Boolean, default: true },// 斑马纹
+  border: { type: Boolean, default: false },// 边框展示
+  stripe: { type: Boolean, default: false },// 斑马纹
 });
 
 const { bpTable, columns, _table_width } = useTable(props);
@@ -74,6 +78,13 @@ const innerClass = computed(() => {
   ];
   return name;
 });
+
+const tdClass = (v) => {
+  let align = `text-${v['align'] || 'left'}`;
+
+  let name = [align];
+  return name;
+}
 
 </script>
 

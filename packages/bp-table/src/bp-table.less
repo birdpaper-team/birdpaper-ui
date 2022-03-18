@@ -17,6 +17,16 @@
     clear: both;
     transition: all .2s ease;
 
+    .text-left {
+      text-align: left;
+    }
+    .text-center {
+      text-align: center;
+    }
+    .text-right {
+      text-align: right;
+    }
+
     .bp-table-header,
     .bp-table-body {
       width: 100%;
@@ -29,7 +39,6 @@
       .bp-table-header-thead {
         display: table-header-group;
         width: 100%;
-        text-align: left;
         -moz-user-select: none;
         -o-user-select: none;
         -khtml-user-select: none;
@@ -45,7 +54,7 @@
           th {
             overflow-wrap: break-word;
             display: table-cell;
-            padding: 12px 0 12px 10px;
+            padding: 12px 10px;
             font-size: 14px;
             font-weight: 500;
             color: @gary-7;
@@ -64,11 +73,11 @@
 
       .bp-table-body-tbody {
         td {
-          padding: 12px 0;
           font-size: inherit;
           color: @gary-7;
           font-weight: 400;
-          padding-left: 10px;
+          padding: 12px 10px;
+          word-break: break-all;
           border-bottom: 1px solid @gary-3;
         }
 
