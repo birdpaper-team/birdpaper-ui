@@ -4,10 +4,10 @@
  * @LastModifiedBy:   Sam
  * @LastModifiedTime: 2022-03-14 10:27:08
  */
-import { ref, onMounted, nextTick, onBeforeUnmount } from "vue";
+import { ref, watch, onMounted, nextTick, onBeforeUnmount } from "vue";
 import { off, on, throttle } from "../utils/util";
 
-export const useTable = (props, emit) => {
+export const useTable = (props) => {
 
   /** Table 实例 */
   const bpTable = ref(null);
@@ -85,7 +85,7 @@ export const useTable = (props, emit) => {
     /**
      * 当表格中含有设置最小宽度的列时，需要挨个比较自适应宽是否小于最小宽度
      * 如果小于，则重新设置各个值并重新计算自适应宽度
-    */
+     */
     if (_min_width_list.length) {
       _min_width_list.map((item, index) => {
         if (adapt_width < item) {
@@ -122,10 +122,11 @@ export const useTable = (props, emit) => {
     return Number(width).toFixed(2);
   }
 
+  watch(() => props.cols, () => { initColumns() });
+
   onMounted(() => {
     nextTick(() => {
       initColumns();
-
       on(window, 'resize', throttle(() => initColumns(), 400));
     });
   });
