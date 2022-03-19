@@ -41,19 +41,19 @@
 </template>
 
 <script setup>
-import { defineProps, computed, onMounted, nextTick } from 'vue';
+import { defineProps, computed } from 'vue';
 import { useTable } from '../table';
 import TableHeader from "./components/table-header.vue";
 import TableEmpty from "./components/empty.vue";
 import ColGroup from "./components/col-group.vue";
 
 const props = defineProps({
-  cols: { type: Array, default: () => [] },
-  dataSource: { type: Array, default: () => [] },
-  height: { type: String, default: "" },
-  loading: { type: Boolean, default: false }, // 加载状态
-  border: { type: Boolean, default: false },// 边框展示
-  stripe: { type: Boolean, default: false },// 斑马纹
+  cols: { type: Array, default: () => [] }, // 表格头部列表 Table header list
+  dataSource: { type: Array, default: () => [] }, // 表格数据 Table data source
+  height: { type: String, default: "" }, // 固定高度 Fixed height
+  loading: { type: Boolean, default: false }, // 加载状态 loading or not
+  border: { type: Boolean, default: false }, // 展示边框 Bordered or not
+  stripe: { type: Boolean, default: false }, // 斑马纹 Stripe or not
 });
 
 const { bpTable, columns, _table_width } = useTable(props);
