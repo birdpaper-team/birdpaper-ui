@@ -3,7 +3,7 @@
     <div class="bp-spin" v-if="loading" :style="`border-radius:${radius}px`">
       <div class="bp-spin-main">
         <span class="bp-icon-spin">
-          <i class="ri-loader-fill"></i>
+          <i class="ri-loader-5-fill"></i>
         </span>
         <p class="bp-spon-text">
           <slot></slot>

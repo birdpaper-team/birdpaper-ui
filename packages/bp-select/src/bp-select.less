@@ -7,9 +7,10 @@
 
 .bp-select {
   position: relative;
-  display: inline-block;
-  max-width: 200px;
-  min-width: 160px;
+  display: flex;
+  align-items: center;
+  // max-width: 200px;
+  // min-width: 160px;
   width: auto;
   line-height: 1;
   -webkit-appearance: none;
@@ -46,17 +47,20 @@
 
   .select-input {
     position: relative;
-    width: 100%;
-    display: inline-block;
+    //width: 100%;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: space-between;
     border: 1px solid @gary-4;
     border-radius: @radius;
     text-align: left;
     background-color: @gary-0;
+    padding: 0 10px;
     cursor: pointer;
     transition: border-color .2s ease;
 
     span {
-      padding-left: 10px;
       font-weight: 400;
       color: @gary-5;
     }
@@ -66,9 +70,9 @@
     }
 
     .option {
-      position: absolute;
-      top: 0;
-      right: 15px;
+      // position: absolute;
+      // top: 0;
+      // right: 15px;
 
       i {
         display: block;
@@ -97,6 +101,7 @@
 
   .select-item-box {
     position: absolute;
+    top: 30px;
     width: 100%;
     z-index: 500;
 
@@ -183,7 +188,6 @@
 }
 
 .bp-select-disabled {
-  opacity: .618;
   background-color: @gary-2  !important;
   cursor: no-drop;
 }

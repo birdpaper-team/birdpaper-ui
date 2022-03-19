@@ -1,8 +1,8 @@
-/*
+/**
  * @Author: Sam
  * @Date: 2020-01-11 10:27:23
  * @Last Modified by: Sam
- * @Last Modified time: 2021-10-30 06:35:26
+ * @Last Modified time: 2022-03-17 19:44:20
  */
 
 /**
@@ -17,14 +17,14 @@ export const isNull = (data) => !data && data != 0;
  * @param {*} data
  * @returns {Boolean}
  */
-export const isString = (data) => typeof data === 'string';
+export const isString = (data) => typeof data === "string";
 
 /**
  * 空格处理
  * @param {String} str
  * @returns
  */
-export const trim = (str) => (str || '').replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, '');
+export const trim = (str) => (str || "").replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, "");
 
 /**
  * 将字符串转换成对象格式
@@ -40,7 +40,7 @@ export const strToObject = (str) => {
   }
 
   return finalObj;
-}
+};
 
 /**
  * clickOutside
@@ -58,11 +58,11 @@ export const clickOutside = {
       binding.value(e);
     }
     el.__vueClickOutside__ = handleClick;
-    document.addEventListener('click', handleClick);
+    document.addEventListener("click", handleClick);
   },
   // 解除事件监听
   unmounted(el, binding) {
-    document.removeEventListener('click', el.__vueClickOutside__);
+    document.removeEventListener("click", el.__vueClickOutside__);
     delete el.__vueClickOutside__;
   },
 };
@@ -90,8 +90,8 @@ export const throttle = (fn, delay) => {
       lastTime = nowTime;
       fn.apply(this, args);
     }
-  }
-}
+  };
+};
 
 /**
  * 新增事件监听
@@ -104,7 +104,7 @@ export const on = function (element, event, handler, useCapture = false) {
   if (element && event && handler) {
     element.addEventListener(event, handler, useCapture);
   }
-}
+};
 
 /**
  * 移除事件监听
@@ -117,8 +117,33 @@ export const off = function (element, event, handler, useCapture = false) {
   if (element && event && handler) {
     element.removeEventListener(event, handler, useCapture);
   }
-}
+};
+
+/**
+ * 判断是否为偶数
+ * @param {*} num
+ */
+export const isEvnetNum = (num) => Number(num) % 2 === 0;
+
+/**
+ * 将数值限制为整数
+ * @param {*} v
+ * @returns
+ */
+export const beInteger = (v) => {
+  let val = v + "";
+  return val.replace(/\D/g, "");
+};
+
+/**
+ * 警告提示处理
+ * @param {String} module
+ * @param {*} info
+ */
+export const warn = (module, info) => {
+  console.warn(`[ A warning of birdpaper-ui ] - ${module}: ` + info);
+};
 
 export const firstToUpper = (str) => {
   return str.trim().toLowerCase().replace(str[0], str[0].toUpperCase());
-}
+};

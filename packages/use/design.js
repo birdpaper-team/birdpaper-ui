@@ -6,7 +6,6 @@
  */
 
 export const useDesign = () => {
-
   // 设计规范中约束的尺寸值
   const DESIGN_SIZE_LIST = ["mini", "small", "normal", "large"];
 
@@ -19,6 +18,7 @@ export const useDesign = () => {
    * @returns Boolean
    */
   const sizeValidator = (v) => DESIGN_SIZE_LIST.includes(v);
+
   /**
    * 主题类型验证器
    * @param {String} v
@@ -30,7 +30,6 @@ export const useDesign = () => {
     DESIGN_SIZE_LIST,
     DESIGN_THEME_LIST,
     sizeValidator,
-    themeValidator
-  }
-
-}
+    themeValidator,
+  };
+};
