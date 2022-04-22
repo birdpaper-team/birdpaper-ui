@@ -10,23 +10,13 @@
     >
       <!-- 占位文本 -->
       <span v-show="!select.label">{{ placeholder }}</span>
-      <span v-show="select.label !== ''" class="select-value">{{
-        select.label
-      }}</span>
+      <span v-show="select.label !== ''" class="select-value">{{ select.label }}</span>
       <!-- 操作图标区域 -->
       <div class="option">
         <!-- 展示/收起 -->
-        <i
-          class="ri-arrow-down-s-line"
-          :class="{ open: optionShow }"
-          v-if="select.value == '' || !clearableIconShow"
-        ></i>
+        <i class="ri-arrow-down-s-line" :class="{ open: optionShow }" v-if="select.value == '' || !clearableIconShow"></i>
         <!-- 清除 -->
-        <i
-          class="ri-close-circle-fill"
-          v-if="clearableIconShow && select.value != ''"
-          @click="clear"
-        ></i>
+        <i class="ri-close-circle-fill" v-if="clearableIconShow && select.value != ''" @click="clear"></i>
       </div>
     </div>
     <!-- 下拉选项列表 -->
@@ -41,18 +31,27 @@
         <div class="option-arrow"></div>
         <!-- 选择器选项 -->
         <div class="option-container">
-          <div
-            class="bp-option"
-            v-for="(item, index) in optionList"
-            :key="`option-${index}`"
-            :title="item[label]"
-            @click="handleOptionItemClick(item)"
-          >
-            <!-- 选项内容 -->
-            <div class="item">
-              <span>{{ item[label] }}</span>
+          <template v-if="optionList.length">
+            <div
+              :class="['bp-option', {'bp-option-active': item[value] === modelValue}]"
+              v-for="(item, index) in optionList"
+              :key="`option-${index}`"
+              :title="item[label]"
+              @click="handleOptionItemClick(item)"
+            >
+              <!-- 选项内容 -->
+              <div class="item">
+                <span>{{ item[label] }}</span>
+              </div>
             </div>
-          </div>
+          </template>
+          <template v-else>
+            <div class="bp-option no-data">
+              <div class="item">
+                <span>暂无数据</span>
+              </div>
+            </div>
+          </template>
         </div>
       </div>
     </transition>
@@ -104,8 +103,7 @@ export default {
 
     const render = () => {
       for (let i = 0; i < props.optionList.length; i++) {
-        labelList.value[props.optionList[i][props.value]] =
-          props.optionList[i][props.label];
+        labelList.value[props.optionList[i][props.value]] = props.optionList[i][props.label];
       }
     };
 

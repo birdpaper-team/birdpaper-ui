@@ -28,7 +28,7 @@
       display: inline-block;
 
       i {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: 400;
         margin-top: -3px;
         margin-right: 6px;
@@ -71,12 +71,13 @@
     }
 
     .message-content {
-      display: inline-block;
-      padding: 4px 18px;
-      height: @normalHeight;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 20px;
+      .bp-normal-height;
       text-align: left;
-      line-height: @normalHeight;
-      font-size: 14px;
+      font-size: 12px;
       font-weight: 400;
       border-radius: @radius;
       color: @gary-7;
@@ -99,7 +100,7 @@
         margin-left: 18px;
 
         i {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 400;
           margin-top: -3px;
           display: inline-block;
@@ -144,11 +145,11 @@
   }
 
   .slide-fade-enter-active {
-    transition: all .2s ease-out;
+    transition: all .4s ease-out;
   }
 
   .slide-fade-leave-active {
-    transition: all .2s ease;
+    transition: all .4s ease;
   }
 
   .slide-fade-enter-from,

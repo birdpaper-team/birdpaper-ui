@@ -2,7 +2,7 @@
  * @Author: Sam
  * @Date: 2020-01-11 10:27:23
  * @Last Modified by: Sam
- * @Last Modified time: 2022-03-17 19:44:20
+ * @Last Modified time: 2022-04-22 05:17:31
  */
 
 /**
@@ -54,6 +54,7 @@ export const clickOutside = {
       if (el.contains(e.target) || e.target.className.includes(binding.arg)) {
         return false;
       }
+
       // 如果绑定了函数，则返回执行
       binding.value(e);
     }
