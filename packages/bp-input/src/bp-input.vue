@@ -69,10 +69,18 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { computed, ref, useSlots, watch, defineProps, defineEmits, reactive } from "vue";
 import { useInput } from "../../use/input";
 import { useDesign } from "../../use/design";
+const { EMITS, typeValidator, initSuffixType, autoHeight } = useInput();
+const { sizeValidator } = useDesign();
+
+export default { name: "bp-input" };
+</script>
+
+
+<script setup>
 import bpInputTail from "./components/bp-input-tail.vue";
 import bpInputFirst from "./components/bp-input-first.vue";
 
@@ -220,11 +228,4 @@ watch(
 );
 
 defineExpose({ blur, focus, select });
-</script>
-
-<script>
-export default { name: "bp-input" };
-
-const { EMITS, typeValidator, initSuffixType, autoHeight } = useInput();
-const { sizeValidator } = useDesign();
 </script>
