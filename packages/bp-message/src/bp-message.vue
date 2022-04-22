@@ -1,9 +1,3 @@
-/*
- * @Author: Sam
- * @Date: 2020-01-21 16:12:26
- * @Last Modified by: Sam
- * @Last Modified time: 2021-03-10 18:22:46
- */
 <template>
   <!-- 消息列表 -->
   <transition name="slide-fade">

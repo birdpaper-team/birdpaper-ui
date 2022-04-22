@@ -7,14 +7,23 @@
     @click="onClick"
   >
     <i :class="icon" v-if="hasIcon"></i>
-    <span v-if="hasSlotDefault"> <slot></slot> </span>
+    <span v-if="hasSlotDefault">
+      <slot></slot>
+    </span>
   </button>
 </template>
 
+<script>
+import { useDesign } from "../../use/design";
+import { useButton } from "../../use/button";
+export default { name: "bp-button" };
+
+const { typeValidator, clickByLink } = useButton();
+const { sizeValidator, themeValidator } = useDesign();
+</script>
+
 <script setup>
 import { computed, ref, watch, useSlots, defineProps, defineEmits } from "vue";
-import { useButton } from "../../use/button";
-import { useDesign } from "../../use/design";
 
 const props = defineProps({
   type: { type: String, default: "default", validator: typeValidator }, // 按钮类型 Type of the button
@@ -99,11 +108,4 @@ const onClick = () => {
   isLinkButton.value && clickByLink(props.href, props.target);
   if (!isLinkButton.value && !props.disabled) return emit("click");
 };
-</script>
-
-<script>
-export default { name: "bp-button" };
-
-const { typeValidator, clickByLink } = useButton();
-const { sizeValidator, themeValidator } = useDesign();
 </script>

@@ -58,7 +58,7 @@ export const useTable = (props) => {
       minWidth && _min_width_list.push(minWidth)
     }
 
-    _table_width.value = el && el.offsetWidth - 4;
+    _table_width.value = el && el.offsetWidth - 6;
     _col_width_list = getWidthList() || [];
 
     columns.value = [];
@@ -88,7 +88,7 @@ export const useTable = (props) => {
      */
     if (_min_width_list.length) {
       _min_width_list.map((item, index) => {
-        if (adapt_width < item) {
+        if (adapt_width > item) {
           _fixed_width += item;
           _remainder_col--;
           _min_width_list.splice(index, 1);

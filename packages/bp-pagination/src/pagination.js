@@ -48,13 +48,15 @@ export const usePagination = (props, emit) => {
    * @param {Stirng} type 'prev', 'next', 'page'
    * @param {Number} pageNum
    */
-  const setCurrentPage = (type, pageNum = 1) => {
+  const setCurrentPage = (type, pageNum = 1, isEmit = true) => {
     let num = currentPage.value;
     type === "prev" ? num-- : type === "next" ? num++ : (num = Number(pageNum));
 
     // 限制页码的边界值，最小为 1，最大不超过总页数
     currentPage.value = num < 1 ? 1 : num > totalPagesNum.value ? totalPagesNum.value : num;
-    emit("page-change", currentPage.value);
+    if (currentPage.value != props.pageNum && isEmit) {
+      emit("page-change", currentPage.value);
+    }
   };
 
   /**
@@ -71,7 +73,9 @@ export const usePagination = (props, emit) => {
     totalPagesNum.value = Math.ceil(props.total / currentPageSize.value);
 
     // 相应的，在每页条数和总页数有变化时，需要重新设定当前激活页，以防止溢出边界值的情况
-    setCurrentPage("page", currentPage.value);
+    if (totalPagesNum.value) {
+      setCurrentPage("page", currentPage.value, false);
+    }
   });
 
   // 总条数
