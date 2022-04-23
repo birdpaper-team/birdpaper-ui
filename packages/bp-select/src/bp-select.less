@@ -9,8 +9,7 @@
   position: relative;
   display: flex;
   align-items: center;
-  // max-width: 200px;
-  // min-width: 160px;
+  max-width: 200px;
   width: auto;
   line-height: 1;
   -webkit-appearance: none;
@@ -47,7 +46,9 @@
 
   .select-input {
     position: relative;
-    //width: 100%;
+    width: auto;
+    max-width: 200px;
+    min-width: 100px;
     display: flex;
     align-items: center;
     box-sizing: border-box;
@@ -70,10 +71,6 @@
     }
 
     .option {
-      // position: absolute;
-      // top: 0;
-      // right: 15px;
-
       i {
         display: block;
         font-size: 16px;
@@ -102,7 +99,8 @@
   .select-item-box {
     position: absolute;
     top: 30px;
-    width: 100%;
+    width: auto;
+    max-width: 200px;
     z-index: 500;
 
     .option-arrow {
@@ -136,11 +134,12 @@
       padding: 5px 0;
       max-height: 200px;
       height: auto;
+      min-width: 100px;
       overflow-x: hidden;
       box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
 
       .bp-option {
-        width: 100%;
+        width: auto;
         height: @normalHeight;
         line-height: @normalHeight;
         cursor: pointer;
@@ -154,7 +153,7 @@
         }
 
         .item {
-          padding-left: 15px;
+          padding: 0 20px;
           font-size: 14px;
           color: @gary-7;
           font-size: inherit;
@@ -165,6 +164,31 @@
             text-overflow: ellipsis;
             white-space: nowrap;
           }
+        }
+
+      }
+
+      .bp-option-active {
+        background: @primary-3;
+
+        .item {
+          color: @gary-0;
+        }
+
+        & {
+          pointer-events: none;
+        }
+      }
+
+      .no-data {
+        cursor: no-drop;
+
+        &:hover {
+          background: @gary-0;
+        }
+
+        .item {
+          color: @gary-4;
         }
       }
     }

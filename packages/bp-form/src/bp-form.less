@@ -17,11 +17,11 @@
     .bp-form-item-label {
       position: relative;
       top: 6px;
-      text-align: right;
 
       .bp-form-item-label-text {
         color: @gary-7;
-        opacity: .9;
+        display: block;
+        line-height: 2;
       }
 
       .require-label::before {
@@ -31,15 +31,16 @@
       }
     }
 
+    .label-text-left {
+      text-align: left;
+    }
+
+    .label-text-right {
+      text-align: right;
+    }
+
     .bp-form-item-inner {
       min-height: 30px;
-
-      p {
-        display: inline-block;
-        color: @gary-7;
-        line-height: 30px;
-        margin-right: 4px;
-      }
 
       .bp-button {
         &:not(:first-child) {
@@ -77,6 +78,9 @@
       width: auto;
       display: inline-block;
       clear: both;
+      .bp-form-item-label-text{
+        margin-bottom: 0 !important;
+      }
     }
 
     .bp-form-item-inner {

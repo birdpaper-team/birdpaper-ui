@@ -18,6 +18,18 @@ var __spreadValues = (a, b) => {
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
 import { ref, useSlots, computed, watch, openBlock, createElementBlock, normalizeClass, unref, normalizeStyle, createCommentVNode, renderSlot, withDirectives, toDisplayString, vShow, createElementVNode, reactive as reactive$1, Fragment, createVNode, withCtx, onMounted, getCurrentInstance, toRefs as toRefs$1, resolveDirective, Transition, renderList, nextTick, resolveComponent, createTextVNode, createBlock, Teleport, onBeforeUnmount, vModelCheckbox, watchEffect, resolveDynamicComponent, mergeProps, toHandlerKey, vModelRadio, isRef as isRef$1 } from "vue";
+const useDesign = () => {
+  const DESIGN_SIZE_LIST = ["mini", "small", "normal", "large"];
+  const DESIGN_THEME_LIST = ["primary", "success", "warning", "danger"];
+  const sizeValidator2 = (v) => DESIGN_SIZE_LIST.includes(v);
+  const themeValidator2 = (v) => DESIGN_THEME_LIST.includes(v);
+  return {
+    DESIGN_SIZE_LIST,
+    DESIGN_THEME_LIST,
+    sizeValidator: sizeValidator2,
+    themeValidator: themeValidator2
+  };
+};
 const useButton = () => {
   const BUTTON_TYPE_LIST = ["text", "default", "primary", "success", "warning", "danger"];
   const typeValidator2 = (v) => BUTTON_TYPE_LIST.includes(v);
@@ -32,18 +44,6 @@ const useButton = () => {
     BUTTON_TYPE_LIST,
     typeValidator: typeValidator2,
     clickByLink: clickByLink2
-  };
-};
-const useDesign = () => {
-  const DESIGN_SIZE_LIST = ["mini", "small", "normal", "large"];
-  const DESIGN_THEME_LIST = ["primary", "success", "warning", "danger"];
-  const sizeValidator2 = (v) => DESIGN_SIZE_LIST.includes(v);
-  const themeValidator2 = (v) => DESIGN_THEME_LIST.includes(v);
-  return {
-    DESIGN_SIZE_LIST,
-    DESIGN_THEME_LIST,
-    sizeValidator: sizeValidator2,
-    themeValidator: themeValidator2
   };
 };
 const _hoisted_1$x = ["type", "disabled"];
@@ -135,59 +135,6 @@ const _sfc_main$C = /* @__PURE__ */ Object.assign(__default__$h, {
 });
 _sfc_main$C.install = function(Vue) {
   Vue.component(_sfc_main$C.name, _sfc_main$C);
-};
-const useInput = () => {
-  const INPUT_TYPE_LIST = ["text", "password", "textarea"];
-  const EMITS2 = ["update:modelValue", "focus", "blur", "keyup", "keydown", "clear", "suffix-click", "input"];
-  const typeValidator2 = (v) => INPUT_TYPE_LIST.includes(v);
-  const initSuffixType2 = ({ type, showPassword, clearable, showLimit, maxLength }) => {
-    if (type === "password" && showPassword) {
-      return "psw-eye-line";
-    }
-    if (clearable) {
-      return "clearable";
-    }
-    if (showLimit && maxLength) {
-      return "word-limit";
-    }
-    return "custom";
-  };
-  const autoHeight2 = (ele) => {
-    var timer = null;
-    const setStyle = (auto = false) => {
-      if (auto)
-        ele.style.height = "auto";
-      ele.style.height = ele.scrollHeight + "px";
-    };
-    const delayedResize = () => {
-      if (timer) {
-        clearTimeout(timer);
-        timer = null;
-      }
-      timer = setTimeout(() => setStyle(), 200);
-    };
-    if (ele.addEventListener) {
-      ele.addEventListener("input", () => setStyle(), false);
-      setStyle();
-    } else if (ele.attachEvent) {
-      ele.attachEvent("onpropertychange", () => setStyle());
-      setStyle();
-    }
-    if (window.VBArray && window.addEventListener) {
-      ele.attachEvent("onkeydown", function() {
-        var key = window.event.keyCode;
-        if (key == 8 || key == 46)
-          delayedResize();
-      });
-      ele.attachEvent("oncut", () => delayedResize());
-    }
-  };
-  return {
-    EMITS: EMITS2,
-    typeValidator: typeValidator2,
-    initSuffixType: initSuffixType2,
-    autoHeight: autoHeight2
-  };
 };
 const _hoisted_1$w = { key: 1 };
 const _hoisted_2$o = {
@@ -309,15 +256,68 @@ const _sfc_main$A = /* @__PURE__ */ Object.assign(__default__$f, {
     };
   }
 });
+const useInput = () => {
+  const INPUT_TYPE_LIST = ["text", "password", "textarea"];
+  const EMITS2 = ["update:modelValue", "focus", "blur", "keyup", "keydown", "clear", "suffix-click", "input"];
+  const typeValidator2 = (v) => INPUT_TYPE_LIST.includes(v);
+  const initSuffixType2 = ({ type, showPassword, clearable, showLimit, maxLength }) => {
+    if (type === "password" && showPassword) {
+      return "psw-eye-line";
+    }
+    if (clearable) {
+      return "clearable";
+    }
+    if (showLimit && maxLength) {
+      return "word-limit";
+    }
+    return "custom";
+  };
+  const autoHeight2 = (ele) => {
+    var timer = null;
+    const setStyle = (auto = false) => {
+      if (auto)
+        ele.style.height = "auto";
+      ele.style.height = ele.scrollHeight + "px";
+    };
+    const delayedResize = () => {
+      if (timer) {
+        clearTimeout(timer);
+        timer = null;
+      }
+      timer = setTimeout(() => setStyle(), 200);
+    };
+    if (ele.addEventListener) {
+      ele.addEventListener("input", () => setStyle(), false);
+      setStyle();
+    } else if (ele.attachEvent) {
+      ele.attachEvent("onpropertychange", () => setStyle());
+      setStyle();
+    }
+    if (window.VBArray && window.addEventListener) {
+      ele.attachEvent("onkeydown", function() {
+        var key = window.event.keyCode;
+        if (key == 8 || key == 46)
+          delayedResize();
+      });
+      ele.attachEvent("oncut", () => delayedResize());
+    }
+  };
+  return {
+    EMITS: EMITS2,
+    typeValidator: typeValidator2,
+    initSuffixType: initSuffixType2,
+    autoHeight: autoHeight2
+  };
+};
 const _hoisted_1$u = ["name", "placeholder", "disabled", "readonly", "value", "type", "maxlength", "autocomplete"];
 const _hoisted_2$m = ["name", "placeholder", "disabled", "autocomplete", "readonly", "rows", "value", "maxlength"];
 const _hoisted_3$d = {
   key: 0,
   class: "bp-textarea-word-limit"
 };
-const __default__$e = { name: "bp-input" };
 const { EMITS, typeValidator, initSuffixType, autoHeight } = useInput();
 const { sizeValidator } = useDesign();
+const __default__$e = { name: "bp-input" };
 const _sfc_main$z = /* @__PURE__ */ Object.assign(__default__$e, {
   props: {
     modelValue: { type: [String, Number], default: "", require: true },
@@ -800,6 +800,16 @@ const _hoisted_3$c = /* @__PURE__ */ createElementVNode("div", { class: "option-
 const _hoisted_4$7 = { class: "option-container" };
 const _hoisted_5$4 = ["title", "onClick"];
 const _hoisted_6$4 = { class: "item" };
+const _hoisted_7$3 = {
+  key: 1,
+  class: "bp-option no-data"
+};
+const _hoisted_8$3 = /* @__PURE__ */ createElementVNode("div", { class: "item" }, [
+  /* @__PURE__ */ createElementVNode("span", null, "\u6682\u65E0\u6570\u636E")
+], -1);
+const _hoisted_9$3 = [
+  _hoisted_8$3
+];
 function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
   const _directive_click_outside = resolveDirective("click-outside");
   return openBlock(), createElementBlock("div", _hoisted_1$t, [
@@ -838,9 +848,9 @@ function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
         }, [
           _hoisted_3$c,
           createElementVNode("div", _hoisted_4$7, [
-            (openBlock(true), createElementBlock(Fragment, null, renderList($props.optionList, (item, index2) => {
+            $props.optionList.length ? (openBlock(true), createElementBlock(Fragment, { key: 0 }, renderList($props.optionList, (item, index2) => {
               return openBlock(), createElementBlock("div", {
-                class: "bp-option",
+                class: normalizeClass(["bp-option", { "bp-option-active": item[$props.value] === $props.modelValue }]),
                 key: `option-${index2}`,
                 title: item[$props.label],
                 onClick: ($event) => $setup.handleOptionItemClick(item)
@@ -848,8 +858,8 @@ function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
                 createElementVNode("div", _hoisted_6$4, [
                   createElementVNode("span", null, toDisplayString(item[$props.label]), 1)
                 ])
-              ], 8, _hoisted_5$4);
-            }), 128))
+              ], 10, _hoisted_5$4);
+            }), 128)) : (openBlock(), createElementBlock("div", _hoisted_7$3, _hoisted_9$3))
           ])
         ], 544), [
           [vShow, _ctx.optionShow]
@@ -1046,25 +1056,30 @@ const _sfc_main$u = {
       default: false
     }
   },
-  setup(props) {
+  emits: ["click"],
+  setup(props, { emit }) {
     const visible = ref(false);
+    const onClick = () => {
+      emit("click");
+    };
     watch(() => props.modelValue, (val) => {
       visible.value = val;
     });
     return {
-      visible
+      visible,
+      onClick
     };
   }
-};
-const _hoisted_1$r = {
-  key: 0,
-  class: "bp-mask"
 };
 function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createBlock(Teleport, { to: "body" }, [
     createVNode(Transition, { name: "mask-fade" }, {
       default: withCtx(() => [
-        $setup.visible ? (openBlock(), createElementBlock("div", _hoisted_1$r)) : createCommentVNode("", true)
+        $setup.visible ? (openBlock(), createElementBlock("div", {
+          key: 0,
+          class: "bp-mask",
+          onClick: _cache[0] || (_cache[0] = (...args) => $setup.onClick && $setup.onClick(...args))
+        })) : createCommentVNode("", true)
       ]),
       _: 1
     })
@@ -1148,7 +1163,7 @@ function useAvatarEvent(emit) {
     handleError
   };
 }
-const _hoisted_1$q = {
+const _hoisted_1$r = {
   key: 0,
   class: "avatar-text"
 };
@@ -1158,7 +1173,7 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     class: normalizeClass($setup.avatarClass),
     onClick: _cache[1] || (_cache[1] = (...args) => $setup.handleClick && $setup.handleClick(...args))
   }, [
-    $setup.textShow ? (openBlock(), createElementBlock("span", _hoisted_1$q, [
+    $setup.textShow ? (openBlock(), createElementBlock("span", _hoisted_1$r, [
       renderSlot(_ctx.$slots, "default")
     ])) : createCommentVNode("", true),
     $setup.iconShow ? (openBlock(), createElementBlock("span", {
@@ -1323,7 +1338,7 @@ const _sfc_main$s = {
     });
   }
 };
-const _hoisted_1$p = ["id"];
+const _hoisted_1$q = ["id"];
 const _hoisted_2$i = {
   key: 0,
   class: "bp-image-placeholder bp-image-inner"
@@ -1356,7 +1371,7 @@ function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
       src: $props.src,
       style: normalizeStyle($setup.imgStyle)
     }, null, 12, _hoisted_6$2))
-  ], 12, _hoisted_1$p);
+  ], 12, _hoisted_1$q);
 }
 var bpImage = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$e]]);
 bpImage.install = function(Vue) {
@@ -1397,11 +1412,11 @@ const _sfc_main$r = {
     };
   }
 };
-const _hoisted_1$o = { class: "bp-item-bar" };
+const _hoisted_1$p = { class: "bp-item-bar" };
 const _hoisted_2$h = { class: "bp-item-bar-list" };
 const _hoisted_3$9 = ["onClick"];
 function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$o, [
+  return openBlock(), createElementBlock("div", _hoisted_1$p, [
     createElementVNode("div", _hoisted_2$h, [
       createElementVNode("ul", null, [
         (openBlock(true), createElementBlock(Fragment, null, renderList($props.itemList, (item, index2) => {
@@ -1476,7 +1491,7 @@ function useClass(props) {
     className
   };
 }
-const _hoisted_1$n = {
+const _hoisted_1$o = {
   key: 0,
   class: "bp-badge-dot"
 };
@@ -1489,7 +1504,7 @@ function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
     renderSlot(_ctx.$slots, "default"),
     createVNode(Transition, { name: "bp-fade-in" }, {
       default: withCtx(() => [
-        $props.isDot ? (openBlock(), createElementBlock("span", _hoisted_1$n)) : createCommentVNode("", true)
+        $props.isDot ? (openBlock(), createElementBlock("span", _hoisted_1$o)) : createCommentVNode("", true)
       ]),
       _: 1
     }),
@@ -1538,7 +1553,7 @@ const _sfc_main$p = {
     };
   }
 };
-const _hoisted_1$m = { class: "bp-spin-main" };
+const _hoisted_1$n = { class: "bp-spin-main" };
 const _hoisted_2$f = /* @__PURE__ */ createElementVNode("span", { class: "bp-icon-spin" }, [
   /* @__PURE__ */ createElementVNode("i", { class: "ri-loader-5-fill" })
 ], -1);
@@ -1551,7 +1566,7 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
         class: "bp-spin",
         style: normalizeStyle(`border-radius:${$props.radius}px`)
       }, [
-        createElementVNode("div", _hoisted_1$m, [
+        createElementVNode("div", _hoisted_1$n, [
           _hoisted_2$f,
           createElementVNode("p", _hoisted_3$8, [
             renderSlot(_ctx.$slots, "default")
@@ -1599,7 +1614,7 @@ const _sfc_main$o = {
     }, toRefs$1(state));
   }
 };
-const _hoisted_1$l = {
+const _hoisted_1$m = {
   class: "bp-popconfirm-container",
   ref: "container"
 };
@@ -1618,7 +1633,7 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
         style: normalizeStyle(`bottom:${_ctx.position.bottom};`)
       }, null, 4)
     ], 64)) : createCommentVNode("", true),
-    createElementVNode("div", _hoisted_1$l, [
+    createElementVNode("div", _hoisted_1$m, [
       renderSlot(_ctx.$slots, "default")
     ], 512)
   ]);
@@ -1644,12 +1659,12 @@ const _sfc_main$n = {
     };
   }
 };
-const _hoisted_1$k = { class: "bp-tag-inner" };
+const _hoisted_1$l = { class: "bp-tag-inner" };
 function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass($setup.tagClazz)
   }, [
-    createElementVNode("p", _hoisted_1$k, [
+    createElementVNode("p", _hoisted_1$l, [
       renderSlot(_ctx.$slots, "default")
     ])
   ], 2);
@@ -1679,14 +1694,14 @@ const _sfc_main$m = {
     };
   }
 };
-const _hoisted_1$j = { class: "select-item-box scro scro-1" };
+const _hoisted_1$k = { class: "select-item-box scro scro-1" };
 const _hoisted_2$e = { class: "bp-dropdown-option-container" };
 const _hoisted_3$7 = ["title", "onClick"];
 const _hoisted_4$4 = { class: "item" };
 function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createBlock(Transition, { name: "option-slide" }, {
     default: withCtx(() => [
-      withDirectives(createElementVNode("div", _hoisted_1$j, [
+      withDirectives(createElementVNode("div", _hoisted_1$k, [
         createElementVNode("div", {
           class: "option-arrow",
           style: normalizeStyle(`left:${$props.optionArrowLeft}%`)
@@ -1778,7 +1793,7 @@ const _sfc_main$l = {
     };
   }
 };
-const _hoisted_1$i = { class: "bp-dropdown-inner-text" };
+const _hoisted_1$j = { class: "bp-dropdown-inner-text" };
 function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_bp_dropdown_option = resolveComponent("bp-dropdown-option");
   const _directive_click_outside = resolveDirective("click-outside");
@@ -1791,7 +1806,7 @@ function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
       onClick: _cache[0] || (_cache[0] = (...args) => $setup.onClick && $setup.onClick(...args)),
       onMouseenter: _cache[1] || (_cache[1] = (...args) => $setup.onMouseEnter && $setup.onMouseEnter(...args))
     }, [
-      createElementVNode("p", _hoisted_1$i, [
+      createElementVNode("p", _hoisted_1$j, [
         renderSlot(_ctx.$slots, "default"),
         !$props.hideArrow ? (openBlock(), createElementBlock("i", {
           key: 0,
@@ -1873,7 +1888,7 @@ const _sfc_main$k = {
     });
   }
 };
-const _hoisted_1$h = {
+const _hoisted_1$i = {
   key: 0,
   class: "bp-alert"
 };
@@ -1889,7 +1904,7 @@ const _hoisted_7$1 = { key: 0 };
 const _hoisted_8$1 = { class: "bp-alert-description" };
 const _hoisted_9$1 = { class: "bp-alert-description-content" };
 function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
-  return _ctx.visible ? (openBlock(), createElementBlock("div", _hoisted_1$h, [
+  return _ctx.visible ? (openBlock(), createElementBlock("div", _hoisted_1$i, [
     createElementVNode("div", {
       class: normalizeClass($setup.alertClassName)
     }, [
@@ -1969,9 +1984,9 @@ const _sfc_main$j = {
     };
   }
 };
-const _hoisted_1$g = /* @__PURE__ */ createElementVNode("div", { class: "bp-checkbox-inner" }, null, -1);
+const _hoisted_1$h = /* @__PURE__ */ createElementVNode("div", { class: "bp-checkbox-inner" }, null, -1);
 const _hoisted_2$c = [
-  _hoisted_1$g
+  _hoisted_1$h
 ];
 const _hoisted_3$5 = ["name"];
 const _hoisted_4$2 = { class: "bp-checkbox-inner-text" };
@@ -2028,7 +2043,7 @@ const useTable = (props) => {
       }
       minWidth && _min_width_list.push(minWidth);
     }
-    _table_width.value = el && el.offsetWidth - 4;
+    _table_width.value = el && el.offsetWidth - 6;
     _col_width_list = getWidthList() || [];
     columns.value = [];
     for (let i = 0; i < cols.length; i++) {
@@ -2042,7 +2057,7 @@ const useTable = (props) => {
     let adapt_width = getAdaptWidth();
     if (_min_width_list.length) {
       _min_width_list.map((item, index2) => {
-        if (adapt_width < item) {
+        if (adapt_width > item) {
           _fixed_width += item;
           _remainder_col--;
           _min_width_list.splice(index2, 1);
@@ -2086,7 +2101,7 @@ const useTable = (props) => {
     columns
   };
 };
-const _hoisted_1$f = ["name", "width"];
+const _hoisted_1$g = ["name", "width"];
 const __default__$d = { name: "bp-table-columns" };
 const _sfc_main$i = /* @__PURE__ */ Object.assign(__default__$d, {
   props: {
@@ -2100,13 +2115,13 @@ const _sfc_main$i = /* @__PURE__ */ Object.assign(__default__$d, {
             key: `bp-table-tr-${index2}`,
             name: `bp_table_tr_${index2}`,
             width: `${item.width}px`
-          }, null, 8, _hoisted_1$f);
+          }, null, 8, _hoisted_1$g);
         }), 128))
       ]);
     };
   }
 });
-const _hoisted_1$e = { class: "bp-table-header-thead" };
+const _hoisted_1$f = { class: "bp-table-header-thead" };
 const __default__$c = { name: "bp-table-header" };
 const _sfc_main$h = /* @__PURE__ */ Object.assign(__default__$c, {
   props: {
@@ -2125,7 +2140,7 @@ const _sfc_main$h = /* @__PURE__ */ Object.assign(__default__$c, {
         style: normalizeStyle(`width:${__props.width}px`)
       }, [
         createVNode(_sfc_main$i, { cols: __props.headerList }, null, 8, ["cols"]),
-        createElementVNode("thead", _hoisted_1$e, [
+        createElementVNode("thead", _hoisted_1$f, [
           createElementVNode("tr", null, [
             (openBlock(true), createElementBlock(Fragment, null, renderList(__props.headerList, (item, index2) => {
               return openBlock(), createElementBlock("th", {
@@ -2139,7 +2154,7 @@ const _sfc_main$h = /* @__PURE__ */ Object.assign(__default__$c, {
     };
   }
 });
-const _hoisted_1$d = { class: "bp-table-empty-tr" };
+const _hoisted_1$e = { class: "bp-table-empty-tr" };
 const _hoisted_2$b = ["colspan"];
 const __default__$b = { name: "bp-table-empty" };
 const _sfc_main$g = /* @__PURE__ */ Object.assign(__default__$b, {
@@ -2148,13 +2163,13 @@ const _sfc_main$g = /* @__PURE__ */ Object.assign(__default__$b, {
   },
   setup(__props) {
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("tr", _hoisted_1$d, [
+      return openBlock(), createElementBlock("tr", _hoisted_1$e, [
         createElementVNode("td", { colspan: __props.colspan }, "\u6682\u65E0\u6570\u636E", 8, _hoisted_2$b)
       ]);
     };
   }
 });
-const _hoisted_1$c = /* @__PURE__ */ createElementVNode("div", { class: "scrollbar" }, null, -1);
+const _hoisted_1$d = /* @__PURE__ */ createElementVNode("div", { class: "scrollbar" }, null, -1);
 const _hoisted_2$a = { class: "bp-table-body-tbody" };
 const __default__$a = { name: "bp-table" };
 const _sfc_main$f = /* @__PURE__ */ Object.assign(__default__$a, {
@@ -2212,7 +2227,7 @@ const _sfc_main$f = /* @__PURE__ */ Object.assign(__default__$a, {
             class: "bp-table-body-area",
             style: normalizeStyle(unref(bodyAreaStyle))
           }, [
-            _hoisted_1$c,
+            _hoisted_1$d,
             createElementVNode("table", {
               class: "bp-table-body",
               style: normalizeStyle(`width:${unref(_table_width)}px`)
@@ -2271,7 +2286,7 @@ var bpButtongroup = /* @__PURE__ */ _export_sfc(_sfc_main$e, [["render", _sfc_re
 bpButtongroup.install = function(Vue) {
   Vue.component(bpButtongroup.name, bpButtongroup);
 };
-const _hoisted_1$b = { class: "bp-page-total" };
+const _hoisted_1$c = { class: "bp-page-total" };
 const _hoisted_2$9 = ["textContent"];
 const __default__$9 = { name: "bp-pagination-total" };
 const _sfc_main$d = /* @__PURE__ */ Object.assign(__default__$9, {
@@ -2287,7 +2302,7 @@ const _sfc_main$d = /* @__PURE__ */ Object.assign(__default__$9, {
       text.value = props.tmpString.replace(paramsStr, props.value);
     });
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1$b, [
+      return openBlock(), createElementBlock("div", _hoisted_1$c, [
         createElementVNode("p", {
           class: "page-text",
           textContent: toDisplayString(text.value)
@@ -2296,7 +2311,7 @@ const _sfc_main$d = /* @__PURE__ */ Object.assign(__default__$9, {
     };
   }
 });
-const _hoisted_1$a = { class: "bp-page-totalPages" };
+const _hoisted_1$b = { class: "bp-page-totalPages" };
 const _hoisted_2$8 = ["textContent"];
 const __default__$8 = { name: "bp-page-totalPages" };
 const _sfc_main$c = /* @__PURE__ */ Object.assign(__default__$8, {
@@ -2312,7 +2327,7 @@ const _sfc_main$c = /* @__PURE__ */ Object.assign(__default__$8, {
       text.value = props.tmpString.replace(paramsStr, props.value);
     });
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1$a, [
+      return openBlock(), createElementBlock("div", _hoisted_1$b, [
         createElementVNode("p", {
           class: "page-text",
           textContent: toDisplayString(text.value)
@@ -2321,7 +2336,7 @@ const _sfc_main$c = /* @__PURE__ */ Object.assign(__default__$8, {
     };
   }
 });
-const _hoisted_1$9 = ["textContent"];
+const _hoisted_1$a = ["textContent"];
 const _hoisted_2$7 = {
   key: 1,
   class: "page-icon ri-arrow-left-s-line"
@@ -2353,12 +2368,12 @@ const _sfc_main$b = /* @__PURE__ */ Object.assign(__default__$7, {
           key: 0,
           class: "page-text",
           textContent: toDisplayString(__props.text)
-        }, null, 8, _hoisted_1$9)) : (openBlock(), createElementBlock("i", _hoisted_2$7))
+        }, null, 8, _hoisted_1$a)) : (openBlock(), createElementBlock("i", _hoisted_2$7))
       ], 2);
     };
   }
 });
-const _hoisted_1$8 = ["onClick"];
+const _hoisted_1$9 = ["onClick"];
 const _hoisted_2$6 = {
   key: 0,
   class: "page-text"
@@ -2417,12 +2432,12 @@ const _sfc_main$a = /* @__PURE__ */ Object.assign(__default__$6, {
           onClick: ($event) => onClick(item.index)
         }, [
           item.type === "number" ? (openBlock(), createElementBlock("span", _hoisted_2$6, toDisplayString(item.index), 1)) : (openBlock(), createElementBlock("i", _hoisted_3$4))
-        ], 10, _hoisted_1$8);
+        ], 10, _hoisted_1$9);
       }), 128);
     };
   }
 });
-const _hoisted_1$7 = ["textContent"];
+const _hoisted_1$8 = ["textContent"];
 const _hoisted_2$5 = {
   key: 1,
   class: "page-icon ri-arrow-right-s-line"
@@ -2454,12 +2469,12 @@ const _sfc_main$9 = /* @__PURE__ */ Object.assign(__default__$5, {
           key: 0,
           class: "page-text",
           textContent: toDisplayString(__props.text)
-        }, null, 8, _hoisted_1$7)) : (openBlock(), createElementBlock("i", _hoisted_2$5))
+        }, null, 8, _hoisted_1$8)) : (openBlock(), createElementBlock("i", _hoisted_2$5))
       ], 2);
     };
   }
 });
-const _hoisted_1$6 = { class: "bp-page-jumper" };
+const _hoisted_1$7 = { class: "bp-page-jumper" };
 const _hoisted_2$4 = {
   key: 0,
   class: "page-text"
@@ -2503,7 +2518,7 @@ const _sfc_main$8 = /* @__PURE__ */ Object.assign(__default__$4, {
     });
     return (_ctx, _cache) => {
       const _component_bp_input = resolveComponent("bp-input");
-      return openBlock(), createElementBlock("div", _hoisted_1$6, [
+      return openBlock(), createElementBlock("div", _hoisted_1$7, [
         unref(jumperText).prefix ? (openBlock(), createElementBlock("span", _hoisted_2$4, toDisplayString(unref(jumperText).prefix), 1)) : createCommentVNode("", true),
         createVNode(_component_bp_input, {
           modelValue: jumperValue.value,
@@ -2518,7 +2533,7 @@ const _sfc_main$8 = /* @__PURE__ */ Object.assign(__default__$4, {
     };
   }
 });
-const _hoisted_1$5 = { class: "bp-page-sizes" };
+const _hoisted_1$6 = { class: "bp-page-sizes" };
 const __default__$3 = { name: "bp-pagination-size" };
 const _sfc_main$7 = /* @__PURE__ */ Object.assign(__default__$3, {
   props: {
@@ -2545,7 +2560,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign(__default__$3, {
     });
     return (_ctx, _cache) => {
       const _component_bp_select = resolveComponent("bp-select");
-      return openBlock(), createElementBlock("div", _hoisted_1$5, [
+      return openBlock(), createElementBlock("div", _hoisted_1$6, [
         createVNode(_component_bp_select, {
           modelValue: sizeValue.value,
           "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => sizeValue.value = $event),
@@ -2557,7 +2572,7 @@ const _sfc_main$7 = /* @__PURE__ */ Object.assign(__default__$3, {
     };
   }
 });
-const _hoisted_1$4 = { class: "bp-page-simple" };
+const _hoisted_1$5 = { class: "bp-page-simple" };
 const _hoisted_2$3 = /* @__PURE__ */ createElementVNode("li", { class: "bp-page-item simple-separator" }, "/", -1);
 const _hoisted_3$2 = ["textContent"];
 const __default__$2 = { name: "bp-paginoation-simple" };
@@ -2573,7 +2588,7 @@ const _sfc_main$6 = /* @__PURE__ */ Object.assign(__default__$2, {
       emit("change", type, Number(val));
     };
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", _hoisted_1$4, [
+      return openBlock(), createElementBlock("div", _hoisted_1$5, [
         createVNode(_sfc_main$8, {
           size: "mini",
           pages: __props.pages,
@@ -2597,11 +2612,13 @@ const usePagination = (props, emit) => {
   const currentPageSize = ref(Number(props.pageSize));
   const totalPagesNum = ref(0);
   const hidePagination = computed(() => props.hideOnSinglePage && totalPagesNum.value === 1);
-  const setCurrentPage = (type, pageNum = 1) => {
+  const setCurrentPage = (type, pageNum = 1, isEmit = true) => {
     let num = currentPage.value;
     type === "prev" ? num-- : type === "next" ? num++ : num = Number(pageNum);
     currentPage.value = num < 1 ? 1 : num > totalPagesNum.value ? totalPagesNum.value : num;
-    emit("page-change", currentPage.value);
+    if (currentPage.value != props.pageNum && isEmit) {
+      emit("page-change", currentPage.value);
+    }
   };
   const setCurrentPageSize = (v) => {
     currentPageSize.value = Number(v);
@@ -2609,7 +2626,9 @@ const usePagination = (props, emit) => {
   };
   watchEffect(() => {
     totalPagesNum.value = Math.ceil(props.total / currentPageSize.value);
-    setCurrentPage("page", currentPage.value);
+    if (totalPagesNum.value) {
+      setCurrentPage("page", currentPage.value, false);
+    }
   });
   const totalComponents = computed(() => {
     return {
@@ -2731,7 +2750,7 @@ const usePaginationValidator = () => {
     layoutValidator: layoutValidator2
   };
 };
-const _hoisted_1$3 = { class: "bp-pagination" };
+const _hoisted_1$4 = { class: "bp-pagination" };
 const __default__$1 = { name: "bp-pagination" };
 const { pagerCountValidator, layoutValidator } = usePaginationValidator();
 const _sfc_main$5 = /* @__PURE__ */ Object.assign(__default__$1, {
@@ -2762,7 +2781,7 @@ const _sfc_main$5 = /* @__PURE__ */ Object.assign(__default__$1, {
       return name;
     });
     return (_ctx, _cache) => {
-      return withDirectives((openBlock(), createElementBlock("div", _hoisted_1$3, [
+      return withDirectives((openBlock(), createElementBlock("div", _hoisted_1$4, [
         createElementVNode("ul", {
           class: normalizeClass(unref(className))
         }, [
@@ -2820,9 +2839,9 @@ const _sfc_main$4 = {
     };
   }
 };
-const _hoisted_1$2 = /* @__PURE__ */ createElementVNode("div", { class: "bp-radio-inner" }, null, -1);
+const _hoisted_1$3 = /* @__PURE__ */ createElementVNode("div", { class: "bp-radio-inner" }, null, -1);
 const _hoisted_2$2 = [
-  _hoisted_1$2
+  _hoisted_1$3
 ];
 const _hoisted_3$1 = ["name", "value"];
 const _hoisted_4$1 = { class: "bp-radio-inner-text" };
@@ -2917,10 +2936,10 @@ const _sfc_main$3 = {
     }
   }
 };
-const _hoisted_1$1 = { class: "bp-switch" };
+const _hoisted_1$2 = { class: "bp-switch" };
 const _hoisted_2$1 = ["value"];
 function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", _hoisted_1$1, [
+  return openBlock(), createElementBlock("div", _hoisted_1$2, [
     createElementVNode("span", {
       class: normalizeClass($options.innerClassName),
       value: $props.modelValue,
@@ -2932,7 +2951,7 @@ var bpSwitch = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$
 bpSwitch.install = function(Vue) {
   Vue.component(bpSwitch.name, bpSwitch);
 };
-const _hoisted_1 = { class: "bp-date-picker" };
+const _hoisted_1$1 = { class: "bp-date-picker" };
 const _hoisted_2 = {
   key: 0,
   class: "bp-picker-inner"
@@ -3121,7 +3140,7 @@ const _sfc_main$2 = /* @__PURE__ */ Object.assign(__default__, {
       const _component_bp_input = resolveComponent("bp-input");
       const _component_bp_button = resolveComponent("bp-button");
       const _directive_click_outside = resolveDirective("click-outside");
-      return withDirectives((openBlock(), createElementBlock("div", _hoisted_1, [
+      return withDirectives((openBlock(), createElementBlock("div", _hoisted_1$1, [
         createVNode(_component_bp_input, {
           placeholder: "\u9009\u62E9\u65E5\u671F",
           readonly: "",
@@ -3821,7 +3840,8 @@ const _sfc_main = {
     name: { type: String, default: "" },
     label: { type: String, default: "" },
     isRequire: { type: Boolean, default: false },
-    col: { type: [String, Object, Number], default: 0 }
+    col: { type: [String, Object, Number], default: 0 },
+    inline: { type: Boolean, default: true }
   },
   setup(props) {
     const col = reactive({
@@ -3838,6 +3858,7 @@ const _sfc_main = {
     return __spreadValues({}, toRefs(col));
   }
 };
+const _hoisted_1 = { class: "bp-form-item-inner" };
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_bp_col = resolveComponent("bp-col");
   const _component_bp_row = resolveComponent("bp-row");
@@ -3849,19 +3870,23 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     align: "top"
   }, {
     default: withCtx(() => [
-      $props.col !== 0 ? (openBlock(), createBlock(_component_bp_col, {
+      $props.col && !$props.inline ? (openBlock(), createBlock(_component_bp_col, {
         key: 0,
-        class: "bp-form-item-label",
-        span: _ctx.labelCol
+        class: normalizeClass(["bp-form-item-label", !$props.inline ? "label-text-left" : "label-text-right"]),
+        span: !$props.inline ? 24 : _ctx.labelCol
       }, {
         default: withCtx(() => [
           createElementVNode("label", {
-            class: normalizeClass(["bp-form-item-label-text", { "require-label": $props.isRequire }])
-          }, toDisplayString($props.label), 3)
+            class: normalizeClass(["bp-form-item-label-text", !$props.inline ? "inline-label-text" : "unline-label-text", { "require-label": $props.isRequire }])
+          }, toDisplayString($props.label), 3),
+          createElementVNode("div", _hoisted_1, [
+            renderSlot(_ctx.$slots, "default")
+          ])
         ]),
-        _: 1
-      }, 8, ["span"])) : createCommentVNode("", true),
-      createVNode(_component_bp_col, {
+        _: 3
+      }, 8, ["class", "span"])) : createCommentVNode("", true),
+      $props.inline ? (openBlock(), createBlock(_component_bp_col, {
+        key: 1,
         span: _ctx.innerCol,
         class: "bp-form-item-inner"
       }, {
@@ -3869,7 +3894,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
           renderSlot(_ctx.$slots, "default")
         ]),
         _: 3
-      }, 8, ["span"])
+      }, 8, ["span"])) : createCommentVNode("", true)
     ]),
     _: 3
   });

@@ -1,13 +1,7 @@
-/*
- * @Author: Sam
- * @Date: 2020-04-02 14:27:59
- * @Last Modified by: Sam
- * @Last Modified time: 2021-03-03 10:49:05
- */
 <template>
   <teleport to="body">
     <transition name="mask-fade">
-      <div class="bp-mask" v-if="visible"></div>
+      <div class="bp-mask" v-if="visible" @click="onClick"></div>
     </transition>
   </teleport>
 </template>
@@ -23,8 +17,12 @@ export default {
       default: false,
     },
   },
-  setup(props) {
+  emits: ["click"],
+  setup(props, { emit }) {
     const visible = ref(false);
+    const onClick = () => {
+      emit("click")
+    }
 
     watch(
       () => props.modelValue,
@@ -35,6 +33,7 @@ export default {
 
     return {
       visible,
+      onClick
     };
   },
 };
