@@ -10,12 +10,21 @@ const config: import("vitepress").UserConfig = {
     nav,
     logo: "/birdpaper-logo.svg",
     siteTitle: "BirdpaperUI",
-    outlineTitle: "In hac pagina",
+    outlineTitle: "大纲",
     socialLinks: [{ icon: "github", link: "https://github.com/vuejs/vitepress" }],
     footer: {
       message: "Released under the MIT License.",
       copyright: "Copyright © 2019-present Evan You",
     },
+    sidebar: [
+      {
+        text: 'Guide',
+        items: [
+          { text: 'Introduction', link: '/introduction' },
+          { text: 'Getting Started', link: '/getting-started' },
+        ]
+      }
+    ]
   },
 };
 
