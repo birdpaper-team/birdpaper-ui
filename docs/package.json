@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vitepress dev . --port 8081",
-    "build": "vitepress build .",
-    "serve": "vitepress serve ."
+    "dev": "vitepress dev src --port 8081",
+    "build": "vitepress build src",
+    "serve": "vitepress serve src"
   },
   "keywords": [],
   "author": "木亦Sam",
