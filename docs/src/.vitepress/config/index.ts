@@ -12,10 +12,6 @@ const config: import("vitepress").UserConfig = {
     siteTitle: "BirdpaperUI",
     outlineTitle: "大纲",
     socialLinks: [{ icon: "github", link: "https://github.com/vuejs/vitepress" }],
-    footer: {
-      message: "Released under the MIT License.",
-      copyright: "Copyright © 2019-present Evan You",
-    },
     sidebar: [
       {
         text: 'Guide',

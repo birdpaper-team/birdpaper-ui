@@ -6,7 +6,6 @@
  */
 
 export const nav = [
-  { text: "指南", link: "/guide/index" },
-  { text: "组件", link: "/guide" },
-  { text: "支持", link: "/guide" },
+  { text: "指南", link: "/guide/" },
+  { text: "组件", link: "/component/" },
 ];
