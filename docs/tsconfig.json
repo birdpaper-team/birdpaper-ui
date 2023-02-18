@@ -13,6 +13,7 @@
     "paths": {
       "~/*": ["./src/.vitepress/*"]
     },
+    "types": ["vite/client"]
   },
   "include": ["**/*", "./src/.vitepress/**/*"],
   "exclude": ["node_modules"]

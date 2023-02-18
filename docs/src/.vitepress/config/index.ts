@@ -7,6 +7,7 @@
 
 import { nav } from "./nav";
 import { sidebar } from "./sidebar";
+import demoblock from "../../../components/code-demo/src/index";
 
 const config: import("vitepress").UserConfig = {
   title: "BirdpaperUI",
@@ -19,11 +20,16 @@ const config: import("vitepress").UserConfig = {
     siteTitle: "BirdpaperUI",
     outlineTitle: "大纲",
     docFooter: {
-      prev: '上一篇',
-      next: '下一篇'
+      prev: "上一篇",
+      next: "下一篇",
     },
     socialLinks: [{ icon: "github", link: "https://github.com/liluanhui/birdpaper-ui" }],
     sidebar,
+  },
+  markdown: {
+    config: md => {
+      md.use(demoblock);
+    },
   },
 };
 

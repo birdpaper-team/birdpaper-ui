@@ -19,7 +19,8 @@
   "author": "木亦Sam",
   "license": "MIT",
   "dependencies": {
-    "cz-customizable": "^7.0.0"
+    "cz-customizable": "^7.0.0",
+    "vite-plugin-vue-setup-extend": "^0.4.0"
   },
   "config": {
     "commitizen": {
