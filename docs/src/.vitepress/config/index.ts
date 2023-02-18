@@ -1,5 +1,12 @@
+/*
+ * @Author: Sam
+ * @Date: 2023-02-17 15:34:06
+ * @Last Modified by: Sam
+ * @Last Modified time: 2023-02-17 15:54:30
+ */
 
 import { nav } from "./nav";
+import { sidebar } from "./sidebar";
 
 const config: import("vitepress").UserConfig = {
   title: "BirdpaperUI",
@@ -11,16 +18,12 @@ const config: import("vitepress").UserConfig = {
     logo: "/birdpaper-logo.svg",
     siteTitle: "BirdpaperUI",
     outlineTitle: "大纲",
-    socialLinks: [{ icon: "github", link: "https://github.com/vuejs/vitepress" }],
-    sidebar: [
-      {
-        text: 'Guide',
-        items: [
-          { text: 'Introduction', link: '/introduction' },
-          { text: 'Getting Started', link: '/getting-started' },
-        ]
-      }
-    ]
+    docFooter: {
+      prev: '上一篇',
+      next: '下一篇'
+    },
+    socialLinks: [{ icon: "github", link: "https://github.com/liluanhui/birdpaper-ui" }],
+    sidebar,
   },
 };
 
