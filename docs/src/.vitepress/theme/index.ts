@@ -6,7 +6,7 @@ import "./index.less";
 import NoFound from "./NotFound.vue";
 import { EnhanceAppContext } from "vitepress";
 
-import CodeDemo from "../../../components/code-demo";
+import DemoBlock from "../../../components/demo-block";
 
 export default {
   ...DefaultTheme,
@@ -16,6 +16,6 @@ export default {
   enhanceApp(ctx: EnhanceAppContext) {
     DefaultTheme.enhanceApp(ctx);
 
-    ctx.app.component("demo", CodeDemo);
+    ctx.app.component("demo-block", DemoBlock);
   },
 };

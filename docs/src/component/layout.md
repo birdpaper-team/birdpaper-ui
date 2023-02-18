@@ -1,4 +1,4 @@
 layout
 
-  <demo src="/example/button/basic">
-  </demo>
+  <demo-block src="example/button/basic">
+  </demo-block>

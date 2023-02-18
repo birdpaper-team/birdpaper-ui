@@ -5,9 +5,8 @@
   </div>
 </template>
 
-<script setup lang="ts" name="code-demo">
-import path from "path";
-import { computed, defineAsyncComponent, markRaw, nextTick, onMounted, ref } from "vue";
+<script setup lang="ts" name="demo-block">
+import { defineAsyncComponent, markRaw, ref } from "vue";
 
 const props = defineProps({
   src: { type: String, default: "/example/button/basic" },

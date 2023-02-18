@@ -7,7 +7,7 @@
 
 import { nav } from "./nav";
 import { sidebar } from "./sidebar";
-import demoblock from "../../../components/code-demo/src/index";
+import demoblock from "../../../components/demo-block/src/index";
 
 const config: import("vitepress").UserConfig = {
   title: "BirdpaperUI",
