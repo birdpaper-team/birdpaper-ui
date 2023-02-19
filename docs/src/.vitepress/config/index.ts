@@ -7,7 +7,7 @@
 
 import { nav } from "./nav";
 import { sidebar } from "./sidebar";
-import demoblock from "../../../components/demo-block/src/index";
+import loadCode from "../../../components/demo-block/src/loadCode";
 
 const config: import("vitepress").UserConfig = {
   title: "BirdpaperUI",
@@ -28,7 +28,7 @@ const config: import("vitepress").UserConfig = {
   },
   markdown: {
     config: md => {
-      md.use(demoblock);
+      md.use(loadCode);
     },
   },
 };

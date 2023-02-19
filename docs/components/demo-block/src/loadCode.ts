@@ -1,3 +1,11 @@
+/**
+ * @ Author: Sam
+ * @ Create Time: 2023-02-18 17:12:22
+ * @ Modified by: Sam
+ * @ Modified time: 2023-02-19 07:50:02
+ * @ Description: 代码示例组件-源码转HTML插件
+ */
+
 import fs from "fs";
 import path from "path";
 import { getHighlighter } from "shiki";
@@ -7,7 +15,7 @@ const { resolve } = path;
 let codeToHtml: any = null;
 (async () => {
   let res = await getHighlighter({
-    theme: "material-theme-palenight",
+    theme: "min-light",
   });
   codeToHtml = res.codeToHtml;
 })();
@@ -21,14 +29,11 @@ export default (md: any) => {
 
     demoTagList?.forEach(async (tagText: any) => {
       const src = getTagLabel(tagText, "demo-block", "src");
+      const lang = getTagLabel(tagText, "demo-block", "lang") || "vue";
+      let codeString = "";
 
-      console.log("[ src ]-24", src);
-      let codeStr = "";
-      let htmlStr = "";
-      codeStr = fs.readFileSync(resolve(`./src/${src}.vue`)).toString();
-
-      htmlStr = codeToHtml(codeStr, { lang: "vue" });
-      let demoStr = tagText.replace(">", ` htmlStr="${encodeURIComponent(htmlStr)}">`);
+      codeString = codeToHtml(fs.readFileSync(resolve(`./src/${src}.vue`)).toString(), { lang });
+      let demoStr = tagText.replace(">", ` codeString="${encodeURIComponent(codeString)}">`);
       result = result.replace(tagText, demoStr);
     });
     return result;

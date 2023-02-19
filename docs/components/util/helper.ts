@@ -8,8 +8,9 @@
 export const getTagLabel = (tagText: string, tagName: string, attr?: string): string => {
   let reg = attr
     ? new RegExp(`<${tagName}[^>]+${attr}=['"]([^'"]+)['"]`)
-    : /<${tagName}[\s\S]*?>([\s\S]*?)(<\/${tagName}>|\/>)$/;
+    : /<demo-block[\s\S]*?>([\s\S]*?)(<\/demo-block>|\/>)$/;
   let match = tagText.match(reg);
+  
   if (match && match.length >= 1) {
     return match[1] || "";
   }
