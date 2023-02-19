@@ -1,5 +1,5 @@
 <template>
-  <div><button @click="t">示例代码</button></div>
+  <div><bp-button @click="t">示例代码</bp-button></div>
 </template>
 
 <script setup lang="ts" name="basic-demo">

@@ -11,8 +11,8 @@ import loadCode from "../../../components/demo-block/src/loadCode";
 
 const config: import("vitepress").UserConfig = {
   title: "BirdpaperUI",
-  titleTemplate: "基于Vue3的 UI组件库",
-  description: "基于Vue3的 UI组件库",
+  titleTemplate: "基于Vue3的UI组件库",
+  description: "基于Vue3的UI组件库",
   lastUpdated: false,
   themeConfig: {
     nav,
