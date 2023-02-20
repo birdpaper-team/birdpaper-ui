@@ -19,6 +19,7 @@
   "author": "木亦Sam",
   "license": "MIT",
   "dependencies": {
+    "@icon-park/vue-next": "^1.4.2",
     "cz-customizable": "^7.0.0"
   },
   "config": {
