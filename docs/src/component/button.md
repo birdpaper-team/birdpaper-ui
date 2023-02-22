@@ -5,3 +5,6 @@
 
 ### Button 属性
 <table-block type="props" src="example/button/props"></table-block>
+
+### Button 事件
+<table-block type="events" src="example/button/events"></table-block>
