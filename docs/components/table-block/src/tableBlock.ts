@@ -1,31 +1,38 @@
+/**
+ * @ Author: Sam
+ * @ Create Time: 2023-02-22 20:18:08
+ * @ Modified by: Sam
+ * @ Modified time: 2023-02-23 05:07:27
+ */
+
 /** Prop 表头 */
 export const propHeader = [
-  { label: "名称", key: "name" },
-  { label: "说明", key: "remark" },
+  { label: "名称", scope: { customRender: "name" }, width: "140" },
+  { label: "说明", scope: { customRender: "remark" } },
   { label: "类型", scope: { customRender: "type" } },
-  { label: "默认值", key: "default" },
+  { label: "默认值", scope: { customRender: "default" } },
 ];
 
 /** Event 表头 */
 export const eventHeader = [
-  { label: "名称", key: "name" },
-  { label: "说明", key: "remark" },
-  { label: "参数", key: "params" },
+  { label: "名称", scope: { customRender: "name" }, width: "140" },
+  { label: "说明", scope: { customRender: "remark" } },
+  { label: "参数", scope: { customRender: "params" } },
 ];
 
 /** Method 表头 */
 export const methodHeader = [
-  { label: "名称", key: "name" },
-  { label: "说明", key: "remark" },
-  { label: "参数", key: "params" },
-  { label: "返回值", key: "returns" },
+  { label: "名称", scope: { customRender: "name" }, width: "140" },
+  { label: "说明", scope: { customRender: "remark" } },
+  { label: "参数", scope: { customRender: "params" } },
+  { label: "返回值", scope: { customRender: "returns" } },
 ];
 
 /** Slot 表头 */
 export const slotHeader = [
-  { label: "名称", key: "name" },
-  { label: "说明", key: "remark" },
-  { label: "参数", key: "params" },
+  { label: "名称", scope: { customRender: "name" }, width: "140" },
+  { label: "说明", scope: { customRender: "remark" } },
+  { label: "参数", scope: { customRender: "params" } },
 ];
 
 /** 表头 */

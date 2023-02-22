@@ -1,9 +1,39 @@
+<!--
+ * @ Author: Sam
+ * @ Create Time: 2023-02-22 20:18:08
+ * @ Modified by: Sam
+ * @ Modified time: 2023-02-23 05:11:28
+ * @ Description: API表格组件
+ -->
 <template>
-  <bp-table :cols="header[type]" :data-source="list">
-    <template #type="{ row }">
-    <span style="font-weight:bold">{{ row.type || "-" }}</span>
-  </template>
-  </bp-table>
+  <div class="table-block">
+    <bp-table :cols="header[type]" :data-source="list">
+      <!-- 名称 -->
+      <template #name="{ row }">
+        <div class="name-area">
+          <span class="name-area-inner">{{ row.name || "-" }}</span>
+        </div>
+      </template>
+      <!-- 说明 -->
+      <template #remark="{ row }">
+        <div class="remark-area">
+          <span class="remark-area-inner">{{ row.remark || "-" }}</span>
+        </div>
+      </template>
+      <!-- 默认值 -->
+      <template #default="{ row }">
+        <div class="default-area">
+          <span class="default-area-inner">{{ row.default || "-" }}</span>
+        </div>
+      </template>
+      <!-- 类型 -->
+      <template #type="{ row }">
+        <div class="type-area">
+          <span class="type-area-inner">{{ row.type || "-" }}</span>
+        </div>
+      </template>
+    </bp-table>
+  </div>
 </template>
 
 <script setup lang="ts" name="table-block">
@@ -20,7 +50,7 @@ const init = async () => {
   if (!props.src) return;
 
   const dataGlob = import.meta.glob(`../../../src/example/**/*.ts`);
-  const res = await import(dataGlob[`../../../src/${props.src}.ts`].name);
+  const res = await import(/* @vite-ignore */ dataGlob[`../../../src/${props.src}.ts`].name);
   list.value = res.default;
 };
 

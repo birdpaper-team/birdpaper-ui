@@ -1,3 +1,11 @@
+<!--
+ * @ Author: Sam
+ * @ Create Time: 2023-02-21 21:05:39
+ * @ Modified by: Sam
+ * @ Modified time: 2023-02-23 05:52:49
+ * @ Description: 按钮 Button
+ -->
+
 <template>
   <button :class="btnClass" :disabled="isDisabled" :style="`${btnElStyle}`" @click="onClick">
     <i :class="icon" v-if="hasIcon"></i>

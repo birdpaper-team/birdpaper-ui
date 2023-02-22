@@ -2,8 +2,8 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-19 16:20:27
  * @ Modified by: Sam
- * @ Modified time: 2023-02-22 09:54:43
- * @ Description:
+ * @ Modified time: 2023-02-23 05:54:07
+ * @ Description: 组件库入口
  */
 
 import { App } from "vue";

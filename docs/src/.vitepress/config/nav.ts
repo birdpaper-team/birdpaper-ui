@@ -1,8 +1,9 @@
-/*
- * @Author: Sam
- * @Date: 2023-02-17 15:34:06
- * @Last Modified by: Sam
- * @Last Modified time: 2023-02-17 15:54:30
+/**
+ * @ Author: Sam
+ * @ Create Time: 2023-02-21 21:05:39
+ * @ Modified by: Sam
+ * @ Modified time: 2023-02-23 05:30:43
+ * @ Description: 顶部导航
  */
 
 export const nav = [

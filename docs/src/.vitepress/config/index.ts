@@ -1,8 +1,9 @@
-/*
- * @Author: Sam
- * @Date: 2023-02-17 15:34:06
- * @Last Modified by: Sam
- * @Last Modified time: 2023-02-17 15:54:30
+/**
+ * @ Author: Sam
+ * @ Create Time: 2023-02-21 21:05:39
+ * @ Modified by: Sam
+ * @ Modified time: 2023-02-23 05:26:09
+ * @ Description: vitepress配置
  */
 
 import { nav } from "./nav";
@@ -14,11 +15,14 @@ const config: import("vitepress").UserConfig = {
   titleTemplate: "基于Vue3的UI组件库",
   description: "基于Vue3的UI组件库",
   lastUpdated: false,
+  cleanUrls: true,
+  appearance: false,
   themeConfig: {
     nav,
     logo: "/birdpaper-logo.svg",
     siteTitle: "BirdpaperUI",
     outlineTitle: "大纲",
+    outline: "deep",
     docFooter: {
       prev: "上一篇",
       next: "下一篇",
