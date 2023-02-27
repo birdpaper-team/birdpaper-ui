@@ -1,20 +1,19 @@
 /**
  * @ Author: Sam
- * @ Create Time: 2023-02-21 21:05:39
+ * @ Create Time: 2023-02-23 04:14:35
  * @ Modified by: Sam
- * @ Modified time: 2023-02-23 05:53:18
+ * @ Modified time: 2023-02-27 15:16:17
+ * @ Description: Button Types
  */
 
-/** 按钮尺寸 */
+/** 按钮类型，普通、主要、线框、虚线、文本 */
+export type ButtonType = "normal" | "primary" | "plain" | "dashed" | "text";
+
+/** 按钮形状，矩形、圆滑 */
+export type ButtonShape = "square" | "round";
+
+/** 按钮尺寸，迷你、小型、普通、大型 */
 export type ButtonSize = "mini" | "small" | "normal" | "large";
 
-export type ButtonType = "text" | "primary" | "success" | "warning" | "danger";
-
-/** 按钮类型 */
-export type ButtonBtnType = "normal" | "plain" | "dashed" | "text";
-
-/** 按钮状态 */
-export type ButtonStatus = "primary" | "success" | "warning" | "danger";
-
-/** 按钮形状 */
-export type ButtonShape = "square" | "round" | "circle";
+/** 按钮状态，普通、主要、成功、警示、危险 */
+export type ButtonStatus = "normal" | "primary" | "success" | "warning" | "danger";

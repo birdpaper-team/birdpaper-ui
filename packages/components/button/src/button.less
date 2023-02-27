@@ -1,11 +1,12 @@
 /**
  * @ Author: Sam
- * @ Create Time: 2023-02-21 21:05:39
+ * @ Create Time: 2023-02-23 04:14:35
  * @ Modified by: Sam
- * @ Modified time: 2023-02-23 05:53:03
+ * @ Modified time: 2023-02-27 15:33:40
+ * @ Description:
  */
 
- .bp-button {
+.bp-button {
   position: relative;
   display: inline-block;
   align-items: center;
@@ -35,8 +36,8 @@
     top: 1px;
   }
 
-  [class*=ri-]+a,
-  [class*=ri-]+span,
+  [class*="ri-"] + a,
+  [class*="ri-"] + span,
   .bp-icon-right {
     margin-left: 4px;
     top: 0 !important;
@@ -45,7 +46,7 @@
   span {
     display: inline-flex;
     align-items: center;
-    letter-spacing: .4px;
+    letter-spacing: 0.4px;
   }
 }
 
@@ -65,32 +66,32 @@
   background: none;
 
   &:hover {
-    opacity: .6;
+    opacity: 0.6;
   }
 }
 
 button:disabled,
 .bp-button-disabled {
-  opacity: .618;
+  opacity: 0.618;
   pointer-events: none;
   cursor: no-drop;
   .transition-all-2-ease();
 }
 
 .bp-btn-theme-primary {
-  color: @primary-3  !important;
+  color: @primary-3 !important;
 }
 
 .bp-btn-theme-success {
-  color: @success-3  !important;
+  color: @success-3 !important;
 }
 
 .bp-btn-theme-warning {
-  color: @warning-3  !important;
+  color: @warning-3 !important;
 }
 
 .bp-btn-theme-danger {
-  color: @danger-3  !important;
+  color: @danger-3 !important;
 }
 
 // 默认按钮
@@ -113,7 +114,7 @@ button:disabled,
   &:active {
     border: 1px solid @primary-3;
     background: @primary-1;
-    opacity: .8;
+    opacity: 0.8;
   }
 }
 
@@ -150,7 +151,7 @@ button:disabled,
   .primary-style;
 
   &:hover {
-    opacity: .8;
+    opacity: 0.8;
   }
 
   &:active {
@@ -181,7 +182,7 @@ button:disabled,
     border: 1px solid @primary-3;
     background: @primary-3;
     color: @gary-0;
-    opacity: .8;
+    opacity: 0.8;
   }
 }
 
@@ -196,7 +197,7 @@ button:disabled,
   .success-style;
 
   &:hover {
-    opacity: .8;
+    opacity: 0.8;
   }
 
   &:active {
@@ -227,7 +228,7 @@ button:disabled,
     border: 1px solid @success-2;
     background: @success-2;
     color: @gary-0;
-    opacity: .8;
+    opacity: 0.8;
   }
 }
 
@@ -242,7 +243,7 @@ button:disabled,
   .warning-style;
 
   &:hover {
-    opacity: .8;
+    opacity: 0.8;
   }
 
   &:active {
@@ -273,7 +274,7 @@ button:disabled,
     border: 1px solid @warning-3;
     background: @warning-3;
     color: @gary-0;
-    opacity: .8;
+    opacity: 0.8;
   }
 }
 
@@ -288,7 +289,7 @@ button:disabled,
   .danger-style;
 
   &:hover {
-    opacity: .8;
+    opacity: 0.8;
   }
 
   &:active {
@@ -319,7 +320,7 @@ button:disabled,
     border: 1px solid @danger-3;
     background: @danger-3;
     color: @gary-0;
-    opacity: .8;
+    opacity: 0.8;
   }
 }
 
@@ -340,21 +341,21 @@ button:disabled,
 .bp-btn-text {
   font-size: inherit;
   cursor: pointer;
-  transition: color .2s ease;
+  transition: color 0.2s ease;
 }
 
 .bp-btn-text-disabled {
-  opacity: .618;
+  opacity: 0.618;
   cursor: no-drop;
   pointer-events: none;
-  transition: color .2s ease;
+  transition: color 0.2s ease;
 }
 
 // 加载
 .bp-icon-loading {
   display: inline-block;
-  animation: rotating .8s linear infinite;
-  -webkit-animation: rotating .8s linear infinite;
+  animation: rotating 0.8s linear infinite;
+  -webkit-animation: rotating 0.8s linear infinite;
 }
 
 @keyframes rotating {
