@@ -2,7 +2,7 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-21 21:05:39
  * @ Modified by: Sam
- * @ Modified time: 2023-02-28 16:26:32
+ * @ Modified time: 2023-03-02 15:57:52
  * @ Description: 按钮 Button
  -->
 
@@ -17,6 +17,7 @@
 <script setup lang="ts" name="bp-button">
 import { ButtonType, ButtonSize, ButtonShape, ButtonStatus } from "./types";
 import { computed, useSlots, PropType } from "vue";
+const name = "bp-button";
 
 const props = defineProps({
   /** 按钮类型 Type of the button */
@@ -43,10 +44,16 @@ const isDisabled = computed(() => props.disabled || props.loading); // 禁用状
 
 // 非纯文本按钮样式
 const btnClass = computed(() => {
-  let name = [`bp-button`, `bp-${props.size}-height`, { "bp-btn-block": props.block }]; // 按钮类型和尺寸
+  let className = [
+    name,
+    `${name}-size-${props.size}`,
+    `${name}-type-${props.type}`,
+    `${name}-${props.status}-${props.type}`,
+  ]; // 按钮类型和尺寸
+  // let className = [name, `${name}-size-${props.size}`, `${name}-type-${props.type}`, `${name}-status-${props.status}`]; // 按钮类型和尺寸
 
-  hasSlotDefault && name.push(`bp-btn-padding-${props.size}`); // 尺寸边距设置
-  return name;
+  // hasSlotDefault && name.push(`bp-btn-padding-${props.size}`); // 尺寸边距设置
+  return className;
 });
 
 const onClick = () => {

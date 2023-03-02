@@ -2,22 +2,19 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-23 04:14:35
  * @ Modified by: Sam
- * @ Modified time: 2023-02-27 15:33:40
+ * @ Modified time: 2023-03-02 16:27:36
  * @ Description:
  */
 
 .bp-button {
   position: relative;
-  display: inline-block;
   align-items: center;
   align-content: center;
   justify-content: center;
   cursor: pointer;
   outline: none;
   white-space: nowrap;
-  max-width: 100%;
   min-height: @miniHeight;
-  min-width: 52px;
   text-rendering: auto;
   letter-spacing: normal;
   word-spacing: normal;
@@ -25,338 +22,89 @@
   text-indent: 0px;
   text-shadow: none;
   text-align: center;
-  border-radius: @radius;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
   opacity: 1;
   .no-select;
   .transition-all-2-ease();
-
-  [class^="ri-"],
-  [class*="ri-"] {
-    position: relative;
-    top: 1px;
-  }
-
-  [class*="ri-"] + a,
-  [class*="ri-"] + span,
-  .bp-icon-right {
-    margin-left: 4px;
-    top: 0 !important;
-  }
 
   span {
     display: inline-flex;
     align-items: center;
     letter-spacing: 0.4px;
   }
-}
 
-.bp-btn-block {
-  width: 100% !important;
-  display: block !important;
-}
-
-.bp-btn-no-border {
-  border: none !important;
-}
-
-.bp-btn-text-style {
-  .bp-btn-no-border;
-  min-width: 32px;
-  padding: 0;
-  background: none;
-
-  &:hover {
-    opacity: 0.6;
-  }
-}
-
-button:disabled,
-.bp-button-disabled {
-  opacity: 0.618;
-  pointer-events: none;
-  cursor: no-drop;
-  .transition-all-2-ease();
-}
-
-.bp-btn-theme-primary {
-  color: @primary-3 !important;
-}
-
-.bp-btn-theme-success {
-  color: @success-3 !important;
-}
-
-.bp-btn-theme-warning {
-  color: @warning-3 !important;
-}
-
-.bp-btn-theme-danger {
-  color: @danger-3 !important;
-}
-
-// 默认按钮
-.default-style {
-  border: 1px solid @gary-4;
-  background: @gary-0;
-  color: @gary-7;
-}
-
-.bp-btn-default {
-  .default-style;
-
-  &:hover {
-    border: 1px solid @primary-3;
-    color: @primary-3;
-    background: @primary-1;
-    opacity: 1;
+  &-size-normal {
+    font-size: 14px;
+    font-weight: 400;
+    height: @normalHeight;
+    border-radius: 4px;
+    padding: 0 15px;
   }
 
-  &:active {
-    border: 1px solid @primary-3;
-    background: @primary-1;
-    opacity: 0.8;
-  }
-}
-
-// 默认幽灵按钮
-.default-plain-style {
-  border: 1px solid @gary-4;
-  background: @gary-0;
-  color: @gary-7;
-}
-
-.bp-btn-default-plain {
-  .default-plain-style;
-
-  &:hover {
-    border: 1px solid @gary-5;
-    color: @primary-3;
-    background: @gary-0;
+  #type-normal() {
+    main_bg: @gary-7;
+    second_bg: @gary-4;
   }
 
-  &:active {
-    border: 1px solid @primary-3;
-    background: @gary-0;
-  }
-}
-
-// 主要按钮
-.primary-style {
-  border: 1px solid @primary-3;
-  background: @primary-3;
-  color: @gary-0;
-}
-
-.bp-btn-primary {
-  .primary-style;
-
-  &:hover {
-    opacity: 0.8;
+  &-normal-normal {
+    background-color: #type-normal[second_bg];
+    border: 1px solid #type-normal[second_bg];
+    color: @gary-9;
   }
 
-  &:active {
-    border: 1px solid @primary-3;
-    background: @primary-3;
-    opacity: 1;
-  }
-}
-
-// 主要幽灵按钮
-.primary-plain-style {
-  border: 1px solid @primary-3;
-  background: @primary-1;
-  color: @primary-3;
-}
-
-.bp-btn-primary-plain {
-  .primary-plain-style;
-
-  &:hover {
-    border: 1px solid @primary-3;
-    background: @primary-3;
-    color: @gary-0;
-    opacity: 1;
+  &-normal-primary {
+    background-color: #type-normal[main_bg];
+    border: 1px solid #type-normal[main_bg];
+    color: @gary-1;
   }
 
-  &:active {
-    border: 1px solid @primary-3;
-    background: @primary-3;
-    color: @gary-0;
-    opacity: 0.8;
-  }
-}
-
-// 成功按钮
-.success-style {
-  border: 1px solid @success-3;
-  background: @success-3;
-  color: @gary-0;
-}
-
-.bp-btn-success {
-  .success-style;
-
-  &:hover {
-    opacity: 0.8;
+  &-normal-dashed {
+    background-color: #type-normal[second_bg];
+    border: 1px solid #type-normal[main_bg];
+    color: @gary-9;
   }
 
-  &:active {
-    border: 1px solid @success-3;
-    background: @success-3;
-    opacity: 1;
-  }
-}
-
-// 成功幽灵按钮
-.success-plain-style {
-  border: 1px solid @success-3;
-  background: @success-1;
-  color: @success-3;
-}
-
-.bp-btn-success-plain {
-  .success-plain-style;
-
-  &:hover {
-    border: 1px solid @success-3;
-    background: @success-3;
-    color: @gary-0;
-    opacity: 1;
+  &-normal-plain {
+    background-color: #type-normal[second_bg];
+    border: 1px solid #type-normal[main_bg];
+    color: @gary-9;
   }
 
-  &:active {
-    border: 1px solid @success-2;
-    background: @success-2;
-    color: @gary-0;
-    opacity: 0.8;
-  }
-}
+  // &-type-primary {
+  //   color: @gary-1;
+  // }
 
-// 警告按钮
-.warning-style {
-  border: 1px solid @warning-3;
-  background: @warning-3;
-  color: @gary-0;
-}
+  // &-type-normal,
+  // &-type-plain,
+  // &-type-dashed {
+  //   color: @gary-9;
+  // }
 
-.bp-btn-warning {
-  .warning-style;
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  &:active {
-    border: 1px solid @warning-3;
-    background: @warning-3;
-    opacity: 1;
-  }
-}
-
-// 警告幽灵按钮
-.warning-plain-style {
-  border: 1px solid @warning-3;
-  background: @warning-1;
-  color: @warning-3;
-}
-
-.bp-btn-warning-plain {
-  .warning-plain-style;
-
-  &:hover {
-    border: 1px solid @warning-3;
-    background: @warning-3;
-    color: @gary-0;
-    opacity: 1;
-  }
-
-  &:active {
-    border: 1px solid @warning-3;
-    background: @warning-3;
-    color: @gary-0;
-    opacity: 0.8;
-  }
-}
-
-// 危险按钮
-.danger-style {
-  border: 1px solid @danger-3;
-  background: @danger-3;
-  color: @gary-0;
-}
-
-.bp-btn-danger {
-  .danger-style;
-
-  &:hover {
-    opacity: 0.8;
-  }
-
-  &:active {
-    border: 1px solid @danger-2;
-    background: @danger-2;
-    opacity: 1;
-  }
-}
-
-// 危险幽灵按钮
-.danger-plain-style {
-  border: 1px solid @danger-3;
-  background: @danger-1;
-  color: @danger-3;
-}
-
-.bp-btn-danger-plain {
-  .danger-plain-style;
-
-  &:hover {
-    border: 1px solid @danger-3;
-    background: @danger-3;
-    color: @gary-0;
-    opacity: 1;
-  }
-
-  &:active {
-    border: 1px solid @danger-3;
-    background: @danger-3;
-    color: @gary-0;
-    opacity: 0.8;
-  }
-}
-
-.bp-btn-round {
-  border-radius: 45px;
-  min-width: 34px;
-}
-
-.bp-btn-dashed {
-  border-style: dashed;
-
-  &:hover {
+  &-type-dashed {
     border-style: dashed;
   }
+
+  &-type-text {
+    background: none;
+    border: none;
+  }
 }
 
-// 文字按钮
-.bp-btn-text {
-  font-size: inherit;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
+// button:disabled,
+// .bp-button-disabled {
+//   opacity: 0.6;
+//   pointer-events: none;
+//   cursor: no-drop;
+//   .transition-all-2-ease();
+// }
 
-.bp-btn-text-disabled {
-  opacity: 0.618;
-  cursor: no-drop;
-  pointer-events: none;
-  transition: color 0.2s ease;
-}
-
-// 加载
-.bp-icon-loading {
-  display: inline-block;
-  animation: rotating 0.8s linear infinite;
-  -webkit-animation: rotating 0.8s linear infinite;
-}
+// // 加载
+// .bp-icon-loading {
+//   display: inline-block;
+//   animation: rotating 0.8s linear infinite;
+//   -webkit-animation: rotating 0.8s linear infinite;
+// }
 
 @keyframes rotating {
   from {
