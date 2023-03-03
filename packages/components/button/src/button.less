@@ -2,14 +2,14 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-23 04:14:35
  * @ Modified by: Sam
- * @ Modified time: 2023-03-02 16:27:36
+ * @ Modified time: 2023-03-03 09:09:50
  * @ Description:
  */
 
 .bp-button {
   position: relative;
+  display: inline-flex;
   align-items: center;
-  align-content: center;
   justify-content: center;
   cursor: pointer;
   outline: none;
@@ -26,7 +26,7 @@
   -moz-box-sizing: border-box;
   opacity: 1;
   .no-select;
-  .transition-all-2-ease();
+  // .transition-all-2-ease();
 
   span {
     display: inline-flex;
@@ -42,44 +42,76 @@
     padding: 0 15px;
   }
 
-  #type-normal() {
+  #status-normal() {
     main_bg: @gary-7;
     second_bg: @gary-4;
+    hover_bg: @gary-3;
   }
 
+  #status-primary() {
+    main_bg: @primary-6;
+    second_bg: @primary-0;
+  }
+
+  // &-${status}-${type}
+  // status: normal
   &-normal-normal {
-    background-color: #type-normal[second_bg];
-    border: 1px solid #type-normal[second_bg];
+    background-color: @gary-4;
+    border: 1px solid @gary-4;
+    color: @gary-9;
+
+    &:hover {
+      background-color: @gary-3;
+      border: 1px solid @gary-3;
+    }
+    &:active {
+      background-color: @gary-4;
+      border: 1px solid @gary-4;
+    }
+  }
+  &-normal-primary {
+    background-color: @gary-7;
+    border: 1px solid @gary-7;
+    color: @gary-1;
+    &:hover {
+      background-color: @gary-6;
+      border: 1px solid @gary-6;
+    }
+    &:active {
+      background-color: @gary-7;
+      border: 1px solid @gary-7;
+    }
+  }
+  &-normal-dashed,
+  &-normal-plain {
+    background-color: @gary-4;
+    border: 1px solid @gary-7;
+    color: @gary-9;
+  }
+  &-normal-text {
     color: @gary-9;
   }
 
-  &-normal-primary {
-    background-color: #type-normal[main_bg];
-    border: 1px solid #type-normal[main_bg];
+  // status: primary
+  &-primary-normal {
+    background-color: #status-primary[second_bg];
+    border: 1px solid #status-primary[second_bg];
+    color: #status-primary[main_bg];
+  }
+  &-primary-primary {
+    background-color: #status-primary[main_bg];
+    border: 1px solid #status-primary[main_bg];
     color: @gary-1;
   }
-
-  &-normal-dashed {
-    background-color: #type-normal[second_bg];
-    border: 1px solid #type-normal[main_bg];
-    color: @gary-9;
+  &-primary-plain,
+  &-primary-dashed {
+    background-color: #status-primary[second_bg];
+    border: 1px solid #status-primary[main_bg];
+    color: #status-primary[main_bg];
   }
-
-  &-normal-plain {
-    background-color: #type-normal[second_bg];
-    border: 1px solid #type-normal[main_bg];
-    color: @gary-9;
+  &-primary-text {
+    color: #status-primary[main_bg];
   }
-
-  // &-type-primary {
-  //   color: @gary-1;
-  // }
-
-  // &-type-normal,
-  // &-type-plain,
-  // &-type-dashed {
-  //   color: @gary-9;
-  // }
 
   &-type-dashed {
     border-style: dashed;

@@ -2,7 +2,7 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-21 21:05:39
  * @ Modified by: Sam
- * @ Modified time: 2023-03-02 16:00:27
+ * @ Modified time: 2023-03-03 08:26:55
  * @ Description:
  -->
 
@@ -13,6 +13,13 @@
     <bp-button type="plain" @click="t">线框按钮</bp-button>
     <bp-button type="dashed" @click="t">虚线按钮</bp-button>
     <bp-button type="text" @click="t">文本按钮</bp-button>
+  </div>
+  <div>
+    <bp-button status="primary" @click="t">常规按钮</bp-button>
+    <bp-button status="primary" type="primary" @click="t">主要按钮</bp-button>
+    <bp-button status="primary" type="plain" @click="t">线框按钮</bp-button>
+    <bp-button status="primary" type="dashed" @click="t">虚线按钮</bp-button>
+    <bp-button status="primary" type="text" @click="t">文本按钮</bp-button>
   </div>
 </template>
 
