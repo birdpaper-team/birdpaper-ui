@@ -2,13 +2,15 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-21 21:05:39
  * @ Modified by: Sam
- * @ Modified time: 2023-03-04 18:03:45
+ * @ Modified time: 2023-03-04 21:03:33
  * @ Description: 按钮 Button
  -->
 
 <template>
   <button :class="btnClass" type="button" :disabled="isDisabled" @click="onClick">
-    <slot></slot>
+    <p>
+      <slot></slot>
+    </p>
   </button>
 </template>
 

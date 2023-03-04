@@ -2,7 +2,7 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-23 04:14:35
  * @ Modified by: Sam
- * @ Modified time: 2023-03-04 16:39:26
+ * @ Modified time: 2023-03-04 21:01:19
  * @ Description:
  */
 @import "./token.less";
@@ -37,12 +37,7 @@
     height: ~"@{btn-size-@{size}-height}";
     font-size: ~"@{btn-size-@{size}-font-size}";
     border-radius: ~"@{btn-size-@{size}-radius}";
-    padding: 0 15px;
-  }
-}
-
-.btn-shape(@shape){
-  .@{btn-cls}-shape-@{shape} {
+    padding: 0 ~"@{btn-size-@{size}-padding}";
   }
 }
 
@@ -106,4 +101,8 @@ button:disabled {
   pointer-events: none;
   cursor: not-allowed;
   .transition-all-2-ease();
+}
+
+.@{btn-cls}-shape-round{
+  border-radius: 40px;
 }
