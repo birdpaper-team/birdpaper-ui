@@ -2,22 +2,20 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-21 21:05:39
  * @ Modified by: Sam
- * @ Modified time: 2023-03-03 09:14:05
+ * @ Modified time: 2023-03-04 18:03:45
  * @ Description: 按钮 Button
  -->
 
 <template>
   <button :class="btnClass" type="button" :disabled="isDisabled" @click="onClick">
-    <!-- <span v-if="hasSlotDefault"> -->
-      <slot></slot>
-    <!-- </span> -->
+    <slot></slot>
   </button>
 </template>
 
 <script setup lang="ts" name="bp-button">
 import { ButtonType, ButtonSize, ButtonShape, ButtonStatus } from "./types";
 import { computed, useSlots, PropType } from "vue";
-const name = "bp-button";
+const name = "bp-btn";
 
 const props = defineProps({
   /** 按钮类型 Type of the button */
@@ -47,8 +45,8 @@ const btnClass = computed(() => {
   let className = [
     name,
     `${name}-size-${props.size}`,
-    `${name}-type-${props.type}`,
-    `${name}-${props.status}-${props.type}`,
+    `${name}-shape-${props.shape}`,
+    `${name}-type-${props.type}-status-${props.status}`,
   ]; // 按钮类型和尺寸
   // let className = [name, `${name}-size-${props.size}`, `${name}-type-${props.type}`, `${name}-status-${props.status}`]; // 按钮类型和尺寸
 

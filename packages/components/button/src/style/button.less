@@ -1,0 +1,109 @@
+/**
+ * @ Author: Sam
+ * @ Create Time: 2023-02-23 04:14:35
+ * @ Modified by: Sam
+ * @ Modified time: 2023-03-04 16:39:26
+ * @ Description:
+ */
+@import "./token.less";
+
+@btn-cls: ~"@{prefix}-btn";
+
+.@{btn-cls} {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+  min-height: @miniHeight;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: center;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  opacity: 1;
+  .no-select;
+  .transition-all-2-ease();
+}
+
+.btn-size(@size) {
+  .@{btn-cls}-size-@{size} {
+    height: ~"@{btn-size-@{size}-height}";
+    font-size: ~"@{btn-size-@{size}-font-size}";
+    border-radius: ~"@{btn-size-@{size}-radius}";
+    padding: 0 15px;
+  }
+}
+
+.btn-shape(@shape){
+  .@{btn-cls}-shape-@{shape} {
+  }
+}
+
+.btn-status(@type, @status) {
+  .@{btn-cls}-type-@{type}-status-@{status}{
+    color: ~"@{btn-type-@{type}-status-@{status}-color}";
+    background-color: ~"@{btn-type-@{type}-status-@{status}-bg}";
+    border:1px ~"@{btn-type-@{type}-border}" ~"@{btn-type-@{type}-status-@{status}-border}";
+
+    &:hover{
+      color: ~"@{btn-type-@{type}-status-@{status}-color-hover}";
+      background-color: ~"@{btn-type-@{type}-status-@{status}-bg-hover}";
+      border:1px ~"@{btn-type-@{type}-border}" ~"@{btn-type-@{type}-status-@{status}-border-hover}";
+    }
+
+    &:active{
+      color: ~"@{btn-type-@{type}-status-@{status}-color-active}";
+      background-color: ~"@{btn-type-@{type}-status-@{status}-bg-active}";
+      border:1px ~"@{btn-type-@{type}-border}" ~"@{btn-type-@{type}-status-@{status}-border-active}";
+    }
+  }
+}
+
+.btn-status(normal, normal);
+.btn-status(primary, normal);
+.btn-status(plain, normal);
+.btn-status(dashed, normal);
+.btn-status(text, normal);
+
+.btn-status(normal, primary);
+.btn-status(primary, primary);
+.btn-status(plain, primary);
+.btn-status(dashed, primary);
+.btn-status(text, primary);
+
+.btn-status(normal, success);
+.btn-status(primary, success);
+.btn-status(plain, success);
+.btn-status(dashed, success);
+.btn-status(text, success);
+
+.btn-status(normal, warning);
+.btn-status(primary, warning);
+.btn-status(plain, warning);
+.btn-status(dashed, warning);
+.btn-status(text, warning);
+
+.btn-status(normal, danger);
+.btn-status(primary, danger);
+.btn-status(plain, danger);
+.btn-status(dashed, danger);
+.btn-status(text, danger);
+
+.btn-size(mini);
+.btn-size(small);
+.btn-size(normal);
+.btn-size(large);
+
+button:disabled {
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: not-allowed;
+  .transition-all-2-ease();
+}
