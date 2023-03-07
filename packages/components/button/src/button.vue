@@ -2,15 +2,16 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-21 21:05:39
  * @ Modified by: Sam
- * @ Modified time: 2023-03-04 21:03:33
+ * @ Modified time: 2023-03-07 20:36:30
  * @ Description: 按钮 Button
  -->
 
 <template>
   <button :class="btnClass" type="button" :disabled="isDisabled" @click="onClick">
-    <p>
+    <i class="ri-search-2-line"></i>
+    <span>
       <slot></slot>
-    </p>
+    </span>
   </button>
 </template>
 
@@ -33,7 +34,7 @@ const props = defineProps({
   /** 是否禁用 Disabled or not */
   disabled: { type: Boolean, default: false },
   /** 按钮图标 Button icon */
-  icon: { type: String, default: "" },
+  icon: { type: String, default: "ri-search-2-line" },
   /** 是否撑满父级 Block or not */
   block: { type: Boolean, default: false },
 });
