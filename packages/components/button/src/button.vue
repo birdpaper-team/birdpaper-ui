@@ -2,16 +2,16 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-21 21:05:39
  * @ Modified by: Sam
- * @ Modified time: 2023-03-07 20:36:30
+ * @ Modified time: 2023-03-08 05:15:05
  * @ Description: 按钮 Button
  -->
 
 <template>
   <button :class="btnClass" type="button" :disabled="isDisabled" @click="onClick">
-    <i class="ri-search-2-line"></i>
-    <span>
-      <slot></slot>
+    <span v-if="btnIcon">
+      <i :class="btnIcon"></i>
     </span>
+    <slot></slot>
   </button>
 </template>
 
@@ -34,27 +34,27 @@ const props = defineProps({
   /** 是否禁用 Disabled or not */
   disabled: { type: Boolean, default: false },
   /** 按钮图标 Button icon */
-  icon: { type: String, default: "ri-search-2-line" },
+  icon: { type: String, default: "" },
   /** 是否撑满父级 Block or not */
   block: { type: Boolean, default: false },
 });
 const emit = defineEmits(["click"]);
 
-const hasSlotDefault = !!useSlots().default;
 const isDisabled = computed(() => props.disabled || props.loading); // 禁用状态，除了传入属性外，还应考虑「加载中」的情况
 
-// 非纯文本按钮样式
+// 按钮样式
 const btnClass = computed(() => {
   let className = [
     name,
     `${name}-size-${props.size}`,
     `${name}-shape-${props.shape}`,
     `${name}-type-${props.type}-status-${props.status}`,
-  ]; // 按钮类型和尺寸
-  // let className = [name, `${name}-size-${props.size}`, `${name}-type-${props.type}`, `${name}-status-${props.status}`]; // 按钮类型和尺寸
-
-  // hasSlotDefault && name.push(`bp-btn-padding-${props.size}`); // 尺寸边距设置
+  ];
   return className;
+});
+
+const btnIcon = computed(() => {
+  return props.loading ? "bp-icon-loading ri-loader-5-line" : props.icon;
 });
 
 const onClick = () => {
