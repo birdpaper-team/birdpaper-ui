@@ -2,7 +2,7 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-23 04:14:35
  * @ Modified by: Sam
- * @ Modified time: 2023-03-08 05:15:45
+ * @ Modified time: 2023-03-08 20:02:26
  * @ Description:
  */
 @import "./token.less";
@@ -32,31 +32,32 @@
   .transition-all-2-ease();
 }
 
-.btn-size(@size) {
-  .@{btn-cls}-size-@{size} {
+.btn-shape(@shape, @size) {
+  .@{btn-cls}-@{shape}-@{size} {
+    width: ~"@{btn-@{size}-@{shape}-weight}";
     height: ~"@{btn-size-@{size}-height}";
     font-size: ~"@{btn-size-@{size}-font-size}";
-    border-radius: ~"@{btn-size-@{size}-radius}";
-    padding: 0 ~"@{btn-size-@{size}-padding}";
+    padding: ~"@{btn-@{size}-@{shape}-padding}";
+    border-radius: ~"@{btn-@{size}-@{shape}-radius}";
   }
 }
 
 .btn-status(@type, @status) {
-  .@{btn-cls}-type-@{type}-status-@{status}{
+  .@{btn-cls}-type-@{type}-status-@{status} {
     color: ~"@{btn-type-@{type}-status-@{status}-color}";
     background-color: ~"@{btn-type-@{type}-status-@{status}-bg}";
-    border:1px ~"@{btn-type-@{type}-border}" ~"@{btn-type-@{type}-status-@{status}-border}";
+    border: 1px~ "@{btn-type-@{type}-border}" ~"@{btn-type-@{type}-status-@{status}-border}";
 
-    &:hover{
+    &:hover {
       color: ~"@{btn-type-@{type}-status-@{status}-color-hover}";
       background-color: ~"@{btn-type-@{type}-status-@{status}-bg-hover}";
-      border:1px ~"@{btn-type-@{type}-border}" ~"@{btn-type-@{type}-status-@{status}-border-hover}";
+      border: 1px~ "@{btn-type-@{type}-border}" ~"@{btn-type-@{type}-status-@{status}-border-hover}";
     }
 
-    &:active{
+    &:active {
       color: ~"@{btn-type-@{type}-status-@{status}-color-active}";
       background-color: ~"@{btn-type-@{type}-status-@{status}-bg-active}";
-      border:1px ~"@{btn-type-@{type}-border}" ~"@{btn-type-@{type}-status-@{status}-border-active}";
+      border: 1px~ "@{btn-type-@{type}-border}" ~"@{btn-type-@{type}-status-@{status}-border-active}";
     }
   }
 }
@@ -91,33 +92,53 @@
 .btn-status(dashed, danger);
 .btn-status(text, danger);
 
-.btn-size(mini);
-.btn-size(small);
-.btn-size(normal);
-.btn-size(large);
+.btn-shape(square, large);
+.btn-shape(square, normal);
+.btn-shape(square, small);
+.btn-shape(square, mini);
+
+.btn-shape(circle, large);
+.btn-shape(circle, normal);
+.btn-shape(circle, small);
+.btn-shape(circle, mini);
+
+.btn-shape(round, large);
+.btn-shape(round, normal);
+.btn-shape(round, small);
+.btn-shape(round, mini);
 
 button:disabled {
   opacity: 0.7;
   pointer-events: none;
-  cursor: not-allowed;
+  cursor: no-drop;
   .transition-all-2-ease();
 }
 
-.@{btn-cls}-shape-round{
+.@{btn-cls}-shape-round {
   border-radius: 40px;
 }
 
-[class^="ri-"], [class*="ri-"] {
+[class^="ri-"],
+[class*="ri-"] {
   display: inline-block;
   vertical-align: -2px;
-  margin-right: 4px;
+}
+
+.has-default-slot {
+  .left-icon {
+    margin-right: 4px;
+  }
+}
+
+.is-block{
+  width: 100%;
 }
 
 // 加载
 .bp-icon-loading {
   display: inline-block;
-  animation: rotating .8s linear infinite;
-  -webkit-animation: rotating .8s linear infinite;
+  animation: rotating 0.8s linear infinite;
+  -webkit-animation: rotating 0.8s linear infinite;
 }
 
 @keyframes rotating {

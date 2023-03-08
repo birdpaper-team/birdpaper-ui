@@ -2,13 +2,13 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-21 21:05:39
  * @ Modified by: Sam
- * @ Modified time: 2023-03-08 05:15:05
+ * @ Modified time: 2023-03-08 20:02:13
  * @ Description: 按钮 Button
  -->
 
 <template>
   <button :class="btnClass" type="button" :disabled="isDisabled" @click="onClick">
-    <span v-if="btnIcon">
+    <span v-if="btnIcon" class="left-icon">
       <i :class="btnIcon"></i>
     </span>
     <slot></slot>
@@ -29,7 +29,7 @@ const props = defineProps({
   shape: { type: String as PropType<ButtonShape>, default: "square" },
   /** 按钮状态 Status of the button */
   status: { type: String as PropType<ButtonStatus>, default: "normal" },
-  /** 是否加载中 Loading or not */
+  /** 是否加载 Loading or not */
   loading: { type: Boolean, default: false },
   /** 是否禁用 Disabled or not */
   disabled: { type: Boolean, default: false },
@@ -46,9 +46,10 @@ const isDisabled = computed(() => props.disabled || props.loading); // 禁用状
 const btnClass = computed(() => {
   let className = [
     name,
-    `${name}-size-${props.size}`,
-    `${name}-shape-${props.shape}`,
+    `${name}-${props.shape}-${props.size}`,
     `${name}-type-${props.type}-status-${props.status}`,
+    { "has-default-slot": !!useSlots().default },
+    { "is-block": props.block },
   ];
   return className;
 });
