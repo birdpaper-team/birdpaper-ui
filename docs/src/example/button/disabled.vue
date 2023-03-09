@@ -1,10 +1,6 @@
 <template>
-  <bp-button disabled type="primary" status="primary">按钮禁用</bp-button>
-  <bp-button disabled status="primary">按钮禁用</bp-button>
+  <bp-space>
+    <bp-button disabled type="primary" status="primary">按钮禁用</bp-button>
+    <bp-button disabled status="primary">按钮禁用</bp-button>
+  </bp-space>
 </template>
-
-<style lang="less" scoped>
-.bp-btn {
-  margin-right: 10px;
-}
-</style>

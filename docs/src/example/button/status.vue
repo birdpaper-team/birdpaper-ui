@@ -1,10 +1,12 @@
 <template>
   <div class="btn-box" v-for="v in list">
-    <bp-button type="normal" :status="v.status">{{ v.title }}</bp-button>
-    <bp-button type="primary" :status="v.status">{{ v.title }}</bp-button>
-    <bp-button type="plain" :status="v.status">{{ v.title }}</bp-button>
-    <bp-button type="dashed" :status="v.status">{{ v.title }}</bp-button>
-    <bp-button type="text" :status="v.status">{{ v.title }}</bp-button>
+    <bp-space>
+      <bp-button type="normal" :status="v.status">{{ v.title }}</bp-button>
+      <bp-button type="primary" :status="v.status">{{ v.title }}</bp-button>
+      <bp-button type="plain" :status="v.status">{{ v.title }}</bp-button>
+      <bp-button type="dashed" :status="v.status">{{ v.title }}</bp-button>
+      <bp-button type="text" :status="v.status">{{ v.title }}</bp-button>
+    </bp-space>
   </div>
 </template>
 
@@ -22,9 +24,6 @@ const list = [
 .btn-box {
   &:not(:first-child) {
     margin-top: 10px;
-  }
-  .bp-btn {
-    margin-right: 10px;
   }
 }
 </style>

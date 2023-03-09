@@ -2,7 +2,7 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-22 20:18:08
  * @ Modified by: Sam
- * @ Modified time: 2023-02-23 05:53:38
+ * @ Modified time: 2023-03-09 13:54:35
  * @ Description: 表格 Table
  -->
 <template>
@@ -47,7 +47,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="bp-table">
+<script setup lang="ts" name="table">
 import { computed } from 'vue';
 import { useTable } from './table';
 import TableHeader from "./components/table-header.vue";

@@ -1,9 +1,5 @@
 <template>
-  <bp-button loading type="primary" status="primary">正在保存</bp-button>
+  <bp-space>
+    <bp-button loading type="primary" status="primary">正在保存</bp-button>
+  </bp-space>
 </template>
-
-<style lang="less" scoped>
-.bp-btn {
-  margin-right: 10px;
-}
-</style>

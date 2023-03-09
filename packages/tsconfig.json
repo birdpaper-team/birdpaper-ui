@@ -25,7 +25,9 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "types/**/*.d.ts",
-    "types/**/*.ts"
-  ],
+    "types/**/*.ts",
+    "components/**/*.tsx",
+    "components/**/*.jsx",
+   ],
   "exclude": ["node_modules", "**/*.js"]
 }

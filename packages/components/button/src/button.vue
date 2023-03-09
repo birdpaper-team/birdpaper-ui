@@ -2,7 +2,7 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-21 21:05:39
  * @ Modified by: Sam
- * @ Modified time: 2023-03-08 20:02:13
+ * @ Modified time: 2023-03-09 10:43:12
  * @ Description: 按钮 Button
  -->
 
@@ -15,7 +15,7 @@
   </button>
 </template>
 
-<script setup lang="ts" name="bp-button">
+<script setup lang="ts" name="button">
 import { ButtonType, ButtonSize, ButtonShape, ButtonStatus } from "./types";
 import { computed, useSlots, PropType } from "vue";
 const name = "bp-btn";
