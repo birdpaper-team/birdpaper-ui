@@ -2,10 +2,19 @@
  * @ Author: Sam
  * @ Create Time: 2023-03-09 07:29:37
  * @ Modified by: Sam
- * @ Modified time: 2023-03-09 18:30:01
+ * @ Modified time: 2023-03-10 10:47:56
  * @ Description:
  */
 
-.bp-space{
+.bp-space {
   display: inline-flex;
+
+  .bp-space-item {
+    &:first-child {
+      margin-left: 0 !important;
+    }
+    &:last-child {
+      margin-right: 0 !important;
+    }
+  }
 }

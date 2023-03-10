@@ -1,6 +1,6 @@
 <template>
   <div class="btn-box" v-for="v in list">
-    <bp-space>
+    <bp-space size="mini">
       <bp-button type="normal" :status="v.status">{{ v.title }}</bp-button>
       <bp-button type="primary" :status="v.status">{{ v.title }}</bp-button>
       <bp-button type="plain" :status="v.status">{{ v.title }}</bp-button>

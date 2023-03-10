@@ -21,24 +21,14 @@ hero:
     - theme: alt
       text: GitHub
       link: https://github.com/birdpaper-team/birdpaper-ui
-
-# features:
-#   - icon: 💡
-#     title:
-#     details:
-#   - icon:
-#     title:
-#     details:
-#   - icon:
-#     title:
-#     details:
-#   - icon:
-#     title:
-#     details:
-#   - icon:
-#     title:
-#     details:
-#   - icon:
-#     title:
-#     details:
+features:
+  - icon: 🎗️
+    title: TS 支持
+    details: 提供丰富的 TypeScript 类型
+  - icon: 🛠
+    title: UI 组件
+    details: 简单易用的 web UI 组件库
+  - icon: 🐬
+    title: 设计规范
+    details: 完整的设计规范和资源
 ---

@@ -1,8 +1,9 @@
 /**
- * @Author: Sam
- * @Date: 2020-01-11 10:27:23
- * @Last Modified by: Sam
- * @Last Modified time: 2022-04-22 05:17:31
+ * @ Author: Sam
+ * @ Create Time: 2023-02-22 06:47:42
+ * @ Modified by: Sam
+ * @ Modified time: 2023-03-10 08:34:25
+ * @ Description:
  */
 
 /**
@@ -10,70 +11,44 @@
  * @param {*} data
  * @returns
  */
-export const isNull = (data) => !data && data != 0;
+export const isNull = (data: any) => !data && data != 0;
 
 /**
  * 判断变量是否为字符串
  * @param {*} data
  * @returns {Boolean}
  */
-export const isString = (data) => typeof data === "string";
+export const isString = (data: any): boolean => typeof data === "string";
 
 /**
  * 空格处理
  * @param {String} str
  * @returns
  */
-export const trim = (str) => (str || "").replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, "");
+export const trim = (str: any) => (str || "").replace(/^[\s\uFEFF]+|[\s\uFEFF]+$/g, "");
 
 /**
  * 将字符串转换成对象格式
  * @param {String} str
  * @returns {Object} null
  */
-export const strToObject = (str) => {
-  var finalObj = null;
+export const strToObject = (str: string): object => {
+  var finalObj: object = {};
   try {
     finalObj = JSON.parse(str);
   } catch (e) {
-    finalObj = null;
+    finalObj = {};
   }
 
   return finalObj;
 };
 
 /**
- * clickOutside
- * 点击某元素外部事件指令
- */
-export const clickOutside = {
-  // 初始化事件
-  beforeMount(el, binding, vnode) {
-    function handleClick(e) {
-      // 如果为元素本身，则返回
-      if (el.contains(e.target) || e.target.className.includes(binding.arg)) {
-        return false;
-      }
-
-      // 如果绑定了函数，则返回执行
-      binding.value(e);
-    }
-    el.__vueClickOutside__ = handleClick;
-    document.addEventListener("click", handleClick);
-  },
-  // 解除事件监听
-  unmounted(el, binding) {
-    document.removeEventListener("click", el.__vueClickOutside__);
-    delete el.__vueClickOutside__;
-  },
-};
-
-/**
  * 函数节流
  */
-export const throttle = (fn, delay) => {
-  var lastTime;
-  var timer;
+export const throttle = (fn: { apply: (arg0: any, arg1: IArguments) => void }, delay: number) => {
+  var lastTime: number;
+  var timer: any;
   var delay = delay || 200;
   return function () {
     var args = arguments;
@@ -101,7 +76,12 @@ export const throttle = (fn, delay) => {
  * @param {*} handler
  * @param {*} useCapture
  */
-export const on = function (element, event, handler, useCapture = false) {
+export const on = function (
+  element: { addEventListener: (arg0: any, arg1: any, arg2: boolean) => void },
+  event: any,
+  handler: any,
+  useCapture: any = false
+) {
   if (element && event && handler) {
     element.addEventListener(event, handler, useCapture);
   }
@@ -114,7 +94,12 @@ export const on = function (element, event, handler, useCapture = false) {
  * @param {*} handler
  * @param {*} useCapture
  */
-export const off = function (element, event, handler, useCapture = false) {
+export const off = function (
+  element: { removeEventListener: (arg0: any, arg1: any, arg2: boolean) => void },
+  event: any,
+  handler: any,
+  useCapture: any = false
+) {
   if (element && event && handler) {
     element.removeEventListener(event, handler, useCapture);
   }
@@ -124,14 +109,14 @@ export const off = function (element, event, handler, useCapture = false) {
  * 判断是否为偶数
  * @param {*} num
  */
-export const isEvnetNum = (num) => Number(num) % 2 === 0;
+export const isEvnetNum = (num: any) => Number(num) % 2 === 0;
 
 /**
  * 将数值限制为整数
  * @param {*} v
  * @returns
  */
-export const beInteger = (v) => {
+export const beInteger = (v: string) => {
   let val = v + "";
   return val.replace(/\D/g, "");
 };
@@ -141,10 +126,15 @@ export const beInteger = (v) => {
  * @param {String} module
  * @param {*} info
  */
-export const warn = (module, info) => {
+export const warn = (module: any, info: string) => {
   console.warn(`[ A warning of birdpaper-ui ] - ${module}: ` + info);
 };
 
-export const firstToUpper = (str) => {
+/**
+ * 首字母大写
+ * @param str
+ * @returns
+ */
+export const firstToUpper = (str: string) => {
   return str.trim().toLowerCase().replace(str[0], str[0].toUpperCase());
 };

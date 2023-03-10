@@ -2,7 +2,7 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-22 20:18:08
  * @ Modified by: Sam
- * @ Modified time: 2023-02-23 05:11:28
+ * @ Modified time: 2023-03-10 17:24:35
  * @ Description: API表格组件
  -->
 <template>
@@ -30,6 +30,16 @@
       <template #type="{ row }">
         <div class="type-area">
           <span class="type-area-inner">{{ row.type || "-" }}</span>
+          <span
+            v-if="row.type === 'Enum'"
+            :class="['ri-error-warning-fill', { active: row.showTip }]"
+            @click="row.showTip = !row.showTip"
+          ></span>
+          <Transition>
+            <div v-if="row.showTip" class="optional-area">
+              <span>{{ row.optional.join(" | ") }}</span>
+            </div>
+          </Transition>
         </div>
       </template>
     </bp-table>

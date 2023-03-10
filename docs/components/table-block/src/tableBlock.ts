@@ -2,7 +2,7 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-22 20:18:08
  * @ Modified by: Sam
- * @ Modified time: 2023-02-23 05:07:27
+ * @ Modified time: 2023-03-10 17:19:49
  */
 
 /** Prop 表头 */
@@ -43,7 +43,7 @@ export const header = {
   slots: slotHeader,
 };
 /** Props 属性类型 */
-export type PropType = "String" | "Number" | "Boolean" | "Array" | "Enum" | "Object" | "Function" | string;
+export type PropType = "String" | "Number" | "Boolean" | "Array" | "Enum" | "Object" | "Function";
 
 /** Props 属性 */
 export interface PropTableItem {
@@ -55,6 +55,8 @@ export interface PropTableItem {
   type: PropType | PropType[];
   /** 可选值，type 为 enum 时可用 */
   optional?: string[] | string;
+  /** 显示提示框 */
+  showTip?: boolean;
   /** 默认值 */
   default?: string;
   /** 版本号 */

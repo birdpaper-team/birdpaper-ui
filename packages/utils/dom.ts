@@ -2,7 +2,7 @@
  * @ Author: Sam
  * @ Create Time: 2022-06-12 04:47:42
  * @ Modified by: Sam
- * @ Modified time: 2023-03-09 14:12:30
+ * @ Modified time: 2023-03-10 08:38:15
  * @ Description:
  */
 import { Component, Slots, VNode, VNodeTypes } from "vue";
@@ -75,7 +75,6 @@ export const getStyle = function (element, styleName) {
   }
 };
 
-
 enum ShapeFlags {
   ELEMENT = 1,
   FUNCTIONAL_COMPONENT = 1 << 1,
@@ -115,6 +114,12 @@ export const isSlotsChildren = (vn: VNode, children: VNode["children"]): childre
   return Boolean(vn && vn.shapeFlag & ShapeFlags.SLOTS_CHILDREN);
 };
 
+/**
+ * 获取所有元素
+ * @param children
+ * @param includeText
+ * @returns
+ */
 export const getAllElements = (children: VNode[] | undefined, includeText = false) => {
   const results: VNode[] = [];
   for (const item of children ?? []) {

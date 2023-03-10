@@ -1,5 +1,5 @@
 <template>
-  <bp-space>
+  <bp-space size="mini">
     <bp-button type="normal" status="primary">常规按钮</bp-button>
     <bp-button type="primary" status="primary">主要按钮</bp-button>
     <bp-button type="plain" status="primary">线框按钮</bp-button>
