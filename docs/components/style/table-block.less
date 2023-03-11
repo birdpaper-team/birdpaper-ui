@@ -2,7 +2,7 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-19 08:02:34
  * @ Modified by: Sam
- * @ Modified time: 2023-03-10 17:24:45
+ * @ Modified time: 2023-03-11 15:58:37
  * @ Description: 表格组件样式
  */
 
@@ -50,6 +50,10 @@
       color: #262626;
       letter-spacing: 0.2px;
       font-weight: 500;
+
+      &:not(:first-child) {
+        margin-left: 4px;
+      }
     }
 
     .ri-error-warning-fill {
@@ -98,13 +102,13 @@
         border-left: 5px solid transparent;
         border-top: 5px solid transparent;
         border-right: 5px solid transparent;
-        border-bottom: 5px solid #000;
+        border-bottom: 5px solid #f0f0f0;
       }
 
       &::after {
         content: "";
         position: absolute;
-        top: -10px;
+        top: -8px;
         left: 53px;
         border-left: 5px solid transparent;
         border-top: 5px solid transparent;
@@ -113,8 +117,8 @@
       }
 
       span {
-        color: #1677ff;
-        font-size: 13px;
+        color: #434343;
+        font-size: 12px;
         font-weight: 500;
         letter-spacing: 0.6px;
       }

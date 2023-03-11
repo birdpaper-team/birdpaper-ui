@@ -2,7 +2,7 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-22 20:18:08
  * @ Modified by: Sam
- * @ Modified time: 2023-03-10 17:24:35
+ * @ Modified time: 2023-03-11 16:07:39
  * @ Description: API表格组件
  -->
 <template>
@@ -28,12 +28,19 @@
       </template>
       <!-- 类型 -->
       <template #type="{ row }">
-        <div class="type-area">
-          <span class="type-area-inner">{{ row.type || "-" }}</span>
+        <div class="type-area" v-clickOutside="() => onClickoutside(row)">
+          <template v-if="typeof row.type === 'object'">
+            <span class="type-area-inner" v-for="v in row.type">
+              {{ v }}
+            </span>
+          </template>
+          <span class="type-area-inner" v-else>{{ row.type || "-" }}</span>
+
+          <!-- 枚举值展示 -->
           <span
-            v-if="row.type === 'Enum'"
+            v-if="row.type === 'Enum' || row.type.includes('Enum')"
             :class="['ri-error-warning-fill', { active: row.showTip }]"
-            @click="row.showTip = !row.showTip"
+            @click="handleRowTipShow(row)"
           ></span>
           <Transition>
             <div v-if="row.showTip" class="optional-area">
@@ -49,6 +56,7 @@
 <script setup lang="ts" name="table-block">
 import { onMounted, ref } from "vue";
 import { EventTableItem, header, MethodTableItem, PropTableItem, SlotTableItem } from "./tableBlock";
+import { vClickOutside } from "../../directives/clickOutside";
 
 const props = defineProps({
   type: { type: String, default: "props" },
@@ -62,6 +70,17 @@ const init = async () => {
   const dataGlob = import.meta.glob(`../../../src/example/**/*.ts`);
   const res = await import(/* @vite-ignore */ dataGlob[`../../../src/${props.src}.ts`].name);
   list.value = res.default;
+};
+
+const handleRowTipShow = (row: any) => {
+  for (let i = 0; i < list.value.length; i++) {
+    list.value[i].name !== row.name && (list.value[i].showTip = false);
+  }
+  row.showTip = !row.showTip;
+};
+
+const onClickoutside = (row: any) => {
+  row.showTip = false;
 };
 
 onMounted(() => init());

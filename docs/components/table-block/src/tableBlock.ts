@@ -2,7 +2,7 @@
  * @ Author: Sam
  * @ Create Time: 2023-02-22 20:18:08
  * @ Modified by: Sam
- * @ Modified time: 2023-03-10 17:19:49
+ * @ Modified time: 2023-03-11 14:41:58
  */
 
 /** Prop 表头 */
@@ -73,6 +73,8 @@ export interface EventTableItem {
   params?: string;
   /** 版本号 */
   version?: string;
+  /** 显示提示框 */
+  showTip?: boolean;
 }
 
 /** Method 方法 */
@@ -87,6 +89,8 @@ export interface MethodTableItem {
   returns?: string;
   /** 版本号 */
   version?: string;
+  /** 显示提示框 */
+  showTip?: boolean;
 }
 
 /** Slot 插槽 */
@@ -99,4 +103,6 @@ export interface SlotTableItem {
   params?: string;
   /** 版本号 */
   version?: string;
+  /** 显示提示框 */
+  showTip?: boolean;
 }
