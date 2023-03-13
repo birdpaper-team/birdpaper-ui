@@ -1,10 +1,3 @@
-<!--
- * @ Author: Sam
- * @ Create Time: 2023-02-22 20:18:08
- * @ Modified by: Sam
- * @ Modified time: 2023-03-11 16:07:39
- * @ Description: API表格组件
- -->
 <template>
   <div class="table-block">
     <bp-table :cols="header[type]" :data-source="list">

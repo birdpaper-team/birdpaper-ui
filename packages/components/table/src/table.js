@@ -1,11 +1,3 @@
-/**
- * @ Author: Sam
- * @ Create Time: 2023-02-22 20:18:08
- * @ Modified by: Sam
- * @ Modified time: 2023-02-23 05:53:50
- * @ Description:
- */
-
 import { ref, watch, onMounted, nextTick, onBeforeUnmount } from "vue";
 import { off, on, throttle } from "../../../utils/util";
 

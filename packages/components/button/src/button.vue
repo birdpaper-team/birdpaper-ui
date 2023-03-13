@@ -1,11 +1,3 @@
-<!--
- * @ Author: Sam
- * @ Create Time: 2023-02-21 21:05:39
- * @ Modified by: Sam
- * @ Modified time: 2023-03-09 10:43:12
- * @ Description: 按钮 Button
- -->
-
 <template>
   <button :class="btnClass" type="button" :disabled="isDisabled" @click="onClick">
     <span v-if="btnIcon" class="left-icon">

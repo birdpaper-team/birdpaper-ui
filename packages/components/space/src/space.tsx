@@ -1,11 +1,3 @@
-/**
- * @ Author: Sam
- * @ Create Time: 2023-03-09 07:25:31
- * @ Modified by: Sam
- * @ Modified time: 2023-03-10 10:47:18
- * @ Description:
- */
-
 import { defineComponent, PropType } from "vue";
 import { getAllElements } from "../../../utils/dom";
 import { isString } from "../../../utils/util";

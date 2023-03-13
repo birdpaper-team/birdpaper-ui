@@ -1,10 +1,3 @@
-/**
- * @ Author: Sam
- * @ Create Time: 2023-02-22 20:18:08
- * @ Modified by: Sam
- * @ Modified time: 2023-03-09 13:54:10
- */
-
 import { App } from "vue";
 import _table from "./src/table.vue";
 

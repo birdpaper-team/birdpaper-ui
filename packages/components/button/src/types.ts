@@ -1,11 +1,3 @@
-/**
- * @ Author: Sam
- * @ Create Time: 2023-02-23 04:14:35
- * @ Modified by: Sam
- * @ Modified time: 2023-03-08 16:11:25
- * @ Description: Button Types
- */
-
 /** 按钮类型，普通、主要、线框、虚线、文本 */
 export type ButtonType = "normal" | "primary" | "plain" | "dashed" | "text";
 

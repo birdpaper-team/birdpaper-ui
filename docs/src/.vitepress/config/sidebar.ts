@@ -1,11 +1,3 @@
-/**
- * @ Author: Sam
- * @ Create Time: 2023-02-21 21:05:39
- * @ Modified by: Sam
- * @ Modified time: 2023-02-23 05:46:10
- * @ Description: 侧边导航
- */
-
 export const sidebar = {
   "/guide/": [
     {

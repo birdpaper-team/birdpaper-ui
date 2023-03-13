@@ -1,10 +1,3 @@
-/**
- * @ Author: Sam
- * @ Create Time: 2023-02-22 20:18:08
- * @ Modified by: Sam
- * @ Modified time: 2023-03-11 14:41:58
- */
-
 /** Prop 表头 */
 export const propHeader = [
   { label: "名称", scope: { customRender: "name" }, width: "140" },

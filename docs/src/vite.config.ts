@@ -1,11 +1,3 @@
-/**
- * @ Author: Sam
- * @ Create Time: 2023-02-17 20:59:44
- * @ Modified by: Sam
- * @ Modified time: 2023-03-09 18:16:55
- * @ Description:
- */
-
 import { SearchPlugin } from "vitepress-plugin-search";
 import { defineConfig } from "vite";
 import vueJsx from "@vitejs/plugin-vue-jsx";

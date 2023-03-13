@@ -1,11 +1,3 @@
-/**
- * @ Author: Sam
- * @ Create Time: 2023-02-19 16:20:27
- * @ Modified by: Sam
- * @ Modified time: 2023-03-09 13:58:16
- * @ Description: 组件库入口
- */
-
 import { App } from "vue";
 
 import Button from "./button";

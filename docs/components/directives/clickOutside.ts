@@ -1,11 +1,3 @@
-/**
- * @ Author: Sam
- * @ Create Time: 2023-03-11 14:51:54
- * @ Modified by: Sam
- * @ Modified time: 2023-03-11 15:06:55
- * @ Description: 点击外部元素触发
- */
-
 export const vClickOutside = {
   mounted(el: any, binding: any) {
     function eventHandler(e: { target: any; }) {

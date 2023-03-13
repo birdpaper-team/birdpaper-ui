@@ -1,12 +1,4 @@
 /**
- * @ Author: Sam
- * @ Create Time: 2023-02-22 06:47:42
- * @ Modified by: Sam
- * @ Modified time: 2023-03-10 08:34:25
- * @ Description:
- */
-
-/**
  * 判断是否为 null
  * @param {*} data
  * @returns

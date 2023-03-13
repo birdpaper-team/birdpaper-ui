@@ -1,10 +1,3 @@
-/**
- * @ Author: Sam
- * @ Create Time: 2022-06-12 04:47:42
- * @ Modified by: Sam
- * @ Modified time: 2023-03-10 08:38:15
- * @ Description:
- */
 import { Component, Slots, VNode, VNodeTypes } from "vue";
 
 // 返回是否是 HTML 元素

@@ -1,11 +1,3 @@
-/**
- * @ Author: Sam
- * @ Create Time: 2023-02-18 17:12:22
- * @ Modified by: Sam
- * @ Modified time: 2023-02-19 07:50:02
- * @ Description: 代码示例组件-源码转HTML插件
- */
-
 import fs from "fs";
 import path from "path";
 import { getHighlighter } from "shiki";
