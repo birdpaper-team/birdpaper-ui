@@ -1,3 +1,33 @@
 .bp-row {
   position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.bp-col {
+  box-sizing: border-box;
+
+  // 栏位
+  .span(@span) when (@span > 0) {
+    .span((@span - 1));
+
+    &-@{span} {
+      width: (100% / 24) * @span;
+      flex: 0 0 (100% / 24) * @span;
+    }
+  }
+
+  .span(24);
+
+  // 偏移
+  .offset(@offset) when (@offset > 0) {
+    .offset((@offset - 1));
+
+    &-offset-@{offset} {
+      margin-left: (100% / 24) * @offset;
+    }
+  }
+
+  .offset(23);
 }
