@@ -7,12 +7,12 @@
       <bp-col span="8" class="demo"></bp-col>
     </bp-row>
   </div>
-  <div class="demo-row">
+  <!-- <div class="demo-row">
     <bp-row>
       <bp-col span="6" offset="2" class="demo"></bp-col>
       <bp-col span="8" offset="3" class="demo"></bp-col>
     </bp-row>
-  </div>
+  </div> -->
 </template>
 
 <style lang="less" scoped>
