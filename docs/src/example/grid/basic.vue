@@ -1,10 +1,18 @@
 <template>
   <div class="demo-row">
-    <bp-row>
-      <bp-col span="4" class="demo"></bp-col>
-      <bp-col span="6" class="demo"></bp-col>
-      <bp-col span="6" class="demo"></bp-col>
-      <bp-col span="8" class="demo"></bp-col>
+    <bp-row :gutter="10">
+      <bp-col span="4">
+        <div class="demo"></div>
+      </bp-col>
+      <bp-col span="6">
+        <div class="demo"></div>
+      </bp-col>
+      <bp-col span="6">
+        <div class="demo"></div>
+      </bp-col>
+      <bp-col span="8">
+        <div class="demo"></div>
+      </bp-col>
     </bp-row>
   </div>
   <!-- <div class="demo-row">
