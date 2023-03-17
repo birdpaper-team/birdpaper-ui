@@ -23,16 +23,17 @@ const name = "row";
 const cls = computed(() => {
   return [`bp-${name}`];
 });
-const slot = useSlots();
-const row = slot.default();
+const row = useSlots().default();
 
 onMounted(() => {
   nextTick(() => {
+    const childrenEls = rowRef.value.children;
+
     row.forEach((item, index) => {
       const isCol = item.type === col;
       if (isCol) {
-        rowRef.value.children[index].style.paddingLeft = `${props.gutter}px`;
-        rowRef.value.children[index].style.paddingRight = `${props.gutter}px`;
+        index !== 0 && (childrenEls[index].style.paddingLeft = `${props.gutter}px`);
+        index !== childrenEls.length - 1 && (childrenEls[index].style.paddingRight = `${props.gutter}px`);
       }
     });
   });
