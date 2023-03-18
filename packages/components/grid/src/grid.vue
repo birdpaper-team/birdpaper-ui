@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts" name="row">
-import { computed, nextTick, onMounted, PropType, ref, useSlots } from "vue";
+import { computed, nextTick, onMounted, PropType, ref, useSlots, VNode, VueElement } from "vue";
 import { Align, Justify } from "./types";
 import col from "./col.vue";
 
@@ -18,24 +18,41 @@ const props = defineProps({
   align: { type: String as PropType<Align>, default: "start" },
 });
 
+const slot = useSlots().default();
 const rowRef = ref();
 const name = "row";
 const cls = computed(() => {
   return [`bp-${name}`, `bp-justify-${props.justify}`, `bp-align-${props.align}`];
 });
-const row = useSlots().default();
+
+const init = () => {
+  setGutter(slot);
+};
+
+/**
+ * 设置栅格间距
+ * @param els
+ */
+const setGutter = (els: VNode[]) => {
+  const childrenEls = rowRef.value.children;
+
+  els.forEach((item, index) => {
+    const isCol = item.type === col;
+
+    if (isCol) {
+      const el: VueElement = childrenEls[index];
+      index !== 0 && (el.style.paddingLeft = `${props.gutter}px`);
+      index !== childrenEls.length - 1 && (el.style.paddingRight = `${props.gutter}px`);
+      return;
+    }
+
+    if (item.type.toString() === "Symbol(Fragment)") {
+      setGutter(item.children as VNode[]);
+    }
+  });
+};
 
 onMounted(() => {
-  nextTick(() => {
-    const childrenEls = rowRef.value.children;
-
-    row.forEach((item, index) => {
-      const isCol = item.type === col;
-      if (isCol) {
-        index !== 0 && (childrenEls[index].style.paddingLeft = `${props.gutter}px`);
-        index !== childrenEls.length - 1 && (childrenEls[index].style.paddingRight = `${props.gutter}px`);
-      }
-    });
-  });
+  nextTick(() => init());
 });
 </script>
