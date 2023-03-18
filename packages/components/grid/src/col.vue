@@ -8,7 +8,9 @@
 import { computed } from "vue";
 
 const props = defineProps({
-  span: { type: [String, Number], default: "" },
+  /** 栏位数量 1-24 Number of fields 1-24 */
+  span: { type: [String, Number], default: 24 },
+  /** 偏移量 Number of offset*/
   offset: { type: [String, Number], default: "" },
 });
 
