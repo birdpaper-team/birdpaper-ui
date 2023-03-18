@@ -21,7 +21,7 @@ const props = defineProps({
 const rowRef = ref();
 const name = "row";
 const cls = computed(() => {
-  return [`bp-${name}`];
+  return [`bp-${name}`, `bp-justify-${props.justify}`, `bp-align-${props.align}`];
 });
 const row = useSlots().default();
 
