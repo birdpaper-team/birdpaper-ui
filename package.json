@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "docs": "pnpm run -C docs dev",
+    "build:docs": "pnpm run -C docs build",
     "commit": "git-cz"
   },
   "keywords": [
