@@ -11,7 +11,9 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 80px;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      width: 30%;
       height: 80px;
       box-sizing: border-box;
       background-color: @gary-1;
@@ -23,6 +25,9 @@
       i {
         font-size: 20px;
         color: @gary-8;
+      }
+      span {
+        font-size: 12px;
       }
 
       &:hover {

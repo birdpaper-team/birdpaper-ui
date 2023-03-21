@@ -4,6 +4,7 @@
       <template v-for="v in iconList">
         <div class="icon-item">
           <i :class="v"></i>
+          <span v-text="v"></span>
         </div>
       </template>
     </div>

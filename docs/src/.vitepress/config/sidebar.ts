@@ -1,14 +1,14 @@
 export const sidebar = {
   "/guide/": [
-    {
-      text: "指南",
-      items: [
-        { text: "介绍", link: "/guide/introduce" },
-        { text: "更新日志", link: "/guide/changelog" },
-        { text: "安装", link: "/guide/install" },
-        { text: "快速上手", link: "/guide/easystart" },
-      ],
-    },
+    // {
+    //   text: "指南",
+    //   items: [
+    //     { text: "介绍", link: "/guide/introduce" },
+    //     { text: "更新日志", link: "/guide/changelog" },
+    //     { text: "安装", link: "/guide/install" },
+    //     { text: "快速上手", link: "/guide/easystart" },
+    //   ],
+    // },
     {
       text: "设计",
       items: [
