@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vitepress dev src --port 8081 --host",
     "build": "vitepress build src",
-    "serve": "vitepress serve src"
+    "preview": "vitepress preview src --port 8080"
   },
   "keywords": [],
   "author": "木亦Sam",

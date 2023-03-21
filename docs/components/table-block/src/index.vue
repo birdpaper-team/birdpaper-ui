@@ -47,23 +47,16 @@
 </template>
 
 <script setup lang="ts" name="table-block">
-import { onMounted, ref } from "vue";
+import { PropType, ref, watch } from "vue";
 import { EventTableItem, header, MethodTableItem, PropTableItem, SlotTableItem } from "./tableBlock";
 import { vClickOutside } from "../../directives/clickOutside";
 
 const props = defineProps({
   type: { type: String, default: "props" },
   src: { type: String, default: "" },
+  data: { type: Array as PropType<PropTableItem[] | EventTableItem[] | MethodTableItem[] | SlotTableItem[]>, default: () => [] },
 });
 const list = ref<PropTableItem[] | EventTableItem[] | MethodTableItem[] | SlotTableItem[]>([]);
-
-const init = async () => {
-  if (!props.src) return;
-
-  const dataGlob = import.meta.glob(`../../../src/example/**/*.ts`);
-  const res = await import(/* @vite-ignore */ dataGlob[`../../../src/${props.src}.ts`].name);
-  list.value = res.default;
-};
 
 const handleRowTipShow = (row: any) => {
   for (let i = 0; i < list.value.length; i++) {
@@ -76,5 +69,14 @@ const onClickoutside = (row: any) => {
   row.showTip = false;
 };
 
-onMounted(() => init());
+watch(
+  () => props.data,
+  () => {
+    list.value = props.data;
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
 </script>

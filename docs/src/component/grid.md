@@ -1,3 +1,8 @@
+<script setup lang="ts">
+  import rowProps from "../example/grid/row-props.ts";
+  import colProps from "../example/grid/col-props.ts";
+</script>
+
 # 栅格 Grid
 通过划分 24 个栅格，保证页面布局的协调性。
 
@@ -14,7 +19,7 @@
 <demo-block src="example/grid/offset"></demo-block>
 
 ### Row 属性
-<table-block type="props" src="example/grid/row-props"></table-block>
+<table-block type="props" :data="rowProps"></table-block>
 
 ### Col 属性
-<table-block type="props" src="example/grid/col-props"></table-block>
+<table-block type="props" :data="colProps"></table-block>

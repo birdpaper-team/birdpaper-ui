@@ -1,3 +1,7 @@
+<script setup lang="ts">
+  import props from "../example/space/props.ts";
+</script>
+
 # 间距 Space
 控制元素之间的距离和排版方式
 
@@ -6,4 +10,4 @@
 <demo-block src="example/space/basic"></demo-block>
 
 ### Space 属性
-<table-block type="props" src="example/space/props"></table-block>
+<table-block type="props" :data="props"></table-block>
