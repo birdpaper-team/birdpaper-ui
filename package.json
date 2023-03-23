@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "docs": "pnpm run -C docs dev",
+    "build": "pnpm run -C packages build",
     "build:docs": "pnpm run -C docs build",
     "build:docs-root": "pnpm run -C docs build:root",
     "preview:docs": "pnpm run -C docs preview",
@@ -23,6 +24,7 @@
   "license": "MIT",
   "dependencies": {
     "@icon-park/vue-next": "^1.4.2",
+    "@vitejs/plugin-vue-jsx": "^3.0.0",
     "cz-customizable": "^7.0.0"
   },
   "config": {
