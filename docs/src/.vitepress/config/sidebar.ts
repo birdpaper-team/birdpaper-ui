@@ -27,5 +27,11 @@ export const sidebar = {
         { text: "按钮", link: "/component/button" },
       ],
     },
+    {
+      text: "数据输入",
+      items: [
+        { text: "输入框", link: "/component/input" },
+      ],
+    },
   ],
 };

@@ -3,7 +3,6 @@ import { sidebar } from "./sidebar";
 import loadCode from "../../../components/demo-block/src/loadCode";
 
 const config: import("vitepress").UserConfig = {
-  base: "/birdpaper-ui",
   title: "BirdpaperUI",
   titleTemplate: "基于Vue3的UI组件库",
   description: "基于Vue3的UI组件库",
