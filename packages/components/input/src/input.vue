@@ -1,5 +1,7 @@
 <template>
-  <div class="bp-input"></div>
+  <div class="bp-input">
+    <input type="text" class="bp-input-inner">
+  </div>
 </template>
 
 <script setup lang="ts" name="input">
