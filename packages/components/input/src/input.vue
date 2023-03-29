@@ -1,12 +1,13 @@
 <template>
-  <div class="bp-input">
+  <div :class="inpClass">
     <input type="text" class="bp-input-inner" />
   </div>
 </template>
 
 <script setup lang="ts" name="input">
-import { PropType } from "vue";
+import { computed, PropType } from "vue";
 import { InputSize } from "./types";
+const name = "bp-input";
 
 const props = defineProps({
   /** 输入框尺寸 Size of the input */
@@ -17,5 +18,9 @@ const props = defineProps({
   readonly: { type: Boolean, default: false },
   /** 是否错误状态 Error or not */
   isError: { type: Boolean, default: false },
+});
+
+const inpClass = computed(() => {
+  return name;
 });
 </script>

@@ -1,8 +1,17 @@
 @import "../../../../style/common/theme.less";
 
-.bp-input {
-  border: 1px solid @gary-4;
-  width: 180px;
+@input-cls: ~"@{prefix}-input";
+
+.@{input-cls} {
+  position: relative;
+  display: flex;
+  outline: none;
+  white-space: nowrap;
+  min-height: @miniHeight;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  opacity: 1;
+  width: 200px;
   border-radius: 4px;
 
   &-inner {
