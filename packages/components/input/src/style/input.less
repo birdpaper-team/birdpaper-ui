@@ -12,7 +12,8 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   opacity: 1;
-  width: 200px;
+  width: 100%;
+  min-width: 80px;
   border-radius: 4px;
   cursor: text;
 }
@@ -37,6 +38,12 @@
     border: 1px solid ~"@{input-status-@{status}-border-color}";
     transition: all 0.2s ease;
 
+    .bp-input-placeholder {
+      color: ~"@{input-status-@{status}-placeholder-color}";
+      font-weight: normal;
+      font-size: 14px;
+    }
+
     &:hover {
       background-color: ~"@{input-status-@{status}-background-hover}";
       border: 1px solid ~"@{input-status-@{status}-border-color-hover}";
@@ -47,6 +54,35 @@
       background-color: ~"@{input-status-@{status}-background-focus}";
       border: 1px solid ~"@{input-status-@{status}-border-color-focus}";
       transition: all 0.2s ease;
+    }
+
+    input::placeholder {
+      .bp-input-placeholder;
+    }
+
+    input::-webkit-input-placeholder {
+      .bp-input-placeholder;
+    }
+
+    /* Firefox 4-18 */
+    input::-moz-placeholder {
+      .bp-input-placeholder;
+    }
+
+    /* Firefox 19-50 */
+    input::-moz-placeholder {
+      .bp-input-placeholder;
+    }
+
+    /* - Internet Explorer 10–11
+      - Internet Explorer Mobile 10-11 */
+    input::-ms-input-placeholder {
+      .bp-input-placeholder;
+    }
+
+    /* Edge (also supports -webkit-input-placeholder) */
+    input::-ms-input-placeholder {
+      .bp-input-placeholder;
     }
   }
 }
@@ -59,39 +95,12 @@
 .input-status(normal);
 .input-status(readonly);
 .input-status(disabled);
-// .input-status(error);
+.input-status(danger);
 
-.bp-input-placeholder {
-  color: @gary-6;
-  font-weight: normal;
-  font-size: 14px;
-}
+.@{input-cls}-status-disabled {
+  cursor: not-allowed;
 
-input::placeholder {
-  .bp-input-placeholder;
-}
-
-input::-webkit-input-placeholder {
-  .bp-input-placeholder;
-}
-
-/* Firefox 4-18 */
-input::-moz-placeholder {
-  .bp-input-placeholder;
-}
-
-/* Firefox 19-50 */
-input::-moz-placeholder {
-  .bp-input-placeholder;
-}
-
-/* - Internet Explorer 10–11
-  - Internet Explorer Mobile 10-11 */
-input::-ms-input-placeholder {
-  .bp-input-placeholder;
-}
-
-/* Edge (also supports -webkit-input-placeholder) */
-input::-ms-input-placeholder {
-  .bp-input-placeholder;
+  .@{input-cls}-inner {
+    cursor: not-allowed;
+  }
 }
