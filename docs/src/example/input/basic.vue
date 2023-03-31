@@ -4,6 +4,7 @@
       <bp-input placeholder="请输入"></bp-input>
       <bp-input readonly placeholder="请输入"></bp-input>
       <bp-input disabled placeholder="请输入"></bp-input>
+      <bp-input is-danger placeholder="请输入"></bp-input>
     </bp-space>
   </div>
 </template>
