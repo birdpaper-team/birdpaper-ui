@@ -1,11 +1,23 @@
 <template>
   <div :class="inpClass">
-    <input type="text" :disabled="disabled" :readonly="readonly" class="bp-input-inner" :placeholder="placeholder" />
+    <input
+      type="text"
+      class="bp-input-inner"
+      :disabled="disabled"
+      :readonly="readonly"
+      :placeholder="placeholder"
+      :maxlength="maxLength"
+      @focus="onFocus"
+      @blur="onBlur"
+      @keydown="onKeydown"
+      @keypress="onKeypress"
+      @keyup="onKeyup"
+    />
   </div>
 </template>
 
 <script setup lang="ts" name="input">
-import { computed, PropType } from "vue";
+import { computed, PropType, ref } from "vue";
 import { InputSize } from "./types";
 const name = "bp-input";
 
@@ -31,10 +43,14 @@ const props = defineProps({
 const emits = defineEmits<{
   (e: "update:modelValue", data: string): void;
   (e: "focus"): void;
-  (e: "keyup"): void;
   (e: "blur"): void;
+  (e: "keydown"): void;
+  (e: "keypress"): void;
+  (e: "keyup"): void;
   (e: "clear"): void;
 }>();
+
+const val = ref<string>("");
 
 const inpClass = computed(() => {
   const status = getStatus();
@@ -44,4 +60,13 @@ const inpClass = computed(() => {
 function getStatus() {
   return (props.disabled && "disabled") || (props.readonly && "readonly") || (props.isDanger && "danger") || "normal";
 }
+
+const onFocus = () => emits("focus");
+const onBlur = () => emits("blur");
+const onKeydown = () => emits("keydown");
+const onKeypress = () => emits("keypress");
+const onKeyup = () => {
+  emits("update:modelValue", val.value);
+  emits("keyup");
+};
 </script>
