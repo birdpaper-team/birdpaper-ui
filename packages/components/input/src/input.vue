@@ -38,6 +38,8 @@ const props = defineProps({
   maxLength: { type: Number, default: 0 },
   /** 是否展示字数限制提示 Display word limit prompts or not */
   showLimit: { type: Boolean, default: false },
+  /** 是否允许清空 Clearable or not */
+  clearable: { type: Boolean, default: false },
 });
 
 const emits = defineEmits<{
