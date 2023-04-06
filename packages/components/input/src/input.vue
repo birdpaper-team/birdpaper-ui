@@ -7,12 +7,16 @@
       :readonly="readonly"
       :placeholder="placeholder"
       :maxlength="maxLength"
+      :value="val"
       @focus="onFocus"
       @blur="onBlur"
       @keydown="onKeydown"
       @keypress="onKeypress"
       @keyup="onKeyup"
     />
+    <div class="suffix">
+      <i class="ri-close-line clear-icon"></i>
+    </div>
   </div>
 </template>
 
