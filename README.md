@@ -35,5 +35,3 @@ birdpaper-ui v2 (Ogino Chihiro 荻野千寻) on its way.
 - 构建产物优化
 - 不断完善的组件库
 - 一些设计资源包的支持
-
-# 测试
