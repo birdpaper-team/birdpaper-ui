@@ -21,7 +21,13 @@
 .input-size(@size) {
   .@{input-cls}-size-@{size} {
     height: ~"@{input-size-@{size}-height}";
-    padding: ~"@{input-size-@{size}-padding}";
+    padding: 0 ~"@{input-size-@{size}-padding}";
+    border-radius: ~"@{input-size-@{size}-radius}";
+
+    .suffix {
+      height: calc(~"@{input-size-@{size}-height}" - 2px);
+      border-radius: ~"@{input-size-@{size}-radius}";
+    }
 
     .@{input-cls}-inner {
       width: 100%;
@@ -38,6 +44,11 @@
     border: 1px solid ~"@{input-status-@{status}-border-color}";
     transition: all 0.2s ease;
 
+    .suffix {
+      background-color: ~"@{input-status-@{status}-background}";
+      transition: all 0.2s ease;
+    }
+
     .bp-input-placeholder {
       color: ~"@{input-status-@{status}-placeholder-color}";
       font-weight: normal;
@@ -48,12 +59,22 @@
       background-color: ~"@{input-status-@{status}-background-hover}";
       border: 1px solid ~"@{input-status-@{status}-border-color-hover}";
       transition: all 0.2s ease;
+
+      .suffix {
+        background-color: ~"@{input-status-@{status}-background-hover}";
+        transition: all 0.2s ease;
+      }
     }
 
     &:focus-within {
       background-color: ~"@{input-status-@{status}-background-focus}";
       border: 1px solid ~"@{input-status-@{status}-border-color-focus}";
       transition: all 0.2s ease;
+
+      .suffix {
+        background-color: ~"@{input-status-@{status}-background-focus}";
+        transition: all 0.2s ease;
+      }
     }
 
     input::placeholder {
@@ -105,6 +126,37 @@
   }
 }
 
-.clear-icon{
-  cursor: pointer;
+// 后缀元素
+.suffix {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100px;
+  padding: 0 8px;
+
+  i {
+    font-size: 14px;
+  }
+
+  .clear-icon {
+    color: @gary-7;
+    cursor: pointer;
+
+    &::before {
+      padding: 1px;
+      border-radius: 10px;
+      transition: all 0.2s ease;
+    }
+
+    &:hover {
+      color: @gary-8;
+
+      &::before {
+        background-color: @gary-5;
+        transition: all 0.2s ease;
+      }
+    }
+  }
 }

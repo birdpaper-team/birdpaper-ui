@@ -1,12 +1,14 @@
 <template>
   <div :class="inpClass">
     <input
+      ref="inpRef"
       type="text"
       class="bp-input-inner"
+      :spellcheck="false"
       :disabled="disabled"
       :readonly="readonly"
       :placeholder="placeholder"
-      :maxlength="maxLength"
+      :maxlength="maxlength"
       :value="val"
       @focus="onFocus"
       @blur="onBlur"
@@ -15,13 +17,16 @@
       @keyup="onKeyup"
     />
     <div class="suffix">
-      <i class="ri-close-line clear-icon"></i>
+      <template v-if="!slot.suffix">
+        <i class="ri-close-line clear-icon"></i>
+      </template>
+      <slot name="suffix"></slot>
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="input">
-import { computed, PropType, ref } from "vue";
+import { computed, PropType, ref, useSlots, watch } from "vue";
 import { InputSize } from "./types";
 const name = "bp-input";
 
@@ -39,7 +44,7 @@ const props = defineProps({
   /** 占位提示文字 The placeholder text*/
   placeholder: { type: String, default: "" },
   /** 限制输入最大长度 Restricts the maximum input length */
-  maxLength: { type: Number, default: 0 },
+  maxlength: { type: Number, default: null },
   /** 是否展示字数限制提示 Display word limit prompts or not */
   showLimit: { type: Boolean, default: false },
   /** 是否允许清空 Clearable or not */
@@ -47,7 +52,7 @@ const props = defineProps({
 });
 
 const emits = defineEmits<{
-  (e: "update:modelValue", data: string): void;
+  (e: "update:modelValue", value: string): void;
   (e: "focus"): void;
   (e: "blur"): void;
   (e: "keydown"): void;
@@ -56,7 +61,9 @@ const emits = defineEmits<{
   (e: "clear"): void;
 }>();
 
-const val = ref<string>("");
+const slot = useSlots();
+const inpRef = ref();
+const val = ref(props.modelValue || "");
 
 const inpClass = computed(() => {
   const status = getStatus();
@@ -71,8 +78,18 @@ const onFocus = () => emits("focus");
 const onBlur = () => emits("blur");
 const onKeydown = () => emits("keydown");
 const onKeypress = () => emits("keypress");
-const onKeyup = () => {
-  emits("update:modelValue", val.value);
+const onKeyup = (e: { target: { value: string } }) => {
+  const targetValue = (e.target as HTMLInputElement).value;
+  val.value = targetValue || "";
+  emits("update:modelValue", targetValue);
   emits("keyup");
 };
+
+watch(
+  () => props.modelValue,
+  v => {
+    console.log("[ watch ]-90", v);
+    val.value = props.modelValue;
+  },
+);
 </script>
