@@ -1,4 +1,4 @@
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, Fragment, Comment } from "vue";
 import { getAllElements } from "../../../utils/dom";
 import { isString } from "../../../utils/util";
 import { SizeType } from "./types";
@@ -16,8 +16,14 @@ export default defineComponent({
     const render = () => {
       return (
         <div class="bp-space">
-          {children.map((child) => {
-            return <div class="bp-space-item" style={`margin: 0 ${size}px`}>{child}</div>;
+          {children.map((child, index) => {
+            return (
+              <Fragment key={child.key ?? `item-${index}`}>
+                <div class="bp-space-item" style={`margin: 0 ${size}px`}>
+                  {child}
+                </div>
+              </Fragment>
+            );
           })}
         </div>
       );
