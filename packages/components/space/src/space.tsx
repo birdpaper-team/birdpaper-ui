@@ -10,10 +10,11 @@ export default defineComponent({
   },
   setup(props, { slots }) {
     const typeMap = { mini: 4, small: 8, normal: 16, large: 24 };
-    const children = getAllElements(slots.default?.(), true).filter(item => item.type !== Comment);
     const size = isString(props.size) ? typeMap[props.size] : props.size;
 
     const render = () => {
+      const children = getAllElements(slots.default?.(), true).filter(item => item.type !== Comment);
+
       return (
         <div class="bp-space">
           {children.map((child, index) => {
