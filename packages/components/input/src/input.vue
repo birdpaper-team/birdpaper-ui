@@ -17,9 +17,9 @@
       @keyup="onKeyup"
       @input="onInput"
     />
-    <div class="suffix">
+    <div class="suffix" v-show="!slot.suffix && showClear">
       <template v-if="!slot.suffix">
-        <i class="ri-close-line clear-icon"></i>
+        <i v-if="showClear" class="ri-close-line clear-icon" @click="handleClearInp"></i>
       </template>
       <slot name="suffix"></slot>
     </div>
@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts" name="input">
-import { computed, PropType, ref, useSlots, watch } from "vue";
+import { computed, PropType, ref, useSlots } from "vue";
 import { InputSize } from "./types";
 const name = "bp-input";
 
@@ -54,13 +54,12 @@ const props = defineProps({
 
 const emits = defineEmits<{
   (e: "update:modelValue", value: string): void;
+  (e: "input"): void;
   (e: "focus"): void;
   (e: "blur"): void;
   (e: "keydown"): void;
   (e: "keypress"): void;
   (e: "keyup"): void;
-  (e: "input"): void;
-  (e: "clear"): void;
 }>();
 
 const slot = useSlots();
@@ -69,6 +68,10 @@ const inpRef = ref();
 const inpClass = computed(() => {
   const status = getStatus();
   return [name, `${name}-size-${props.size}`, `${name}-status-${status}`];
+});
+
+const showClear = computed(() => {
+  return props.modelValue && props.clearable && !props.disabled && !props.readonly;
 });
 
 function getStatus() {
@@ -81,16 +84,17 @@ const onKeydown = () => emits("keydown");
 const onKeypress = () => emits("keypress");
 const onKeyup = () => emits("keyup");
 
+const handleFocus = () => {
+  inpRef.value.focus();
+};
+
 const onInput = (e: { target: { value: string } }) => {
   const targetValue = (e.target as HTMLInputElement).value;
   emits("update:modelValue", targetValue);
 };
 
-// watch(
-//   () => props.modelValue,
-//   v => {
-//     console.log("[ watch ]-90", v);
-//     val.value = props.modelValue;
-//   }
-// );
+const handleClearInp = () => {
+  emits("update:modelValue", "");
+  handleFocus();
+};
 </script>

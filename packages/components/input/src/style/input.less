@@ -21,7 +21,7 @@
 .input-size(@size) {
   .@{input-cls}-size-@{size} {
     height: ~"@{input-size-@{size}-height}";
-    padding: 0 ~"@{input-size-@{size}-padding}";
+    padding: ~"@{input-size-@{size}-padding}";
     border-radius: ~"@{input-size-@{size}-radius}";
 
     .suffix {
@@ -31,7 +31,6 @@
 
     .@{input-cls}-inner {
       width: 100%;
-      height: ~"@{input-size-@{size}-height}";
       font-size: ~"@{input-size-@{size}-font-size}";
     }
   }
@@ -43,11 +42,6 @@
     background-color: ~"@{input-status-@{status}-background}";
     border: 1px solid ~"@{input-status-@{status}-border-color}";
     transition: all 0.2s ease;
-
-    .suffix {
-      background-color: ~"@{input-status-@{status}-background}";
-      transition: all 0.2s ease;
-    }
 
     .bp-input-placeholder {
       color: ~"@{input-status-@{status}-placeholder-color}";
@@ -61,8 +55,10 @@
       transition: all 0.2s ease;
 
       .suffix {
-        background-color: ~"@{input-status-@{status}-background-hover}";
-        transition: all 0.2s ease;
+        .clear-icon{
+          opacity: 1;
+          transition: all 0.2s ease;
+        }
       }
     }
 
@@ -72,7 +68,6 @@
       transition: all 0.2s ease;
 
       .suffix {
-        background-color: ~"@{input-status-@{status}-background-focus}";
         transition: all 0.2s ease;
       }
     }
@@ -129,12 +124,11 @@
 // 后缀元素
 .suffix {
   position: absolute;
-  right: 0;
+  right: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 100px;
-  padding: 0 8px;
 
   i {
     font-size: 14px;
@@ -143,6 +137,8 @@
   .clear-icon {
     color: @gary-7;
     cursor: pointer;
+    opacity: 0;
+    transition: all 0.2s ease;
 
     &::before {
       padding: 1px;
