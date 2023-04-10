@@ -12,7 +12,7 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   opacity: 1;
-  width: 100%;
+  width: 200px;
   min-width: 80px;
   border-radius: 4px;
   cursor: text;
@@ -30,7 +30,7 @@
     }
 
     .@{input-cls}-inner {
-      width: 100%;
+      flex: 1 1 auto;
       font-size: ~"@{input-size-@{size}-font-size}";
     }
   }
@@ -123,12 +123,13 @@
 
 // 后缀元素
 .suffix {
-  position: absolute;
-  right: 6px;
+  // position: absolute;
+  // right: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 100px;
+  flex: 0 0 auto;
 
   i {
     font-size: 14px;
@@ -154,5 +155,10 @@
         transition: all 0.2s ease;
       }
     }
+  }
+
+  span{
+    font-size: 12px;
+    color: @gary-7;
   }
 }

@@ -17,9 +17,10 @@
       @keyup="onKeyup"
       @input="onInput"
     />
-    <div class="suffix" v-show="!slot.suffix && showClear">
+    <div class="suffix">
       <template v-if="!slot.suffix">
         <i v-if="showClear" class="ri-close-line clear-icon" @click="handleClearInp"></i>
+        <span v-if="showWordLimit">{{ modelValue.length+'/'+maxlength }}</span>
       </template>
       <slot name="suffix"></slot>
     </div>
@@ -72,6 +73,10 @@ const inpClass = computed(() => {
 
 const showClear = computed(() => {
   return props.modelValue && props.clearable && !props.disabled && !props.readonly;
+});
+
+const showWordLimit = computed(() => {
+  return props.maxlength && props.showLimit;
 });
 
 function getStatus() {
