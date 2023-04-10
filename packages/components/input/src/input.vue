@@ -9,12 +9,13 @@
       :readonly="readonly"
       :placeholder="placeholder"
       :maxlength="maxlength"
-      :value="val"
+      :value="modelValue"
       @focus="onFocus"
       @blur="onBlur"
       @keydown="onKeydown"
       @keypress="onKeypress"
       @keyup="onKeyup"
+      @input="onInput"
     />
     <div class="suffix">
       <template v-if="!slot.suffix">
@@ -58,12 +59,12 @@ const emits = defineEmits<{
   (e: "keydown"): void;
   (e: "keypress"): void;
   (e: "keyup"): void;
+  (e: "input"): void;
   (e: "clear"): void;
 }>();
 
 const slot = useSlots();
 const inpRef = ref();
-const val = ref(props.modelValue || "");
 
 const inpClass = computed(() => {
   const status = getStatus();
@@ -78,18 +79,18 @@ const onFocus = () => emits("focus");
 const onBlur = () => emits("blur");
 const onKeydown = () => emits("keydown");
 const onKeypress = () => emits("keypress");
-const onKeyup = (e: { target: { value: string } }) => {
+const onKeyup = () => emits("keyup");
+
+const onInput = (e: { target: { value: string } }) => {
   const targetValue = (e.target as HTMLInputElement).value;
-  val.value = targetValue || "";
   emits("update:modelValue", targetValue);
-  emits("keyup");
 };
 
-watch(
-  () => props.modelValue,
-  v => {
-    console.log("[ watch ]-90", v);
-    val.value = props.modelValue;
-  },
-);
+// watch(
+//   () => props.modelValue,
+//   v => {
+//     console.log("[ watch ]-90", v);
+//     val.value = props.modelValue;
+//   }
+// );
 </script>
