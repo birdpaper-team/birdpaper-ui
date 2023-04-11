@@ -2,8 +2,8 @@
   <div :class="inpClass">
     <input
       ref="inpRef"
-      type="text"
       class="bp-input-inner"
+      :type="inpType"
       :spellcheck="false"
       :disabled="disabled"
       :readonly="readonly"
@@ -17,9 +17,18 @@
       @input="onInput"
     />
     <div class="suffix">
+      <!-- TODO: Need to Optim -->
       <template v-if="!slot.suffix">
-        <i v-if="showClear" class="ri-close-line clear-icon" @click="handleClearInp"></i>
+        <!-- 清空按钮 -->
+        <i v-if="showClear" class="ri-close-line click-icon" @click="handleClearInp"></i>
+        <!-- 字数限制提示 -->
         <span v-if="showWordLimit" v-text="limitText"></span>
+        <!-- 密码/明文切换 -->
+        <i
+          v-if="type === 'password'"
+          @click="triggerPassword"
+          :class="['click-icon', showPassword ? 'ri-eye-fill' : 'ri-eye-close-fill']"
+        ></i>
       </template>
       <slot name="suffix"></slot>
     </div>
@@ -28,12 +37,14 @@
 
 <script setup lang="ts" name="input">
 import { computed, PropType, ref, useSlots } from "vue";
-import { InputSize } from "./types";
+import { InputSize, InputType } from "./types";
 const name = "bp-input";
 
 const props = defineProps({
   /** 绑定值 Binding value */
   modelValue: { type: String, default: "" },
+  /** 输入框类型 Type of the input */
+  type: { type: String as PropType<InputType>, default: "text" },
   /** 输入框尺寸 Size of the input */
   size: { type: String as PropType<InputSize>, default: "normal" },
   /** 是否禁用 Disabled or not */
@@ -63,6 +74,7 @@ const emits = defineEmits<{
 
 const slot = useSlots();
 const inpRef = ref();
+const showPassword = ref<boolean>(false);
 
 const inpClass = computed(() => {
   const status = getStatus();
@@ -70,17 +82,22 @@ const inpClass = computed(() => {
 });
 
 const showClear = computed(() => {
-  return props.modelValue && props.clearable && !props.disabled && !props.readonly;
+  return props.type === "text" && props.modelValue && props.clearable && !props.disabled && !props.readonly;
 });
 
 const showWordLimit = computed(() => {
-  return props.maxlength && props.showLimit;
+  return props.maxlength && props.showLimit && props.type === "text";
 });
 const limitText = computed(() => `${props.modelValue.length}/${props.maxlength}`);
+const inpType = computed(() => (props.type === "password" ? (showPassword.value ? "text" : "password") : "text"));
 
 function getStatus() {
   return (props.disabled && "disabled") || (props.readonly && "readonly") || (props.isDanger && "danger") || "normal";
 }
+
+const triggerPassword = () => {
+  showPassword.value = !showPassword.value;
+};
 
 const onFocus = () => emits("focus");
 const onBlur = () => emits("blur");

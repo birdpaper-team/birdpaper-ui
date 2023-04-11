@@ -55,7 +55,7 @@
       transition: all 0.2s ease;
 
       .suffix {
-        .clear-icon{
+        .ri-close-line{
           opacity: 1;
           transition: all 0.2s ease;
         }
@@ -136,10 +136,14 @@
     font-size: 14px;
   }
 
-  .clear-icon {
+  .ri-close-line{
+    opacity: 0;
+    transition: all 0.2s ease;
+  }
+
+  .click-icon {
     color: @gary-7;
     cursor: pointer;
-    opacity: 0;
     transition: all 0.2s ease;
 
     &::before {
