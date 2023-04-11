@@ -1,21 +1,9 @@
 <template>
-  <div>
-    <bp-space>
-      <bp-input v-model="name" clearable placeholder="请输入"></bp-input>
-      <bp-input v-model="name" clearable :maxlength="11" show-limit placeholder="请输入"></bp-input>
-      <!-- <bp-input readonly placeholder="请输入"></bp-input> -->
-      <!-- <bp-input disabled placeholder="请输入"></bp-input> -->
-      <!-- <bp-input is-danger placeholder="请输入"></bp-input> -->
-    </bp-space>
-  </div>
+  <bp-input :style="{ width: '220px' }" v-model="val" clearable placeholder="请输入内容"></bp-input>
 </template>
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref } from "vue";
 
-const name = ref("");
-
-watch(()=>name.value,()=>{
-  console.log('[ name.value ]-18', name.value);
-});
+const val = ref("");
 </script>

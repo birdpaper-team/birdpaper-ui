@@ -12,7 +12,6 @@
       :value="modelValue"
       @focus="onFocus"
       @blur="onBlur"
-      @keydown="onKeydown"
       @keypress="onKeypress"
       @keyup="onKeyup"
       @input="onInput"
@@ -20,7 +19,7 @@
     <div class="suffix">
       <template v-if="!slot.suffix">
         <i v-if="showClear" class="ri-close-line clear-icon" @click="handleClearInp"></i>
-        <span v-if="showWordLimit">{{ modelValue.length+'/'+maxlength }}</span>
+        <span v-if="showWordLimit" v-text="limitText"></span>
       </template>
       <slot name="suffix"></slot>
     </div>
@@ -58,7 +57,6 @@ const emits = defineEmits<{
   (e: "input"): void;
   (e: "focus"): void;
   (e: "blur"): void;
-  (e: "keydown"): void;
   (e: "keypress"): void;
   (e: "keyup"): void;
 }>();
@@ -78,6 +76,7 @@ const showClear = computed(() => {
 const showWordLimit = computed(() => {
   return props.maxlength && props.showLimit;
 });
+const limitText = computed(() => `${props.modelValue.length}/${props.maxlength}`);
 
 function getStatus() {
   return (props.disabled && "disabled") || (props.readonly && "readonly") || (props.isDanger && "danger") || "normal";
@@ -85,7 +84,6 @@ function getStatus() {
 
 const onFocus = () => emits("focus");
 const onBlur = () => emits("blur");
-const onKeydown = () => emits("keydown");
 const onKeypress = () => emits("keypress");
 const onKeyup = () => emits("keyup");
 

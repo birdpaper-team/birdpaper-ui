@@ -12,7 +12,7 @@
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   opacity: 1;
-  width: 200px;
+  width: auto;
   min-width: 80px;
   border-radius: 4px;
   cursor: text;
@@ -123,13 +123,14 @@
 
 // 后缀元素
 .suffix {
-  // position: absolute;
-  // right: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 100px;
   flex: 0 0 auto;
+  margin-left: 2px;
+  min-width: 16px;
+  .no-select();
 
   i {
     font-size: 14px;
@@ -151,7 +152,7 @@
       color: @gary-8;
 
       &::before {
-        background-color: @gary-5;
+        background-color: @gary-4;
         transition: all 0.2s ease;
       }
     }

@@ -19,6 +19,12 @@
           <span class="default-area-inner">{{ row.default || "-" }}</span>
         </div>
       </template>
+      <!-- 参数 -->
+      <template #params="{ row }">
+        <div class="params-area">
+          <span class="params-area-inner">{{ row.params || "-" }}</span>
+        </div>
+      </template>
       <!-- 类型 -->
       <template #type="{ row }">
         <div class="type-area" v-clickOutside="() => onClickoutside(row)">
