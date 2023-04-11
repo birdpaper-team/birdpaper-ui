@@ -3,6 +3,13 @@ import { PropTableItem } from "../../../components/table-block/src/tableBlock";
 const list: PropTableItem[] = [
   { name: "v-model", remark: "输入框绑定值", type: "String", default: "" },
   {
+    name: "type",
+    remark: "输入框类型",
+    type: "Enum",
+    optional: ["text", "password"],
+    default: "text",
+  },
+  {
     name: "size",
     remark: "按钮尺寸",
     type: "Enum",
