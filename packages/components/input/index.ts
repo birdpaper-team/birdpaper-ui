@@ -1,7 +1,8 @@
 import { App } from "vue";
 import _input from "./src/input.vue";
+import { getComponentsPrefix } from "../../utils/config";
 
-_input.name = `bp-${_input.name}`;
+_input.name = getComponentsPrefix() + _input.name;
 
 const Input = Object.assign(_input, {
   install: (app: App) => {

@@ -35,7 +35,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="input">
+<script setup lang="ts" name="Input">
 import { computed, PropType, ref, useSlots } from "vue";
 import { InputSize, InputType } from "./types";
 const name = "bp-input";
@@ -97,6 +97,7 @@ function getStatus() {
 
 const triggerPassword = () => {
   showPassword.value = !showPassword.value;
+  handleFocus();
 };
 
 const onFocus = () => emits("focus");

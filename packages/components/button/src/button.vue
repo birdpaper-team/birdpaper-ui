@@ -7,7 +7,7 @@
   </button>
 </template>
 
-<script setup lang="ts" name="button">
+<script setup lang="ts" name="Button">
 import { ButtonType, ButtonSize, ButtonShape, ButtonStatus } from "./types";
 import { computed, useSlots, PropType } from "vue";
 const name = "bp-btn";

@@ -1,9 +1,10 @@
 import { App } from "vue";
+import { getComponentsPrefix } from "../../utils/config";
 import _grid from "./src/grid.vue";
 import _col from "./src/col.vue";
 
-_grid.name = `bp-${_grid.name}`;
-_col.name = `bp-${_col.name}`;
+_grid.name = getComponentsPrefix() + _grid.name;
+_col.name = getComponentsPrefix() + _col.name;
 
 const Grid = Object.assign(_grid, {
   install: (app: App) => {

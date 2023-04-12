@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="row">
+<script setup lang="ts" name="Row">
 import { computed, nextTick, onMounted, PropType, ref, useSlots, VNode, VueElement } from "vue";
 import { Align, Justify } from "./types";
 import col from "./col.vue";

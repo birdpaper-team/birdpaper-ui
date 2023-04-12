@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="col">
+<script setup lang="ts" name="Col">
 import { computed } from "vue";
 
 const props = defineProps({

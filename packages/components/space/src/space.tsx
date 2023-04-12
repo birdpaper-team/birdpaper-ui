@@ -4,7 +4,7 @@ import { isString } from "../../../utils/util";
 import { SizeType } from "./types";
 
 export default defineComponent({
-  name: "space",
+  name: "Space",
   props: {
     size: { type: [Number, String] as PropType<SizeType>, default: "small" },
   },
