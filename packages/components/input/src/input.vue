@@ -45,7 +45,7 @@ const props = defineProps({
   /** 绑定值 Binding value */
   modelValue: { type: String, default: "" },
   /** 输入框类型 Type of the input */
-  type: { type: String as PropType<InputType>, default: "text" },
+  type: { type: String as PropType<InputType>, default: InputType.Text },
   /** 输入框尺寸 Size of the input */
   size: { type: String as PropType<InputSize>, default: "normal" },
   /** 是否禁用 Disabled or not */
@@ -75,7 +75,6 @@ const emits = defineEmits<{
 
 const slot = useSlots();
 const inpRef = ref();
-const showPassword = ref<boolean>(false);
 
 const inpClass = computed(() => {
   const status = getStatus();
@@ -90,12 +89,18 @@ const showWordLimit = computed(() => {
   return props.maxlength && props.showLimit && props.type === "text";
 });
 const limitText = computed(() => `${props.modelValue.length}/${props.maxlength}`);
-const inpType = computed(() => (props.type === "password" ? (showPassword.value ? "text" : "password") : "text"));
 
 function getStatus() {
   return (props.disabled && "disabled") || (props.readonly && "readonly") || (props.isDanger && "danger") || "normal";
 }
 
+const inpType = computed<InputType>(() => (isPasswordType.value ? InputType.Password : InputType.Text));
+
+/** 是否明文展示密码类型输入框内容 */
+const showPassword = ref<boolean>(false);
+/** 是否为密码类型输入框 */
+const isPasswordType = computed<boolean>(() => props.type === InputType.Password && !showPassword.value);
+/** 明文/匿文切换 */
 const triggerPassword = () => {
   showPassword.value = !showPassword.value;
   nextTick(() => handleFocus());
