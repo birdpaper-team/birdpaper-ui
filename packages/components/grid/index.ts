@@ -7,11 +7,15 @@ _grid.name = getComponentsPrefix() + _grid.name;
 _col.name = getComponentsPrefix() + _col.name;
 
 const Grid = Object.assign(_grid, {
+  Col: _col,
   install: (app: App) => {
     app.component(_grid.name, _grid);
     app.component(_col.name, _col);
   },
 });
 
-export { _col as col };
+export type GridInstance = InstanceType<typeof _grid>;
+export type ColInstance = InstanceType<typeof _col>;
+
+export { _col as Col };
 export default Grid;

@@ -40,7 +40,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="table">
+<script setup lang="ts" name="Table">
 import { computed } from 'vue';
 import { useTable } from './table';
 import TableHeader from "./components/table-header.vue";

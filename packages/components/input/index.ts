@@ -1,6 +1,7 @@
 import { App } from "vue";
 import _input from "./src/input.vue";
 import { getComponentsPrefix } from "../../utils/config";
+export type { InputSize, InputType } from "./src/types";
 
 _input.name = getComponentsPrefix() + _input.name;
 
