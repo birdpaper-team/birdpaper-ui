@@ -21,7 +21,7 @@
       <!-- TODO: Need to Optim -->
       <template v-if="!slot.suffix">
         <!-- 清空按钮 -->
-        <i v-if="showClear" class="ri-close-line click-icon" @click="handleClearInp"></i>
+        <i v-if="showClear" class="ri-close-line click-icon" @click="handleClear"></i>
         <!-- 字数限制提示 -->
         <span v-if="showWordLimit" v-text="limitText"></span>
         <!-- 密码/明文切换 -->
@@ -76,25 +76,28 @@ const emits = defineEmits<{
 const slot = useSlots();
 const inpRef = ref();
 
+const inpType = computed<InputType>(() => (isPasswordType.value ? InputType.Password : InputType.Text));
+
 const inpClass = computed(() => {
   const status = getStatus();
   return [name, `${name}-size-${props.size}`, `${name}-status-${status}`];
 });
-
-const showClear = computed(() => {
-  return props.type === "text" && props.modelValue && props.clearable && !props.disabled && !props.readonly;
-});
-
-const showWordLimit = computed(() => {
-  return props.maxlength && props.showLimit && props.type === "text";
-});
-const limitText = computed(() => `${props.modelValue.length}/${props.maxlength}`);
-
 function getStatus() {
   return (props.disabled && "disabled") || (props.readonly && "readonly") || (props.isDanger && "danger") || "normal";
 }
 
-const inpType = computed<InputType>(() => (isPasswordType.value ? InputType.Password : InputType.Text));
+// 清空文本内容
+const showClear = computed(() => props.type === "text" && props.modelValue && props.clearable && !props.disabled && !props.readonly);
+const handleClear = () => {
+  emits("update:modelValue", "");
+  nextTick(() => handleFocus());
+};
+
+// 输入字数限制
+const showWordLimit = computed(() => {
+  return props.maxlength && props.showLimit && props.type === "text";
+});
+const limitText = computed(() => `${props.modelValue.length}/${props.maxlength}`);
 
 /** 是否明文展示密码类型输入框内容 */
 const showPassword = ref<boolean>(false);
@@ -106,22 +109,16 @@ const triggerPassword = () => {
   nextTick(() => handleFocus());
 };
 
+/** 使输入框聚焦 */
+const handleFocus = () => inpRef.value.focus();
+
 const onFocus = () => emits("focus");
 const onBlur = () => emits("blur");
 const onKeypress = () => emits("keypress");
 const onKeyup = () => emits("keyup");
 
-const handleFocus = () => {
-  inpRef.value.focus();
-};
-
 const onInput = (e: { target: { value: string } }) => {
   const targetValue = (e.target as HTMLInputElement).value;
   emits("update:modelValue", targetValue);
-};
-
-const handleClearInp = () => {
-  emits("update:modelValue", "");
-  handleFocus();
 };
 </script>
