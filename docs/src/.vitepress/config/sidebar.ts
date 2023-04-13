@@ -33,5 +33,11 @@ export const sidebar = {
         { text: "输入框", link: "/component/input" },
       ],
     },
+    {
+      text: "反馈",
+      items: [
+        { text: "消息提示", link: "/component/message" },
+      ],
+    },
   ],
 };

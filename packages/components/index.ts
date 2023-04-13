@@ -4,8 +4,9 @@ import Input from "./input";
 import Table from "./table";
 import Space from "./space";
 import Grid from "./grid";
+import Message from "./message";
 
-const components: Record<string, Plugin> = { Button, Input, Table, Space, Grid };
+const components: Record<string, Plugin> = { Button, Input, Table, Space, Grid, Message };
 
 const install = function (app: App) {
   for (const key of Object.keys(components)) {
@@ -20,4 +21,5 @@ export default {
   Table,
   Space,
   Grid,
+  Message,
 };
