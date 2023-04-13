@@ -1,5 +1,5 @@
 <template>
-  <div>message</div>
+  <div>message123</div>
 </template>
 
 <script setup lang="ts" name="Message">

@@ -9,9 +9,9 @@ export enum MessageType {
 
 /** 消息配置 */
 export interface MessageConfig {
-  id: string;
+  id?: string;
   type?: MessageType;
   icon?: string;
   content: string;
-  clearable: boolean;
+  clearable?: boolean;
 }

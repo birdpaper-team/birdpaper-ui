@@ -14,6 +14,8 @@ const install = function (app: App) {
   }
 };
 
+export { default as Message } from './message';
+
 export default {
   install,
   Button,
