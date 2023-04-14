@@ -1,0 +1,40 @@
+.bp-mask-message {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 999;
+}
+
+.bp-message-list {
+  position: relative;
+  top: 0;
+  li {
+    min-width: 180px;
+    height: 46px;
+    border-radius: 6px;
+    background: @gary-1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 0 14px;
+    border: 1px solid @gary-4;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    margin-top: 30px;
+    font-size: 14px;
+    color: @gary-9;
+  }
+}
+
+.fademsg-enter-active,
+.fademsg-leave-active {
+  transition: all 0.2s ease-out;
+}
+.fademsg-enter-from,
+.fademsg-leave-to {
+  opacity: 0;
+  transform: translateY(-30px);
+}

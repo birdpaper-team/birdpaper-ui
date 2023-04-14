@@ -1,16 +1,43 @@
-import { AppContext, createApp, createVNode, render } from "vue";
-import Message from "./message.vue";
-import { MessageConfig } from "./type";
+import { AppContext, Ref, createVNode, reactive, ref, render } from "vue";
+import Message from "./messageList.vue";
+import { MessageConfig, MessageItem } from "./type";
 
 class MessageManager {
-  constructor(config: MessageConfig, appContext?: AppContext) {
-    const box = document.createElement("div");
-    const vm = createVNode(Message);
+  private container: HTMLElement | null;
+  private readonly messageList: Ref<MessageItem[]>;
 
-    render(vm, box);
-    document.body.appendChild(box);
+  constructor(config: MessageConfig, appContext?: AppContext) {
+    this.messageList = ref([]);
+
+    const mask = document.createElement("div");
+    mask.setAttribute("class", `bp-mask-message`);
+    this.container = mask;
+
+    const vm = createVNode(Message, {
+      list: this.messageList.value,
+      onClose: this.remove,
+    });
+
+    render(vm, this.container);
+    document.body.appendChild(this.container);
   }
-  add() {}
+
+  add(config: MessageConfig) {
+    const id = config.id ?? `_bp_message_${Math.random().toString()}`;
+
+    const message: MessageItem = reactive({ id, ...config });
+    this.messageList.value.push(message);
+  }
+
+  remove(id: string | number) {
+    for (let i = 0; i < this.messageList.value.length; i++) {
+      const { id: itemId } = this.messageList.value[i];
+      if (id === itemId) {
+        this.messageList.value.splice(i, 1);
+        break;
+      }
+    }
+  }
 }
 
 export default MessageManager;

@@ -13,5 +13,14 @@ export interface MessageConfig {
   type?: MessageType;
   icon?: string;
   content: string;
-  clearable?: boolean;
+  closeable?: boolean;
+}
+
+export interface MessageItem {
+  id: number | string;
+  content: string;
+  type?: MessageType;
+  icon?: string;
+  closable?: boolean;
+  duration?: number;
 }
