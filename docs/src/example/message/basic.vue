@@ -9,6 +9,6 @@ import { Message } from "birdpaper-ui";
 
 const onOpen = () => {
   // Message.text({ content: "This is text content." });
-  Message.text("This is text content.");
+  Message.text("网络繁忙，请稍候重试");
 };
 </script>
