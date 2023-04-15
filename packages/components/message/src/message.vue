@@ -26,6 +26,7 @@ const emits = defineEmits<{
 const timer = ref(0);
 
 const init = () => {
+  console.log('[ props ]-30', props);
   if (props.duration > 0) {
     timer.value = window.setTimeout(handleClose, props.duration);
   }

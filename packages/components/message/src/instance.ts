@@ -6,7 +6,7 @@ class MessageManager {
   private container: HTMLElement | null;
   private readonly messageList: Ref<MessageItem[]>;
 
-  constructor(config: MessageConfig, appContext?: AppContext) {
+  constructor(config: string | MessageConfig, appContext?: AppContext) {
     this.messageList = ref([]);
 
     const mask = document.createElement("div");
@@ -18,6 +18,9 @@ class MessageManager {
       onClose: this.remove,
     });
 
+    if (appContext) {
+      vm.appContext = appContext;
+    }
     render(vm, this.container);
     document.body.appendChild(this.container);
   }
@@ -27,6 +30,10 @@ class MessageManager {
 
     const message: MessageItem = reactive({ id, ...config });
     this.messageList.value.push(message);
+
+    return {
+      close: () => this.remove(id),
+    };
   };
 
   remove = (id: string | number) => {

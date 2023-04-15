@@ -8,6 +8,7 @@
 import { Message } from "birdpaper-ui";
 
 const onOpen = () => {
-  Message.text({ content: "This is text content." });
+  // Message.text({ content: "This is text content." });
+  Message.text("This is text content.");
 };
 </script>
