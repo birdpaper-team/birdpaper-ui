@@ -22,14 +22,14 @@ class MessageManager {
     document.body.appendChild(this.container);
   }
 
-  add(config: MessageConfig) {
+  add = (config: MessageConfig) => {
     const id = config.id ?? `_bp_message_${Math.random().toString()}`;
 
     const message: MessageItem = reactive({ id, ...config });
     this.messageList.value.push(message);
-  }
+  };
 
-  remove(id: string | number) {
+  remove = (id: string | number) => {
     for (let i = 0; i < this.messageList.value.length; i++) {
       const { id: itemId } = this.messageList.value[i];
       if (id === itemId) {
@@ -37,7 +37,7 @@ class MessageManager {
         break;
       }
     }
-  }
+  };
 }
 
 export default MessageManager;

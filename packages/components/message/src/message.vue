@@ -1,8 +1,7 @@
 <template>
-  <div></div>
-    <!-- <li :key="`${v.id}`">
-      <span>{{ v.content }}</span>
-    </li> -->
+  <li>
+    <span>{{ props.content }}</span>
+  </li>
 </template>
 
 <script setup lang="ts" name="MessageList">
@@ -12,9 +11,13 @@ import { MessageItem, MessageType } from "./type";
 const name = "bp-message";
 
 const props = defineProps({
-  id: { type: String, default: "" },
+  /** 消息ID Message id */
+  id: { type: [String, Number], default: "" },
   type: { type: String as PropType<MessageType>, default: MessageType.Text },
+  icon: { type: String, default: "" },
+  content: { type: String, default: "" },
   duration: { type: Number, default: 3000 },
+  closeable: { type: Boolean, default: false },
 });
 const emits = defineEmits<{
   (e: "close", id: string | number): void;
@@ -36,11 +39,11 @@ const clearTimer = () => {
 };
 
 const handleClose = () => {
-  // emits("close",props.id)
+  emits("close", props.id);
 };
 
 onMounted(() => {
-  // nextTick(() => init());
+  nextTick(() => init());
 });
 
 onUnmounted(() => {
