@@ -1,5 +1,8 @@
 <template>
   <li>
+    <span v-if="icon">
+      <i class=""></i>
+    </span>
     <span>{{ props.content }}</span>
   </li>
 </template>
