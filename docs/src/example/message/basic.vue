@@ -8,10 +8,9 @@
 import { Message } from "birdpaper-ui";
 
 const onOpen = () => {
-  // Message.text({ content: "This is text content." });
-  // Message.error("网络繁忙，请稍候重试");
-  // Message.warning("网络繁忙，请稍候重试");
-  // Message.success("网络繁忙，请稍候重试");
-  Message.loading("网络繁忙，请稍候重试");
+  Message.text({ content: "This is text content." });
+  Message.error("网络繁忙，请稍候重试");
+  Message.warning("网络繁忙，请稍候重试");
+  Message.success("网络繁忙，请稍候重试");
 };
 </script>

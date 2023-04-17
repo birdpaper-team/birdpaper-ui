@@ -38,7 +38,7 @@ class MessageManager {
 
     // 处理可能存在的同时移除情况。
     const len = this.messageList.value.length;
-    if (this.messageList.value[len - 1]?.duration === message.duration) {
+    if (len > 1 && this.messageList.value[len - 1]?.duration === message.duration) {
       message.duration = message.duration ?? 3000 + 200 * len;
     }
 
@@ -61,6 +61,10 @@ class MessageManager {
       }
     }
   };
+
+  clear = ()=>{
+    this.messageList.value = [];
+  }
 }
 
 export default MessageManager;
