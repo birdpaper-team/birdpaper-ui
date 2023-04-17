@@ -4,7 +4,6 @@
       <message
         :id="v.id"
         :type="v.type"
-        :icon="v.icon"
         :content="v.content"
         :duration="v.duration"
         :closeable="v.closable"

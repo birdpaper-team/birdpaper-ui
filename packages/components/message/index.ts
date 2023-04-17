@@ -12,15 +12,16 @@ const types = ["text", "success", "warning", "error", "loading"] as const;
 
 const message = types.reduce((pre, value) => {
   pre[value] = (config: string | MessageConfig, appContext?: AppContext) => {
+    // 直接传入消息提示内容的情况
     if (isString(config)) {
       config = { content: config as string };
     }
 
     const _config: MessageConfig = { type: value as MessageType, ...(config as MessageConfig) };
     if (!msg) {
-      msg = new MessageManager(_config, appContext);
+      msg = new MessageManager(appContext);
     }
-    return msg!.add(config as MessageConfig);
+    return msg!.add(_config as MessageConfig);
   };
   return pre;
 }, {} as any);

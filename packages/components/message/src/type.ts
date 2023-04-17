@@ -11,8 +11,8 @@ export enum MessageType {
 export interface MessageConfig {
   id?: string;
   type?: MessageType;
-  icon?: string;
   content: string;
+  duration?: number;
   closeable?: boolean;
 }
 
@@ -20,7 +20,6 @@ export interface MessageItem {
   id: number | string;
   content: string;
   type?: MessageType;
-  icon?: string;
-  closable?: boolean;
   duration?: number;
+  closable?: boolean;
 }

@@ -1,15 +1,21 @@
 <template>
-  <li>
-    <span v-if="icon">
-      <i class=""></i>
+  <li :class="name">
+    <span v-if="type !== 'text'" class="bp-message-icon">
+      <i v-if="type === 'success'" class="ri-checkbox-circle-fill"></i>
+      <i v-if="type === 'error'" class="ri-close-circle-fill"></i>
+      <i v-if="type === 'warning'" class="ri-error-warning-fill"></i>
+      <i v-if="type === 'loading'" class="ri-loader-5-line"></i>
     </span>
-    <span>{{ props.content }}</span>
+    <span class="bp-message-content">{{content }}{{ duration }}</span>
+    <span v-if="closeable" class="bp-message-close" @click="handleClose">
+      <i class="ri-close-line"></i>
+    </span>
   </li>
 </template>
 
 <script setup lang="ts" name="MessageList">
-import { PropType, computed, nextTick, onMounted, onUnmounted, ref } from "vue";
-import { MessageItem, MessageType } from "./type";
+import { PropType, nextTick, onMounted, onUnmounted, ref } from "vue";
+import { MessageType } from "./type";
 
 const name = "bp-message";
 
@@ -17,7 +23,6 @@ const props = defineProps({
   /** 消息ID Message id */
   id: { type: [String, Number], default: "" },
   type: { type: String as PropType<MessageType>, default: MessageType.Text },
-  icon: { type: String, default: "" },
   content: { type: String, default: "" },
   duration: { type: Number, default: 3000 },
   closeable: { type: Boolean, default: false },
