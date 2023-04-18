@@ -1,16 +1,11 @@
 <template>
-  <div>
-    <bp-button type="plain" status="primary" @click="onOpen">打开消息提示</bp-button>
-  </div>
+  <bp-button @click="handleClick">文本消息提示</bp-button>
 </template>
 
 <script setup lang="ts">
 import { Message } from "birdpaper-ui";
 
-const onOpen = () => {
-  Message.text({ content: "This is text content." });
-  Message.error("网络繁忙，请稍候重试");
-  Message.warning("网络繁忙，请稍候重试");
-  Message.success("网络繁忙，请稍候重试");
+const handleClick = () => {
+  Message.text("这是一条文本类型的消息提示");
 };
 </script>
