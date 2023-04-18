@@ -18,8 +18,8 @@ export interface MessageConfig {
 
 export interface MessageItem {
   id: number | string;
-  content: string;
   type?: MessageType;
+  content: string;
   duration?: number;
-  closable?: boolean;
+  closeable?: boolean;
 }

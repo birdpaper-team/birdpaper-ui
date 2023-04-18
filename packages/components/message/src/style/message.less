@@ -1,5 +1,7 @@
+@message-cls: ~"@{prefix}-message";
+
 .bp-mask-message {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -10,7 +12,7 @@
   z-index: 999;
 }
 
-.bp-message-list {
+.@{message-cls}-list {
   position: relative;
   top: 40px;
   display: flex;
@@ -19,7 +21,7 @@
   align-items: center;
   flex-wrap: nowrap;
 
-  .bp-message {
+  .@{message-cls} {
     min-width: 80px;
     width: max-content;
     height: 46px;
@@ -115,7 +117,6 @@
 .fademsg-enter-from,
 .fademsg-leave-to {
   opacity: 0;
-  // transform: translateY(-30px);
 }
 .fademsg-leave-active {
   position: absolute;

@@ -6,7 +6,7 @@
         :type="v.type"
         :content="v.content"
         :duration="v.duration"
-        :closeable="v.closable"
+        :closeable="v.closeable"
         @close="onClose"
       ></message>
     </template>
