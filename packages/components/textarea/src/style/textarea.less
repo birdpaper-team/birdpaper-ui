@@ -1,0 +1,115 @@
+@import "./token.less";
+
+@textarea-cls: ~"@{prefix}-textarea";
+
+.@{textarea-cls} {
+  position: relative;
+  display: flex;
+  align-items: center;
+  outline: none;
+  white-space: nowrap;
+  min-height: @miniHeight;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  opacity: 1;
+  width: auto;
+  min-width: 80px;
+  border-radius: 4px;
+  cursor: text;
+
+  &-inner {
+    width: 100%;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: normal;
+    background: none;
+    .input-font-family;
+  }
+}
+
+.textarea-status(@status) {
+  .@{textarea-cls}-status-@{status} {
+    color: ~"@{textarea-status-@{status}-color}";
+    background-color: ~"@{textarea-status-@{status}-background}";
+    border: 1px solid ~"@{textarea-status-@{status}-border-color}";
+    transition: all 0.2s ease;
+
+    .bp-textarea-placeholder {
+      color: ~"@{textarea-status-@{status}-placeholder-color}";
+      font-weight: normal;
+    }
+
+    &:hover {
+      background-color: ~"@{textarea-status-@{status}-background-hover}";
+      border: 1px solid ~"@{textarea-status-@{status}-border-color-hover}";
+      transition: all 0.2s ease;
+    }
+
+    &:focus-within {
+      background-color: ~"@{textarea-status-@{status}-background-focus}";
+      border: 1px solid ~"@{textarea-status-@{status}-border-color-focus}";
+      transition: all 0.2s ease;
+    }
+
+    input::placeholder {
+      .bp-textarea-placeholder;
+    }
+
+    input::-webkit-input-placeholder {
+      .bp-textarea-placeholder;
+    }
+
+    /* Firefox 4-18 */
+    input::-moz-placeholder {
+      .bp-textarea-placeholder;
+    }
+
+    /* Firefox 19-50 */
+    input::-moz-placeholder {
+      .bp-textarea-placeholder;
+    }
+
+    /* - Internet Explorer 10–11
+      - Internet Explorer Mobile 10-11 */
+    input::-ms-input-placeholder {
+      .bp-textarea-placeholder;
+    }
+
+    /* Edge (also supports -webkit-input-placeholder) */
+    input::-ms-input-placeholder {
+      .bp-textarea-placeholder;
+    }
+  }
+}
+
+.textarea-status(normal);
+.textarea-status(readonly);
+.textarea-status(disabled);
+.textarea-status(danger);
+
+.@{textarea-cls}-status-disabled {
+  cursor: not-allowed;
+
+  .@{textarea-cls}-inner {
+    cursor: not-allowed;
+  }
+}
+
+.suffix {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100px;
+  margin-left: 2px;
+  min-width: 16px;
+  .no-select();
+
+  span {
+    font-size: 12px;
+    color: @gary-7;
+  }
+}

@@ -31,6 +31,7 @@ export const sidebar = {
       text: "数据输入",
       items: [
         { text: "输入框", link: "/component/input" },
+        { text: "文本域", link: "/component/textarea" },
       ],
     },
     {
