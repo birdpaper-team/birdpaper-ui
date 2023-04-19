@@ -3,10 +3,20 @@
 
   .bp-space-item {
     &:first-child {
+      margin-top: 0 !important;
       margin-left: 0 !important;
     }
     &:last-child {
       margin-right: 0 !important;
+      margin-bottom: 0 !important;
     }
   }
+}
+
+.bp-space-vertical{
+  flex-direction: row;
+}
+
+.bp-space-horizontal{
+  flex-direction: column;
 }
