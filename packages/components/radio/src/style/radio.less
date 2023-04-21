@@ -1,0 +1,40 @@
+@import "../../../../style/common/theme.less";
+
+@radio-cls: ~"@{prefix}-radio";
+
+.@{radio-cls} {
+  position: relative;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+
+  &-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  &-radio {
+    width: 16px;
+    height: 16px;
+    border: 1px solid @gary-5;
+    display: inline-block;
+    border-radius: 16px;
+    transition: all 0.2s;
+  }
+
+  &-check {
+    border: 5px solid @primary-6;
+    transition: all 0.2s;
+  }
+
+  &-label {
+    color: @gary-10;
+    font-size: 14px;
+    font-weight: normal;
+    margin-left: 6px;
+  }
+}
