@@ -27,7 +27,5 @@ const handleInput = () => {
   emits("update:modelValue", props.value);
 };
 
-const isCheck = computed(() => {
-  return props.modelValue === props.value;
-});
+const isCheck = computed(() =>  props.modelValue === props.value);
 </script>
