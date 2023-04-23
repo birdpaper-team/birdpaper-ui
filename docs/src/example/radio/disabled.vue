@@ -1,7 +1,6 @@
 <template>
   <bp-space>
-    <bp-radio v-model="val" :value="0">选项一</bp-radio>
-    <bp-radio v-model="val" :value="1">选项二</bp-radio>
+    <bp-radio disabled v-model="val" :value="0">禁用选项</bp-radio>
   </bp-space>
 </template>
 
