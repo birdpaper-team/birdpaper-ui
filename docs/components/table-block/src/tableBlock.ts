@@ -2,7 +2,7 @@
 export const propHeader = [
   { label: "名称", scope: { customRender: "name" }, width: "140" },
   { label: "说明", scope: { customRender: "remark" } },
-  { label: "类型", scope: { customRender: "type" } },
+  { label: "类型", scope: { customRender: "type" },width: "240" },
   { label: "默认值", scope: { customRender: "default" } },
 ];
 
@@ -36,7 +36,7 @@ export const header = {
   slots: slotHeader,
 };
 /** Props 属性类型 */
-export type PropType = "String" | "Number" | "Boolean" | "Array" | "Enum" | "Object" | "Function";
+export type PropType = "String" | "Number" | "Boolean" | "Array" | "Enum" | "Object" | "Function" | String;
 
 /** Props 属性 */
 export interface PropTableItem {

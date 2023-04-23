@@ -4,9 +4,12 @@
 
 .@{radio-cls} {
   position: relative;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
   cursor: pointer;
+  .no-select;
 
   &-inner {
     position: absolute;
@@ -18,11 +21,11 @@
   }
 
   &-radio {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     border: 1px solid @gary-5;
     display: inline-block;
-    border-radius: 16px;
+    border-radius: 14px;
     transition: all 0.2s;
   }
 
@@ -31,10 +34,28 @@
     transition: all 0.2s;
   }
 
+  &:hover {
+    .@{radio-cls}-radio {
+      border: 1px solid @primary-2;
+      transition: all 0.2s;
+    }
+
+    .@{radio-cls}-check {
+      border: 5px solid @primary-6;
+      transition: all 0.2s;
+    }
+  }
+
   &-label {
     color: @gary-10;
     font-size: 14px;
     font-weight: normal;
     margin-left: 6px;
   }
+}
+
+
+.@{radio-cls}-disabled {
+  opacity: .5;
+  cursor: not-allowed;
 }
