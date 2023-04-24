@@ -38,6 +38,7 @@ export const sidebar = {
     {
       text: "反馈",
       items: [
+        { text: "警告提示", link: "/component/alert" },
         { text: "消息提示", link: "/component/message" },
       ],
     },

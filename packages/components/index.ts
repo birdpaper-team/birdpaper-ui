@@ -5,10 +5,11 @@ import Textarea from "./textarea";
 import Radio from "./radio";
 import Table from "./table";
 import Space from "./space";
+import Alert from "./alert";
 import Grid from "./grid";
 import Message from "./message";
 
-const components: Record<string, Plugin> = { Button, Input, Textarea,Radio, Table, Space, Grid, Message };
+const components: Record<string, Plugin> = { Button, Input, Textarea, Radio, Table, Space, Alert, Grid, Message };
 
 const install = function (app: App) {
   for (const key of Object.keys(components)) {
@@ -26,6 +27,7 @@ export default {
   Radio,
   Table,
   Space,
+  Alert,
   Grid,
   Message,
 };
