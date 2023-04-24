@@ -1,0 +1,75 @@
+@import "./token.less";
+
+@alert-cls: ~"@{prefix}-alert";
+
+.@{alert-cls} {
+  position: relative;
+  display: flex;
+  align-items: center;
+  outline: none;
+  width: 100%;
+  min-height: 38px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  opacity: 1;
+  border-radius: 4px;
+  padding: 4px 12px;
+
+  &-icon {
+    margin-right: 6px;
+    font-size: 16px;
+  }
+
+  &-body {
+    position: relative;
+    flex: 1;
+
+    .@{alert-cls}-content {
+      font-size: 14px;
+      color: @gary-9;
+      text-align: left;
+      font-weight: normal;
+      word-break: break-all;
+      overflow: hidden;
+    }
+  }
+
+  &-option {
+    .ri-close-line {
+      color: @gary-6;
+      font-size: 14px;
+      cursor: pointer;
+
+      &::before {
+        padding: 1px;
+        border-radius: 10px;
+        transition: all 0.2s ease;
+      }
+
+      &:hover {
+        color: @gary-7;
+
+        &::before {
+          background-color: @gary-1;
+          transition: all 0.2s ease;
+        }
+      }
+    }
+  }
+}
+
+.alert-type(@type) {
+  .@{alert-cls}-@{type} {
+    background-color: ~"@{alert-@{type}-background}";
+    border: 1px solid ~"@{alert-@{type}-border}";
+
+    .@{alert-cls}-icon {
+      color: ~"@{alert-@{type}-icon-color}";
+    }
+  }
+}
+
+.alert-type(info);
+.alert-type(warning);
+.alert-type(success);
+.alert-type(error);
