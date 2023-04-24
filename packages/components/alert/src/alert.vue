@@ -16,14 +16,17 @@
       </div>
     </div>
 
-    <div :class="`${name}-option`" v-if="closeable" @click="handleClose">
-      <i class="ri-close-line"></i>
+    <div :class="`${name}-option`">
+      <div v-if="closeable" :class="`${name}-close-inner`" @click="handleClose">
+        <i class="ri-close-line" v-if="!slots.close"></i>
+        <span v-else><slot name="close"></slot></span>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts" name="Alert">
-import { PropType, computed, ref } from "vue";
+import { PropType, computed, ref, useSlots } from "vue";
 import { AlertType } from "./types";
 
 const name = "bp-alert";
@@ -38,13 +41,16 @@ const emits = defineEmits<{
   (e: "close"): void;
 }>();
 
+const slots = useSlots();
+
 const cls = computed(() => {
-  return [name, `${name}-${props.type}`,props.title?`${name}-with-title`:''];
+  return [name, `${name}-${props.type}`, props.title ? `${name}-with-title` : ""];
 });
 
 const isRender = ref<boolean>(true);
 
 const handleClose = () => {
   isRender.value = false;
+  emits("close");
 };
 </script>

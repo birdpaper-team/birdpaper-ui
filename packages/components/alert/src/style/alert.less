@@ -51,23 +51,39 @@
   }
 
   &-option {
-    .ri-close-line {
-      color: @gary-6;
-      font-size: 14px;
-      cursor: pointer;
-
-      &::before {
-        padding: 1px;
-        border-radius: 10px;
-        transition: all 0.2s ease;
+    .@{alert-cls}-close-inner {
+      .close-inner {
+        color: @gary-6;
+        font-size: 14px;
+        cursor: pointer;
       }
 
-      &:hover {
-        color: @gary-7;
+      span {
+        .close-inner;
+        transition: all 0.2s ease;
+
+        &:hover {
+          color: @gary-7;
+          transition: all 0.2s ease;
+        }
+      }
+
+      .ri-close-line {
+        .close-inner;
 
         &::before {
-          background-color: @gary-1;
+          padding: 1px;
+          border-radius: 10px;
           transition: all 0.2s ease;
+        }
+
+        &:hover {
+          color: @gary-7;
+
+          &::before {
+            background-color: @gary-1;
+            transition: all 0.2s ease;
+          }
         }
       }
     }
