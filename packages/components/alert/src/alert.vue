@@ -39,7 +39,7 @@ const emits = defineEmits<{
 }>();
 
 const cls = computed(() => {
-  return [name, `${name}-${props.type}`];
+  return [name, `${name}-${props.type}`,props.title?`${name}-with-title`:''];
 });
 
 const isRender = ref<boolean>(true);

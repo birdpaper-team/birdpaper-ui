@@ -15,14 +15,30 @@
   border-radius: 4px;
   padding: 4px 12px;
 
+  &-with-title {
+    align-items: flex-start;
+
+    .@{alert-cls}-icon,
+    .@{alert-cls}-option {
+      line-height: 38px;
+    }
+  }
+
   &-icon {
-    margin-right: 6px;
+    margin-right: 8px;
     font-size: 16px;
   }
 
   &-body {
     position: relative;
     flex: 1;
+
+    .@{alert-cls}-title {
+      color: @gary-11;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 38px;
+    }
 
     .@{alert-cls}-content {
       font-size: 14px;
