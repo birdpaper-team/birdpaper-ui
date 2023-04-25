@@ -33,7 +33,6 @@ const name = "bp-alert";
 const props = defineProps({
   type: { type: String as PropType<AlertType>, default: "info" },
   title: { type: String, default: "" },
-  showIcon: { type: Boolean, default: false },
   closeable: { type: Boolean, default: false },
 });
 

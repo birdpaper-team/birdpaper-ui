@@ -1,7 +1,3 @@
 <template>
-  <bp-space type="horizontal" size="mini">
-    <bp-alert closeable>提示内容
-      <template #close>close</template>
-    </bp-alert>
-  </bp-space>
+  <bp-alert type="error">这是一条错误提示</bp-alert>
 </template>
