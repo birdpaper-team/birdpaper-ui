@@ -1,8 +1,13 @@
 <template>
-  <div class="bp-select"></div>
+  <div :class="name">
+    <bp-input v-model="inpVal" readonly :placeholder="placeholder"></bp-input>
+    <span :class="`${name}-down-inner`"><i class="ri-arrow-down-s-line"></i> </span>
+  </div>
 </template>
 
 <script setup lang="ts" name="Select">
+import { ref } from "vue";
+
 const props = defineProps({
   /** 绑定值 Binding value */
   modelValue: { type: String, default: "" },
@@ -15,4 +20,6 @@ const props = defineProps({
 });
 
 const name = "bp-select";
+const inpVal = ref<string | number>(props.modelValue || '');
+const isFocus = ref<boolean>(false);
 </script>

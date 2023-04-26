@@ -1,0 +1,47 @@
+@import "./token.less";
+
+@select-cls: ~"@{prefix}-select";
+
+.@{select-cls} {
+  position: relative;
+  display: flex;
+  align-items: center;
+  outline: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  opacity: 1;
+  width: 180px;
+  height: 32px;
+  min-width: 80px;
+  border-radius: 4px;
+  background-color: @gary-2;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  .@{prefix}-input {
+    border: none;
+    flex: 1;
+    cursor: pointer;
+
+    &-inner {
+      cursor: pointer;
+    }
+  }
+
+  &-down-inner {
+    text-align: center;
+    padding: 0 4px;
+    color: @gary-7;
+    font-size: 16px;
+  }
+
+  &:hover {
+    background-color: @gary-3;
+    transition: all 0.2s ease;
+
+    .@{prefix}-input {
+      background-color: @gary-3;
+    }
+  }
+}
