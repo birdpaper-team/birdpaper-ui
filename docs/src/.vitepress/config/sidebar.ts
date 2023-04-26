@@ -33,6 +33,7 @@ export const sidebar = {
         { text: "输入框", link: "/component/input" },
         { text: "文本域", link: "/component/textarea" },
         { text: "单选框", link: "/component/radio" },
+        { text: "选择器", link: "/component/select" },
       ],
     },
     {
