@@ -17,7 +17,7 @@
       @keyup="onKeyup"
       @input="onInput"
     />
-    <div class="suffix">
+    <div class="suffix" v-if="slot.suffix || showClear || showWordLimit || type === 'password'">
       <!-- TODO: Need to Optim -->
       <template v-if="!slot.suffix">
         <!-- 清空按钮 -->
@@ -87,7 +87,9 @@ function getStatus() {
 }
 
 // 清空文本内容
-const showClear = computed(() => props.type === "text" && props.modelValue && props.clearable && !props.disabled && !props.readonly);
+const showClear = computed(
+  () => props.type === "text" && props.modelValue && props.clearable && !props.disabled && !props.readonly
+);
 const handleClear = () => {
   emits("update:modelValue", "");
   nextTick(() => handleFocus());
