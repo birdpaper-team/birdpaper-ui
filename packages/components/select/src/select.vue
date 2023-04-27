@@ -1,12 +1,19 @@
 <template>
-  <div :class="name">
+  <div ref="selectRef" :class="name" @click="handleClick">
     <bp-input v-model="inpVal" readonly :placeholder="placeholder"></bp-input>
     <span :class="`${name}-down-inner`"><i class="ri-arrow-down-s-line"></i> </span>
+
+    <teleport to="body">
+      <div :class="`${name}-option-box`" v-show="isFocus">
+        <slot></slot>
+      </div>
+    </teleport>
   </div>
 </template>
 
 <script setup lang="ts" name="Select">
-import { ref } from "vue";
+import { nextTick, onMounted, ref } from "vue";
+// import { vClickOutside } from "../../../directives/clickOutside";
 
 const props = defineProps({
   /** 绑定值 Binding value */
@@ -20,6 +27,19 @@ const props = defineProps({
 });
 
 const name = "bp-select";
-const inpVal = ref<string | number>(props.modelValue || '');
+const selectRef = ref();
+const inpVal = ref<string | number>(props.modelValue || "");
 const isFocus = ref<boolean>(false);
+
+const handleClick = () => {
+  isFocus.value = !isFocus.value;
+};
+
+const init = () => {
+  const rect = selectRef.value.getBoundingClientRect();
+};
+
+onMounted(() => {
+  nextTick(() => init());
+});
 </script>
