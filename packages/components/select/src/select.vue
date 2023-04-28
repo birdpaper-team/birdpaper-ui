@@ -13,7 +13,7 @@
 
 <script setup lang="ts" name="Select">
 import { nextTick, onMounted, ref } from "vue";
-// import { vClickOutside } from "../../../directives/clickOutside";
+import { vClickOutside } from "../../../directives/clickOutside";
 
 const props = defineProps({
   /** 绑定值 Binding value */
