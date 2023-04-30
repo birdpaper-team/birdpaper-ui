@@ -4,7 +4,7 @@
     <span :class="`${name}-down-inner`"><i class="ri-arrow-down-s-line"></i> </span>
 
     <teleport to="body">
-      <div :class="`${name}-option-box`" v-show="isFocus">
+      <div ref="optionBoxRef" :class="`${name}-option-box`" v-show="isFocus">
         <slot></slot>
       </div>
     </teleport>
@@ -28,6 +28,7 @@ const props = defineProps({
 
 const name = "bp-select";
 const selectRef = ref();
+const optionBoxRef = ref();
 const inpVal = ref<string | number>(props.modelValue || "");
 const isFocus = ref<boolean>(false);
 
@@ -37,6 +38,7 @@ const handleClick = () => {
 
 const init = () => {
   const rect = selectRef.value.getBoundingClientRect();
+  optionBoxRef.value.setAttribute("style",`width: ${rect.width}px;top:${rect.top+rect.height}px;left:${rect.left}px`);
 };
 
 onMounted(() => {
