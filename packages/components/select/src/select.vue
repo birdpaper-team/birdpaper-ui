@@ -38,7 +38,7 @@ const handleClick = () => {
 
 const init = () => {
   const rect = selectRef.value.getBoundingClientRect();
-  optionBoxRef.value.setAttribute("style",`width: ${rect.width}px;top:${rect.top+rect.height}px;left:${rect.left}px`);
+  optionBoxRef.value.setAttribute("style",`display:none;width: ${rect.width}px;top:${rect.top+rect.height}px;left:${rect.left}px`);
 };
 
 onMounted(() => {
