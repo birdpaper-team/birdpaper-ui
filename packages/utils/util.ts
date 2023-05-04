@@ -38,7 +38,7 @@ export const strToObject = (str: string): object => {
 /**
  * 函数节流
  */
-export const throttle = (fn: { apply: (arg0: any, arg1: IArguments) => void }, delay: number) => {
+export const throttle = (fn: { apply: (arg0: any, arg1: IArguments) => void }, delay?: number) => {
   var lastTime: number;
   var timer: any;
   var delay = delay || 200;

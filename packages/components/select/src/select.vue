@@ -1,5 +1,5 @@
 <template>
-  <div ref="selectRef" :class="name" @click="handleClick">
+  <div ref="selectRef" :class="name" @click.stop="handleClick" v-clickOutside="onClickOutside">
     <bp-input v-model="inpVal" readonly :placeholder="placeholder"></bp-input>
     <span :class="`${name}-down-inner`"><i class="ri-arrow-down-s-line"></i> </span>
 
@@ -12,8 +12,9 @@
 </template>
 
 <script setup lang="ts" name="Select">
-import { nextTick, onMounted, ref } from "vue";
+import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 import { vClickOutside } from "../../../directives/clickOutside";
+import { off, on, throttle } from "../../../utils/util";
 
 const props = defineProps({
   /** 绑定值 Binding value */
@@ -38,10 +39,26 @@ const handleClick = () => {
 
 const init = () => {
   const rect = selectRef.value.getBoundingClientRect();
-  optionBoxRef.value.setAttribute("style",`display:none;width: ${rect.width}px;top:${rect.top+rect.height}px;left:${rect.left}px`);
+  optionBoxRef.value.setAttribute(
+    "style",
+    `display:${isFocus.value ? "block" : "none"};width: ${rect.width}px;top:${rect.top + rect.height}px;left:${
+      rect.left
+    }px`
+  );
 };
 
+const onClickOutside = ()=>{
+  isFocus.value = false;
+}
+
 onMounted(() => {
-  nextTick(() => init());
+  nextTick(() => {
+    on(window, "resize", throttle(init, 100));
+    init();
+  });
+});
+
+onBeforeUnmount(() => {
+  off(window, "resize", init);
 });
 </script>
