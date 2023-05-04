@@ -113,6 +113,8 @@ const triggerPassword = () => {
 
 /** 使输入框聚焦 */
 const handleFocus = () => inpRef.value.focus();
+/** 使输入框失焦 */
+const handleBlur = () => inpRef.value.blur();
 
 const onFocus = () => emits("focus");
 const onBlur = () => emits("blur");
@@ -123,4 +125,9 @@ const onInput = (e: { target: { value: string } }) => {
   const targetValue = (e.target as HTMLInputElement).value;
   emits("update:modelValue", targetValue);
 };
+
+defineExpose({
+  handleFocus,
+  handleBlur
+});
 </script>
