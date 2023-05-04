@@ -1,20 +1,32 @@
 <template>
-  <div ref="selectRef" :class="name" @click.stop="handleClick" v-clickOutside="onClickOutside">
-    <bp-input v-model="inpVal" readonly :placeholder="placeholder"></bp-input>
-    <span :class="`${name}-down-inner`"><i class="ri-arrow-down-s-line"></i> </span>
+  <div
+    ref="selectRef"
+    :class="[name, isFocus ? `${name}-focus` : '']"
+    @click.stop="handleClick"
+    v-clickOutside="onClickOutside"
+    @mouseleave="onMouseleave"
+  >
+    <bp-input ref="inpRef" v-model="inpVal" readonly :placeholder="placeholder">
+      <template #suffix>
+        <i class="ri-arrow-down-s-line"></i>
+      </template>
+    </bp-input>
 
     <teleport to="body">
       <div ref="optionBoxRef" :class="`${name}-option-box`" v-show="isFocus">
-        <slot></slot>
+        <ul :class="`${name}-option-list`">
+          <slot></slot>
+        </ul>
       </div>
     </teleport>
   </div>
 </template>
 
 <script setup lang="ts" name="Select">
-import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import { nextTick, onBeforeUnmount, onMounted, provide, ref } from "vue";
 import { vClickOutside } from "../../../directives/clickOutside";
 import { off, on, throttle } from "../../../utils/util";
+import { selectInjectionKey } from "./type";
 
 const props = defineProps({
   /** 绑定值 Binding value */
@@ -29,6 +41,7 @@ const props = defineProps({
 
 const name = "bp-select";
 const selectRef = ref();
+const inpRef = ref();
 const optionBoxRef = ref();
 const inpVal = ref<string | number>(props.modelValue || "");
 const isFocus = ref<boolean>(false);
@@ -47,9 +60,21 @@ const init = () => {
   );
 };
 
-const onClickOutside = ()=>{
+const onClickOutside = () => {
   isFocus.value = false;
-}
+};
+const onMouseleave = () => {
+  !isFocus.value && inpRef.value.handleBlur();
+};
+
+const setup = () => {
+  provide(selectInjectionKey, {
+    onSelect: (v: any) => {
+      inpVal.value = v.label;
+    },
+  });
+};
+setup();
 
 onMounted(() => {
   nextTick(() => {

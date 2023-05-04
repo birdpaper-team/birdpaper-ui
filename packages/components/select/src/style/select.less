@@ -1,6 +1,7 @@
 @import "./token.less";
 
 @select-cls: ~"@{prefix}-select";
+@option-cls: ~"@{prefix}-option";
 
 .@{select-cls} {
   position: relative;
@@ -16,11 +17,12 @@
   min-width: 80px;
   border-radius: 4px;
   background-color: @gary-2;
+  border: none;
   cursor: pointer;
   transition: all 0.2s ease;
 
   .@{prefix}-input {
-    border: none;
+    // border: none;
     flex: 1;
     cursor: pointer;
 
@@ -29,19 +31,12 @@
     }
   }
 
-  &-down-inner {
-    text-align: center;
-    padding: 0 4px;
-    color: @gary-7;
-    font-size: 16px;
-  }
-
   &:hover {
-    background-color: @gary-3;
+    // background-color: @gary-3;
     transition: all 0.2s ease;
 
     .@{prefix}-input {
-      background-color: @gary-3;
+      // background-color: @gary-3;
     }
   }
 
@@ -49,10 +44,33 @@
     position: absolute;
     background-color: @gary-1;
     min-height: 80px;
-    margin-top: 10px;
+    margin-top: 4px;
     border: 1px solid @gary-4;
     border-radius: 4px;
     z-index: 1001;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
+  }
+
+  &-option-list {
+    padding: 4px 0;
+
+    .@{option-cls}-item {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      font-size: 14px;
+      color: @gary-9;
+      height: 36px;
+      cursor: pointer;
+
+      span {
+        padding: 0 10px;
+      }
+
+      &:hover {
+        background-color: @gary-3;
+      }
+    }
   }
 }
