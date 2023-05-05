@@ -74,3 +74,38 @@
     }
   }
 }
+
+.fade-select-enter-from,
+.fade-select-appear-from {
+  transform: scaleY(0.9);
+  transform-origin: 0 0;
+  opacity: 0;
+}
+
+.fade-select-enter-to,
+.fade-select-appear-to {
+  transform: scaleY(1);
+  transform-origin: 0 0;
+  opacity: 1;
+}
+
+.fade-select-enter-active,
+.fade-select-appear-active {
+  transition: all 0.2s cubic-bezier(0, 0, 1, 1);
+}
+
+.fade-select-leave-from {
+  transform: scaleY(1);
+  transform-origin: 0 0;
+  opacity: 1;
+}
+
+.fade-select-leave-to {
+  transform: scaleY(0.9);
+  transform-origin: 0 0;
+  opacity: 0;
+}
+
+.fade-select-leave-active {
+  transition: all 0.2s cubic-bezier(0, 0, 1, 1);
+}

@@ -13,11 +13,13 @@
     </bp-input>
 
     <teleport to="body">
-      <div ref="optionBoxRef" :class="`${name}-option-box`" v-show="isFocus">
-        <ul :class="`${name}-option-list`">
-          <slot></slot>
-        </ul>
-      </div>
+      <Transition name="fade-select" appear>
+        <div ref="optionBoxRef" :class="`${name}-option-box`" v-show="isFocus">
+          <ul :class="`${name}-option-list`">
+            <slot></slot>
+          </ul>
+        </div>
+      </Transition>
     </teleport>
   </div>
 </template>
