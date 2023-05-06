@@ -3,12 +3,12 @@
     ref="selectRef"
     :class="[name, isFocus ? `${name}-focus` : '']"
     @click.stop="handleClick"
-    v-clickOutside="onClickOutside"
     @mouseleave="onMouseleave"
+    v-clickOutside="onClickOutside"
   >
-    <bp-input ref="inpRef" v-model="inpVal" readonly :placeholder="placeholder">
+    <bp-input ref="inpRef" v-model="inpVal.label" readonly :placeholder="placeholder">
       <template #suffix>
-        <i class="ri-arrow-down-s-line"></i>
+        <i :class="[`${name}-icon-inner`, `ri-arrow-${isFocus ? 'up' : 'down'}-s-line`]"></i>
       </template>
     </bp-input>
 
@@ -25,34 +25,39 @@
 </template>
 
 <script setup lang="ts" name="Select">
-import { nextTick, onBeforeUnmount, onMounted, provide, ref } from "vue";
+import { PropType, VNode, nextTick, onBeforeUnmount, onMounted, provide, reactive, ref, useSlots } from "vue";
 import { vClickOutside } from "../../../directives/clickOutside";
 import { off, on, throttle } from "../../../utils/util";
-import { selectInjectionKey } from "./type";
+import { SelectBindValue, SelectOption, selectInjectionKey } from "./type";
+import { getAllElements } from "../../../utils/dom";
 
 const props = defineProps({
   /** 绑定值 Binding value */
-  modelValue: { type: String, default: "" },
-  /** 是否禁用 Disabled or not */
+  modelValue: { type: [String, Number, Boolean] as PropType<SelectBindValue>, default: "" },
+  // TODO /** 是否禁用 Disabled or not */
   disabled: { type: Boolean, default: false },
   /** 占位提示文字 The placeholder text */
   placeholder: { type: String, default: "" },
-  /** 是否允许清空 Clearable or not */
+  // TODO /** 是否允许清空 Clearable or not */
   clearable: { type: Boolean, default: false },
 });
 
 const name = "bp-select";
 const selectRef = ref();
+const slots = useSlots();
 const inpRef = ref();
 const optionBoxRef = ref();
-const inpVal = ref<string | number>(props.modelValue || "");
+const inpVal = reactive<SelectOption>(new SelectOption());
 const isFocus = ref<boolean>(false);
 
 const handleClick = () => {
+  if (props.disabled) return;
+
   isFocus.value = !isFocus.value;
+  isFocus.value && inpRef.value.handleFocus();
 };
 
-const init = () => {
+const handleResize = () => {
   const rect = selectRef.value.getBoundingClientRect();
   optionBoxRef.value.setAttribute(
     "style",
@@ -71,21 +76,29 @@ const onMouseleave = () => {
 
 const setup = () => {
   provide(selectInjectionKey, {
+    modelValue: props.modelValue,
     onSelect: (v: any) => {
-      inpVal.value = v.label;
+      inpVal.label = v.label;
     },
   });
+
+  const children = getAllElements(slots.default?.(), true).filter(item => item.type !== Comment) ?? [];
+
+  var arr = children.map((item: VNode) => {
+    return { value: item.props.value, label: item.props.label || item.children["default"]?.()[0].children };
+  });
+  console.log("[ arr ]-88", arr);
 };
 setup();
 
 onMounted(() => {
   nextTick(() => {
-    on(window, "resize", throttle(init, 100));
-    init();
+    on(window, "resize", throttle(handleResize, 100));
+    handleResize();
   });
 });
 
 onBeforeUnmount(() => {
-  off(window, "resize", init);
+  off(window, "resize", handleResize);
 });
 </script>
