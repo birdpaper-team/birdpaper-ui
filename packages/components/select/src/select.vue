@@ -25,15 +25,15 @@
 </template>
 
 <script setup lang="ts" name="Select">
-import { PropType, VNode, nextTick, onBeforeUnmount, onMounted, provide, reactive, ref, useSlots } from "vue";
-import { vClickOutside } from "../../../directives/clickOutside";
-import { off, on, throttle } from "../../../utils/util";
+import { PropType, VNode, computed, nextTick, onBeforeUnmount, onMounted, provide, reactive, ref, useSlots } from "vue";
 import { SelectBindValue, SelectOption, selectInjectionKey } from "./type";
+import { vClickOutside } from "../../../directives/clickOutside";
 import { getAllElements } from "../../../utils/dom";
+import { off, on, throttle } from "../../../utils/util";
 
 const props = defineProps({
   /** 绑定值 Binding value */
-  modelValue: { type: [String, Number, Boolean] as PropType<SelectBindValue>, default: "" },
+  modelValue: { type: [String, Number] as PropType<SelectBindValue>, default: "" },
   // TODO /** 是否禁用 Disabled or not */
   disabled: { type: Boolean, default: false },
   /** 占位提示文字 The placeholder text */
@@ -41,14 +41,33 @@ const props = defineProps({
   // TODO /** 是否允许清空 Clearable or not */
   clearable: { type: Boolean, default: false },
 });
+const emits = defineEmits<{
+  (e: "update:modelValue", val: SelectBindValue): void;
+}>();
+const slots = useSlots();
 
 const name = "bp-select";
 const selectRef = ref();
-const slots = useSlots();
 const inpRef = ref();
 const optionBoxRef = ref();
 const inpVal = reactive<SelectOption>(new SelectOption());
 const isFocus = ref<boolean>(false);
+
+const valueMap = computed(() => {
+  try {
+    let obj = {};
+    const children: VNode[] = getAllElements(slots.default?.(), true).filter(item => item.type !== Comment) ?? [];
+
+    for (const item of children) {
+      if(item.type["name"] === "BpOption"){
+        obj[item.props.value] = item.props.label || item.children["default"]?.()[0].children;
+      }
+    }
+    return obj;
+  } catch (error) {
+    return {};
+  }
+});
 
 const handleClick = () => {
   if (props.disabled) return;
@@ -77,17 +96,17 @@ const onMouseleave = () => {
 const setup = () => {
   provide(selectInjectionKey, {
     modelValue: props.modelValue,
-    onSelect: (v: any) => {
-      inpVal.label = v.label;
+    onSelect: (v: SelectBindValue, payload: any) => {
+      inpVal.value = v;
+      inpVal.label = payload.label;
+      emits("update:modelValue", inpVal.value);
+
+      isFocus.value = false;
     },
   });
 
-  const children = getAllElements(slots.default?.(), true).filter(item => item.type !== Comment) ?? [];
-
-  var arr = children.map((item: VNode) => {
-    return { value: item.props.value, label: item.props.label || item.children["default"]?.()[0].children };
-  });
-  console.log("[ arr ]-88", arr);
+  inpVal.value = props.modelValue;
+  inpVal.label = valueMap.value[inpVal.value];
 };
 setup();
 

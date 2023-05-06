@@ -8,7 +8,7 @@
 
 <script setup lang="ts" name="Option">
 import { PropType, inject, reactive, ref, useSlots, watch } from "vue";
-import { SelectBindValue, SelectOption, selectInjectionKey } from "./type";
+import { SelectBindValue, SelectContext, SelectOption, selectInjectionKey } from "./type";
 
 const props = defineProps({
   value: { type: [String, Number, Boolean] as PropType<SelectBindValue>, default: "" },
@@ -16,7 +16,7 @@ const props = defineProps({
 });
 
 const name = "bp-option";
-const ctx = ref();
+const ctx = ref<SelectContext>();
 const slot = useSlots();
 const option = reactive<SelectOption>(new SelectOption());
 
@@ -28,7 +28,7 @@ const setup = () => {
 };
 
 const handleClick = () => {
-  ctx.value?.onSelect({ ...props, ...option });
+  ctx.value?.onSelect(option.value, { ...option });
 };
 
 watch(

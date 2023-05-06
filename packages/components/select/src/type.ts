@@ -1,6 +1,6 @@
 import { InjectionKey } from "vue";
 
-export type SelectBindValue = string | number | boolean;
+export type SelectBindValue = string | number;
 
 export class SelectOption {
   label: string = "";
