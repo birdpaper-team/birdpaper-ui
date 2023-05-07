@@ -43,6 +43,7 @@ const props = defineProps({
 });
 const emits = defineEmits<{
   (e: "update:modelValue", val: SelectBindValue): void;
+  (e: "change", val: SelectBindValue): void;
 }>();
 const slots = useSlots();
 
@@ -100,6 +101,7 @@ const setup = () => {
       inpVal.value = v;
       inpVal.label = payload.label;
       emits("update:modelValue", inpVal.value);
+      emits("change", inpVal.value);
 
       isFocus.value = false;
     },
