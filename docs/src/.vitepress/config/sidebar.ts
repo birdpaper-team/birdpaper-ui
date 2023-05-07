@@ -37,6 +37,12 @@ export const sidebar = {
       ],
     },
     {
+      text: "展示",
+      items: [
+        { text: "分页", link: "/component/pagination" },
+      ],
+    },
+    {
       text: "反馈",
       items: [
         { text: "警告提示", link: "/component/alert" },

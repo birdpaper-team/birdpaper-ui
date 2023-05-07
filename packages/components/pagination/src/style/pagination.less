@@ -1,0 +1,24 @@
+@import "../../../../style/common/theme.less";
+
+@pagination-cls: ~"@{prefix}-pagination";
+
+.@{pagination-cls} {
+  position: relative;
+  display: flex;
+
+  &-item {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid @gary-4;
+    border-radius: 4px;
+    cursor: pointer;
+
+    i {
+      font-size: 14px;
+      color: @gary-8;
+    }
+  }
+}

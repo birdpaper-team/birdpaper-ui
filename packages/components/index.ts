@@ -4,6 +4,7 @@ import Input from "./input";
 import Textarea from "./textarea";
 import Radio from "./radio";
 import Select from "./select";
+import Pagination from "./pagination";
 import Table from "./table";
 import Space from "./space";
 import Alert from "./alert";
@@ -16,6 +17,7 @@ const components: Record<string, Plugin> = {
   Textarea,
   Radio,
   Select,
+  Pagination,
   Table,
   Space,
   Alert,
@@ -38,6 +40,7 @@ export default {
   Textarea,
   Radio,
   Select,
+  Pagination,
   Table,
   Space,
   Alert,
