@@ -1,16 +1,24 @@
 <template>
   <div :class="name">
-    <div :class="`${name}-item`">
-      <i class="ri-arrow-left-s-line"></i>
-    </div>
-    <div :class="`${name}-item`">
-      <i class="ri-arrow-right-s-line"></i>
-    </div>
+    <ul :class="`${name}-container`">
+      <template v-for="item in componentsList">
+        <component
+          v-bind="item.bind"
+          :is="item.component"
+          :disabled="disabled"
+          @[item.event]="item.eventName"
+        ></component>
+      </template>
+    </ul>
   </div>
 </template>
 
 <script setup lang="ts" name="Pagination">
+import { usePagination } from "./hook";
+import { PageinationProps } from "./types";
+
 const props = defineProps({
+  layout: { type: String, default: "prev, next" },
   /** 总数 The total number of */
   total: { type: [Number, String], default: 0 },
   /** 当前页数 The current number of pages */
@@ -30,4 +38,5 @@ const emits = defineEmits<{
 }>();
 
 const name = "bp-pagination";
+const { componentsList } = usePagination(props as unknown as PageinationProps);
 </script>
