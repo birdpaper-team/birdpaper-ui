@@ -1,4 +1,4 @@
-import { computed, ref, toRefs } from "vue";
+import { computed, ref } from "vue";
 import { PageinationComponent, PageinationProps } from "./types";
 import prev from "./components/prev.vue";
 import next from "./components/next.vue";
