@@ -5,21 +5,22 @@
 .@{pagination-cls} {
   position: relative;
   display: flex;
+  .no-select;
 
   ul,
   &-container {
-    padding: 0;
+    display: flex;
+    align-items: center;
     margin: 0;
+    padding: 0;
 
     .@{pagination-cls}-item {
       display: inline-flex;
       justify-content: center;
       align-items: center;
-      width: 32px;
-      height: 32px;
+      list-style: none;
+      height: 30px;
       margin: 0;
-      border: 1px solid @gary-4;
-      border-radius: 4px;
       cursor: pointer;
 
       i {
@@ -29,6 +30,50 @@
 
       &:not(:first-child) {
         margin-left: 10px;
+      }
+    }
+
+    .@{pagination-cls}-prev,
+    .@{pagination-cls}-next,
+    .@{pagination-cls}-pager {
+      width: 30px;
+      border-radius: 4px;
+      color: @gary-8;
+      font-weight: normal;
+      font-size: 12px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: @gary-2;
+        transition: all 0.2s ease;
+      }
+    }
+
+    .@{pagination-cls}-total {
+      font-size: 12px;
+      color: @gary-8;
+      font-weight: normal;
+      cursor: default;
+    }
+
+    .@{pagination-cls}-jumper {
+      .bp-input {
+        min-width: 42px;
+        width: 42px;
+        margin: 0 4px;
+      }
+    }
+
+    .@{pagination-cls}-item-active {
+      color: @primary-6;
+      background-color: @primary-0;
+      font-weight: bold;
+      transition: all 0.2s ease;
+
+      &:hover {
+        color: @primary-6;
+        background-color: @primary-0;
+        font-weight: bold;
       }
     }
   }

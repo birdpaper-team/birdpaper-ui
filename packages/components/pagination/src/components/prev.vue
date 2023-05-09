@@ -1,5 +1,5 @@
 <template>
-  <li :class="`${name}-item`" @click="handleClick">
+  <li :class="`${name}-item ${name}-prev`" @click="handleClick">
     <span v-if="text" v-text="text"></span>
     <i v-else class="ri-arrow-left-s-line"></i>
   </li>
@@ -11,9 +11,15 @@ const props = defineProps({
   disabled: { type: Boolean, default: false },
 });
 
+const emits = defineEmits<{
+  (e: "click", type: "prev"): void;
+}>();
+
 const name = "bp-pagination";
 
 const handleClick = () => {
   if (props.disabled) return;
+
+  emits("click", "prev");
 };
 </script>
