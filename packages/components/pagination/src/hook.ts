@@ -35,7 +35,7 @@ export const usePagination = (props: ExtractPropTypes<PageinationProps>, emits: 
   };
 
   /**
-   * 设置分页尺寸
+   * 设置每页条数
    * @param pageSizes number
    * @returns currentPageSize
    */
@@ -130,7 +130,7 @@ export const usePagination = (props: ExtractPropTypes<PageinationProps>, emits: 
     };
   });
 
-  // 分页尺寸
+  // 每页条数
   const sizesComponents = computed(() => {
     return {
       bind: {
@@ -141,7 +141,7 @@ export const usePagination = (props: ExtractPropTypes<PageinationProps>, emits: 
       eventName: "change",
       event: (size: number) => {
         const sizes = sizeSizes(size);
-        emits("update:page-size", sizes);
+        emits("update:pageSize", sizes);
         emits("size-change", sizes);
       },
     };

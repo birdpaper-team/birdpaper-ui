@@ -5,7 +5,7 @@
     :class="[`${name}-pager`, `${name}-item`, item.index === currentPage ? `${name}-item-active` : '']"
     @click="onClick(item.index)"
   >
-    <span class="page-text" v-if="item.type === 'number'">{{ item.index }}</span>
+    <span v-if="item.type === 'number'">{{ item.index }}</span>
     <i class="ri-more-fill" v-else></i>
   </li>
 </template>

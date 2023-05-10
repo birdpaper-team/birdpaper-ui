@@ -21,13 +21,13 @@ export interface PageinationProps {
   totalTmpString: string;
   /** 页码跳转文案模板 */
   jumperTmpString: string;
-  /** 分页尺寸选项文案模板 */
+  /** 每页条数选项文案模板 */
   sizesTmpString: string;
 }
 
 export interface PageinationEmits {
   (e: "update:current", page: number): void;
-  (e: "update:page-size", size: number): void;
+  (e: "update:pageSize", size: number): void;
   (e: "page-change", page: number): void;
   (e: "size-change", size: number): void;
 }

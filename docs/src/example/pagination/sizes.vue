@@ -1,5 +1,5 @@
 <template>
-  <bp-pagination v-model:current="page" :total="30"> </bp-pagination>
+  <bp-pagination v-model:current="page" :total="500" layout="prev, pager, next, sizes"> </bp-pagination>
 </template>
 
 <script setup lang="ts">
