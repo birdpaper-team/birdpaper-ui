@@ -23,7 +23,7 @@ const option = reactive<SelectOption>(new SelectOption());
 const setup = () => {
   ctx.value = inject(selectInjectionKey, null);
 
-  option.label = props.label || (slot.default()[0].children as string);
+  option.label = props.label || (slot.default?.()[0].children as string);
   option.value = props.value;
 };
 

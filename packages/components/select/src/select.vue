@@ -72,6 +72,7 @@ const valueMap = computed(() => {
 
 const handleClick = () => {
   if (props.disabled) return;
+  handleResize();
 
   isFocus.value = !isFocus.value;
   isFocus.value && inpRef.value.handleFocus();
@@ -115,7 +116,6 @@ setup();
 onMounted(() => {
   nextTick(() => {
     on(window, "resize", throttle(handleResize, 100));
-    handleResize();
   });
 });
 
