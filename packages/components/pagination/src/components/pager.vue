@@ -17,19 +17,16 @@ const props = defineProps({
   currentPage: { type: Number, default: 1 },
   pages: { type: Number, default: 0 },
   maxPager: { type: Number, default: 0 },
-  disabled: { type: Boolean, default: false },
 });
 const emits = defineEmits<{
-  (e: "click", type: "page", pageNum: number): void;
+  (e: "click", pageNum: number): void;
 }>();
 
 const name = "bp-pagination";
 const pageList = ref([]);
 
 const onClick = (pageNum: number) => {
-  if (props.disabled) return;
-
-  emits("click", "page", pageNum);
+  emits("click", pageNum);
 };
 
 watchEffect(() => {

@@ -1,5 +1,5 @@
 <template>
-  <li :class="`${name}-item ${name}-total`">
+  <li :class="[`${name}-item`, `${name}-total`]">
     <span class="page-text" v-text="text"></span>
   </li>
 </template>
