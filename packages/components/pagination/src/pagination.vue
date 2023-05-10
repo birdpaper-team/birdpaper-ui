@@ -14,29 +14,35 @@ import { usePagination } from "./hook";
 import { PageinationProps } from "./types";
 
 const props = defineProps({
-  layout: { type: String, default: "prev, pager, next" },
+  layout: { type: String, default: "total, prev, pager, next, sizes, jumper" },
   /** 总数 The total number of */
   total: { type: [Number, String], default: 0 },
-  /** 当前页数 The current number of pages */
-  pageNum: { type: [Number, String], default: 1 },
+  /** 当前页 The current number of pages */
+  current: { type: Number, default: 1 },
   /** 每页显示条数 Size of entries per page */
-  pageSize: { type: [Number, String], default: () => 10 },
+  pageSize: { type: Number, default: () => 10 },
   /** 每页显示条数的选项设置 Option setting to display number of entries per page */
   sizesList: { type: Array, default: () => [10, 20, 50, 100] },
+  /** 上一页按钮文案 Replace the icon displayed on the previous page */
+  prevText: { type: String, default: "" },
+  /** 下一页按钮文案 Replace the icon displayed on the next page */
+  nextText: { type: String, default: "" },
   /** 最大页码数，须为大于等于 5 且小于等于 21 的奇数 The maximum number of pages must be an odd number greater than or equal to 5 and less than or equal to 21 */
   maxPager: { type: [Number, String], default: 7 },
-  /** 是否禁用 Disabled or not */
-  disabled: { type: Boolean, default: false },
   /** 总条数文案模板 Replace the total copywriting templates */
   totalTmpString: { type: String, default: "共 {total} 条" },
   /** 页码跳转文案模板 Replace the jumper copywriting template */
-  jumperTmpString: { type: String, default: "跳至{jumper}页" },
+  jumperTmpString: { type: String, default: "前往{jumper}" },
+  /** 分页尺寸选项文案模板 Replace the sizes copywriting template */
+  sizesTmpString: { type: String, default: "{value}/每条" },
 });
 const emits = defineEmits<{
+  (e: "update:current", page: number): void;
+  (e: "update:page-size", size: number): void;
   (e: "page-change", page: number): void;
-  (e: "size-change", page: number): void;
+  (e: "size-change", size: number): void;
 }>();
 
 const name = "bp-pagination";
-const { componentsList } = usePagination(props as unknown as ExtractPropTypes<PageinationProps>);
+const { componentsList } = usePagination(props as unknown as ExtractPropTypes<PageinationProps>, emits);
 </script>

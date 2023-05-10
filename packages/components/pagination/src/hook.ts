@@ -1,17 +1,18 @@
 import { ExtractPropTypes, computed, ref, watchEffect } from "vue";
-import { PageinationComponent, PageinationProps } from "./types";
+import { PageinationComponent, PageinationEmits, PageinationProps } from "./types";
 import prev from "./components/prev.vue";
 import next from "./components/next.vue";
 import total from "./components/total.vue";
 import pager from "./components/pager.vue";
 import jumper from "./components/jumper.vue";
+import sizes from "./components/sizes.vue";
 import { warn } from "../../../utils/util";
 
-export const usePagination = (props: ExtractPropTypes<PageinationProps>) => {
-  const layoutMap = { prev, next, total, pager, jumper };
+export const usePagination = (props: ExtractPropTypes<PageinationProps>, emits: PageinationEmits) => {
+  const layoutMap = { prev, next, total, pager, jumper, sizes };
 
   /** 当前页 */
-  const currentPage = ref<number>(props.pageNum || 1);
+  const currentPage = ref<number>(props.current || 1);
 
   /** 每页显示的条数 */
   const currentPageSize = ref<number>(props.pageSize);
@@ -24,12 +25,23 @@ export const usePagination = (props: ExtractPropTypes<PageinationProps>) => {
    * @param type "prev" | "next" | "page"
    * @param pageNum number
    */
-  const setPage = (type: "prev" | "next" | "page", pageNum?: number) => {
+  const setPage = (type: "prev" | "next" | "page", pageNum?: number): number => {
     let num = currentPage.value;
     type === "prev" ? num-- : type === "next" ? num++ : (num = pageNum ?? 1);
 
     // 限制页码的边界值，最小为 1，最大不超过总页数
     currentPage.value = num < 1 ? 1 : num > totalPagesNum.value ? totalPagesNum.value : num;
+    return currentPage.value;
+  };
+
+  /**
+   * 设置分页尺寸
+   * @param pageSizes number
+   * @returns currentPageSize
+   */
+  const sizeSizes = (pageSizes: number) => {
+    currentPageSize.value = pageSizes;
+    return currentPageSize.value;
   };
 
   watchEffect(() => {
@@ -57,10 +69,14 @@ export const usePagination = (props: ExtractPropTypes<PageinationProps>) => {
     return {
       bind: {
         text: props.prevText,
-        disabled: props.disabled || currentPage.value === 1,
+        disabled: currentPage.value === 1,
       },
       eventName: "click",
-      event: setPage,
+      event: () => {
+        const pages = setPage("prev");
+        emits("update:current", pages);
+        emits("page-change", pages);
+      },
     };
   });
 
@@ -73,7 +89,11 @@ export const usePagination = (props: ExtractPropTypes<PageinationProps>) => {
         currentPage: currentPage.value,
       },
       eventName: "click",
-      event: setPage,
+      event: (page: number) => {
+        const pages = setPage("page", page);
+        emits("update:current", pages);
+        emits("page-change", pages);
+      },
     };
   });
 
@@ -86,7 +106,11 @@ export const usePagination = (props: ExtractPropTypes<PageinationProps>) => {
         tmpString: props.jumperTmpString,
       },
       eventName: "change",
-      event: setPage,
+      event: (page: number) => {
+        const pages = setPage("page", page);
+        emits("update:current", pages);
+        emits("page-change", pages);
+      },
     };
   });
 
@@ -95,10 +119,31 @@ export const usePagination = (props: ExtractPropTypes<PageinationProps>) => {
     return {
       bind: {
         text: props.nextText,
-        disabled: props.disabled || currentPage.value === totalPagesNum.value,
+        disabled: currentPage.value === totalPagesNum.value,
       },
       eventName: "click",
-      event: setPage,
+      event: () => {
+        const pages = setPage("next");
+        emits("update:current", pages);
+        emits("page-change", pages);
+      },
+    };
+  });
+
+  // 分页尺寸
+  const sizesComponents = computed(() => {
+    return {
+      bind: {
+        currentSize: currentPageSize.value,
+        sizesList: props.sizesList,
+        tmpString: props.sizesTmpString,
+      },
+      eventName: "change",
+      event: (size: number) => {
+        const sizes = sizeSizes(size);
+        emits("update:page-size", sizes);
+        emits("size-change", sizes);
+      },
     };
   });
 
@@ -117,6 +162,7 @@ export const usePagination = (props: ExtractPropTypes<PageinationProps>) => {
         next: nextComponents.value,
         pager: pagerComponents.value,
         jumper: jumperComponents.value,
+        sizes: sizesComponents.value,
       };
 
       layoutList.map(name => {

@@ -31,12 +31,23 @@
       &:not(:first-child) {
         margin-left: 10px;
       }
+
+      .page-text {
+        font-size: 12px;
+        color: @gary-8;
+        font-weight: normal;
+      }
+    }
+
+    .@{pagination-cls}-item-disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
     }
 
     .@{pagination-cls}-prev,
     .@{pagination-cls}-next,
     .@{pagination-cls}-pager {
-      width: 30px;
+      min-width: 30px;
       border-radius: 4px;
       color: @gary-8;
       font-weight: normal;
