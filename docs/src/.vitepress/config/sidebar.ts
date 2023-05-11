@@ -33,13 +33,18 @@ export const sidebar = {
         { text: "输入框", link: "/component/input" },
         { text: "文本域", link: "/component/textarea" },
         { text: "单选框", link: "/component/radio" },
+        { text: "复选框", link: "/component/checkbox" },
         { text: "选择器", link: "/component/select" },
+        { text: "开关", link: "/component/switch" },
       ],
     },
     {
       text: "展示",
       items: [
         { text: "分页", link: "/component/pagination" },
+        { text: "表格", link: "/component/table" },
+        { text: "标签", link: "/component/tag" },
+        { text: "加载中", link: "/component/spin" },
       ],
     },
     {
@@ -47,6 +52,7 @@ export const sidebar = {
       items: [
         { text: "警告提示", link: "/component/alert" },
         { text: "消息提示", link: "/component/message" },
+        { text: "对话框", link: "/component/modal" },
       ],
     },
   ],
