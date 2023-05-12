@@ -15,15 +15,15 @@
     "@types/node": "^18.13.0",
     "@vue/babel-plugin-jsx": "^1.1.1",
     "terser": "^5.16.6",
-    "vite": "^4.1.2",
+    "vite": "^4.3.5",
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.2.0",
     "gulp-sourcemaps": "^3.0.0",
-    "vue": "^3.2.47"
+    "vue": "^3.3"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^4.1.0",
+    "@vitejs/plugin-vue": "^4.2.0",
     "@vitejs/plugin-vue-jsx": "^3.0.0",
     "gulp": "^4.0.2",
     "gulp-less": "^5.0.0",

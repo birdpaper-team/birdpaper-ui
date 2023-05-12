@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts" name="PaginationTotal">
-import { defineProps, ref, watchEffect } from "vue";
+import { ref, watchEffect } from "vue";
 
 const props = defineProps({
   value: { type: Number, default: 0 },
