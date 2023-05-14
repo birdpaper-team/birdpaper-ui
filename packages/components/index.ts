@@ -4,6 +4,7 @@ import Input from "./input";
 import Textarea from "./textarea";
 import Radio from "./radio";
 import Checkbox from "./checkbox";
+import Switch from "./switch";
 import Select from "./select";
 import Pagination from "./pagination";
 import Table from "./table";
@@ -18,6 +19,7 @@ const components: Record<string, Plugin> = {
   Textarea,
   Radio,
   Checkbox,
+  Switch,
   Select,
   Pagination,
   Table,
@@ -42,6 +44,7 @@ export default {
   Textarea,
   Radio,
   Checkbox,
+  Switch,
   Select,
   Pagination,
   Table,
