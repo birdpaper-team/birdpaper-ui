@@ -1,0 +1,68 @@
+@import "../../../../style/common/theme.less";
+
+@checkbox-cls: ~"@{prefix}-checkbox";
+
+.@{checkbox-cls} {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  cursor: pointer;
+  .no-select;
+
+  &-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    display: none;
+  }
+
+  &-checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 14px;
+    height: 14px;
+    border: 1px solid @gary-5;
+    border-radius: 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    transition: all 0.2s;
+  }
+
+  &-check {
+    background-color: @primary-6;
+    border: 1px solid @primary-6;
+
+    .ri-check-line {
+      font-size: 14px;
+      color: @gary-1;
+      font-weight: normal;
+      line-height: 1;
+      transform: scale(.8);
+    }
+  }
+
+  &:hover {
+    .@{checkbox-cls}-checkbox {
+      border: 1px solid @primary-6;
+      transition: all 0.2s;
+    }
+  }
+
+  &-label {
+    color: @gary-10;
+    font-size: 14px;
+    font-weight: normal;
+    margin-left: 6px;
+  }
+}
+
+.@{checkbox-cls}-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
