@@ -18,8 +18,8 @@ const props = defineProps({
   disabled: { type: Boolean, default: false },
 });
 const emits = defineEmits<{
-  (e: "update:modelValue", val: string | number | boolean): void;
-  (e: "change", val: string | number | boolean): void;
+  "update:modelValue": [value: string | number | boolean];
+  change: [value: string | number | boolean];
 }>();
 
 const name = "bp-radio";
