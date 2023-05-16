@@ -32,7 +32,7 @@ const props = defineProps({
   closeable: { type: Boolean, default: false },
 });
 const emits = defineEmits<{
-  (e: "close", id: string | number): void;
+  close: [id: string | number];
 }>();
 
 const timer = ref(0);

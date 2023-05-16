@@ -20,7 +20,6 @@ const props = defineProps({
   /** 是否禁用 Disabled or not */
   disabled: { type: Boolean, default: false },
 });
-
 const emits = defineEmits<{
   "update:modelValue": [value: boolean];
 }>();

@@ -47,12 +47,12 @@ const props = defineProps({
   showLimit: { type: Boolean, default: false },
 });
 const emits = defineEmits<{
-  (e: "update:modelValue", value: string): void;
-  (e: "input"): void;
-  (e: "focus"): void;
-  (e: "blur"): void;
-  (e: "keypress"): void;
-  (e: "keyup"): void;
+  "update:modelValue": [value: string];
+  input: [];
+  focus: [];
+  blur: [];
+  keypress: [];
+  keyup: [];
 }>();
 
 const inpRef = ref();
@@ -76,7 +76,7 @@ const onBlur = () => emits("blur");
 const onKeypress = () => emits("keypress");
 const onKeyup = () => emits("keyup");
 
-const onInput = (e: { target: { value: string } }) => {
+const onInput = (e: Event) => {
   const targetValue = (e.target as HTMLInputElement).value;
   emits("update:modelValue", targetValue);
 };

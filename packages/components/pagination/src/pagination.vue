@@ -38,10 +38,10 @@ const props = defineProps({
   sizesTmpString: { type: String, default: "{value} 条/页" },
 });
 const emits = defineEmits<{
-  (e: "update:current", page: number): void;
-  (e: "update:pageSize", size: number): void;
-  (e: "page-change", page: number): void;
-  (e: "size-change", size: number): void;
+  "update:current": [page: number];
+  "update:pageSize": [size: number];
+  "page-change": [page: number];
+  "size-change": [size: number];
 }>();
 
 const name = "bp-pagination";

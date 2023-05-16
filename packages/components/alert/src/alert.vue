@@ -37,7 +37,7 @@ const props = defineProps({
 });
 
 const emits = defineEmits<{
-  (e: "close"): void;
+  close: [];
 }>();
 
 const slots = useSlots();
