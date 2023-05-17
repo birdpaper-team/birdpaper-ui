@@ -1,8 +1,8 @@
 <template>
-   <div :class="cls" @click="handleClick">
+  <div :class="cls" @click="handleClick">
     <input type="checkbox" :class="`${name}-inner`" />
 
-    <span :class="`${name}-label`"></span>
+    <span :class="[`${name}-slider`, isCheck ? `${name}-check` : '']"></span>
   </div>
 </template>
 
