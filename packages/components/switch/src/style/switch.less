@@ -1,0 +1,66 @@
+@import "../../../../style/common/theme.less";
+
+@switch-cls: ~"@{prefix}-switch";
+
+.@{switch-cls} {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  min-width: 42px;
+  height: 24px;
+  cursor: pointer;
+  .no-select;
+
+  &-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    display: none;
+  }
+
+  &-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: @gary-5;
+    border: 1px solid @gary-5;
+    border-radius: 20px;
+    transition: all 0.2s ease;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: 16px;
+      width: 16px;
+      border-radius: 20px;
+      left: 4px;
+      top: 3px;
+      background-color: @gary-1;
+      transition: all 0.2s ease;
+    }
+  }
+
+  &-check {
+    background-color: @primary-6;
+    border: 1px solid @primary-6;
+    transition: all 0.2s ease;
+
+    &:before {
+      left: calc(100% - 20px);
+      transition: all 0.2s ease;
+    }
+  }
+}
+
+.@{switch-cls}-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
