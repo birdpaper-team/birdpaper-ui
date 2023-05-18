@@ -1,0 +1,64 @@
+@import "./token.less";
+
+@tag-cls: ~"@{prefix}-tag";
+
+.@{tag-cls} {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 42px;
+  max-width: 180px;
+  height: 24px;
+  border-radius: 4px;
+  padding: 4px 8px;
+  .no-select;
+
+  &-inner {
+    font-size: 12px;
+    font-weight: 400;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+  }
+
+  .ri-close-line {
+    color: @gary-7;
+    margin-left: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &::before {
+      padding: 1px;
+      border-radius: 10px;
+      transition: all 0.2s ease;
+    }
+
+    &:hover {
+      color: @gary-8;
+
+      &::before {
+        background-color: @gary-4;
+        transition: all 0.2s ease;
+      }
+    }
+  }
+}
+
+.tag-status(@status) {
+  .@{tag-cls}-@{status} {
+    background-color: ~"@{tag-status-@{status}-background}";
+
+    .@{tag-cls}-inner {
+      color: ~"@{tag-status-@{status}-font-color}";
+    }
+  }
+}
+
+.tag-status(normal);
+.tag-status(primary);
+.tag-status(success);
+.tag-status(warning);
+.tag-status(danger);
