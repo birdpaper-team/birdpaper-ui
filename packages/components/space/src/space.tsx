@@ -8,6 +8,7 @@ export default defineComponent({
   props: {
     size: { type: [Number, String] as PropType<SizeType>, default: "small" },
     type: { type: String as PropType<SpaceType>, default: "vertical" },
+    justify: { type: String, default: "flex-start" },
   },
   setup(props, { slots }) {
     const typeMap = { mini: 4, small: 8, normal: 16, large: 24 };
@@ -17,7 +18,7 @@ export default defineComponent({
       const children = getAllElements(slots.default?.(), true).filter(item => item.type !== Comment);
 
       return (
-        <div class={["bp-space", `bp-space-${props.type}`]}>
+        <div class={["bp-space", `bp-space-${props.type}`]} style={`justify-content:${props.justify}`}>
           {children.map((child, index) => {
             return (
               <Fragment key={child.key ?? `item-${index}`}>
