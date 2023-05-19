@@ -10,6 +10,8 @@ import Pagination from "./pagination";
 import Table from "./table";
 import Space from "./space";
 import Alert from "./alert";
+import Tag from "./tag";
+import Modal from "./modal";
 import Grid from "./grid";
 import Message from "./message";
 
@@ -25,6 +27,8 @@ const components: Record<string, Plugin> = {
   Table,
   Space,
   Alert,
+  Tag,
+  Modal,
   Grid,
   Message,
 };
@@ -50,6 +54,8 @@ export default {
   Table,
   Space,
   Alert,
+  Tag,
+  Modal,
   Grid,
   Message,
 };
