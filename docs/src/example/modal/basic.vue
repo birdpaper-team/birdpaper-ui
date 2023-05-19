@@ -1,7 +1,7 @@
 <template>
   <bp-button @click="handleOpen">打开对话框</bp-button>
 
-  <bp-modal :visible="show"> </bp-modal>
+  <bp-modal v-model:visible="show"> </bp-modal>
 </template>
 
 <script setup lang="ts">
