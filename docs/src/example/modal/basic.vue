@@ -1,11 +1,15 @@
 <template>
-  <bp-button>打开对话框</bp-button>
+  <bp-button @click="handleOpen">打开对话框</bp-button>
 
-<bp-modal :visible="show"></bp-modal>
+  <bp-modal :visible="show"> </bp-modal>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const show = ref(false);
+
+const handleOpen = ()=>{
+  show.value = true;
+}
 </script>
