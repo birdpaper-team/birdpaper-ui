@@ -22,10 +22,8 @@
 
   .@{modal-cls} {
     position: relative;
-    top: 20vh;
     min-width: 300px;
     max-width: 100%;
-    width: 600px;
     min-height: 158px;
     margin: 0 auto;
     background-color: @gary-1;
@@ -120,37 +118,33 @@
 }
 
 .modal-fade-enter-active {
-  animation: modal-fade-in .2s ease;
+  animation: modal-fade-in 0.2s;
 }
 
 .modal-fade-leave-active {
-  animation: modal-fade-out .2s ease;
+  animation: modal-fade-out 0.2s;
 }
 
 @keyframes modal-fade-in {
   0% {
-    // transform: translate3d(0, -6%, 0);
-    transform: scale(.7);
+    transform: scale(0.5, 0.5);
     opacity: 0;
   }
 
   100% {
-    // transform: translate3d(0, 0, 0);
-    transform: scale(1);
+    transform: scale(1, 1);
     opacity: 1;
   }
 }
 
 @keyframes modal-fade-out {
   0% {
-    // transform: translate3d(0, 0, 0);
-    transform: scale(1);
+    transform: scale(1, 1);
     opacity: 1;
   }
 
   100% {
-    // transform: translate3d(0, -6%, 0);
-    transform: scale(.7);
+    transform: scale(0.5, 0.5);
     opacity: 0;
   }
 }
