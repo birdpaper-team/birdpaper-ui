@@ -11,10 +11,10 @@
 <demo-block src="example/modal/basic"></demo-block>
 
 
-### Radio 属性
+### Modal 属性
 
 <table-block type="props" :data="props"></table-block>
 
-### Radio 事件
+### Modal 事件
 
 <table-block type="events" :data="events"></table-block>
