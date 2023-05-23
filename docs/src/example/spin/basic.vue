@@ -1,0 +1,3 @@
+<template>
+  <bp-spin />
+</template>

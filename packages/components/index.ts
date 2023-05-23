@@ -12,6 +12,7 @@ import Space from "./space";
 import Alert from "./alert";
 import Tag from "./tag";
 import Modal from "./modal";
+import Spin from "./spin";
 import Grid from "./grid";
 import Message from "./message";
 
@@ -29,6 +30,7 @@ const components: Record<string, Plugin> = {
   Alert,
   Tag,
   Modal,
+  Spin,
   Grid,
   Message,
 };
@@ -56,6 +58,7 @@ export default {
   Alert,
   Tag,
   Modal,
+  Spin,
   Grid,
   Message,
 };
