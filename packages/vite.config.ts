@@ -13,6 +13,7 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         charset: false,
+        javascriptEnabled: true,
         additionalData: '@import "./style/index.less";',
       },
     },
