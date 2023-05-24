@@ -1,8 +1,7 @@
 import { ref, watch, onMounted, nextTick, onBeforeUnmount } from "vue";
 import { off, on, throttle } from "../../../utils/util";
 
-export const useTable = (props) => {
-
+export const useTable = props => {
   /** Table 实例 */
   const bpTable = ref(null);
 
@@ -10,7 +9,7 @@ export const useTable = (props) => {
   const columns = ref([]);
 
   /** _table_width 表格所占的实际宽度 px */
-  const _table_width = ref("");
+  const _table_width = ref();
 
   /** _remainder_col 在没有设定宽度时，可用于撑开剩余宽度的列数 */
   let _remainder_col = 0;
@@ -49,7 +48,7 @@ export const useTable = (props) => {
         _fixed_width += Number(width);
         _remainder_col--;
       }
-      minWidth && _min_width_list.push(minWidth)
+      minWidth && _min_width_list.push(minWidth);
     }
 
     _table_width.value = el && el.offsetWidth - 6;
@@ -61,7 +60,7 @@ export const useTable = (props) => {
     }
 
     return columns.value;
-  }
+  };
 
   /**
    * 获取各列宽度，并组成一个数组
@@ -74,7 +73,7 @@ export const useTable = (props) => {
     let width_list = [];
 
     /** 自适应列宽 */
-    let adapt_width = getAdaptWidth();
+    let adapt_width: number = getAdaptWidth();
 
     /**
      * 当表格中含有设置最小宽度的列时，需要挨个比较自适应宽是否小于最小宽度
@@ -95,11 +94,17 @@ export const useTable = (props) => {
       const { width, minWidth } = cols[i];
 
       // 设置成固定宽度
-      if (width) { width_list.push(width); continue; }
+      if (width) {
+        width_list.push(width);
+        continue;
+      }
 
       // 是否设置成最小宽度：当含有最小宽度属性并且最小宽度大于计算得出的最大列宽
       const hasMinWidth = minWidth && minWidth > adapt_width;
-      if (hasMinWidth) { width_list.push(minWidth); continue; }
+      if (hasMinWidth) {
+        width_list.push(minWidth);
+        continue;
+      }
 
       // 如果没有定义宽度和最小宽，则设置成自适应宽度或者最小预设宽度
       width_list.push(adapt_width < _min_column_width ? _min_column_width : adapt_width);
@@ -111,26 +116,35 @@ export const useTable = (props) => {
    * 根据表格实际宽度、已固定的列宽、以及剩余自适应列数，计算得出自适应列宽
    * @returns Number width
    */
-  function getAdaptWidth() {
+  function getAdaptWidth(): number {
     let width = (_table_width.value - _fixed_width) / _remainder_col;
-    return Number(width).toFixed(2);
+    return Number(Number(width).toFixed(2));
   }
 
-  watch(() => props.cols, () => { initColumns() });
+  watch(
+    () => props.cols,
+    () => {
+      initColumns();
+    }
+  );
 
   onMounted(() => {
     nextTick(() => {
       initColumns();
-      on(window, 'resize', throttle(() => initColumns(), 400));
+      on(
+        window,
+        "resize",
+        throttle(() => initColumns(), 400)
+      );
     });
   });
 
-  onBeforeUnmount(() => off(window, 'resize', () => initColumns()));
+  onBeforeUnmount(() => off(window, "resize", () => initColumns()));
 
   return {
     initColumns,
     bpTable,
     _table_width,
-    columns
-  }
-}
+    columns,
+  };
+};

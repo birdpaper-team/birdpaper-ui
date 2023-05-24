@@ -9,8 +9,9 @@
   </colgroup>
 </template>
 
-<script setup lang="ts" name="bp-table-columns">
+<script setup lang="ts" name="TableColumns">
 const props = defineProps({
-  cols: { type: Array, default: () => [] },
+  // TODO
+  cols: { type: Array<any>, default: () => [] },
 });
 </script>

@@ -4,7 +4,7 @@
   </tr>
 </template>
 
-<script setup lang="ts" name="bp-table-empty">
+<script setup lang="ts" name="TableEmpty">
 const props = defineProps({
   colspan: { type: Number, default: 0 }
 });
