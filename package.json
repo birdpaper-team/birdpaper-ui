@@ -1,8 +1,7 @@
 {
   "name": "birdpaper-ui",
-  "version": "1.0.0",
-  "description": "基础组件库",
-  "main": "index.js",
+  "version": "2.0.0-beat",
+  "description": "一个通用的 vue3 UI组件库。A common vue3 UI component library.",
   "workspaces": [
     "packages/*",
     "docs"
