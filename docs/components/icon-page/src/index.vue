@@ -1,10 +1,10 @@
 <template>
   <div class="icon-page">
     <div class="icon-page-inner">
-      <template v-for="v in iconList">
-        <div class="icon-item" @click="handleCopy(v)">
-          <i :class="v"></i>
-          <span v-text="v"></span>
+      <template v-for="item in iconList">
+        <div class="icon-item" @click="handleCopy(item)">
+          <i :class="item"></i>
+          <span v-text="item"></span>
         </div>
       </template>
     </div>

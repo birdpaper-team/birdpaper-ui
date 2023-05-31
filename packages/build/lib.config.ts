@@ -16,7 +16,7 @@ export default defineConfig({
     sourcemap: true, // 输出单独 source文件
     reportCompressedSize: true,  // 生成压缩大小报告
     cssCodeSplit: true,
-    outDir: "dist",
+    outDir: "../dist",
     rollupOptions: {
       external: ["vue"],
       output: {
