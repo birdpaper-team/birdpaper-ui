@@ -12,12 +12,12 @@
 </template>
 
 <script setup lang="ts" name="icon-page">
-import useClipboard from "vue-clipboard3";
+import * as useClipboard from "vue-clipboard3/dist/esm/index";
 import { Message } from "birdpaper-ui";
 import iconList from "./icon";
 
 /** 复制到剪贴板 */
-const { toClipboard } = useClipboard();
+const { toClipboard } = useClipboard.default();
 const handleCopy = async (item: any) => {
   try {
     await toClipboard(item);

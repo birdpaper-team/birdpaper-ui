@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts" name="colorBlock">
-import useClipboard from "vue-clipboard3";
+import * as useClipboard from "vue-clipboard3/dist/esm/index";
 import { Message } from "birdpaper-ui";
 import { ColorThemeItem } from "../color";
 import { PropType } from "vue";
@@ -22,7 +22,7 @@ const props = defineProps({
 });
 
 /** 复制到剪贴板 */
-const { toClipboard } = useClipboard();
+const { toClipboard } = useClipboard.default();
 const handleCopy = async (item: ColorThemeItem) => {
   try {
     await toClipboard(item.value);
