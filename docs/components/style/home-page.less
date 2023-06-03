@@ -16,7 +16,7 @@
     flex-direction: row;
     flex-wrap: nowrap;
     width: 100%;
-    padding: 0 20px 0 40px;
+    padding: 0 40px 0 100px;
 
     .left {
       display: flex;
@@ -25,7 +25,7 @@
       transition: all 0.2s ease;
 
       .app-name {
-        font-size: 4em;
+        font-size: 56px;
         font-weight: bold;
         color: #1677ff;
         line-height: 1.4;
@@ -34,16 +34,16 @@
 
       .app-intro {
         margin: 10px 0;
-        font-size: 32px;
+        font-size: 28px;
         font-weight: bold;
         color: #1f1f1f;
         .font-quick;
 
         .text-en {
           font-size: 16px;
-          color: #595959;
+          color: #8c8c8c;
           margin-top: 40px;
-          letter-spacing: 0.5px;
+          letter-spacing: 0.4px;
         }
       }
 
@@ -54,6 +54,7 @@
 
     .right {
       width: 50%;
+      text-align: right;
       transition: all 0.2s ease;
 
       img {
@@ -64,10 +65,11 @@
   }
 }
 
-@media (max-width: 1360px) {
+@media screen and (max-width: 766px) {
   .home-page {
     &-banner {
       flex-direction: column-reverse;
+      padding: 0 40px;
       transition: all 0.2s ease;
 
       .left {
@@ -75,12 +77,30 @@
         align-items: center;
         text-align: center;
         transition: all 0.2s ease;
+
+        .app-name {
+          font-size: 48px;
+        }
+
+        .app-intro {
+          font-size: 22px;
+
+          .text-en {
+            margin-top: 20px;
+            font-size: 14px;
+          }
+        }
       }
 
       .right {
         width: 100%;
         text-align: center;
         transition: all 0.2s ease;
+
+        img {
+          width: 80%;
+          margin: 0 auto;
+        }
       }
     }
   }
