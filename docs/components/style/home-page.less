@@ -14,10 +14,16 @@
     align-items: center;
     justify-content: space-between;
     flex-direction: row;
+    flex-wrap: nowrap;
     width: 100%;
     padding: 0 20px 0 40px;
 
     .left {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      transition: all 0.2s ease;
+
       .app-name {
         font-size: 4em;
         font-weight: bold;
@@ -45,9 +51,36 @@
         margin-top: 20px;
       }
     }
+
     .right {
+      width: 50%;
+      transition: all 0.2s ease;
+
       img {
         width: 380px;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+@media (max-width: 1360px) {
+  .home-page {
+    &-banner {
+      flex-direction: column-reverse;
+      transition: all 0.2s ease;
+
+      .left {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        transition: all 0.2s ease;
+      }
+
+      .right {
+        width: 100%;
+        text-align: center;
+        transition: all 0.2s ease;
       }
     }
   }
