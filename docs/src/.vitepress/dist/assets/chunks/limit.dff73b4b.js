@@ -1,0 +1,1 @@
+import{d as n,j as a,r as p,o as s,i as m}from"../app.79e262a2.js";const d=n({__name:"limit",setup(r){const e=a("");return(u,o)=>{const t=p("bp-input");return s(),m(t,{style:{width:"220px"},modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=l=>e.value=l),"show-limit":"",maxlength:11,placeholder:"请输入内容"},null,8,["modelValue"])}}});export{d as default};

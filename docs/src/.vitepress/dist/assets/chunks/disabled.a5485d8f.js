@@ -1,0 +1,1 @@
+import{d as l,j as n,r as s,o as r,i as p}from"../app.79e262a2.js";const c=l({__name:"disabled",setup(d){const e=n(!0);return(u,o)=>{const a=s("bp-switch");return r(),p(a,{disabled:"",modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=t=>e.value=t)},null,8,["modelValue"])}}});export{c as default};

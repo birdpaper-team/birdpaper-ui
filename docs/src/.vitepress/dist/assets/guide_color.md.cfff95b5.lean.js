@@ -1,1 +1,0 @@
-import{_ as e,o,c as t,e as r}from"./app.d6e4ebd6.js";const f=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"guide/color.md"}'),a={name:"guide/color.md"},c=r("p",null,"color",-1),s=[c];function n(_,d,l,i,p,m){return o(),t("div",null,s)}const h=e(a,[["render",n]]);export{f as __pageData,h as default};

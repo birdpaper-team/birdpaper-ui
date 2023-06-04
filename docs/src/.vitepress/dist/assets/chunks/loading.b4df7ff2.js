@@ -1,0 +1,1 @@
+import{d as n,r as s,o as a,i as c,w as r,e as _,M as l}from"../app.79e262a2.js";const d=n({__name:"loading",setup(p){const o=()=>{const e=l.loading("正在加载...");setTimeout(()=>{e.close()},4e3)};return(e,i)=>{const t=s("bp-button");return a(),c(t,{onClick:o},{default:r(()=>[_("点击加载")]),_:1})}}});export{d as default};

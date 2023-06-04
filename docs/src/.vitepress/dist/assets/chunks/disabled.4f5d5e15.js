@@ -1,0 +1,1 @@
+import{d as s,j as l,r as n,o as d,i as r,w as c,e as p}from"../app.79e262a2.js";const f=s({__name:"disabled",setup(m){const e=l(!1);return(u,o)=>{const a=n("bp-checkbox");return d(),r(a,{disabled:"",modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=t=>e.value=t)},{default:c(()=>[p("禁用选项")]),_:1},8,["modelValue"])}}});export{f as default};

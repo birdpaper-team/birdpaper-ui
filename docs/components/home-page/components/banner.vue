@@ -22,7 +22,7 @@ import logoShadow from "/logo-shadow.jpg";
 const _data = {
   name: "BirdpaperUI",
   intro_cn: `一个通用的 <span style="color:#059669">Vue3</span> 组件库`,
-  intro_en: `<p class="text-en"> A common UI component library for Vue3.</p>`,
+  intro_en: `<span class="text-en"> A common UI component library for Vue3.</span>`,
   btn_text: {
     start: "快速上手",
     git: "在 Github 上查看",
