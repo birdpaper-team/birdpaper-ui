@@ -25,11 +25,30 @@
       transition: all 0.2s ease;
 
       .app-name {
-        font-size: 52px;
+        position: relative;
+        font-size: 50px;
         font-weight: bold;
         color: #1677ff;
         line-height: 1.4;
+        width: max-content;
         .font-quick;
+
+        .brage-version {
+          position: absolute;
+          top: -1px;
+          right: -32px;
+          border: 2px solid #ffffff;
+          border-radius: 12px;
+          cursor: pointer;
+
+          &-inner {
+            font-size: 12px;
+            border: 2px solid #1677ff;
+            border-radius: 12px;
+            padding: 0 6px;
+            background-color: #ffffff;
+          }
+        }
       }
 
       .app-intro {
@@ -43,6 +62,7 @@
           font-size: 16px;
           color: #8c8c8c;
           margin-top: 40px;
+          font-weight: 500;
           letter-spacing: 0.4px;
           display: block;
         }
