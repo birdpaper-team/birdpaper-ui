@@ -1,0 +1,7 @@
+.github
+docs
+node_modules
+packages/assets
+packages/build
+packages/directives
+packages/utils

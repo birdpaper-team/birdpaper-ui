@@ -1,6 +1,5 @@
 {
   "name": "docs",
-  "version": "1.0.0",
   "description": "birdpaper-ui docs",
   "main": "index.js",
   "scripts": {

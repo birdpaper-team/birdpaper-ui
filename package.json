@@ -38,6 +38,6 @@
     "directory": "birdpaper-team/birdpaper-ui"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/birdpaper-team/birdpaper-ui.git"
+    "registry": "https://npm.pkg.github.com/birdpaper-team"
   }
 }
