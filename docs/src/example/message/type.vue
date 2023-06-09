@@ -7,7 +7,7 @@
 </template>
 
 <script setup lang="ts">
-import { Message } from "birdpaper-ui";
+import { Message } from "../../../../packages/components/index";
 
 const handleClick = (type: "success" | "warning" | "error") => {
   Message[type](`这是 ${type} 类型的消息提示`);

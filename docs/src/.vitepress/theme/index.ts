@@ -10,8 +10,9 @@ import { EnhanceAppContext } from "vitepress";
 
 import DemoBlock from "../../../components/demo-block";
 import TableBlock from "../../../components/table-block";
-import BirdpaperUI from "birdpaper-ui";
-import "birdpaper-ui/style/index.less";
+
+import BirdpaperUI from "../../../../packages/components/index";
+import "../../../../packages/style/index.less";
 
 import "@icon-park/vue-next/styles/index.css";
 

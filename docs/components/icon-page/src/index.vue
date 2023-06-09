@@ -13,7 +13,7 @@
 
 <script setup lang="ts" name="icon-page">
 import * as useClipboard from "vue-clipboard3/dist/esm/index";
-import { Message } from "birdpaper-ui";
+import { Message } from "../../../../packages/components/index";
 import iconList from "./icon";
 
 /** 复制到剪贴板 */
