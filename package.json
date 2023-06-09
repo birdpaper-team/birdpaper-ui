@@ -1,6 +1,6 @@
 {
-  "name": "birdpaper-ui",
-  "version": "2.0.0-beat",
+  "name": "@birdpaper-team/birdpaper-ui",
+  "version": "1.9.0",
   "description": "一个通用的 vue3 UI组件库。A common vue3 UI component library.",
   "workspaces": [
     "packages/*",
@@ -31,5 +31,13 @@
     "commitizen": {
       "path": "node_modules/cz-customizable"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com/birdpaper-team/birdpaper-ui.git",
+    "directory": "birdpaper-team/birdpaper-ui"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/birdpaper-team/birdpaper-ui.git"
   }
 }
