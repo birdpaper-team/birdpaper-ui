@@ -16,7 +16,7 @@ function gulpStyleDist() {
       .pipe(less())
       .pipe(cssmin())
       .pipe(sourcemaps.write())
-      .pipe(gulp.dest("../dist/"));
+      .pipe(gulp.dest("../../dist/"));
   });
 
   gulp.task("default", gulp.series(["less"]));

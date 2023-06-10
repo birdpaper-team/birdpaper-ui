@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { Message } from "../../../../packages/components/index";
+import { Message } from "birdpaper-ui";
 
 const handleClick = () => {
   const msg = Message.loading("正在加载...");

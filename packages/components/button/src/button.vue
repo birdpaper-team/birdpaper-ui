@@ -47,7 +47,7 @@ const btnClass = computed(() => {
 });
 
 const btnIcon = computed(() => {
-  return props.loading ? "bp-icon-loading ri-loader-5-line" : props.icon;
+  return props.loading ? "bp-icon-loading ri-loader-4-line" : props.icon;
 });
 
 const onClick = () => {

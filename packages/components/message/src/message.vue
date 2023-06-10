@@ -4,7 +4,7 @@
       <i v-if="type === 'success'" class="ri-checkbox-circle-fill"></i>
       <i v-if="type === 'error'" class="ri-close-circle-fill"></i>
       <i v-if="type === 'warning'" class="ri-error-warning-fill"></i>
-      <i v-if="type === 'loading'" class="ri-loader-5-line"></i>
+      <i v-if="type === 'loading'" class="ri-loader-4-line"></i>
     </span>
     <span :class="`${name}-content`">{{ content }}</span>
     <span v-if="closeable" :class="`${name}-close`" @click="handleClose">

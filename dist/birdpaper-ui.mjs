@@ -82,7 +82,6 @@ const Button = Object.assign(_sfc_main$q, {
     app.component(_sfc_main$q.name, _sfc_main$q);
   }
 });
-const Button$1 = Button;
 var InputType = /* @__PURE__ */ ((InputType2) => {
   InputType2["Text"] = "text";
   InputType2["Password"] = "password";
@@ -217,7 +216,6 @@ const Input = Object.assign(_sfc_main$p, {
     app.component(_sfc_main$p.name, _sfc_main$p);
   }
 });
-const Input$1 = Input;
 const _hoisted_1$e = ["rows", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
 const _hoisted_2$9 = { class: "suffix" };
 const _hoisted_3$4 = ["textContent"];
@@ -306,7 +304,6 @@ const Textarea = Object.assign(_sfc_main$o, {
     app.component(_sfc_main$o.name, _sfc_main$o);
   }
 });
-const Textarea$1 = Textarea;
 const __default__$n = defineComponent({
   name: "Radio"
 });
@@ -355,7 +352,6 @@ const Radio = Object.assign(_sfc_main$n, {
     app.component(_sfc_main$n.name, _sfc_main$n);
   }
 });
-const Radio$1 = Radio;
 const _hoisted_1$d = {
   key: 0,
   class: "ri-check-line"
@@ -415,7 +411,6 @@ const Checkbox = Object.assign(_sfc_main$m, {
     app.component(_sfc_main$m.name, _sfc_main$m);
   }
 });
-const Checkbox$1 = Checkbox;
 const __default__$l = defineComponent({
   name: "Switch"
 });
@@ -464,7 +459,6 @@ const Switch = Object.assign(_sfc_main$l, {
     app.component(_sfc_main$l.name, _sfc_main$l);
   }
 });
-const Switch$1 = Switch;
 class SelectOption {
   constructor() {
     __publicField(this, "label", "");
@@ -761,7 +755,6 @@ const Select = Object.assign(_sfc_main$k, {
     app.component(_sfc_main$j.name, _sfc_main$j);
   }
 });
-const Select$1 = Select;
 const _hoisted_1$b = ["textContent"];
 const _hoisted_2$8 = {
   key: 1,
@@ -1241,7 +1234,6 @@ const Pagination = Object.assign(_sfc_main$c, {
     app.component(_sfc_main$c.name, _sfc_main$c);
   }
 });
-const Pagination$1 = Pagination;
 const useTable = (props) => {
   const bpTable = ref(null);
   const columns = ref([]);
@@ -1521,7 +1513,6 @@ const Table = Object.assign(_sfc_main$8, {
     app.component(_sfc_main$8.name, _sfc_main$8);
   }
 });
-const Table$1 = Table;
 const _space = /* @__PURE__ */ defineComponent({
   name: "Space",
   props: {
@@ -1572,7 +1563,6 @@ const Space = Object.assign(_space, {
     app.component(_space.name, _space);
   }
 });
-const Space$1 = Space;
 const _hoisted_1$2 = {
   key: 0,
   class: "ri-information-fill"
@@ -1673,7 +1663,6 @@ const Alert = Object.assign(_sfc_main$7, {
     app.component(_sfc_main$7.name, _sfc_main$7);
   }
 });
-const Alert$1 = Alert;
 const __default__$6 = defineComponent({
   name: "Tag"
 });
@@ -1720,7 +1709,6 @@ const Tag = Object.assign(_sfc_main$6, {
     app.component(_sfc_main$6.name, _sfc_main$6);
   }
 });
-const Tag$1 = Tag;
 const __default__$5 = defineComponent({
   name: "Modal"
 });
@@ -1829,7 +1817,6 @@ const Modal = Object.assign(_sfc_main$5, {
     app.component(_sfc_main$5.name, _sfc_main$5);
   }
 });
-const Modal$1 = Modal;
 const _hoisted_1$1 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-5-line" }, null, -1);
 const _hoisted_2$1 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-5-line" }, null, -1);
 const _hoisted_3$1 = [
@@ -1880,7 +1867,6 @@ const Spin = Object.assign(_sfc_main$4, {
     app.component(_sfc_main$4.name, _sfc_main$4);
   }
 });
-const Spin$1 = Spin;
 const __default__$3 = defineComponent({
   name: "Col"
 });
@@ -1972,7 +1958,6 @@ const Grid = Object.assign(_sfc_main$2, {
     app.component(_sfc_main$3.name, _sfc_main$3);
   }
 });
-const Grid$1 = Grid;
 var MessageType = /* @__PURE__ */ ((MessageType2) => {
   MessageType2["Text"] = "text";
   MessageType2["Success"] = "success";
@@ -2156,7 +2141,6 @@ class MessageManager {
     document.body.appendChild(this.container);
   }
 }
-const MessageManager$1 = MessageManager;
 _sfc_main.name = getComponentsPrefix() + _sfc_main.name;
 let msg = null;
 const types = ["text", "success", "warning", "error", "loading"];
@@ -2167,7 +2151,7 @@ const message = types.reduce((pre, value) => {
     }
     const _config = { type: value, ...config };
     if (!msg) {
-      msg = new MessageManager$1(appContext);
+      msg = new MessageManager(appContext);
     }
     return msg.add(_config);
   };
@@ -2179,24 +2163,23 @@ const Message = Object.assign({
     app.component(_sfc_main.name, _sfc_main);
   }
 });
-const Message$1 = Message;
 const components = {
-  Button: Button$1,
-  Input: Input$1,
-  Textarea: Textarea$1,
-  Radio: Radio$1,
-  Checkbox: Checkbox$1,
-  Switch: Switch$1,
-  Select: Select$1,
-  Pagination: Pagination$1,
-  Table: Table$1,
-  Space: Space$1,
-  Alert: Alert$1,
-  Tag: Tag$1,
-  Modal: Modal$1,
-  Spin: Spin$1,
-  Grid: Grid$1,
-  Message: Message$1
+  Button,
+  Input,
+  Textarea,
+  Radio,
+  Checkbox,
+  Switch,
+  Select,
+  Pagination,
+  Table,
+  Space,
+  Alert,
+  Tag,
+  Modal,
+  Spin,
+  Grid,
+  Message
 };
 const install = function(app) {
   for (const key of Object.keys(components)) {
@@ -2205,25 +2188,25 @@ const install = function(app) {
 };
 const index = {
   install,
-  Button: Button$1,
-  Input: Input$1,
-  Textarea: Textarea$1,
-  Radio: Radio$1,
-  Checkbox: Checkbox$1,
-  Switch: Switch$1,
-  Select: Select$1,
-  Pagination: Pagination$1,
-  Table: Table$1,
-  Space: Space$1,
-  Alert: Alert$1,
-  Tag: Tag$1,
-  Modal: Modal$1,
-  Spin: Spin$1,
-  Grid: Grid$1,
-  Message: Message$1
+  Button,
+  Input,
+  Textarea,
+  Radio,
+  Checkbox,
+  Switch,
+  Select,
+  Pagination,
+  Table,
+  Space,
+  Alert,
+  Tag,
+  Modal,
+  Spin,
+  Grid,
+  Message
 };
 export {
-  Message$1 as Message,
+  Message,
   index as default
 };
 //# sourceMappingURL=birdpaper-ui.mjs.map

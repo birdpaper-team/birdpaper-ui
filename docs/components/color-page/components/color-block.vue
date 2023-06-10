@@ -13,7 +13,7 @@
 
 <script setup lang="ts" name="colorBlock">
 import * as useClipboard from "vue-clipboard3/dist/esm/index";
-import { Message } from "../../../../packages/components/index";
+import { Message } from "birdpaper-ui";
 import { ColorThemeItem } from "../color";
 import { PropType } from "vue";
 

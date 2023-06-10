@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { Message } from "../../../../packages/components/index";
+import { Message } from "birdpaper-ui";
 
 const handleClick = () => {
   Message.text("这是一条文本类型的消息提示");
