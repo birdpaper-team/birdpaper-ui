@@ -7,5 +7,5 @@
 
 <script setup lang="ts">
 import banner from "./components/banner.vue";
-import quickEntry from "./components/quickEntry.vue";
+import quickEntry from "./components/quick-entry.vue";
 </script>
