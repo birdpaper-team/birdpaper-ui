@@ -1,1 +1,0 @@
-import{d as s,j as n,r as l,o as c,i as r,w as p,e as m}from"../app.79e262a2.js";const f=s({__name:"basic",setup(u){const e=n(!1);return(_,o)=>{const a=l("bp-checkbox");return c(),r(a,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=t=>e.value=t)},{default:p(()=>[m("选项一")]),_:1},8,["modelValue"])}}});export{f as default};

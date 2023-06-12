@@ -1,1 +1,0 @@
-import{_ as t,r as o,o as r,i as a,w as c,e as s}from"../app.79e262a2.js";const n={};function _(p,f){const e=o("bp-alert");return r(),a(e,{type:"error"},{default:c(()=>[s("这是一条错误提示")]),_:1})}const i=t(n,[["render",_]]);export{i as default};

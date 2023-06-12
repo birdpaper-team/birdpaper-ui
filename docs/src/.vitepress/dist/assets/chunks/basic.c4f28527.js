@@ -1,1 +1,0 @@
-import{d as o,r as n,o as a,i as s,w as c,e as r,M as _}from"../app.79e262a2.js";const u=o({__name:"basic",setup(p){const e=()=>{_.text("这是一条文本类型的消息提示")};return(i,l)=>{const t=n("bp-button");return a(),s(t,{onClick:e},{default:c(()=>[r("文本消息提示")]),_:1})}}});export{u as default};

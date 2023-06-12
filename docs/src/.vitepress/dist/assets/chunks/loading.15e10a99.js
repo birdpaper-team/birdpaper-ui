@@ -1,1 +1,0 @@
-import{_ as n,r as e,o as s,i as c,w as t,a as r,e as _}from"../app.79e262a2.js";const p={};function i(d,m){const o=e("bp-button"),a=e("bp-space");return s(),c(a,{size:"mini"},{default:t(()=>[r(o,{loading:"",type:"primary",status:"primary"},{default:t(()=>[_("正在保存")]),_:1})]),_:1})}const l=n(p,[["render",i]]);export{l as default};

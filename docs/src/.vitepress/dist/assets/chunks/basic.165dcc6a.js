@@ -1,1 +1,0 @@
-import{_ as t,r as o,o as a,i as c,w as n,e as s}from"../app.79e262a2.js";const r={};function _(p,f){const e=o("bp-tag");return a(),c(e,null,{default:n(()=>[s("标签一")]),_:1})}const i=t(r,[["render",_]]);export{i as default};
