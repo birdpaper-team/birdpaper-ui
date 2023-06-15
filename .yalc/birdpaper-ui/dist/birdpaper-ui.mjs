@@ -1716,7 +1716,6 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   ...__default__$5,
   props: {
     visible: { type: Boolean, default: false },
-    hideFooter: { type: Boolean, default: false },
     title: { type: String, default: "标题" },
     width: { type: String, default: "600px" },
     top: { type: String, default: "20vh" }
@@ -1772,9 +1771,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
                 }, [
                   renderSlot(_ctx.$slots, "default")
                 ], 2),
-                createTextVNode(" " + toDisplayString(__props.hideFooter) + " ", 1),
-                !__props.hideFooter ? (openBlock(), createElementBlock("div", {
-                  key: 0,
+                createElementVNode("div", {
                   class: normalizeClass(`${name}-footer`)
                 }, [
                   !unref(slots).footer ? (openBlock(), createBlock(_component_bp_space, {
@@ -1802,7 +1799,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
                     _: 1
                   })) : createCommentVNode("", true),
                   renderSlot(_ctx.$slots, "footer")
-                ], 2)) : createCommentVNode("", true)
+                ], 2)
               ], 6)
             ], 2), [
               [vShow, __props.visible]

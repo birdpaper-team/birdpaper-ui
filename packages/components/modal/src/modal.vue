@@ -14,7 +14,7 @@
           <div :class="`${name}-body`">
             <slot></slot>
           </div>
-          <div :class="`${name}-footer`">
+          <div :class="`${name}-footer`" v-if="!hideFooter">
             <bp-space justify="flex-end" v-if="!slots.footer">
               <bp-button @click="handleCancle">取消</bp-button>
               <bp-button @click="handleOk" type="primary" status="primary">确认</bp-button>
@@ -32,6 +32,7 @@ import { useSlots } from "vue";
 
 const props = defineProps({
   visible: { type: Boolean, default: false },
+  hideFooter: { type: Boolean, default: false },
   title: { type: String, default: "标题" },
   width: { type: String, default: "600px" },
   top: { type: String, default: "20vh" },

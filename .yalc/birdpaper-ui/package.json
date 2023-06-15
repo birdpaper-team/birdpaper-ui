@@ -1,6 +1,6 @@
 {
   "name": "birdpaper-ui",
-  "version": "1.9.4-1",
+  "version": "1.9.4",
   "description": "一个通用的 vue3 UI组件库。A common vue3 UI component library.",
   "workspaces": [
     "packages",
@@ -51,5 +51,6 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/birdpaper-team/birdpaper-ui"
-  }
+  },
+  "yalcSig": "9c4b10ef443f9c13cf9101b2c3702bc2"
 }
