@@ -7,7 +7,7 @@ export default defineComponent({
   name: "Space",
   props: {
     size: { type: [Number, String] as PropType<SizeType>, default: "small" },
-    type: { type: String as PropType<SpaceType>, default: "vertical" },
+    type: { type: String as PropType<SpaceType>, default: "horizontal" },
     justify: { type: String, default: "flex-start" },
   },
   setup(props, { slots }) {
@@ -24,7 +24,7 @@ export default defineComponent({
               <Fragment key={child.key ?? `item-${index}`}>
                 <div
                   class="bp-space-item"
-                  style={props.type === "vertical" ? `margin: 0 ${size}px` : `margin: ${size}px 0`}
+                  style={props.type === "horizontal" ? `margin: 0 ${size}px` : `margin: ${size}px 0`}
                 >
                   {child}
                 </div>

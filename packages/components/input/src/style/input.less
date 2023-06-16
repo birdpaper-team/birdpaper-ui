@@ -21,7 +21,6 @@
 .input-size(@size) {
   .@{input-cls}-size-@{size} {
     height: ~"@{input-size-@{size}-height}";
-    padding: ~"@{input-size-@{size}-padding}";
     border-radius: ~"@{input-size-@{size}-radius}";
 
     .suffix {
@@ -31,7 +30,10 @@
 
     .@{input-cls}-inner {
       width: 100%;
+      height: 100%;
       flex: 1 1 auto;
+      border-radius: ~"@{input-size-@{size}-radius}";
+      padding: ~"@{input-size-@{size}-padding}";
       font-size: ~"@{input-size-@{size}-font-size}";
       .input-font-family;
     }

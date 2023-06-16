@@ -5,7 +5,7 @@ var __publicField = (obj, key, value) => {
   return value;
 };
 import { defineComponent, computed, useSlots, openBlock, createElementBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, ref, unref, Fragment, toDisplayString, nextTick, reactive, onMounted, onBeforeUnmount, resolveComponent, withDirectives, withModifiers, createVNode, withCtx, createBlock, Teleport, Transition, vShow, provide, watch, inject, watchEffect, renderList, createTextVNode, resolveDynamicComponent, mergeProps, toHandlerKey, normalizeStyle, Comment as Comment$1, onUnmounted, TransitionGroup, render } from "vue";
-const _hoisted_1$g = ["disabled"];
+const _hoisted_1$h = ["disabled"];
 const _hoisted_2$b = {
   key: 0,
   class: "left-icon"
@@ -68,7 +68,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
           }, null, 2)
         ])) : createCommentVNode("", true),
         renderSlot(_ctx.$slots, "default")
-      ], 10, _hoisted_1$g);
+      ], 10, _hoisted_1$h);
     };
   }
 });
@@ -87,7 +87,7 @@ var InputType = /* @__PURE__ */ ((InputType2) => {
   InputType2["Password"] = "password";
   return InputType2;
 })(InputType || {});
-const _hoisted_1$f = ["type", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
+const _hoisted_1$g = ["type", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
 const _hoisted_2$a = {
   key: 0,
   class: "suffix"
@@ -186,7 +186,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
           onKeypress,
           onKeyup,
           onInput
-        }, null, 40, _hoisted_1$f),
+        }, null, 40, _hoisted_1$g),
         unref(slot).suffix || showClear.value || showWordLimit.value || __props.type === "password" ? (openBlock(), createElementBlock("div", _hoisted_2$a, [
           !unref(slot).suffix ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
             showClear.value ? (openBlock(), createElementBlock("i", {
@@ -216,7 +216,7 @@ const Input = Object.assign(_sfc_main$p, {
     app.component(_sfc_main$p.name, _sfc_main$p);
   }
 });
-const _hoisted_1$e = ["rows", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
+const _hoisted_1$f = ["rows", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
 const _hoisted_2$9 = { class: "suffix" };
 const _hoisted_3$4 = ["textContent"];
 const __default__$o = defineComponent({
@@ -287,7 +287,7 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
           onKeypress,
           onKeyup,
           onInput
-        }, null, 40, _hoisted_1$e),
+        }, null, 40, _hoisted_1$f),
         createElementVNode("div", _hoisted_2$9, [
           showWordLimit.value ? (openBlock(), createElementBlock("span", {
             key: 0,
@@ -352,7 +352,7 @@ const Radio = Object.assign(_sfc_main$n, {
     app.component(_sfc_main$n.name, _sfc_main$n);
   }
 });
-const _hoisted_1$d = {
+const _hoisted_1$e = {
   key: 0,
   class: "ri-check-line"
 };
@@ -394,7 +394,7 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
         createElementVNode("span", {
           class: normalizeClass([`${name}-checkbox`, isCheck.value ? `${name}-check` : ""])
         }, [
-          isCheck.value ? (openBlock(), createElementBlock("i", _hoisted_1$d)) : createCommentVNode("", true)
+          isCheck.value ? (openBlock(), createElementBlock("i", _hoisted_1$e)) : createCommentVNode("", true)
         ], 2),
         createElementVNode("span", {
           class: normalizeClass(`${name}-label`)
@@ -564,7 +564,7 @@ const off = function(element, event, handler, useCapture = false) {
 const warn = (module, info) => {
   console.warn(`[ A warning of birdpaper-ui ] - ${module}: ` + info);
 };
-const _hoisted_1$c = ["onClick"];
+const _hoisted_1$d = ["onClick"];
 const __default__$k = defineComponent({
   name: "Select"
 });
@@ -695,7 +695,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
             _: 3
           })
         ]))
-      ], 42, _hoisted_1$c)), [
+      ], 42, _hoisted_1$d)), [
         [unref(vClickOutside), onClickOutside]
       ]);
     };
@@ -755,7 +755,7 @@ const Select = Object.assign(_sfc_main$k, {
     app.component(_sfc_main$j.name, _sfc_main$j);
   }
 });
-const _hoisted_1$b = ["textContent"];
+const _hoisted_1$c = ["textContent"];
 const _hoisted_2$8 = {
   key: 1,
   class: "ri-arrow-left-s-line"
@@ -793,12 +793,12 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
         __props.text ? (openBlock(), createElementBlock("span", {
           key: 0,
           textContent: toDisplayString(__props.text)
-        }, null, 8, _hoisted_1$b)) : (openBlock(), createElementBlock("i", _hoisted_2$8))
+        }, null, 8, _hoisted_1$c)) : (openBlock(), createElementBlock("i", _hoisted_2$8))
       ], 2);
     };
   }
 });
-const _hoisted_1$a = ["textContent"];
+const _hoisted_1$b = ["textContent"];
 const _hoisted_2$7 = {
   key: 1,
   class: "ri-arrow-right-s-line"
@@ -836,12 +836,12 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
         __props.text ? (openBlock(), createElementBlock("span", {
           key: 0,
           textContent: toDisplayString(__props.text)
-        }, null, 8, _hoisted_1$a)) : (openBlock(), createElementBlock("i", _hoisted_2$7))
+        }, null, 8, _hoisted_1$b)) : (openBlock(), createElementBlock("i", _hoisted_2$7))
       ], 2);
     };
   }
 });
-const _hoisted_1$9 = ["textContent"];
+const _hoisted_1$a = ["textContent"];
 const __default__$g = defineComponent({
   name: "PaginationTotal"
 });
@@ -866,12 +866,12 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
         createElementVNode("span", {
           class: "page-text",
           textContent: toDisplayString(text.value)
-        }, null, 8, _hoisted_1$9)
+        }, null, 8, _hoisted_1$a)
       ], 2);
     };
   }
 });
-const _hoisted_1$8 = ["onClick"];
+const _hoisted_1$9 = ["onClick"];
 const _hoisted_2$6 = { key: 0 };
 const _hoisted_3$3 = {
   key: 1,
@@ -928,12 +928,12 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
           onClick: ($event) => onClick(item.index)
         }, [
           item.type === "number" ? (openBlock(), createElementBlock("span", _hoisted_2$6, toDisplayString(item.index), 1)) : (openBlock(), createElementBlock("i", _hoisted_3$3))
-        ], 10, _hoisted_1$8);
+        ], 10, _hoisted_1$9);
       }), 128);
     };
   }
 });
-const _hoisted_1$7 = {
+const _hoisted_1$8 = {
   key: 0,
   class: "page-text"
 };
@@ -980,7 +980,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("li", {
         class: normalizeClass([`${name}-item`, `${name}-jumper`])
       }, [
-        text.prefix ? (openBlock(), createElementBlock("span", _hoisted_1$7, toDisplayString(text.prefix), 1)) : createCommentVNode("", true),
+        text.prefix ? (openBlock(), createElementBlock("span", _hoisted_1$8, toDisplayString(text.prefix), 1)) : createCommentVNode("", true),
         createVNode(_component_bp_input, {
           modelValue: val.value,
           "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => val.value = $event),
@@ -1324,7 +1324,7 @@ const useTable = (props) => {
     columns
   };
 };
-const _hoisted_1$6 = ["name", "width"];
+const _hoisted_1$7 = ["name", "width"];
 const __default__$b = defineComponent({
   name: "TableColumns"
 });
@@ -1342,13 +1342,13 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
             key: `bp-table-tr-${index2}`,
             name: `bp_table_tr_${index2}`,
             width: `${item.width}px`
-          }, null, 8, _hoisted_1$6);
+          }, null, 8, _hoisted_1$7);
         }), 128))
       ]);
     };
   }
 });
-const _hoisted_1$5 = { class: "bp-table-header-thead" };
+const _hoisted_1$6 = { class: "bp-table-header-thead" };
 const __default__$a = defineComponent({
   name: "TableHeader"
 });
@@ -1371,7 +1371,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
         style: normalizeStyle(`width:${__props.width}px`)
       }, [
         createVNode(_sfc_main$b, { cols: __props.headerList }, null, 8, ["cols"]),
-        createElementVNode("thead", _hoisted_1$5, [
+        createElementVNode("thead", _hoisted_1$6, [
           createElementVNode("tr", null, [
             (openBlock(true), createElementBlock(Fragment, null, renderList(__props.headerList, (item, index2) => {
               return openBlock(), createElementBlock("th", {
@@ -1385,7 +1385,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$4 = { class: "bp-table-empty-tr" };
+const _hoisted_1$5 = { class: "bp-table-empty-tr" };
 const _hoisted_2$4 = ["colspan"];
 const __default__$9 = defineComponent({
   name: "TableEmpty"
@@ -1397,13 +1397,13 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("tr", _hoisted_1$4, [
+      return openBlock(), createElementBlock("tr", _hoisted_1$5, [
         createElementVNode("td", { colspan: __props.colspan }, "暂无数据", 8, _hoisted_2$4)
       ]);
     };
   }
 });
-const _hoisted_1$3 = /* @__PURE__ */ createElementVNode("div", { class: "scrollbar" }, null, -1);
+const _hoisted_1$4 = /* @__PURE__ */ createElementVNode("div", { class: "scrollbar" }, null, -1);
 const _hoisted_2$3 = { class: "bp-table-body-tbody" };
 const __default__$8 = defineComponent({
   name: "Table"
@@ -1468,7 +1468,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
             class: "bp-table-body-area",
             style: normalizeStyle(bodyAreaStyle.value)
           }, [
-            _hoisted_1$3,
+            _hoisted_1$4,
             createElementVNode("table", {
               class: "bp-table-body",
               style: normalizeStyle(`width:${unref(_table_width)}px`)
@@ -1522,7 +1522,7 @@ const _space = /* @__PURE__ */ defineComponent({
     },
     type: {
       type: String,
-      default: "vertical"
+      default: "horizontal"
     },
     justify: {
       type: String,
@@ -1550,7 +1550,7 @@ const _space = /* @__PURE__ */ defineComponent({
           "key": child.key ?? `item-${index2}`
         }, [createVNode("div", {
           "class": "bp-space-item",
-          "style": props.type === "vertical" ? `margin: 0 ${size}px` : `margin: ${size}px 0`
+          "style": props.type === "horizontal" ? `margin: 0 ${size}px` : `margin: ${size}px 0`
         }, [child])]);
       })]);
     };
@@ -1563,7 +1563,7 @@ const Space = Object.assign(_space, {
     app.component(_space.name, _space);
   }
 });
-const _hoisted_1$2 = {
+const _hoisted_1$3 = {
   key: 0,
   class: "ri-information-fill"
 };
@@ -1616,7 +1616,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
         createElementVNode("div", {
           class: normalizeClass(`${name}-icon`)
         }, [
-          __props.type === "info" ? (openBlock(), createElementBlock("i", _hoisted_1$2)) : createCommentVNode("", true),
+          __props.type === "info" ? (openBlock(), createElementBlock("i", _hoisted_1$3)) : createCommentVNode("", true),
           __props.type === "success" ? (openBlock(), createElementBlock("i", _hoisted_2$2)) : createCommentVNode("", true),
           __props.type === "warning" ? (openBlock(), createElementBlock("i", _hoisted_3$2)) : createCommentVNode("", true),
           __props.type === "error" ? (openBlock(), createElementBlock("i", _hoisted_4$1)) : createCommentVNode("", true)
@@ -1709,6 +1709,7 @@ const Tag = Object.assign(_sfc_main$6, {
     app.component(_sfc_main$6.name, _sfc_main$6);
   }
 });
+const _hoisted_1$2 = ["onClick"];
 const __default__$5 = defineComponent({
   name: "Modal"
 });
@@ -1717,14 +1718,33 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   props: {
     visible: { type: Boolean, default: false },
     hideFooter: { type: Boolean, default: false },
+    hideClose: { type: Boolean, default: false },
+    border: { type: Boolean, default: false },
+    maskClosable: { type: Boolean, default: true },
     title: { type: String, default: "标题" },
+    titleAlign: { type: String, default: "left" },
     width: { type: String, default: "600px" },
     top: { type: String, default: "20vh" }
   },
   emits: ["ok", "cancle", "update:visible"],
   setup(__props, { emit: emits }) {
+    const props = __props;
     const name = "bp-modal";
     const slots = useSlots();
+    const containerVisable = ref(false);
+    const clsName = computed(() => {
+      let cls = [name];
+      if (props.border) {
+        cls.push(`${name}-border`);
+      }
+      cls.push(`${name}-title-${props.titleAlign}`);
+      return cls;
+    });
+    const handleMaskClick = () => {
+      if (!props.maskClosable)
+        return;
+      handleCancle();
+    };
     const handleCancle = () => {
       emits("cancle");
       emits("update:visible", false);
@@ -1733,82 +1753,102 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
       emits("ok");
       emits("update:visible", false);
     };
+    watch(
+      () => props.visible,
+      () => {
+        if (props.visible) {
+          containerVisable.value = true;
+          return;
+        }
+        setTimeout(() => {
+          containerVisable.value = false;
+        }, 200);
+      }
+    );
     return (_ctx, _cache) => {
       const _component_bp_button = resolveComponent("bp-button");
       const _component_bp_space = resolveComponent("bp-space");
       return openBlock(), createBlock(Teleport, { to: "body" }, [
-        createVNode(Transition, { name: "fade-modal-mask" }, {
-          default: withCtx(() => [
-            withDirectives(createElementVNode("div", {
-              class: normalizeClass(`${name}-mask`)
-            }, null, 2), [
-              [vShow, __props.visible]
-            ])
-          ]),
-          _: 1
-        }),
-        createVNode(Transition, { name: "modal-fade" }, {
-          default: withCtx(() => [
-            withDirectives(createElementVNode("div", {
-              class: normalizeClass(`${name}-wrapper`)
-            }, [
-              createElementVNode("div", {
-                class: normalizeClass(`${name}`),
-                style: normalizeStyle(`width:${__props.width};top:${__props.top}`)
+        withDirectives(createElementVNode("div", {
+          class: normalizeClass(`${name}-container`)
+        }, [
+          createVNode(Transition, { name: "fade-modal-mask" }, {
+            default: withCtx(() => [
+              withDirectives(createElementVNode("div", {
+                class: normalizeClass(`${name}-mask`)
+              }, null, 2), [
+                [vShow, __props.visible]
+              ])
+            ]),
+            _: 1
+          }),
+          createVNode(Transition, { name: "modal-fade" }, {
+            default: withCtx(() => [
+              withDirectives(createElementVNode("div", {
+                class: normalizeClass(`${name}-wrapper`),
+                onClick: withModifiers(handleMaskClick, ["self"])
               }, [
                 createElementVNode("div", {
-                  class: normalizeClass(`${name}-header`)
+                  class: normalizeClass(clsName.value),
+                  style: normalizeStyle(`width:${__props.width};top:${__props.top}`)
                 }, [
-                  createElementVNode("p", {
-                    class: normalizeClass(`${name}-header-title`)
-                  }, toDisplayString(__props.title), 3),
-                  createElementVNode("i", {
-                    class: normalizeClass([`${name}-header-close`, "ri-close-line"]),
-                    onClick: handleCancle
-                  }, null, 2)
-                ], 2),
-                createElementVNode("div", {
-                  class: normalizeClass(`${name}-body`)
-                }, [
-                  renderSlot(_ctx.$slots, "default")
-                ], 2),
-                !__props.hideFooter ? (openBlock(), createElementBlock("div", {
-                  key: 0,
-                  class: normalizeClass(`${name}-footer`)
-                }, [
-                  !unref(slots).footer ? (openBlock(), createBlock(_component_bp_space, {
+                  createElementVNode("div", {
+                    class: normalizeClass(`${name}-header`)
+                  }, [
+                    createElementVNode("p", {
+                      class: normalizeClass(`${name}-header-title`)
+                    }, toDisplayString(__props.title), 3),
+                    !__props.hideClose ? (openBlock(), createElementBlock("i", {
+                      key: 0,
+                      class: normalizeClass([`${name}-header-close`, "ri-close-line"]),
+                      onClick: handleCancle
+                    }, null, 2)) : createCommentVNode("", true)
+                  ], 2),
+                  createElementVNode("div", {
+                    class: normalizeClass(`${name}-body`)
+                  }, [
+                    renderSlot(_ctx.$slots, "default")
+                  ], 2),
+                  !__props.hideFooter ? (openBlock(), createElementBlock("div", {
                     key: 0,
-                    justify: "flex-end"
-                  }, {
-                    default: withCtx(() => [
-                      createVNode(_component_bp_button, { onClick: handleCancle }, {
-                        default: withCtx(() => [
-                          createTextVNode("取消")
-                        ]),
-                        _: 1
-                      }),
-                      createVNode(_component_bp_button, {
-                        onClick: handleOk,
-                        type: "primary",
-                        status: "primary"
-                      }, {
-                        default: withCtx(() => [
-                          createTextVNode("确认")
-                        ]),
-                        _: 1
-                      })
-                    ]),
-                    _: 1
-                  })) : createCommentVNode("", true),
-                  renderSlot(_ctx.$slots, "footer")
-                ], 2)) : createCommentVNode("", true)
-              ], 6)
-            ], 2), [
-              [vShow, __props.visible]
-            ])
-          ]),
-          _: 3
-        })
+                    class: normalizeClass(`${name}-footer`)
+                  }, [
+                    !unref(slots).footer ? (openBlock(), createBlock(_component_bp_space, {
+                      key: 0,
+                      justify: "flex-end"
+                    }, {
+                      default: withCtx(() => [
+                        createVNode(_component_bp_button, { onClick: handleCancle }, {
+                          default: withCtx(() => [
+                            createTextVNode("取消")
+                          ]),
+                          _: 1
+                        }),
+                        createVNode(_component_bp_button, {
+                          onClick: handleOk,
+                          type: "primary",
+                          status: "primary"
+                        }, {
+                          default: withCtx(() => [
+                            createTextVNode("确认")
+                          ]),
+                          _: 1
+                        })
+                      ]),
+                      _: 1
+                    })) : createCommentVNode("", true),
+                    renderSlot(_ctx.$slots, "footer")
+                  ], 2)) : createCommentVNode("", true)
+                ], 6)
+              ], 10, _hoisted_1$2), [
+                [vShow, __props.visible]
+              ])
+            ]),
+            _: 3
+          })
+        ], 2), [
+          [vShow, containerVisable.value]
+        ])
       ]);
     };
   }
