@@ -4,8 +4,7 @@
   "scripts": {
     "gulp": "gulp -f build/gulpStyle.ts",
     "vite": "vite build --config build/lib.config.ts",
-    "build": "npm run vite && npm run gulp",
-    "publish": "npm publish"
+    "build": "npm run vite && npm run gulp"
   },
   "keywords": [],
   "author": "木亦Sam",

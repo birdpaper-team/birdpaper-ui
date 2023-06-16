@@ -1772,7 +1772,6 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
                 }, [
                   renderSlot(_ctx.$slots, "default")
                 ], 2),
-                createTextVNode(" " + toDisplayString(__props.hideFooter) + " ", 1),
                 !__props.hideFooter ? (openBlock(), createElementBlock("div", {
                   key: 0,
                   class: normalizeClass(`${name}-footer`)
