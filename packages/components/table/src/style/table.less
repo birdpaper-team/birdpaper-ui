@@ -4,16 +4,16 @@
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   box-sizing: border-box;
-  border: 1px solid @gary-4;
+  border: 1px solid #e8e8e8;
 
   .bp-table-inner {
     font-feature-settings: "tnum";
     position: relative;
     clear: both;
     box-sizing: border-box;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
     overflow-x: auto;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
 
     .text-left {
       text-align: left;
@@ -76,7 +76,7 @@
           border: none;
 
           &:hover {
-            background-color: @gary-3;
+            background-color: @gary-2;
           }
 
           td {
@@ -102,6 +102,44 @@
 
   // 带边框表格
   .bp-table-border {
+    .bp-table-header {
+      .bp-table-header-thead {
+        tr {
+          th {
+            &:not(:first-child) {
+              border-right: 1px solid #e8e8e8;
+            }
+            &:not(:last-child) {
+              border-left: 1px solid #e8e8e8;
+            }
+            &:first-child {
+              border-left: none;
+            }
+            &:last-child {
+              border-right: none;
+            }
+          }
+        }
+      }
+    }
+    .bp-table-body-tbody {
+      tr {
+        td {
+          &:not(:first-child) {
+            border-right: 1px solid #e8e8e8;
+          }
+          &:not(:last-child) {
+            border-left: 1px solid #e8e8e8;
+          }
+          &:first-child {
+            border-left: none;
+          }
+          &:last-child {
+            border-right: none;
+          }
+        }
+      }
+    }
   }
 
   // 斑马纹样式
