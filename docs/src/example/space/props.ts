@@ -13,7 +13,7 @@ const list: PropTableItem[] = [
     remark: "布局类型",
     type: ["Enum"],
     optional: ["vertical", "horizontal"],
-    default: "vertical",
+    default: "horizontal",
   },
   {
     name: "justify",
