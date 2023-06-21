@@ -66,7 +66,10 @@ import { vClickOutside } from "../../directives/clickOutside";
 const props = defineProps({
   type: { type: String, default: "props" },
   src: { type: String, default: "" },
-  data: { type: Array as PropType<PropTableItem[] | EventTableItem[] | MethodTableItem[] | SlotTableItem[]>, default: () => [] },
+  data: {
+    type: Array as PropType<PropTableItem[] | EventTableItem[] | MethodTableItem[] | SlotTableItem[]>,
+    default: () => [],
+  },
 });
 const list = ref<PropTableItem[] | EventTableItem[] | MethodTableItem[] | SlotTableItem[]>([]);
 

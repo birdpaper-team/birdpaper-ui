@@ -1,5 +1,5 @@
 <template>
-  <table class="bp-table-header" :style="`width:${width}px`">
+  <table class="bp-table-header">
     <col-group :cols="headerList"></col-group>
 
     <thead class="bp-table-header-thead">
@@ -18,7 +18,6 @@ import ColGroup from "./col-group.vue";
 const props = defineProps({
   // TODO
   headerList: { type: Array<any>, default: () => [] },
-  width: { type: [String, Number], default: "" },
 });
 
 // TODO

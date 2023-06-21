@@ -1,23 +1,34 @@
 .bp-table {
   position: relative;
   width: 100%;
-  margin-bottom: 14px;
-  overflow-x: auto;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  box-sizing: border-box;
+  border: 1px solid @gary-4;
 
   .bp-table-inner {
     font-feature-settings: "tnum";
     position: relative;
     clear: both;
-    transition: all 0.2s ease;
+    box-sizing: border-box;
+    overflow-x: auto;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
 
     .text-left {
       text-align: left;
     }
+
     .text-center {
       text-align: center;
     }
+
     .text-right {
       text-align: right;
+    }
+
+    .bp-table-header {
+      background-color: @gary-3;
     }
 
     .bp-table-header,
@@ -25,9 +36,8 @@
       width: 100%;
       border: none;
       border-spacing: 0;
-      background-color: @gary-1;
       table-layout: fixed;
-      transition: all 0.2s ease;
+      box-sizing: border-box;
 
       .bp-table-header-thead {
         display: table-header-group;
@@ -49,35 +59,34 @@
           th {
             overflow-wrap: break-word;
             display: table-cell;
-            padding: 12px 10px;
-            font-size: 13px;
+            padding: 8px 10px;
+            font-size: 14px;
             font-weight: 500;
-            color: @gary-7;
+            color: @gary-10;
             border-left: none;
             border-right: none;
             border-top: none;
-            border-bottom: 1px solid @gary-3;
             background: none;
-
-            &:first-child {
-              border-top-left-radius: 4px;
-            }
-
-            &:last-child {
-              border-top-right-radius: 4px;
-            }
           }
         }
       }
 
       .bp-table-body-tbody {
-        td {
-          font-size: 13px;
-          color: @gary-8;
-          font-weight: 400;
-          padding: 8px 10px;
-          word-break: break-all;
-          border-bottom: 1px solid @gary-3;
+        tr {
+          border: none;
+
+          &:hover {
+            background-color: @gary-3;
+          }
+
+          td {
+            font-size: 14px;
+            color: @gary-10;
+            font-weight: 400;
+            padding: 8px 10px;
+            word-break: break-all;
+            border-top: 1px solid @gary-4;
+          }
         }
 
         .bp-table-empty-tr {
@@ -89,59 +98,10 @@
         }
       }
     }
-
-    .bp-table-header {
-      height: 46px;
-      max-height: 46px;
-    }
   }
 
   // 带边框表格
   .bp-table-border {
-    .bp-table-header {
-      .bp-table-header-thead {
-        tr {
-          background: none;
-          th {
-            border-top: 1px solid @gary-4;
-            border-left: 1px solid @gary-4;
-
-            &:last-child {
-              border-right: 1px solid @gary-4;
-            }
-          }
-        }
-      }
-    }
-
-    .bp-table-body {
-      .bp-table-body-tbody {
-        tr {
-          background: none;
-          td {
-            border-left: 1px solid @gary-4;
-
-            &:last-child {
-              border-right: 1px solid @gary-4;
-            }
-          }
-
-          &:last-child {
-            td {
-              border-bottom: 1px solid @gary-4;
-
-              &:first-child {
-                border-bottom-left-radius: 4px;
-              }
-
-              &:last-child {
-                border-bottom-right-radius: 4px;
-              }
-            }
-          }
-        }
-      }
-    }
   }
 
   // 斑马纹样式

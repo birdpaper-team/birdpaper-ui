@@ -1,7 +1,7 @@
 <template>
   <div class="bp-table" ref="bpTable">
     <div :class="innerClass">
-      <table-header :header-list="columns" :width="_table_width"></table-header>
+      <table-header :header-list="columns"></table-header>
 
       <div class="bp-table-body-area" :style="bodyAreaStyle">
         <div class="scrollbar"></div>
