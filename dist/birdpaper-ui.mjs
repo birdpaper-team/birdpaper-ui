@@ -6,7 +6,7 @@ var __publicField = (obj, key, value) => {
 };
 import { defineComponent, computed, useSlots, openBlock, createElementBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, ref, unref, Fragment, toDisplayString, nextTick, reactive, onMounted, onBeforeUnmount, resolveComponent, withDirectives, withModifiers, createVNode, withCtx, createBlock, Teleport, Transition, vShow, provide, watch, inject, watchEffect, renderList, createTextVNode, resolveDynamicComponent, mergeProps, toHandlerKey, normalizeStyle, Comment as Comment$1, onUnmounted, TransitionGroup, render } from "vue";
 const _hoisted_1$h = ["disabled"];
-const _hoisted_2$b = {
+const _hoisted_2$c = {
   key: 0,
   class: "left-icon"
 };
@@ -62,7 +62,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
         disabled: isDisabled.value,
         onClick
       }, [
-        btnIcon.value ? (openBlock(), createElementBlock("span", _hoisted_2$b, [
+        btnIcon.value ? (openBlock(), createElementBlock("span", _hoisted_2$c, [
           createElementVNode("i", {
             class: normalizeClass(btnIcon.value)
           }, null, 2)
@@ -88,7 +88,7 @@ var InputType = /* @__PURE__ */ ((InputType2) => {
   return InputType2;
 })(InputType || {});
 const _hoisted_1$g = ["type", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
-const _hoisted_2$a = {
+const _hoisted_2$b = {
   key: 0,
   class: "suffix"
 };
@@ -187,7 +187,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
           onKeyup,
           onInput
         }, null, 40, _hoisted_1$g),
-        unref(slot).suffix || showClear.value || showWordLimit.value || __props.type === "password" ? (openBlock(), createElementBlock("div", _hoisted_2$a, [
+        unref(slot).suffix || showClear.value || showWordLimit.value || __props.type === "password" ? (openBlock(), createElementBlock("div", _hoisted_2$b, [
           !unref(slot).suffix ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
             showClear.value ? (openBlock(), createElementBlock("i", {
               key: 0,
@@ -217,7 +217,7 @@ const Input = Object.assign(_sfc_main$p, {
   }
 });
 const _hoisted_1$f = ["rows", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
-const _hoisted_2$9 = { class: "suffix" };
+const _hoisted_2$a = { class: "suffix" };
 const _hoisted_3$4 = ["textContent"];
 const __default__$o = defineComponent({
   name: "Textarea"
@@ -288,7 +288,7 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
           onKeyup,
           onInput
         }, null, 40, _hoisted_1$f),
-        createElementVNode("div", _hoisted_2$9, [
+        createElementVNode("div", _hoisted_2$a, [
           showWordLimit.value ? (openBlock(), createElementBlock("span", {
             key: 0,
             textContent: toDisplayString(limitText.value)
@@ -756,7 +756,7 @@ const Select = Object.assign(_sfc_main$k, {
   }
 });
 const _hoisted_1$c = ["textContent"];
-const _hoisted_2$8 = {
+const _hoisted_2$9 = {
   key: 1,
   class: "ri-arrow-left-s-line"
 };
@@ -793,13 +793,13 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
         __props.text ? (openBlock(), createElementBlock("span", {
           key: 0,
           textContent: toDisplayString(__props.text)
-        }, null, 8, _hoisted_1$c)) : (openBlock(), createElementBlock("i", _hoisted_2$8))
+        }, null, 8, _hoisted_1$c)) : (openBlock(), createElementBlock("i", _hoisted_2$9))
       ], 2);
     };
   }
 });
 const _hoisted_1$b = ["textContent"];
-const _hoisted_2$7 = {
+const _hoisted_2$8 = {
   key: 1,
   class: "ri-arrow-right-s-line"
 };
@@ -836,7 +836,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
         __props.text ? (openBlock(), createElementBlock("span", {
           key: 0,
           textContent: toDisplayString(__props.text)
-        }, null, 8, _hoisted_1$b)) : (openBlock(), createElementBlock("i", _hoisted_2$7))
+        }, null, 8, _hoisted_1$b)) : (openBlock(), createElementBlock("i", _hoisted_2$8))
       ], 2);
     };
   }
@@ -872,7 +872,7 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1$9 = ["onClick"];
-const _hoisted_2$6 = { key: 0 };
+const _hoisted_2$7 = { key: 0 };
 const _hoisted_3$3 = {
   key: 1,
   class: "ri-more-fill"
@@ -927,7 +927,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
           class: normalizeClass([`${name}-pager`, `${name}-item`, item.index === __props.currentPage ? `${name}-item-active` : ""]),
           onClick: ($event) => onClick(item.index)
         }, [
-          item.type === "number" ? (openBlock(), createElementBlock("span", _hoisted_2$6, toDisplayString(item.index), 1)) : (openBlock(), createElementBlock("i", _hoisted_3$3))
+          item.type === "number" ? (openBlock(), createElementBlock("span", _hoisted_2$7, toDisplayString(item.index), 1)) : (openBlock(), createElementBlock("i", _hoisted_3$3))
         ], 10, _hoisted_1$9);
       }), 128);
     };
@@ -937,7 +937,7 @@ const _hoisted_1$8 = {
   key: 0,
   class: "page-text"
 };
-const _hoisted_2$5 = {
+const _hoisted_2$6 = {
   key: 1,
   class: "page-text"
 };
@@ -987,7 +987,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
           size: "small",
           onBlur: handleBlur
         }, null, 8, ["modelValue"]),
-        text.suffix ? (openBlock(), createElementBlock("span", _hoisted_2$5, toDisplayString(text.suffix), 1)) : createCommentVNode("", true)
+        text.suffix ? (openBlock(), createElementBlock("span", _hoisted_2$6, toDisplayString(text.suffix), 1)) : createCommentVNode("", true)
       ], 2);
     };
   }
@@ -1259,7 +1259,7 @@ const useTable = (props) => {
       }
       minWidth && _min_width_list.push(minWidth);
     }
-    _table_width.value = el && el.offsetWidth - 6;
+    _table_width.value = el && el.offsetWidth - 2;
     _col_width_list = getWidthList() || [];
     columns.value = [];
     for (let i = 0; i < cols.length; i++) {
@@ -1348,7 +1348,8 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$6 = { class: "bp-table-header-thead" };
+const _hoisted_1$6 = { class: "bp-table-header" };
+const _hoisted_2$5 = { class: "bp-table-header-thead" };
 const __default__$a = defineComponent({
   name: "TableHeader"
 });
@@ -1356,8 +1357,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
   ...__default__$a,
   props: {
     // TODO
-    headerList: { type: Array, default: () => [] },
-    width: { type: [String, Number], default: "" }
+    headerList: { type: Array, default: () => [] }
   },
   setup(__props) {
     const thClass = (item) => {
@@ -1366,12 +1366,9 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
       return name;
     };
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("table", {
-        class: "bp-table-header",
-        style: normalizeStyle(`width:${__props.width}px`)
-      }, [
+      return openBlock(), createElementBlock("table", _hoisted_1$6, [
         createVNode(_sfc_main$b, { cols: __props.headerList }, null, 8, ["cols"]),
-        createElementVNode("thead", _hoisted_1$6, [
+        createElementVNode("thead", _hoisted_2$5, [
           createElementVNode("tr", null, [
             (openBlock(true), createElementBlock(Fragment, null, renderList(__props.headerList, (item, index2) => {
               return openBlock(), createElementBlock("th", {
@@ -1381,7 +1378,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
             }), 128))
           ])
         ])
-      ], 4);
+      ]);
     };
   }
 });
@@ -1403,18 +1400,68 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$4 = /* @__PURE__ */ createElementVNode("div", { class: "scrollbar" }, null, -1);
-const _hoisted_2$3 = { class: "bp-table-body-tbody" };
+const _hoisted_1$4 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
+const _hoisted_2$3 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
+const _hoisted_3$2 = [
+  _hoisted_2$3
+];
 const __default__$8 = defineComponent({
-  name: "Table"
+  name: "Spin"
 });
 const _sfc_main$8 = /* @__PURE__ */ defineComponent({
   ...__default__$8,
   props: {
+    /** 是否开启加载 Loading or not */
+    loading: { type: Boolean, default: false },
+    /** 加载提示文字 The loading tip text */
+    tip: { type: String, default: "" }
+  },
+  setup(__props) {
+    const name = "bp-spin";
+    const slots = useSlots();
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        class: normalizeClass(name)
+      }, [
+        renderSlot(_ctx.$slots, "default"),
+        unref(slots).default && __props.loading ? (openBlock(), createElementBlock("div", {
+          key: 0,
+          class: normalizeClass(`${name}-mask`)
+        }, [
+          createElementVNode("div", {
+            class: normalizeClass(`${name}-loading`)
+          }, [
+            _hoisted_1$4,
+            createElementVNode("p", {
+              class: normalizeClass(`${name}-tip`)
+            }, toDisplayString(__props.tip), 3)
+          ], 2)
+        ], 2)) : __props.loading ? (openBlock(), createElementBlock("div", {
+          key: 1,
+          class: normalizeClass(`${name}-loading`)
+        }, _hoisted_3$2, 2)) : createCommentVNode("", true)
+      ]);
+    };
+  }
+});
+_sfc_main$8.name = getComponentsPrefix() + _sfc_main$8.name;
+const Spin = Object.assign(_sfc_main$8, {
+  install: (app) => {
+    app.component(_sfc_main$8.name, _sfc_main$8);
+  }
+});
+const _hoisted_1$3 = /* @__PURE__ */ createElementVNode("div", { class: "scrollbar" }, null, -1);
+const _hoisted_2$2 = { class: "bp-table-body-tbody" };
+const __default__$7 = defineComponent({
+  name: "Table"
+});
+const _sfc_main$7 = /* @__PURE__ */ defineComponent({
+  ...__default__$7,
+  props: {
     /* 表格头部列表 Table header list */
     cols: { type: Array, default: () => [] },
     /* 表格数据 Table data source */
-    dataSource: { type: Array, default: () => [] },
+    data: { type: Array, default: () => [] },
     /* 固定高度 Fixed height */
     height: { type: String, default: "" },
     /* 加载状态 loading or not */
@@ -1427,7 +1474,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const props = __props;
     const { bpTable, columns, _table_width } = useTable(props);
-    const isEmpty = computed(() => props.dataSource.length === 0);
+    const isEmpty = computed(() => props.data.length === 0);
     const hasBorder = computed(() => props.border);
     const isStripe = computed(() => props.stripe);
     const fixedHeight = computed(() => props.height);
@@ -1452,65 +1499,67 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       return name;
     };
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: "bp-table",
-        ref_key: "bpTable",
-        ref: bpTable
-      }, [
-        createElementVNode("div", {
-          class: normalizeClass(innerClass.value)
-        }, [
-          createVNode(_sfc_main$a, {
-            "header-list": unref(columns),
-            width: unref(_table_width)
-          }, null, 8, ["header-list", "width"]),
+      return openBlock(), createBlock(unref(Spin), { loading: __props.loading }, {
+        default: withCtx(() => [
           createElementVNode("div", {
-            class: "bp-table-body-area",
-            style: normalizeStyle(bodyAreaStyle.value)
+            class: "bp-table",
+            ref_key: "bpTable",
+            ref: bpTable
           }, [
-            _hoisted_1$4,
-            createElementVNode("table", {
-              class: "bp-table-body",
-              style: normalizeStyle(`width:${unref(_table_width)}px`)
+            createElementVNode("div", {
+              class: normalizeClass(innerClass.value)
             }, [
-              createVNode(_sfc_main$b, { cols: unref(columns) }, null, 8, ["cols"]),
-              createElementVNode("tbody", _hoisted_2$3, [
-                isEmpty.value ? (openBlock(), createBlock(_sfc_main$9, {
-                  key: 0,
-                  colspan: unref(columns).length
-                }, null, 8, ["colspan"])) : (openBlock(true), createElementBlock(Fragment, { key: 1 }, renderList(__props.dataSource, (item, index2) => {
-                  return openBlock(), createElementBlock("tr", {
-                    key: `bp-table-tbody-tr-${index2}`
-                  }, [
-                    (openBlock(true), createElementBlock(Fragment, null, renderList(unref(columns), (v, k) => {
-                      return openBlock(), createElementBlock("td", {
-                        key: `bp-table-tbody-td-${index2}-${k}`,
-                        class: normalizeClass(tdClass(v))
+              createVNode(_sfc_main$a, { "header-list": unref(columns) }, null, 8, ["header-list"]),
+              createElementVNode("div", {
+                class: "bp-table-body-area",
+                style: normalizeStyle(bodyAreaStyle.value)
+              }, [
+                _hoisted_1$3,
+                createElementVNode("table", {
+                  class: "bp-table-body",
+                  style: normalizeStyle(`width:${unref(_table_width)}px`)
+                }, [
+                  createVNode(_sfc_main$b, { cols: unref(columns) }, null, 8, ["cols"]),
+                  createElementVNode("tbody", _hoisted_2$2, [
+                    isEmpty.value ? (openBlock(), createBlock(_sfc_main$9, {
+                      key: 0,
+                      colspan: unref(columns).length
+                    }, null, 8, ["colspan"])) : (openBlock(true), createElementBlock(Fragment, { key: 1 }, renderList(__props.data, (item, index2) => {
+                      return openBlock(), createElementBlock("tr", {
+                        key: `bp-table-tbody-tr-${index2}`
                       }, [
-                        !v.scope ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
-                          createTextVNode(toDisplayString(item[v.key]), 1)
-                        ], 64)) : renderSlot(_ctx.$slots, v.scope.customRender, {
-                          key: 1,
-                          row: item,
-                          index: index2,
-                          data: item[v.key]
-                        })
-                      ], 2);
+                        (openBlock(true), createElementBlock(Fragment, null, renderList(unref(columns), (v, k) => {
+                          return openBlock(), createElementBlock("td", {
+                            key: `bp-table-tbody-td-${index2}-${k}`,
+                            class: normalizeClass(tdClass(v))
+                          }, [
+                            !v.scope ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
+                              createTextVNode(toDisplayString(item[v.key]), 1)
+                            ], 64)) : renderSlot(_ctx.$slots, v.scope.customRender, {
+                              key: 1,
+                              row: item,
+                              index: index2,
+                              data: item[v.key]
+                            })
+                          ], 2);
+                        }), 128))
+                      ]);
                     }), 128))
-                  ]);
-                }), 128))
-              ])
-            ], 4)
-          ], 4)
-        ], 2)
-      ], 512);
+                  ])
+                ], 4)
+              ], 4)
+            ], 2)
+          ], 512)
+        ]),
+        _: 3
+      }, 8, ["loading"]);
     };
   }
 });
-_sfc_main$8.name = getComponentsPrefix() + _sfc_main$8.name;
-const Table = Object.assign(_sfc_main$8, {
+_sfc_main$7.name = getComponentsPrefix() + _sfc_main$7.name;
+const Table = Object.assign(_sfc_main$7, {
   install: (app) => {
-    app.component(_sfc_main$8.name, _sfc_main$8);
+    app.component(_sfc_main$7.name, _sfc_main$7);
   }
 });
 const _space = /* @__PURE__ */ defineComponent({
@@ -1563,15 +1612,15 @@ const Space = Object.assign(_space, {
     app.component(_space.name, _space);
   }
 });
-const _hoisted_1$3 = {
+const _hoisted_1$2 = {
   key: 0,
   class: "ri-information-fill"
 };
-const _hoisted_2$2 = {
+const _hoisted_2$1 = {
   key: 1,
   class: "ri-checkbox-circle-fill"
 };
-const _hoisted_3$2 = {
+const _hoisted_3$1 = {
   key: 2,
   class: "ri-error-warning-fill"
 };
@@ -1585,11 +1634,11 @@ const _hoisted_6$1 = {
   class: "ri-close-line"
 };
 const _hoisted_7 = { key: 1 };
-const __default__$7 = defineComponent({
+const __default__$6 = defineComponent({
   name: "Alert"
 });
-const _sfc_main$7 = /* @__PURE__ */ defineComponent({
-  ...__default__$7,
+const _sfc_main$6 = /* @__PURE__ */ defineComponent({
+  ...__default__$6,
   props: {
     type: { type: String, default: "info" },
     title: { type: String, default: "" },
@@ -1616,9 +1665,9 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
         createElementVNode("div", {
           class: normalizeClass(`${name}-icon`)
         }, [
-          __props.type === "info" ? (openBlock(), createElementBlock("i", _hoisted_1$3)) : createCommentVNode("", true),
-          __props.type === "success" ? (openBlock(), createElementBlock("i", _hoisted_2$2)) : createCommentVNode("", true),
-          __props.type === "warning" ? (openBlock(), createElementBlock("i", _hoisted_3$2)) : createCommentVNode("", true),
+          __props.type === "info" ? (openBlock(), createElementBlock("i", _hoisted_1$2)) : createCommentVNode("", true),
+          __props.type === "success" ? (openBlock(), createElementBlock("i", _hoisted_2$1)) : createCommentVNode("", true),
+          __props.type === "warning" ? (openBlock(), createElementBlock("i", _hoisted_3$1)) : createCommentVNode("", true),
           __props.type === "error" ? (openBlock(), createElementBlock("i", _hoisted_4$1)) : createCommentVNode("", true)
         ], 2),
         createElementVNode("div", {
@@ -1657,17 +1706,17 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-_sfc_main$7.name = getComponentsPrefix() + _sfc_main$7.name;
-const Alert = Object.assign(_sfc_main$7, {
+_sfc_main$6.name = getComponentsPrefix() + _sfc_main$6.name;
+const Alert = Object.assign(_sfc_main$6, {
   install: (app) => {
-    app.component(_sfc_main$7.name, _sfc_main$7);
+    app.component(_sfc_main$6.name, _sfc_main$6);
   }
 });
-const __default__$6 = defineComponent({
+const __default__$5 = defineComponent({
   name: "Tag"
 });
-const _sfc_main$6 = /* @__PURE__ */ defineComponent({
-  ...__default__$6,
+const _sfc_main$5 = /* @__PURE__ */ defineComponent({
+  ...__default__$5,
   props: {
     status: { type: String, default: "normal" },
     closeable: { type: Boolean, default: false }
@@ -1703,18 +1752,18 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-_sfc_main$6.name = getComponentsPrefix() + _sfc_main$6.name;
-const Tag = Object.assign(_sfc_main$6, {
+_sfc_main$5.name = getComponentsPrefix() + _sfc_main$5.name;
+const Tag = Object.assign(_sfc_main$5, {
   install: (app) => {
-    app.component(_sfc_main$6.name, _sfc_main$6);
+    app.component(_sfc_main$5.name, _sfc_main$5);
   }
 });
-const _hoisted_1$2 = ["onClick"];
-const __default__$5 = defineComponent({
+const _hoisted_1$1 = ["onClick"];
+const __default__$4 = defineComponent({
   name: "Modal"
 });
-const _sfc_main$5 = /* @__PURE__ */ defineComponent({
-  ...__default__$5,
+const _sfc_main$4 = /* @__PURE__ */ defineComponent({
+  ...__default__$4,
   props: {
     visible: { type: Boolean, default: false },
     hideFooter: { type: Boolean, default: false },
@@ -1840,7 +1889,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
                     renderSlot(_ctx.$slots, "footer")
                   ], 2)) : createCommentVNode("", true)
                 ], 6)
-              ], 10, _hoisted_1$2), [
+              ], 10, _hoisted_1$1), [
                 [vShow, __props.visible]
               ])
             ]),
@@ -1853,58 +1902,8 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-_sfc_main$5.name = getComponentsPrefix() + _sfc_main$5.name;
-const Modal = Object.assign(_sfc_main$5, {
-  install: (app) => {
-    app.component(_sfc_main$5.name, _sfc_main$5);
-  }
-});
-const _hoisted_1$1 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
-const _hoisted_2$1 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
-const _hoisted_3$1 = [
-  _hoisted_2$1
-];
-const __default__$4 = defineComponent({
-  name: "Spin"
-});
-const _sfc_main$4 = /* @__PURE__ */ defineComponent({
-  ...__default__$4,
-  props: {
-    /** 是否开启加载 Loading or not */
-    loading: { type: Boolean, default: false },
-    /** 加载提示文字 The loading tip text */
-    tip: { type: String, default: "" }
-  },
-  setup(__props) {
-    const name = "bp-spin";
-    const slots = useSlots();
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(name)
-      }, [
-        renderSlot(_ctx.$slots, "default"),
-        unref(slots).default && __props.loading ? (openBlock(), createElementBlock("div", {
-          key: 0,
-          class: normalizeClass(`${name}-mask`)
-        }, [
-          createElementVNode("div", {
-            class: normalizeClass(`${name}-loading`)
-          }, [
-            _hoisted_1$1,
-            createElementVNode("p", {
-              class: normalizeClass(`${name}-tip`)
-            }, toDisplayString(__props.tip), 3)
-          ], 2)
-        ], 2)) : (openBlock(), createElementBlock("div", {
-          key: 1,
-          class: normalizeClass(`${name}-loading`)
-        }, _hoisted_3$1, 2))
-      ]);
-    };
-  }
-});
 _sfc_main$4.name = getComponentsPrefix() + _sfc_main$4.name;
-const Spin = Object.assign(_sfc_main$4, {
+const Modal = Object.assign(_sfc_main$4, {
   install: (app) => {
     app.component(_sfc_main$4.name, _sfc_main$4);
   }

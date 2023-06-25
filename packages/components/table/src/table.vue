@@ -1,30 +1,32 @@
 <template>
-  <div class="bp-table" ref="bpTable">
-    <div :class="innerClass">
-      <table-header :header-list="columns"></table-header>
+  <bp-spin :loading="loading">
+    <div class="bp-table" ref="bpTable">
+      <div :class="innerClass">
+        <table-header :header-list="columns"></table-header>
 
-      <div class="bp-table-body-area" :style="bodyAreaStyle">
-        <div class="scrollbar"></div>
+        <div class="bp-table-body-area" :style="bodyAreaStyle">
+          <div class="scrollbar"></div>
 
-        <table class="bp-table-body" :style="`width:${_table_width}px`">
-          <col-group :cols="columns"></col-group>
+          <table class="bp-table-body" :style="`width:${_table_width}px`">
+            <col-group :cols="columns"></col-group>
 
-          <tbody class="bp-table-body-tbody">
-            <table-empty v-if="isEmpty" :colspan="columns.length"></table-empty>
+            <tbody class="bp-table-body-tbody">
+              <table-empty v-if="isEmpty" :colspan="columns.length"></table-empty>
 
-            <template v-else>
-              <tr v-for="(item, index) in dataSource" :key="`bp-table-tbody-tr-${index}`">
-                <td v-for="(v, k) in columns" :key="`bp-table-tbody-td-${index}-${k}`" :class="tdClass(v)">
-                  <template v-if="!v.scope">{{ item[v.key] }}</template>
-                  <slot v-else :name="v.scope.customRender" :row="item" :index="index" :data="item[v.key]"></slot>
-                </td>
-              </tr>
-            </template>
-          </tbody>
-        </table>
+              <template v-else>
+                <tr v-for="(item, index) in data" :key="`bp-table-tbody-tr-${index}`">
+                  <td v-for="(v, k) in columns" :key="`bp-table-tbody-td-${index}-${k}`" :class="tdClass(v)">
+                    <template v-if="!v.scope">{{ item[v.key] }}</template>
+                    <slot v-else :name="v.scope.customRender" :row="item" :index="index" :data="item[v.key]"></slot>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
+  </bp-spin>
 </template>
 
 <script setup lang="ts" name="Table">
@@ -33,12 +35,13 @@ import { useTable } from "./table";
 import TableHeader from "./components/table-header.vue";
 import TableEmpty from "./components/empty.vue";
 import ColGroup from "./components/col-group.vue";
+import bpSpin from "../../spin/index";
 
 const props = defineProps({
   /* 表格头部列表 Table header list */
   cols: { type: Array, default: () => [] },
   /* 表格数据 Table data source */
-  dataSource: { type: Array, default: () => [] },
+  data: { type: Array, default: () => [] },
   /* 固定高度 Fixed height */
   height: { type: String, default: "" },
   /* 加载状态 loading or not */
@@ -51,7 +54,7 @@ const props = defineProps({
 
 const { bpTable, columns, _table_width } = useTable(props);
 
-const isEmpty = computed(() => props.dataSource.length === 0);
+const isEmpty = computed(() => props.data.length === 0);
 const hasBorder = computed(() => props.border);
 const isStripe = computed(() => props.stripe);
 const fixedHeight = computed(() => props.height);

@@ -1,6 +1,6 @@
 <template>
   <div class="table-block">
-    <bp-table :cols="header[type]" :data-source="list">
+    <bp-table :cols="header[type]" :data="list">
       <!-- 名称 -->
       <template #name="{ row }">
         <div class="name-area">

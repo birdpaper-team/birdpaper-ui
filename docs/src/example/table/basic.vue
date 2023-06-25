@@ -1,5 +1,5 @@
 <template>
-  <bp-table border :cols="cols" :data-source="list"> </bp-table>
+  <bp-table border :cols="cols" :data="list"> </bp-table>
 </template>
 
 <script setup lang="ts">
