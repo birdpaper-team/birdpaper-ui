@@ -9,7 +9,7 @@
       </div>
     </div>
 
-    <div v-else :class="`${name}-loading`">
+    <div v-else-if="loading" :class="`${name}-loading`">
       <i class="bp-icon-loading ri-loader-4-line"></i>
     </div>
   </div>
