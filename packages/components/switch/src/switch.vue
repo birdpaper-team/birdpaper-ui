@@ -14,9 +14,13 @@ const props = defineProps({
   modelValue: { type: Boolean, default: false },
   /** 是否禁用 Disabled or not */
   disabled: { type: Boolean, default: false },
+  /** 选中时的值 */
+  checkValue: { type: [Boolean, Number, String], default: true },
+  /** 未选中时的值 */
+  uncheckValue: { type: [Boolean, Number, String], default: false },
 });
 const emits = defineEmits<{
-  "update:modelValue": [value: boolean];
+  "update:modelValue": [value: boolean | number | string];
 }>();
 
 const name = "bp-switch";
@@ -28,9 +32,9 @@ const cls = computed(() => {
   return clsName;
 });
 
-const isCheck = computed(() => props.modelValue);
+const isCheck = computed(() => props.modelValue === props.checkValue);
 
 const handleClick = () => {
-  emits("update:modelValue", !props.modelValue);
+  emits("update:modelValue", isCheck.value ? props.uncheckValue : props.checkValue);
 };
 </script>

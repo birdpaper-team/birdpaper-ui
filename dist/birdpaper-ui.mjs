@@ -420,7 +420,11 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     /** 绑定值 Binding value */
     modelValue: { type: Boolean, default: false },
     /** 是否禁用 Disabled or not */
-    disabled: { type: Boolean, default: false }
+    disabled: { type: Boolean, default: false },
+    /** 选中时的值 */
+    checkValue: { type: [Boolean, Number, String], default: true },
+    /** 未选中时的值 */
+    uncheckValue: { type: [Boolean, Number, String], default: false }
   },
   emits: ["update:modelValue"],
   setup(__props, { emit: emits }) {
@@ -433,9 +437,9 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
       }
       return clsName;
     });
-    const isCheck = computed(() => props.modelValue);
+    const isCheck = computed(() => props.modelValue === props.checkValue);
     const handleClick = () => {
-      emits("update:modelValue", !props.modelValue);
+      emits("update:modelValue", isCheck.value ? props.uncheckValue : props.checkValue);
     };
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
@@ -1719,13 +1723,14 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   ...__default__$5,
   props: {
     status: { type: String, default: "normal" },
+    dot: { type: Boolean, default: false },
     closeable: { type: Boolean, default: false }
   },
   setup(__props) {
     const props = __props;
     const name = "bp-tag";
     const cls = computed(() => {
-      return [name, `${name}-${props.status}`];
+      return [name, props.dot ? `${name}-dot-box` : `${name}-${props.status}`];
     });
     const visible = ref(true);
     const handleClose = () => {
@@ -1738,13 +1743,17 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
         key: 0,
         class: normalizeClass(cls.value)
       }, [
+        __props.dot ? (openBlock(), createElementBlock("div", {
+          key: 0,
+          class: normalizeClass([`${name}-dot`, `${name}-dot-${__props.status}`])
+        }, null, 2)) : createCommentVNode("", true),
         createElementVNode("span", {
           class: normalizeClass(`${name}-inner`)
         }, [
           renderSlot(_ctx.$slots, "default")
         ], 2),
         __props.closeable ? (openBlock(), createElementBlock("i", {
-          key: 0,
+          key: 1,
           class: "ri-close-line",
           onClick: handleClose
         })) : createCommentVNode("", true)

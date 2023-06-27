@@ -8,12 +8,19 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  min-width: 42px;
   max-width: 180px;
+  box-sizing: border-box;
   height: 24px;
   border-radius: 4px;
   padding: 4px 8px;
   .no-select;
+
+  &-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
 
   &-inner {
     font-size: 12px;
@@ -47,6 +54,10 @@
   }
 }
 
+.@{tag-cls}-dot-box {
+  background-color: none;
+}
+
 .tag-status(@status) {
   .@{tag-cls}-@{status} {
     background-color: ~"@{tag-status-@{status}-background}";
@@ -57,8 +68,24 @@
   }
 }
 
+.tag-status-dot(@status) {
+  .@{tag-cls}-dot-@{status} {
+    background-color: ~"@{tag-status-@{status}-background-dot}";
+
+    .@{tag-cls}-inner {
+      color: @gary-8;
+    }
+  }
+}
+
 .tag-status(normal);
 .tag-status(primary);
 .tag-status(success);
 .tag-status(warning);
 .tag-status(danger);
+
+.tag-status-dot(normal);
+.tag-status-dot(primary);
+.tag-status-dot(success);
+.tag-status-dot(warning);
+.tag-status-dot(danger);
