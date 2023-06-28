@@ -1,1 +1,0 @@
-import{_ as n,r as o,o as t,j as s,w as _,b as c}from"../app.8cdd5676.js";const a={},r=c("div",{class:"demo-spin-box"},null,-1);function i(p,l){const e=o("bp-spin");return t(),s(e,{loading:"",tip:"加载中，请稍候"},{default:_(()=>[r]),_:1})}const f=n(a,[["render",i]]);export{f as default};

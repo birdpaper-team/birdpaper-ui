@@ -1,0 +1,1 @@
+import{_ as o,r as t,o as a,j as c,w as s,e as n}from"../app.9fcb9066.js";const r={};function _(l,p){const e=t("bp-tag");return a(),c(e,{closeable:""},{default:s(()=>[n("标签一")]),_:1})}const d=o(r,[["render",_]]);export{d as default};

@@ -1,1 +1,0 @@
-import{d as o,r as n,o as a,j as s,w as c,e as r,M as l}from"../app.8cdd5676.js";const b=o({__name:"closeable",setup(_){const e=()=>{l.text({content:"这是一条可手动关闭的消息提示",closeable:!0})};return(p,u)=>{const t=n("bp-button");return a(),s(t,{onClick:e},{default:c(()=>[r("可关闭的提示")]),_:1})}}});export{b as default};

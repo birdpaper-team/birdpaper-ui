@@ -1,0 +1,1 @@
+import{_ as o,r as t,o as a,j as c,w as r,e as s}from"../app.9fcb9066.js";const n={};function _(l,p){const e=t("bp-alert");return a(),c(e,{type:"info",closeable:""},{default:r(()=>[s("这是一条提示信息")]),_:1})}const d=o(n,[["render",_]]);export{d as default};
