@@ -1,0 +1,44 @@
+@link-cls: ~"@{prefix}-link";
+
+.@{link-cls} {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  a,
+  &-inner {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+}
+
+.@{link-cls}-status-primary {
+  a,
+  &-inner {
+    color: @primary-6;
+  }
+}
+
+.@{link-cls}-status-success {
+  a,
+  .@{link-cls}-inner {
+    color: @success-6;
+  }
+}
+
+.@{link-cls}-status-warning {
+  a,
+  &-inner {
+    color: @warning-6;
+  }
+}
+
+.@{link-cls}-status-danger {
+  a,
+  &-inner {
+    color: @danger-6;
+  }
+}

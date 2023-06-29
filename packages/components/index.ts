@@ -14,6 +14,7 @@ import Tag from "./tag";
 import Modal from "./modal";
 import Spin from "./spin";
 import Grid from "./grid";
+import Link from "./link";
 import Message from "./message";
 
 const components: Record<string, Plugin> = {
@@ -32,6 +33,7 @@ const components: Record<string, Plugin> = {
   Modal,
   Spin,
   Grid,
+  Link,
   Message,
 };
 
@@ -60,5 +62,6 @@ export default {
   Modal,
   Spin,
   Grid,
+  Link,
   Message,
 };

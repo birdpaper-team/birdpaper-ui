@@ -44,6 +44,7 @@ export const sidebar = {
         { text: "分页", link: "/component/pagination" },
         { text: "表格", link: "/component/table" },
         { text: "标签", link: "/component/tag" },
+        { text: "链接", link: "/component/link" },
         { text: "加载中", link: "/component/spin" },
       ],
     },
