@@ -59,7 +59,7 @@
           th {
             overflow-wrap: break-word;
             display: table-cell;
-            padding: 8px 10px;
+            padding: 8px 14px;
             font-size: 14px;
             font-weight: 500;
             color: @gary-10;
@@ -83,7 +83,7 @@
             font-size: 13px;
             color: @gary-9;
             font-weight: 400;
-            padding: 8px 10px;
+            padding: 8px 14px;
             word-break: break-all;
             border-top: 1px solid @gary-4;
           }
@@ -106,12 +106,8 @@
       .bp-table-header-thead {
         tr {
           th {
-            &:not(:first-child) {
-              border-right: 1px solid #e8e8e8;
-            }
-            &:not(:last-child) {
-              border-left: 1px solid #e8e8e8;
-            }
+            border-right: 1px solid #e8e8e8;
+
             &:first-child {
               border-left: none;
             }
@@ -125,12 +121,8 @@
     .bp-table-body-tbody {
       tr {
         td {
-          &:not(:first-child) {
-            border-right: 1px solid #e8e8e8;
-          }
-          &:not(:last-child) {
-            border-left: 1px solid #e8e8e8;
-          }
+          border-right: 1px solid #e8e8e8;
+
           &:first-child {
             border-left: none;
           }
