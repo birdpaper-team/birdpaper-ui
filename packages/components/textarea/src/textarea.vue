@@ -42,7 +42,7 @@ const props = defineProps({
   /** 限制输入最大长度 Restricts the maximum input length */
   maxlength: { type: Number, default: null },
   /** 行数 */
-  rows: { type: Number, default: 2 },
+  rows: { type: Number, default: 3 },
   /** 是否展示字数限制提示 Display word limit prompts or not */
   showLimit: { type: Boolean, default: false },
 });
