@@ -1,5 +1,13 @@
 @radio-cls: ~"@{prefix}-radio";
 
+.@{radio-cls}-group {
+  .@{radio-cls} {
+    &:not(:first-child){
+      margin-left: 12px;
+    }
+  }
+}
+
 .@{radio-cls} {
   position: relative;
   display: inline-flex;

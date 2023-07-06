@@ -13,8 +13,11 @@
 import { computed } from "vue";
 
 const props = defineProps({
+  /** 单选框绑定值 */
   modelValue: { type: [String, Number, Boolean], default: false },
+  /** 选项的值 */
   value: { type: [String, Number, Boolean], default: false },
+  /** 是否禁用 */
   disabled: { type: Boolean, default: false },
 });
 const emits = defineEmits<{
