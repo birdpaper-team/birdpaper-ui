@@ -33,15 +33,24 @@
 import { computed, ref, useSlots, watch } from "vue";
 
 const props = defineProps({
+  /** 对话框显示状态 */
   visible: { type: Boolean, default: false },
-  hideFooter: { type: Boolean, default: false },
-  hideClose: { type: Boolean, default: false },
-  border: { type: Boolean, default: false },
-  maskClosable: { type: Boolean, default: true },
+  /** 对话框标题 */
   title: { type: String, default: "标题" },
+  /** 标题对齐方式 */
   titleAlign: { type: String, default: "left" },
+  /** 对话框宽度 */
   width: { type: String, default: "600px" },
+  /** 对话框宽度 */
   top: { type: String, default: "20vh" },
+  /** 是否隐藏底部区域 */
+  hideFooter: { type: Boolean, default: false },
+  /** 是否隐藏关闭图标 */
+  hideClose: { type: Boolean, default: false },
+  /** 是否展示边框 */
+  border: { type: Boolean, default: false },
+  /** 点击遮罩是否关闭 */
+  maskClosable: { type: Boolean, default: true },
 });
 const emits = defineEmits<{
   ok: [];
