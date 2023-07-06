@@ -17,7 +17,7 @@
   &-container {
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(auto-fill, calc(50% - 88px));
+    grid-template-columns: repeat(auto-fill, calc(50% - 16px));
     grid-gap: 30px;
     margin-top: 40px;
     .no-select;
@@ -27,9 +27,8 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      height: 400px;
+      height: 380px;
       border-radius: 12px;
-      padding: 0 120px;
 
       .title {
         font-size: 24px;
@@ -46,7 +45,7 @@
       }
 
       .option {
-        width: 100%;
+        width: 300px;
         margin-top: 60px;
       }
     }
@@ -92,7 +91,7 @@
             flex: 1;
             font-weight: 500;
             color: @gary-1;
-            font-size: 16px;
+            font-size: 14px;
             letter-spacing: 1px;
             padding: 10px 20px;
             .font-quick;
@@ -133,12 +132,22 @@
 
 @media screen and (max-width: 1366px) {
   .@{start-cls} {
-    // grid-template-columns: repeat(auto-fill, calc(50% - 48px));
+    &-container {
+      grid-template-columns: repeat(auto-fill, calc(50% - 48px));
+    }
   }
 }
 
 @media screen and (max-width: 960px) {
   .@{start-cls} {
-    // grid-template-columns: repeat(auto-fill, calc(100% - 48px));
+    &-container {
+      grid-template-columns: repeat(auto-fill, calc(100% - 48px));
+
+      .shell-box {
+        .content {
+          font-size: 13px !important;
+        }
+      }
+    }
   }
 }
