@@ -1,0 +1,144 @@
+@start-cls: ~"start-entry";
+
+.@{start-cls} {
+  margin-top: 80px;
+
+  &-header {
+    text-align: center;
+
+    &-inner {
+      font-size: 30px;
+      font-weight: bold;
+      color: @gary-11;
+      letter-spacing: 2px;
+    }
+  }
+
+  &-container {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fill, calc(50% - 88px));
+    grid-gap: 30px;
+    margin-top: 40px;
+    .no-select;
+
+    &-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      height: 400px;
+      border-radius: 12px;
+      padding: 0 120px;
+
+      .title {
+        font-size: 24px;
+        font-weight: bold;
+
+        i {
+          margin-right: 10px;
+        }
+      }
+
+      .intro {
+        font-size: 13px;
+        margin-top: 20px;
+      }
+
+      .option {
+        width: 100%;
+        margin-top: 60px;
+      }
+    }
+
+    .designer {
+      background-color: @gary-3;
+
+      .title {
+        color: @gary-10;
+      }
+
+      .intro {
+        color: @gary-8;
+      }
+
+      .option {
+        .bp-btn {
+          height: 44px;
+        }
+      }
+    }
+
+    .developer {
+      background-color: @primary-6;
+
+      .title {
+        color: @gary-1;
+      }
+
+      .intro {
+        color: @gary-1;
+      }
+
+      .option {
+        .shell-box {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          background-color: @gary-10;
+          border-radius: 6px;
+
+          .content {
+            flex: 1;
+            font-weight: 500;
+            color: @gary-1;
+            font-size: 16px;
+            letter-spacing: 1px;
+            padding: 10px 20px;
+            .font-quick;
+
+            span {
+              color: @primary-4;
+            }
+          }
+
+          .copy-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 40px;
+            border-left: 1px solid @gary-9;
+            color: @gary-2;
+            font-size: 14px;
+            cursor: pointer;
+
+            .ri-file-copy-line {
+              transform: scale(1);
+              transition: all 0.2s ease;
+            }
+
+            &:hover {
+              .ri-file-copy-line {
+                transform: scale(1.1);
+                transition: all 0.2s ease;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .@{start-cls} {
+    // grid-template-columns: repeat(auto-fill, calc(50% - 48px));
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .@{start-cls} {
+    // grid-template-columns: repeat(auto-fill, calc(100% - 48px));
+  }
+}
