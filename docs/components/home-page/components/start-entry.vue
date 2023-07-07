@@ -10,7 +10,7 @@
           <p><i class="ri-brush-2-fill"></i>设计师</p>
         </div>
         <div class="intro">
-          <p>了解设计指引和风格，获取第一手组件库设计资源</p>
+          <p>了解设计指引和规范，获取第一手组件库设计资源，帮助设计师快速输出视觉效果</p>
         </div>
         <div class="option">
           <bp-button type="dashed" size="large" block disabled>稍晚推出</bp-button>
@@ -22,7 +22,7 @@
           <p><i class="ri-terminal-box-fill"></i>开发者</p>
         </div>
         <div class="intro">
-          <p>从 Npm 安装开始，快速构建你的 web 应用</p>
+          <p>推荐使用 Npm 安装，快速构建你的 Web 应用</p>
         </div>
         <div class="option">
           <div class="shell-box">
