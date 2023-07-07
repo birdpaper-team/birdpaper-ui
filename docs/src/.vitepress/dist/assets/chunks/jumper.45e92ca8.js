@@ -1,0 +1,1 @@
+import{d as r,k as a,r as p,o as s,j as u}from"../app.d9c827c8.js";const _=r({__name:"jumper",setup(c){const e=a(1);return(l,n)=>{const t=p("bp-pagination");return s(),u(t,{current:e.value,"onUpdate:current":n[0]||(n[0]=o=>e.value=o),total:500,layout:"prev, pager, next, jumper"},null,8,["current"])}}});export{_ as default};

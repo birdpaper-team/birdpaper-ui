@@ -1,0 +1,1 @@
+import{_ as s,r as a,o as _,j as r,w as e,a as o,e as c}from"../app.d9c827c8.js";const l={};function p(d,f){const t=a("bp-link"),n=a("bp-space");return _(),r(n,null,{default:e(()=>[o(t,null,{default:e(()=>[c("链接")]),_:1}),o(t,{disabled:""},{default:e(()=>[c("链接")]),_:1})]),_:1})}const u=s(l,[["render",p]]);export{u as default};

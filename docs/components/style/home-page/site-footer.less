@@ -102,6 +102,12 @@
         color: @gary-7;
         font-weight: normal;
         letter-spacing: 0.2px;
+
+        .bp-link {
+          &-inner {
+            font-size: 12px;
+          }
+        }
       }
     }
   }
@@ -133,6 +139,15 @@
 
       &-inner {
         width: 100%;
+      }
+    }
+    &-info {
+      &-content {
+        flex-direction: column;
+
+        .power-area {
+          flex-direction: column;
+        }
       }
     }
   }
