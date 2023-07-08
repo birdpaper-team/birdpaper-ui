@@ -52,12 +52,36 @@
     justify-content: center;
 
     &-inner {
-      width: 220px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 200px;
       height: 266px;
       opacity: 1;
       border-radius: 10px;
       background-color: @gary-1;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+
+      img {
+        width: 120px;
+        height: 120px;
+      }
+
+      &-title {
+        font-size: 13px;
+        font-weight: 500;
+        color: @gary-10;
+        margin-top: 20px;
+      }
+
+      &-intro {
+        font-size: 12px;
+        font-weight: normal;
+        color: @gary-7;
+        letter-spacing: .2px;
+        margin-top: 8px;
+      }
     }
   }
 
@@ -78,7 +102,7 @@
         align-items: center;
 
         .power-tag {
-          border-radius: 6px;
+          border-radius: 4px;
           background: rgba(255, 255, 255, 1);
           border: 1px solid rgba(217, 217, 217, 1);
           font-size: 12px;
@@ -116,6 +140,10 @@
 @media screen and (max-width: 1366px) {
   .@{footer-cls} {
     &-container {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    &-info {
       padding-left: 20px;
       padding-right: 20px;
     }
