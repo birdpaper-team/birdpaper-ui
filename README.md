@@ -25,7 +25,7 @@ birdpaper-ui for v2 (Ogino Chihiro 荻野千寻) is coming soon.
 
 ## Getting Started
 
-In order to better understand birdpaper-ui, you may need to read this manual carefully; For developers, the need for more in-depth instructions document, you can access [Quick Start](https://v2.birdpaper.design).
+In order to better understand birdpaper-ui, you may need to read this manual carefully; For developers, the need for more in-depth instructions document, you can access [快速上手](https://v2.birdpaper.design).
 
 birdpaper-ui is a general-purpose UI component library that is written based on Vue3 and provides a set of web-friendly component scenarios. At present by the author [木亦Sam](https://github.com/liluanhui) for maintenance.
 
@@ -39,14 +39,14 @@ birdpaper-ui is a general-purpose UI component library that is written based on 
 
 There are currently two sites that can access the project documents, and for better access experience, the documents will be deployed to more places in the future.
 
-- 中国大陆推荐访问 [官方站点](https://v2.birdpaper.design)
+- 中国大陆推荐访问 [官方文档](https://v2.birdpaper.design)
 - [Github Page](https://birdpaper-team.github.io/birdpaper-ui/)
 
 ### Product planning
 
-About the function of the project plan, version requirements, scheduling and other information, you can access products [Product planning](https://birdpaper.feishu.cn/base/XuwfbzYJZaXsQ4shv6rcl1J4nNb) to understand; You can also submit feedback and defects, I will keep an eye on and follow up.
+About the function of the project plan, version requirements, scheduling and other information, you can access [产品计划](https://birdpaper.feishu.cn/base/XuwfbzYJZaXsQ4shv6rcl1J4nNb) to understand; You can also submit feedback and defects, I will keep an eye on and follow up.
 
-I sincerely hope that you can participate in the construction of the project, Submit by [feedback](https://birdpaper.feishu.cn/share/base/form/shrcn5frnnnGQ8srrudH9wV0TMh) or [Github Issues](https://github.com/birdpaper-team/birdpaper-ui/issues)
+I sincerely hope that you can participate in the construction of the project, Submit by [提交反馈](https://birdpaper.feishu.cn/share/base/form/shrcn5frnnnGQ8srrudH9wV0TMh) or [Github Issues](https://github.com/birdpaper-team/birdpaper-ui/issues)
 
 ## License
 
