@@ -23,31 +23,29 @@
 
 birdpaper-ui for v2 (Ogino Chihiro 荻野千寻) is coming soon.
 
-## 快速了解
+## Getting Started
 
-为了方便你更好的了解 birdpaper-ui，你可能需要仔细阅读这份说明书；对于开发者，需要更深入的使用说明文档，可以访问 [快速上手](https://v2.bridpaper.design)。
+In order to better understand birdpaper-ui, you may need to read this manual carefully; For developers, the need for more in-depth instructions document, can access [quick-and-dirty](https://v2.birdpaper.design).
 
-birdpaper-ui 是一个通用的 UI 组件库，它基于 Vue3 编写，提供一套友好的 web 组件方案。目前由作者 [木亦 Sam](https://github.com/liluanhui) 进行维护。
+birdpaper-ui is a general-purpose UI component library that is written based on Vue3 and provides a set of web-friendly component scenarios. At present by the author [木亦 Sam](https://github.com/liluanhui) for maintenance.
 
-### 新特性
+### Feature
 
-- Vue3 组合式 API 支持
-- 使用 TypeScript 编写（进行中）
-- 完善的设计资源（进行中）
+- Vue3 Composite API
+- Written in TypeScript (in progress)
+- Comprehensive design resources (in progress)
 
-### 项目文档
+### Document site
 
-目前有 2 个站点可以访问项目文档，为了更好的访问体验，后面也会将文档部署到更多的地方。
+There are currently two sites that can access the project documents, and for better access experience, the documents will be deployed to more places in the future.
 
-- 国内推荐访问 [官方站点](https://v2.bridpaper.design)
+- Mainland China [Official site](https://v2.birdpaper.design)
 - [Github Page](https://birdpaper-team.github.io/birdpaper-ui/)
 
-### 产品计划
+### Product planning
+About the function of the project plan, version requirements, scheduling and other information, you can access products [Product planning](https://birdpaper.feishu.cn/base/XuwfbzYJZaXsQ4shv6rcl1J4nNb) to understand; You can also submit feedback and defects, I will keep an eye on and follow up.
 
-关于这个项目的功能计划、版本需求、排期等信息，你可以访问 [产品计划](https://birdpaper.feishu.cn/base/XuwfbzYJZaXsQ4shv6rcl1J4nNb) 进行了解；你也可以提交反馈和缺陷，我会时刻关注并跟进。
+I sincerely hope that you can participate in the construction of the project, Submit by [feedback](https://birdpaper.feishu.cn/share/base/form/shrcn5frnnnGQ8srrudH9wV0TMh) or [Github Issues](https://github.com/birdpaper-team/birdpaper-ui/issues)
 
-由衷地希望你可以参与到项目的建设，通过 [提交反馈](https://birdpaper.feishu.cn/share/base/form/shrcn5frnnnGQ8srrudH9wV0TMh) 或者 [Github Issues](https://github.com/birdpaper-team/birdpaper-ui/issues)
-
-## 协议
-
-bridpaper-ui 使用 [MIT](https://github.com/birdpaper-team/birdpaper-ui/LICENSE) 开源协议。
+## License
+birdpaper-ui use at [MIT] (https://github.com/birdpaper-team/birdpaper-ui/LICENSE) open source licenses.
