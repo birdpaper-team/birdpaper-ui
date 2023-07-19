@@ -25,7 +25,19 @@
 </template>
 
 <script setup lang="ts" name="Select">
-import { PropType, VNode, computed, nextTick, onBeforeUnmount, onMounted, provide, reactive, ref, useSlots } from "vue";
+import {
+  PropType,
+  VNode,
+  computed,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+  useSlots,
+  watch,
+} from "vue";
 import { SelectBindValue, SelectOption, selectInjectionKey } from "./type";
 import { vClickOutside } from "../../../directives/clickOutside";
 import { getAllElements } from "../../../utils/dom";
@@ -60,7 +72,7 @@ const valueMap = computed(() => {
     const children: VNode[] = getAllElements(slots.default?.(), true).filter(item => item.type !== Comment) ?? [];
 
     for (const item of children) {
-      if(item.type["name"] === "BpOption"){
+      if (item.type["name"] === "BpOption") {
         obj[item.props.value] = item.props.label || item.children["default"]?.()[0].children;
       }
     }
@@ -111,7 +123,6 @@ const setup = () => {
   inpVal.value = props.modelValue;
   inpVal.label = valueMap.value[inpVal.value];
 };
-setup();
 
 onMounted(() => {
   nextTick(() => {
@@ -122,4 +133,14 @@ onMounted(() => {
 onBeforeUnmount(() => {
   off(window, "resize", handleResize);
 });
+
+watch(
+  () => props.modelValue,
+  () => {
+    setup();
+  },
+  {
+    immediate: true,
+  }
+);
 </script>

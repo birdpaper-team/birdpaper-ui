@@ -4,17 +4,17 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { defineComponent, computed, useSlots, openBlock, createElementBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, ref, unref, Fragment, toDisplayString, nextTick, reactive, onMounted, onBeforeUnmount, resolveComponent, withDirectives, withModifiers, createVNode, withCtx, createBlock, Teleport, Transition, vShow, provide, watch, inject, watchEffect, renderList, createTextVNode, resolveDynamicComponent, mergeProps, toHandlerKey, normalizeStyle, Comment as Comment$1, onUnmounted, TransitionGroup, render } from "vue";
+import { defineComponent, computed, useSlots, openBlock, createElementBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, ref, unref, Fragment, toDisplayString, nextTick, watch, renderList, createBlock, withCtx, createTextVNode, reactive, onMounted, onBeforeUnmount, resolveComponent, withDirectives, withModifiers, createVNode, Teleport, Transition, vShow, provide, inject, watchEffect, resolveDynamicComponent, mergeProps, toHandlerKey, normalizeStyle, Comment as Comment$1, onUnmounted, TransitionGroup, render } from "vue";
 const _hoisted_1$i = ["disabled"];
 const _hoisted_2$d = {
   key: 0,
   class: "left-icon"
 };
-const __default__$r = defineComponent({
+const __default__$s = defineComponent({
   name: "Button"
 });
-const _sfc_main$r = /* @__PURE__ */ defineComponent({
-  ...__default__$r,
+const _sfc_main$s = /* @__PURE__ */ defineComponent({
+  ...__default__$s,
   props: {
     /** 按钮类型 Type of the button */
     type: { type: String, default: "normal" },
@@ -76,10 +76,10 @@ const DEFAULT_PREFIX = "Bp";
 const getComponentsPrefix = (name) => {
   return name ?? DEFAULT_PREFIX;
 };
-_sfc_main$r.name = getComponentsPrefix() + _sfc_main$r.name;
-const Button = Object.assign(_sfc_main$r, {
+_sfc_main$s.name = getComponentsPrefix() + _sfc_main$s.name;
+const Button = Object.assign(_sfc_main$s, {
   install: (app) => {
-    app.component(_sfc_main$r.name, _sfc_main$r);
+    app.component(_sfc_main$s.name, _sfc_main$s);
   }
 });
 var InputType = /* @__PURE__ */ ((InputType2) => {
@@ -92,12 +92,12 @@ const _hoisted_2$c = {
   key: 0,
   class: "suffix"
 };
-const _hoisted_3$5 = ["textContent"];
-const __default__$q = defineComponent({
+const _hoisted_3$6 = ["textContent"];
+const __default__$r = defineComponent({
   name: "Input"
 });
-const _sfc_main$q = /* @__PURE__ */ defineComponent({
-  ...__default__$q,
+const _sfc_main$r = /* @__PURE__ */ defineComponent({
+  ...__default__$r,
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: String, default: "" },
@@ -197,7 +197,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
             showWordLimit.value ? (openBlock(), createElementBlock("span", {
               key: 1,
               textContent: toDisplayString(limitText.value)
-            }, null, 8, _hoisted_3$5)) : createCommentVNode("", true),
+            }, null, 8, _hoisted_3$6)) : createCommentVNode("", true),
             __props.type === "password" ? (openBlock(), createElementBlock("i", {
               key: 2,
               onClick: triggerPassword,
@@ -210,20 +210,20 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     };
   }
 });
-_sfc_main$q.name = getComponentsPrefix() + _sfc_main$q.name;
-const Input = Object.assign(_sfc_main$q, {
+_sfc_main$r.name = getComponentsPrefix() + _sfc_main$r.name;
+const Input = Object.assign(_sfc_main$r, {
   install: (app) => {
-    app.component(_sfc_main$q.name, _sfc_main$q);
+    app.component(_sfc_main$r.name, _sfc_main$r);
   }
 });
 const _hoisted_1$g = ["rows", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
 const _hoisted_2$b = { class: "suffix" };
-const _hoisted_3$4 = ["textContent"];
-const __default__$p = defineComponent({
+const _hoisted_3$5 = ["textContent"];
+const __default__$q = defineComponent({
   name: "Textarea"
 });
-const _sfc_main$p = /* @__PURE__ */ defineComponent({
-  ...__default__$p,
+const _sfc_main$q = /* @__PURE__ */ defineComponent({
+  ...__default__$q,
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: String, default: "" },
@@ -292,26 +292,29 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
           showWordLimit.value ? (openBlock(), createElementBlock("span", {
             key: 0,
             textContent: toDisplayString(limitText.value)
-          }, null, 8, _hoisted_3$4)) : createCommentVNode("", true)
+          }, null, 8, _hoisted_3$5)) : createCommentVNode("", true)
         ])
       ], 2);
     };
   }
 });
-_sfc_main$p.name = getComponentsPrefix() + _sfc_main$p.name;
-const Textarea = Object.assign(_sfc_main$p, {
+_sfc_main$q.name = getComponentsPrefix() + _sfc_main$q.name;
+const Textarea = Object.assign(_sfc_main$q, {
   install: (app) => {
-    app.component(_sfc_main$p.name, _sfc_main$p);
+    app.component(_sfc_main$q.name, _sfc_main$q);
   }
 });
-const __default__$o = defineComponent({
+const __default__$p = defineComponent({
   name: "Radio"
 });
-const _sfc_main$o = /* @__PURE__ */ defineComponent({
-  ...__default__$o,
+const _sfc_main$p = /* @__PURE__ */ defineComponent({
+  ...__default__$p,
   props: {
+    /** 单选框绑定值 */
     modelValue: { type: [String, Number, Boolean], default: false },
+    /** 选项的值 */
     value: { type: [String, Number, Boolean], default: false },
+    /** 是否禁用 */
     disabled: { type: Boolean, default: false }
   },
   emits: ["update:modelValue", "change"],
@@ -346,9 +349,57 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
     };
   }
 });
+const __default__$o = defineComponent({
+  name: "RadioGroup"
+});
+const _sfc_main$o = /* @__PURE__ */ defineComponent({
+  ...__default__$o,
+  props: {
+    /** 单选框绑定值 */
+    modelValue: { type: [String, Number] },
+    /** 选项列表 */
+    optionList: { type: Array, default: () => [] },
+    /** 是否禁用 */
+    disabled: { type: Boolean, default: false }
+  },
+  emits: ["update:modelValue"],
+  setup(__props, { emit: emits }) {
+    const props = __props;
+    const name = "bp-radio-group";
+    const val = ref(props.modelValue ?? "");
+    const updateValue = (val2) => {
+      emits("update:modelValue", val2);
+    };
+    watch(
+      () => props.modelValue,
+      () => val.value = props.modelValue
+    );
+    return (_ctx, _cache) => {
+      return openBlock(), createElementBlock("div", {
+        class: normalizeClass(name)
+      }, [
+        (openBlock(true), createElementBlock(Fragment, null, renderList(__props.optionList, (v) => {
+          return openBlock(), createBlock(_sfc_main$p, {
+            modelValue: val.value,
+            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => val.value = $event),
+            value: v.value,
+            onChange: updateValue
+          }, {
+            default: withCtx(() => [
+              createTextVNode(toDisplayString(v.label), 1)
+            ]),
+            _: 2
+          }, 1032, ["modelValue", "value"]);
+        }), 256))
+      ]);
+    };
+  }
+});
+_sfc_main$p.name = getComponentsPrefix() + _sfc_main$p.name;
 _sfc_main$o.name = getComponentsPrefix() + _sfc_main$o.name;
-const Radio = Object.assign(_sfc_main$o, {
+const Radio = Object.assign(_sfc_main$p, {
   install: (app) => {
+    app.component(_sfc_main$p.name, _sfc_main$p);
     app.component(_sfc_main$o.name, _sfc_main$o);
   }
 });
@@ -643,7 +694,6 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
       inpVal.value = props.modelValue;
       inpVal.label = valueMap.value[inpVal.value];
     };
-    setup();
     onMounted(() => {
       nextTick(() => {
         on(window, "resize", throttle(handleResize, 100));
@@ -652,6 +702,15 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     onBeforeUnmount(() => {
       off(window, "resize", handleResize);
     });
+    watch(
+      () => props.modelValue,
+      () => {
+        setup();
+      },
+      {
+        immediate: true
+      }
+    );
     return (_ctx, _cache) => {
       const _component_bp_input = resolveComponent("bp-input");
       return withDirectives((openBlock(), createElementBlock("div", {
@@ -877,7 +936,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
 });
 const _hoisted_1$a = ["onClick"];
 const _hoisted_2$8 = { key: 0 };
-const _hoisted_3$3 = {
+const _hoisted_3$4 = {
   key: 1,
   class: "ri-more-fill"
 };
@@ -931,7 +990,7 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
           class: normalizeClass([`${name}-pager`, `${name}-item`, item.index === __props.currentPage ? `${name}-item-active` : ""]),
           onClick: ($event) => onClick(item.index)
         }, [
-          item.type === "number" ? (openBlock(), createElementBlock("span", _hoisted_2$8, toDisplayString(item.index), 1)) : (openBlock(), createElementBlock("i", _hoisted_3$3))
+          item.type === "number" ? (openBlock(), createElementBlock("span", _hoisted_2$8, toDisplayString(item.index), 1)) : (openBlock(), createElementBlock("i", _hoisted_3$4))
         ], 10, _hoisted_1$a);
       }), 128);
     };
@@ -1406,7 +1465,7 @@ const _sfc_main$a = /* @__PURE__ */ defineComponent({
 });
 const _hoisted_1$5 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
 const _hoisted_2$4 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
-const _hoisted_3$2 = [
+const _hoisted_3$3 = [
   _hoisted_2$4
 ];
 const __default__$9 = defineComponent({
@@ -1443,7 +1502,7 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
         ], 2)) : __props.loading ? (openBlock(), createElementBlock("div", {
           key: 1,
           class: normalizeClass(`${name}-loading`)
-        }, _hoisted_3$2, 2)) : createCommentVNode("", true)
+        }, _hoisted_3$3, 2)) : createCommentVNode("", true)
       ]);
     };
   }
@@ -1624,15 +1683,15 @@ const _hoisted_2$2 = {
   key: 1,
   class: "ri-checkbox-circle-fill"
 };
-const _hoisted_3$1 = {
+const _hoisted_3$2 = {
   key: 2,
   class: "ri-error-warning-fill"
 };
-const _hoisted_4$1 = {
+const _hoisted_4$2 = {
   key: 3,
   class: "ri-close-circle-fill"
 };
-const _hoisted_5$1 = ["textContent"];
+const _hoisted_5$2 = ["textContent"];
 const _hoisted_6$1 = {
   key: 0,
   class: "ri-close-line"
@@ -1671,8 +1730,8 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
         }, [
           __props.type === "info" ? (openBlock(), createElementBlock("i", _hoisted_1$3)) : createCommentVNode("", true),
           __props.type === "success" ? (openBlock(), createElementBlock("i", _hoisted_2$2)) : createCommentVNode("", true),
-          __props.type === "warning" ? (openBlock(), createElementBlock("i", _hoisted_3$1)) : createCommentVNode("", true),
-          __props.type === "error" ? (openBlock(), createElementBlock("i", _hoisted_4$1)) : createCommentVNode("", true)
+          __props.type === "warning" ? (openBlock(), createElementBlock("i", _hoisted_3$2)) : createCommentVNode("", true),
+          __props.type === "error" ? (openBlock(), createElementBlock("i", _hoisted_4$2)) : createCommentVNode("", true)
         ], 2),
         createElementVNode("div", {
           class: normalizeClass(`${name}-body`)
@@ -1683,7 +1742,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
           }, [
             createElementVNode("span", {
               textContent: toDisplayString(__props.title)
-            }, null, 8, _hoisted_5$1)
+            }, null, 8, _hoisted_5$2)
           ], 2)) : createCommentVNode("", true),
           createElementVNode("div", {
             class: normalizeClass(`${name}-content`)
@@ -1774,15 +1833,24 @@ const __default__$5 = defineComponent({
 const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   ...__default__$5,
   props: {
+    /** 对话框显示状态 */
     visible: { type: Boolean, default: false },
-    hideFooter: { type: Boolean, default: false },
-    hideClose: { type: Boolean, default: false },
-    border: { type: Boolean, default: false },
-    maskClosable: { type: Boolean, default: true },
+    /** 对话框标题 */
     title: { type: String, default: "标题" },
+    /** 标题对齐方式 */
     titleAlign: { type: String, default: "left" },
+    /** 对话框宽度 */
     width: { type: String, default: "600px" },
-    top: { type: String, default: "20vh" }
+    /** 对话框宽度 */
+    top: { type: String, default: "20vh" },
+    /** 是否隐藏底部区域 */
+    hideFooter: { type: Boolean, default: false },
+    /** 是否隐藏关闭图标 */
+    hideClose: { type: Boolean, default: false },
+    /** 是否展示边框 */
+    border: { type: Boolean, default: false },
+    /** 点击遮罩是否关闭 */
+    maskClosable: { type: Boolean, default: true }
   },
   emits: ["ok", "cancle", "update:visible"],
   setup(__props, { emit: emits }) {
@@ -2009,29 +2077,56 @@ const Grid = Object.assign(_sfc_main$3, {
   }
 });
 const _hoisted_1$1 = ["onClick"];
-const _hoisted_2$1 = ["href"];
+const _hoisted_2$1 = ["disabled", "href"];
+const _hoisted_3$1 = {
+  key: 0,
+  class: "left-icon"
+};
+const _hoisted_4$1 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
+const _hoisted_5$1 = [
+  _hoisted_4$1
+];
 const __default__$2 = defineComponent({
   name: "Link"
 });
 const _sfc_main$2 = /* @__PURE__ */ defineComponent({
   ...__default__$2,
   props: {
+    /** 链接地址 */
     href: { type: String, default: "javascript:;" },
-    status: { type: String, default: "primary" }
+    /** 链接状态 */
+    status: { type: String, default: "primary" },
+    /** 是否禁用 */
+    disabled: { type: Boolean, default: false },
+    /** 是否加载状态 */
+    loading: { type: Boolean, default: false }
   },
   emits: ["click"],
   setup(__props, { emit: emits }) {
+    const props = __props;
     const name = "bp-link";
-    const handleClick = () => emits("click");
+    const clsName = computed(() => {
+      let cls = [name, `${name}-status-${props.status}`];
+      if (props.disabled || props.loading)
+        cls.push(`${name}-disabled`);
+      return cls;
+    });
+    const handleClick = () => {
+      if (props.disabled)
+        return;
+      emits("click");
+    };
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
-        class: normalizeClass([name, `${name}-status-${__props.status}`]),
+        class: normalizeClass(clsName.value),
         onClick: withModifiers(handleClick, ["stop"])
       }, [
         createElementVNode("a", {
+          disabled: __props.disabled,
           class: normalizeClass(`${name}-inner`),
           href: __props.href
         }, [
+          __props.loading ? (openBlock(), createElementBlock("span", _hoisted_3$1, _hoisted_5$1)) : createCommentVNode("", true),
           renderSlot(_ctx.$slots, "default")
         ], 10, _hoisted_2$1)
       ], 10, _hoisted_1$1);
