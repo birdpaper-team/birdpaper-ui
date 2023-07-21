@@ -1,25 +1,31 @@
 # 快速上手
 
-这篇文档将介绍如何使用 birdpaper-ui
+这篇文档将指引如何快手上手使用组件库。
 
 ### 安装
-```shell
-npm install birdpaper-ui
+你可以从 `npm` 或 `yarn` 安装，注意，需要同时安装 `Vue@3.x`
+```Shell
+# npm
+npm i birdpaper-ui
+
+# yarn
+yarn add birdpaper-ui
 ```
 
-### 引入 birdpaper-ui
+### 全量引入
+```JS
+import App from "./App.vue"
 
-你不仅可以完整的引入整个包，还可以根据实际使用需求，进行按需加载部分组件。
-
-在`main.js`中写入：
-
-```javascript
 import BirdpaperUI from "birdpaper-ui"
 import "birdpaper-ui/dist/index.css"
 
 const app = createApp(App)
-app.use(BirdpaperUI).mount("#app")
+app.use(BirdpaperUI)
+app.mount("#app")
 ```
 
 ### 按需加载
-后面将会更新这一块的文档...
+进行中...
+
+### CDN 引入
+进行中...
