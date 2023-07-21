@@ -42,7 +42,7 @@
     },
     "./*": "./*"
   },
-  "types": "dist/birdpaper-ui.d.ts",
+  "types": "dist/components/index.d.ts",
   "sideEffects": [
     "dist/*",
     "packages/components/*",

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 // GlobalComponents for Volar
-declare module '@vue/runtime-core' {
+declare module 'vue' {
   export interface GlobalComponents {
     BpLink: typeof import('birdpaper-ui')['Link'];
   }
