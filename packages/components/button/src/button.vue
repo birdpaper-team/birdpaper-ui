@@ -30,7 +30,7 @@ const props = defineProps({
   /** 是否撑满父级 Block or not */
   block: { type: Boolean, default: false },
 });
-const emit = defineEmits(["click"]);
+const emits = defineEmits(["click"]);
 
 const isDisabled = computed(() => props.disabled || props.loading); // 禁用状态，除了传入属性外，还应考虑「加载中」的情况
 
@@ -51,6 +51,6 @@ const btnIcon = computed(() => {
 });
 
 const onClick = () => {
-  if (!props.disabled) return emit("click");
+  if (!props.disabled) return emits("click");
 };
 </script>

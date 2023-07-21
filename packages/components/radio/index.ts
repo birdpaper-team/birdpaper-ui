@@ -13,4 +13,6 @@ const Radio = Object.assign(_radio, {
   },
 });
 
+export type RadioInstance = InstanceType<typeof _radio>;
+export type RadioGroupInstance = InstanceType<typeof _radioGroup>;
 export default Radio;

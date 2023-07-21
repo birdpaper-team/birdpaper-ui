@@ -9,6 +9,7 @@ declare const BpLink: {
             loading?: boolean;
             disabled?: boolean;
             href?: string;
+            onClick?: (ev: MouseEvent) => any;
             key?: string | number | symbol;
             ref?: import("vue").VNodeRef;
             ref_for?: boolean;
@@ -53,7 +54,6 @@ declare const BpLink: {
             }>) => void)[];
             class?: unknown;
             style?: unknown;
-            onClick?: (ev: MouseEvent) => any;
         };
         $attrs: {
             [x: string]: unknown;

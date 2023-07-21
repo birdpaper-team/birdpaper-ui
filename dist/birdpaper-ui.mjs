@@ -10,11 +10,12 @@ const _hoisted_2$d = {
   key: 0,
   class: "left-icon"
 };
-const __default__$r = defineComponent({
-  name: "Button"
-});
+const name = "bp-btn";
 const _sfc_main$s = /* @__PURE__ */ defineComponent({
-  ...__default__$r,
+  ...{
+    name: "Button"
+  },
+  __name: "button",
   props: {
     /** 按钮类型 Type of the button */
     type: { type: String, default: "normal" },
@@ -34,9 +35,8 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
     block: { type: Boolean, default: false }
   },
   emits: ["click"],
-  setup(__props, { emit }) {
+  setup(__props, { expose: __expose, emit: emits }) {
     const props = __props;
-    const name = "bp-btn";
     const isDisabled = computed(() => props.disabled || props.loading);
     const btnClass = computed(() => {
       let className = [
@@ -53,8 +53,13 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
     });
     const onClick = () => {
       if (!props.disabled)
-        return emit("click");
+        return emits("click");
     };
+    __expose({
+      props,
+      emits,
+      onClick
+    });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("button", {
         class: normalizeClass(btnClass.value),
@@ -73,8 +78,8 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
   }
 });
 const DEFAULT_PREFIX = "Bp";
-const getComponentsPrefix = (name) => {
-  return name ?? DEFAULT_PREFIX;
+const getComponentsPrefix = (name2) => {
+  return name2 ?? DEFAULT_PREFIX;
 };
 _sfc_main$s.name = getComponentsPrefix() + _sfc_main$s.name;
 const Button = Object.assign(_sfc_main$s, {
@@ -123,13 +128,13 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
   emits: ["update:modelValue", "input", "focus", "blur", "keypress", "keyup"],
   setup(__props, { expose: __expose, emit: emits }) {
     const props = __props;
-    const name = "bp-input";
+    const name2 = "bp-input";
     const slot = useSlots();
     const inpRef = ref();
     const inpType = computed(() => isPasswordType.value ? InputType.Password : InputType.Text);
     const inpClass = computed(() => {
       const status = getStatus();
-      return [name, `${name}-size-${props.size}`, `${name}-status-${status}`];
+      return [name2, `${name2}-size-${props.size}`, `${name2}-status-${status}`];
     });
     function getStatus() {
       return props.disabled && "disabled" || props.readonly && "readonly" || props.isDanger && "danger" || "normal";
@@ -245,11 +250,11 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
   emits: ["update:modelValue", "input", "focus", "blur", "keypress", "keyup"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const name = "bp-textarea";
+    const name2 = "bp-textarea";
     const inpRef = ref();
     const inpClass = computed(() => {
       const status = getStatus();
-      return [name, `${name}-status-${status}`];
+      return [name2, `${name2}-status-${status}`];
     });
     function getStatus() {
       return props.disabled && "disabled" || props.readonly && "readonly" || props.isDanger && "danger" || "normal";
@@ -320,7 +325,7 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
   emits: ["update:modelValue", "change"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const name = "bp-radio";
+    const name2 = "bp-radio";
     const handleInput = () => {
       if (props.disabled)
         return;
@@ -330,18 +335,18 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
     const isCheck = computed(() => props.modelValue === props.value);
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
-        class: normalizeClass([name, __props.disabled ? `${name}-disabled` : ""]),
+        class: normalizeClass([name2, __props.disabled ? `${name2}-disabled` : ""]),
         onClick: handleInput
       }, [
         createElementVNode("input", {
           type: "radio",
-          class: normalizeClass(`${name}-inner`)
+          class: normalizeClass(`${name2}-inner`)
         }, null, 2),
         createElementVNode("span", {
-          class: normalizeClass([`${name}-radio`, isCheck.value ? `${name}-check` : ""])
+          class: normalizeClass([`${name2}-radio`, isCheck.value ? `${name2}-check` : ""])
         }, null, 2),
         createElementVNode("span", {
-          class: normalizeClass(`${name}-label`)
+          class: normalizeClass(`${name2}-label`)
         }, [
           renderSlot(_ctx.$slots, "default")
         ], 2)
@@ -365,7 +370,7 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
   emits: ["update:modelValue"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const name = "bp-radio-group";
+    const name2 = "bp-radio-group";
     const val = ref(props.modelValue ?? "");
     const updateValue = (val2) => {
       emits("update:modelValue", val2);
@@ -376,7 +381,7 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
     );
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
-        class: normalizeClass(name)
+        class: normalizeClass(name2)
       }, [
         (openBlock(true), createElementBlock(Fragment, null, renderList(__props.optionList, (v) => {
           return openBlock(), createBlock(_sfc_main$p, {
@@ -421,11 +426,11 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
   emits: ["update:modelValue"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const name = "bp-checkbox";
+    const name2 = "bp-checkbox";
     const cls = computed(() => {
-      let clsName = [name];
+      let clsName = [name2];
       if (props.disabled) {
-        clsName.push(`${name}-disabled`);
+        clsName.push(`${name2}-disabled`);
       }
       return clsName;
     });
@@ -440,15 +445,15 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
       }, [
         createElementVNode("input", {
           type: "checkbox",
-          class: normalizeClass(`${name}-inner`)
+          class: normalizeClass(`${name2}-inner`)
         }, null, 2),
         createElementVNode("span", {
-          class: normalizeClass([`${name}-checkbox`, isCheck.value ? `${name}-check` : ""])
+          class: normalizeClass([`${name2}-checkbox`, isCheck.value ? `${name2}-check` : ""])
         }, [
           isCheck.value ? (openBlock(), createElementBlock("i", _hoisted_1$f)) : createCommentVNode("", true)
         ], 2),
         createElementVNode("span", {
-          class: normalizeClass(`${name}-label`)
+          class: normalizeClass(`${name2}-label`)
         }, [
           renderSlot(_ctx.$slots, "default")
         ], 2)
@@ -480,11 +485,11 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
   emits: ["update:modelValue"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const name = "bp-switch";
+    const name2 = "bp-switch";
     const cls = computed(() => {
-      let clsName = [name];
+      let clsName = [name2];
       if (props.disabled) {
-        clsName.push(`${name}-disabled`);
+        clsName.push(`${name2}-disabled`);
       }
       return clsName;
     });
@@ -499,10 +504,10 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
       }, [
         createElementVNode("input", {
           type: "checkbox",
-          class: normalizeClass(`${name}-inner`)
+          class: normalizeClass(`${name2}-inner`)
         }, null, 2),
         createElementVNode("span", {
-          class: normalizeClass([`${name}-slider`, isCheck.value ? `${name}-check` : ""])
+          class: normalizeClass([`${name2}-slider`, isCheck.value ? `${name2}-check` : ""])
         }, null, 2)
       ], 2);
     };
@@ -639,7 +644,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
   setup(__props, { emit: emits }) {
     const props = __props;
     const slots = useSlots();
-    const name = "bp-select";
+    const name2 = "bp-select";
     const selectRef = ref();
     const inpRef = ref();
     const optionBoxRef = ref();
@@ -716,7 +721,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
       return withDirectives((openBlock(), createElementBlock("div", {
         ref_key: "selectRef",
         ref: selectRef,
-        class: normalizeClass([name, isFocus.value ? `${name}-focus` : ""]),
+        class: normalizeClass([name2, isFocus.value ? `${name2}-focus` : ""]),
         onClick: withModifiers(handleClick, ["stop"]),
         onMouseleave
       }, [
@@ -730,7 +735,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
         }, {
           suffix: withCtx(() => [
             createElementVNode("i", {
-              class: normalizeClass([`${name}-icon-inner`, `ri-arrow-${isFocus.value ? "up" : "down"}-s-line`])
+              class: normalizeClass([`${name2}-icon-inner`, `ri-arrow-${isFocus.value ? "up" : "down"}-s-line`])
             }, null, 2)
           ]),
           _: 1
@@ -744,10 +749,10 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
               withDirectives(createElementVNode("div", {
                 ref_key: "optionBoxRef",
                 ref: optionBoxRef,
-                class: normalizeClass(`${name}-option-box`)
+                class: normalizeClass(`${name2}-option-box`)
               }, [
                 createElementVNode("ul", {
-                  class: normalizeClass(`${name}-option-list`)
+                  class: normalizeClass(`${name2}-option-list`)
                 }, [
                   renderSlot(_ctx.$slots, "default")
                 ], 2)
@@ -775,7 +780,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const name = "bp-option";
+    const name2 = "bp-option";
     const ctx = ref();
     const slot = useSlots();
     const option = reactive(new SelectOption());
@@ -800,7 +805,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
     );
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("li", {
-        class: normalizeClass(`${name}-item`),
+        class: normalizeClass(`${name2}-item`),
         onClick: handleClick
       }, [
         createElementVNode("span", null, [
@@ -835,11 +840,11 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
   emits: ["click"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const name = "bp-pagination";
+    const name2 = "bp-pagination";
     const clsName = computed(() => {
-      let cls = [`${name}-item`, `${name}-prev`];
+      let cls = [`${name2}-item`, `${name2}-prev`];
       if (props.disabled) {
-        cls.push(`${name}-item-disabled`);
+        cls.push(`${name2}-item-disabled`);
       }
       return cls;
     });
@@ -878,11 +883,11 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
   emits: ["click"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const name = "bp-pagination";
+    const name2 = "bp-pagination";
     const clsName = computed(() => {
-      let cls = [`${name}-item`, `${name}-next`];
+      let cls = [`${name2}-item`, `${name2}-next`];
       if (props.disabled) {
-        cls.push(`${name}-item-disabled`);
+        cls.push(`${name2}-item-disabled`);
       }
       return cls;
     });
@@ -916,7 +921,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const name = "bp-pagination";
+    const name2 = "bp-pagination";
     const paramsStr = "{total}";
     const text = ref("");
     watchEffect(() => {
@@ -924,7 +929,7 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("li", {
-        class: normalizeClass([`${name}-item`, `${name}-total`])
+        class: normalizeClass([`${name2}-item`, `${name2}-total`])
       }, [
         createElementVNode("span", {
           class: "page-text",
@@ -953,7 +958,7 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
   emits: ["click"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const name = "bp-pagination";
+    const name2 = "bp-pagination";
     const pageList = ref([]);
     const onClick = (pageNum) => {
       emits("click", pageNum);
@@ -987,7 +992,7 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
       return openBlock(true), createElementBlock(Fragment, null, renderList(pageList.value, (item, index) => {
         return openBlock(), createElementBlock("li", {
           key: `page-item-${index}`,
-          class: normalizeClass([`${name}-pager`, `${name}-item`, item.index === __props.currentPage ? `${name}-item-active` : ""]),
+          class: normalizeClass([`${name2}-pager`, `${name2}-item`, item.index === __props.currentPage ? `${name2}-item-active` : ""]),
           onClick: ($event) => onClick(item.index)
         }, [
           item.type === "number" ? (openBlock(), createElementBlock("span", _hoisted_2$8, toDisplayString(item.index), 1)) : (openBlock(), createElementBlock("i", _hoisted_3$4))
@@ -1017,7 +1022,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
   emits: ["change"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const name = "bp-pagination";
+    const name2 = "bp-pagination";
     const paramsStr = "{jumper}";
     const val = ref("");
     const text = reactive({ prefix: "", suffix: "" });
@@ -1041,7 +1046,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     return (_ctx, _cache) => {
       const _component_bp_input = resolveComponent("bp-input");
       return openBlock(), createElementBlock("li", {
-        class: normalizeClass([`${name}-item`, `${name}-jumper`])
+        class: normalizeClass([`${name2}-item`, `${name2}-jumper`])
       }, [
         text.prefix ? (openBlock(), createElementBlock("span", _hoisted_1$9, toDisplayString(text.prefix), 1)) : createCommentVNode("", true),
         createVNode(_component_bp_input, {
@@ -1068,7 +1073,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
   emits: ["change"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const name = "bp-pagination";
+    const name2 = "bp-pagination";
     const val = ref(props.currentSize || props.sizesList[0] || 10);
     const paramsStr = "{value}";
     const list = ref([]);
@@ -1086,7 +1091,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
       const _component_bp_option = resolveComponent("bp-option");
       const _component_bp_select = resolveComponent("bp-select");
       return openBlock(), createElementBlock("li", {
-        class: normalizeClass(`${name}-item ${name}-sizes`)
+        class: normalizeClass(`${name2}-item ${name2}-sizes`)
       }, [
         createVNode(_component_bp_select, {
           modelValue: val.value,
@@ -1228,8 +1233,8 @@ const usePagination = (props, emits) => {
         jumper: jumperComponents.value,
         sizes: sizesComponents.value
       };
-      layoutList.map((name) => {
-        components2.push({ name, component: layoutMap[name], ...componentMap[name] });
+      layoutList.map((name2) => {
+        components2.push({ name: name2, component: layoutMap[name2], ...componentMap[name2] });
       });
       return components2;
     } catch (error) {
@@ -1272,14 +1277,14 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
   emits: ["update:current", "update:pageSize", "page-change", "size-change"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const name = "bp-pagination";
+    const name2 = "bp-pagination";
     const { componentsList } = usePagination(props, emits);
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
-        class: normalizeClass(name)
+        class: normalizeClass(name2)
       }, [
         createElementVNode("ul", {
-          class: normalizeClass(`${name}-container`)
+          class: normalizeClass(`${name2}-container`)
         }, [
           (openBlock(true), createElementBlock(Fragment, null, renderList(unref(componentsList), (item) => {
             return openBlock(), createBlock(resolveDynamicComponent(item.component), mergeProps(item.bind, {
@@ -1425,8 +1430,8 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
   setup(__props) {
     const thClass = (item) => {
       let align = `text-${item["headerAlign"] || item["align"] || "left"}`;
-      let name = [align];
-      return name;
+      let name2 = [align];
+      return name2;
     };
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("table", _hoisted_1$7, [
@@ -1480,28 +1485,28 @@ const _sfc_main$9 = /* @__PURE__ */ defineComponent({
     tip: { type: String, default: "" }
   },
   setup(__props) {
-    const name = "bp-spin";
+    const name2 = "bp-spin";
     const slots = useSlots();
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("div", {
-        class: normalizeClass(name)
+        class: normalizeClass(name2)
       }, [
         renderSlot(_ctx.$slots, "default"),
         unref(slots).default && __props.loading ? (openBlock(), createElementBlock("div", {
           key: 0,
-          class: normalizeClass(`${name}-mask`)
+          class: normalizeClass(`${name2}-mask`)
         }, [
           createElementVNode("div", {
-            class: normalizeClass(`${name}-loading`)
+            class: normalizeClass(`${name2}-loading`)
           }, [
             _hoisted_1$5,
             createElementVNode("p", {
-              class: normalizeClass(`${name}-tip`)
+              class: normalizeClass(`${name2}-tip`)
             }, toDisplayString(__props.tip), 3)
           ], 2)
         ], 2)) : __props.loading ? (openBlock(), createElementBlock("div", {
           key: 1,
-          class: normalizeClass(`${name}-loading`)
+          class: normalizeClass(`${name2}-loading`)
         }, _hoisted_3$3, 2)) : createCommentVNode("", true)
       ]);
     };
@@ -1548,18 +1553,18 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       return `width:${_table_width.value}px`;
     });
     const innerClass = computed(() => {
-      let name = [
+      let name2 = [
         "bp-table-inner",
         { "bp-table-border": hasBorder.value },
         { "bp-table-stripe": isStripe.value },
         { "bp-table-fixed-header": fixedHeight.value }
       ];
-      return name;
+      return name2;
     });
     const tdClass = (v) => {
       let align = `text-${v["align"] || "left"}`;
-      let name = [align];
-      return name;
+      let name2 = [align];
+      return name2;
     };
     return (_ctx, _cache) => {
       return openBlock(), createBlock(unref(Spin), { loading: __props.loading }, {
@@ -1710,10 +1715,10 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
   emits: ["close"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const name = "bp-alert";
+    const name2 = "bp-alert";
     const slots = useSlots();
     const cls = computed(() => {
-      return [name, `${name}-${props.type}`, props.title ? `${name}-with-title` : ""];
+      return [name2, `${name2}-${props.type}`, props.title ? `${name2}-with-title` : ""];
     });
     const isRender = ref(true);
     const handleClose = () => {
@@ -1726,7 +1731,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
         class: normalizeClass(cls.value)
       }, [
         createElementVNode("div", {
-          class: normalizeClass(`${name}-icon`)
+          class: normalizeClass(`${name2}-icon`)
         }, [
           __props.type === "info" ? (openBlock(), createElementBlock("i", _hoisted_1$3)) : createCommentVNode("", true),
           __props.type === "success" ? (openBlock(), createElementBlock("i", _hoisted_2$2)) : createCommentVNode("", true),
@@ -1734,18 +1739,18 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
           __props.type === "error" ? (openBlock(), createElementBlock("i", _hoisted_4$2)) : createCommentVNode("", true)
         ], 2),
         createElementVNode("div", {
-          class: normalizeClass(`${name}-body`)
+          class: normalizeClass(`${name2}-body`)
         }, [
           __props.title ? (openBlock(), createElementBlock("div", {
             key: 0,
-            class: normalizeClass(`${name}-title`)
+            class: normalizeClass(`${name2}-title`)
           }, [
             createElementVNode("span", {
               textContent: toDisplayString(__props.title)
             }, null, 8, _hoisted_5$1)
           ], 2)) : createCommentVNode("", true),
           createElementVNode("div", {
-            class: normalizeClass(`${name}-content`)
+            class: normalizeClass(`${name2}-content`)
           }, [
             createElementVNode("span", null, [
               renderSlot(_ctx.$slots, "default")
@@ -1753,11 +1758,11 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
           ], 2)
         ], 2),
         createElementVNode("div", {
-          class: normalizeClass(`${name}-option`)
+          class: normalizeClass(`${name2}-option`)
         }, [
           __props.closeable ? (openBlock(), createElementBlock("div", {
             key: 0,
-            class: normalizeClass(`${name}-close-inner`),
+            class: normalizeClass(`${name2}-close-inner`),
             onClick: handleClose
           }, [
             !unref(slots).close ? (openBlock(), createElementBlock("i", _hoisted_6$1)) : (openBlock(), createElementBlock("span", _hoisted_7, [
@@ -1787,9 +1792,9 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const name = "bp-tag";
+    const name2 = "bp-tag";
     const cls = computed(() => {
-      return [name, props.dot ? `${name}-dot-box` : `${name}-${props.status}`];
+      return [name2, props.dot ? `${name2}-dot-box` : `${name2}-${props.status}`];
     });
     const visible = ref(true);
     const handleClose = () => {
@@ -1804,10 +1809,10 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
       }, [
         __props.dot ? (openBlock(), createElementBlock("div", {
           key: 0,
-          class: normalizeClass([`${name}-dot`, `${name}-dot-${__props.status}`])
+          class: normalizeClass([`${name2}-dot`, `${name2}-dot-${__props.status}`])
         }, null, 2)) : createCommentVNode("", true),
         createElementVNode("span", {
-          class: normalizeClass(`${name}-inner`)
+          class: normalizeClass(`${name2}-inner`)
         }, [
           renderSlot(_ctx.$slots, "default")
         ], 2),
@@ -1855,15 +1860,15 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
   emits: ["ok", "cancle", "update:visible"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const name = "bp-modal";
+    const name2 = "bp-modal";
     const slots = useSlots();
     const containerVisable = ref(false);
     const clsName = computed(() => {
-      let cls = [name];
+      let cls = [name2];
       if (props.border) {
-        cls.push(`${name}-border`);
+        cls.push(`${name2}-border`);
       }
-      cls.push(`${name}-title-${props.titleAlign}`);
+      cls.push(`${name2}-title-${props.titleAlign}`);
       return cls;
     });
     const handleMaskClick = () => {
@@ -1896,12 +1901,12 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
       const _component_bp_space = resolveComponent("bp-space");
       return openBlock(), createBlock(Teleport, { to: "body" }, [
         withDirectives(createElementVNode("div", {
-          class: normalizeClass(`${name}-container`)
+          class: normalizeClass(`${name2}-container`)
         }, [
           createVNode(Transition, { name: "fade-modal-mask" }, {
             default: withCtx(() => [
               withDirectives(createElementVNode("div", {
-                class: normalizeClass(`${name}-mask`)
+                class: normalizeClass(`${name2}-mask`)
               }, null, 2), [
                 [vShow, __props.visible]
               ])
@@ -1911,7 +1916,7 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
           createVNode(Transition, { name: "modal-fade" }, {
             default: withCtx(() => [
               withDirectives(createElementVNode("div", {
-                class: normalizeClass(`${name}-wrapper`),
+                class: normalizeClass(`${name2}-wrapper`),
                 onClick: withModifiers(handleMaskClick, ["self"])
               }, [
                 createElementVNode("div", {
@@ -1919,25 +1924,25 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
                   style: normalizeStyle(`width:${__props.width};top:${__props.top}`)
                 }, [
                   createElementVNode("div", {
-                    class: normalizeClass(`${name}-header`)
+                    class: normalizeClass(`${name2}-header`)
                   }, [
                     createElementVNode("p", {
-                      class: normalizeClass(`${name}-header-title`)
+                      class: normalizeClass(`${name2}-header-title`)
                     }, toDisplayString(__props.title), 3),
                     !__props.hideClose ? (openBlock(), createElementBlock("i", {
                       key: 0,
-                      class: normalizeClass([`${name}-header-close`, "ri-close-line"]),
+                      class: normalizeClass([`${name2}-header-close`, "ri-close-line"]),
                       onClick: handleCancle
                     }, null, 2)) : createCommentVNode("", true)
                   ], 2),
                   createElementVNode("div", {
-                    class: normalizeClass(`${name}-body`)
+                    class: normalizeClass(`${name2}-body`)
                   }, [
                     renderSlot(_ctx.$slots, "default")
                   ], 2),
                   !__props.hideFooter ? (openBlock(), createElementBlock("div", {
                     key: 0,
-                    class: normalizeClass(`${name}-footer`)
+                    class: normalizeClass(`${name2}-footer`)
                   }, [
                     !unref(slots).footer ? (openBlock(), createBlock(_component_bp_space, {
                       key: 0,
@@ -1998,11 +2003,11 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
   },
   setup(__props) {
     const props = __props;
-    const name = "col";
+    const name2 = "col";
     const cls = computed(() => {
-      let className = [`bp-${name}`];
-      Number(props.span) !== 0 ? className.push(`bp-${name}-${props.span}`) : "";
-      Number(props.offset) !== 0 ? className.push(`bp-${name}-offset-${props.offset}`) : "";
+      let className = [`bp-${name2}`];
+      Number(props.span) !== 0 ? className.push(`bp-${name2}-${props.span}`) : "";
+      Number(props.offset) !== 0 ? className.push(`bp-${name2}-offset-${props.offset}`) : "";
       return className;
     });
     return (_ctx, _cache) => {
@@ -2031,9 +2036,9 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     const props = __props;
     const slot = useSlots().default();
     const rowRef = ref();
-    const name = "row";
+    const name2 = "row";
     const cls = computed(() => {
-      return [`bp-${name}`, `bp-justify-${props.justify}`, `bp-align-${props.align}`];
+      return [`bp-${name2}`, `bp-justify-${props.justify}`, `bp-align-${props.align}`];
     });
     const init = () => {
       setGutter(slot);
@@ -2092,11 +2097,11 @@ const _sfc_main$2 = defineComponent({
     click: (ev) => true
   },
   setup(props, { emit }) {
-    const name = "bp-link";
+    const name2 = "bp-link";
     const clsName = computed(() => {
-      let cls = [name, `${name}-status-${props.status}`];
+      let cls = [name2, `${name2}-status-${props.status}`];
       if (props.disabled || props.loading)
-        cls.push(`${name}-disabled`);
+        cls.push(`${name2}-disabled`);
       return cls;
     });
     const handleClick = (e) => {
@@ -2105,7 +2110,7 @@ const _sfc_main$2 = defineComponent({
       emit("click", e);
     };
     return {
-      name,
+      name: name2,
       clsName,
       handleClick
     };
@@ -2197,7 +2202,7 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   emits: ["close"],
   setup(__props, { emit: emits }) {
     const props = __props;
-    const name = "bp-message";
+    const name2 = "bp-message";
     const timer = ref(0);
     const init = () => {
       if (props.duration > 0 && props.type !== MessageType.Loading) {
@@ -2221,11 +2226,11 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("li", {
-        class: normalizeClass(name)
+        class: normalizeClass(name2)
       }, [
         __props.type !== "text" ? (openBlock(), createElementBlock("span", {
           key: 0,
-          class: normalizeClass(`${name}-icon`)
+          class: normalizeClass(`${name2}-icon`)
         }, [
           __props.type === "success" ? (openBlock(), createElementBlock("i", _hoisted_1)) : createCommentVNode("", true),
           __props.type === "error" ? (openBlock(), createElementBlock("i", _hoisted_2)) : createCommentVNode("", true),
@@ -2233,11 +2238,11 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
           __props.type === "loading" ? (openBlock(), createElementBlock("i", _hoisted_4)) : createCommentVNode("", true)
         ], 2)) : createCommentVNode("", true),
         createElementVNode("span", {
-          class: normalizeClass(`${name}-content`)
+          class: normalizeClass(`${name2}-content`)
         }, toDisplayString(__props.content), 3),
         __props.closeable ? (openBlock(), createElementBlock("span", {
           key: 1,
-          class: normalizeClass(`${name}-close`),
+          class: normalizeClass(`${name2}-close`),
           onClick: handleClose
         }, _hoisted_6, 2)) : createCommentVNode("", true)
       ]);
@@ -2399,7 +2404,22 @@ const birdpaperUi = {
   Message
 };
 export {
+  Alert,
+  Button,
+  Checkbox,
+  Grid,
+  Input,
   BpLink as Link,
+  Modal,
+  Pagination,
+  Radio,
+  Select,
+  Space,
+  Spin,
+  Switch,
+  Table,
+  Tag,
+  Textarea,
   birdpaperUi as default
 };
 //# sourceMappingURL=birdpaper-ui.mjs.map

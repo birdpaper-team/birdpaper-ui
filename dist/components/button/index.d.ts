@@ -6,3 +6,4 @@ declare const Button: ((props: Record<string, any> & {}) => any) & {
 };
 export declare type ButtonInstance = InstanceType<typeof _button>;
 export default Button;
+export * from './src/button.vue';

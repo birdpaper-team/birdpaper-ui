@@ -10,4 +10,5 @@ const Table = Object.assign(_table, {
   },
 });
 
+export type TableInstance = InstanceType<typeof _table>;
 export default Table;
