@@ -8,9 +8,8 @@ export const sidebar = {
     {
       text: "指南",
       items: [
-        { text: "介绍", link: "/guide/introduce" },
-        { text: "更新日志", link: "/guide/changelog" },
         { text: "快速上手", link: "/guide/easystart" },
+        { text: "更新日志", link: "/guide/changelog" },
         { text: "颜色", link: "/guide/color" },
         { text: "图标", link: "/guide/icon" },
       ],

@@ -9,35 +9,45 @@
   </div>
 </template>
 
-<script setup lang="ts" name="Link">
-import { PropType, computed } from "vue";
+<script lang="ts">
+import { PropType, computed, defineComponent } from "vue";
 import { LinkStatus } from "./types";
 
-const props = defineProps({
-  /** 链接地址 */
-  href: { type: String, default: "javascript:;" },
-  /** 链接状态 */
-  status: { type: String as PropType<LinkStatus>, default: "primary" },
-  /** 是否禁用 */
-  disabled: { type: Boolean, default: false },
-  /** 是否加载状态 */
-  loading: { type: Boolean, default: false },
+export default defineComponent({
+  name: "Link",
+  props: {
+    /** 链接地址 */
+    href: { type: String, default: "javascript:;" },
+    /** 链接状态 */
+    status: { type: String as PropType<LinkStatus>, default: "primary" },
+    /** 是否禁用 */
+    disabled: { type: Boolean, default: false },
+    /** 是否加载状态 */
+    loading: { type: Boolean, default: false },
+  },
+  emits: {
+    click: (ev: MouseEvent) => true,
+  },
+  setup(props, { emit }) {
+    const name = "bp-link";
+    const clsName = computed(() => {
+      let cls = [name, `${name}-status-${props.status}`];
+      if (props.disabled || props.loading) cls.push(`${name}-disabled`);
+
+      return cls;
+    });
+
+    const handleClick = (e: MouseEvent) => {
+      if (props.disabled) return;
+
+      emit("click", e);
+    };
+
+    return {
+      name,
+      clsName,
+      handleClick,
+    };
+  },
 });
-const emits = defineEmits<{
-  click: [];
-}>();
-const name = "bp-link";
-
-const clsName = computed(() => {
-  let cls = [name, `${name}-status-${props.status}`];
-  if (props.disabled || props.loading) cls.push(`${name}-disabled`);
-
-  return cls;
-});
-
-const handleClick = () => {
-  if (props.disabled) return;
-
-  emits("click");
-};
 </script>

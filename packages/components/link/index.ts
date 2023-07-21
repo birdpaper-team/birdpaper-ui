@@ -4,10 +4,11 @@ import { getComponentsPrefix } from "../../utils/config";
 
 _link.name = getComponentsPrefix() + _link.name;
 
-const Link = Object.assign(_link, {
+const BpLink = Object.assign(_link, {
   install: (app: App) => {
     app.component(_link.name, _link);
   },
 });
 
-export default Link;
+export type LinkInstance = InstanceType<typeof _link>;
+export default BpLink;

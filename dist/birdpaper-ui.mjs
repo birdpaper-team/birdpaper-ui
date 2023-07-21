@@ -10,11 +10,11 @@ const _hoisted_2$d = {
   key: 0,
   class: "left-icon"
 };
-const __default__$s = defineComponent({
+const __default__$r = defineComponent({
   name: "Button"
 });
 const _sfc_main$s = /* @__PURE__ */ defineComponent({
-  ...__default__$s,
+  ...__default__$r,
   props: {
     /** 按钮类型 Type of the button */
     type: { type: String, default: "normal" },
@@ -93,11 +93,11 @@ const _hoisted_2$c = {
   class: "suffix"
 };
 const _hoisted_3$6 = ["textContent"];
-const __default__$r = defineComponent({
+const __default__$q = defineComponent({
   name: "Input"
 });
 const _sfc_main$r = /* @__PURE__ */ defineComponent({
-  ...__default__$r,
+  ...__default__$q,
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: String, default: "" },
@@ -219,11 +219,11 @@ const Input = Object.assign(_sfc_main$r, {
 const _hoisted_1$g = ["rows", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
 const _hoisted_2$b = { class: "suffix" };
 const _hoisted_3$5 = ["textContent"];
-const __default__$q = defineComponent({
+const __default__$p = defineComponent({
   name: "Textarea"
 });
 const _sfc_main$q = /* @__PURE__ */ defineComponent({
-  ...__default__$q,
+  ...__default__$p,
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: String, default: "" },
@@ -304,11 +304,11 @@ const Textarea = Object.assign(_sfc_main$q, {
     app.component(_sfc_main$q.name, _sfc_main$q);
   }
 });
-const __default__$p = defineComponent({
+const __default__$o = defineComponent({
   name: "Radio"
 });
 const _sfc_main$p = /* @__PURE__ */ defineComponent({
-  ...__default__$p,
+  ...__default__$o,
   props: {
     /** 单选框绑定值 */
     modelValue: { type: [String, Number, Boolean], default: false },
@@ -349,11 +349,11 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const __default__$o = defineComponent({
+const __default__$n = defineComponent({
   name: "RadioGroup"
 });
 const _sfc_main$o = /* @__PURE__ */ defineComponent({
-  ...__default__$o,
+  ...__default__$n,
   props: {
     /** 单选框绑定值 */
     modelValue: { type: [String, Number] },
@@ -407,11 +407,11 @@ const _hoisted_1$f = {
   key: 0,
   class: "ri-check-line"
 };
-const __default__$n = defineComponent({
+const __default__$m = defineComponent({
   name: "Checkbox"
 });
 const _sfc_main$n = /* @__PURE__ */ defineComponent({
-  ...__default__$n,
+  ...__default__$m,
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: Boolean, default: false },
@@ -462,11 +462,11 @@ const Checkbox = Object.assign(_sfc_main$n, {
     app.component(_sfc_main$n.name, _sfc_main$n);
   }
 });
-const __default__$m = defineComponent({
+const __default__$l = defineComponent({
   name: "Switch"
 });
 const _sfc_main$m = /* @__PURE__ */ defineComponent({
-  ...__default__$m,
+  ...__default__$l,
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: Boolean, default: false },
@@ -620,11 +620,11 @@ const warn = (module, info) => {
   console.warn(`[ A warning of birdpaper-ui ] - ${module}: ` + info);
 };
 const _hoisted_1$e = ["onClick"];
-const __default__$l = defineComponent({
+const __default__$k = defineComponent({
   name: "Select"
 });
 const _sfc_main$l = /* @__PURE__ */ defineComponent({
-  ...__default__$l,
+  ...__default__$k,
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: [String, Number], default: "" },
@@ -764,11 +764,11 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const __default__$k = defineComponent({
+const __default__$j = defineComponent({
   name: "Option"
 });
 const _sfc_main$k = /* @__PURE__ */ defineComponent({
-  ...__default__$k,
+  ...__default__$j,
   props: {
     value: { type: [String, Number, Boolean], default: "" },
     label: { type: String, default: "" }
@@ -823,11 +823,11 @@ const _hoisted_2$a = {
   key: 1,
   class: "ri-arrow-left-s-line"
 };
-const __default__$j = defineComponent({
+const __default__$i = defineComponent({
   name: "PaginationPrev"
 });
 const _sfc_main$j = /* @__PURE__ */ defineComponent({
-  ...__default__$j,
+  ...__default__$i,
   props: {
     text: { type: String, default: "" },
     disabled: { type: Boolean, default: false }
@@ -866,11 +866,11 @@ const _hoisted_2$9 = {
   key: 1,
   class: "ri-arrow-right-s-line"
 };
-const __default__$i = defineComponent({
+const __default__$h = defineComponent({
   name: "PaginationNext"
 });
 const _sfc_main$i = /* @__PURE__ */ defineComponent({
-  ...__default__$i,
+  ...__default__$h,
   props: {
     text: { type: String, default: "" },
     disabled: { type: Boolean, default: false }
@@ -905,11 +905,11 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
   }
 });
 const _hoisted_1$b = ["textContent"];
-const __default__$h = defineComponent({
+const __default__$g = defineComponent({
   name: "PaginationTotal"
 });
 const _sfc_main$h = /* @__PURE__ */ defineComponent({
-  ...__default__$h,
+  ...__default__$g,
   props: {
     value: { type: Number, default: 0 },
     tmpString: { type: String, default: "" }
@@ -940,11 +940,11 @@ const _hoisted_3$4 = {
   key: 1,
   class: "ri-more-fill"
 };
-const __default__$g = defineComponent({
+const __default__$f = defineComponent({
   name: "PaginationPager"
 });
 const _sfc_main$g = /* @__PURE__ */ defineComponent({
-  ...__default__$g,
+  ...__default__$f,
   props: {
     currentPage: { type: Number, default: 1 },
     pages: { type: Number, default: 0 },
@@ -984,9 +984,9 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
       pageList.value.push({ index: pages, type: "number" });
     });
     return (_ctx, _cache) => {
-      return openBlock(true), createElementBlock(Fragment, null, renderList(pageList.value, (item, index2) => {
+      return openBlock(true), createElementBlock(Fragment, null, renderList(pageList.value, (item, index) => {
         return openBlock(), createElementBlock("li", {
-          key: `page-item-${index2}`,
+          key: `page-item-${index}`,
           class: normalizeClass([`${name}-pager`, `${name}-item`, item.index === __props.currentPage ? `${name}-item-active` : ""]),
           onClick: ($event) => onClick(item.index)
         }, [
@@ -1004,11 +1004,11 @@ const _hoisted_2$7 = {
   key: 1,
   class: "page-text"
 };
-const __default__$f = defineComponent({
+const __default__$e = defineComponent({
   name: "PaginationJumper"
 });
 const _sfc_main$f = /* @__PURE__ */ defineComponent({
-  ...__default__$f,
+  ...__default__$e,
   props: {
     currentPage: { type: Number, default: 1 },
     pages: { type: Number, default: 0 },
@@ -1055,11 +1055,11 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const __default__$e = defineComponent({
+const __default__$d = defineComponent({
   name: "PaginationSizes"
 });
 const _sfc_main$e = /* @__PURE__ */ defineComponent({
-  ...__default__$e,
+  ...__default__$d,
   props: {
     currentSize: { type: Number, default: "" },
     sizesList: { type: Array, default: () => [] },
@@ -1240,11 +1240,11 @@ const usePagination = (props, emits) => {
     componentsList
   };
 };
-const __default__$d = defineComponent({
+const __default__$c = defineComponent({
   name: "Pagination"
 });
 const _sfc_main$d = /* @__PURE__ */ defineComponent({
-  ...__default__$d,
+  ...__default__$c,
   props: {
     /** 布局配置 The layout config */
     layout: { type: String, default: "prev, pager, next" },
@@ -1335,11 +1335,11 @@ const useTable = (props) => {
     let width_list = [];
     let adapt_width = getAdaptWidth();
     if (_min_width_list.length) {
-      _min_width_list.map((item, index2) => {
+      _min_width_list.map((item, index) => {
         if (adapt_width > item) {
           _fixed_width += item;
           _remainder_col--;
-          _min_width_list.splice(index2, 1);
+          _min_width_list.splice(index, 1);
           adapt_width = getAdaptWidth();
         }
       });
@@ -1388,11 +1388,11 @@ const useTable = (props) => {
   };
 };
 const _hoisted_1$8 = ["name", "width"];
-const __default__$c = defineComponent({
+const __default__$b = defineComponent({
   name: "TableColumns"
 });
 const _sfc_main$c = /* @__PURE__ */ defineComponent({
-  ...__default__$c,
+  ...__default__$b,
   props: {
     // TODO
     cols: { type: Array, default: () => [] }
@@ -1400,10 +1400,10 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
   setup(__props) {
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("colgroup", null, [
-        (openBlock(true), createElementBlock(Fragment, null, renderList(__props.cols, (item, index2) => {
+        (openBlock(true), createElementBlock(Fragment, null, renderList(__props.cols, (item, index) => {
           return openBlock(), createElementBlock("col", {
-            key: `bp-table-tr-${index2}`,
-            name: `bp_table_tr_${index2}`,
+            key: `bp-table-tr-${index}`,
+            name: `bp_table_tr_${index}`,
             width: `${item.width}px`
           }, null, 8, _hoisted_1$8);
         }), 128))
@@ -1413,11 +1413,11 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
 });
 const _hoisted_1$7 = { class: "bp-table-header" };
 const _hoisted_2$6 = { class: "bp-table-header-thead" };
-const __default__$b = defineComponent({
+const __default__$a = defineComponent({
   name: "TableHeader"
 });
 const _sfc_main$b = /* @__PURE__ */ defineComponent({
-  ...__default__$b,
+  ...__default__$a,
   props: {
     // TODO
     headerList: { type: Array, default: () => [] }
@@ -1433,9 +1433,9 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
         createVNode(_sfc_main$c, { cols: __props.headerList }, null, 8, ["cols"]),
         createElementVNode("thead", _hoisted_2$6, [
           createElementVNode("tr", null, [
-            (openBlock(true), createElementBlock(Fragment, null, renderList(__props.headerList, (item, index2) => {
+            (openBlock(true), createElementBlock(Fragment, null, renderList(__props.headerList, (item, index) => {
               return openBlock(), createElementBlock("th", {
-                key: `bp-table-thead-${index2}`,
+                key: `bp-table-thead-${index}`,
                 class: normalizeClass(thClass(item))
               }, toDisplayString(item.label), 3);
             }), 128))
@@ -1447,11 +1447,11 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
 });
 const _hoisted_1$6 = { class: "bp-table-empty-tr" };
 const _hoisted_2$5 = ["colspan"];
-const __default__$a = defineComponent({
+const __default__$9 = defineComponent({
   name: "TableEmpty"
 });
 const _sfc_main$a = /* @__PURE__ */ defineComponent({
-  ...__default__$a,
+  ...__default__$9,
   props: {
     colspan: { type: Number, default: 0 }
   },
@@ -1468,11 +1468,11 @@ const _hoisted_2$4 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-l
 const _hoisted_3$3 = [
   _hoisted_2$4
 ];
-const __default__$9 = defineComponent({
+const __default__$8 = defineComponent({
   name: "Spin"
 });
 const _sfc_main$9 = /* @__PURE__ */ defineComponent({
-  ...__default__$9,
+  ...__default__$8,
   props: {
     /** 是否开启加载 Loading or not */
     loading: { type: Boolean, default: false },
@@ -1515,11 +1515,11 @@ const Spin = Object.assign(_sfc_main$9, {
 });
 const _hoisted_1$4 = /* @__PURE__ */ createElementVNode("div", { class: "scrollbar" }, null, -1);
 const _hoisted_2$3 = { class: "bp-table-body-tbody" };
-const __default__$8 = defineComponent({
+const __default__$7 = defineComponent({
   name: "Table"
 });
 const _sfc_main$8 = /* @__PURE__ */ defineComponent({
-  ...__default__$8,
+  ...__default__$7,
   props: {
     /* 表格头部列表 Table header list */
     cols: { type: Array, default: () => [] },
@@ -1587,13 +1587,13 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                     isEmpty.value ? (openBlock(), createBlock(_sfc_main$a, {
                       key: 0,
                       colspan: unref(columns).length
-                    }, null, 8, ["colspan"])) : (openBlock(true), createElementBlock(Fragment, { key: 1 }, renderList(__props.data, (item, index2) => {
+                    }, null, 8, ["colspan"])) : (openBlock(true), createElementBlock(Fragment, { key: 1 }, renderList(__props.data, (item, index) => {
                       return openBlock(), createElementBlock("tr", {
-                        key: `bp-table-tbody-tr-${index2}`
+                        key: `bp-table-tbody-tr-${index}`
                       }, [
                         (openBlock(true), createElementBlock(Fragment, null, renderList(unref(columns), (v, k) => {
                           return openBlock(), createElementBlock("td", {
-                            key: `bp-table-tbody-td-${index2}-${k}`,
+                            key: `bp-table-tbody-td-${index}-${k}`,
                             class: normalizeClass(tdClass(v))
                           }, [
                             !v.scope ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
@@ -1601,7 +1601,7 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
                             ], 64)) : renderSlot(_ctx.$slots, v.scope.customRender, {
                               key: 1,
                               row: item,
-                              index: index2,
+                              index,
                               data: item[v.key]
                             })
                           ], 2);
@@ -1657,9 +1657,9 @@ const _space = /* @__PURE__ */ defineComponent({
       return createVNode("div", {
         "class": ["bp-space", `bp-space-${props.type}`],
         "style": `justify-content:${props.justify}`
-      }, [children.map((child, index2) => {
+      }, [children.map((child, index) => {
         return createVNode(Fragment, {
-          "key": child.key ?? `item-${index2}`
+          "key": child.key ?? `item-${index}`
         }, [createVNode("div", {
           "class": "bp-space-item",
           "style": props.type === "horizontal" ? `margin: 0 ${size}px` : `margin: ${size}px 0`
@@ -1691,17 +1691,17 @@ const _hoisted_4$2 = {
   key: 3,
   class: "ri-close-circle-fill"
 };
-const _hoisted_5$2 = ["textContent"];
+const _hoisted_5$1 = ["textContent"];
 const _hoisted_6$1 = {
   key: 0,
   class: "ri-close-line"
 };
 const _hoisted_7 = { key: 1 };
-const __default__$7 = defineComponent({
+const __default__$6 = defineComponent({
   name: "Alert"
 });
 const _sfc_main$7 = /* @__PURE__ */ defineComponent({
-  ...__default__$7,
+  ...__default__$6,
   props: {
     type: { type: String, default: "info" },
     title: { type: String, default: "" },
@@ -1742,7 +1742,7 @@ const _sfc_main$7 = /* @__PURE__ */ defineComponent({
           }, [
             createElementVNode("span", {
               textContent: toDisplayString(__props.title)
-            }, null, 8, _hoisted_5$2)
+            }, null, 8, _hoisted_5$1)
           ], 2)) : createCommentVNode("", true),
           createElementVNode("div", {
             class: normalizeClass(`${name}-content`)
@@ -1775,11 +1775,11 @@ const Alert = Object.assign(_sfc_main$7, {
     app.component(_sfc_main$7.name, _sfc_main$7);
   }
 });
-const __default__$6 = defineComponent({
+const __default__$5 = defineComponent({
   name: "Tag"
 });
 const _sfc_main$6 = /* @__PURE__ */ defineComponent({
-  ...__default__$6,
+  ...__default__$5,
   props: {
     status: { type: String, default: "normal" },
     dot: { type: Boolean, default: false },
@@ -1827,11 +1827,11 @@ const Tag = Object.assign(_sfc_main$6, {
   }
 });
 const _hoisted_1$2 = ["onClick"];
-const __default__$5 = defineComponent({
+const __default__$4 = defineComponent({
   name: "Modal"
 });
 const _sfc_main$5 = /* @__PURE__ */ defineComponent({
-  ...__default__$5,
+  ...__default__$4,
   props: {
     /** 对话框显示状态 */
     visible: { type: Boolean, default: false },
@@ -1985,11 +1985,11 @@ const Modal = Object.assign(_sfc_main$5, {
     app.component(_sfc_main$5.name, _sfc_main$5);
   }
 });
-const __default__$4 = defineComponent({
+const __default__$3 = defineComponent({
   name: "Col"
 });
 const _sfc_main$4 = /* @__PURE__ */ defineComponent({
-  ...__default__$4,
+  ...__default__$3,
   props: {
     /** 栏位数量 1-24 Number of fields 1-24 */
     span: { type: [String, Number], default: 24 },
@@ -2014,11 +2014,11 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const __default__$3 = defineComponent({
+const __default__$2 = defineComponent({
   name: "Row"
 });
 const _sfc_main$3 = /* @__PURE__ */ defineComponent({
-  ...__default__$3,
+  ...__default__$2,
   props: {
     /** 栏位间隔 Field spacing */
     gutter: { type: [String, Number], default: "" },
@@ -2040,12 +2040,12 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     };
     const setGutter = (els) => {
       const childrenEls = rowRef.value.children;
-      els.forEach((item, index2) => {
+      els.forEach((item, index) => {
         const isCol = item.type === _sfc_main$4;
         if (isCol) {
-          const el = childrenEls[index2];
-          index2 !== 0 && (el.style.paddingLeft = `${props.gutter}px`);
-          index2 !== childrenEls.length - 1 && (el.style.paddingRight = `${props.gutter}px`);
+          const el = childrenEls[index];
+          index !== 0 && (el.style.paddingLeft = `${props.gutter}px`);
+          index !== childrenEls.length - 1 && (el.style.paddingRight = `${props.gutter}px`);
           return;
         }
         if (item.type.toString() === "Symbol(Fragment)") {
@@ -2076,21 +2076,8 @@ const Grid = Object.assign(_sfc_main$3, {
     app.component(_sfc_main$4.name, _sfc_main$4);
   }
 });
-const _hoisted_1$1 = ["onClick"];
-const _hoisted_2$1 = ["disabled", "href"];
-const _hoisted_3$1 = {
-  key: 0,
-  class: "left-icon"
-};
-const _hoisted_4$1 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
-const _hoisted_5$1 = [
-  _hoisted_4$1
-];
-const __default__$2 = defineComponent({
-  name: "Link"
-});
-const _sfc_main$2 = /* @__PURE__ */ defineComponent({
-  ...__default__$2,
+const _sfc_main$2 = defineComponent({
+  name: "Link",
   props: {
     /** 链接地址 */
     href: { type: String, default: "javascript:;" },
@@ -2101,9 +2088,10 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
     /** 是否加载状态 */
     loading: { type: Boolean, default: false }
   },
-  emits: ["click"],
-  setup(__props, { emit: emits }) {
-    const props = __props;
+  emits: {
+    click: (ev) => true
+  },
+  setup(props, { emit }) {
     const name = "bp-link";
     const clsName = computed(() => {
       let cls = [name, `${name}-status-${props.status}`];
@@ -2111,32 +2099,54 @@ const _sfc_main$2 = /* @__PURE__ */ defineComponent({
         cls.push(`${name}-disabled`);
       return cls;
     });
-    const handleClick = () => {
+    const handleClick = (e) => {
       if (props.disabled)
         return;
-      emits("click");
+      emit("click", e);
     };
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(clsName.value),
-        onClick: withModifiers(handleClick, ["stop"])
-      }, [
-        createElementVNode("a", {
-          disabled: __props.disabled,
-          class: normalizeClass(`${name}-inner`),
-          href: __props.href
-        }, [
-          __props.loading ? (openBlock(), createElementBlock("span", _hoisted_3$1, _hoisted_5$1)) : createCommentVNode("", true),
-          renderSlot(_ctx.$slots, "default")
-        ], 10, _hoisted_2$1)
-      ], 10, _hoisted_1$1);
+    return {
+      name,
+      clsName,
+      handleClick
     };
   }
 });
-_sfc_main$2.name = getComponentsPrefix() + _sfc_main$2.name;
-const Link = Object.assign(_sfc_main$2, {
+const _export_sfc = (sfc, props) => {
+  const target = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target[key] = val;
+  }
+  return target;
+};
+const _hoisted_1$1 = ["disabled", "href"];
+const _hoisted_2$1 = {
+  key: 0,
+  class: "left-icon"
+};
+const _hoisted_3$1 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
+const _hoisted_4$1 = [
+  _hoisted_3$1
+];
+function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.clsName),
+    onClick: _cache[0] || (_cache[0] = withModifiers((...args) => _ctx.handleClick && _ctx.handleClick(...args), ["stop"]))
+  }, [
+    createElementVNode("a", {
+      disabled: _ctx.disabled,
+      class: normalizeClass(`${_ctx.name}-inner`),
+      href: _ctx.href
+    }, [
+      _ctx.loading ? (openBlock(), createElementBlock("span", _hoisted_2$1, _hoisted_4$1)) : createCommentVNode("", true),
+      renderSlot(_ctx.$slots, "default")
+    ], 10, _hoisted_1$1)
+  ], 2);
+}
+const _link = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render]]);
+_link.name = getComponentsPrefix() + _link.name;
+const BpLink = Object.assign(_link, {
   install: (app) => {
-    app.component(_sfc_main$2.name, _sfc_main$2);
+    app.component(_link.name, _link);
   }
 });
 var MessageType = /* @__PURE__ */ ((MessageType2) => {
@@ -2360,7 +2370,7 @@ const components = {
   Modal,
   Spin,
   Grid,
-  Link,
+  Link: BpLink,
   Message
 };
 const install = function(app) {
@@ -2368,7 +2378,7 @@ const install = function(app) {
     app.use(components[key]);
   }
 };
-const index = {
+const birdpaperUi = {
   install,
   Button,
   Input,
@@ -2385,11 +2395,11 @@ const index = {
   Modal,
   Spin,
   Grid,
-  Link,
+  Link: BpLink,
   Message
 };
 export {
-  Message,
-  index as default
+  BpLink as Link,
+  birdpaperUi as default
 };
 //# sourceMappingURL=birdpaper-ui.mjs.map

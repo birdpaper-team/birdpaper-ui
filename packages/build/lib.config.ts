@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import VueSetupExtend from "vite-plugin-vue-setup-extend";
+import dts from "vite-plugin-dts";
 
 export default defineConfig({
   build: {
@@ -13,8 +14,8 @@ export default defineConfig({
       fileName: "birdpaper-ui",
     },
     minify: "terser",
-    sourcemap: true, // 输出单独 source文件
-    reportCompressedSize: true, // 生成压缩大小报告
+    sourcemap: true,
+    reportCompressedSize: true,
     cssCodeSplit: true,
     outDir: "../dist",
     rollupOptions: {
@@ -26,5 +27,13 @@ export default defineConfig({
       },
     },
   },
-  plugins: [VueSetupExtend(), vue(), vueJsx()],
+  plugins: [
+    VueSetupExtend(),
+    vue(),
+    vueJsx(),
+    // dts({
+    //   insertTypesEntry: true, copyDtsFiles: false
+    // }),
+    dts()
+  ],
 });

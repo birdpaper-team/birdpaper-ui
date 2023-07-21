@@ -17,6 +17,7 @@
     "remixicon": "^3.3.0",
     "terser": "^5.16.6",
     "vite": "^4.2.1",
+    "vite-plugin-dts": "1.4.1",
     "vite-plugin-vue-setup-extend": "^0.4.0",
     "vue": "^3.3.2"
   },
