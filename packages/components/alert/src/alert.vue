@@ -25,31 +25,40 @@
   </div>
 </template>
 
-<script setup lang="ts" name="Alert">
-import { PropType, computed, ref, useSlots } from "vue";
+<script lang="ts">
+import { PropType, computed, ref } from "vue";
 import { AlertType } from "./types";
+import { defineComponent } from "vue";
 
-const name = "bp-alert";
-const props = defineProps({
-  type: { type: String as PropType<AlertType>, default: "info" },
-  title: { type: String, default: "" },
-  closeable: { type: Boolean, default: false },
+export default defineComponent({
+  name: "Alert",
+  props: {
+    type: { type: String as PropType<AlertType>, default: "info" },
+    title: { type: String, default: "" },
+    closeable: { type: Boolean, default: false },
+  },
+  emits: ["close"],
+  setup(props, { emit, slots }) {
+    const name = "bp-alert";
+
+    const cls = computed(() => {
+      return [name, `${name}-${props.type}`, props.title ? `${name}-with-title` : ""];
+    });
+
+    const isRender = ref<boolean>(true);
+
+    const handleClose = () => {
+      isRender.value = false;
+      emit("close");
+    };
+
+    return {
+      name,
+      cls,
+      isRender,
+      handleClose,
+      slots,
+    };
+  },
 });
-
-const emits = defineEmits<{
-  close: [];
-}>();
-
-const slots = useSlots();
-
-const cls = computed(() => {
-  return [name, `${name}-${props.type}`, props.title ? `${name}-with-title` : ""];
-});
-
-const isRender = ref<boolean>(true);
-
-const handleClose = () => {
-  isRender.value = false;
-  emits("close");
-};
 </script>

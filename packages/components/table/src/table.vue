@@ -29,58 +29,74 @@
   </bp-spin>
 </template>
 
-<script setup lang="ts" name="Table">
+<script lang="ts">
 import { computed } from "vue";
 import { useTable } from "./table";
 import TableHeader from "./components/table-header.vue";
 import TableEmpty from "./components/empty.vue";
 import ColGroup from "./components/col-group.vue";
 import bpSpin from "../../spin/index";
+import { defineComponent } from "vue";
 
-const props = defineProps({
-  /* 表格头部列表 Table header list */
-  cols: { type: Array, default: () => [] },
-  /* 表格数据 Table data source */
-  data: { type: Array, default: () => [] },
-  /* 固定高度 Fixed height */
-  height: { type: String, default: "" },
-  /* 加载状态 loading or not */
-  loading: { type: Boolean, default: false },
-  /* 展示边框 Bordered or not */
-  border: { type: Boolean, default: false },
-  /* 斑马纹 Stripe or not */
-  stripe: { type: Boolean, default: false },
+export default defineComponent({
+  name: "Table",
+  components: { TableHeader, TableEmpty, ColGroup, bpSpin },
+  props: {
+    /* 表格头部列表 Table header list */
+    cols: { type: Array, default: () => [] },
+    /* 表格数据 Table data source */
+    data: { type: Array, default: () => [] },
+    /* 固定高度 Fixed height */
+    height: { type: String, default: "" },
+    /* 加载状态 loading or not */
+    loading: { type: Boolean, default: false },
+    /* 展示边框 Bordered or not */
+    border: { type: Boolean, default: false },
+    /* 斑马纹 Stripe or not */
+    stripe: { type: Boolean, default: false },
+  },
+  setup(props) {
+    const { bpTable, columns, _table_width } = useTable(props);
+
+    const isEmpty = computed(() => props.data.length === 0);
+    const hasBorder = computed(() => props.border);
+    const isStripe = computed(() => props.stripe);
+    const fixedHeight = computed(() => props.height);
+
+    const bodyAreaStyle = computed(() => {
+      if (props.height) {
+        return `width:${_table_width.value}px;max-height:${props.height}px;height:${props.height}px;overflow-y:auto`;
+      }
+      return `width:${_table_width.value}px`;
+    });
+
+    const innerClass = computed(() => {
+      let name = [
+        "bp-table-inner",
+        { "bp-table-border": hasBorder.value },
+        { "bp-table-stripe": isStripe.value },
+        { "bp-table-fixed-header": fixedHeight.value },
+      ];
+      return name;
+    });
+
+    // TODO
+    const tdClass = (v: any) => {
+      let align = `text-${v["align"] || "left"}`;
+
+      let name = [align];
+      return name;
+    };
+
+    return {
+      bpTable,
+      columns,
+      _table_width,
+      isEmpty,
+      bodyAreaStyle,
+      innerClass,
+      tdClass,
+    };
+  },
 });
-
-const { bpTable, columns, _table_width } = useTable(props);
-
-const isEmpty = computed(() => props.data.length === 0);
-const hasBorder = computed(() => props.border);
-const isStripe = computed(() => props.stripe);
-const fixedHeight = computed(() => props.height);
-
-const bodyAreaStyle = computed(() => {
-  if (props.height) {
-    return `width:${_table_width.value}px;max-height:${props.height}px;height:${props.height}px;overflow-y:auto`;
-  }
-  return `width:${_table_width.value}px`;
-});
-
-const innerClass = computed(() => {
-  let name = [
-    "bp-table-inner",
-    { "bp-table-border": hasBorder.value },
-    { "bp-table-stripe": isStripe.value },
-    { "bp-table-fixed-header": fixedHeight.value },
-  ];
-  return name;
-});
-
-// TODO
-const tdClass = (v: any) => {
-  let align = `text-${v["align"] || "left"}`;
-
-  let name = [align];
-  return name;
-};
 </script>

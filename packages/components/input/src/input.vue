@@ -122,10 +122,12 @@ export default defineComponent({
     };
 
     return {
+      inpRef,
       inpType,
       inpClass,
       showClear,
       handleClear,
+      handleFocus,
       showPassword,
       showWordLimit,
       limitText,

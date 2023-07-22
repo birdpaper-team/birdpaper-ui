@@ -15,16 +15,24 @@
   </div>
 </template>
 
-<script setup lang="ts" name="Spin">
-import { useSlots } from "vue";
+<script lang="ts">
+import { defineComponent } from "vue";
 
-const props = defineProps({
-  /** 是否开启加载 Loading or not */
-  loading: { type: Boolean, default: false },
-  /** 加载提示文字 The loading tip text */
-  tip: { type: String, default: "" },
+export default defineComponent({
+  name: "Spin",
+  props: {
+    /** 是否开启加载 Loading or not */
+    loading: { type: Boolean, default: false },
+    /** 加载提示文字 The loading tip text */
+    tip: { type: String, default: "" },
+  },
+  setup(props, { slots }) {
+    const name = "bp-spin";
+
+    return {
+      name,
+      slots,
+    };
+  },
 });
-
-const name = "bp-spin";
-const slots = useSlots();
 </script>
