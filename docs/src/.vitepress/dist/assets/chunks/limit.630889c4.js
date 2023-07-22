@@ -1,1 +1,0 @@
-import{d as l,k as n,r,o as s,j as p}from"../app.d9c827c8.js";const _=l({__name:"limit",setup(m){const e=n("");return(u,o)=>{const t=r("bp-textarea");return s(),p(t,{style:{width:"380px"},modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=a=>e.value=a),placeholder:"请输入",maxlength:200,"show-limit":""},null,8,["modelValue"])}}});export{_ as default};

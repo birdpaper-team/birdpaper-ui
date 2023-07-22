@@ -2,9 +2,95 @@ import { App } from "vue";
 export { default as Message } from "./message";
 declare const _default: {
     install: (app: App<any>) => void;
-    Button: ((props: Record<string, any> & {}) => any) & {
-        install: (app: App<any>) => void;
-    };
+    Button: import("vue").DefineComponent<{
+        type: {
+            type: import("vue").PropType<import("./button").ButtonType>;
+            default: string;
+        };
+        size: {
+            type: import("vue").PropType<import("./button").ButtonSize>;
+            default: string;
+        };
+        shape: {
+            type: import("vue").PropType<import("./button").ButtonShape>;
+            default: string;
+        };
+        status: {
+            type: import("vue").PropType<import("./button").ButtonStatus>;
+            default: string;
+        };
+        loading: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        disabled: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        icon: {
+            type: StringConstructor;
+            default: string;
+        };
+        block: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+    }, {
+        isDisabled: import("vue").ComputedRef<boolean>;
+        btnClass: import("vue").ComputedRef<(string | {
+            "has-default-slot": boolean;
+            "is-block"?: undefined;
+        } | {
+            "is-block": boolean;
+            "has-default-slot"?: undefined;
+        })[]>;
+        btnIcon: import("vue").ComputedRef<string>;
+        onClick: () => void;
+    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "click"[], "click", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+        type: {
+            type: import("vue").PropType<import("./button").ButtonType>;
+            default: string;
+        };
+        size: {
+            type: import("vue").PropType<import("./button").ButtonSize>;
+            default: string;
+        };
+        shape: {
+            type: import("vue").PropType<import("./button").ButtonShape>;
+            default: string;
+        };
+        status: {
+            type: import("vue").PropType<import("./button").ButtonStatus>;
+            default: string;
+        };
+        loading: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        disabled: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        icon: {
+            type: StringConstructor;
+            default: string;
+        };
+        block: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+    }>> & {
+        onClick?: (...args: any[]) => any;
+    }, {
+        type: import("./button").ButtonType;
+        size: import("./button").ButtonSize;
+        shape: import("./button").ButtonShape;
+        status: import("./button").ButtonStatus;
+        loading: boolean;
+        disabled: boolean;
+        icon: string;
+        block: boolean;
+    }, {}>;
     Input: ((props: Record<string, any> & {}) => any) & {
         install: (app: App<any>) => void;
     };
@@ -194,6 +280,7 @@ declare const _default: {
                 loading?: boolean;
                 disabled?: boolean;
                 href?: string;
+                onClick?: (ev: MouseEvent) => any;
                 key?: string | number | symbol;
                 ref?: import("vue").VNodeRef;
                 ref_for?: boolean;
@@ -238,7 +325,6 @@ declare const _default: {
                 }>) => void)[];
                 class?: unknown;
                 style?: unknown;
-                onClick?: (ev: MouseEvent) => any;
             };
             $attrs: {
                 [x: string]: unknown;

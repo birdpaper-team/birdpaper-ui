@@ -1,1 +1,0 @@
-import{d as s,k as t,r as l,o as p,j as r}from"../app.d9c827c8.js";const _=s({__name:"basic",setup(c){const e=t(!1);return(m,o)=>{const a=l("bp-switch");return p(),r(a,{modelValue:e.value,"onUpdate:modelValue":o[0]||(o[0]=n=>e.value=n)},null,8,["modelValue"])}}});export{_ as default};

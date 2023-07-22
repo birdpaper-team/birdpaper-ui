@@ -10,5 +10,5 @@ const Checkbox = Object.assign(_checkbox, {
   },
 });
 
-export type checkboxInstance = InstanceType<typeof _checkbox>;
+export type CheckboxInstance = InstanceType<typeof _checkbox>;
 export default Checkbox;

@@ -1,1 +1,0 @@
-import{d as a,k as r,r as p,o as s,j as c}from"../app.d9c827c8.js";const i=a({__name:"basic",setup(u){const n=r(1);return(l,e)=>{const o=p("bp-pagination");return s(),c(o,{current:n.value,"onUpdate:current":e[0]||(e[0]=t=>n.value=t),total:30},null,8,["current"])}}});export{i as default};

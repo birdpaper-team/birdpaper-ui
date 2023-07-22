@@ -1,1 +1,0 @@
-import{_ as o,r as n,o as t,j as a,w as c,e as r}from"../app.d9c827c8.js";const s={};function _(l,i){const e=n("bp-link");return t(),a(e,{loading:""},{default:c(()=>[r("加载中")]),_:1})}const d=o(s,[["render",_]]);export{d as default};

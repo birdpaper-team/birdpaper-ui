@@ -1,1 +1,0 @@
-import{d as a,k as r,r as p,o as s,j as u}from"../app.d9c827c8.js";const _=a({__name:"sizes",setup(c){const e=r(1);return(l,n)=>{const t=p("bp-pagination");return s(),u(t,{current:e.value,"onUpdate:current":n[0]||(n[0]=o=>e.value=o),total:500,layout:"prev, pager, next, sizes"},null,8,["current"])}}});export{_ as default};

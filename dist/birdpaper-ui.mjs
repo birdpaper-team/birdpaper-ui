@@ -5,16 +5,7 @@ var __publicField = (obj, key, value) => {
   return value;
 };
 import { defineComponent, computed, useSlots, openBlock, createElementBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, ref, unref, Fragment, toDisplayString, nextTick, watch, renderList, createBlock, withCtx, createTextVNode, reactive, onMounted, onBeforeUnmount, resolveComponent, withDirectives, withModifiers, createVNode, Teleport, Transition, vShow, provide, inject, watchEffect, resolveDynamicComponent, mergeProps, toHandlerKey, normalizeStyle, Comment as Comment$1, onUnmounted, TransitionGroup, render } from "vue";
-const _hoisted_1$i = ["disabled"];
-const _hoisted_2$d = {
-  key: 0,
-  class: "left-icon"
-};
-const __default__$r = defineComponent({
-  name: "Button"
-});
-const _sfc_main$s = /* @__PURE__ */ defineComponent({
-  ...__default__$r,
+const _sfc_main$s = defineComponent({
   props: {
     /** 按钮类型 Type of the button */
     type: { type: String, default: "normal" },
@@ -34,8 +25,7 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
     block: { type: Boolean, default: false }
   },
   emits: ["click"],
-  setup(__props, { emit }) {
-    const props = __props;
+  setup(props, { emit }) {
     const name = "bp-btn";
     const isDisabled = computed(() => props.disabled || props.loading);
     const btnClass = computed(() => {
@@ -55,31 +45,50 @@ const _sfc_main$s = /* @__PURE__ */ defineComponent({
       if (!props.disabled)
         return emit("click");
     };
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("button", {
-        class: normalizeClass(btnClass.value),
-        type: "button",
-        disabled: isDisabled.value,
-        onClick
-      }, [
-        btnIcon.value ? (openBlock(), createElementBlock("span", _hoisted_2$d, [
-          createElementVNode("i", {
-            class: normalizeClass(btnIcon.value)
-          }, null, 2)
-        ])) : createCommentVNode("", true),
-        renderSlot(_ctx.$slots, "default")
-      ], 10, _hoisted_1$i);
+    return {
+      isDisabled,
+      btnClass,
+      btnIcon,
+      onClick
     };
   }
 });
+const _export_sfc = (sfc, props) => {
+  const target = sfc.__vccOpts || sfc;
+  for (const [key, val] of props) {
+    target[key] = val;
+  }
+  return target;
+};
+const _hoisted_1$i = ["disabled"];
+const _hoisted_2$d = {
+  key: 0,
+  class: "left-icon"
+};
+function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("button", {
+    class: normalizeClass(_ctx.btnClass),
+    type: "button",
+    disabled: _ctx.isDisabled,
+    onClick: _cache[0] || (_cache[0] = (...args) => _ctx.onClick && _ctx.onClick(...args))
+  }, [
+    _ctx.btnIcon ? (openBlock(), createElementBlock("span", _hoisted_2$d, [
+      createElementVNode("i", {
+        class: normalizeClass(_ctx.btnIcon)
+      }, null, 2)
+    ])) : createCommentVNode("", true),
+    renderSlot(_ctx.$slots, "default")
+  ], 10, _hoisted_1$i);
+}
+const _button = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$1]]);
 const DEFAULT_PREFIX = "Bp";
 const getComponentsPrefix = (name) => {
   return name ?? DEFAULT_PREFIX;
 };
-_sfc_main$s.name = getComponentsPrefix() + _sfc_main$s.name;
-const Button = Object.assign(_sfc_main$s, {
+_button.name = getComponentsPrefix() + _button.name;
+Object.assign(_button, {
   install: (app) => {
-    app.component(_sfc_main$s.name, _sfc_main$s);
+    app.component(_button.name, _button);
   }
 });
 var InputType = /* @__PURE__ */ ((InputType2) => {
@@ -2111,13 +2120,6 @@ const _sfc_main$2 = defineComponent({
     };
   }
 });
-const _export_sfc = (sfc, props) => {
-  const target = sfc.__vccOpts || sfc;
-  for (const [key, val] of props) {
-    target[key] = val;
-  }
-  return target;
-};
 const _hoisted_1$1 = ["disabled", "href"];
 const _hoisted_2$1 = {
   key: 0,
@@ -2355,7 +2357,7 @@ const Message = Object.assign({
   }
 });
 const components = {
-  Button,
+  Button: _button,
   Input,
   Textarea,
   Radio,
@@ -2380,7 +2382,7 @@ const install = function(app) {
 };
 const birdpaperUi = {
   install,
-  Button,
+  Button: _button,
   Input,
   Textarea,
   Radio,
@@ -2399,7 +2401,22 @@ const birdpaperUi = {
   Message
 };
 export {
+  Alert,
+  _button as Button,
+  Checkbox,
+  Grid,
+  Input,
   BpLink as Link,
+  Modal,
+  Pagination,
+  Radio,
+  Select,
+  Space,
+  Spin,
+  Switch,
+  Table,
+  Tag,
+  Textarea,
   birdpaperUi as default
 };
 //# sourceMappingURL=birdpaper-ui.mjs.map

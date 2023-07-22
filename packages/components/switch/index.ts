@@ -10,5 +10,5 @@ const Switch = Object.assign(_switch, {
   },
 });
 
-export type switchInstance = InstanceType<typeof _switch>;
+export type SwitchInstance = InstanceType<typeof _switch>;
 export default Switch;

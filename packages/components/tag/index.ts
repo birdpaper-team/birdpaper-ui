@@ -10,5 +10,5 @@ const Tag = Object.assign(_tag, {
   },
 });
 
-export type tagInstance = InstanceType<typeof _tag>;
+export type TagInstance = InstanceType<typeof _tag>;
 export default Tag;
