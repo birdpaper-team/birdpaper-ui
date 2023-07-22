@@ -52,6 +52,7 @@ export const sidebar = {
         { text: "警告提示", link: "/component/alert" },
         { text: "消息提示", link: "/component/message" },
         { text: "对话框", link: "/component/modal" },
+        { text: "气泡确认", link: "/component/popconfirm" },
       ],
     },
   ],

@@ -48,6 +48,9 @@ export type { GridInstance, ColInstance } from "./grid";
 export { default as Link } from "./link";
 export type { LinkInstance } from "./link";
 
+export { default as Popconfirm } from "./popconfirm";
+export type { PopconfirmInstance } from "./popconfirm";
+
 export { default as Message } from "./message";
 
 export type {} from "./components";
