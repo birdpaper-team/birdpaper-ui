@@ -34,7 +34,7 @@ export default defineComponent({
   emits: ["click"],
   setup(props, { emit }) {
     const name = "bp-btn";
-    const isDisabled = computed(() => props.disabled || props.loading); // 禁用状态，除了传入属性外，还应考虑「加载中」的情况
+    const isDisabled = computed<boolean>(() => props.disabled || props.loading); // 禁用状态，除了传入属性外，还应考虑「加载中」的情况
 
     // 按钮样式
     const btnClass = computed(() => {
@@ -48,7 +48,7 @@ export default defineComponent({
       return className;
     });
 
-    const btnIcon = computed(() => {
+    const btnIcon = computed<string>(() => {
       return props.loading ? "bp-icon-loading ri-loader-4-line" : props.icon;
     });
 
