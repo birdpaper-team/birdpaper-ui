@@ -36,7 +36,7 @@ import BpInput from "../../input/src/input.vue";
 export default defineComponent({
   name: "Select",
   components: { BpInput },
-  directives: { vClickOutside },
+  directives: { clickOutside: vClickOutside },
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: [String, Number] as PropType<SelectBindValue>, default: "" },

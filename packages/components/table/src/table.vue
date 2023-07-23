@@ -7,7 +7,7 @@
         <div class="bp-table-body-area" :style="bodyAreaStyle">
           <div class="scrollbar"></div>
 
-          <table class="bp-table-body" :style="`width:${_table_width}px`">
+          <table class="bp-table-body" :style="`width:${table_width}px`">
             <col-group :cols="columns"></col-group>
 
             <tbody class="bp-table-body-tbody">
@@ -56,7 +56,7 @@ export default defineComponent({
     stripe: { type: Boolean, default: false },
   },
   setup(props) {
-    const { bpTable, columns, _table_width } = useTable(props);
+    const { bpTable, columns, table_width } = useTable(props);
 
     const isEmpty = computed(() => props.data.length === 0);
     const hasBorder = computed(() => props.border);
@@ -65,9 +65,9 @@ export default defineComponent({
 
     const bodyAreaStyle = computed(() => {
       if (props.height) {
-        return `width:${_table_width.value}px;max-height:${props.height}px;height:${props.height}px;overflow-y:auto`;
+        return `width:${table_width.value}px;max-height:${props.height}px;height:${props.height}px;overflow-y:auto`;
       }
-      return `width:${_table_width.value}px`;
+      return `width:${table_width.value}px`;
     });
 
     const innerClass = computed(() => {
@@ -91,7 +91,7 @@ export default defineComponent({
     return {
       bpTable,
       columns,
-      _table_width,
+      table_width,
       isEmpty,
       bodyAreaStyle,
       innerClass,

@@ -8,8 +8,8 @@ export const useTable = props => {
   /** columns 表头列表 */
   const columns = ref([]);
 
-  /** _table_width 表格所占的实际宽度 px */
-  const _table_width = ref();
+  /** table_width 表格所占的实际宽度 px */
+  const table_width = ref();
 
   /** _remainder_col 在没有设定宽度时，可用于撑开剩余宽度的列数 */
   let _remainder_col = 0;
@@ -51,7 +51,7 @@ export const useTable = props => {
       minWidth && _min_width_list.push(minWidth);
     }
 
-    _table_width.value = el && el.offsetWidth - 2;
+    table_width.value = el && el.offsetWidth - 2;
     _col_width_list = getWidthList() || [];
 
     columns.value = [];
@@ -117,7 +117,7 @@ export const useTable = props => {
    * @returns Number width
    */
   function getAdaptWidth(): number {
-    let width = (_table_width.value - _fixed_width) / _remainder_col;
+    let width = (table_width.value - _fixed_width) / _remainder_col;
     return Number(Number(width).toFixed(2));
   }
 
@@ -144,7 +144,7 @@ export const useTable = props => {
   return {
     initColumns,
     bpTable,
-    _table_width,
+    table_width,
     columns,
   };
 };
