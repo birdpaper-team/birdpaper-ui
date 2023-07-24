@@ -82,6 +82,8 @@ export default defineComponent({
 
     const handleResize = () => {
       const rect = selectRef.value.getBoundingClientRect();
+      if (!rect) return;
+
       optionBoxRef.value.setAttribute(
         "style",
         `display:${isFocus.value ? "block" : "none"};width: ${rect.width}px;top:${rect.top + rect.height}px;left:${
