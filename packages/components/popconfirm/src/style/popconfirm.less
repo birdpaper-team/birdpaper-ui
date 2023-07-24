@@ -2,6 +2,7 @@
   position: relative;
 
   &-slot {
+    position: relative;
     display: inline-block;
   }
 
@@ -13,8 +14,9 @@
     border: 1px solid @gary-4;
     border-radius: 6px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 16px;
+    padding: 12px 10px;
     z-index: 99;
+    transition: all .2s ease;
     .no-select;
 
     &-content {
