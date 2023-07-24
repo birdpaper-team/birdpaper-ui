@@ -19,6 +19,7 @@ declare module "vue" {
     BpGrid: typeof import("birdpaper-ui")["Grid"];
     BpSpace: typeof import("birdpaper-ui")["Space"];
     BpPopconfirm: typeof import("birdpaper-ui")["Popconfirm"];
+    BpImage: typeof import("birdpaper-ui")["Image"];
   }
 }
 

@@ -51,6 +51,9 @@ export type { LinkInstance } from "./link";
 export { default as Popconfirm } from "./popconfirm";
 export type { PopconfirmInstance } from "./popconfirm";
 
+export { default as Image } from "./image";
+export type { ImageInstance } from "./image";
+
 export { default as Message } from "./message";
 
 export type {} from "./components";

@@ -16,6 +16,7 @@ import Spin from "./spin";
 import Grid from "./grid";
 import Link from "./link";
 import Popconfirm from "./popconfirm";
+import Image from "./image";
 import Message from "./message";
 
 const components: Record<string, Plugin> = {
@@ -36,6 +37,7 @@ const components: Record<string, Plugin> = {
   Grid,
   Link,
   Popconfirm,
+  Image,
   Message,
 };
 
@@ -66,5 +68,6 @@ export default {
   Grid,
   Link,
   Popconfirm,
+  Image,
   Message,
 };
