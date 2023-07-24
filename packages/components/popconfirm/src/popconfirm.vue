@@ -42,11 +42,17 @@ import { off, on, throttle } from "../../../utils/util";
 export default defineComponent({
   name: "Popconfirm",
   props: {
+    /**确认框文本内容 */
     content: { type: String, default: "" },
+    /** 类型 */
     type: { type: String as PropType<PopconfirmType>, default: PopconfirmType.Info },
+    /** 弹出位置 */
     position: { type: String as PropType<PopconfirmPosition>, default: PopconfirmPosition.Top },
+    /** 确认按钮文本 */
     okText: { type: String, default: "确认" },
+    /** 取消按钮文本 */
     cancleText: { type: String, default: "取消" },
+    /** 触发确定前的回调，返回 false 则中断 */
     onBeforeOk: { type: Function, default: () => true },
   },
   directives: { clickOutside: vClickOutside },
@@ -63,7 +69,8 @@ export default defineComponent({
     };
 
     const handleResize = () => {
-      const slotRect = slotRef.value.getBoundingClientRect();
+      const slotRect = slotRef.value?.getBoundingClientRect();
+      if (!slotRect) return;
 
       const position = {
         top: `top:${slotRect.top - 10}px;left:${
