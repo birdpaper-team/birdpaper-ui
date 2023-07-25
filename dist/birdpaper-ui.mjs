@@ -4,8 +4,9 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { defineComponent, computed, useSlots, openBlock, createElementBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, ref, unref, Fragment, toDisplayString, nextTick, watch, renderList, createBlock, withCtx, createTextVNode, reactive, onMounted, onBeforeUnmount, resolveComponent, withDirectives, withModifiers, createVNode, Teleport, Transition, vShow, provide, inject, watchEffect, resolveDynamicComponent, mergeProps, toHandlerKey, normalizeStyle, Comment as Comment$1, onUnmounted, TransitionGroup, render } from "vue";
-const _sfc_main$s = defineComponent({
+import { defineComponent, computed, useSlots, openBlock, createElementBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, ref, nextTick, Fragment, toDisplayString, watch, resolveComponent, renderList, createBlock, withCtx, createTextVNode, reactive, provide, onMounted, onBeforeUnmount, resolveDirective, withDirectives, withModifiers, createVNode, Teleport, Transition, vShow, inject, watchEffect, resolveDynamicComponent, mergeProps, toHandlerKey, normalizeStyle, Comment as Comment$1, onUnmounted, TransitionGroup, render } from "vue";
+const _sfc_main$u = defineComponent({
+  name: "Button",
   props: {
     /** 按钮类型 Type of the button */
     type: { type: String, default: "normal" },
@@ -61,18 +62,18 @@ const _export_sfc = (sfc, props) => {
   return target;
 };
 const _hoisted_1$i = ["disabled"];
-const _hoisted_2$d = {
+const _hoisted_2$f = {
   key: 0,
   class: "left-icon"
 };
-function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("button", {
     class: normalizeClass(_ctx.btnClass),
     type: "button",
     disabled: _ctx.isDisabled,
     onClick: _cache[0] || (_cache[0] = (...args) => _ctx.onClick && _ctx.onClick(...args))
   }, [
-    _ctx.btnIcon ? (openBlock(), createElementBlock("span", _hoisted_2$d, [
+    _ctx.btnIcon ? (openBlock(), createElementBlock("span", _hoisted_2$f, [
       createElementVNode("i", {
         class: normalizeClass(_ctx.btnIcon)
       }, null, 2)
@@ -80,13 +81,13 @@ function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
     renderSlot(_ctx.$slots, "default")
   ], 10, _hoisted_1$i);
 }
-const _button = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$1]]);
+const _button = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$j]]);
 const DEFAULT_PREFIX = "Bp";
 const getComponentsPrefix = (name) => {
   return name ?? DEFAULT_PREFIX;
 };
 _button.name = getComponentsPrefix() + _button.name;
-Object.assign(_button, {
+const Button = Object.assign(_button, {
   install: (app) => {
     app.component(_button.name, _button);
   }
@@ -96,17 +97,8 @@ var InputType = /* @__PURE__ */ ((InputType2) => {
   InputType2["Password"] = "password";
   return InputType2;
 })(InputType || {});
-const _hoisted_1$h = ["type", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
-const _hoisted_2$c = {
-  key: 0,
-  class: "suffix"
-};
-const _hoisted_3$6 = ["textContent"];
-const __default__$q = defineComponent({
-  name: "Input"
-});
-const _sfc_main$r = /* @__PURE__ */ defineComponent({
-  ...__default__$q,
+const _sfc_main$t = defineComponent({
+  name: "Input",
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: String, default: "" },
@@ -130,10 +122,8 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
     clearable: { type: Boolean, default: false }
   },
   emits: ["update:modelValue", "input", "focus", "blur", "keypress", "keyup"],
-  setup(__props, { expose: __expose, emit: emits }) {
-    const props = __props;
+  setup(props, { emit, slots }) {
     const name = "bp-input";
-    const slot = useSlots();
     const inpRef = ref();
     const inpType = computed(() => isPasswordType.value ? InputType.Password : InputType.Text);
     const inpClass = computed(() => {
@@ -147,7 +137,7 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
       () => props.type === "text" && props.modelValue && props.clearable && !props.disabled && !props.readonly
     );
     const handleClear = () => {
-      emits("update:modelValue", "");
+      emit("update:modelValue", "");
       nextTick(() => handleFocus());
     };
     const showWordLimit = computed(() => {
@@ -162,77 +152,92 @@ const _sfc_main$r = /* @__PURE__ */ defineComponent({
     };
     const handleFocus = () => inpRef.value.focus();
     const handleBlur = () => inpRef.value.blur();
-    const onFocus = () => emits("focus");
-    const onBlur = () => emits("blur");
-    const onKeypress = () => emits("keypress");
-    const onKeyup = () => emits("keyup");
+    const onFocus = () => emit("focus");
+    const onBlur = () => emit("blur");
+    const onKeypress = () => emit("keypress");
+    const onKeyup = () => emit("keyup");
     const onInput = (e) => {
       const targetValue = e.target.value;
-      emits("update:modelValue", targetValue);
+      emit("update:modelValue", targetValue);
     };
-    __expose({
+    return {
+      inpRef,
+      inpType,
+      inpClass,
+      showClear,
+      handleClear,
       handleFocus,
-      handleBlur
-    });
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(inpClass.value)
-      }, [
-        createElementVNode("input", {
-          ref_key: "inpRef",
-          ref: inpRef,
-          class: "bp-input-inner",
-          type: inpType.value,
-          spellcheck: false,
-          disabled: __props.disabled,
-          readonly: __props.readonly,
-          cursor: __props.modelValue.length,
-          placeholder: __props.placeholder,
-          maxlength: __props.maxlength,
-          value: __props.modelValue,
-          onFocus,
-          onBlur,
-          onKeypress,
-          onKeyup,
-          onInput
-        }, null, 40, _hoisted_1$h),
-        unref(slot).suffix || showClear.value || showWordLimit.value || __props.type === "password" ? (openBlock(), createElementBlock("div", _hoisted_2$c, [
-          !unref(slot).suffix ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
-            showClear.value ? (openBlock(), createElementBlock("i", {
-              key: 0,
-              class: "ri-close-line click-icon",
-              onClick: handleClear
-            })) : createCommentVNode("", true),
-            showWordLimit.value ? (openBlock(), createElementBlock("span", {
-              key: 1,
-              textContent: toDisplayString(limitText.value)
-            }, null, 8, _hoisted_3$6)) : createCommentVNode("", true),
-            __props.type === "password" ? (openBlock(), createElementBlock("i", {
-              key: 2,
-              onClick: triggerPassword,
-              class: normalizeClass(["click-icon", showPassword.value ? "ri-eye-fill" : "ri-eye-close-fill"])
-            }, null, 2)) : createCommentVNode("", true)
-          ], 64)) : createCommentVNode("", true),
-          renderSlot(_ctx.$slots, "suffix")
-        ])) : createCommentVNode("", true)
-      ], 2);
+      showPassword,
+      showWordLimit,
+      limitText,
+      slots,
+      handleBlur,
+      onFocus,
+      onBlur,
+      onKeypress,
+      onKeyup,
+      onInput,
+      triggerPassword
     };
   }
 });
-_sfc_main$r.name = getComponentsPrefix() + _sfc_main$r.name;
-const Input = Object.assign(_sfc_main$r, {
+const _hoisted_1$h = ["type", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
+const _hoisted_2$e = {
+  key: 0,
+  class: "suffix"
+};
+const _hoisted_3$9 = ["textContent"];
+function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.inpClass)
+  }, [
+    createElementVNode("input", {
+      ref: "inpRef",
+      class: "bp-input-inner",
+      type: _ctx.inpType,
+      spellcheck: false,
+      disabled: _ctx.disabled,
+      readonly: _ctx.readonly,
+      cursor: _ctx.modelValue.length,
+      placeholder: _ctx.placeholder,
+      maxlength: _ctx.maxlength,
+      value: _ctx.modelValue,
+      onFocus: _cache[0] || (_cache[0] = (...args) => _ctx.onFocus && _ctx.onFocus(...args)),
+      onBlur: _cache[1] || (_cache[1] = (...args) => _ctx.onBlur && _ctx.onBlur(...args)),
+      onKeypress: _cache[2] || (_cache[2] = (...args) => _ctx.onKeypress && _ctx.onKeypress(...args)),
+      onKeyup: _cache[3] || (_cache[3] = (...args) => _ctx.onKeyup && _ctx.onKeyup(...args)),
+      onInput: _cache[4] || (_cache[4] = (...args) => _ctx.onInput && _ctx.onInput(...args))
+    }, null, 40, _hoisted_1$h),
+    _ctx.slots.suffix || _ctx.showClear || _ctx.showWordLimit || _ctx.type === "password" ? (openBlock(), createElementBlock("div", _hoisted_2$e, [
+      !_ctx.slots.suffix ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
+        _ctx.showClear ? (openBlock(), createElementBlock("i", {
+          key: 0,
+          class: "ri-close-line click-icon",
+          onClick: _cache[5] || (_cache[5] = (...args) => _ctx.handleClear && _ctx.handleClear(...args))
+        })) : createCommentVNode("", true),
+        _ctx.showWordLimit ? (openBlock(), createElementBlock("span", {
+          key: 1,
+          textContent: toDisplayString(_ctx.limitText)
+        }, null, 8, _hoisted_3$9)) : createCommentVNode("", true),
+        _ctx.type === "password" ? (openBlock(), createElementBlock("i", {
+          key: 2,
+          onClick: _cache[6] || (_cache[6] = (...args) => _ctx.triggerPassword && _ctx.triggerPassword(...args)),
+          class: normalizeClass(["click-icon", _ctx.showPassword ? "ri-eye-fill" : "ri-eye-close-fill"])
+        }, null, 2)) : createCommentVNode("", true)
+      ], 64)) : createCommentVNode("", true),
+      renderSlot(_ctx.$slots, "suffix")
+    ])) : createCommentVNode("", true)
+  ], 2);
+}
+const BpInput = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$i]]);
+BpInput.name = getComponentsPrefix() + BpInput.name;
+const Input = Object.assign(BpInput, {
   install: (app) => {
-    app.component(_sfc_main$r.name, _sfc_main$r);
+    app.component(BpInput.name, BpInput);
   }
 });
-const _hoisted_1$g = ["rows", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
-const _hoisted_2$b = { class: "suffix" };
-const _hoisted_3$5 = ["textContent"];
-const __default__$p = defineComponent({
-  name: "Textarea"
-});
-const _sfc_main$q = /* @__PURE__ */ defineComponent({
-  ...__default__$p,
+const _sfc_main$s = defineComponent({
+  name: "Textarea",
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: String, default: "" },
@@ -252,8 +257,7 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
     showLimit: { type: Boolean, default: false }
   },
   emits: ["update:modelValue", "input", "focus", "blur", "keypress", "keyup"],
-  setup(__props, { emit: emits }) {
-    const props = __props;
+  setup(props, { emit }) {
     const name = "bp-textarea";
     const inpRef = ref();
     const inpClass = computed(() => {
@@ -267,57 +271,70 @@ const _sfc_main$q = /* @__PURE__ */ defineComponent({
       return props.maxlength && props.showLimit;
     });
     const limitText = computed(() => `${props.modelValue.length}/${props.maxlength}`);
-    const onFocus = () => emits("focus");
-    const onBlur = () => emits("blur");
-    const onKeypress = () => emits("keypress");
-    const onKeyup = () => emits("keyup");
+    const onFocus = () => emit("focus");
+    const onBlur = () => emit("blur");
+    const onKeypress = () => emit("keypress");
+    const onKeyup = () => emit("keyup");
     const onInput = (e) => {
       const targetValue = e.target.value;
-      emits("update:modelValue", targetValue);
+      emit("update:modelValue", targetValue);
     };
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(inpClass.value)
-      }, [
-        createElementVNode("textarea", {
-          ref_key: "inpRef",
-          ref: inpRef,
-          class: "bp-textarea-inner",
-          rows: __props.rows,
-          spellcheck: false,
-          disabled: __props.disabled,
-          readonly: __props.readonly,
-          cursor: __props.modelValue.length,
-          placeholder: __props.placeholder,
-          maxlength: __props.maxlength,
-          value: __props.modelValue,
-          onFocus,
-          onBlur,
-          onKeypress,
-          onKeyup,
-          onInput
-        }, null, 40, _hoisted_1$g),
-        createElementVNode("div", _hoisted_2$b, [
-          showWordLimit.value ? (openBlock(), createElementBlock("span", {
-            key: 0,
-            textContent: toDisplayString(limitText.value)
-          }, null, 8, _hoisted_3$5)) : createCommentVNode("", true)
-        ])
-      ], 2);
+    return {
+      name,
+      inpRef,
+      inpClass,
+      getStatus,
+      showWordLimit,
+      limitText,
+      onFocus,
+      onBlur,
+      onKeypress,
+      onKeyup,
+      onInput
     };
   }
 });
-_sfc_main$q.name = getComponentsPrefix() + _sfc_main$q.name;
-const Textarea = Object.assign(_sfc_main$q, {
+const _hoisted_1$g = ["rows", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
+const _hoisted_2$d = { class: "suffix" };
+const _hoisted_3$8 = ["textContent"];
+function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.inpClass)
+  }, [
+    createElementVNode("textarea", {
+      ref: "inpRef",
+      class: "bp-textarea-inner",
+      rows: _ctx.rows,
+      spellcheck: false,
+      disabled: _ctx.disabled,
+      readonly: _ctx.readonly,
+      cursor: _ctx.modelValue.length,
+      placeholder: _ctx.placeholder,
+      maxlength: _ctx.maxlength,
+      value: _ctx.modelValue,
+      onFocus: _cache[0] || (_cache[0] = (...args) => _ctx.onFocus && _ctx.onFocus(...args)),
+      onBlur: _cache[1] || (_cache[1] = (...args) => _ctx.onBlur && _ctx.onBlur(...args)),
+      onKeypress: _cache[2] || (_cache[2] = (...args) => _ctx.onKeypress && _ctx.onKeypress(...args)),
+      onKeyup: _cache[3] || (_cache[3] = (...args) => _ctx.onKeyup && _ctx.onKeyup(...args)),
+      onInput: _cache[4] || (_cache[4] = (...args) => _ctx.onInput && _ctx.onInput(...args))
+    }, null, 40, _hoisted_1$g),
+    createElementVNode("div", _hoisted_2$d, [
+      _ctx.showWordLimit ? (openBlock(), createElementBlock("span", {
+        key: 0,
+        textContent: toDisplayString(_ctx.limitText)
+      }, null, 8, _hoisted_3$8)) : createCommentVNode("", true)
+    ])
+  ], 2);
+}
+const _textarea = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$h]]);
+_textarea.name = getComponentsPrefix() + _textarea.name;
+const Textarea = Object.assign(_textarea, {
   install: (app) => {
-    app.component(_sfc_main$q.name, _sfc_main$q);
+    app.component(_textarea.name, _textarea);
   }
 });
-const __default__$o = defineComponent({
-  name: "Radio"
-});
-const _sfc_main$p = /* @__PURE__ */ defineComponent({
-  ...__default__$o,
+const _sfc_main$r = defineComponent({
+  name: "Radio",
   props: {
     /** 单选框绑定值 */
     modelValue: { type: [String, Number, Boolean], default: false },
@@ -327,42 +344,45 @@ const _sfc_main$p = /* @__PURE__ */ defineComponent({
     disabled: { type: Boolean, default: false }
   },
   emits: ["update:modelValue", "change"],
-  setup(__props, { emit: emits }) {
-    const props = __props;
+  setup(props, { emit }) {
     const name = "bp-radio";
     const handleInput = () => {
       if (props.disabled)
         return;
-      emits("update:modelValue", props.value);
-      emits("change", props.value);
+      emit("update:modelValue", props.value);
+      emit("change", props.value);
     };
     const isCheck = computed(() => props.modelValue === props.value);
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass([name, __props.disabled ? `${name}-disabled` : ""]),
-        onClick: handleInput
-      }, [
-        createElementVNode("input", {
-          type: "radio",
-          class: normalizeClass(`${name}-inner`)
-        }, null, 2),
-        createElementVNode("span", {
-          class: normalizeClass([`${name}-radio`, isCheck.value ? `${name}-check` : ""])
-        }, null, 2),
-        createElementVNode("span", {
-          class: normalizeClass(`${name}-label`)
-        }, [
-          renderSlot(_ctx.$slots, "default")
-        ], 2)
-      ], 2);
+    return {
+      name,
+      handleInput,
+      isCheck
     };
   }
 });
-const __default__$n = defineComponent({
-  name: "RadioGroup"
-});
-const _sfc_main$o = /* @__PURE__ */ defineComponent({
-  ...__default__$n,
+function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass([_ctx.name, _ctx.disabled ? `${_ctx.name}-disabled` : ""]),
+    onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleInput && _ctx.handleInput(...args))
+  }, [
+    createElementVNode("input", {
+      type: "radio",
+      class: normalizeClass(`${_ctx.name}-inner`)
+    }, null, 2),
+    createElementVNode("span", {
+      class: normalizeClass([`${_ctx.name}-radio`, _ctx.isCheck ? `${_ctx.name}-check` : ""])
+    }, null, 2),
+    createElementVNode("span", {
+      class: normalizeClass(`${_ctx.name}-label`)
+    }, [
+      renderSlot(_ctx.$slots, "default")
+    ], 2)
+  ], 2);
+}
+const _radio = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$g]]);
+const _sfc_main$q = defineComponent({
+  name: "RadioGroup",
+  components: { bpRadio: _radio },
   props: {
     /** 单选框绑定值 */
     modelValue: { type: [String, Number] },
@@ -372,55 +392,54 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
     disabled: { type: Boolean, default: false }
   },
   emits: ["update:modelValue"],
-  setup(__props, { emit: emits }) {
-    const props = __props;
+  setup(props, { emit }) {
     const name = "bp-radio-group";
     const val = ref(props.modelValue ?? "");
     const updateValue = (val2) => {
-      emits("update:modelValue", val2);
+      emit("update:modelValue", val2);
     };
     watch(
       () => props.modelValue,
       () => val.value = props.modelValue
     );
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(name)
-      }, [
-        (openBlock(true), createElementBlock(Fragment, null, renderList(__props.optionList, (v) => {
-          return openBlock(), createBlock(_sfc_main$p, {
-            modelValue: val.value,
-            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => val.value = $event),
-            value: v.value,
-            onChange: updateValue
-          }, {
-            default: withCtx(() => [
-              createTextVNode(toDisplayString(v.label), 1)
-            ]),
-            _: 2
-          }, 1032, ["modelValue", "value"]);
-        }), 256))
-      ]);
+    return {
+      name,
+      val,
+      updateValue
     };
   }
 });
-_sfc_main$p.name = getComponentsPrefix() + _sfc_main$p.name;
-_sfc_main$o.name = getComponentsPrefix() + _sfc_main$o.name;
-const Radio = Object.assign(_sfc_main$p, {
+function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_bp_radio = resolveComponent("bp-radio");
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.name)
+  }, [
+    (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.optionList, (v) => {
+      return openBlock(), createBlock(_component_bp_radio, {
+        modelValue: _ctx.val,
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.val = $event),
+        value: v.value,
+        onChange: _ctx.updateValue
+      }, {
+        default: withCtx(() => [
+          createTextVNode(toDisplayString(v.label), 1)
+        ]),
+        _: 2
+      }, 1032, ["modelValue", "value", "onChange"]);
+    }), 256))
+  ], 2);
+}
+const _radioGroup = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$f]]);
+_radio.name = getComponentsPrefix() + _radio.name;
+_radioGroup.name = getComponentsPrefix() + _radioGroup.name;
+const Radio = Object.assign(_radio, {
   install: (app) => {
-    app.component(_sfc_main$p.name, _sfc_main$p);
-    app.component(_sfc_main$o.name, _sfc_main$o);
+    app.component(_radio.name, _radio);
+    app.component(_radioGroup.name, _radioGroup);
   }
 });
-const _hoisted_1$f = {
-  key: 0,
-  class: "ri-check-line"
-};
-const __default__$m = defineComponent({
-  name: "Checkbox"
-});
-const _sfc_main$n = /* @__PURE__ */ defineComponent({
-  ...__default__$m,
+const _sfc_main$p = defineComponent({
+  name: "Checkbox",
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: Boolean, default: false },
@@ -428,8 +447,7 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
     disabled: { type: Boolean, default: false }
   },
   emits: ["update:modelValue"],
-  setup(__props, { emit: emits }) {
-    const props = __props;
+  setup(props, { emit }) {
     const name = "bp-checkbox";
     const cls = computed(() => {
       let clsName = [name];
@@ -440,42 +458,50 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
     });
     const isCheck = computed(() => props.modelValue);
     const handleClick = () => {
-      emits("update:modelValue", !props.modelValue);
+      emit("update:modelValue", !props.modelValue);
     };
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(cls.value),
-        onClick: handleClick
-      }, [
-        createElementVNode("input", {
-          type: "checkbox",
-          class: normalizeClass(`${name}-inner`)
-        }, null, 2),
-        createElementVNode("span", {
-          class: normalizeClass([`${name}-checkbox`, isCheck.value ? `${name}-check` : ""])
-        }, [
-          isCheck.value ? (openBlock(), createElementBlock("i", _hoisted_1$f)) : createCommentVNode("", true)
-        ], 2),
-        createElementVNode("span", {
-          class: normalizeClass(`${name}-label`)
-        }, [
-          renderSlot(_ctx.$slots, "default")
-        ], 2)
-      ], 2);
+    return {
+      cls,
+      name,
+      isCheck,
+      handleClick
     };
   }
 });
-_sfc_main$n.name = getComponentsPrefix() + _sfc_main$n.name;
-const Checkbox = Object.assign(_sfc_main$n, {
+const _hoisted_1$f = {
+  key: 0,
+  class: "ri-check-line"
+};
+function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.cls),
+    onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args))
+  }, [
+    createElementVNode("input", {
+      type: "checkbox",
+      class: normalizeClass(`${_ctx.name}-inner`)
+    }, null, 2),
+    createElementVNode("span", {
+      class: normalizeClass([`${_ctx.name}-checkbox`, _ctx.isCheck ? `${_ctx.name}-check` : ""])
+    }, [
+      _ctx.isCheck ? (openBlock(), createElementBlock("i", _hoisted_1$f)) : createCommentVNode("", true)
+    ], 2),
+    createElementVNode("span", {
+      class: normalizeClass(`${_ctx.name}-label`)
+    }, [
+      renderSlot(_ctx.$slots, "default")
+    ], 2)
+  ], 2);
+}
+const _checkbox = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$e]]);
+_checkbox.name = getComponentsPrefix() + _checkbox.name;
+const Checkbox = Object.assign(_checkbox, {
   install: (app) => {
-    app.component(_sfc_main$n.name, _sfc_main$n);
+    app.component(_checkbox.name, _checkbox);
   }
 });
-const __default__$l = defineComponent({
-  name: "Switch"
-});
-const _sfc_main$m = /* @__PURE__ */ defineComponent({
-  ...__default__$l,
+const _sfc_main$o = defineComponent({
+  name: "Switch",
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: Boolean, default: false },
@@ -487,8 +513,7 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
     uncheckValue: { type: [Boolean, Number, String], default: false }
   },
   emits: ["update:modelValue"],
-  setup(__props, { emit: emits }) {
-    const props = __props;
+  setup(props, { emit }) {
     const name = "bp-switch";
     const cls = computed(() => {
       let clsName = [name];
@@ -499,28 +524,35 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
     });
     const isCheck = computed(() => props.modelValue === props.checkValue);
     const handleClick = () => {
-      emits("update:modelValue", isCheck.value ? props.uncheckValue : props.checkValue);
+      emit("update:modelValue", isCheck.value ? props.uncheckValue : props.checkValue);
     };
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(cls.value),
-        onClick: handleClick
-      }, [
-        createElementVNode("input", {
-          type: "checkbox",
-          class: normalizeClass(`${name}-inner`)
-        }, null, 2),
-        createElementVNode("span", {
-          class: normalizeClass([`${name}-slider`, isCheck.value ? `${name}-check` : ""])
-        }, null, 2)
-      ], 2);
+    return {
+      name,
+      cls,
+      isCheck,
+      handleClick
     };
   }
 });
-_sfc_main$m.name = getComponentsPrefix() + _sfc_main$m.name;
-const Switch = Object.assign(_sfc_main$m, {
+function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.cls),
+    onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args))
+  }, [
+    createElementVNode("input", {
+      type: "checkbox",
+      class: normalizeClass(`${_ctx.name}-inner`)
+    }, null, 2),
+    createElementVNode("span", {
+      class: normalizeClass([`${_ctx.name}-slider`, _ctx.isCheck ? `${_ctx.name}-check` : ""])
+    }, null, 2)
+  ], 2);
+}
+const _switch = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$d]]);
+_switch.name = getComponentsPrefix() + _switch.name;
+const Switch = Object.assign(_switch, {
   install: (app) => {
-    app.component(_sfc_main$m.name, _sfc_main$m);
+    app.component(_switch.name, _switch);
   }
 });
 class SelectOption {
@@ -628,12 +660,10 @@ const off = function(element, event, handler, useCapture = false) {
 const warn = (module, info) => {
   console.warn(`[ A warning of birdpaper-ui ] - ${module}: ` + info);
 };
-const _hoisted_1$e = ["onClick"];
-const __default__$k = defineComponent({
-  name: "Select"
-});
-const _sfc_main$l = /* @__PURE__ */ defineComponent({
-  ...__default__$k,
+const _sfc_main$n = defineComponent({
+  name: "Select",
+  components: { BpInput },
+  directives: { clickOutside: vClickOutside },
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: [String, Number], default: "" },
@@ -645,9 +675,7 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     clearable: { type: Boolean, default: false }
   },
   emits: ["update:modelValue", "change"],
-  setup(__props, { emit: emits }) {
-    const props = __props;
-    const slots = useSlots();
+  setup(props, { emit, slots }) {
     const name = "bp-select";
     const selectRef = ref();
     const inpRef = ref();
@@ -678,6 +706,8 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     };
     const handleResize = () => {
       const rect = selectRef.value.getBoundingClientRect();
+      if (!rect)
+        return;
       optionBoxRef.value.setAttribute(
         "style",
         `display:${isFocus.value ? "block" : "none"};width: ${rect.width}px;top:${rect.top + rect.height}px;left:${rect.left}px`
@@ -689,20 +719,18 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     const onMouseleave = () => {
       !isFocus.value && inpRef.value.handleBlur();
     };
-    const setup = () => {
-      provide(selectInjectionKey, {
-        modelValue: props.modelValue,
-        onSelect: (v, payload) => {
-          inpVal.value = v;
-          inpVal.label = payload.label;
-          emits("update:modelValue", inpVal.value);
-          emits("change", inpVal.value);
-          isFocus.value = false;
-        }
-      });
-      inpVal.value = props.modelValue;
-      inpVal.label = valueMap.value[inpVal.value];
-    };
+    provide(selectInjectionKey, {
+      modelValue: props.modelValue,
+      onSelect: (v, payload) => {
+        inpVal.value = v;
+        inpVal.label = payload.label;
+        emit("update:modelValue", inpVal.value);
+        emit("change", inpVal.value);
+        isFocus.value = false;
+      }
+    });
+    inpVal.value = props.modelValue;
+    inpVal.label = valueMap.value[inpVal.value];
     onMounted(() => {
       nextTick(() => {
         on(window, "resize", throttle(handleResize, 100));
@@ -711,79 +739,76 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
     onBeforeUnmount(() => {
       off(window, "resize", handleResize);
     });
-    watch(
-      () => props.modelValue,
-      () => {
-        setup();
-      },
-      {
-        immediate: true
-      }
-    );
-    return (_ctx, _cache) => {
-      const _component_bp_input = resolveComponent("bp-input");
-      return withDirectives((openBlock(), createElementBlock("div", {
-        ref_key: "selectRef",
-        ref: selectRef,
-        class: normalizeClass([name, isFocus.value ? `${name}-focus` : ""]),
-        onClick: withModifiers(handleClick, ["stop"]),
-        onMouseleave
-      }, [
-        createVNode(_component_bp_input, {
-          ref_key: "inpRef",
-          ref: inpRef,
-          modelValue: inpVal.label,
-          "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => inpVal.label = $event),
-          readonly: "",
-          placeholder: __props.placeholder
-        }, {
-          suffix: withCtx(() => [
-            createElementVNode("i", {
-              class: normalizeClass([`${name}-icon-inner`, `ri-arrow-${isFocus.value ? "up" : "down"}-s-line`])
-            }, null, 2)
-          ]),
-          _: 1
-        }, 8, ["modelValue", "placeholder"]),
-        (openBlock(), createBlock(Teleport, { to: "body" }, [
-          createVNode(Transition, {
-            name: "fade-select",
-            appear: ""
-          }, {
-            default: withCtx(() => [
-              withDirectives(createElementVNode("div", {
-                ref_key: "optionBoxRef",
-                ref: optionBoxRef,
-                class: normalizeClass(`${name}-option-box`)
-              }, [
-                createElementVNode("ul", {
-                  class: normalizeClass(`${name}-option-list`)
-                }, [
-                  renderSlot(_ctx.$slots, "default")
-                ], 2)
-              ], 2), [
-                [vShow, isFocus.value]
-              ])
-            ]),
-            _: 3
-          })
-        ]))
-      ], 42, _hoisted_1$e)), [
-        [unref(vClickOutside), onClickOutside]
-      ]);
+    return {
+      name,
+      selectRef,
+      inpRef,
+      optionBoxRef,
+      inpVal,
+      isFocus,
+      handleClick,
+      onClickOutside,
+      onMouseleave
     };
   }
 });
-const __default__$j = defineComponent({
-  name: "Option"
-});
-const _sfc_main$k = /* @__PURE__ */ defineComponent({
-  ...__default__$j,
+function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_bp_input = resolveComponent("bp-input");
+  const _directive_clickOutside = resolveDirective("clickOutside");
+  return withDirectives((openBlock(), createElementBlock("div", {
+    ref: "selectRef",
+    class: normalizeClass([_ctx.name, _ctx.isFocus ? `${_ctx.name}-focus` : ""]),
+    onClick: _cache[1] || (_cache[1] = withModifiers((...args) => _ctx.handleClick && _ctx.handleClick(...args), ["stop"])),
+    onMouseleave: _cache[2] || (_cache[2] = (...args) => _ctx.onMouseleave && _ctx.onMouseleave(...args))
+  }, [
+    createVNode(_component_bp_input, {
+      ref: "inpRef",
+      modelValue: _ctx.inpVal.label,
+      "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.inpVal.label = $event),
+      readonly: "",
+      placeholder: _ctx.placeholder
+    }, {
+      suffix: withCtx(() => [
+        createElementVNode("i", {
+          class: normalizeClass([`${_ctx.name}-icon-inner`, `ri-arrow-${_ctx.isFocus ? "up" : "down"}-s-line`])
+        }, null, 2)
+      ]),
+      _: 1
+    }, 8, ["modelValue", "placeholder"]),
+    (openBlock(), createBlock(Teleport, { to: "body" }, [
+      createVNode(Transition, {
+        name: "fade-select",
+        appear: ""
+      }, {
+        default: withCtx(() => [
+          withDirectives(createElementVNode("div", {
+            ref: "optionBoxRef",
+            class: normalizeClass(`${_ctx.name}-option-box`)
+          }, [
+            createElementVNode("ul", {
+              class: normalizeClass(`${_ctx.name}-option-list`)
+            }, [
+              renderSlot(_ctx.$slots, "default")
+            ], 2)
+          ], 2), [
+            [vShow, _ctx.isFocus]
+          ])
+        ]),
+        _: 3
+      })
+    ]))
+  ], 34)), [
+    [_directive_clickOutside, _ctx.onClickOutside]
+  ]);
+}
+const _select = /* @__PURE__ */ _export_sfc(_sfc_main$n, [["render", _sfc_render$c]]);
+const _sfc_main$m = defineComponent({
+  name: "Option",
   props: {
     value: { type: [String, Number, Boolean], default: "" },
     label: { type: String, default: "" }
   },
-  setup(__props) {
-    const props = __props;
+  setup(props) {
     const name = "bp-option";
     const ctx = ref();
     const slot = useSlots();
@@ -807,36 +832,41 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
         immediate: true
       }
     );
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("li", {
-        class: normalizeClass(`${name}-item`),
-        onClick: handleClick
-      }, [
-        createElementVNode("span", null, [
-          renderSlot(_ctx.$slots, "default")
-        ])
-      ], 2);
+    return {
+      name,
+      handleClick
     };
   }
 });
-_sfc_main$l.name = getComponentsPrefix() + _sfc_main$l.name;
-_sfc_main$k.name = getComponentsPrefix() + _sfc_main$k.name;
-const Select = Object.assign(_sfc_main$l, {
+function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("li", {
+    class: normalizeClass(`${_ctx.name}-item`),
+    onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args))
+  }, [
+    createElementVNode("span", null, [
+      renderSlot(_ctx.$slots, "default")
+    ])
+  ], 2);
+}
+const _option = /* @__PURE__ */ _export_sfc(_sfc_main$m, [["render", _sfc_render$b]]);
+_select.name = getComponentsPrefix() + _select.name;
+_option.name = getComponentsPrefix() + _option.name;
+const Select = Object.assign(_select, {
   install: (app) => {
-    app.component(_sfc_main$l.name, _sfc_main$l);
-    app.component(_sfc_main$k.name, _sfc_main$k);
+    app.component(_select.name, _select);
+    app.component(_option.name, _option);
   }
 });
-const _hoisted_1$d = ["textContent"];
-const _hoisted_2$a = {
+const _hoisted_1$e = ["textContent"];
+const _hoisted_2$c = {
   key: 1,
   class: "ri-arrow-left-s-line"
 };
-const __default__$i = defineComponent({
+const __default__$a = defineComponent({
   name: "PaginationPrev"
 });
-const _sfc_main$j = /* @__PURE__ */ defineComponent({
-  ...__default__$i,
+const _sfc_main$l = /* @__PURE__ */ defineComponent({
+  ...__default__$a,
   props: {
     text: { type: String, default: "" },
     disabled: { type: Boolean, default: false }
@@ -865,21 +895,21 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
         __props.text ? (openBlock(), createElementBlock("span", {
           key: 0,
           textContent: toDisplayString(__props.text)
-        }, null, 8, _hoisted_1$d)) : (openBlock(), createElementBlock("i", _hoisted_2$a))
+        }, null, 8, _hoisted_1$e)) : (openBlock(), createElementBlock("i", _hoisted_2$c))
       ], 2);
     };
   }
 });
-const _hoisted_1$c = ["textContent"];
-const _hoisted_2$9 = {
+const _hoisted_1$d = ["textContent"];
+const _hoisted_2$b = {
   key: 1,
   class: "ri-arrow-right-s-line"
 };
-const __default__$h = defineComponent({
+const __default__$9 = defineComponent({
   name: "PaginationNext"
 });
-const _sfc_main$i = /* @__PURE__ */ defineComponent({
-  ...__default__$h,
+const _sfc_main$k = /* @__PURE__ */ defineComponent({
+  ...__default__$9,
   props: {
     text: { type: String, default: "" },
     disabled: { type: Boolean, default: false }
@@ -908,17 +938,17 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
         __props.text ? (openBlock(), createElementBlock("span", {
           key: 0,
           textContent: toDisplayString(__props.text)
-        }, null, 8, _hoisted_1$c)) : (openBlock(), createElementBlock("i", _hoisted_2$9))
+        }, null, 8, _hoisted_1$d)) : (openBlock(), createElementBlock("i", _hoisted_2$b))
       ], 2);
     };
   }
 });
-const _hoisted_1$b = ["textContent"];
-const __default__$g = defineComponent({
+const _hoisted_1$c = ["textContent"];
+const __default__$8 = defineComponent({
   name: "PaginationTotal"
 });
-const _sfc_main$h = /* @__PURE__ */ defineComponent({
-  ...__default__$g,
+const _sfc_main$j = /* @__PURE__ */ defineComponent({
+  ...__default__$8,
   props: {
     value: { type: Number, default: 0 },
     tmpString: { type: String, default: "" }
@@ -938,22 +968,22 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
         createElementVNode("span", {
           class: "page-text",
           textContent: toDisplayString(text.value)
-        }, null, 8, _hoisted_1$b)
+        }, null, 8, _hoisted_1$c)
       ], 2);
     };
   }
 });
-const _hoisted_1$a = ["onClick"];
-const _hoisted_2$8 = { key: 0 };
-const _hoisted_3$4 = {
+const _hoisted_1$b = ["onClick"];
+const _hoisted_2$a = { key: 0 };
+const _hoisted_3$7 = {
   key: 1,
   class: "ri-more-fill"
 };
-const __default__$f = defineComponent({
+const __default__$7 = defineComponent({
   name: "PaginationPager"
 });
-const _sfc_main$g = /* @__PURE__ */ defineComponent({
-  ...__default__$f,
+const _sfc_main$i = /* @__PURE__ */ defineComponent({
+  ...__default__$7,
   props: {
     currentPage: { type: Number, default: 1 },
     pages: { type: Number, default: 0 },
@@ -999,25 +1029,25 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
           class: normalizeClass([`${name}-pager`, `${name}-item`, item.index === __props.currentPage ? `${name}-item-active` : ""]),
           onClick: ($event) => onClick(item.index)
         }, [
-          item.type === "number" ? (openBlock(), createElementBlock("span", _hoisted_2$8, toDisplayString(item.index), 1)) : (openBlock(), createElementBlock("i", _hoisted_3$4))
-        ], 10, _hoisted_1$a);
+          item.type === "number" ? (openBlock(), createElementBlock("span", _hoisted_2$a, toDisplayString(item.index), 1)) : (openBlock(), createElementBlock("i", _hoisted_3$7))
+        ], 10, _hoisted_1$b);
       }), 128);
     };
   }
 });
-const _hoisted_1$9 = {
+const _hoisted_1$a = {
   key: 0,
   class: "page-text"
 };
-const _hoisted_2$7 = {
+const _hoisted_2$9 = {
   key: 1,
   class: "page-text"
 };
-const __default__$e = defineComponent({
+const __default__$6 = defineComponent({
   name: "PaginationJumper"
 });
-const _sfc_main$f = /* @__PURE__ */ defineComponent({
-  ...__default__$e,
+const _sfc_main$h = /* @__PURE__ */ defineComponent({
+  ...__default__$6,
   props: {
     currentPage: { type: Number, default: 1 },
     pages: { type: Number, default: 0 },
@@ -1052,23 +1082,23 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("li", {
         class: normalizeClass([`${name}-item`, `${name}-jumper`])
       }, [
-        text.prefix ? (openBlock(), createElementBlock("span", _hoisted_1$9, toDisplayString(text.prefix), 1)) : createCommentVNode("", true),
+        text.prefix ? (openBlock(), createElementBlock("span", _hoisted_1$a, toDisplayString(text.prefix), 1)) : createCommentVNode("", true),
         createVNode(_component_bp_input, {
           modelValue: val.value,
           "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => val.value = $event),
           size: "small",
           onBlur: handleBlur
         }, null, 8, ["modelValue"]),
-        text.suffix ? (openBlock(), createElementBlock("span", _hoisted_2$7, toDisplayString(text.suffix), 1)) : createCommentVNode("", true)
+        text.suffix ? (openBlock(), createElementBlock("span", _hoisted_2$9, toDisplayString(text.suffix), 1)) : createCommentVNode("", true)
       ], 2);
     };
   }
 });
-const __default__$d = defineComponent({
+const __default__$5 = defineComponent({
   name: "PaginationSizes"
 });
-const _sfc_main$e = /* @__PURE__ */ defineComponent({
-  ...__default__$d,
+const _sfc_main$g = /* @__PURE__ */ defineComponent({
+  ...__default__$5,
   props: {
     currentSize: { type: Number, default: "" },
     sizesList: { type: Array, default: () => [] },
@@ -1122,7 +1152,7 @@ const _sfc_main$e = /* @__PURE__ */ defineComponent({
   }
 });
 const usePagination = (props, emits) => {
-  const layoutMap = { prev: _sfc_main$j, next: _sfc_main$i, total: _sfc_main$h, pager: _sfc_main$g, jumper: _sfc_main$f, sizes: _sfc_main$e };
+  const layoutMap = { prev: _sfc_main$l, next: _sfc_main$k, total: _sfc_main$j, pager: _sfc_main$i, jumper: _sfc_main$h, sizes: _sfc_main$g };
   const currentPage = ref(props.current || 1);
   const currentPageSize = ref(props.pageSize);
   const totalPagesNum = ref(0);
@@ -1249,11 +1279,8 @@ const usePagination = (props, emits) => {
     componentsList
   };
 };
-const __default__$c = defineComponent({
-  name: "Pagination"
-});
-const _sfc_main$d = /* @__PURE__ */ defineComponent({
-  ...__default__$c,
+const _sfc_main$f = defineComponent({
+  name: "Pagination",
   props: {
     /** 布局配置 The layout config */
     layout: { type: String, default: "prev, pager, next" },
@@ -1279,37 +1306,41 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
     sizesTmpString: { type: String, default: "{value} 条/页" }
   },
   emits: ["update:current", "update:pageSize", "page-change", "size-change"],
-  setup(__props, { emit: emits }) {
-    const props = __props;
+  setup(props, { emit }) {
     const name = "bp-pagination";
-    const { componentsList } = usePagination(props, emits);
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(name)
-      }, [
-        createElementVNode("ul", {
-          class: normalizeClass(`${name}-container`)
-        }, [
-          (openBlock(true), createElementBlock(Fragment, null, renderList(unref(componentsList), (item) => {
-            return openBlock(), createBlock(resolveDynamicComponent(item.component), mergeProps(item.bind, {
-              [toHandlerKey(item.eventName)]: item.event
-            }), null, 16);
-          }), 256))
-        ], 2)
-      ]);
+    const { componentsList } = usePagination(props, emit);
+    return {
+      name,
+      componentsList
     };
   }
 });
-_sfc_main$d.name = getComponentsPrefix() + _sfc_main$d.name;
-const Pagination = Object.assign(_sfc_main$d, {
+function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.name)
+  }, [
+    createElementVNode("ul", {
+      class: normalizeClass(`${_ctx.name}-container`)
+    }, [
+      (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.componentsList, (item) => {
+        return openBlock(), createBlock(resolveDynamicComponent(item.component), mergeProps(item.bind, {
+          [toHandlerKey(item.eventName)]: item.event
+        }), null, 16);
+      }), 256))
+    ], 2)
+  ], 2);
+}
+const _pagination = /* @__PURE__ */ _export_sfc(_sfc_main$f, [["render", _sfc_render$a]]);
+_pagination.name = getComponentsPrefix() + _pagination.name;
+const Pagination = Object.assign(_pagination, {
   install: (app) => {
-    app.component(_sfc_main$d.name, _sfc_main$d);
+    app.component(_pagination.name, _pagination);
   }
 });
 const useTable = (props) => {
   const bpTable = ref(null);
   const columns = ref([]);
-  const _table_width = ref();
+  const table_width = ref();
   let _remainder_col = 0;
   let _fixed_width = 0;
   let _min_width_list = [];
@@ -1331,7 +1362,7 @@ const useTable = (props) => {
       }
       minWidth && _min_width_list.push(minWidth);
     }
-    _table_width.value = el && el.offsetWidth - 2;
+    table_width.value = el && el.offsetWidth - 2;
     _col_width_list = getWidthList() || [];
     columns.value = [];
     for (let i = 0; i < cols.length; i++) {
@@ -1369,7 +1400,7 @@ const useTable = (props) => {
     return width_list;
   }
   function getAdaptWidth() {
-    let width = (_table_width.value - _fixed_width) / _remainder_col;
+    let width = (table_width.value - _fixed_width) / _remainder_col;
     return Number(Number(width).toFixed(2));
   }
   watch(
@@ -1392,16 +1423,16 @@ const useTable = (props) => {
   return {
     initColumns,
     bpTable,
-    _table_width,
+    table_width,
     columns
   };
 };
-const _hoisted_1$8 = ["name", "width"];
-const __default__$b = defineComponent({
+const _hoisted_1$9 = ["name", "width"];
+const __default__$4 = defineComponent({
   name: "TableColumns"
 });
-const _sfc_main$c = /* @__PURE__ */ defineComponent({
-  ...__default__$b,
+const _sfc_main$e = /* @__PURE__ */ defineComponent({
+  ...__default__$4,
   props: {
     // TODO
     cols: { type: Array, default: () => [] }
@@ -1414,19 +1445,19 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
             key: `bp-table-tr-${index}`,
             name: `bp_table_tr_${index}`,
             width: `${item.width}px`
-          }, null, 8, _hoisted_1$8);
+          }, null, 8, _hoisted_1$9);
         }), 128))
       ]);
     };
   }
 });
-const _hoisted_1$7 = { class: "bp-table-header" };
-const _hoisted_2$6 = { class: "bp-table-header-thead" };
-const __default__$a = defineComponent({
+const _hoisted_1$8 = { class: "bp-table-header" };
+const _hoisted_2$8 = { class: "bp-table-header-thead" };
+const __default__$3 = defineComponent({
   name: "TableHeader"
 });
-const _sfc_main$b = /* @__PURE__ */ defineComponent({
-  ...__default__$a,
+const _sfc_main$d = /* @__PURE__ */ defineComponent({
+  ...__default__$3,
   props: {
     // TODO
     headerList: { type: Array, default: () => [] }
@@ -1438,9 +1469,9 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
       return name;
     };
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("table", _hoisted_1$7, [
-        createVNode(_sfc_main$c, { cols: __props.headerList }, null, 8, ["cols"]),
-        createElementVNode("thead", _hoisted_2$6, [
+      return openBlock(), createElementBlock("table", _hoisted_1$8, [
+        createVNode(_sfc_main$e, { cols: __props.headerList }, null, 8, ["cols"]),
+        createElementVNode("thead", _hoisted_2$8, [
           createElementVNode("tr", null, [
             (openBlock(true), createElementBlock(Fragment, null, renderList(__props.headerList, (item, index) => {
               return openBlock(), createElementBlock("th", {
@@ -1454,81 +1485,78 @@ const _sfc_main$b = /* @__PURE__ */ defineComponent({
     };
   }
 });
-const _hoisted_1$6 = { class: "bp-table-empty-tr" };
-const _hoisted_2$5 = ["colspan"];
-const __default__$9 = defineComponent({
+const _hoisted_1$7 = { class: "bp-table-empty-tr" };
+const _hoisted_2$7 = ["colspan"];
+const __default__$2 = defineComponent({
   name: "TableEmpty"
 });
-const _sfc_main$a = /* @__PURE__ */ defineComponent({
-  ...__default__$9,
+const _sfc_main$c = /* @__PURE__ */ defineComponent({
+  ...__default__$2,
   props: {
     colspan: { type: Number, default: 0 }
   },
   setup(__props) {
     return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("tr", _hoisted_1$6, [
-        createElementVNode("td", { colspan: __props.colspan }, "暂无数据", 8, _hoisted_2$5)
+      return openBlock(), createElementBlock("tr", _hoisted_1$7, [
+        createElementVNode("td", { colspan: __props.colspan }, "暂无数据", 8, _hoisted_2$7)
       ]);
     };
   }
 });
-const _hoisted_1$5 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
-const _hoisted_2$4 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
-const _hoisted_3$3 = [
-  _hoisted_2$4
-];
-const __default__$8 = defineComponent({
-  name: "Spin"
-});
-const _sfc_main$9 = /* @__PURE__ */ defineComponent({
-  ...__default__$8,
+const _sfc_main$b = defineComponent({
+  name: "Spin",
   props: {
     /** 是否开启加载 Loading or not */
     loading: { type: Boolean, default: false },
     /** 加载提示文字 The loading tip text */
     tip: { type: String, default: "" }
   },
-  setup(__props) {
+  setup(props, { slots }) {
     const name = "bp-spin";
-    const slots = useSlots();
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(name)
-      }, [
-        renderSlot(_ctx.$slots, "default"),
-        unref(slots).default && __props.loading ? (openBlock(), createElementBlock("div", {
-          key: 0,
-          class: normalizeClass(`${name}-mask`)
-        }, [
-          createElementVNode("div", {
-            class: normalizeClass(`${name}-loading`)
-          }, [
-            _hoisted_1$5,
-            createElementVNode("p", {
-              class: normalizeClass(`${name}-tip`)
-            }, toDisplayString(__props.tip), 3)
-          ], 2)
-        ], 2)) : __props.loading ? (openBlock(), createElementBlock("div", {
-          key: 1,
-          class: normalizeClass(`${name}-loading`)
-        }, _hoisted_3$3, 2)) : createCommentVNode("", true)
-      ]);
+    return {
+      name,
+      slots
     };
   }
 });
-_sfc_main$9.name = getComponentsPrefix() + _sfc_main$9.name;
-const Spin = Object.assign(_sfc_main$9, {
+const _hoisted_1$6 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
+const _hoisted_2$6 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
+const _hoisted_3$6 = [
+  _hoisted_2$6
+];
+function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.name)
+  }, [
+    renderSlot(_ctx.$slots, "default"),
+    _ctx.slots.default && _ctx.loading ? (openBlock(), createElementBlock("div", {
+      key: 0,
+      class: normalizeClass(`${_ctx.name}-mask`)
+    }, [
+      createElementVNode("div", {
+        class: normalizeClass(`${_ctx.name}-loading`)
+      }, [
+        _hoisted_1$6,
+        createElementVNode("p", {
+          class: normalizeClass(`${_ctx.name}-tip`)
+        }, toDisplayString(_ctx.tip), 3)
+      ], 2)
+    ], 2)) : _ctx.loading ? (openBlock(), createElementBlock("div", {
+      key: 1,
+      class: normalizeClass(`${_ctx.name}-loading`)
+    }, _hoisted_3$6, 2)) : createCommentVNode("", true)
+  ], 2);
+}
+const _spin = /* @__PURE__ */ _export_sfc(_sfc_main$b, [["render", _sfc_render$9]]);
+_spin.name = getComponentsPrefix() + _spin.name;
+const Spin = Object.assign(_spin, {
   install: (app) => {
-    app.component(_sfc_main$9.name, _sfc_main$9);
+    app.component(_spin.name, _spin);
   }
 });
-const _hoisted_1$4 = /* @__PURE__ */ createElementVNode("div", { class: "scrollbar" }, null, -1);
-const _hoisted_2$3 = { class: "bp-table-body-tbody" };
-const __default__$7 = defineComponent({
-  name: "Table"
-});
-const _sfc_main$8 = /* @__PURE__ */ defineComponent({
-  ...__default__$7,
+const _sfc_main$a = defineComponent({
+  name: "Table",
+  components: { TableHeader: _sfc_main$d, TableEmpty: _sfc_main$c, ColGroup: _sfc_main$e, bpSpin: Spin },
   props: {
     /* 表格头部列表 Table header list */
     cols: { type: Array, default: () => [] },
@@ -1543,18 +1571,17 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
     /* 斑马纹 Stripe or not */
     stripe: { type: Boolean, default: false }
   },
-  setup(__props) {
-    const props = __props;
-    const { bpTable, columns, _table_width } = useTable(props);
+  setup(props) {
+    const { bpTable, columns, table_width } = useTable(props);
     const isEmpty = computed(() => props.data.length === 0);
     const hasBorder = computed(() => props.border);
     const isStripe = computed(() => props.stripe);
     const fixedHeight = computed(() => props.height);
     const bodyAreaStyle = computed(() => {
       if (props.height) {
-        return `width:${_table_width.value}px;max-height:${props.height}px;height:${props.height}px;overflow-y:auto`;
+        return `width:${table_width.value}px;max-height:${props.height}px;height:${props.height}px;overflow-y:auto`;
       }
-      return `width:${_table_width.value}px`;
+      return `width:${table_width.value}px`;
     });
     const innerClass = computed(() => {
       let name = [
@@ -1570,68 +1597,83 @@ const _sfc_main$8 = /* @__PURE__ */ defineComponent({
       let name = [align];
       return name;
     };
-    return (_ctx, _cache) => {
-      return openBlock(), createBlock(unref(Spin), { loading: __props.loading }, {
-        default: withCtx(() => [
-          createElementVNode("div", {
-            class: "bp-table",
-            ref_key: "bpTable",
-            ref: bpTable
-          }, [
-            createElementVNode("div", {
-              class: normalizeClass(innerClass.value)
-            }, [
-              createVNode(_sfc_main$b, { "header-list": unref(columns) }, null, 8, ["header-list"]),
-              createElementVNode("div", {
-                class: "bp-table-body-area",
-                style: normalizeStyle(bodyAreaStyle.value)
-              }, [
-                _hoisted_1$4,
-                createElementVNode("table", {
-                  class: "bp-table-body",
-                  style: normalizeStyle(`width:${unref(_table_width)}px`)
-                }, [
-                  createVNode(_sfc_main$c, { cols: unref(columns) }, null, 8, ["cols"]),
-                  createElementVNode("tbody", _hoisted_2$3, [
-                    isEmpty.value ? (openBlock(), createBlock(_sfc_main$a, {
-                      key: 0,
-                      colspan: unref(columns).length
-                    }, null, 8, ["colspan"])) : (openBlock(true), createElementBlock(Fragment, { key: 1 }, renderList(__props.data, (item, index) => {
-                      return openBlock(), createElementBlock("tr", {
-                        key: `bp-table-tbody-tr-${index}`
-                      }, [
-                        (openBlock(true), createElementBlock(Fragment, null, renderList(unref(columns), (v, k) => {
-                          return openBlock(), createElementBlock("td", {
-                            key: `bp-table-tbody-td-${index}-${k}`,
-                            class: normalizeClass(tdClass(v))
-                          }, [
-                            !v.scope ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
-                              createTextVNode(toDisplayString(item[v.key]), 1)
-                            ], 64)) : renderSlot(_ctx.$slots, v.scope.customRender, {
-                              key: 1,
-                              row: item,
-                              index,
-                              data: item[v.key]
-                            })
-                          ], 2);
-                        }), 128))
-                      ]);
-                    }), 128))
-                  ])
-                ], 4)
-              ], 4)
-            ], 2)
-          ], 512)
-        ]),
-        _: 3
-      }, 8, ["loading"]);
+    return {
+      bpTable,
+      columns,
+      table_width,
+      isEmpty,
+      bodyAreaStyle,
+      innerClass,
+      tdClass
     };
   }
 });
-_sfc_main$8.name = getComponentsPrefix() + _sfc_main$8.name;
-const Table = Object.assign(_sfc_main$8, {
+const _hoisted_1$5 = {
+  class: "bp-table",
+  ref: "bpTable"
+};
+const _hoisted_2$5 = /* @__PURE__ */ createElementVNode("div", { class: "scrollbar" }, null, -1);
+const _hoisted_3$5 = { class: "bp-table-body-tbody" };
+const _hoisted_4$5 = { key: 0 };
+function _sfc_render$8(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_table_header = resolveComponent("table-header");
+  const _component_col_group = resolveComponent("col-group");
+  const _component_table_empty = resolveComponent("table-empty");
+  const _component_bp_spin = resolveComponent("bp-spin");
+  return openBlock(), createBlock(_component_bp_spin, { loading: _ctx.loading }, {
+    default: withCtx(() => [
+      createElementVNode("div", _hoisted_1$5, [
+        createElementVNode("div", {
+          class: normalizeClass(_ctx.innerClass)
+        }, [
+          createVNode(_component_table_header, { "header-list": _ctx.columns }, null, 8, ["header-list"]),
+          createElementVNode("div", {
+            class: "bp-table-body-area",
+            style: normalizeStyle(_ctx.bodyAreaStyle)
+          }, [
+            _hoisted_2$5,
+            createElementVNode("table", {
+              class: "bp-table-body",
+              style: normalizeStyle(`width:${_ctx.table_width}px`)
+            }, [
+              createVNode(_component_col_group, { cols: _ctx.columns }, null, 8, ["cols"]),
+              createElementVNode("tbody", _hoisted_3$5, [
+                _ctx.isEmpty ? (openBlock(), createBlock(_component_table_empty, {
+                  key: 0,
+                  colspan: _ctx.columns.length
+                }, null, 8, ["colspan"])) : (openBlock(true), createElementBlock(Fragment, { key: 1 }, renderList(_ctx.data, (item, index) => {
+                  return openBlock(), createElementBlock("tr", {
+                    key: `bp-table-tbody-tr-${index}`
+                  }, [
+                    (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.columns, (v, k) => {
+                      return openBlock(), createElementBlock("td", {
+                        key: `bp-table-tbody-td-${index}-${k}`,
+                        class: normalizeClass(_ctx.tdClass(v))
+                      }, [
+                        !v.scope ? (openBlock(), createElementBlock("span", _hoisted_4$5, toDisplayString(item[v.key]), 1)) : renderSlot(_ctx.$slots, v.scope.customRender, {
+                          key: 1,
+                          row: item,
+                          index,
+                          data: item[v.key]
+                        })
+                      ], 2);
+                    }), 128))
+                  ]);
+                }), 128))
+              ])
+            ], 4)
+          ], 4)
+        ], 2)
+      ], 512)
+    ]),
+    _: 3
+  }, 8, ["loading"]);
+}
+const _table = /* @__PURE__ */ _export_sfc(_sfc_main$a, [["render", _sfc_render$8]]);
+_table.name = getComponentsPrefix() + _table.name;
+const Table = Object.assign(_table, {
   install: (app) => {
-    app.component(_sfc_main$8.name, _sfc_main$8);
+    app.component(_table.name, _table);
   }
 });
 const _space = /* @__PURE__ */ defineComponent({
@@ -1684,118 +1726,117 @@ const Space = Object.assign(_space, {
     app.component(_space.name, _space);
   }
 });
-const _hoisted_1$3 = {
-  key: 0,
-  class: "ri-information-fill"
-};
-const _hoisted_2$2 = {
-  key: 1,
-  class: "ri-checkbox-circle-fill"
-};
-const _hoisted_3$2 = {
-  key: 2,
-  class: "ri-error-warning-fill"
-};
-const _hoisted_4$2 = {
-  key: 3,
-  class: "ri-close-circle-fill"
-};
-const _hoisted_5$1 = ["textContent"];
-const _hoisted_6$1 = {
-  key: 0,
-  class: "ri-close-line"
-};
-const _hoisted_7 = { key: 1 };
-const __default__$6 = defineComponent({
-  name: "Alert"
-});
-const _sfc_main$7 = /* @__PURE__ */ defineComponent({
-  ...__default__$6,
+const _sfc_main$9 = defineComponent({
+  name: "Alert",
   props: {
     type: { type: String, default: "info" },
     title: { type: String, default: "" },
     closeable: { type: Boolean, default: false }
   },
   emits: ["close"],
-  setup(__props, { emit: emits }) {
-    const props = __props;
+  setup(props, { emit, slots }) {
     const name = "bp-alert";
-    const slots = useSlots();
     const cls = computed(() => {
       return [name, `${name}-${props.type}`, props.title ? `${name}-with-title` : ""];
     });
     const isRender = ref(true);
     const handleClose = () => {
       isRender.value = false;
-      emits("close");
+      emit("close");
     };
-    return (_ctx, _cache) => {
-      return isRender.value ? (openBlock(), createElementBlock("div", {
+    return {
+      name,
+      cls,
+      isRender,
+      handleClose,
+      slots
+    };
+  }
+});
+const _hoisted_1$4 = {
+  key: 0,
+  class: "ri-information-fill"
+};
+const _hoisted_2$4 = {
+  key: 1,
+  class: "ri-checkbox-circle-fill"
+};
+const _hoisted_3$4 = {
+  key: 2,
+  class: "ri-error-warning-fill"
+};
+const _hoisted_4$4 = {
+  key: 3,
+  class: "ri-close-circle-fill"
+};
+const _hoisted_5$2 = ["textContent"];
+const _hoisted_6$1 = {
+  key: 0,
+  class: "ri-close-line"
+};
+const _hoisted_7 = { key: 1 };
+function _sfc_render$7(_ctx, _cache, $props, $setup, $data, $options) {
+  return _ctx.isRender ? (openBlock(), createElementBlock("div", {
+    key: 0,
+    class: normalizeClass(_ctx.cls)
+  }, [
+    createElementVNode("div", {
+      class: normalizeClass(`${_ctx.name}-icon`)
+    }, [
+      _ctx.type === "info" ? (openBlock(), createElementBlock("i", _hoisted_1$4)) : createCommentVNode("", true),
+      _ctx.type === "success" ? (openBlock(), createElementBlock("i", _hoisted_2$4)) : createCommentVNode("", true),
+      _ctx.type === "warning" ? (openBlock(), createElementBlock("i", _hoisted_3$4)) : createCommentVNode("", true),
+      _ctx.type === "error" ? (openBlock(), createElementBlock("i", _hoisted_4$4)) : createCommentVNode("", true)
+    ], 2),
+    createElementVNode("div", {
+      class: normalizeClass(`${_ctx.name}-body`)
+    }, [
+      _ctx.title ? (openBlock(), createElementBlock("div", {
         key: 0,
-        class: normalizeClass(cls.value)
+        class: normalizeClass(`${_ctx.name}-title`)
       }, [
-        createElementVNode("div", {
-          class: normalizeClass(`${name}-icon`)
-        }, [
-          __props.type === "info" ? (openBlock(), createElementBlock("i", _hoisted_1$3)) : createCommentVNode("", true),
-          __props.type === "success" ? (openBlock(), createElementBlock("i", _hoisted_2$2)) : createCommentVNode("", true),
-          __props.type === "warning" ? (openBlock(), createElementBlock("i", _hoisted_3$2)) : createCommentVNode("", true),
-          __props.type === "error" ? (openBlock(), createElementBlock("i", _hoisted_4$2)) : createCommentVNode("", true)
-        ], 2),
-        createElementVNode("div", {
-          class: normalizeClass(`${name}-body`)
-        }, [
-          __props.title ? (openBlock(), createElementBlock("div", {
-            key: 0,
-            class: normalizeClass(`${name}-title`)
-          }, [
-            createElementVNode("span", {
-              textContent: toDisplayString(__props.title)
-            }, null, 8, _hoisted_5$1)
-          ], 2)) : createCommentVNode("", true),
-          createElementVNode("div", {
-            class: normalizeClass(`${name}-content`)
-          }, [
-            createElementVNode("span", null, [
-              renderSlot(_ctx.$slots, "default")
-            ])
-          ], 2)
-        ], 2),
-        createElementVNode("div", {
-          class: normalizeClass(`${name}-option`)
-        }, [
-          __props.closeable ? (openBlock(), createElementBlock("div", {
-            key: 0,
-            class: normalizeClass(`${name}-close-inner`),
-            onClick: handleClose
-          }, [
-            !unref(slots).close ? (openBlock(), createElementBlock("i", _hoisted_6$1)) : (openBlock(), createElementBlock("span", _hoisted_7, [
-              renderSlot(_ctx.$slots, "close")
-            ]))
-          ], 2)) : createCommentVNode("", true)
-        ], 2)
-      ], 2)) : createCommentVNode("", true);
-    };
-  }
-});
-_sfc_main$7.name = getComponentsPrefix() + _sfc_main$7.name;
-const Alert = Object.assign(_sfc_main$7, {
+        createElementVNode("span", {
+          textContent: toDisplayString(_ctx.title)
+        }, null, 8, _hoisted_5$2)
+      ], 2)) : createCommentVNode("", true),
+      createElementVNode("div", {
+        class: normalizeClass(`${_ctx.name}-content`)
+      }, [
+        createElementVNode("span", null, [
+          renderSlot(_ctx.$slots, "default")
+        ])
+      ], 2)
+    ], 2),
+    createElementVNode("div", {
+      class: normalizeClass(`${_ctx.name}-option`)
+    }, [
+      _ctx.closeable ? (openBlock(), createElementBlock("div", {
+        key: 0,
+        class: normalizeClass(`${_ctx.name}-close-inner`),
+        onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClose && _ctx.handleClose(...args))
+      }, [
+        !_ctx.slots.close ? (openBlock(), createElementBlock("i", _hoisted_6$1)) : (openBlock(), createElementBlock("span", _hoisted_7, [
+          renderSlot(_ctx.$slots, "close")
+        ]))
+      ], 2)) : createCommentVNode("", true)
+    ], 2)
+  ], 2)) : createCommentVNode("", true);
+}
+const _alert = /* @__PURE__ */ _export_sfc(_sfc_main$9, [["render", _sfc_render$7]]);
+_alert.name = getComponentsPrefix() + _alert.name;
+const Alert = Object.assign(_alert, {
   install: (app) => {
-    app.component(_sfc_main$7.name, _sfc_main$7);
+    app.component(_alert.name, _alert);
   }
 });
-const __default__$5 = defineComponent({
-  name: "Tag"
-});
-const _sfc_main$6 = /* @__PURE__ */ defineComponent({
-  ...__default__$5,
+const _sfc_main$8 = defineComponent({
+  name: "Tag",
   props: {
     status: { type: String, default: "normal" },
     dot: { type: Boolean, default: false },
     closeable: { type: Boolean, default: false }
   },
-  setup(__props) {
-    const props = __props;
+  setup(props) {
     const name = "bp-tag";
     const cls = computed(() => {
       return [name, props.dot ? `${name}-dot-box` : `${name}-${props.status}`];
@@ -1806,41 +1847,44 @@ const _sfc_main$6 = /* @__PURE__ */ defineComponent({
         return;
       visible.value = false;
     };
-    return (_ctx, _cache) => {
-      return visible.value ? (openBlock(), createElementBlock("div", {
-        key: 0,
-        class: normalizeClass(cls.value)
-      }, [
-        __props.dot ? (openBlock(), createElementBlock("div", {
-          key: 0,
-          class: normalizeClass([`${name}-dot`, `${name}-dot-${__props.status}`])
-        }, null, 2)) : createCommentVNode("", true),
-        createElementVNode("span", {
-          class: normalizeClass(`${name}-inner`)
-        }, [
-          renderSlot(_ctx.$slots, "default")
-        ], 2),
-        __props.closeable ? (openBlock(), createElementBlock("i", {
-          key: 1,
-          class: "ri-close-line",
-          onClick: handleClose
-        })) : createCommentVNode("", true)
-      ], 2)) : createCommentVNode("", true);
+    return {
+      name,
+      cls,
+      visible,
+      handleClose
     };
   }
 });
-_sfc_main$6.name = getComponentsPrefix() + _sfc_main$6.name;
-const Tag = Object.assign(_sfc_main$6, {
+function _sfc_render$6(_ctx, _cache, $props, $setup, $data, $options) {
+  return _ctx.visible ? (openBlock(), createElementBlock("div", {
+    key: 0,
+    class: normalizeClass(_ctx.cls)
+  }, [
+    _ctx.dot ? (openBlock(), createElementBlock("div", {
+      key: 0,
+      class: normalizeClass([`${_ctx.name}-dot`, `${_ctx.name}-dot-${_ctx.status}`])
+    }, null, 2)) : createCommentVNode("", true),
+    createElementVNode("span", {
+      class: normalizeClass(`${_ctx.name}-inner`)
+    }, [
+      renderSlot(_ctx.$slots, "default")
+    ], 2),
+    _ctx.closeable ? (openBlock(), createElementBlock("i", {
+      key: 1,
+      class: "ri-close-line",
+      onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClose && _ctx.handleClose(...args))
+    })) : createCommentVNode("", true)
+  ], 2)) : createCommentVNode("", true);
+}
+const _tag = /* @__PURE__ */ _export_sfc(_sfc_main$8, [["render", _sfc_render$6]]);
+_tag.name = getComponentsPrefix() + _tag.name;
+const Tag = Object.assign(_tag, {
   install: (app) => {
-    app.component(_sfc_main$6.name, _sfc_main$6);
+    app.component(_tag.name, _tag);
   }
 });
-const _hoisted_1$2 = ["onClick"];
-const __default__$4 = defineComponent({
-  name: "Modal"
-});
-const _sfc_main$5 = /* @__PURE__ */ defineComponent({
-  ...__default__$4,
+const _sfc_main$7 = defineComponent({
+  name: "Modal",
   props: {
     /** 对话框显示状态 */
     visible: { type: Boolean, default: false },
@@ -1861,19 +1905,17 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
     /** 点击遮罩是否关闭 */
     maskClosable: { type: Boolean, default: true }
   },
-  emits: ["ok", "cancle", "update:visible"],
-  setup(__props, { emit: emits }) {
-    const props = __props;
+  emits: ["update:visible", "ok", "cancle"],
+  setup(props, { emit, slots }) {
     const name = "bp-modal";
-    const slots = useSlots();
     const containerVisable = ref(false);
-    const clsName = computed(() => {
-      let cls = [name];
+    const cls = computed(() => {
+      let cls2 = [name];
       if (props.border) {
-        cls.push(`${name}-border`);
+        cls2.push(`${name}-border`);
       }
-      cls.push(`${name}-title-${props.titleAlign}`);
-      return cls;
+      cls2.push(`${name}-title-${props.titleAlign}`);
+      return cls2;
     });
     const handleMaskClick = () => {
       if (!props.maskClosable)
@@ -1881,12 +1923,12 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
       handleCancle();
     };
     const handleCancle = () => {
-      emits("cancle");
-      emits("update:visible", false);
+      emit("cancle");
+      emit("update:visible", false);
     };
     const handleOk = () => {
-      emits("ok");
-      emits("update:visible", false);
+      emit("ok");
+      emit("update:visible", false);
     };
     watch(
       () => props.visible,
@@ -1900,113 +1942,119 @@ const _sfc_main$5 = /* @__PURE__ */ defineComponent({
         }, 200);
       }
     );
-    return (_ctx, _cache) => {
-      const _component_bp_button = resolveComponent("bp-button");
-      const _component_bp_space = resolveComponent("bp-space");
-      return openBlock(), createBlock(Teleport, { to: "body" }, [
-        withDirectives(createElementVNode("div", {
-          class: normalizeClass(`${name}-container`)
-        }, [
-          createVNode(Transition, { name: "fade-modal-mask" }, {
-            default: withCtx(() => [
-              withDirectives(createElementVNode("div", {
-                class: normalizeClass(`${name}-mask`)
-              }, null, 2), [
-                [vShow, __props.visible]
-              ])
-            ]),
-            _: 1
-          }),
-          createVNode(Transition, { name: "modal-fade" }, {
-            default: withCtx(() => [
-              withDirectives(createElementVNode("div", {
-                class: normalizeClass(`${name}-wrapper`),
-                onClick: withModifiers(handleMaskClick, ["self"])
-              }, [
-                createElementVNode("div", {
-                  class: normalizeClass(clsName.value),
-                  style: normalizeStyle(`width:${__props.width};top:${__props.top}`)
-                }, [
-                  createElementVNode("div", {
-                    class: normalizeClass(`${name}-header`)
-                  }, [
-                    createElementVNode("p", {
-                      class: normalizeClass(`${name}-header-title`)
-                    }, toDisplayString(__props.title), 3),
-                    !__props.hideClose ? (openBlock(), createElementBlock("i", {
-                      key: 0,
-                      class: normalizeClass([`${name}-header-close`, "ri-close-line"]),
-                      onClick: handleCancle
-                    }, null, 2)) : createCommentVNode("", true)
-                  ], 2),
-                  createElementVNode("div", {
-                    class: normalizeClass(`${name}-body`)
-                  }, [
-                    renderSlot(_ctx.$slots, "default")
-                  ], 2),
-                  !__props.hideFooter ? (openBlock(), createElementBlock("div", {
-                    key: 0,
-                    class: normalizeClass(`${name}-footer`)
-                  }, [
-                    !unref(slots).footer ? (openBlock(), createBlock(_component_bp_space, {
-                      key: 0,
-                      justify: "flex-end"
-                    }, {
-                      default: withCtx(() => [
-                        createVNode(_component_bp_button, { onClick: handleCancle }, {
-                          default: withCtx(() => [
-                            createTextVNode("取消")
-                          ]),
-                          _: 1
-                        }),
-                        createVNode(_component_bp_button, {
-                          onClick: handleOk,
-                          type: "primary",
-                          status: "primary"
-                        }, {
-                          default: withCtx(() => [
-                            createTextVNode("确认")
-                          ]),
-                          _: 1
-                        })
-                      ]),
-                      _: 1
-                    })) : createCommentVNode("", true),
-                    renderSlot(_ctx.$slots, "footer")
-                  ], 2)) : createCommentVNode("", true)
-                ], 6)
-              ], 10, _hoisted_1$2), [
-                [vShow, __props.visible]
-              ])
-            ]),
-            _: 3
-          })
-        ], 2), [
-          [vShow, containerVisable.value]
-        ])
-      ]);
+    return {
+      name,
+      cls,
+      containerVisable,
+      handleMaskClick,
+      handleCancle,
+      handleOk,
+      slots
     };
   }
 });
-_sfc_main$5.name = getComponentsPrefix() + _sfc_main$5.name;
-const Modal = Object.assign(_sfc_main$5, {
+function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_bp_button = resolveComponent("bp-button");
+  const _component_bp_space = resolveComponent("bp-space");
+  return openBlock(), createBlock(Teleport, { to: "body" }, [
+    withDirectives(createElementVNode("div", {
+      class: normalizeClass(`${_ctx.name}-container`)
+    }, [
+      createVNode(Transition, { name: "fade-modal-mask" }, {
+        default: withCtx(() => [
+          withDirectives(createElementVNode("div", {
+            class: normalizeClass(`${_ctx.name}-mask`)
+          }, null, 2), [
+            [vShow, _ctx.visible]
+          ])
+        ]),
+        _: 1
+      }),
+      createVNode(Transition, { name: "modal-fade" }, {
+        default: withCtx(() => [
+          withDirectives(createElementVNode("div", {
+            class: normalizeClass(`${_ctx.name}-wrapper`),
+            onClick: _cache[1] || (_cache[1] = withModifiers((...args) => _ctx.handleMaskClick && _ctx.handleMaskClick(...args), ["self"]))
+          }, [
+            createElementVNode("div", {
+              class: normalizeClass(_ctx.cls),
+              style: normalizeStyle(`width:${_ctx.width};top:${_ctx.top}`)
+            }, [
+              createElementVNode("div", {
+                class: normalizeClass(`${_ctx.name}-header`)
+              }, [
+                createElementVNode("p", {
+                  class: normalizeClass(`${_ctx.name}-header-title`)
+                }, toDisplayString(_ctx.title), 3),
+                !_ctx.hideClose ? (openBlock(), createElementBlock("i", {
+                  key: 0,
+                  class: normalizeClass([`${_ctx.name}-header-close`, "ri-close-line"]),
+                  onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleCancle && _ctx.handleCancle(...args))
+                }, null, 2)) : createCommentVNode("", true)
+              ], 2),
+              createElementVNode("div", {
+                class: normalizeClass(`${_ctx.name}-body`)
+              }, [
+                renderSlot(_ctx.$slots, "default")
+              ], 2),
+              !_ctx.hideFooter ? (openBlock(), createElementBlock("div", {
+                key: 0,
+                class: normalizeClass(`${_ctx.name}-footer`)
+              }, [
+                !_ctx.slots.footer ? (openBlock(), createBlock(_component_bp_space, {
+                  key: 0,
+                  justify: "flex-end"
+                }, {
+                  default: withCtx(() => [
+                    createVNode(_component_bp_button, { onClick: _ctx.handleCancle }, {
+                      default: withCtx(() => [
+                        createTextVNode("取消")
+                      ]),
+                      _: 1
+                    }, 8, ["onClick"]),
+                    createVNode(_component_bp_button, {
+                      onClick: _ctx.handleOk,
+                      type: "primary",
+                      status: "primary"
+                    }, {
+                      default: withCtx(() => [
+                        createTextVNode("确认")
+                      ]),
+                      _: 1
+                    }, 8, ["onClick"])
+                  ]),
+                  _: 1
+                })) : createCommentVNode("", true),
+                renderSlot(_ctx.$slots, "footer")
+              ], 2)) : createCommentVNode("", true)
+            ], 6)
+          ], 2), [
+            [vShow, _ctx.visible]
+          ])
+        ]),
+        _: 3
+      })
+    ], 2), [
+      [vShow, _ctx.containerVisable]
+    ])
+  ]);
+}
+const _modal = /* @__PURE__ */ _export_sfc(_sfc_main$7, [["render", _sfc_render$5]]);
+_modal.name = getComponentsPrefix() + _modal.name;
+const Modal = Object.assign(_modal, {
   install: (app) => {
-    app.component(_sfc_main$5.name, _sfc_main$5);
+    app.component(_modal.name, _modal);
   }
 });
-const __default__$3 = defineComponent({
-  name: "Col"
-});
-const _sfc_main$4 = /* @__PURE__ */ defineComponent({
-  ...__default__$3,
+const _sfc_main$6 = defineComponent({
+  name: "Col",
   props: {
     /** 栏位数量 1-24 Number of fields 1-24 */
     span: { type: [String, Number], default: 24 },
     /** 偏移量 Number of offset*/
     offset: { type: [String, Number], default: "" }
   },
-  setup(__props) {
-    const props = __props;
+  setup(props) {
     const name = "col";
     const cls = computed(() => {
       let className = [`bp-${name}`];
@@ -2014,20 +2062,22 @@ const _sfc_main$4 = /* @__PURE__ */ defineComponent({
       Number(props.offset) !== 0 ? className.push(`bp-${name}-offset-${props.offset}`) : "";
       return className;
     });
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(cls.value)
-      }, [
-        renderSlot(_ctx.$slots, "default")
-      ], 2);
+    return {
+      name,
+      cls
     };
   }
 });
-const __default__$2 = defineComponent({
-  name: "Row"
-});
-const _sfc_main$3 = /* @__PURE__ */ defineComponent({
-  ...__default__$2,
+function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.cls)
+  }, [
+    renderSlot(_ctx.$slots, "default")
+  ], 2);
+}
+const _col = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$4]]);
+const _sfc_main$5 = defineComponent({
+  name: "Row",
   props: {
     /** 栏位间隔 Field spacing */
     gutter: { type: [String, Number], default: "" },
@@ -2036,21 +2086,19 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     /** 垂直对齐方式 Vertical alignment */
     align: { type: String, default: "start" }
   },
-  setup(__props) {
-    const props = __props;
-    const slot = useSlots().default();
+  setup(props, { emit, slots }) {
     const rowRef = ref();
     const name = "row";
     const cls = computed(() => {
       return [`bp-${name}`, `bp-justify-${props.justify}`, `bp-align-${props.align}`];
     });
     const init = () => {
-      setGutter(slot);
+      setGutter(slots.default());
     };
     const setGutter = (els) => {
       const childrenEls = rowRef.value.children;
       els.forEach((item, index) => {
-        const isCol = item.type === _sfc_main$4;
+        const isCol = item.type === _col;
         if (isCol) {
           const el = childrenEls[index];
           index !== 0 && (el.style.paddingLeft = `${props.gutter}px`);
@@ -2065,27 +2113,33 @@ const _sfc_main$3 = /* @__PURE__ */ defineComponent({
     onMounted(() => {
       nextTick(() => init());
     });
-    return (_ctx, _cache) => {
-      return openBlock(), createElementBlock("div", {
-        class: normalizeClass(cls.value),
-        ref_key: "rowRef",
-        ref: rowRef
-      }, [
-        renderSlot(_ctx.$slots, "default")
-      ], 2);
+    return {
+      rowRef,
+      name,
+      cls,
+      init
     };
   }
 });
-_sfc_main$3.name = getComponentsPrefix() + _sfc_main$3.name;
-_sfc_main$4.name = getComponentsPrefix() + _sfc_main$4.name;
-const Grid = Object.assign(_sfc_main$3, {
-  Col: _sfc_main$4,
+function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.cls),
+    ref: "rowRef"
+  }, [
+    renderSlot(_ctx.$slots, "default")
+  ], 2);
+}
+const _grid = /* @__PURE__ */ _export_sfc(_sfc_main$5, [["render", _sfc_render$3]]);
+_grid.name = getComponentsPrefix() + _grid.name;
+_col.name = getComponentsPrefix() + _col.name;
+const Grid = Object.assign(_grid, {
+  Col: _col,
   install: (app) => {
-    app.component(_sfc_main$3.name, _sfc_main$3);
-    app.component(_sfc_main$4.name, _sfc_main$4);
+    app.component(_grid.name, _grid);
+    app.component(_col.name, _col);
   }
 });
-const _sfc_main$2 = defineComponent({
+const _sfc_main$4 = defineComponent({
   name: "Link",
   props: {
     /** 链接地址 */
@@ -2120,35 +2174,319 @@ const _sfc_main$2 = defineComponent({
     };
   }
 });
-const _hoisted_1$1 = ["disabled", "href"];
-const _hoisted_2$1 = {
+const _hoisted_1$3 = ["disabled", "href"];
+const _hoisted_2$3 = {
   key: 0,
   class: "left-icon"
 };
-const _hoisted_3$1 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
-const _hoisted_4$1 = [
-  _hoisted_3$1
+const _hoisted_3$3 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
+const _hoisted_4$3 = [
+  _hoisted_3$3
 ];
-function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.clsName),
-    onClick: _cache[0] || (_cache[0] = withModifiers((...args) => _ctx.handleClick && _ctx.handleClick(...args), ["stop"]))
+    onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args))
   }, [
     createElementVNode("a", {
       disabled: _ctx.disabled,
       class: normalizeClass(`${_ctx.name}-inner`),
       href: _ctx.href
     }, [
-      _ctx.loading ? (openBlock(), createElementBlock("span", _hoisted_2$1, _hoisted_4$1)) : createCommentVNode("", true),
+      _ctx.loading ? (openBlock(), createElementBlock("span", _hoisted_2$3, _hoisted_4$3)) : createCommentVNode("", true),
       renderSlot(_ctx.$slots, "default")
-    ], 10, _hoisted_1$1)
+    ], 10, _hoisted_1$3)
   ], 2);
 }
-const _link = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render]]);
+const _link = /* @__PURE__ */ _export_sfc(_sfc_main$4, [["render", _sfc_render$2]]);
 _link.name = getComponentsPrefix() + _link.name;
 const BpLink = Object.assign(_link, {
   install: (app) => {
     app.component(_link.name, _link);
+  }
+});
+const _sfc_main$3 = defineComponent({
+  name: "Popconfirm",
+  props: {
+    /**确认框文本内容 */
+    content: { type: String, default: "" },
+    /** 类型 */
+    type: { type: String, default: "info" },
+    /** 弹出位置 */
+    position: { type: String, default: "top" },
+    /** 确认按钮文本 */
+    okText: { type: String, default: "确认" },
+    /** 取消按钮文本 */
+    cancleText: { type: String, default: "取消" },
+    /** 触发确定前的回调，返回 false 则中断 */
+    onBeforeOk: { type: Function, default: () => true }
+  },
+  directives: { clickOutside: vClickOutside },
+  emits: ["ok", "cancle"],
+  setup(props, { emit }) {
+    const name = "bp-popconfirm";
+    const show = ref(false);
+    const slotRef = ref();
+    const innerRef = ref();
+    const handleClick = () => {
+      handleResize();
+      show.value = true;
+    };
+    const handleResize = () => {
+      var _a;
+      const slotRect = (_a = slotRef.value) == null ? void 0 : _a.getBoundingClientRect();
+      if (!slotRect)
+        return;
+      const position = {
+        top: `top:${slotRect.top - 10}px;left:${slotRect.left + slotRect.width / 2}px;transform: translateX(-50%) translateY(-100%);`,
+        bottom: `top:${slotRect.top + slotRect.height + 10}px;left:${slotRect.left + slotRect.width / 2}px;transform: translateX(-50%);`,
+        left: `top:${slotRect.top + slotRect.height / 2}px;left:${slotRect.left - 10}px;transform: translateX(-100%) translateY(-50%);`,
+        right: `top:${slotRect.top + slotRect.height / 2}px;right:${slotRect.right}px;transform: translateX(-100%) translateY(-50%);`
+      };
+      innerRef.value.setAttribute("style", `${position[props.position]};display:${show.value ? "block" : "none"}`);
+    };
+    const handleCancle = () => {
+      show.value = false;
+      emit("cancle");
+    };
+    const okLoading = ref(false);
+    const handleOk = async () => {
+      try {
+        okLoading.value = true;
+        const res = await props.onBeforeOk();
+        if (!res)
+          return;
+        show.value = false;
+        emit("ok");
+      } catch (error) {
+        console.log("[ Popconfirm -onBeforeOk error]", error);
+      } finally {
+        okLoading.value = false;
+      }
+    };
+    onMounted(() => {
+      nextTick(() => {
+        on(window, "resize", throttle(handleResize, 100));
+      });
+    });
+    onBeforeUnmount(() => {
+      off(window, "resize", handleResize);
+    });
+    return {
+      name,
+      show,
+      slotRef,
+      innerRef,
+      okLoading,
+      handleClick,
+      handleCancle,
+      handleOk
+    };
+  }
+});
+const _hoisted_1$2 = {
+  key: 0,
+  class: "ri-checkbox-circle-fill"
+};
+const _hoisted_2$2 = {
+  key: 1,
+  class: "ri-close-circle-fill"
+};
+const _hoisted_3$2 = {
+  key: 2,
+  class: "ri-error-warning-fill"
+};
+const _hoisted_4$2 = {
+  key: 3,
+  class: "ri-information-fill"
+};
+function _sfc_render$1(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_bp_button = resolveComponent("bp-button");
+  const _component_bp_space = resolveComponent("bp-space");
+  const _directive_clickOutside = resolveDirective("clickOutside");
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.name)
+  }, [
+    (openBlock(), createBlock(Teleport, { to: "body" }, [
+      createVNode(Transition, {
+        name: "fade-select",
+        appear: ""
+      }, {
+        default: withCtx(() => [
+          withDirectives((openBlock(), createElementBlock("div", {
+            ref: "innerRef",
+            class: normalizeClass(`${_ctx.name}-inner`)
+          }, [
+            createElementVNode("div", {
+              class: normalizeClass(`${_ctx.name}-inner-content`)
+            }, [
+              createElementVNode("span", {
+                class: normalizeClass(`${_ctx.name}-icon`)
+              }, [
+                _ctx.type === "success" ? (openBlock(), createElementBlock("i", _hoisted_1$2)) : createCommentVNode("", true),
+                _ctx.type === "danger" ? (openBlock(), createElementBlock("i", _hoisted_2$2)) : createCommentVNode("", true),
+                _ctx.type === "warning" ? (openBlock(), createElementBlock("i", _hoisted_3$2)) : createCommentVNode("", true),
+                _ctx.type === "info" ? (openBlock(), createElementBlock("i", _hoisted_4$2)) : createCommentVNode("", true)
+              ], 2),
+              createElementVNode("span", {
+                class: normalizeClass(`${_ctx.name}-text`)
+              }, toDisplayString(_ctx.content), 3)
+            ], 2),
+            createElementVNode("div", {
+              class: normalizeClass(`${_ctx.name}-inner-footer`)
+            }, [
+              createVNode(_component_bp_space, {
+                size: "mini",
+                justify: "flex-end"
+              }, {
+                default: withCtx(() => [
+                  createVNode(_component_bp_button, {
+                    onClick: _ctx.handleCancle,
+                    size: "mini"
+                  }, {
+                    default: withCtx(() => [
+                      createTextVNode(toDisplayString(_ctx.cancleText), 1)
+                    ]),
+                    _: 1
+                  }, 8, ["onClick"]),
+                  createVNode(_component_bp_button, {
+                    onClick: _ctx.handleOk,
+                    loading: _ctx.okLoading,
+                    size: "mini",
+                    type: "primary",
+                    status: "primary"
+                  }, {
+                    default: withCtx(() => [
+                      createTextVNode(toDisplayString(_ctx.okText), 1)
+                    ]),
+                    _: 1
+                  }, 8, ["onClick", "loading"])
+                ]),
+                _: 1
+              })
+            ], 2)
+          ], 2)), [
+            [vShow, _ctx.show],
+            [_directive_clickOutside, _ctx.handleCancle]
+          ])
+        ]),
+        _: 1
+      })
+    ])),
+    createElementVNode("div", {
+      ref: "slotRef",
+      class: normalizeClass(`${_ctx.name}-slot`),
+      onClick: _cache[0] || (_cache[0] = withModifiers((...args) => _ctx.handleClick && _ctx.handleClick(...args), ["stop"]))
+    }, [
+      renderSlot(_ctx.$slots, "default")
+    ], 2)
+  ], 2);
+}
+const _popconfirm = /* @__PURE__ */ _export_sfc(_sfc_main$3, [["render", _sfc_render$1]]);
+_popconfirm.name = getComponentsPrefix() + _popconfirm.name;
+const Popconfirm = Object.assign(_popconfirm, {
+  install: (app) => {
+    app.component(_popconfirm.name, _popconfirm);
+  }
+});
+const _sfc_main$2 = defineComponent({
+  name: "Image",
+  props: {
+    /** 图片资源地址 */
+    src: { type: String, default: "" },
+    /** 图片适应类型 */
+    fit: { type: String, default: "fill" },
+    /** 文字描述 */
+    alt: { type: String, default: "" },
+    /** 标题 */
+    title: { type: String, default: "" },
+    /** 图片宽度 */
+    width: { type: [String, Number] },
+    /** 图片高度 */
+    height: { type: [String, Number] }
+  },
+  emits: ["load", "error"],
+  setup(props, { emit }) {
+    const name = "bp-image";
+    const imageRef = ref();
+    const loadStatus = ref("loading");
+    const isLoading = computed(() => loadStatus.value === "loading");
+    const isError = computed(() => loadStatus.value === "error");
+    const imgStyle = computed(() => ({
+      width: `${props.width}px`,
+      height: `${props.height}px`
+    }));
+    const fitStyle = computed(() => {
+      if (props.fit) {
+        return { objectFit: props.fit };
+      }
+      return {};
+    });
+    const onLoad = () => {
+      loadStatus.value = "load";
+      emit("load");
+    };
+    const onError = () => {
+      loadStatus.value = "error";
+      emit("error");
+    };
+    watchEffect(() => {
+      if (!props.src || !imageRef.value)
+        return;
+      imageRef.value.src = props.src;
+    });
+    return {
+      name,
+      imageRef,
+      loadStatus,
+      onLoad,
+      onError,
+      imgStyle,
+      fitStyle,
+      isLoading,
+      isError
+    };
+  }
+});
+const _hoisted_1$1 = ["alt", "title"];
+const _hoisted_2$1 = /* @__PURE__ */ createElementVNode("span", null, "加载中", -1);
+const _hoisted_3$1 = [
+  _hoisted_2$1
+];
+const _hoisted_4$1 = /* @__PURE__ */ createElementVNode("i", { class: "ri-image-2-line" }, null, -1);
+const _hoisted_5$1 = [
+  _hoisted_4$1
+];
+function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("div", {
+    class: normalizeClass(_ctx.name),
+    style: normalizeStyle(_ctx.imgStyle)
+  }, [
+    createElementVNode("img", {
+      ref: "imageRef",
+      alt: _ctx.alt,
+      title: _ctx.title,
+      style: normalizeStyle({ ..._ctx.imgStyle, ..._ctx.fitStyle }),
+      onLoad: _cache[0] || (_cache[0] = (...args) => _ctx.onLoad && _ctx.onLoad(...args)),
+      onError: _cache[1] || (_cache[1] = (...args) => _ctx.onError && _ctx.onError(...args))
+    }, null, 44, _hoisted_1$1),
+    _ctx.isLoading ? renderSlot(_ctx.$slots, "loading", { key: 0 }, () => [
+      createElementVNode("div", {
+        class: normalizeClass(`${_ctx.name}-loading`)
+      }, _hoisted_3$1, 2)
+    ]) : createCommentVNode("", true),
+    !_ctx.isLoading && _ctx.isError ? renderSlot(_ctx.$slots, "error", { key: 1 }, () => [
+      createElementVNode("div", {
+        class: normalizeClass(`${_ctx.name}-error`)
+      }, _hoisted_5$1, 2)
+    ]) : createCommentVNode("", true)
+  ], 6);
+}
+const _image = /* @__PURE__ */ _export_sfc(_sfc_main$2, [["render", _sfc_render]]);
+_image.name = getComponentsPrefix() + _image.name;
+const Image = Object.assign(_image, {
+  install: (app) => {
+    app.component(_image.name, _image);
   }
 });
 var MessageType = /* @__PURE__ */ ((MessageType2) => {
@@ -2357,7 +2695,7 @@ const Message = Object.assign({
   }
 });
 const components = {
-  Button: _button,
+  Button,
   Input,
   Textarea,
   Radio,
@@ -2373,6 +2711,8 @@ const components = {
   Spin,
   Grid,
   Link: BpLink,
+  Popconfirm,
+  Image,
   Message
 };
 const install = function(app) {
@@ -2382,7 +2722,7 @@ const install = function(app) {
 };
 const birdpaperUi = {
   install,
-  Button: _button,
+  Button,
   Input,
   Textarea,
   Radio,
@@ -2398,17 +2738,22 @@ const birdpaperUi = {
   Spin,
   Grid,
   Link: BpLink,
+  Popconfirm,
+  Image,
   Message
 };
 export {
   Alert,
-  _button as Button,
+  Button,
   Checkbox,
   Grid,
+  Image,
   Input,
   BpLink as Link,
+  Message,
   Modal,
   Pagination,
+  Popconfirm,
   Radio,
   Select,
   Space,
