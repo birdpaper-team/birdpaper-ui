@@ -1,0 +1,23 @@
+.bp-image {
+  position: relative;
+
+  &-loading,
+  &-error {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: @gary-3;
+    color: @gary-6;
+    font-size: 13px;
+
+    .ri-image-2-line {
+      font-size: 22px;
+    }
+  }
+}
