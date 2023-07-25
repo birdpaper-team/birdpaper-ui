@@ -16,7 +16,9 @@
               <template v-else>
                 <tr v-for="(item, index) in data" :key="`bp-table-tbody-tr-${index}`">
                   <td v-for="(v, k) in columns" :key="`bp-table-tbody-td-${index}-${k}`" :class="tdClass(v)">
-                    <template v-if="!v.scope">{{ item[v.key] }}</template>
+                    <template v-if="!v.scope">
+                      <span>{{ item[v.key] }}</span>
+                    </template>
                     <slot v-else :name="v.scope.customRender" :row="item" :index="index" :data="item[v.key]"></slot>
                   </td>
                 </tr>

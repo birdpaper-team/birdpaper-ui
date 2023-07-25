@@ -18,9 +18,9 @@
           <div :class="`${name}-inner-footer`">
             <bp-space size="mini" justify="flex-end">
               <bp-button @click="handleCancle" size="mini">{{ cancleText }}</bp-button>
-              <bp-button @click="handleOk" :loading="okLoading" size="mini" type="primary" status="primary">{{
-                okText
-              }}</bp-button>
+              <bp-button @click="handleOk" :loading="okLoading" size="mini" type="primary" status="primary">
+                {{ okText }}
+              </bp-button>
             </bp-space>
           </div>
         </div>
@@ -35,7 +35,7 @@
 
 <script lang="ts">
 import { PropType, defineComponent, nextTick, onBeforeUnmount, ref, onMounted } from "vue";
-import { PopconfirmPosition, PopconfirmType } from "./type";
+import { PopconfirmPosition, PopconfirmType } from "./types";
 import { vClickOutside } from "../../../directives/clickOutside";
 import { off, on, throttle } from "../../../utils/util";
 
@@ -45,9 +45,9 @@ export default defineComponent({
     /**确认框文本内容 */
     content: { type: String, default: "" },
     /** 类型 */
-    type: { type: String as PropType<PopconfirmType>, default: PopconfirmType.Info },
+    type: { type: String as PropType<PopconfirmType>, default: "info" },
     /** 弹出位置 */
-    position: { type: String as PropType<PopconfirmPosition>, default: PopconfirmPosition.Top },
+    position: { type: String as PropType<PopconfirmPosition>, default: "top" },
     /** 确认按钮文本 */
     okText: { type: String, default: "确认" },
     /** 取消按钮文本 */

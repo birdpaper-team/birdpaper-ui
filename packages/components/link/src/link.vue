@@ -1,5 +1,5 @@
 <template>
-  <div :class="clsName" @click.stop="handleClick">
+  <div :class="clsName" @click="handleClick">
     <a :disabled="disabled" :class="`${name}-inner`" :href="href">
       <span v-if="loading" class="left-icon">
         <i class="bp-icon-loading ri-loader-4-line"></i>

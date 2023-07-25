@@ -31,7 +31,7 @@ export default defineComponent({
     /** 图片资源地址 */
     src: { type: String, default: "" },
     /** 图片适应类型 */
-    fit: { type: String as PropType<ImageFit>, default: ImageFit.Fill },
+    fit: { type: String as PropType<ImageFit>, default: 'fill' },
     /** 文字描述 */
     alt: { type: String, default: "" },
     /** 标题 */
