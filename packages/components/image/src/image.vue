@@ -1,12 +1,19 @@
 <template>
   <div :class="name" :style="imgStyle">
-    <img ref="imageRef" :style="{ ...imgStyle, ...fitStyle }" @load="onLoad" @error="onError" />
+    <img
+      ref="imageRef"
+      :alt="alt"
+      :title="title"
+      :style="{ ...imgStyle, ...fitStyle }"
+      @load="onLoad"
+      @error="onError"
+    />
     <slot name="loading" v-if="isLoading">
       <div :class="`${name}-loading`">
         <span>加载中</span>
       </div>
     </slot>
-    <slot name="error" v-if="!isLoading && loadStatus === 'error'">
+    <slot name="error" v-if="!isLoading && isError">
       <div :class="`${name}-error`">
         <i class="ri-image-2-line"></i>
       </div>
@@ -16,6 +23,7 @@
 
 <script lang="ts">
 import { CSSProperties, PropType, computed, defineComponent, ref, watchEffect } from "vue";
+import { ImageFit } from "./types";
 
 export default defineComponent({
   name: "Image",
@@ -23,9 +31,14 @@ export default defineComponent({
     /** 图片资源地址 */
     src: { type: String, default: "" },
     /** 图片适应类型 */
-    fit: { type: String as PropType<"contain" | "cover" | "fill" | "none" | "scale-down">, default: "fill" },
+    fit: { type: String as PropType<ImageFit>, default: ImageFit.Fill },
+    /** 文字描述 */
     alt: { type: String, default: "" },
+    /** 标题 */
+    title: { type: String, default: "" },
+    /** 图片宽度 */
     width: { type: [String, Number] as PropType<string | number> },
+    /** 图片高度 */
     height: { type: [String, Number] as PropType<string | number> },
   },
   emits: ["load", "error"],
@@ -35,6 +48,7 @@ export default defineComponent({
     const loadStatus = ref<"loading" | "load" | "error">("loading");
 
     const isLoading = computed<boolean>(() => loadStatus.value === "loading");
+    const isError = computed<boolean>(() => loadStatus.value === "error");
     const imgStyle = computed<CSSProperties>(() => ({
       width: `${props.width}px`,
       height: `${props.height}px`,
@@ -70,6 +84,7 @@ export default defineComponent({
       imgStyle,
       fitStyle,
       isLoading,
+      isError,
     };
   },
 });
