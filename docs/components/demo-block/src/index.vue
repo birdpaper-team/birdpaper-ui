@@ -8,7 +8,7 @@
     <!-- 操作区域 -->
     <div class="demo-block-footer">
       <div :class="['icon-item', { active: showCode }]" @click="showCode = !showCode">
-        <code-icon theme="filled" size="14" :fill="showCode ? '#434343' : '#8c8c8c'" />
+        <i class="ri-code-s-slash-line"></i>
       </div>
     </div>
 
@@ -20,7 +20,6 @@
 </template>
 
 <script setup lang="ts" name="demo-block">
-import { Code as codeIcon } from "@icon-park/vue-next";
 import { defineAsyncComponent, markRaw, onMounted, ref } from "vue";
 
 interface Prop {
