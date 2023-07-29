@@ -21,7 +21,7 @@ export default defineComponent({
     /** 选项列表 */
     optionList: { type: Array as PropType<{ label: string; value: RadioGroupValue }[]>, default: () => [] },
     /** 是否禁用 */
-    disabled: { type: Boolean, default: false },
+    // disabled: { type: Boolean, default: false },
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
