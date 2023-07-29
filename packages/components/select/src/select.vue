@@ -6,7 +6,7 @@
     @mouseleave="onMouseleave"
     v-clickOutside="onClickOutside"
   >
-    <bp-input ref="inpRef" v-model="inpVal.label" readonly :placeholder="placeholder">
+    <bp-input ref="inpRef" v-model="currentSelect.label" readonly :placeholder="placeholder">
       <template #suffix>
         <i :class="[`${name}-icon-inner`, `ri-arrow-${isFocus ? 'up' : 'down'}-s-line`]"></i>
       </template>
@@ -32,6 +32,8 @@ import { getAllElements } from "../../../utils/dom";
 import { off, on, throttle } from "../../../utils/util";
 import { defineComponent } from "vue";
 import BpInput from "../../input/src/input.vue";
+import { watch } from "vue";
+import { useSelect } from "./select";
 
 export default defineComponent({
   name: "Select",
@@ -53,83 +55,76 @@ export default defineComponent({
     const selectRef = ref();
     const inpRef = ref();
     const optionBoxRef = ref();
-    const inpVal = reactive<SelectOption>(new SelectOption());
-    const isFocus = ref<boolean>(false);
 
-    const valueMap = computed(() => {
-      try {
-        let obj = {};
-        const children: VNode[] = getAllElements(slots.default?.(), true).filter(item => item.type !== Comment) ?? [];
+    provide(selectInjectionKey, {
+      modelValue: props.modelValue,
+      onSelect: (v: SelectBindValue, payload: any) => {
+        currentSelect.value = v;
+        currentSelect.label = payload.label;
+        emit("update:modelValue", currentSelect.value);
+        emit("change", currentSelect.value);
 
-        for (const item of children) {
-          if (item.type["name"] === "BpOption") {
-            obj[item.props.value] = item.props.label || item.children["default"]?.()[0].children;
-          }
-        }
-        return obj;
-      } catch (error) {
-        return {};
-      }
+        // 选择后主动关闭选项面板
+        isFocus.value = false;
+      },
     });
 
+    const { currentSelect, valueMap, isFocus } = useSelect(slots);
+
+    /** 外层点击触发，聚焦并打开下拉面板 */
     const handleClick = () => {
       if (props.disabled) return;
-      handleResize();
+      handleTrigger();
 
       isFocus.value = !isFocus.value;
       isFocus.value && inpRef.value.handleFocus();
     };
+    const onClickOutside = () => (isFocus.value = false);
+    const onMouseleave = () => !isFocus.value && inpRef.value.handleBlur();
 
-    const handleResize = () => {
+    const setValue = () => {
+      currentSelect.value = props.modelValue;
+      currentSelect.label = valueMap.value[currentSelect.value];
+    };
+    watch(
+      () => valueMap.value,
+      () => setValue(),
+      {
+        immediate: true,
+        deep: true,
+      }
+    );
+
+    onMounted(() => {
+      nextTick(() => {
+        on(window, "resize", throttle(handleTrigger, 100));
+      });
+    });
+
+    onBeforeUnmount(() => {
+      off(window, "resize", handleTrigger);
+    });
+
+    /** 展开/收起选项面板 */
+    const handleTrigger = () => {
       const rect = selectRef.value.getBoundingClientRect();
       if (!rect) return;
 
       optionBoxRef.value.setAttribute(
         "style",
-        `display:${isFocus.value ? "block" : "none"};width: ${rect.width}px;top:${rect.top + rect.height}px;left:${
-          rect.left
-        }px`
+        `display: ${isFocus.value ? "block" : "none"};
+         width: ${rect.width}px;
+         left: ${rect.left}px;
+         top: ${rect.top + rect.height}px;`
       );
     };
-
-    const onClickOutside = () => {
-      isFocus.value = false;
-    };
-    const onMouseleave = () => {
-      !isFocus.value && inpRef.value.handleBlur();
-    };
-
-    provide(selectInjectionKey, {
-      modelValue: props.modelValue,
-      onSelect: (v: SelectBindValue, payload: any) => {
-        inpVal.value = v;
-        inpVal.label = payload.label;
-        emit("update:modelValue", inpVal.value);
-        emit("change", inpVal.value);
-
-        isFocus.value = false;
-      },
-    });
-
-    inpVal.value = props.modelValue;
-    inpVal.label = valueMap.value[inpVal.value];
-
-    onMounted(() => {
-      nextTick(() => {
-        on(window, "resize", throttle(handleResize, 100));
-      });
-    });
-
-    onBeforeUnmount(() => {
-      off(window, "resize", handleResize);
-    });
 
     return {
       name,
       selectRef,
       inpRef,
       optionBoxRef,
-      inpVal,
+      currentSelect,
       isFocus,
       handleClick,
       onClickOutside,
