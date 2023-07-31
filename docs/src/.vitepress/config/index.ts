@@ -1,6 +1,7 @@
 import { nav } from "./nav";
 import { sidebar } from "./sidebar";
 import loadCode from "../../../components/demo-block/src/loadCode";
+import timeline from "vitepress-markdown-timeline";
 
 const config: import("vitepress").UserConfig = {
   title: "BirdpaperUI",
@@ -26,6 +27,7 @@ const config: import("vitepress").UserConfig = {
     theme: "material-theme",
     config: md => {
       md.use(loadCode);
+      md.use(timeline);
     },
   },
 };

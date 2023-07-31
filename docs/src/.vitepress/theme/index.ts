@@ -4,6 +4,7 @@ import "./var.less";
 import "./index.less";
 import "./font.less";
 import "../../../components/style/index.less";
+import "vitepress-markdown-timeline/dist/theme/index.css";
 
 import NoFound from "./NotFound.vue";
 import { EnhanceAppContext } from "vitepress";
