@@ -2,8 +2,11 @@
 
 这篇文档将指引如何快手上手使用组件库。
 
+### Vue 版本
+建议使用 Vue.js >= `3.3.2`
+
 ### 安装
-你可以从 `npm` 或 `yarn` 安装，注意，需要同时安装 `Vue@3.x`
+你可以从 `npm` 或 `yarn` 安装
 ```Shell
 # npm
 npm i birdpaper-ui
