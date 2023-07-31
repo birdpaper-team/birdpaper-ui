@@ -14,6 +14,11 @@
 <demo-block src="example/switch/disabled"></demo-block>
 
 
+### 异步关闭
+通过 `on-before-ok` 控制开关的异步操作
+<demo-block src="example/switch/async"></demo-block>
+
+
 ### Switch 属性
 
 <table-block type="props" :data="props"></table-block>

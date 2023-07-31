@@ -43,6 +43,8 @@ export default defineComponent({
 
     const loading = ref<boolean>(false);
     const handleClick = async () => {
+      if (props.disabled || loading.value) return;
+
       try {
         loading.value = true;
         const res = await props.onBeforeOk();
