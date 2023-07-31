@@ -6,7 +6,7 @@
   align-items: center;
   flex-direction: row;
   justify-content: flex-start;
-  min-width: 42px;
+  min-width: 44px;
   height: 24px;
   cursor: pointer;
   .no-select;
@@ -33,15 +33,17 @@
     border-radius: 20px;
     transition: all 0.2s ease;
 
-    &:before {
+    &-dot {
       position: absolute;
-      content: "";
+      top: 3px;
+      left: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       height: 16px;
       width: 16px;
-      border-radius: 20px;
-      left: 4px;
-      top: 3px;
       background-color: @gary-1;
+      border-radius: 20px;
       transition: all 0.2s ease;
     }
   }
@@ -51,9 +53,13 @@
     border: 1px solid @primary-6;
     transition: all 0.2s ease;
 
-    &:before {
+    .@{switch-cls}-slider-dot {
       left: calc(100% - 20px);
       transition: all 0.2s ease;
+
+      .switch-icon-loading {
+        color: @gary-7 !important;
+      }
     }
   }
 }
@@ -61,4 +67,25 @@
 .@{switch-cls}-disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+// 加载
+.switch-icon-loading {
+  display: inline-block;
+  line-height: 1;
+  color: @gary-6;
+  animation: rotating 1s linear infinite;
+  -webkit-animation: rotating 1s linear infinite;
+}
+
+@keyframes rotating {
+  from {
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+    -webkit-transform: rotate(365deg);
+  }
 }

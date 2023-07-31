@@ -2,12 +2,16 @@
   <div :class="cls" @click="handleClick">
     <input type="checkbox" :class="`${name}-inner`" />
 
-    <span :class="[`${name}-slider`, isCheck ? `${name}-check` : '']"></span>
+    <div :class="[`${name}-slider`, isCheck ? `${name}-check` : '']">
+      <span :class="`${name}-slider-dot`">
+        <i v-if="loading" class="switch-icon-loading ri-loader-4-line"></i>
+      </span>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import { computed } from "vue";
 
 export default defineComponent({
@@ -21,6 +25,8 @@ export default defineComponent({
     checkValue: { type: [Boolean, Number, String], default: true },
     /** 未选中时的值 */
     uncheckValue: { type: [Boolean, Number, String], default: false },
+    /** 触发改变前的回调，返回 false 则中断 */
+    onBeforeOk: { type: Function, default: () => true },
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
@@ -35,14 +41,26 @@ export default defineComponent({
 
     const isCheck = computed(() => props.modelValue === props.checkValue);
 
-    const handleClick = () => {
-      emit("update:modelValue", isCheck.value ? props.uncheckValue : props.checkValue);
+    const loading = ref<boolean>(false);
+    const handleClick = async () => {
+      try {
+        loading.value = true;
+        const res = await props.onBeforeOk();
+        if (!res) return;
+
+        emit("update:modelValue", isCheck.value ? props.uncheckValue : props.checkValue);
+      } catch (error) {
+        console.log("[ Switch -onBeforeOk error]", error);
+      } finally {
+        loading.value = false;
+      }
     };
 
     return {
       name,
       cls,
       isCheck,
+      loading,
       handleClick,
     };
   },
