@@ -3,7 +3,7 @@
     <div class="icon-page-inner">
       <template v-for="item in iconList">
         <div class="icon-item" @click="handleCopy(item)">
-          <i :class="item"></i>
+          <i :class="`ri-${item}`"></i>
           <span v-text="item"></span>
         </div>
       </template>
@@ -20,8 +20,8 @@ import iconList from "./icon";
 const { toClipboard } = useClipboard.default();
 const handleCopy = async (item: any) => {
   try {
-    await toClipboard(item);
-    Message.success(`已复制到剪贴板: ${item}`);
+    await toClipboard(`ri-${item}`);
+    Message.success(`已复制到剪贴板: ri-${item}`);
   } catch (err) {
     Message.error((err as Error).message);
   }
