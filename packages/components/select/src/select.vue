@@ -1,12 +1,12 @@
 <template>
   <div
     ref="selectRef"
-    :class="[name, isFocus ? `${name}-focus` : '']"
+    :class="clsName"
     @click.stop="handleClick"
     @mouseleave="onMouseleave"
     v-clickOutside="onClickOutside"
   >
-    <bp-input ref="inpRef" v-model="currentSelect.label" readonly :placeholder="placeholder">
+    <bp-input ref="inpRef" :disabled="disabled" v-model="currentSelect.label" readonly :placeholder="placeholder">
       <template #suffix>
         <i :class="[`${name}-icon-inner`, `ri-arrow-${isFocus ? 'up' : 'down'}-s-line`]"></i>
       </template>
@@ -25,15 +25,15 @@
 </template>
 
 <script lang="ts">
-import { PropType, VNode, computed, nextTick, onBeforeUnmount, onMounted, provide, reactive, ref } from "vue";
-import { SelectBindValue, SelectOption, selectInjectionKey } from "./type";
+import { PropType, nextTick, onBeforeUnmount, onMounted, provide, ref } from "vue";
+import { SelectBindValue, selectInjectionKey } from "./type";
 import { vClickOutside } from "../../../directives/clickOutside";
-import { getAllElements } from "../../../utils/dom";
 import { off, on, throttle } from "../../../utils/util";
 import { defineComponent } from "vue";
 import BpInput from "../../input/src/input.vue";
 import { watch } from "vue";
 import { useSelect } from "./select";
+import { computed } from "vue";
 
 export default defineComponent({
   name: "Select",
@@ -55,9 +55,11 @@ export default defineComponent({
     const selectRef = ref();
     const inpRef = ref();
     const optionBoxRef = ref();
+    const { currentSelect, valueMap, isFocus } = useSelect(slots);
 
     provide(selectInjectionKey, {
       modelValue: props.modelValue,
+      currentSelect: currentSelect,
       onSelect: (v: SelectBindValue, payload: any) => {
         currentSelect.value = v;
         currentSelect.label = payload.label;
@@ -69,7 +71,14 @@ export default defineComponent({
       },
     });
 
-    const { currentSelect, valueMap, isFocus } = useSelect(slots);
+    const clsName = computed(() => {
+      let cls = [name];
+      if (isFocus.value) cls.push(`${name}-focus`);
+      if (props.disabled) cls.push(`${name}-disabled`);
+
+      return cls;
+    });
+
 
     /** 外层点击触发，聚焦并打开下拉面板 */
     const handleClick = () => {
@@ -126,6 +135,7 @@ export default defineComponent({
       optionBoxRef,
       currentSelect,
       isFocus,
+      clsName,
       handleClick,
       onClickOutside,
       onMouseleave,

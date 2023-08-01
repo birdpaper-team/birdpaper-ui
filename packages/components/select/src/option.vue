@@ -1,5 +1,5 @@
 <template>
-  <li :class="`${name}-item`" @click="handleClick">
+  <li :class="clsName" @click="handleClick">
     <span>
       <slot></slot>
     </span>
@@ -10,6 +10,7 @@
 import { PropType, inject, reactive, ref, useSlots, watch } from "vue";
 import { SelectBindValue, SelectContext, SelectOption, selectInjectionKey } from "./type";
 import { defineComponent } from "vue";
+import { computed } from "vue";
 
 export default defineComponent({
   name: "Option",
@@ -23,12 +24,19 @@ export default defineComponent({
     const slot = useSlots();
     const option = reactive<SelectOption>(new SelectOption());
 
-    const setup = () => {
+    const init = () => {
       ctx.value = inject(selectInjectionKey, null);
 
       option.label = props.label || (slot.default?.()[0].children as string);
       option.value = props.value;
     };
+
+    const clsName = computed(() => {
+      let cls = [`${name}-item`];
+      if (ctx.value.currentSelect.value === props.value) cls.push(`${name}-active`);
+
+      return cls;
+    });
 
     const handleClick = () => {
       ctx.value?.onSelect(option.value, { ...option });
@@ -37,7 +45,7 @@ export default defineComponent({
     watch(
       () => props,
       () => {
-        setup();
+        init();
       },
       {
         immediate: true,
@@ -46,6 +54,7 @@ export default defineComponent({
 
     return {
       name,
+      clsName,
       handleClick,
     };
   },

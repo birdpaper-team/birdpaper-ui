@@ -12,6 +12,8 @@ export class SelectOption {
 export interface SelectContext {
   /** 绑定值 */
   modelValue: SelectBindValue;
+  /** 当前选择 */
+  currentSelect: SelectOption;
   /** 选择后触发 */
   onSelect: (value: SelectBindValue, payload: object) => void;
 }

@@ -21,6 +21,11 @@
   cursor: pointer;
   transition: all 0.2s ease;
 
+  &-disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
   .@{prefix}-input {
     flex: 1;
     cursor: pointer;
@@ -49,6 +54,15 @@
 
   &-option-list {
     padding: 4px 0;
+
+    .@{option-cls}-active {
+      background-color: @gary-3;
+
+      span {
+        color: @primary-6;
+        font-weight: 500;
+      }
+    }
 
     .@{option-cls}-item {
       display: flex;
