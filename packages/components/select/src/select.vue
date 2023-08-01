@@ -42,7 +42,7 @@ export default defineComponent({
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: [String, Number] as PropType<SelectBindValue>, default: "" },
-    // TODO /** 是否禁用 Disabled or not */
+    /** 是否禁用 Disabled or not */
     disabled: { type: Boolean, default: false },
     /** 占位提示文字 The placeholder text */
     placeholder: { type: String, default: "" },
