@@ -1,6 +1,6 @@
 <template>
   <div :class="clsName" @click="handleClick">
-    <a :disabled="disabled" :class="`${name}-inner`" :href="href">
+    <a :disabled="disabled" :class="`${name}-inner`" :href="href" :target="target">
       <span v-if="loading" class="left-icon">
         <i class="bp-icon-loading ri-loader-4-line"></i>
       </span>
@@ -24,6 +24,8 @@ export default defineComponent({
     disabled: { type: Boolean, default: false },
     /** 是否加载状态 */
     loading: { type: Boolean, default: false },
+    /** 跳转链接方式 */
+    target: { type: String, default: "_slef" },
   },
   emits: {
     click: (ev: MouseEvent) => true,

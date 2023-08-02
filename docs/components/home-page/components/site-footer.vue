@@ -9,7 +9,7 @@
           <div :class="`${name}-menu-group-list`">
             <ul>
               <li :class="`${name}-menu-group-list-item`" v-for="v in item.children">
-                <bp-link status="normal">{{ v.title }}</bp-link>
+                <bp-link status="normal" :href="v.path">{{ v.title }}</bp-link>
               </li>
             </ul>
           </div>
@@ -29,10 +29,13 @@
           <div class="power-tag">
             <span>Powered by Birdpaper Design</span>
           </div>
-          <span class="copyright-text">BirdpaperUI author by <bp-link status="normal">木亦Sam</bp-link> 2023</span>
+          <span class="copyright-text"
+            >BirdpaperUI author by
+            <bp-link status="normal" href="https://github.com/liluanhui" target="_blank">木亦Sam</bp-link> 2023</span
+          >
         </div>
         <div class="number">
-          <bp-link status="normal">粤ICP备17015354号</bp-link>
+          <bp-link status="normal" href="https://beian.miit.gov.cn/" target="_blank">粤ICP备17015354号</bp-link>
         </div>
       </div>
     </div>
@@ -49,6 +52,7 @@ interface FooterRouteItem {
   children: {
     title: string;
     path: string;
+    target: string;
   }[];
 }
 
@@ -56,24 +60,24 @@ const footerRouteList: FooterRouteItem[] = [
   {
     title: "设计",
     children: [
-      { title: "价值观", path: "#" },
-      { title: "设计原则", path: "#" },
+      { title: "价值观", path: "/design/values", target: "_slef" },
+      { title: "设计原则", path: "/design/philosophy", target: "_slef" },
     ],
   },
   {
     title: "开发指南",
     children: [
-      { title: "安装", path: "#" },
-      { title: "快速上手", path: "#" },
-      { title: "更新日志", path: "#" },
+      { title: "安装", path: "#", target: "_slef" },
+      { title: "快速上手", path: "#", target: "_slef" },
+      { title: "更新日志", path: "/guide/changelog", target: "_slef" },
     ],
   },
   {
     title: "社区",
     children: [
-      { title: "Github", path: "#" },
-      { title: "Moya", path: "#" },
-      { title: "语雀", path: "#" },
+      { title: "Github", path: "https://github.com/birdpaper-team/birdpaper-ui", target: "_blank" },
+      { title: "Moya", path: "https://moya.plus", target: "_blank" },
+      { title: "语雀", path: "https://www.yuque.com/birdpaper.design", target: "_blank" },
     ],
   },
 ];
