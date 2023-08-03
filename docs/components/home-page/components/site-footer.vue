@@ -9,7 +9,7 @@
           <div :class="`${name}-menu-group-list`">
             <ul>
               <li :class="`${name}-menu-group-list-item`" v-for="v in item.children">
-                <bp-link status="normal" :href="v.path">{{ v.title }}</bp-link>
+                <bp-link status="normal" :href="v.path" :target="v.target">{{ v.title }}</bp-link>
               </li>
             </ul>
           </div>
@@ -60,16 +60,16 @@ const footerRouteList: FooterRouteItem[] = [
   {
     title: "设计",
     children: [
-      { title: "价值观", path: "/design/values", target: "_slef" },
-      { title: "设计原则", path: "/design/philosophy", target: "_slef" },
+      { title: "价值观", path: "/design/values", target: "_self" },
+      { title: "设计原则", path: "/design/philosophy", target: "_self" },
     ],
   },
   {
     title: "开发指南",
     children: [
-      { title: "安装", path: "#", target: "_slef" },
-      { title: "快速上手", path: "#", target: "_slef" },
-      { title: "更新日志", path: "/guide/changelog", target: "_slef" },
+      { title: "安装", path: "#", target: "_self" },
+      { title: "快速上手", path: "#", target: "_self" },
+      { title: "更新日志", path: "/guide/changelog", target: "_self" },
     ],
   },
   {

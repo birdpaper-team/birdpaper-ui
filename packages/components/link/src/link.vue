@@ -25,7 +25,7 @@ export default defineComponent({
     /** 是否加载状态 */
     loading: { type: Boolean, default: false },
     /** 跳转链接方式 */
-    target: { type: String, default: "_slef" },
+    target: { type: String, default: "_self" },
   },
   emits: {
     click: (ev: MouseEvent) => true,
