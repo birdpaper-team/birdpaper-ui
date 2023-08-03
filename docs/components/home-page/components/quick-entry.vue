@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from "vitepress";
+import { useRouter, withBase } from "vitepress";
 import { quickEntryList } from "../core";
 
 const name = "quick-entry";
@@ -39,6 +39,6 @@ const router = useRouter();
  * @param v
  */
 const handleClick = (v: any) => {
-  router.go(v.action.link);
+  router.go(withBase(v.action.link));
 };
 </script>

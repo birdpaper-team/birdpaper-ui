@@ -31,12 +31,12 @@
 <script setup lang="ts">
 import logoShadow from "/logo-shadow.jpg";
 import { bannerInfo as _data } from "../core";
-import { useRouter } from "vitepress";
+import { useRouter, withBase } from "vitepress";
 
 const router = useRouter();
 const handleClick = (type: string) => {
   if (type === "start") {
-    return router.go("/guide/easystart");
+    return router.go(withBase("/guide/easystart"));
   }
   if (type === "git") {
     window.open("https://github.com/birdpaper-team/birdpaper-ui");

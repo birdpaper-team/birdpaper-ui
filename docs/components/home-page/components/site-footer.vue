@@ -43,6 +43,7 @@
 </template>
 
 <script setup lang="ts">
+import { withBase } from "vitepress";
 import qrcodeMp from "../../../src/public/qrcode_mp.jpg";
 
 const name = "site-footer";
@@ -60,15 +61,15 @@ const footerRouteList: FooterRouteItem[] = [
   {
     title: "设计",
     children: [
-      { title: "价值观", path: "/design/values", target: "_self" },
-      { title: "设计原则", path: "/design/philosophy", target: "_self" },
+      { title: "价值观", path: withBase("/design/values"), target: "_self" },
+      { title: "设计原则", path: withBase("/design/philosophy"), target: "_self" },
     ],
   },
   {
     title: "开发指南",
     children: [
-      { title: "快速上手", path: "/guide/easystart", target: "_self" },
-      { title: "更新日志", path: "/guide/changelog", target: "_self" },
+      { title: "快速上手", path: withBase("/guide/easystart"), target: "_self" },
+      { title: "更新日志", path: withBase("/guide/changelog"), target: "_self" },
     ],
   },
   {
