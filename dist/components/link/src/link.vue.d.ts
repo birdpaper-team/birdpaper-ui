@@ -21,6 +21,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    /** 跳转链接方式 */
+    target: {
+        type: StringConstructor;
+        default: string;
+    };
 }, {
     name: string;
     clsName: import("vue").ComputedRef<string[]>;
@@ -48,6 +53,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    /** 跳转链接方式 */
+    target: {
+        type: StringConstructor;
+        default: string;
+    };
 }>> & {
     onClick?: (ev: MouseEvent) => any;
 }, {
@@ -55,5 +65,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
     loading: boolean;
     disabled: boolean;
     href: string;
+    target: string;
 }, {}>;
 export default _sfc_main;

@@ -9,6 +9,7 @@ declare const Switch: {
             modelValue?: boolean;
             checkValue?: string | number | boolean;
             uncheckValue?: string | number | boolean;
+            onBeforeOk?: Function;
             "onUpdate:modelValue"?: (...args: any[]) => any;
             key?: string | number | symbol;
             ref?: import("vue").VNodeRef;
@@ -85,18 +86,24 @@ declare const Switch: {
                 type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
                 default: boolean;
             };
+            onBeforeOk: {
+                type: FunctionConstructor;
+                default: () => boolean;
+            };
         }>> & {
             "onUpdate:modelValue"?: (...args: any[]) => any;
         }, {
             name: string;
             cls: import("vue").ComputedRef<string[]>;
             isCheck: import("vue").ComputedRef<boolean>;
-            handleClick: () => void;
+            loading: import("vue").Ref<boolean>;
+            handleClick: () => Promise<void>;
         }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], string, {
             disabled: boolean;
             modelValue: boolean;
             checkValue: string | number | boolean;
             uncheckValue: string | number | boolean;
+            onBeforeOk: Function;
         }, {}, string, {}> & {
             beforeCreate?: (() => void) | (() => void)[];
             created?: (() => void) | (() => void)[];
@@ -134,13 +141,18 @@ declare const Switch: {
             type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
             default: boolean;
         };
+        onBeforeOk: {
+            type: FunctionConstructor;
+            default: () => boolean;
+        };
     }>> & {
         "onUpdate:modelValue"?: (...args: any[]) => any;
     } & import("vue").ShallowUnwrapRef<{
         name: string;
         cls: import("vue").ComputedRef<string[]>;
         isCheck: import("vue").ComputedRef<boolean>;
-        handleClick: () => void;
+        loading: import("vue").Ref<boolean>;
+        handleClick: () => Promise<void>;
     }> & {} & import("vue").ComponentCustomProperties & {};
     __isFragment?: never;
     __isTeleport?: never;
@@ -162,18 +174,24 @@ declare const Switch: {
         type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
         default: boolean;
     };
+    onBeforeOk: {
+        type: FunctionConstructor;
+        default: () => boolean;
+    };
 }>> & {
     "onUpdate:modelValue"?: (...args: any[]) => any;
 }, {
     name: string;
     cls: import("vue").ComputedRef<string[]>;
     isCheck: import("vue").ComputedRef<boolean>;
-    handleClick: () => void;
+    loading: import("vue").Ref<boolean>;
+    handleClick: () => Promise<void>;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", {
     disabled: boolean;
     modelValue: boolean;
     checkValue: string | number | boolean;
     uncheckValue: string | number | boolean;
+    onBeforeOk: Function;
 }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
     install: (app: App) => void;
 };

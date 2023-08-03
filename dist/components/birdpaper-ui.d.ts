@@ -1186,6 +1186,7 @@ declare const _default: {
                 modelValue?: boolean;
                 checkValue?: string | number | boolean;
                 uncheckValue?: string | number | boolean;
+                onBeforeOk?: Function;
                 "onUpdate:modelValue"?: (...args: any[]) => any;
                 key?: string | number | symbol;
                 ref?: import("vue").VNodeRef;
@@ -1262,18 +1263,24 @@ declare const _default: {
                     type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
                     default: boolean;
                 };
+                onBeforeOk: {
+                    type: FunctionConstructor;
+                    default: () => boolean;
+                };
             }>> & {
                 "onUpdate:modelValue"?: (...args: any[]) => any;
             }, {
                 name: string;
                 cls: import("vue").ComputedRef<string[]>;
                 isCheck: import("vue").ComputedRef<boolean>;
-                handleClick: () => void;
+                loading: import("vue").Ref<boolean>;
+                handleClick: () => Promise<void>;
             }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], string, {
                 disabled: boolean;
                 modelValue: boolean;
                 checkValue: string | number | boolean;
                 uncheckValue: string | number | boolean;
+                onBeforeOk: Function;
             }, {}, string, {}> & {
                 beforeCreate?: (() => void) | (() => void)[];
                 created?: (() => void) | (() => void)[];
@@ -1311,13 +1318,18 @@ declare const _default: {
                 type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
                 default: boolean;
             };
+            onBeforeOk: {
+                type: FunctionConstructor;
+                default: () => boolean;
+            };
         }>> & {
             "onUpdate:modelValue"?: (...args: any[]) => any;
         } & import("vue").ShallowUnwrapRef<{
             name: string;
             cls: import("vue").ComputedRef<string[]>;
             isCheck: import("vue").ComputedRef<boolean>;
-            handleClick: () => void;
+            loading: import("vue").Ref<boolean>;
+            handleClick: () => Promise<void>;
         }> & {} & import("vue").ComponentCustomProperties & {};
         __isFragment?: never;
         __isTeleport?: never;
@@ -1339,18 +1351,24 @@ declare const _default: {
             type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
             default: boolean;
         };
+        onBeforeOk: {
+            type: FunctionConstructor;
+            default: () => boolean;
+        };
     }>> & {
         "onUpdate:modelValue"?: (...args: any[]) => any;
     }, {
         name: string;
         cls: import("vue").ComputedRef<string[]>;
         isCheck: import("vue").ComputedRef<boolean>;
-        handleClick: () => void;
+        loading: import("vue").Ref<boolean>;
+        handleClick: () => Promise<void>;
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", {
         disabled: boolean;
         modelValue: boolean;
         checkValue: string | number | boolean;
         uncheckValue: string | number | boolean;
+        onBeforeOk: Function;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
     };
@@ -1448,14 +1466,15 @@ declare const _default: {
                 selectRef: import("vue").Ref<any>;
                 inpRef: import("vue").Ref<any>;
                 optionBoxRef: import("vue").Ref<any>;
-                inpVal: {
+                currentSelect: {
                     label: string;
                     value: import("./select/src/type").SelectBindValue;
                 };
                 isFocus: import("vue").Ref<boolean>;
+                clsName: import("vue").ComputedRef<string[]>;
                 handleClick: () => void;
-                onClickOutside: () => void;
-                onMouseleave: () => void;
+                onClickOutside: () => boolean;
+                onMouseleave: () => any;
             }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], string, {
                 disabled: boolean;
                 modelValue: import("./select/src/type").SelectBindValue;
@@ -1506,14 +1525,15 @@ declare const _default: {
             selectRef: import("vue").Ref<any>;
             inpRef: import("vue").Ref<any>;
             optionBoxRef: import("vue").Ref<any>;
-            inpVal: {
+            currentSelect: {
                 label: string;
                 value: import("./select/src/type").SelectBindValue;
             };
             isFocus: import("vue").Ref<boolean>;
+            clsName: import("vue").ComputedRef<string[]>;
             handleClick: () => void;
-            onClickOutside: () => void;
-            onMouseleave: () => void;
+            onClickOutside: () => boolean;
+            onMouseleave: () => any;
         }> & {} & import("vue").ComponentCustomProperties & {};
         __isFragment?: never;
         __isTeleport?: never;
@@ -1543,14 +1563,15 @@ declare const _default: {
         selectRef: import("vue").Ref<any>;
         inpRef: import("vue").Ref<any>;
         optionBoxRef: import("vue").Ref<any>;
-        inpVal: {
+        currentSelect: {
             label: string;
             value: import("./select/src/type").SelectBindValue;
         };
         isFocus: import("vue").Ref<boolean>;
+        clsName: import("vue").ComputedRef<string[]>;
         handleClick: () => void;
-        onClickOutside: () => void;
-        onMouseleave: () => void;
+        onClickOutside: () => boolean;
+        onMouseleave: () => any;
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", {
         disabled: boolean;
         modelValue: import("./select/src/type").SelectBindValue;
@@ -3162,6 +3183,7 @@ declare const _default: {
                 loading?: boolean;
                 disabled?: boolean;
                 href?: string;
+                target?: string;
                 onClick?: (ev: MouseEvent) => any;
                 key?: string | number | symbol;
                 ref?: import("vue").VNodeRef;
@@ -3238,6 +3260,10 @@ declare const _default: {
                     type: BooleanConstructor;
                     default: boolean;
                 };
+                target: {
+                    type: StringConstructor;
+                    default: string;
+                };
             }>> & {
                 onClick?: (ev: MouseEvent) => any;
             }, {
@@ -3251,6 +3277,7 @@ declare const _default: {
                 loading: boolean;
                 disabled: boolean;
                 href: string;
+                target: string;
             }, {}, string, {}> & {
                 beforeCreate?: (() => void) | (() => void)[];
                 created?: (() => void) | (() => void)[];
@@ -3288,6 +3315,10 @@ declare const _default: {
                 type: BooleanConstructor;
                 default: boolean;
             };
+            target: {
+                type: StringConstructor;
+                default: string;
+            };
         }>> & {
             onClick?: (ev: MouseEvent) => any;
         } & import("vue").ShallowUnwrapRef<{
@@ -3315,6 +3346,10 @@ declare const _default: {
             type: BooleanConstructor;
             default: boolean;
         };
+        target: {
+            type: StringConstructor;
+            default: string;
+        };
     }>> & {
         onClick?: (ev: MouseEvent) => any;
     }, {
@@ -3328,6 +3363,7 @@ declare const _default: {
         loading: boolean;
         disabled: boolean;
         href: string;
+        target: string;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
     };
@@ -3337,11 +3373,11 @@ declare const _default: {
             $data: {};
             $props: {
                 type?: import("./popconfirm/src/types").PopconfirmType;
+                onBeforeOk?: Function;
                 content?: string;
                 position?: import("./popconfirm/src/types").PopconfirmPosition;
                 okText?: string;
                 cancleText?: string;
-                onBeforeOk?: Function;
                 key?: string | number | symbol;
                 ref?: import("vue").VNodeRef;
                 ref_for?: boolean;
@@ -3441,11 +3477,11 @@ declare const _default: {
                 handleOk: () => Promise<void>;
             }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("ok" | "cancle")[], string, {
                 type: import("./popconfirm/src/types").PopconfirmType;
+                onBeforeOk: Function;
                 content: string;
                 position: import("./popconfirm/src/types").PopconfirmPosition;
                 okText: string;
                 cancleText: string;
-                onBeforeOk: Function;
             }, {}, string, {}> & {
                 beforeCreate?: (() => void) | (() => void)[];
                 created?: (() => void) | (() => void)[];
@@ -3546,11 +3582,11 @@ declare const _default: {
         handleOk: () => Promise<void>;
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("ok" | "cancle")[], "ok" | "cancle", {
         type: import("./popconfirm/src/types").PopconfirmType;
+        onBeforeOk: Function;
         content: string;
         position: import("./popconfirm/src/types").PopconfirmPosition;
         okText: string;
         cancleText: string;
-        onBeforeOk: Function;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
     };

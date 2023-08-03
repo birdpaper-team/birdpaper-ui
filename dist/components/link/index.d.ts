@@ -9,6 +9,7 @@ declare const BpLink: {
             loading?: boolean;
             disabled?: boolean;
             href?: string;
+            target?: string;
             onClick?: (ev: MouseEvent) => any;
             key?: string | number | symbol;
             ref?: import("vue").VNodeRef;
@@ -85,6 +86,10 @@ declare const BpLink: {
                 type: BooleanConstructor;
                 default: boolean;
             };
+            target: {
+                type: StringConstructor;
+                default: string;
+            };
         }>> & {
             onClick?: (ev: MouseEvent) => any;
         }, {
@@ -98,6 +103,7 @@ declare const BpLink: {
             loading: boolean;
             disabled: boolean;
             href: string;
+            target: string;
         }, {}, string, {}> & {
             beforeCreate?: (() => void) | (() => void)[];
             created?: (() => void) | (() => void)[];
@@ -135,6 +141,10 @@ declare const BpLink: {
             type: BooleanConstructor;
             default: boolean;
         };
+        target: {
+            type: StringConstructor;
+            default: string;
+        };
     }>> & {
         onClick?: (ev: MouseEvent) => any;
     } & import("vue").ShallowUnwrapRef<{
@@ -162,6 +172,10 @@ declare const BpLink: {
         type: BooleanConstructor;
         default: boolean;
     };
+    target: {
+        type: StringConstructor;
+        default: string;
+    };
 }>> & {
     onClick?: (ev: MouseEvent) => any;
 }, {
@@ -175,6 +189,7 @@ declare const BpLink: {
     loading: boolean;
     disabled: boolean;
     href: string;
+    target: string;
 }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
     install: (app: App) => void;
 };

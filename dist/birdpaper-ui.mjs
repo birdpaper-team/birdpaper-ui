@@ -61,7 +61,7 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _hoisted_1$i = ["disabled"];
+const _hoisted_1$j = ["disabled"];
 const _hoisted_2$f = {
   key: 0,
   class: "left-icon"
@@ -79,7 +79,7 @@ function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 2)
     ])) : createCommentVNode("", true),
     renderSlot(_ctx.$slots, "default")
-  ], 10, _hoisted_1$i);
+  ], 10, _hoisted_1$j);
 }
 const _button = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$j]]);
 const DEFAULT_PREFIX = "Bp";
@@ -181,12 +181,12 @@ const _sfc_main$t = defineComponent({
     };
   }
 });
-const _hoisted_1$h = ["type", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
+const _hoisted_1$i = ["type", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
 const _hoisted_2$e = {
   key: 0,
   class: "suffix"
 };
-const _hoisted_3$9 = ["textContent"];
+const _hoisted_3$a = ["textContent"];
 function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.inpClass)
@@ -207,7 +207,7 @@ function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
       onKeypress: _cache[2] || (_cache[2] = (...args) => _ctx.onKeypress && _ctx.onKeypress(...args)),
       onKeyup: _cache[3] || (_cache[3] = (...args) => _ctx.onKeyup && _ctx.onKeyup(...args)),
       onInput: _cache[4] || (_cache[4] = (...args) => _ctx.onInput && _ctx.onInput(...args))
-    }, null, 40, _hoisted_1$h),
+    }, null, 40, _hoisted_1$i),
     _ctx.slots.suffix || _ctx.showClear || _ctx.showWordLimit || _ctx.type === "password" ? (openBlock(), createElementBlock("div", _hoisted_2$e, [
       !_ctx.slots.suffix ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
         _ctx.showClear ? (openBlock(), createElementBlock("i", {
@@ -218,7 +218,7 @@ function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
         _ctx.showWordLimit ? (openBlock(), createElementBlock("span", {
           key: 1,
           textContent: toDisplayString(_ctx.limitText)
-        }, null, 8, _hoisted_3$9)) : createCommentVNode("", true),
+        }, null, 8, _hoisted_3$a)) : createCommentVNode("", true),
         _ctx.type === "password" ? (openBlock(), createElementBlock("i", {
           key: 2,
           onClick: _cache[6] || (_cache[6] = (...args) => _ctx.triggerPassword && _ctx.triggerPassword(...args)),
@@ -294,9 +294,9 @@ const _sfc_main$s = defineComponent({
     };
   }
 });
-const _hoisted_1$g = ["rows", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
+const _hoisted_1$h = ["rows", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
 const _hoisted_2$d = { class: "suffix" };
-const _hoisted_3$8 = ["textContent"];
+const _hoisted_3$9 = ["textContent"];
 function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.inpClass)
@@ -317,12 +317,12 @@ function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
       onKeypress: _cache[2] || (_cache[2] = (...args) => _ctx.onKeypress && _ctx.onKeypress(...args)),
       onKeyup: _cache[3] || (_cache[3] = (...args) => _ctx.onKeyup && _ctx.onKeyup(...args)),
       onInput: _cache[4] || (_cache[4] = (...args) => _ctx.onInput && _ctx.onInput(...args))
-    }, null, 40, _hoisted_1$g),
+    }, null, 40, _hoisted_1$h),
     createElementVNode("div", _hoisted_2$d, [
       _ctx.showWordLimit ? (openBlock(), createElementBlock("span", {
         key: 0,
         textContent: toDisplayString(_ctx.limitText)
-      }, null, 8, _hoisted_3$8)) : createCommentVNode("", true)
+      }, null, 8, _hoisted_3$9)) : createCommentVNode("", true)
     ])
   ], 2);
 }
@@ -418,6 +418,7 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
       return openBlock(), createBlock(_component_bp_radio, {
         modelValue: _ctx.val,
         "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.val = $event),
+        disabled: _ctx.disabled,
         value: v.value,
         onChange: _ctx.updateValue
       }, {
@@ -425,7 +426,7 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
           createTextVNode(toDisplayString(v.label), 1)
         ]),
         _: 2
-      }, 1032, ["modelValue", "value", "onChange"]);
+      }, 1032, ["modelValue", "disabled", "value", "onChange"]);
     }), 256))
   ], 2);
 }
@@ -468,7 +469,7 @@ const _sfc_main$p = defineComponent({
     };
   }
 });
-const _hoisted_1$f = {
+const _hoisted_1$g = {
   key: 0,
   class: "ri-check-line"
 };
@@ -484,7 +485,7 @@ function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     createElementVNode("span", {
       class: normalizeClass([`${_ctx.name}-checkbox`, _ctx.isCheck ? `${_ctx.name}-check` : ""])
     }, [
-      _ctx.isCheck ? (openBlock(), createElementBlock("i", _hoisted_1$f)) : createCommentVNode("", true)
+      _ctx.isCheck ? (openBlock(), createElementBlock("i", _hoisted_1$g)) : createCommentVNode("", true)
     ], 2),
     createElementVNode("span", {
       class: normalizeClass(`${_ctx.name}-label`)
@@ -510,7 +511,9 @@ const _sfc_main$o = defineComponent({
     /** 选中时的值 */
     checkValue: { type: [Boolean, Number, String], default: true },
     /** 未选中时的值 */
-    uncheckValue: { type: [Boolean, Number, String], default: false }
+    uncheckValue: { type: [Boolean, Number, String], default: false },
+    /** 触发改变前的回调，返回 false 则中断 */
+    onBeforeOk: { type: Function, default: () => true }
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
@@ -523,17 +526,35 @@ const _sfc_main$o = defineComponent({
       return clsName;
     });
     const isCheck = computed(() => props.modelValue === props.checkValue);
-    const handleClick = () => {
-      emit("update:modelValue", isCheck.value ? props.uncheckValue : props.checkValue);
+    const loading = ref(false);
+    const handleClick = async () => {
+      if (props.disabled || loading.value)
+        return;
+      try {
+        loading.value = true;
+        const res = await props.onBeforeOk();
+        if (!res)
+          return;
+        emit("update:modelValue", isCheck.value ? props.uncheckValue : props.checkValue);
+      } catch (error) {
+        console.log("[ Switch -onBeforeOk error]", error);
+      } finally {
+        loading.value = false;
+      }
     };
     return {
       name,
       cls,
       isCheck,
+      loading,
       handleClick
     };
   }
 });
+const _hoisted_1$f = {
+  key: 0,
+  class: "switch-icon-loading ri-loader-4-line"
+};
 function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.cls),
@@ -543,9 +564,15 @@ function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
       type: "checkbox",
       class: normalizeClass(`${_ctx.name}-inner`)
     }, null, 2),
-    createElementVNode("span", {
+    createElementVNode("div", {
       class: normalizeClass([`${_ctx.name}-slider`, _ctx.isCheck ? `${_ctx.name}-check` : ""])
-    }, null, 2)
+    }, [
+      createElementVNode("span", {
+        class: normalizeClass(`${_ctx.name}-slider-dot`)
+      }, [
+        _ctx.loading ? (openBlock(), createElementBlock("i", _hoisted_1$f)) : createCommentVNode("", true)
+      ], 2)
+    ], 2)
   ], 2);
 }
 const _switch = /* @__PURE__ */ _export_sfc(_sfc_main$o, [["render", _sfc_render$d]]);
@@ -557,7 +584,9 @@ const Switch = Object.assign(_switch, {
 });
 class SelectOption {
   constructor() {
+    /** 选项文本 */
     __publicField(this, "label", "");
+    /** 选项值 */
     __publicField(this, "value", "");
   }
 }
@@ -579,6 +608,39 @@ const vClickOutside = {
     document.removeEventListener("click", el.__click_outside__);
     delete el.__click_outside__;
   }
+};
+const isString = (data) => typeof data === "string";
+const throttle = (fn, delay) => {
+  var lastTime;
+  var timer;
+  var delay = delay || 200;
+  return function() {
+    var args = arguments;
+    var nowTime = Date.now();
+    if (lastTime && nowTime - lastTime < delay) {
+      clearTimeout(timer);
+      timer = setTimeout(function() {
+        lastTime = nowTime;
+        fn.apply(this, args);
+      }, delay);
+    } else {
+      lastTime = nowTime;
+      fn.apply(this, args);
+    }
+  };
+};
+const on = function(element, event, handler, useCapture = false) {
+  if (element && event && handler) {
+    element.addEventListener(event, handler, useCapture);
+  }
+};
+const off = function(element, event, handler, useCapture = false) {
+  if (element && event && handler) {
+    element.removeEventListener(event, handler, useCapture);
+  }
+};
+const warn = (module, info) => {
+  console.warn(`[ A warning of birdpaper-ui ] - ${module}: ` + info);
 };
 const isElement = (vn) => {
   return Boolean(
@@ -627,38 +689,29 @@ const getAllElements = (children, includeText = false) => {
   }
   return results;
 };
-const isString = (data) => typeof data === "string";
-const throttle = (fn, delay) => {
-  var lastTime;
-  var timer;
-  var delay = delay || 200;
-  return function() {
-    var args = arguments;
-    var nowTime = Date.now();
-    if (lastTime && nowTime - lastTime < delay) {
-      clearTimeout(timer);
-      timer = setTimeout(function() {
-        lastTime = nowTime;
-        fn.apply(this, args);
-      }, delay);
-    } else {
-      lastTime = nowTime;
-      fn.apply(this, args);
+const useSelect = (slots) => {
+  const currentSelect = reactive(new SelectOption());
+  const isFocus = ref(false);
+  const valueMap = computed(() => {
+    var _a, _b, _c;
+    try {
+      let obj = {};
+      const children = getAllElements((_a = slots.default) == null ? void 0 : _a.call(slots), true).filter((item) => item.type !== Comment) ?? [];
+      for (const item of children) {
+        if (item.type["name"] === "BpOption") {
+          obj[item.props.value] = item.props.label || ((_c = (_b = item.children)["default"]) == null ? void 0 : _c.call(_b)[0].children);
+        }
+      }
+      return obj;
+    } catch (error) {
+      return {};
     }
+  });
+  return {
+    isFocus,
+    currentSelect,
+    valueMap
   };
-};
-const on = function(element, event, handler, useCapture = false) {
-  if (element && event && handler) {
-    element.addEventListener(event, handler, useCapture);
-  }
-};
-const off = function(element, event, handler, useCapture = false) {
-  if (element && event && handler) {
-    element.removeEventListener(event, handler, useCapture);
-  }
-};
-const warn = (module, info) => {
-  console.warn(`[ A warning of birdpaper-ui ] - ${module}: ` + info);
 };
 const _sfc_main$n = defineComponent({
   name: "Select",
@@ -667,7 +720,7 @@ const _sfc_main$n = defineComponent({
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: [String, Number], default: "" },
-    // TODO /** 是否禁用 Disabled or not */
+    /** 是否禁用 Disabled or not */
     disabled: { type: Boolean, default: false },
     /** 占位提示文字 The placeholder text */
     placeholder: { type: String, default: "" },
@@ -680,72 +733,75 @@ const _sfc_main$n = defineComponent({
     const selectRef = ref();
     const inpRef = ref();
     const optionBoxRef = ref();
-    const inpVal = reactive(new SelectOption());
-    const isFocus = ref(false);
-    const valueMap = computed(() => {
-      var _a, _b, _c;
-      try {
-        let obj = {};
-        const children = getAllElements((_a = slots.default) == null ? void 0 : _a.call(slots), true).filter((item) => item.type !== Comment) ?? [];
-        for (const item of children) {
-          if (item.type["name"] === "BpOption") {
-            obj[item.props.value] = item.props.label || ((_c = (_b = item.children)["default"]) == null ? void 0 : _c.call(_b)[0].children);
-          }
-        }
-        return obj;
-      } catch (error) {
-        return {};
+    const { currentSelect, valueMap, isFocus } = useSelect(slots);
+    provide(selectInjectionKey, {
+      modelValue: props.modelValue,
+      currentSelect,
+      onSelect: (v, payload) => {
+        currentSelect.value = v;
+        currentSelect.label = payload.label;
+        emit("update:modelValue", currentSelect.value);
+        emit("change", currentSelect.value);
+        isFocus.value = false;
       }
+    });
+    const clsName = computed(() => {
+      let cls = [name];
+      if (isFocus.value)
+        cls.push(`${name}-focus`);
+      if (props.disabled)
+        cls.push(`${name}-disabled`);
+      return cls;
     });
     const handleClick = () => {
       if (props.disabled)
         return;
-      handleResize();
+      handleTrigger();
       isFocus.value = !isFocus.value;
       isFocus.value && inpRef.value.handleFocus();
     };
-    const handleResize = () => {
+    const onClickOutside = () => isFocus.value = false;
+    const onMouseleave = () => !isFocus.value && inpRef.value.handleBlur();
+    const setValue = () => {
+      currentSelect.value = props.modelValue;
+      currentSelect.label = valueMap.value[currentSelect.value];
+    };
+    watch(
+      () => valueMap.value,
+      () => setValue(),
+      {
+        immediate: true,
+        deep: true
+      }
+    );
+    onMounted(() => {
+      nextTick(() => {
+        on(window, "resize", throttle(handleTrigger, 100));
+      });
+    });
+    onBeforeUnmount(() => {
+      off(window, "resize", handleTrigger);
+    });
+    const handleTrigger = () => {
       const rect = selectRef.value.getBoundingClientRect();
       if (!rect)
         return;
       optionBoxRef.value.setAttribute(
         "style",
-        `display:${isFocus.value ? "block" : "none"};width: ${rect.width}px;top:${rect.top + rect.height}px;left:${rect.left}px`
+        `display: ${isFocus.value ? "block" : "none"};
+         width: ${rect.width}px;
+         left: ${rect.left}px;
+         top: ${rect.top + rect.height}px;`
       );
     };
-    const onClickOutside = () => {
-      isFocus.value = false;
-    };
-    const onMouseleave = () => {
-      !isFocus.value && inpRef.value.handleBlur();
-    };
-    provide(selectInjectionKey, {
-      modelValue: props.modelValue,
-      onSelect: (v, payload) => {
-        inpVal.value = v;
-        inpVal.label = payload.label;
-        emit("update:modelValue", inpVal.value);
-        emit("change", inpVal.value);
-        isFocus.value = false;
-      }
-    });
-    inpVal.value = props.modelValue;
-    inpVal.label = valueMap.value[inpVal.value];
-    onMounted(() => {
-      nextTick(() => {
-        on(window, "resize", throttle(handleResize, 100));
-      });
-    });
-    onBeforeUnmount(() => {
-      off(window, "resize", handleResize);
-    });
     return {
       name,
       selectRef,
       inpRef,
       optionBoxRef,
-      inpVal,
+      currentSelect,
       isFocus,
+      clsName,
       handleClick,
       onClickOutside,
       onMouseleave
@@ -757,14 +813,15 @@ function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
   const _directive_clickOutside = resolveDirective("clickOutside");
   return withDirectives((openBlock(), createElementBlock("div", {
     ref: "selectRef",
-    class: normalizeClass([_ctx.name, _ctx.isFocus ? `${_ctx.name}-focus` : ""]),
+    class: normalizeClass(_ctx.clsName),
     onClick: _cache[1] || (_cache[1] = withModifiers((...args) => _ctx.handleClick && _ctx.handleClick(...args), ["stop"])),
     onMouseleave: _cache[2] || (_cache[2] = (...args) => _ctx.onMouseleave && _ctx.onMouseleave(...args))
   }, [
     createVNode(_component_bp_input, {
       ref: "inpRef",
-      modelValue: _ctx.inpVal.label,
-      "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.inpVal.label = $event),
+      disabled: _ctx.disabled,
+      modelValue: _ctx.currentSelect.label,
+      "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.currentSelect.label = $event),
       readonly: "",
       placeholder: _ctx.placeholder
     }, {
@@ -774,7 +831,7 @@ function _sfc_render$c(_ctx, _cache, $props, $setup, $data, $options) {
         }, null, 2)
       ]),
       _: 1
-    }, 8, ["modelValue", "placeholder"]),
+    }, 8, ["disabled", "modelValue", "placeholder"]),
     (openBlock(), createBlock(Teleport, { to: "body" }, [
       createVNode(Transition, {
         name: "fade-select",
@@ -813,12 +870,18 @@ const _sfc_main$m = defineComponent({
     const ctx = ref();
     const slot = useSlots();
     const option = reactive(new SelectOption());
-    const setup = () => {
+    const init = () => {
       var _a;
       ctx.value = inject(selectInjectionKey, null);
       option.label = props.label || ((_a = slot.default) == null ? void 0 : _a.call(slot)[0].children);
       option.value = props.value;
     };
+    const clsName = computed(() => {
+      let cls = [`${name}-item`];
+      if (ctx.value.currentSelect.value === props.value)
+        cls.push(`${name}-active`);
+      return cls;
+    });
     const handleClick = () => {
       var _a;
       (_a = ctx.value) == null ? void 0 : _a.onSelect(option.value, { ...option });
@@ -826,7 +889,7 @@ const _sfc_main$m = defineComponent({
     watch(
       () => props,
       () => {
-        setup();
+        init();
       },
       {
         immediate: true
@@ -834,13 +897,14 @@ const _sfc_main$m = defineComponent({
     );
     return {
       name,
+      clsName,
       handleClick
     };
   }
 });
 function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("li", {
-    class: normalizeClass(`${_ctx.name}-item`),
+    class: normalizeClass(_ctx.clsName),
     onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args))
   }, [
     createElementVNode("span", null, [
@@ -975,7 +1039,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
 });
 const _hoisted_1$b = ["onClick"];
 const _hoisted_2$a = { key: 0 };
-const _hoisted_3$7 = {
+const _hoisted_3$8 = {
   key: 1,
   class: "ri-more-fill"
 };
@@ -1029,7 +1093,7 @@ const _sfc_main$i = /* @__PURE__ */ defineComponent({
           class: normalizeClass([`${name}-pager`, `${name}-item`, item.index === __props.currentPage ? `${name}-item-active` : ""]),
           onClick: ($event) => onClick(item.index)
         }, [
-          item.type === "number" ? (openBlock(), createElementBlock("span", _hoisted_2$a, toDisplayString(item.index), 1)) : (openBlock(), createElementBlock("i", _hoisted_3$7))
+          item.type === "number" ? (openBlock(), createElementBlock("span", _hoisted_2$a, toDisplayString(item.index), 1)) : (openBlock(), createElementBlock("i", _hoisted_3$8))
         ], 10, _hoisted_1$b);
       }), 128);
     };
@@ -1487,6 +1551,13 @@ const _sfc_main$d = /* @__PURE__ */ defineComponent({
 });
 const _hoisted_1$7 = { class: "bp-table-empty-tr" };
 const _hoisted_2$7 = ["colspan"];
+const _hoisted_3$7 = /* @__PURE__ */ createElementVNode("div", { class: "bp-table-empty-tr-inner" }, [
+  /* @__PURE__ */ createElementVNode("i", { class: "ri-inbox-2-line" }),
+  /* @__PURE__ */ createElementVNode("span", null, "暂无数据")
+], -1);
+const _hoisted_4$6 = [
+  _hoisted_3$7
+];
 const __default__$2 = defineComponent({
   name: "TableEmpty"
 });
@@ -1498,7 +1569,7 @@ const _sfc_main$c = /* @__PURE__ */ defineComponent({
   setup(__props) {
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("tr", _hoisted_1$7, [
-        createElementVNode("td", { colspan: __props.colspan }, "暂无数据", 8, _hoisted_2$7)
+        createElementVNode("td", { colspan: __props.colspan }, _hoisted_4$6, 8, _hoisted_2$7)
       ]);
     };
   }
@@ -1681,7 +1752,7 @@ const _space = /* @__PURE__ */ defineComponent({
   props: {
     size: {
       type: [Number, String],
-      default: "small"
+      default: "normal"
     },
     type: {
       type: String,
@@ -1698,7 +1769,7 @@ const _space = /* @__PURE__ */ defineComponent({
     const typeMap = {
       mini: 4,
       small: 8,
-      normal: 16,
+      normal: 10,
       large: 24
     };
     const size = isString(props.size) ? typeMap[props.size] : props.size;
@@ -2003,10 +2074,14 @@ function _sfc_render$5(_ctx, _cache, $props, $setup, $data, $options) {
               }, [
                 !_ctx.slots.footer ? (openBlock(), createBlock(_component_bp_space, {
                   key: 0,
-                  justify: "flex-end"
+                  justify: "flex-end",
+                  size: "small"
                 }, {
                   default: withCtx(() => [
-                    createVNode(_component_bp_button, { onClick: _ctx.handleCancle }, {
+                    createVNode(_component_bp_button, {
+                      type: "plain",
+                      onClick: _ctx.handleCancle
+                    }, {
                       default: withCtx(() => [
                         createTextVNode("取消")
                       ]),
@@ -2149,7 +2224,9 @@ const _sfc_main$4 = defineComponent({
     /** 是否禁用 */
     disabled: { type: Boolean, default: false },
     /** 是否加载状态 */
-    loading: { type: Boolean, default: false }
+    loading: { type: Boolean, default: false },
+    /** 跳转链接方式 */
+    target: { type: String, default: "_self" }
   },
   emits: {
     click: (ev) => true
@@ -2174,7 +2251,7 @@ const _sfc_main$4 = defineComponent({
     };
   }
 });
-const _hoisted_1$3 = ["disabled", "href"];
+const _hoisted_1$3 = ["disabled", "href", "target"];
 const _hoisted_2$3 = {
   key: 0,
   class: "left-icon"
@@ -2191,7 +2268,8 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     createElementVNode("a", {
       disabled: _ctx.disabled,
       class: normalizeClass(`${_ctx.name}-inner`),
-      href: _ctx.href
+      href: _ctx.href,
+      target: _ctx.target
     }, [
       _ctx.loading ? (openBlock(), createElementBlock("span", _hoisted_2$3, _hoisted_4$3)) : createCommentVNode("", true),
       renderSlot(_ctx.$slots, "default")

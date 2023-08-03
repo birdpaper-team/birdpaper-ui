@@ -6,6 +6,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: PropType<SelectBindValue>;
         default: string;
     };
+    /** 是否禁用 Disabled or not */
     disabled: {
         type: BooleanConstructor;
         default: boolean;
@@ -24,20 +25,22 @@ declare const _sfc_main: import("vue").DefineComponent<{
     selectRef: import("vue").Ref<any>;
     inpRef: import("vue").Ref<any>;
     optionBoxRef: import("vue").Ref<any>;
-    inpVal: {
+    currentSelect: {
         label: string;
         value: SelectBindValue;
     };
     isFocus: import("vue").Ref<boolean>;
+    clsName: import("vue").ComputedRef<string[]>;
     handleClick: () => void;
-    onClickOutside: () => void;
-    onMouseleave: () => void;
+    onClickOutside: () => boolean;
+    onMouseleave: () => any;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     /** 绑定值 Binding value */
     modelValue: {
         type: PropType<SelectBindValue>;
         default: string;
     };
+    /** 是否禁用 Disabled or not */
     disabled: {
         type: BooleanConstructor;
         default: boolean;

@@ -11,6 +11,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
 }, {
     name: string;
+    clsName: import("vue").ComputedRef<string[]>;
     handleClick: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     value: {

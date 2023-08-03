@@ -94,14 +94,15 @@ declare const Select: {
             selectRef: import("vue").Ref<any>;
             inpRef: import("vue").Ref<any>;
             optionBoxRef: import("vue").Ref<any>;
-            inpVal: {
+            currentSelect: {
                 label: string;
                 value: import("./src/type").SelectBindValue;
             };
             isFocus: import("vue").Ref<boolean>;
+            clsName: import("vue").ComputedRef<string[]>;
             handleClick: () => void;
-            onClickOutside: () => void;
-            onMouseleave: () => void;
+            onClickOutside: () => boolean;
+            onMouseleave: () => any;
         }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], string, {
             disabled: boolean;
             modelValue: import("./src/type").SelectBindValue;
@@ -152,14 +153,15 @@ declare const Select: {
         selectRef: import("vue").Ref<any>;
         inpRef: import("vue").Ref<any>;
         optionBoxRef: import("vue").Ref<any>;
-        inpVal: {
+        currentSelect: {
             label: string;
             value: import("./src/type").SelectBindValue;
         };
         isFocus: import("vue").Ref<boolean>;
+        clsName: import("vue").ComputedRef<string[]>;
         handleClick: () => void;
-        onClickOutside: () => void;
-        onMouseleave: () => void;
+        onClickOutside: () => boolean;
+        onMouseleave: () => any;
     }> & {} & import("vue").ComponentCustomProperties & {};
     __isFragment?: never;
     __isTeleport?: never;
@@ -189,14 +191,15 @@ declare const Select: {
     selectRef: import("vue").Ref<any>;
     inpRef: import("vue").Ref<any>;
     optionBoxRef: import("vue").Ref<any>;
-    inpVal: {
+    currentSelect: {
         label: string;
         value: import("./src/type").SelectBindValue;
     };
     isFocus: import("vue").Ref<boolean>;
+    clsName: import("vue").ComputedRef<string[]>;
     handleClick: () => void;
-    onClickOutside: () => void;
-    onMouseleave: () => void;
+    onClickOutside: () => boolean;
+    onMouseleave: () => any;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", {
     disabled: boolean;
     modelValue: import("./src/type").SelectBindValue;

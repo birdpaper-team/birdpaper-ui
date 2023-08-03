@@ -19,11 +19,17 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
         default: boolean;
     };
+    /** 触发改变前的回调，返回 false 则中断 */
+    onBeforeOk: {
+        type: FunctionConstructor;
+        default: () => boolean;
+    };
 }, {
     name: string;
     cls: import("vue").ComputedRef<string[]>;
     isCheck: import("vue").ComputedRef<boolean>;
-    handleClick: () => void;
+    loading: import("vue").Ref<boolean>;
+    handleClick: () => Promise<void>;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     /** 绑定值 Binding value */
     modelValue: {
@@ -45,6 +51,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
         default: boolean;
     };
+    /** 触发改变前的回调，返回 false 则中断 */
+    onBeforeOk: {
+        type: FunctionConstructor;
+        default: () => boolean;
+    };
 }>> & {
     "onUpdate:modelValue"?: (...args: any[]) => any;
 }, {
@@ -52,5 +63,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
     modelValue: boolean;
     checkValue: string | number | boolean;
     uncheckValue: string | number | boolean;
+    onBeforeOk: Function;
 }, {}>;
 export default _sfc_main;
