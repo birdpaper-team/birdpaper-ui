@@ -16,8 +16,8 @@
               <slot></slot>
             </div>
             <div :class="`${name}-footer`" v-if="!hideFooter">
-              <bp-space justify="flex-end" v-if="!slots.footer">
-                <bp-button @click="handleCancle">取消</bp-button>
+              <bp-space justify="flex-end" size="small" v-if="!slots.footer">
+                <bp-button type="plain" @click="handleCancle">取消</bp-button>
                 <bp-button @click="handleOk" type="primary" status="primary">确认</bp-button>
               </bp-space>
               <slot name="footer"></slot>
@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { computed, ref, useSlots, watch } from "vue";
+import { computed, ref, watch } from "vue";
 
 export default defineComponent({
   name: "Modal",

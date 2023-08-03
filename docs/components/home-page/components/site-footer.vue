@@ -67,8 +67,7 @@ const footerRouteList: FooterRouteItem[] = [
   {
     title: "开发指南",
     children: [
-      { title: "安装", path: "#", target: "_self" },
-      { title: "快速上手", path: "#", target: "_self" },
+      { title: "快速上手", path: "/guide/easystart", target: "_self" },
       { title: "更新日志", path: "/guide/changelog", target: "_self" },
     ],
   },

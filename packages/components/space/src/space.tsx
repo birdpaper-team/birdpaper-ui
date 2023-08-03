@@ -6,7 +6,7 @@ import { SizeType, SpaceType } from "./types";
 export default defineComponent({
   name: "Space",
   props: {
-    size: { type: [Number, String] as PropType<SizeType>, default: "small" },
+    size: { type: [Number, String] as PropType<SizeType>, default: "normal" },
     type: { type: String as PropType<SpaceType>, default: "horizontal" },
     justify: { type: String, default: "flex-start" },
   },
