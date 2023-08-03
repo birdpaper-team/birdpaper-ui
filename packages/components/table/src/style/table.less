@@ -93,9 +93,21 @@
 
         .bp-table-empty-tr {
           text-align: center;
+          height: 120px;
 
-          td {
-            color: @gary-6;
+          &-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: @gary-7;
+            font-size: 13px;
+            letter-spacing: 0.1px;
+            .no-select;
+
+            .ri-inbox-2-line {
+              color: @gary-6;
+              font-size: 28px;
+            }
           }
         }
       }
