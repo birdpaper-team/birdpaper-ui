@@ -18,8 +18,7 @@ export const quickEntryList = [
     intro: "查看操作指南，帮助更快速的上手组件库的安装和使用，更高效的搭建易用、美观的页面。",
     action: {
       btnName: "查看详情",
-      // TODO
-      link: "/guide/install",
+      link: "/guide/easystart",
       disabled: false,
     },
   },
@@ -29,8 +28,7 @@ export const quickEntryList = [
     intro: "组件参考文档，了解并预览组件的使用方式、API、事件和方法等。",
     action: {
       btnName: "查看详情",
-      // TODO
-      link: "",
+      link: "/component/grid",
       disabled: false,
     },
   },

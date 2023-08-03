@@ -28,13 +28,17 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from "vitepress";
 import { quickEntryList } from "../core";
 
 const name = "quick-entry";
 
+const router = useRouter();
 /**
  * 底部按钮点击触发
  * @param v
  */
-const handleClick = (v: unknown) => {};
+const handleClick = (v: any) => {
+  router.go(v.action.link);
+};
 </script>

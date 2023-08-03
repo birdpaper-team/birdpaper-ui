@@ -18,7 +18,7 @@
       <div :class="`${name}-mp`">
         <div :class="`${name}-mp-inner`">
           <img :src="qrcodeMp" alt="扫码关注" />
-          <p :class="`${name}-mp-inner-title`">联系我们</p>
+          <p :class="`${name}-mp-inner-title`">联系作者</p>
           <p :class="`${name}-mp-inner-intro`">扫码关注公众号-小纸鹤</p>
         </div>
       </div>

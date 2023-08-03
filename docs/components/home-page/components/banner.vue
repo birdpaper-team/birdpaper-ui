@@ -13,8 +13,12 @@
 
       <div class="btn-area">
         <bp-space>
-          <bp-button status="primary" size="large" type="primary">{{ _data.btn_text.start }}</bp-button>
-          <bp-button status="normal" size="large" type="normal">{{ _data.btn_text.git }}</bp-button>
+          <bp-button @click="handleClick('start')" status="primary" type="primary">
+            {{ _data.btn_text.start }}
+          </bp-button>
+          <bp-button @click="handleClick('git')" status="normal" type="normal">
+            {{ _data.btn_text.git }}
+          </bp-button>
         </bp-space>
       </div>
     </div>
@@ -27,4 +31,15 @@
 <script setup lang="ts">
 import logoShadow from "/logo-shadow.jpg";
 import { bannerInfo as _data } from "../core";
+import { useRouter } from "vitepress";
+
+const router = useRouter();
+const handleClick = (type: string) => {
+  if (type === "start") {
+    return router.go("/guide/easystart");
+  }
+  if (type === "git") {
+    window.open("https://github.com/birdpaper-team/birdpaper-ui");
+  }
+};
 </script>

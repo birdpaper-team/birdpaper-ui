@@ -11,7 +11,7 @@ export default defineComponent({
     justify: { type: String, default: "flex-start" },
   },
   setup(props, { slots }) {
-    const typeMap = { mini: 4, small: 8, normal: 16, large: 24 };
+    const typeMap = { mini: 4, small: 8, normal: 10, large: 24 };
     const size = isString(props.size) ? typeMap[props.size] : props.size;
 
     const render = () => {
