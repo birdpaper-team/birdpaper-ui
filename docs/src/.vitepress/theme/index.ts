@@ -15,8 +15,6 @@ import TableBlock from "../../../components/table-block";
 import BirdpaperUI from "birdpaper-ui";
 import "birdpaper-ui/style/index.less";
 
-import "@icon-park/vue-next/styles/index.css";
-
 export default {
   ...DefaultTheme,
 
