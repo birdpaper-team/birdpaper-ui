@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vitepress dev src --port 8081 --host --base /",
     "build": "vitepress build src --base /birdpaper-ui/",
-    "build:root": "vitepress build src --base /",
+    "build:root": "vitepress build src --base ./",
     "preview": "vitepress preview src --port 8080"
   },
   "keywords": [],
