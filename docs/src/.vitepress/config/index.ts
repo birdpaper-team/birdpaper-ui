@@ -12,7 +12,7 @@ const config: import("vitepress").UserConfig = {
   appearance: false,
   themeConfig: {
     nav,
-    logo: "/birdpaper-logo.svg",
+    logo: "https://cos.birdpaper.design/birdpaper-ui/v2/public/birdpaper-logo.svg",
     siteTitle: "BirdpaperUI",
     outlineTitle: "大纲",
     outline: "deep",

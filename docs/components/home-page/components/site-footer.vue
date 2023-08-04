@@ -17,7 +17,7 @@
       </div>
       <div :class="`${name}-mp`">
         <div :class="`${name}-mp-inner`">
-          <img :src="qrcodeMp" alt="扫码关注" />
+          <img src="https://cos.birdpaper.design/birdpaper-ui/v2/public/qrcode_mp.jpg" alt="扫码关注" />
           <p :class="`${name}-mp-inner-title`">联系作者</p>
           <p :class="`${name}-mp-inner-intro`">扫码关注公众号-小纸鹤</p>
         </div>
@@ -44,7 +44,6 @@
 
 <script setup lang="ts">
 import { withBase } from "vitepress";
-import qrcodeMp from "../../../src/public/qrcode_mp.jpg";
 
 const name = "site-footer";
 

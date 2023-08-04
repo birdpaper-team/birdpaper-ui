@@ -23,13 +23,12 @@
       </div>
     </div>
     <div class="right">
-      <img :src="logoShadow" alt="" />
+      <img src="https://cos.birdpaper.design/birdpaper-ui/v2/public/logo-shadow.jpg?imageMogr2/thumbnail/!50p" alt="" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import logoShadow from "/logo-shadow.jpg";
 import { bannerInfo as _data } from "../core";
 import { useRouter, withBase } from "vitepress";
 
