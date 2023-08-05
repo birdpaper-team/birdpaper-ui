@@ -4,7 +4,7 @@ import loadCode from "../../../components/demo-block/src/loadCode";
 import timeline from "vitepress-markdown-timeline";
 
 const config: import("vitepress").UserConfig = {
-  title: "BirdpaperUI",
+  title: "小纸鹤-BirdpaperUI",
   titleTemplate: "基于Vue3的UI组件库",
   description: "基于Vue3的UI组件库",
   lastUpdated: false,
