@@ -29,10 +29,11 @@
           <div class="power-tag">
             <span>Powered by Birdpaper Design</span>
           </div>
-          <span class="copyright-text"
-            >BirdpaperUI author by
-            <bp-link status="normal" href="https://github.com/liluanhui" target="_blank">木亦Sam</bp-link> 2023</span
-          >
+          <span class="copyright-text">
+            BirdpaperUI author by
+            <bp-link status="normal" href="https://github.com/liluanhui" target="_blank">木亦Sam</bp-link>
+            2023
+          </span>
         </div>
         <div class="number">
           <bp-link status="normal" href="https://beian.miit.gov.cn/" target="_blank">粤ICP备17015354号</bp-link>
