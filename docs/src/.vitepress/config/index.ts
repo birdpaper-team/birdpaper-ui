@@ -12,8 +12,8 @@ const config: import("vitepress").UserConfig = {
   appearance: false,
   themeConfig: {
     nav,
-    logo: "https://cos.birdpaper.design/birdpaper-ui/v2/public/birdpaper-logo.svg",
-    siteTitle: "BirdpaperUI",
+    logo: "https://cos.birdpaper.design/birdpaper-ui/v2/public/birdpaper-ui_logo_text.svg",
+    siteTitle: "",
     outlineTitle: "大纲",
     outline: "deep",
     docFooter: {
@@ -23,6 +23,7 @@ const config: import("vitepress").UserConfig = {
     socialLinks: [{ icon: "github", link: "https://github.com/liluanhui/birdpaper-ui" }],
     sidebar,
   },
+  head: [["link", { rel: "shortcut icon", href: "https://cos.birdpaper.design/birdpaper-ui/v2/public/favicon.ico", type: "image/x-icon" }]],
   markdown: {
     theme: "material-theme",
     config: md => {
