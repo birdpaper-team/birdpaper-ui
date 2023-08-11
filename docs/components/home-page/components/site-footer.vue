@@ -76,7 +76,7 @@ const footerRouteList: FooterRouteItem[] = [
     title: "社区",
     children: [
       { title: "Github", path: "https://github.com/birdpaper-team/birdpaper-ui", target: "_blank" },
-      { title: "Moya", path: "https://moya.plus", target: "_blank" },
+      // { title: "Moya", path: "https://moya.plus", target: "_blank" },
       { title: "语雀", path: "https://www.yuque.com/birdpaper.design", target: "_blank" },
     ],
   },
