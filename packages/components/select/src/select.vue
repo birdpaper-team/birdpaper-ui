@@ -116,7 +116,7 @@ export default defineComponent({
 
     /** 展开/收起选项面板 */
     const handleTrigger = () => {
-      const rect = selectRef.value.getBoundingClientRect();
+      const rect = selectRef.value?.getBoundingClientRect();
       if (!rect) return;
 
       optionBoxRef.value.setAttribute(
