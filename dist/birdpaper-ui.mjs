@@ -783,7 +783,8 @@ const _sfc_main$n = defineComponent({
       off(window, "resize", handleTrigger);
     });
     const handleTrigger = () => {
-      const rect = selectRef.value.getBoundingClientRect();
+      var _a;
+      const rect = (_a = selectRef.value) == null ? void 0 : _a.getBoundingClientRect();
       if (!rect)
         return;
       optionBoxRef.value.setAttribute(
