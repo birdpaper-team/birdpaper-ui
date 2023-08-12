@@ -119,11 +119,17 @@ pre code {
   border-radius: 6px;
   padding: 3px 12px;
 
+  &:hover {
+    background-color: #f5f5f5;
+    transition: all .2s ease;
+  }
+
   .item {
     .text {
       font-size: 14px;
       color: #262626 !important;
       font-weight: normal !important;
+      transition: all .2s ease;
 
       span {
         color: #434343;
@@ -136,15 +142,18 @@ pre code {
 }
 
 .VPSidebarItem .is-active {
-  background-color: #f5f5f5;
+  background-color: #e6f4ff;
+  transition: all .2s ease;
 
   .item {
     .text {
-      color: #1677ff !important;
+      color: #262626 !important;
       font-weight: bold !important;
+      transition: all .2s ease;
 
       span {
-        color: #1677ff !important;
+        color: #262626 !important;
+        transition: all .2s ease;
       }
     }
   }
@@ -171,7 +180,7 @@ pre code {
 .timeline-dot {
   color: #434343 !important;
 
-  &::before{
+  &::before {
     width: 10px !important;
     height: 10px !important;
     left: 3px !important;
@@ -187,7 +196,7 @@ pre code {
     font-weight: normal !important;
   }
 
-  h2{
+  h2 {
     margin: 0 !important;
     border: none !important;
     padding-top: 12px !important;
