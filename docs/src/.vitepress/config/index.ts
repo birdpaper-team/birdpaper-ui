@@ -20,7 +20,7 @@ const config: import("vitepress").UserConfig = {
       prev: "上一篇",
       next: "下一篇",
     },
-    socialLinks: [{ icon: "github", link: "https://github.com/liluanhui/birdpaper-ui" }],
+    socialLinks: [{ icon: "github", link: "https://github.com/birdpaper-team/birdpaper-ui" }],
     sidebar,
   },
   head: [["link", { rel: "shortcut icon", href: "https://cos.birdpaper.design/birdpaper-ui/v2/public/favicon.ico", type: "image/x-icon" }]],
