@@ -41,7 +41,6 @@
         align-items: center;
         justify-content: space-between;
         box-sizing: border-box;
-        border-bottom: 1px solid @gary-4;
         margin-bottom: 10px;
         padding: 14px 24px;
 
@@ -90,8 +89,17 @@
         justify-content: space-between;
         width: 100%;
         padding: 14px 24px;
-        border-top: 1px solid @gary-4;
         box-sizing: border-box;
+      }
+    }
+
+    // 边框处理
+    .@{modal-cls}-border {
+      .@{modal-cls}-header {
+        border-bottom: 1px solid @gary-4;
+      }
+      .@{modal-cls}-footer {
+        border-top: 1px solid @gary-4;
       }
     }
 
