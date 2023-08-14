@@ -54,6 +54,9 @@ export type { PopconfirmInstance } from "./popconfirm";
 export { default as Image } from "./image";
 export type { ImageInstance } from "./image";
 
+export { default as Drawer } from "./drawer";
+export type { DrawerInstance } from "./drawer";
+
 export { default as Message } from "./message";
 
 export type {} from "./components";

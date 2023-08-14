@@ -1,6 +1,6 @@
-@modal-cls: ~"@{prefix}-modal";
+@drawer-cls: ~"@{prefix}-drawer";
 
-.@{modal-cls}-container {
+.@{drawer-cls}-container {
   position: fixed;
   top: 0;
   right: 0;
@@ -8,7 +8,7 @@
   left: 0;
   z-index: 1001;
 
-  .@{modal-cls}-mask {
+  .@{drawer-cls}-mask {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -18,7 +18,7 @@
     background-color: rgba(0, 0, 0, 0.4);
   }
 
-  .@{modal-cls}-wrapper {
+  .@{drawer-cls}-wrapper {
     position: absolute;
     top: 0;
     right: 0;
@@ -26,13 +26,14 @@
     left: 0;
     overflow: auto;
 
-    .@{modal-cls} {
-      position: relative;
+    .@{drawer-cls} {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
       min-width: 300px;
       max-width: 100%;
-      margin: 0 auto;
       background-color: @gary-1;
-      border-radius: 8px;
       vertical-align: middle;
 
       &-header {
@@ -40,6 +41,7 @@
         align-items: center;
         justify-content: space-between;
         box-sizing: border-box;
+        border-bottom: 1px solid @gary-4;
         margin-bottom: 10px;
         padding: 14px 24px;
 
@@ -77,6 +79,7 @@
         position: relative;
         font-size: 14px;
         color: @gary-10;
+        height: calc(100% - 125px);
         padding: 10px 24px;
         overflow: auto;
       }
@@ -86,37 +89,27 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        margin-top: 10px;
         padding: 14px 24px;
+        border-top: 1px solid @gary-4;
         box-sizing: border-box;
       }
     }
 
-    // 边框处理
-    .@{modal-cls}-border {
-      .@{modal-cls}-header {
-        border-bottom: 1px solid @gary-4;
-      }
-      .@{modal-cls}-footer {
-        border-top: 1px solid @gary-4;
-      }
-    }
-
     // 标题对齐方式
-    .@{modal-cls}-title-left {
-      .@{modal-cls}-header-title {
+    .@{drawer-cls}-title-left {
+      .@{drawer-cls}-header-title {
         text-align: left;
       }
     }
 
-    .@{modal-cls}-title-center {
-      .@{modal-cls}-header-title {
+    .@{drawer-cls}-title-center {
+      .@{drawer-cls}-header-title {
         text-align: center;
       }
     }
 
-    .@{modal-cls}-title-right {
-      .@{modal-cls}-header-title {
+    .@{drawer-cls}-title-right {
+      .@{drawer-cls}-header-title {
         text-align: right;
       }
     }
@@ -150,34 +143,29 @@
   transition: all 0.2s cubic-bezier(0, 0, 1, 1);
 }
 
-.modal-fade-enter-active {
-  animation: modal-fade-in 0.2s;
+.drawer-fade-enter-from,
+.drawer-fade-appear-from {
+ transform: translate(100%);
 }
 
-.modal-fade-leave-active {
-  animation: modal-fade-out 0.2s;
+.drawer-fade-enter-to,
+.drawer-fade-appear-to {
+  transform: translate(0);
 }
 
-@keyframes modal-fade-in {
-  0% {
-    transform: scale(0.5, 0.5);
-    opacity: 0;
-  }
-
-  100% {
-    transform: scale(1, 1);
-    opacity: 1;
-  }
+.drawer-fade-enter-active,
+.drawer-fade-appear-active {
+  transition: all 0.2s ease;
 }
 
-@keyframes modal-fade-out {
-  0% {
-    transform: scale(1, 1);
-    opacity: 1;
-  }
+.drawer-fade-leave-from {
+  transform: translate(0);
+}
 
-  100% {
-    transform: scale(0.5, 0.5);
-    opacity: 0;
-  }
+.drawer-fade-leave-to {
+ transform: translate(100%);
+}
+
+.drawer-fade-leave-active {
+  transition: all 0.2s ease;
 }

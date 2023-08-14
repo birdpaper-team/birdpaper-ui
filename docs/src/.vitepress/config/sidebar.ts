@@ -54,6 +54,7 @@ export const sidebar = {
         { text: "消息提示 <span>Message</span>", link: "/component/message" },
         { text: "气泡确认 <span>Popconfirm</span>", link: "/component/popconfirm" },
         { text: "对话框 <span>Modal</span>", link: "/component/modal" },
+        { text: "抽屉 <span>Drawer</span>", link: "/component/drawer" },
       ],
     },
   ],
