@@ -17,8 +17,10 @@
             </div>
             <div :class="`${name}-footer`" v-if="!hideFooter">
               <bp-space justify="flex-end" size="small" v-if="!slots.footer">
-                <bp-button type="plain" @click="handleCancle">取消</bp-button>
-                <bp-button @click="handleOk" type="primary" status="primary">确认</bp-button>
+                <bp-button type="plain" @click="handleCancle">{{ cancleText }}</bp-button>
+                <bp-button @click="handleOk" :loading="confirmLoading || okLoading" type="primary" status="primary">
+                  {{ okText }}
+                </bp-button>
               </bp-space>
               <slot name="footer"></slot>
             </div>
@@ -54,6 +56,14 @@ export default defineComponent({
     border: { type: Boolean, default: false },
     /** 点击遮罩是否关闭 */
     maskClosable: { type: Boolean, default: true },
+    /** 确认按钮是否处于加载状态 */
+    okLoading: { type: Boolean, default: false },
+    /** 确定按钮内容 */
+    okText: { type: String, default: "确认" },
+    /** 取消按钮内容 */
+    cancleText: { type: String, default: "取消" },
+    /** 触发确定前的回调，返回 false 则中断 */
+    onBeforeOk: { type: Function, default: () => true },
   },
   emits: ["update:visible", "ok", "cancle"],
   setup(props, { emit, slots }) {
@@ -81,9 +91,20 @@ export default defineComponent({
       emit("update:visible", false);
     };
 
-    const handleOk = () => {
-      emit("ok");
-      emit("update:visible", false);
+    const confirmLoading = ref<boolean>(false);
+    const handleOk = async () => {
+      try {
+        confirmLoading.value = true;
+        const res = await props.onBeforeOk();
+        if (!res) return;
+
+        emit("ok");
+        emit("update:visible", false);
+      } catch (error) {
+        console.log("[ Modal -onBeforeOk error]", error);
+      } finally {
+        confirmLoading.value = false;
+      }
     };
 
     watch(
@@ -102,6 +123,7 @@ export default defineComponent({
     return {
       name,
       cls,
+      confirmLoading,
       containerVisable,
       handleMaskClick,
       handleCancle,
