@@ -1,7 +1,7 @@
 <template>
   <bp-button @click="handleOpen">打开抽屉</bp-button>
 
-  <bp-drawer v-model:visible="show"></bp-drawer>
+  <bp-drawer v-model="show"></bp-drawer>
 </template>
 
 <script setup lang="ts">

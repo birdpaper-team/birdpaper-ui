@@ -1,7 +1,7 @@
 <template>
   <bp-button @click="handleOpen">自定义底部</bp-button>
 
-  <bp-modal v-model:visible="show">
+  <bp-modal v-model="show">
     <p>对话框内容</p>
 
     <template #footer>

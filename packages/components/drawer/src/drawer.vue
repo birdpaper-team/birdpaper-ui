@@ -2,11 +2,11 @@
   <teleport to="body">
     <div :class="`${name}-container`" v-show="containerVisable">
       <Transition name="fade-modal-mask">
-        <div :class="`${name}-mask`" v-show="visible"></div>
+        <div :class="`${name}-mask`" v-show="modelValue"></div>
       </Transition>
 
       <Transition name="drawer-fade">
-        <div :class="`${name}-wrapper`" v-show="visible" @click.self="handleMaskClick">
+        <div :class="`${name}-wrapper`" v-show="modelValue" @click.self="handleMaskClick">
           <div :class="cls" :style="`width:${width};`">
             <div :class="`${name}-header`">
               <p :class="`${name}-header-title`">{{ title }}</p>
@@ -37,7 +37,7 @@ import { computed, defineComponent, ref, watch } from "vue";
 export default defineComponent({
   name: "Drawer",
   props: {
-    visible: { type: Boolean, default: false },
+    modelValue: { type: Boolean, default: false },
     /** 抽屉标题 */
     title: { type: String, default: "标题" },
     /** 标题对齐方式 */
@@ -61,7 +61,7 @@ export default defineComponent({
     /** 触发确定前的回调，返回 false 则中断 */
     onBeforeOk: { type: Function, default: () => true },
   },
-  emits: ["update:visible", "ok", "cancle"],
+  emits: ["update:modelValue", "ok", "cancle"],
   setup(props, { emit, slots }) {
     const name = "bp-drawer";
     const containerVisable = ref<boolean>(false);
@@ -84,7 +84,7 @@ export default defineComponent({
 
     const handleCancle = () => {
       emit("cancle");
-      emit("update:visible", false);
+      emit("update:modelValue", false);
     };
 
     const confirmLoading = ref<boolean>(false);
@@ -95,7 +95,7 @@ export default defineComponent({
         if (!res) return;
 
         emit("ok");
-        emit("update:visible", false);
+        emit("update:modelValue", false);
       } catch (error) {
         console.log("[ Drawer -onBeforeOk error]", error);
       } finally {
@@ -104,9 +104,9 @@ export default defineComponent({
     };
 
     watch(
-      () => props.visible,
+      () => props.modelValue,
       () => {
-        if (props.visible) {
+        if (props.modelValue) {
           containerVisable.value = true;
           return;
         }
