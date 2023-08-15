@@ -1,0 +1,26 @@
+@tooltip-cls: ~"@{prefix}-tooltip";
+
+.@{tooltip-cls} {
+  position: relative;
+
+  &-content {
+    position: absolute;
+    background-color: @gary-11;
+    border-radius: 4px;
+    padding: 4px 12px;
+    z-index: 999;
+
+    span {
+      font-size: 14px;
+      font-weight: normal;
+      line-height: 2;
+      color: @gary-1;
+    }
+  }
+
+  &-inner {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+  }
+}

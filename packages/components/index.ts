@@ -57,6 +57,9 @@ export type { ImageInstance } from "./image";
 export { default as Drawer } from "./drawer";
 export type { DrawerInstance } from "./drawer";
 
+export { default as Tooltip } from "./tooltip";
+export type { TooltipInstance } from "./tooltip";
+
 export { default as Message } from "./message";
 
 export type {} from "./components";

@@ -21,6 +21,7 @@ declare module "vue" {
     BpPopconfirm: typeof import("birdpaper-ui")["Popconfirm"];
     BpImage: typeof import("birdpaper-ui")["Image"];
     BpDrawer: typeof import("birdpaper-ui")["Drawer"];
+    BpTooltip: typeof import("birdpaper-ui")["Tooltip"];
   }
 }
 

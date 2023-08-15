@@ -3,6 +3,7 @@
   import events from "../example/drawer/events.ts";
 </script>
 # 抽屉 Drawer
+通过动作触发，从屏幕一端弹出操作面板。
 
 ### 基础用法
 通过 `v-model` 控制抽屉弹出/收起
