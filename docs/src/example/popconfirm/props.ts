@@ -6,7 +6,7 @@ const list: PropTableItem[] = [
   { name: "position", remark: "弹出位置", type: "Enum", optional: ["top", "bottom", "left", "right"], default: "top" },
   { name: "okText", remark: "确认按钮文本", type: "String", default: "确认" },
   { name: "cancleText", remark: "取消按钮文本", type: "String", default: "取消" },
-  { name: "on-before-ok", remark: "触发确定前的回调，返回 false 则中断", type: "Function", default: "()=>true" },
+  { name: "on-before-ok", remark: "触发确定前的回调，返回 false 则中断", type: "Function", default: "() => true" },
 ];
 
 export default list;
