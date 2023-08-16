@@ -4,7 +4,10 @@
       <transition name="tooltip-fade">
         <div ref="containerRef" v-show="visible" :class="`${name}-container`">
           <div :class="`${name}-content`">
-            {{ content }}
+            <template v-if="!slots.content">
+              {{ content }}
+            </template>
+            <slot name="content"></slot>
           </div>
           <div class="triangle"></div>
         </div>
@@ -24,6 +27,7 @@ import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 export default {
   name: "Tooltip",
   props: {
+    /** 文本提示内容 */
     content: { type: String, default: "" },
   },
   setup(props, { slots }) {
@@ -69,6 +73,7 @@ export default {
       slotRef,
       containerRef,
       visible,
+      slots,
       mouseenter,
       mouseleave,
     };
