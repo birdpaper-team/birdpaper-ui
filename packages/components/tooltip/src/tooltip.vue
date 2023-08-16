@@ -1,9 +1,14 @@
 <template>
   <div :class="name">
     <teleport to="body">
-      <div ref="innerRef" :class="`${name}-content`">
-        <span>{{ content }}</span>
-      </div>
+      <transition name="tooltip-fade">
+        <div ref="containerRef" v-show="visible" :class="`${name}-container`">
+          <div :class="`${name}-content`">
+            {{ content }}
+          </div>
+          <div class="triangle"></div>
+        </div>
+      </transition>
     </teleport>
 
     <div ref="slotRef" :class="`${name}-inner`" @mouseenter="mouseenter" @mouseleave="mouseleave">
@@ -24,23 +29,30 @@ export default {
   setup(props, { slots }) {
     const name = "bp-tooltip";
 
-    const innerRef = ref();
+    const containerRef = ref();
     const slotRef = ref();
+
+    const visible = ref<boolean>(false);
     const handleResize = () => {
       const slotRect = slotRef.value?.getBoundingClientRect();
       if (!slotRect) return;
 
-      innerRef.value.setAttribute(
+      containerRef.value.setAttribute(
         "style",
         `top:${slotRect.top - 10}px;left:${
           slotRect.left + slotRect.width / 2
-        }px;transform: translateX(-50%) translateY(-100%);;display:"block"`
+        }px;transform: translateX(-50%) translateY(-100%);display:${visible.value ? "block" : "none"}`
       );
     };
 
-    const mouseenter = () => {};
+    const mouseenter = () => {
+      handleResize();
+      visible.value = true;
+    };
 
-    const mouseleave = () => {};
+    const mouseleave = () => {
+      visible.value = false;
+    };
 
     onMounted(() => {
       nextTick(() => {
@@ -55,7 +67,8 @@ export default {
     return {
       name,
       slotRef,
-      innerRef,
+      containerRef,
+      visible,
       mouseenter,
       mouseleave,
     };
