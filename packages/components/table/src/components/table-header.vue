@@ -5,7 +5,7 @@
     <thead class="bp-table-header-thead">
       <tr>
         <th v-for="(item, index) in headerList" :key="`bp-table-thead-${index}`" :class="thClass(item)">
-          {{ item.label }}
+          {{ item.title }}
         </th>
       </tr>
     </thead>

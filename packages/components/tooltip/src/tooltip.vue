@@ -22,9 +22,9 @@
 
 <script lang="ts">
 import { off, on, throttle } from "../../../utils/util";
-import { nextTick, onBeforeUnmount, onMounted, ref } from "vue";
+import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 
-export default {
+export default defineComponent({
   name: "Tooltip",
   props: {
     /** 文本提示内容 */
@@ -78,5 +78,5 @@ export default {
       mouseleave,
     };
   },
-};
+});
 </script>

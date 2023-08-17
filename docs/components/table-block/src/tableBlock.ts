@@ -1,31 +1,31 @@
 /** Prop 表头 */
 export const propHeader = [
-  { label: "名称", scope: { customRender: "name" }, width: "140" },
-  { label: "说明", scope: { customRender: "remark" } },
-  { label: "类型", scope: { customRender: "type" },width: "240" },
-  { label: "默认值", scope: { customRender: "default" } },
+  { title: "名称", scope: { customRender: "name" }, width: "140" },
+  { title: "说明", scope: { customRender: "remark" } },
+  { title: "类型", scope: { customRender: "type" },width: "240" },
+  { title: "默认值", scope: { customRender: "default" } },
 ];
 
 /** Event 表头 */
 export const eventHeader = [
-  { label: "名称", scope: { customRender: "name" }, width: "140" },
-  { label: "说明", scope: { customRender: "remark" } },
-  { label: "参数", scope: { customRender: "params" } },
+  { title: "名称", scope: { customRender: "name" }, width: "140" },
+  { title: "说明", scope: { customRender: "remark" } },
+  { title: "参数", scope: { customRender: "params" } },
 ];
 
 /** Method 表头 */
 export const methodHeader = [
-  { label: "名称", scope: { customRender: "name" }, width: "140" },
-  { label: "说明", scope: { customRender: "remark" } },
-  { label: "参数", scope: { customRender: "params" } },
-  { label: "返回值", scope: { customRender: "returns" } },
+  { title: "名称", scope: { customRender: "name" }, width: "140" },
+  { title: "说明", scope: { customRender: "remark" } },
+  { title: "参数", scope: { customRender: "params" } },
+  { title: "返回值", scope: { customRender: "returns" } },
 ];
 
 /** Slot 表头 */
 export const slotHeader = [
-  { label: "名称", scope: { customRender: "name" }, width: "140" },
-  { label: "说明", scope: { customRender: "remark" } },
-  { label: "参数", scope: { customRender: "params" } },
+  { title: "名称", scope: { customRender: "name" }, width: "140" },
+  { title: "说明", scope: { customRender: "remark" } },
+  { title: "参数", scope: { customRender: "params" } },
 ];
 
 /** 表头 */
