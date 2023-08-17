@@ -1,12 +1,14 @@
 import { ref, watch, onMounted, nextTick, onBeforeUnmount } from "vue";
 import { off, on, throttle } from "../../../utils/util";
+import { getAllElements } from "../../../utils/dom";
+import { ColumnsItem } from "./types";
 
-export const useTable = props => {
+export const useTable = (props: any, slots: any) => {
   /** Table 实例 */
   const bpTable = ref(null);
 
   /** columns 表头列表 */
-  const columns = ref([]);
+  const columns = ref<ColumnsItem[]>([]);
 
   /** table_width 表格所占的实际宽度 px */
   const table_width = ref();
@@ -26,13 +28,28 @@ export const useTable = props => {
   /** _min_column_width 单列最小宽度 */
   const _min_column_width = 80;
 
+  const getColumnsBySlot = (): ColumnsItem[] => {
+    if (!slots.columns) return;
+
+    const children = getAllElements(slots.columns?.(), true).filter(item => item.type !== Comment);
+    if (children.length === 0) return;
+
+    let arr: ColumnsItem[] = [];
+    for (let i = 0; i < children.length; i++) {
+      arr.push(children[i]?.props as ColumnsItem);
+    }
+
+    return arr;
+  };
+
+  const cols: ColumnsItem[] = getColumnsBySlot() || props.cols;
+
   /**
    * 初始化表头列表
    * @returns Array
    */
   const initColumns = () => {
     const el = bpTable.value;
-    const { cols } = props;
 
     if (cols.length === 0 || cols.length > 99) return;
 
@@ -56,9 +73,8 @@ export const useTable = props => {
 
     columns.value = [];
     for (let i = 0; i < cols.length; i++) {
-      columns.value.push({ ...props.cols[i], width: _col_width_list[i] });
+      columns.value.push({ ...cols[i], width: _col_width_list[i] });
     }
-
     return columns.value;
   };
 
@@ -67,8 +83,6 @@ export const useTable = props => {
    * @returns Array width_list
    */
   function getWidthList() {
-    const { cols } = props;
-
     /** 各列宽度数组 */
     let width_list = [];
 

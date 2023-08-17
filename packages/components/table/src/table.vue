@@ -13,6 +13,14 @@
             <tbody class="bp-table-body-tbody">
               <table-empty v-if="isEmpty" :colspan="columns.length"></table-empty>
 
+              <tr v-else-if="!isEmpty && slots.columns">
+                <slot name="columns" v-for="(item, index) in data" :key="`bp-table-tbody-tr-${index}`">
+                  <td v-for="(v, k) in columns" :key="`bp-table-tbody-td-${index}-${k}`" :class="tdClass(v)">
+                    <span>{{ item[v.key] }}</span>
+                  </td>
+                </slot>
+              </tr>
+
               <template v-else>
                 <tr v-for="(item, index) in data" :key="`bp-table-tbody-tr-${index}`">
                   <td v-for="(v, k) in columns" :key="`bp-table-tbody-td-${index}-${k}`" :class="tdClass(v)">
@@ -32,20 +40,21 @@
 </template>
 
 <script lang="ts">
-import { computed } from "vue";
+import { PropType, computed } from "vue";
 import { useTable } from "./table";
 import TableHeader from "./components/table-header.vue";
 import TableEmpty from "./components/empty.vue";
 import ColGroup from "./components/col-group.vue";
 import bpSpin from "../../spin/index";
 import { defineComponent } from "vue";
+import { ColumnsItem } from "./types";
 
 export default defineComponent({
   name: "Table",
   components: { TableHeader, TableEmpty, ColGroup, bpSpin },
   props: {
     /* 表格头部列表 Table header list */
-    cols: { type: Array, default: () => [] },
+    cols: { type: Array as PropType<ColumnsItem[]>, default: () => [] },
     /* 表格数据 Table data source */
     data: { type: Array, default: () => [] },
     /* 固定高度 Fixed height */
@@ -57,8 +66,8 @@ export default defineComponent({
     /* 斑马纹 Stripe or not */
     stripe: { type: Boolean, default: false },
   },
-  setup(props) {
-    const { bpTable, columns, table_width } = useTable(props);
+  setup(props, { slots }) {
+    const { bpTable, columns, table_width } = useTable(props, slots);
 
     const isEmpty = computed(() => props.data.length === 0);
     const hasBorder = computed(() => props.border);
@@ -91,6 +100,7 @@ export default defineComponent({
     };
 
     return {
+      slots,
       bpTable,
       columns,
       table_width,

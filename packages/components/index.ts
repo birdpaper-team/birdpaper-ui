@@ -26,6 +26,7 @@ export type { PaginationInstance } from "./pagination";
 
 export { default as Table } from "./table";
 export type { TableInstance } from "./table";
+export type { TableColumnsInstance } from "./table";
 
 export { default as Space } from "./space";
 export type { SpaceInstance } from "./space";

@@ -1,5 +1,12 @@
 <template>
-  <bp-table border :cols="cols" :data="list"> </bp-table>
+  <bp-table border :cols="cols" :data="list">
+    <template #columns>
+      <bp-table-column title="座号1" key="seat"></bp-table-column>
+      <bp-table-column title="姓名" key="name"></bp-table-column>
+      <bp-table-column title="成绩" key="results"></bp-table-column>
+      <bp-table-column title="班级排名" key="ranking"></bp-table-column>
+    </template>
+  </bp-table>
 </template>
 
 <script setup lang="ts">
@@ -14,9 +21,9 @@ const list = [
   { seat: "43", name: "邹小辉", results: "293", ranking: "53" },
 ];
 const cols = [
-  { label: "座号", key: "seat", width: 100 },
-  { label: "姓名", key: "name" },
-  { label: "成绩", key: "results" },
-  { label: "班级排名", key: "ranking" },
+  { title: "座号", key: "seat", width: 100 },
+  { title: "姓名", key: "name" },
+  { title: "成绩", key: "results" },
+  { title: "班级排名", key: "ranking" },
 ];
 </script>
