@@ -2,13 +2,12 @@
   <bp-spin :loading="loading">
     <div class="bp-table" ref="bpTable">
       <div :class="innerClass">
-        <table-header :header-list="columns"></table-header>
-
         <div class="bp-table-body-area" :style="bodyAreaStyle">
           <div class="scrollbar"></div>
 
           <table class="bp-table-body" :style="`width:${table_width}px`">
-            <col-group :cols="columns"></col-group>
+            <table-header :header-list="columns"></table-header>
+            <!-- <col-group :cols="columns"></col-group> -->
 
             <table-empty v-if="isEmpty" :colspan="columns.length"></table-empty>
 
@@ -19,10 +18,18 @@
             <tbody class="bp-table-body-tbody" v-else>
               <tr v-for="(item, index) in data" :key="`bp-table-tbody-tr-${index}`">
                 <td v-for="(v, k) in columns" :key="`bp-table-tbody-td-${index}-${k}`" :class="tdClass(v)">
-                  <template v-if="!v.scope">
-                    <span>{{ item[v.dataIndex] }}</span>
-                  </template>
-                  <slot v-else :name="v.scope.customRender" :row="item" :index="index" :data="item[v.dataIndex]"></slot>
+                  <span class="bp-table-td-content">
+                    <template v-if="!v.scope">
+                      <span>{{ item[v.dataIndex] }}</span>
+                    </template>
+                    <slot
+                      v-else
+                      :name="v.scope.customRender"
+                      :row="item"
+                      :index="index"
+                      :data="item[v.dataIndex]"
+                    ></slot>
+                  </span>
                 </td>
               </tr>
             </tbody>
@@ -90,7 +97,7 @@ export default defineComponent({
     const tdClass = (v: any) => {
       let align = `text-${v["align"] || "left"}`;
 
-      let name = [align];
+      let name = ["bp-table-td", align];
       return name;
     };
 

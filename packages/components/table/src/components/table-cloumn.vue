@@ -1,7 +1,16 @@
 <template>
   <td :class="tdClass">
-    <span v-if="!hasCustomCell">{{ record[dataIndex] }}</span>
-    <slot v-else name="cell" :record="record" :rowIndex="rowIndex" />
+    <span class="bp-table-td-content">
+      <bp-tooltip :content="record[dataIndex]" v-if="!hasCustomCell && ellipsis">
+        <span :class="[{ 'text-ellipsis': ellipsis }]">
+          {{ record[dataIndex] }}
+        </span>
+      </bp-tooltip>
+      <span v-else-if="!ellipsis">
+        {{ record[dataIndex] }}
+      </span>
+      <slot v-else name="cell" :record="record" :rowIndex="rowIndex" />
+    </span>
   </td>
 </template>
 
@@ -23,17 +32,21 @@ export default defineComponent({
     width: { type: [Number, String] },
     /** 最小列宽 */
     minWidth: { type: [Number, String] },
-    /** 标题对齐方式 */
+    /** 对齐方式 */
     align: { type: String, default: "left" },
+    /** 是否开启文本省略 */
+    ellipsis: { type: Boolean, default: false },
+    /** 是否开启文本气泡提示 */
+    tooltip: { type: Boolean, default: false },
   },
   setup(props, { slots }) {
     const hasCustomCell = computed(() => !!slots?.cell);
 
-    const tdClass = () => {
+    const tdClass = computed(() => {
       let align = `text-${props.align || "left"}`;
 
-      return [align];
-    };
+      return ["bp-table-td", align];
+    });
 
     return {
       hasCustomCell,

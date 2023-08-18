@@ -1,5 +1,5 @@
 <template>
-  <table class="bp-table-header">
+  <!-- <table class="bp-table-header"> -->
     <col-group :cols="headerList"></col-group>
 
     <thead class="bp-table-header-thead">
@@ -9,7 +9,7 @@
         </th>
       </tr>
     </thead>
-  </table>
+  <!-- </table> -->
 </template>
 
 <script setup lang="ts" name="TableHeader">
@@ -24,7 +24,7 @@ const props = defineProps({
 const thClass = (item: any) => {
   let align = `text-${item["headerAlign"] || item["align"] || "left"}`;
 
-  let name = [align];
+  let name = ["bp-table-th", align];
   return name;
 };
 </script>
