@@ -10,24 +10,22 @@
           <table class="bp-table-body" :style="`width:${table_width}px`">
             <col-group :cols="columns"></col-group>
 
-            <!-- <tbody class="bp-table-body-tbody"> -->
-              <table-empty v-if="isEmpty" :colspan="columns.length"></table-empty>
+            <table-empty v-if="isEmpty" :colspan="columns.length"></table-empty>
 
-              <table-body v-else-if="!isEmpty && slots.columns" :data="data">
-                <slot name="columns"> </slot>
-              </table-body>
+            <table-body v-else-if="!isEmpty && slots.columns" :data="data">
+              <slot name="columns"> </slot>
+            </table-body>
 
-              <template v-else>
-                <tr v-for="(item, index) in data" :key="`bp-table-tbody-tr-${index}`">
-                  <td v-for="(v, k) in columns" :key="`bp-table-tbody-td-${index}-${k}`" :class="tdClass(v)">
-                    <template v-if="!v.scope">
-                      <span>{{ item[v.dataIndex] }}</span>
-                    </template>
-                    <slot v-else :name="v.scope.customRender" :row="item" :index="index" :data="item[v.dataIndex]"></slot>
-                  </td>
-                </tr>
-              </template>
-            <!-- </tbody> -->
+            <tbody class="bp-table-body-tbody" v-else>
+              <tr v-for="(item, index) in data" :key="`bp-table-tbody-tr-${index}`">
+                <td v-for="(v, k) in columns" :key="`bp-table-tbody-td-${index}-${k}`" :class="tdClass(v)">
+                  <template v-if="!v.scope">
+                    <span>{{ item[v.dataIndex] }}</span>
+                  </template>
+                  <slot v-else :name="v.scope.customRender" :row="item" :index="index" :data="item[v.dataIndex]"></slot>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -48,7 +46,7 @@ import { ColumnsItem } from "./types";
 
 export default defineComponent({
   name: "Table",
-  components: { TableHeader, TableEmpty,TableBody, ColGroup, bpSpin },
+  components: { TableHeader, TableEmpty, TableBody, ColGroup, bpSpin },
   props: {
     /* 表格头部列表 Table header list */
     cols: { type: Array as PropType<ColumnsItem[]>, default: () => [] },

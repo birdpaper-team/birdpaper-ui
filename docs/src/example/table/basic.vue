@@ -1,16 +1,5 @@
 <template>
-  <bp-table border :cols="cols" :data="list">
-    <template #columns>
-      <bp-table-column title="座号" data-index="seat">
-        <template #cell="{ record }">
-          <span style="font-weight:bold">{{ record.seat }}</span>
-        </template>
-      </bp-table-column>
-      <bp-table-column title="姓名" data-index="name"></bp-table-column>
-      <bp-table-column title="成绩" data-index="results"></bp-table-column>
-      <bp-table-column title="班级排名" data-index="ranking"></bp-table-column>
-    </template>
-  </bp-table>
+  <bp-table border :cols="cols" :data="list"></bp-table>
 </template>
 
 <script setup lang="ts">
