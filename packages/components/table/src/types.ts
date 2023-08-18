@@ -1,6 +1,6 @@
 export interface ColumnsItem {
   title?: string;
-  key?: string;
+  dataIndex?: string;
   width?: number;
   minWidth?: number;
   scope?: {

@@ -1,7 +1,8 @@
 <template>
-  <div>
-    <slot name="cell" />
-  </div>
+  <td>
+    <span v-if="!slots?.cell">{{ record[dataIndex] }}</span>
+    <slot name="cell" :record="record" :rowIndex="rowIndex"/>
+  </td>
 </template>
 
 <script lang="ts">
@@ -11,8 +12,14 @@ export default defineComponent({
   name: "TableColumn",
   props: {
     title: { type: String },
-    key: { type: String },
+    record: { type: Object, default: () => {} },
+    dataIndex: { type: Number },
+    rowIndex: { type: Number },
   },
-  setup(props, { slots }) {},
+  setup(props, { slots }) {
+    return {
+      slots
+    }
+  },
 });
 </script>

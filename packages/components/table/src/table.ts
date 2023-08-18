@@ -29,7 +29,7 @@ export const useTable = (props: any, slots: any) => {
   const _min_column_width = 80;
 
   const getColumnsBySlot = (): ColumnsItem[] => {
-    if (!slots.columns) return;
+    if (!slots.columns?.()) return;
 
     const children = getAllElements(slots.columns?.(), true).filter(item => item.type !== Comment);
     if (children.length === 0) return;
