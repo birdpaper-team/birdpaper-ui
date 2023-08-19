@@ -41,9 +41,11 @@ export default defineComponent({
       const slotRect = slotRef.value?.getBoundingClientRect();
       if (!slotRect) return;
 
+      const top = slotRect.top - 10 + document.documentElement.scrollTop;
+
       containerRef.value.setAttribute(
         "style",
-        `top:${slotRect.top - 10}px;left:${
+        `top:${top}px;left:${
           slotRect.left + slotRect.width / 2
         }px;transform: translateX(-50%) translateY(-100%);display:${visible.value ? "block" : "none"}`
       );
