@@ -7,7 +7,6 @@
 
           <table class="bp-table-body" :style="`width:${table_width}px`">
             <table-header :header-list="columns"></table-header>
-            <!-- <col-group :cols="columns"></col-group> -->
 
             <table-empty v-if="isEmpty" :colspan="columns.length"></table-empty>
 
@@ -46,14 +45,13 @@ import { useTable } from "./table";
 import TableHeader from "./components/table-header.vue";
 import TableBody from "./components/table-body";
 import TableEmpty from "./components/empty.vue";
-import ColGroup from "./components/col-group.vue";
 import bpSpin from "../../spin/index";
 import { defineComponent } from "vue";
 import { ColumnsItem } from "./types";
 
 export default defineComponent({
   name: "Table",
-  components: { TableHeader, TableEmpty, TableBody, ColGroup, bpSpin },
+  components: { TableHeader, TableEmpty, TableBody, bpSpin },
   props: {
     /* 表格头部列表 Table header list */
     cols: { type: Array as PropType<ColumnsItem[]>, default: () => [] },

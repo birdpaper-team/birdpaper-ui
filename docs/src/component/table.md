@@ -19,7 +19,7 @@
 ### 文本省略和提示
 
 设置 `ellipsis` 和 `tooltip` 开启文本省略和气泡提示
-<demo-block src="example/table/tooltip"></demo-block>
+<demo-block src="example/table/table-tooltip"></demo-block>
 
 ### Table 属性
 
