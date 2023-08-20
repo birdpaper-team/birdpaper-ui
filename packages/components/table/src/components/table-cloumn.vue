@@ -1,14 +1,16 @@
 <template>
   <td :class="tdClass">
     <span class="bp-table-td-content">
-      <bp-tooltip :content="record[dataIndex]" v-if="!hasCustomCell && ellipsis">
-        <span :class="[{ 'text-ellipsis': ellipsis }]">
+      <template v-if="!hasCustomCell">
+        <bp-tooltip :content="record[dataIndex]" v-if="tooltip">
+          <span class="text-ellipsis">
+            {{ record[dataIndex] }}
+          </span>
+        </bp-tooltip>
+        <span v-else-if="!tooltip" :class="[{ 'text-ellipsis': ellipsis }]">
           {{ record[dataIndex] }}
         </span>
-      </bp-tooltip>
-      <span v-else-if="!ellipsis">
-        {{ record[dataIndex] }}
-      </span>
+      </template>
       <slot v-else name="cell" :record="record" :rowIndex="rowIndex" />
     </span>
   </td>

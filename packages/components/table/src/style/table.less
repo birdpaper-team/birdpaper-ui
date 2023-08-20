@@ -27,11 +27,6 @@
       text-align: right;
     }
 
-    .bp-table-header {
-      background-color: @gary-3;
-    }
-
-    .bp-table-header,
     .bp-table-body {
       display: table;
       width: 100%;
@@ -41,6 +36,7 @@
       box-sizing: border-box;
 
       .bp-table-header-thead {
+        background-color: @gary-3;
         display: table-header-group;
         width: 100%;
         -moz-user-select: none;
@@ -64,9 +60,6 @@
             font-size: 14px;
             font-weight: 500;
             color: @gary-10;
-            border-left: none;
-            border-right: none;
-            border-top: none;
             background: none;
             line-height: 1.5;
           }
@@ -131,18 +124,16 @@
 
   // 带边框表格
   .bp-table-border {
-    .bp-table-header {
-      .bp-table-header-thead {
-        tr {
-          .bp-table-th {
-            border-right: 1px solid #e8e8e8;
+    .bp-table-header-thead {
+      tr {
+        .bp-table-th {
+          border-right: 1px solid #e8e8e8;
 
-            &:first-child {
-              border-left: none;
-            }
-            &:last-child {
-              border-right: none;
-            }
+          &:first-child {
+            border-left: none;
+          }
+          &:last-child {
+            border-right: none;
           }
         }
       }
@@ -180,10 +171,6 @@
 
   // 固定表头
   .bp-table-fixed-header {
-    .bp-table-header {
-      z-index: 500;
-    }
-
     .bp-table-body {
       z-index: 499;
     }

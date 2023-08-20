@@ -1,15 +1,13 @@
 <template>
-  <!-- <table class="bp-table-header"> -->
-    <col-group :cols="headerList"></col-group>
+  <col-group :cols="headerList"></col-group>
 
-    <thead class="bp-table-header-thead">
-      <tr>
-        <th v-for="(item, index) in headerList" :key="`bp-table-thead-${index}`" :class="thClass(item)">
-          {{ item.title }}
-        </th>
-      </tr>
-    </thead>
-  <!-- </table> -->
+  <thead class="bp-table-header-thead">
+    <tr>
+      <th v-for="(item, index) in headerList" :key="`bp-table-thead-${index}`" :class="thClass(item)">
+        {{ item.title }}
+      </th>
+    </tr>
+  </thead>
 </template>
 
 <script setup lang="ts" name="TableHeader">
