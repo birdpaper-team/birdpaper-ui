@@ -5,15 +5,20 @@ declare const Modal: {
         $: import("vue").ComponentInternalInstance;
         $data: {};
         $props: {
+            modelValue?: boolean;
+            onBeforeOk?: Function;
             border?: boolean;
             title?: string;
-            visible?: boolean;
-            titleAlign?: string;
             width?: string;
+            titleAlign?: string;
             top?: string;
             hideFooter?: boolean;
             hideClose?: boolean;
             maskClosable?: boolean;
+            okLoading?: boolean;
+            okText?: string;
+            cancleText?: string;
+            "onUpdate:modelValue"?: (...args: any[]) => any;
             key?: string | number | symbol;
             ref?: import("vue").VNodeRef;
             ref_for?: boolean;
@@ -58,7 +63,6 @@ declare const Modal: {
             }>) => void)[];
             class?: unknown;
             style?: unknown;
-            "onUpdate:visible"?: (...args: any[]) => any;
             onOk?: (...args: any[]) => any;
             onCancle?: (...args: any[]) => any;
         };
@@ -73,10 +77,10 @@ declare const Modal: {
         }>;
         $root: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
         $parent: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
-        $emit: (event: "update:visible" | "ok" | "cancle", ...args: any[]) => void;
+        $emit: (event: "update:modelValue" | "ok" | "cancle", ...args: any[]) => void;
         $el: any;
         $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
-            visible: {
+            modelValue: {
                 type: BooleanConstructor;
                 default: boolean;
             };
@@ -112,30 +116,51 @@ declare const Modal: {
                 type: BooleanConstructor;
                 default: boolean;
             };
+            okLoading: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            okText: {
+                type: StringConstructor;
+                default: string;
+            };
+            cancleText: {
+                type: StringConstructor;
+                default: string;
+            };
+            onBeforeOk: {
+                type: FunctionConstructor;
+                default: () => boolean;
+            };
         }>> & {
-            "onUpdate:visible"?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: (...args: any[]) => any;
             onOk?: (...args: any[]) => any;
             onCancle?: (...args: any[]) => any;
         }, {
             name: string;
             cls: import("vue").ComputedRef<string[]>;
+            confirmLoading: import("vue").Ref<boolean>;
             containerVisable: import("vue").Ref<boolean>;
             handleMaskClick: () => void;
             handleCancle: () => void;
-            handleOk: () => void;
+            handleOk: () => Promise<void>;
             slots: Readonly<{
                 [name: string]: import("vue").Slot<any>;
             }>;
-        }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:visible" | "ok" | "cancle")[], string, {
+        }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "ok" | "cancle")[], string, {
+            modelValue: boolean;
+            onBeforeOk: Function;
             border: boolean;
             title: string;
-            visible: boolean;
-            titleAlign: string;
             width: string;
+            titleAlign: string;
             top: string;
             hideFooter: boolean;
             hideClose: boolean;
             maskClosable: boolean;
+            okLoading: boolean;
+            okText: string;
+            cancleText: string;
         }, {}, string, {}> & {
             beforeCreate?: (() => void) | (() => void)[];
             created?: (() => void) | (() => void)[];
@@ -157,7 +182,7 @@ declare const Modal: {
         $nextTick: typeof import("vue").nextTick;
         $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
     } & Readonly<import("vue").ExtractPropTypes<{
-        visible: {
+        modelValue: {
             type: BooleanConstructor;
             default: boolean;
         };
@@ -193,17 +218,34 @@ declare const Modal: {
             type: BooleanConstructor;
             default: boolean;
         };
+        okLoading: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        okText: {
+            type: StringConstructor;
+            default: string;
+        };
+        cancleText: {
+            type: StringConstructor;
+            default: string;
+        };
+        onBeforeOk: {
+            type: FunctionConstructor;
+            default: () => boolean;
+        };
     }>> & {
-        "onUpdate:visible"?: (...args: any[]) => any;
+        "onUpdate:modelValue"?: (...args: any[]) => any;
         onOk?: (...args: any[]) => any;
         onCancle?: (...args: any[]) => any;
     } & import("vue").ShallowUnwrapRef<{
         name: string;
         cls: import("vue").ComputedRef<string[]>;
+        confirmLoading: import("vue").Ref<boolean>;
         containerVisable: import("vue").Ref<boolean>;
         handleMaskClick: () => void;
         handleCancle: () => void;
-        handleOk: () => void;
+        handleOk: () => Promise<void>;
         slots: Readonly<{
             [name: string]: import("vue").Slot<any>;
         }>;
@@ -212,7 +254,7 @@ declare const Modal: {
     __isTeleport?: never;
     __isSuspense?: never;
 } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
-    visible: {
+    modelValue: {
         type: BooleanConstructor;
         default: boolean;
     };
@@ -248,30 +290,51 @@ declare const Modal: {
         type: BooleanConstructor;
         default: boolean;
     };
+    okLoading: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    okText: {
+        type: StringConstructor;
+        default: string;
+    };
+    cancleText: {
+        type: StringConstructor;
+        default: string;
+    };
+    onBeforeOk: {
+        type: FunctionConstructor;
+        default: () => boolean;
+    };
 }>> & {
-    "onUpdate:visible"?: (...args: any[]) => any;
+    "onUpdate:modelValue"?: (...args: any[]) => any;
     onOk?: (...args: any[]) => any;
     onCancle?: (...args: any[]) => any;
 }, {
     name: string;
     cls: import("vue").ComputedRef<string[]>;
+    confirmLoading: import("vue").Ref<boolean>;
     containerVisable: import("vue").Ref<boolean>;
     handleMaskClick: () => void;
     handleCancle: () => void;
-    handleOk: () => void;
+    handleOk: () => Promise<void>;
     slots: Readonly<{
         [name: string]: import("vue").Slot<any>;
     }>;
-}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:visible" | "ok" | "cancle")[], "update:visible" | "ok" | "cancle", {
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "ok" | "cancle")[], "update:modelValue" | "ok" | "cancle", {
+    modelValue: boolean;
+    onBeforeOk: Function;
     border: boolean;
     title: string;
-    visible: boolean;
-    titleAlign: string;
     width: string;
+    titleAlign: string;
     top: string;
     hideFooter: boolean;
     hideClose: boolean;
     maskClosable: boolean;
+    okLoading: boolean;
+    okText: string;
+    cancleText: string;
 }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
     install: (app: App) => void;
 };

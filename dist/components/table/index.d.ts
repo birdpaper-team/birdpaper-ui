@@ -1,5 +1,6 @@
 import { App } from "vue";
 import _table from "./src/table.vue";
+import _tableColumn from "./src/components/table-cloumn.vue";
 declare const Table: {
     new (...args: any[]): {
         $: import("vue").ComponentInternalInstance;
@@ -7,7 +8,7 @@ declare const Table: {
         $props: {
             data?: unknown[];
             loading?: boolean;
-            cols?: unknown[];
+            cols?: import("./src/types").ColumnsItem[];
             height?: string;
             border?: boolean;
             stripe?: boolean;
@@ -71,7 +72,7 @@ declare const Table: {
         $el: any;
         $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
             cols: {
-                type: ArrayConstructor;
+                type: import("vue").PropType<import("./src/types").ColumnsItem[]>;
                 default: () => any[];
             };
             data: {
@@ -95,8 +96,19 @@ declare const Table: {
                 default: boolean;
             };
         }>>, {
+            slots: Readonly<{
+                [name: string]: import("vue").Slot<any>;
+            }>;
             bpTable: any;
-            columns: import("vue").Ref<any[]>;
+            columns: import("vue").Ref<{
+                title?: string;
+                dataIndex?: string;
+                width?: number;
+                minWidth?: number;
+                scope?: {
+                    customRender: string;
+                };
+            }[]>;
             table_width: import("vue").Ref<any>;
             isEmpty: import("vue").ComputedRef<boolean>;
             bodyAreaStyle: import("vue").ComputedRef<string>;
@@ -117,7 +129,7 @@ declare const Table: {
         }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
             data: unknown[];
             loading: boolean;
-            cols: unknown[];
+            cols: import("./src/types").ColumnsItem[];
             height: string;
             border: boolean;
             stripe: boolean;
@@ -143,7 +155,7 @@ declare const Table: {
         $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
     } & Readonly<import("vue").ExtractPropTypes<{
         cols: {
-            type: ArrayConstructor;
+            type: import("vue").PropType<import("./src/types").ColumnsItem[]>;
             default: () => any[];
         };
         data: {
@@ -167,8 +179,19 @@ declare const Table: {
             default: boolean;
         };
     }>> & import("vue").ShallowUnwrapRef<{
+        slots: Readonly<{
+            [name: string]: import("vue").Slot<any>;
+        }>;
         bpTable: any;
-        columns: import("vue").Ref<any[]>;
+        columns: import("vue").Ref<{
+            title?: string;
+            dataIndex?: string;
+            width?: number;
+            minWidth?: number;
+            scope?: {
+                customRender: string;
+            };
+        }[]>;
         table_width: import("vue").Ref<any>;
         isEmpty: import("vue").ComputedRef<boolean>;
         bodyAreaStyle: import("vue").ComputedRef<string>;
@@ -192,7 +215,7 @@ declare const Table: {
     __isSuspense?: never;
 } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
     cols: {
-        type: ArrayConstructor;
+        type: import("vue").PropType<import("./src/types").ColumnsItem[]>;
         default: () => any[];
     };
     data: {
@@ -216,8 +239,19 @@ declare const Table: {
         default: boolean;
     };
 }>>, {
+    slots: Readonly<{
+        [name: string]: import("vue").Slot<any>;
+    }>;
     bpTable: any;
-    columns: import("vue").Ref<any[]>;
+    columns: import("vue").Ref<{
+        title?: string;
+        dataIndex?: string;
+        width?: number;
+        minWidth?: number;
+        scope?: {
+            customRender: string;
+        };
+    }[]>;
     table_width: import("vue").Ref<any>;
     isEmpty: import("vue").ComputedRef<boolean>;
     bodyAreaStyle: import("vue").ComputedRef<string>;
@@ -238,7 +272,7 @@ declare const Table: {
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
     data: unknown[];
     loading: boolean;
-    cols: unknown[];
+    cols: import("./src/types").ColumnsItem[];
     height: string;
     border: boolean;
     stripe: boolean;
@@ -246,4 +280,5 @@ declare const Table: {
     install: (app: App) => void;
 };
 export declare type TableInstance = InstanceType<typeof _table>;
+export declare type TableColumnsInstance = InstanceType<typeof _tableColumn>;
 export default Table;
