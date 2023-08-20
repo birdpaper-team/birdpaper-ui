@@ -1,6 +1,6 @@
 declare const _sfc_main: import("vue").DefineComponent<{
     /** 对话框显示状态 */
-    visible: {
+    modelValue: {
         type: BooleanConstructor;
         default: boolean;
     };
@@ -43,20 +43,41 @@ declare const _sfc_main: import("vue").DefineComponent<{
     maskClosable: {
         type: BooleanConstructor;
         default: boolean;
+    };
+    /** 确认按钮是否处于加载状态 */
+    okLoading: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    /** 确定按钮内容 */
+    okText: {
+        type: StringConstructor;
+        default: string;
+    };
+    /** 取消按钮内容 */
+    cancleText: {
+        type: StringConstructor;
+        default: string;
+    };
+    /** 触发确定前的回调，返回 false 则中断 */
+    onBeforeOk: {
+        type: FunctionConstructor;
+        default: () => boolean;
     };
 }, {
     name: string;
     cls: import("vue").ComputedRef<string[]>;
+    confirmLoading: import("vue").Ref<boolean>;
     containerVisable: import("vue").Ref<boolean>;
     handleMaskClick: () => void;
     handleCancle: () => void;
-    handleOk: () => void;
+    handleOk: () => Promise<void>;
     slots: Readonly<{
         [name: string]: import("vue").Slot<any>;
     }>;
-}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:visible" | "ok" | "cancle")[], "update:visible" | "ok" | "cancle", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "ok" | "cancle")[], "update:modelValue" | "ok" | "cancle", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     /** 对话框显示状态 */
-    visible: {
+    modelValue: {
         type: BooleanConstructor;
         default: boolean;
     };
@@ -100,19 +121,43 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    /** 确认按钮是否处于加载状态 */
+    okLoading: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
+    /** 确定按钮内容 */
+    okText: {
+        type: StringConstructor;
+        default: string;
+    };
+    /** 取消按钮内容 */
+    cancleText: {
+        type: StringConstructor;
+        default: string;
+    };
+    /** 触发确定前的回调，返回 false 则中断 */
+    onBeforeOk: {
+        type: FunctionConstructor;
+        default: () => boolean;
+    };
 }>> & {
-    "onUpdate:visible"?: (...args: any[]) => any;
+    "onUpdate:modelValue"?: (...args: any[]) => any;
     onOk?: (...args: any[]) => any;
     onCancle?: (...args: any[]) => any;
 }, {
+    modelValue: boolean;
+    onBeforeOk: Function;
     border: boolean;
     title: string;
-    visible: boolean;
-    titleAlign: string;
     width: string;
+    titleAlign: string;
     top: string;
     hideFooter: boolean;
     hideClose: boolean;
     maskClosable: boolean;
+    okLoading: boolean;
+    okText: string;
+    cancleText: string;
 }, {}>;
 export default _sfc_main;

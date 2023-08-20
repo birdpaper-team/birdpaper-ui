@@ -1,6 +1,8 @@
+import { PropType } from "vue";
+import { ColumnsItem } from "./types";
 declare const _sfc_main: import("vue").DefineComponent<{
     cols: {
-        type: ArrayConstructor;
+        type: PropType<ColumnsItem[]>;
         default: () => any[];
     };
     data: {
@@ -24,8 +26,19 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: boolean;
     };
 }, {
+    slots: Readonly<{
+        [name: string]: import("vue").Slot<any>;
+    }>;
     bpTable: any;
-    columns: import("vue").Ref<any[]>;
+    columns: import("vue").Ref<{
+        title?: string;
+        dataIndex?: string;
+        width?: number;
+        minWidth?: number;
+        scope?: {
+            customRender: string;
+        };
+    }[]>;
     table_width: import("vue").Ref<any>;
     isEmpty: import("vue").ComputedRef<boolean>;
     bodyAreaStyle: import("vue").ComputedRef<string>;
@@ -45,7 +58,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     tdClass: (v: any) => string[];
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     cols: {
-        type: ArrayConstructor;
+        type: PropType<ColumnsItem[]>;
         default: () => any[];
     };
     data: {
@@ -71,7 +84,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
 }>>, {
     data: unknown[];
     loading: boolean;
-    cols: unknown[];
+    cols: ColumnsItem[];
     height: string;
     border: boolean;
     stripe: boolean;

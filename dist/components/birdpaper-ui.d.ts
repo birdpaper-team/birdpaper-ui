@@ -1875,7 +1875,7 @@ declare const _default: {
             $props: {
                 data?: unknown[];
                 loading?: boolean;
-                cols?: unknown[];
+                cols?: import("./table/src/types").ColumnsItem[];
                 height?: string;
                 border?: boolean;
                 stripe?: boolean;
@@ -1939,7 +1939,7 @@ declare const _default: {
             $el: any;
             $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
                 cols: {
-                    type: ArrayConstructor;
+                    type: import("vue").PropType<import("./table/src/types").ColumnsItem[]>;
                     default: () => any[];
                 };
                 data: {
@@ -1963,8 +1963,19 @@ declare const _default: {
                     default: boolean;
                 };
             }>>, {
+                slots: Readonly<{
+                    [name: string]: import("vue").Slot<any>;
+                }>;
                 bpTable: any;
-                columns: import("vue").Ref<any[]>;
+                columns: import("vue").Ref<{
+                    title?: string;
+                    dataIndex?: string;
+                    width?: number;
+                    minWidth?: number;
+                    scope?: {
+                        customRender: string;
+                    };
+                }[]>;
                 table_width: import("vue").Ref<any>;
                 isEmpty: import("vue").ComputedRef<boolean>;
                 bodyAreaStyle: import("vue").ComputedRef<string>;
@@ -1985,7 +1996,7 @@ declare const _default: {
             }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
                 data: unknown[];
                 loading: boolean;
-                cols: unknown[];
+                cols: import("./table/src/types").ColumnsItem[];
                 height: string;
                 border: boolean;
                 stripe: boolean;
@@ -2011,7 +2022,7 @@ declare const _default: {
             $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
         } & Readonly<import("vue").ExtractPropTypes<{
             cols: {
-                type: ArrayConstructor;
+                type: import("vue").PropType<import("./table/src/types").ColumnsItem[]>;
                 default: () => any[];
             };
             data: {
@@ -2035,8 +2046,19 @@ declare const _default: {
                 default: boolean;
             };
         }>> & import("vue").ShallowUnwrapRef<{
+            slots: Readonly<{
+                [name: string]: import("vue").Slot<any>;
+            }>;
             bpTable: any;
-            columns: import("vue").Ref<any[]>;
+            columns: import("vue").Ref<{
+                title?: string;
+                dataIndex?: string;
+                width?: number;
+                minWidth?: number;
+                scope?: {
+                    customRender: string;
+                };
+            }[]>;
             table_width: import("vue").Ref<any>;
             isEmpty: import("vue").ComputedRef<boolean>;
             bodyAreaStyle: import("vue").ComputedRef<string>;
@@ -2060,7 +2082,7 @@ declare const _default: {
         __isSuspense?: never;
     } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
         cols: {
-            type: ArrayConstructor;
+            type: import("vue").PropType<import("./table/src/types").ColumnsItem[]>;
             default: () => any[];
         };
         data: {
@@ -2084,8 +2106,19 @@ declare const _default: {
             default: boolean;
         };
     }>>, {
+        slots: Readonly<{
+            [name: string]: import("vue").Slot<any>;
+        }>;
         bpTable: any;
-        columns: import("vue").Ref<any[]>;
+        columns: import("vue").Ref<{
+            title?: string;
+            dataIndex?: string;
+            width?: number;
+            minWidth?: number;
+            scope?: {
+                customRender: string;
+            };
+        }[]>;
         table_width: import("vue").Ref<any>;
         isEmpty: import("vue").ComputedRef<boolean>;
         bodyAreaStyle: import("vue").ComputedRef<string>;
@@ -2106,7 +2139,7 @@ declare const _default: {
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
         data: unknown[];
         loading: boolean;
-        cols: unknown[];
+        cols: import("./table/src/types").ColumnsItem[];
         height: string;
         border: boolean;
         stripe: boolean;
@@ -2584,15 +2617,20 @@ declare const _default: {
             $: import("vue").ComponentInternalInstance;
             $data: {};
             $props: {
+                modelValue?: boolean;
+                onBeforeOk?: Function;
                 border?: boolean;
                 title?: string;
-                visible?: boolean;
-                titleAlign?: string;
                 width?: string;
+                titleAlign?: string;
                 top?: string;
                 hideFooter?: boolean;
                 hideClose?: boolean;
                 maskClosable?: boolean;
+                okLoading?: boolean;
+                okText?: string;
+                cancleText?: string;
+                "onUpdate:modelValue"?: (...args: any[]) => any;
                 key?: string | number | symbol;
                 ref?: import("vue").VNodeRef;
                 ref_for?: boolean;
@@ -2637,7 +2675,6 @@ declare const _default: {
                 }>) => void)[];
                 class?: unknown;
                 style?: unknown;
-                "onUpdate:visible"?: (...args: any[]) => any;
                 onOk?: (...args: any[]) => any;
                 onCancle?: (...args: any[]) => any;
             };
@@ -2652,10 +2689,10 @@ declare const _default: {
             }>;
             $root: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
             $parent: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
-            $emit: (event: "update:visible" | "ok" | "cancle", ...args: any[]) => void;
+            $emit: (event: "update:modelValue" | "ok" | "cancle", ...args: any[]) => void;
             $el: any;
             $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
-                visible: {
+                modelValue: {
                     type: BooleanConstructor;
                     default: boolean;
                 };
@@ -2691,30 +2728,51 @@ declare const _default: {
                     type: BooleanConstructor;
                     default: boolean;
                 };
+                okLoading: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                okText: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                cancleText: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                onBeforeOk: {
+                    type: FunctionConstructor;
+                    default: () => boolean;
+                };
             }>> & {
-                "onUpdate:visible"?: (...args: any[]) => any;
+                "onUpdate:modelValue"?: (...args: any[]) => any;
                 onOk?: (...args: any[]) => any;
                 onCancle?: (...args: any[]) => any;
             }, {
                 name: string;
                 cls: import("vue").ComputedRef<string[]>;
+                confirmLoading: import("vue").Ref<boolean>;
                 containerVisable: import("vue").Ref<boolean>;
                 handleMaskClick: () => void;
                 handleCancle: () => void;
-                handleOk: () => void;
+                handleOk: () => Promise<void>;
                 slots: Readonly<{
                     [name: string]: import("vue").Slot<any>;
                 }>;
-            }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:visible" | "ok" | "cancle")[], string, {
+            }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "ok" | "cancle")[], string, {
+                modelValue: boolean;
+                onBeforeOk: Function;
                 border: boolean;
                 title: string;
-                visible: boolean;
-                titleAlign: string;
                 width: string;
+                titleAlign: string;
                 top: string;
                 hideFooter: boolean;
                 hideClose: boolean;
                 maskClosable: boolean;
+                okLoading: boolean;
+                okText: string;
+                cancleText: string;
             }, {}, string, {}> & {
                 beforeCreate?: (() => void) | (() => void)[];
                 created?: (() => void) | (() => void)[];
@@ -2736,7 +2794,7 @@ declare const _default: {
             $nextTick: typeof import("vue").nextTick;
             $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
         } & Readonly<import("vue").ExtractPropTypes<{
-            visible: {
+            modelValue: {
                 type: BooleanConstructor;
                 default: boolean;
             };
@@ -2772,17 +2830,34 @@ declare const _default: {
                 type: BooleanConstructor;
                 default: boolean;
             };
+            okLoading: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            okText: {
+                type: StringConstructor;
+                default: string;
+            };
+            cancleText: {
+                type: StringConstructor;
+                default: string;
+            };
+            onBeforeOk: {
+                type: FunctionConstructor;
+                default: () => boolean;
+            };
         }>> & {
-            "onUpdate:visible"?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: (...args: any[]) => any;
             onOk?: (...args: any[]) => any;
             onCancle?: (...args: any[]) => any;
         } & import("vue").ShallowUnwrapRef<{
             name: string;
             cls: import("vue").ComputedRef<string[]>;
+            confirmLoading: import("vue").Ref<boolean>;
             containerVisable: import("vue").Ref<boolean>;
             handleMaskClick: () => void;
             handleCancle: () => void;
-            handleOk: () => void;
+            handleOk: () => Promise<void>;
             slots: Readonly<{
                 [name: string]: import("vue").Slot<any>;
             }>;
@@ -2791,7 +2866,7 @@ declare const _default: {
         __isTeleport?: never;
         __isSuspense?: never;
     } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
-        visible: {
+        modelValue: {
             type: BooleanConstructor;
             default: boolean;
         };
@@ -2827,30 +2902,51 @@ declare const _default: {
             type: BooleanConstructor;
             default: boolean;
         };
+        okLoading: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        okText: {
+            type: StringConstructor;
+            default: string;
+        };
+        cancleText: {
+            type: StringConstructor;
+            default: string;
+        };
+        onBeforeOk: {
+            type: FunctionConstructor;
+            default: () => boolean;
+        };
     }>> & {
-        "onUpdate:visible"?: (...args: any[]) => any;
+        "onUpdate:modelValue"?: (...args: any[]) => any;
         onOk?: (...args: any[]) => any;
         onCancle?: (...args: any[]) => any;
     }, {
         name: string;
         cls: import("vue").ComputedRef<string[]>;
+        confirmLoading: import("vue").Ref<boolean>;
         containerVisable: import("vue").Ref<boolean>;
         handleMaskClick: () => void;
         handleCancle: () => void;
-        handleOk: () => void;
+        handleOk: () => Promise<void>;
         slots: Readonly<{
             [name: string]: import("vue").Slot<any>;
         }>;
-    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:visible" | "ok" | "cancle")[], "update:visible" | "ok" | "cancle", {
+    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "ok" | "cancle")[], "update:modelValue" | "ok" | "cancle", {
+        modelValue: boolean;
+        onBeforeOk: Function;
         border: boolean;
         title: string;
-        visible: boolean;
-        titleAlign: string;
         width: string;
+        titleAlign: string;
         top: string;
         hideFooter: boolean;
         hideClose: boolean;
         maskClosable: boolean;
+        okLoading: boolean;
+        okText: string;
+        cancleText: string;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
     };
@@ -3374,10 +3470,10 @@ declare const _default: {
             $props: {
                 type?: import("./popconfirm/src/types").PopconfirmType;
                 onBeforeOk?: Function;
-                content?: string;
-                position?: import("./popconfirm/src/types").PopconfirmPosition;
                 okText?: string;
                 cancleText?: string;
+                content?: string;
+                position?: import("./popconfirm/src/types").PopconfirmPosition;
                 key?: string | number | symbol;
                 ref?: import("vue").VNodeRef;
                 ref_for?: boolean;
@@ -3478,10 +3574,10 @@ declare const _default: {
             }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("ok" | "cancle")[], string, {
                 type: import("./popconfirm/src/types").PopconfirmType;
                 onBeforeOk: Function;
-                content: string;
-                position: import("./popconfirm/src/types").PopconfirmPosition;
                 okText: string;
                 cancleText: string;
+                content: string;
+                position: import("./popconfirm/src/types").PopconfirmPosition;
             }, {}, string, {}> & {
                 beforeCreate?: (() => void) | (() => void)[];
                 created?: (() => void) | (() => void)[];
@@ -3583,10 +3679,10 @@ declare const _default: {
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("ok" | "cancle")[], "ok" | "cancle", {
         type: import("./popconfirm/src/types").PopconfirmType;
         onBeforeOk: Function;
-        content: string;
-        position: import("./popconfirm/src/types").PopconfirmPosition;
         okText: string;
         cancleText: string;
+        content: string;
+        position: import("./popconfirm/src/types").PopconfirmPosition;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
     };
@@ -3803,6 +3899,472 @@ declare const _default: {
         src: string;
         fit: import("./image/src/types").ImageFit;
         alt: string;
+    }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
+        install: (app: App<any>) => void;
+    };
+    Drawer: {
+        new (...args: any[]): {
+            $: import("vue").ComponentInternalInstance;
+            $data: {};
+            $props: {
+                modelValue?: boolean;
+                onBeforeOk?: Function;
+                border?: boolean;
+                title?: string;
+                width?: string;
+                titleAlign?: string;
+                hideFooter?: boolean;
+                hideClose?: boolean;
+                maskClosable?: boolean;
+                okLoading?: boolean;
+                okText?: string;
+                cancleText?: string;
+                "onUpdate:modelValue"?: (...args: any[]) => any;
+                key?: string | number | symbol;
+                ref?: import("vue").VNodeRef;
+                ref_for?: boolean;
+                ref_key?: string;
+                onVnodeBeforeMount?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeMounted?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeBeforeUpdate?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeUpdated?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeBeforeUnmount?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeUnmounted?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                class?: unknown;
+                style?: unknown;
+                onOk?: (...args: any[]) => any;
+                onCancle?: (...args: any[]) => any;
+            };
+            $attrs: {
+                [x: string]: unknown;
+            };
+            $refs: {
+                [x: string]: unknown;
+            };
+            $slots: Readonly<{
+                [name: string]: import("vue").Slot<any>;
+            }>;
+            $root: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
+            $parent: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
+            $emit: (event: "update:modelValue" | "ok" | "cancle", ...args: any[]) => void;
+            $el: any;
+            $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
+                modelValue: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                title: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                titleAlign: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                width: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                hideFooter: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                hideClose: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                border: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                maskClosable: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                okLoading: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                okText: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                cancleText: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                onBeforeOk: {
+                    type: FunctionConstructor;
+                    default: () => boolean;
+                };
+            }>> & {
+                "onUpdate:modelValue"?: (...args: any[]) => any;
+                onOk?: (...args: any[]) => any;
+                onCancle?: (...args: any[]) => any;
+            }, {
+                name: string;
+                cls: import("vue").ComputedRef<string[]>;
+                confirmLoading: import("vue").Ref<boolean>;
+                containerVisable: import("vue").Ref<boolean>;
+                handleMaskClick: () => void;
+                handleCancle: () => void;
+                handleOk: () => Promise<void>;
+                slots: Readonly<{
+                    [name: string]: import("vue").Slot<any>;
+                }>;
+            }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "ok" | "cancle")[], string, {
+                modelValue: boolean;
+                onBeforeOk: Function;
+                border: boolean;
+                title: string;
+                width: string;
+                titleAlign: string;
+                hideFooter: boolean;
+                hideClose: boolean;
+                maskClosable: boolean;
+                okLoading: boolean;
+                okText: string;
+                cancleText: string;
+            }, {}, string, {}> & {
+                beforeCreate?: (() => void) | (() => void)[];
+                created?: (() => void) | (() => void)[];
+                beforeMount?: (() => void) | (() => void)[];
+                mounted?: (() => void) | (() => void)[];
+                beforeUpdate?: (() => void) | (() => void)[];
+                updated?: (() => void) | (() => void)[];
+                activated?: (() => void) | (() => void)[];
+                deactivated?: (() => void) | (() => void)[];
+                beforeDestroy?: (() => void) | (() => void)[];
+                beforeUnmount?: (() => void) | (() => void)[];
+                destroyed?: (() => void) | (() => void)[];
+                unmounted?: (() => void) | (() => void)[];
+                renderTracked?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
+                renderTriggered?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
+                errorCaptured?: ((err: unknown, instance: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>, info: string) => boolean | void) | ((err: unknown, instance: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>, info: string) => boolean | void)[];
+            };
+            $forceUpdate: () => void;
+            $nextTick: typeof import("vue").nextTick;
+            $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
+        } & Readonly<import("vue").ExtractPropTypes<{
+            modelValue: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            title: {
+                type: StringConstructor;
+                default: string;
+            };
+            titleAlign: {
+                type: StringConstructor;
+                default: string;
+            };
+            width: {
+                type: StringConstructor;
+                default: string;
+            };
+            hideFooter: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            hideClose: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            border: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            maskClosable: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            okLoading: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            okText: {
+                type: StringConstructor;
+                default: string;
+            };
+            cancleText: {
+                type: StringConstructor;
+                default: string;
+            };
+            onBeforeOk: {
+                type: FunctionConstructor;
+                default: () => boolean;
+            };
+        }>> & {
+            "onUpdate:modelValue"?: (...args: any[]) => any;
+            onOk?: (...args: any[]) => any;
+            onCancle?: (...args: any[]) => any;
+        } & import("vue").ShallowUnwrapRef<{
+            name: string;
+            cls: import("vue").ComputedRef<string[]>;
+            confirmLoading: import("vue").Ref<boolean>;
+            containerVisable: import("vue").Ref<boolean>;
+            handleMaskClick: () => void;
+            handleCancle: () => void;
+            handleOk: () => Promise<void>;
+            slots: Readonly<{
+                [name: string]: import("vue").Slot<any>;
+            }>;
+        }> & {} & import("vue").ComponentCustomProperties & {};
+        __isFragment?: never;
+        __isTeleport?: never;
+        __isSuspense?: never;
+    } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
+        modelValue: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        title: {
+            type: StringConstructor;
+            default: string;
+        };
+        titleAlign: {
+            type: StringConstructor;
+            default: string;
+        };
+        width: {
+            type: StringConstructor;
+            default: string;
+        };
+        hideFooter: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        hideClose: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        border: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        maskClosable: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        okLoading: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        okText: {
+            type: StringConstructor;
+            default: string;
+        };
+        cancleText: {
+            type: StringConstructor;
+            default: string;
+        };
+        onBeforeOk: {
+            type: FunctionConstructor;
+            default: () => boolean;
+        };
+    }>> & {
+        "onUpdate:modelValue"?: (...args: any[]) => any;
+        onOk?: (...args: any[]) => any;
+        onCancle?: (...args: any[]) => any;
+    }, {
+        name: string;
+        cls: import("vue").ComputedRef<string[]>;
+        confirmLoading: import("vue").Ref<boolean>;
+        containerVisable: import("vue").Ref<boolean>;
+        handleMaskClick: () => void;
+        handleCancle: () => void;
+        handleOk: () => Promise<void>;
+        slots: Readonly<{
+            [name: string]: import("vue").Slot<any>;
+        }>;
+    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "ok" | "cancle")[], "update:modelValue" | "ok" | "cancle", {
+        modelValue: boolean;
+        onBeforeOk: Function;
+        border: boolean;
+        title: string;
+        width: string;
+        titleAlign: string;
+        hideFooter: boolean;
+        hideClose: boolean;
+        maskClosable: boolean;
+        okLoading: boolean;
+        okText: string;
+        cancleText: string;
+    }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
+        install: (app: App<any>) => void;
+    };
+    Tooltip: {
+        new (...args: any[]): {
+            $: import("vue").ComponentInternalInstance;
+            $data: {};
+            $props: {
+                content?: string;
+                key?: string | number | symbol;
+                ref?: import("vue").VNodeRef;
+                ref_for?: boolean;
+                ref_key?: string;
+                onVnodeBeforeMount?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeMounted?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeBeforeUpdate?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeUpdated?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeBeforeUnmount?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeUnmounted?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                class?: unknown;
+                style?: unknown;
+            };
+            $attrs: {
+                [x: string]: unknown;
+            };
+            $refs: {
+                [x: string]: unknown;
+            };
+            $slots: Readonly<{
+                [name: string]: import("vue").Slot<any>;
+            }>;
+            $root: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
+            $parent: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
+            $emit: (event: string, ...args: any[]) => void;
+            $el: any;
+            $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
+                content: {
+                    type: StringConstructor;
+                    default: string;
+                };
+            }>>, {
+                name: string;
+                slotRef: import("vue").Ref<any>;
+                containerRef: import("vue").Ref<any>;
+                show: import("vue").Ref<boolean>;
+                visible: import("vue").Ref<boolean>;
+                slots: Readonly<{
+                    [name: string]: import("vue").Slot<any>;
+                }>;
+                mouseenter: () => void;
+                mouseleave: () => void;
+            }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
+                content: string;
+            }, {}, string, {}> & {
+                beforeCreate?: (() => void) | (() => void)[];
+                created?: (() => void) | (() => void)[];
+                beforeMount?: (() => void) | (() => void)[];
+                mounted?: (() => void) | (() => void)[];
+                beforeUpdate?: (() => void) | (() => void)[];
+                updated?: (() => void) | (() => void)[];
+                activated?: (() => void) | (() => void)[];
+                deactivated?: (() => void) | (() => void)[];
+                beforeDestroy?: (() => void) | (() => void)[];
+                beforeUnmount?: (() => void) | (() => void)[];
+                destroyed?: (() => void) | (() => void)[];
+                unmounted?: (() => void) | (() => void)[];
+                renderTracked?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
+                renderTriggered?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
+                errorCaptured?: ((err: unknown, instance: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>, info: string) => boolean | void) | ((err: unknown, instance: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>, info: string) => boolean | void)[];
+            };
+            $forceUpdate: () => void;
+            $nextTick: typeof import("vue").nextTick;
+            $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
+        } & Readonly<import("vue").ExtractPropTypes<{
+            content: {
+                type: StringConstructor;
+                default: string;
+            };
+        }>> & import("vue").ShallowUnwrapRef<{
+            name: string;
+            slotRef: import("vue").Ref<any>;
+            containerRef: import("vue").Ref<any>;
+            show: import("vue").Ref<boolean>;
+            visible: import("vue").Ref<boolean>;
+            slots: Readonly<{
+                [name: string]: import("vue").Slot<any>;
+            }>;
+            mouseenter: () => void;
+            mouseleave: () => void;
+        }> & {} & import("vue").ComponentCustomProperties & {};
+        __isFragment?: never;
+        __isTeleport?: never;
+        __isSuspense?: never;
+    } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
+        content: {
+            type: StringConstructor;
+            default: string;
+        };
+    }>>, {
+        name: string;
+        slotRef: import("vue").Ref<any>;
+        containerRef: import("vue").Ref<any>;
+        show: import("vue").Ref<boolean>;
+        visible: import("vue").Ref<boolean>;
+        slots: Readonly<{
+            [name: string]: import("vue").Slot<any>;
+        }>;
+        mouseenter: () => void;
+        mouseleave: () => void;
+    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
+        content: string;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
     };
