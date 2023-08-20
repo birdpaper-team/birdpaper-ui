@@ -1,8 +1,6 @@
 @tooltip-cls: ~"@{prefix}-tooltip";
 
 .@{tooltip-cls} {
-  position: relative;
-  width: 100%;
 
   &-container {
     position: absolute;
@@ -37,8 +35,8 @@
 
   &-inner {
     position: relative;
-    display: inline-block;
-    width: 100%;
+    display: inline-grid;
+    width: auto;
     cursor: pointer;
   }
 }

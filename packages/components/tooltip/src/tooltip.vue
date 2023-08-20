@@ -1,22 +1,20 @@
 <template>
-  <div :class="name">
-    <teleport to="body">
-      <transition name="tooltip-fade">
-        <div ref="containerRef" v-show="visible" :class="`${name}-container`">
-          <div :class="`${name}-content`">
-            <template v-if="!slots.content">
-              {{ content }}
-            </template>
-            <slot name="content"></slot>
-          </div>
-          <div class="triangle"></div>
+  <teleport to="body" v-if="show">
+    <transition name="tooltip-fade">
+      <div ref="containerRef" v-show="visible" :class="`${name}-container`">
+        <div :class="`${name}-content`">
+          <template v-if="!slots.content">
+            {{ content }}
+          </template>
+          <slot name="content"></slot>
         </div>
-      </transition>
-    </teleport>
+        <div class="triangle"></div>
+      </div>
+    </transition>
+  </teleport>
 
-    <div ref="slotRef" :class="`${name}-inner`" @mouseenter="mouseenter" @mouseleave="mouseleave">
-      <slot />
-    </div>
+  <div ref="slotRef" :class="`${name}-inner`" @mouseenter="mouseenter" @mouseleave="mouseleave">
+    <slot />
   </div>
 </template>
 
@@ -36,6 +34,7 @@ export default defineComponent({
     const containerRef = ref();
     const slotRef = ref();
 
+    const show = ref<boolean>(false);
     const visible = ref<boolean>(false);
     const handleResize = () => {
       const slotRect = slotRef.value?.getBoundingClientRect();
@@ -43,21 +42,30 @@ export default defineComponent({
 
       const top = slotRect.top - 10 + document.documentElement.scrollTop;
 
-      containerRef.value.setAttribute(
-        "style",
-        `top:${top}px;left:${
-          slotRect.left + slotRect.width / 2
-        }px;transform: translateX(-50%) translateY(-100%);display:${visible.value ? "block" : "none"}`
-      );
+      containerRef.value &&
+        containerRef.value.setAttribute(
+          "style",
+          `top:${top}px;left:${
+            slotRect.left + slotRect.width / 2
+          }px;transform: translateX(-50%) translateY(-100%);display:${visible.value ? "block" : "none"}`
+        );
     };
 
     const mouseenter = () => {
-      handleResize();
-      visible.value = true;
+      show.value = true;
+
+      setTimeout(() => {
+        handleResize();
+        visible.value = true;
+      }, 50);
     };
 
     const mouseleave = () => {
       visible.value = false;
+
+      setTimeout(() => {
+        show.value = false;
+      }, 50);
     };
 
     onMounted(() => {
@@ -74,6 +82,7 @@ export default defineComponent({
       name,
       slotRef,
       containerRef,
+      show,
       visible,
       slots,
       mouseenter,
