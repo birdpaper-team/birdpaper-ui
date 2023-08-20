@@ -27,7 +27,7 @@ export default defineComponent({
     /** 行记录 */
     record: { type: Object, default: () => {} },
     /** 列标识字段 */
-    dataIndex: { type: Number },
+    dataIndex: { type: String },
     /** 行下标 */
     rowIndex: { type: Number },
     /** 列宽度 */

@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import props from "../example/table/props.ts";
+  import columnProps from "../example/table/column-props.ts";
 </script>
 
 # 表格 Table
@@ -24,3 +25,7 @@
 ### Table 属性
 
 <table-block type="props" :data="props"></table-block>
+
+### TableColumn 属性
+
+<table-block type="props" :data="columnProps"></table-block>
