@@ -27,12 +27,8 @@
       text-align: right;
     }
 
-    .bp-table-header {
-      background-color: @gary-3;
-    }
-
-    .bp-table-header,
     .bp-table-body {
+      display: table;
       width: 100%;
       border: none;
       border-spacing: 0;
@@ -40,6 +36,7 @@
       box-sizing: border-box;
 
       .bp-table-header-thead {
+        background-color: @gary-3;
         display: table-header-group;
         width: 100%;
         -moz-user-select: none;
@@ -56,16 +53,13 @@
           background: none;
           border: none;
 
-          th {
+          .bp-table-th {
             overflow-wrap: break-word;
             display: table-cell;
             padding: 9px 16px;
             font-size: 14px;
             font-weight: 500;
             color: @gary-10;
-            border-left: none;
-            border-right: none;
-            border-top: none;
             background: none;
             line-height: 1.5;
           }
@@ -80,14 +74,28 @@
             background-color: @gary-2;
           }
 
-          td {
-            font-size: 13px;
-            font-weight: 400;
-            padding: 9px 16px;
-            word-break: break-all;
+          .bp-table-td {
             border-top: 1px solid @gary-4;
-            color: @gary-10;
-            line-height: 1.8;
+            padding: 9px 16px;
+            display: table-cell;
+
+            .bp-table-td-content {
+              display: flex;
+              width: 100%;
+              font-size: 13px;
+              font-weight: 400;
+              word-break: break-all;
+              color: @gary-10;
+              line-height: 1.8;
+
+              .text-ellipsis {
+                width: 100%;
+                display: block;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              }
+            }
           }
         }
 
@@ -116,25 +124,23 @@
 
   // 带边框表格
   .bp-table-border {
-    .bp-table-header {
-      .bp-table-header-thead {
-        tr {
-          th {
-            border-right: 1px solid #e8e8e8;
+    .bp-table-header-thead {
+      tr {
+        .bp-table-th {
+          border-right: 1px solid #e8e8e8;
 
-            &:first-child {
-              border-left: none;
-            }
-            &:last-child {
-              border-right: none;
-            }
+          &:first-child {
+            border-left: none;
+          }
+          &:last-child {
+            border-right: none;
           }
         }
       }
     }
     .bp-table-body-tbody {
       tr {
-        td {
+        .bp-table-td {
           border-right: 1px solid #e8e8e8;
 
           &:first-child {
@@ -154,7 +160,7 @@
       .bp-table-body-tbody {
         tr {
           &:nth-child(2n + 2) {
-            td {
+            .bp-table-td {
               background-color: @gary-1;
             }
           }
@@ -165,10 +171,6 @@
 
   // 固定表头
   .bp-table-fixed-header {
-    .bp-table-header {
-      z-index: 500;
-    }
-
     .bp-table-body {
       z-index: 499;
     }

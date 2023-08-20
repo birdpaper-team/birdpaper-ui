@@ -124,7 +124,7 @@ export default defineComponent({
         `display: ${isFocus.value ? "block" : "none"};
          width: ${rect.width}px;
          left: ${rect.left}px;
-         top: ${rect.top + rect.height}px;`
+         top: ${rect.top + rect.height + document.documentElement.scrollTop}px;`
       );
     };
 

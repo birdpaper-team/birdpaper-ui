@@ -1,9 +1,7 @@
 <template>
-  <bp-button @click="handleOpen">打开对话框</bp-button>
+  <bp-button @click="handleOpen">打开抽屉</bp-button>
 
-  <bp-modal v-model="show">
-    <p>对话框内容</p>
-  </bp-modal>
+  <bp-drawer v-model="show"></bp-drawer>
 </template>
 
 <script setup lang="ts">

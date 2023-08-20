@@ -73,24 +73,25 @@ export default defineComponent({
       if (!slotRect) return;
 
       const position = {
-        top: `top:${slotRect.top - 10}px;left:${
+        top: `top:${slotRect.top - 10 + document.documentElement.scrollTop}px;left:${
           slotRect.left + slotRect.width / 2
         }px;transform: translateX(-50%) translateY(-100%);`,
 
-        bottom: `top:${slotRect.top + slotRect.height + 10}px;left:${
+        bottom: `top:${slotRect.top + slotRect.height + 10 + document.documentElement.scrollTop}px;left:${
           slotRect.left + slotRect.width / 2
         }px;transform: translateX(-50%);`,
 
-        left: `top:${slotRect.top + slotRect.height / 2}px;left:${
+        left: `top:${slotRect.top + slotRect.height / 2 + document.documentElement.scrollTop}px;left:${
           slotRect.left - 10
         }px;transform: translateX(-100%) translateY(-50%);`,
 
-        right: `top:${slotRect.top + slotRect.height / 2}px;right:${
+        right: `top:${slotRect.top + slotRect.height / 2 + document.documentElement.scrollTop}px;right:${
           slotRect.right
         }px;transform: translateX(-100%) translateY(-50%);`,
       };
 
-      innerRef.value.setAttribute("style", `${position[props.position]};display:${show.value ? "block" : "none"}`);
+      innerRef.value &&
+        innerRef.value.setAttribute("style", `${position[props.position]};display:${show.value ? "block" : "none"}`);
     };
 
     const handleCancle = () => {

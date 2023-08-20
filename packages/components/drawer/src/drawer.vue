@@ -5,9 +5,9 @@
         <div :class="`${name}-mask`" v-show="modelValue"></div>
       </Transition>
 
-      <Transition name="modal-fade">
+      <Transition name="drawer-fade">
         <div :class="`${name}-wrapper`" v-show="modelValue" @click.self="handleMaskClick">
-          <div :class="cls" :style="`width:${width};top:${top}`">
+          <div :class="cls" :style="`width:${width};`">
             <div :class="`${name}-header`">
               <p :class="`${name}-header-title`">{{ title }}</p>
               <i v-if="!hideClose" :class="`${name}-header-close`" class="ri-close-line" @click="handleCancle"></i>
@@ -32,22 +32,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { computed, ref, watch } from "vue";
+import { computed, defineComponent, ref, watch } from "vue";
 
 export default defineComponent({
-  name: "Modal",
+  name: "Drawer",
   props: {
-    /** 对话框显示状态 */
     modelValue: { type: Boolean, default: false },
-    /** 对话框标题 */
+    /** 抽屉标题 */
     title: { type: String, default: "标题" },
     /** 标题对齐方式 */
     titleAlign: { type: String, default: "left" },
-    /** 对话框宽度 */
-    width: { type: String, default: "600px" },
-    /** 对话框宽度 */
-    top: { type: String, default: "20vh" },
+    /** 抽屉宽度 */
+    width: { type: String, default: "360px" },
     /** 是否隐藏底部区域 */
     hideFooter: { type: Boolean, default: false },
     /** 是否隐藏关闭图标 */
@@ -67,7 +63,7 @@ export default defineComponent({
   },
   emits: ["update:modelValue", "ok", "cancle"],
   setup(props, { emit, slots }) {
-    const name = "bp-modal";
+    const name = "bp-drawer";
     const containerVisable = ref<boolean>(false);
 
     const cls = computed(() => {
@@ -101,7 +97,7 @@ export default defineComponent({
         emit("ok");
         emit("update:modelValue", false);
       } catch (error) {
-        console.log("[ Modal -onBeforeOk error]", error);
+        console.log("[ Drawer -onBeforeOk error]", error);
       } finally {
         confirmLoading.value = false;
       }
@@ -120,6 +116,7 @@ export default defineComponent({
         }, 200);
       }
     );
+
     return {
       name,
       cls,

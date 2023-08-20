@@ -45,6 +45,7 @@ export const sidebar = {
         { text: "链接 <span>Link</span>", link: "/component/link" },
         { text: "图片 <span>Image</span>", link: "/component/image" },
         { text: "加载中 <span>Loading</span>", link: "/component/spin" },
+        { text: "文字气泡 <span>Tooltip</span>", link: "/component/tooltip" },
       ],
     },
     {
@@ -54,6 +55,7 @@ export const sidebar = {
         { text: "消息提示 <span>Message</span>", link: "/component/message" },
         { text: "气泡确认 <span>Popconfirm</span>", link: "/component/popconfirm" },
         { text: "对话框 <span>Modal</span>", link: "/component/modal" },
+        { text: "抽屉 <span>Drawer</span>", link: "/component/drawer" },
       ],
     },
   ],

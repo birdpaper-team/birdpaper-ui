@@ -26,6 +26,7 @@ export type { PaginationInstance } from "./pagination";
 
 export { default as Table } from "./table";
 export type { TableInstance } from "./table";
+export type { TableColumnsInstance } from "./table";
 
 export { default as Space } from "./space";
 export type { SpaceInstance } from "./space";
@@ -53,6 +54,12 @@ export type { PopconfirmInstance } from "./popconfirm";
 
 export { default as Image } from "./image";
 export type { ImageInstance } from "./image";
+
+export { default as Drawer } from "./drawer";
+export type { DrawerInstance } from "./drawer";
+
+export { default as Tooltip } from "./tooltip";
+export type { TooltipInstance } from "./tooltip";
 
 export { default as Message } from "./message";
 

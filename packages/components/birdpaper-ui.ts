@@ -17,6 +17,8 @@ import Grid from "./grid";
 import Link from "./link";
 import Popconfirm from "./popconfirm";
 import Image from "./image";
+import Drawer from "./drawer";
+import Tooltip from "./tooltip";
 import Message from "./message";
 
 const components: Record<string, Plugin> = {
@@ -38,6 +40,8 @@ const components: Record<string, Plugin> = {
   Link,
   Popconfirm,
   Image,
+  Drawer,
+  Tooltip,
   Message,
 };
 
@@ -69,5 +73,7 @@ export default {
   Link,
   Popconfirm,
   Image,
+  Drawer,
+  Tooltip,
   Message,
 };

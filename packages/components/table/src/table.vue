@@ -2,27 +2,35 @@
   <bp-spin :loading="loading">
     <div class="bp-table" ref="bpTable">
       <div :class="innerClass">
-        <table-header :header-list="columns"></table-header>
-
         <div class="bp-table-body-area" :style="bodyAreaStyle">
           <div class="scrollbar"></div>
 
           <table class="bp-table-body" :style="`width:${table_width}px`">
-            <col-group :cols="columns"></col-group>
+            <table-header :header-list="columns"></table-header>
 
-            <tbody class="bp-table-body-tbody">
-              <table-empty v-if="isEmpty" :colspan="columns.length"></table-empty>
+            <table-empty v-if="isEmpty" :colspan="columns.length"></table-empty>
 
-              <template v-else>
-                <tr v-for="(item, index) in data" :key="`bp-table-tbody-tr-${index}`">
-                  <td v-for="(v, k) in columns" :key="`bp-table-tbody-td-${index}-${k}`" :class="tdClass(v)">
+            <table-body v-else-if="!isEmpty && slots.columns" :data="data">
+              <slot name="columns"> </slot>
+            </table-body>
+
+            <tbody class="bp-table-body-tbody" v-else>
+              <tr v-for="(item, index) in data" :key="`bp-table-tbody-tr-${index}`">
+                <td v-for="(v, k) in columns" :key="`bp-table-tbody-td-${index}-${k}`" :class="tdClass(v)">
+                  <span class="bp-table-td-content">
                     <template v-if="!v.scope">
-                      <span>{{ item[v.key] }}</span>
+                      <span>{{ item[v.dataIndex] }}</span>
                     </template>
-                    <slot v-else :name="v.scope.customRender" :row="item" :index="index" :data="item[v.key]"></slot>
-                  </td>
-                </tr>
-              </template>
+                    <slot
+                      v-else
+                      :name="v.scope.customRender"
+                      :row="item"
+                      :index="index"
+                      :data="item[v.dataIndex]"
+                    ></slot>
+                  </span>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -32,20 +40,21 @@
 </template>
 
 <script lang="ts">
-import { computed } from "vue";
+import { PropType, computed } from "vue";
 import { useTable } from "./table";
 import TableHeader from "./components/table-header.vue";
+import TableBody from "./components/table-body";
 import TableEmpty from "./components/empty.vue";
-import ColGroup from "./components/col-group.vue";
 import bpSpin from "../../spin/index";
 import { defineComponent } from "vue";
+import { ColumnsItem } from "./types";
 
 export default defineComponent({
   name: "Table",
-  components: { TableHeader, TableEmpty, ColGroup, bpSpin },
+  components: { TableHeader, TableEmpty, TableBody, bpSpin },
   props: {
     /* 表格头部列表 Table header list */
-    cols: { type: Array, default: () => [] },
+    cols: { type: Array as PropType<ColumnsItem[]>, default: () => [] },
     /* 表格数据 Table data source */
     data: { type: Array, default: () => [] },
     /* 固定高度 Fixed height */
@@ -57,8 +66,8 @@ export default defineComponent({
     /* 斑马纹 Stripe or not */
     stripe: { type: Boolean, default: false },
   },
-  setup(props) {
-    const { bpTable, columns, table_width } = useTable(props);
+  setup(props, { slots }) {
+    const { bpTable, columns, table_width } = useTable(props, slots);
 
     const isEmpty = computed(() => props.data.length === 0);
     const hasBorder = computed(() => props.border);
@@ -86,11 +95,12 @@ export default defineComponent({
     const tdClass = (v: any) => {
       let align = `text-${v["align"] || "left"}`;
 
-      let name = [align];
+      let name = ["bp-table-td", align];
       return name;
     };
 
     return {
+      slots,
       bpTable,
       columns,
       table_width,
