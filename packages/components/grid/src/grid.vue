@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { computed, nextTick, onMounted, PropType, ref, useSlots, VNode, VueElement } from "vue";
+import { computed, nextTick, onMounted, PropType, ref, VNode, VueElement } from "vue";
 import { Align, Justify } from "./types";
 import col from "./col.vue";
 import { defineComponent } from "vue";
@@ -20,16 +20,12 @@ export default defineComponent({
     /** 垂直对齐方式 Vertical alignment */
     align: { type: String as PropType<Align>, default: "start" },
   },
-  setup(props, { emit, slots }) {
+  setup(props, { slots }) {
     const rowRef = ref();
     const name = "row";
     const cls = computed(() => {
       return [`bp-${name}`, `bp-justify-${props.justify}`, `bp-align-${props.align}`];
     });
-
-    const init = () => {
-      setGutter(slots.default());
-    };
 
     /**
      * 设置栅格间距
@@ -55,14 +51,13 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      nextTick(() => init());
+      nextTick(() => setGutter(slots.default()));
     });
 
     return {
       rowRef,
       name,
       cls,
-      init,
     };
   },
 });
