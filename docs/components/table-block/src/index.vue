@@ -1,58 +1,45 @@
 <template>
   <div class="table-block">
-    <bp-table :cols="header[type]" :data="list">
-      <!-- 名称 -->
-      <template #name="{ row }">
-        <div class="name-area">
-          <span class="name-area-inner">{{ row.name || "-" }}</span>
-        </div>
-      </template>
-      <!-- 说明 -->
-      <template #remark="{ row }">
-        <div class="remark-area">
-          <span class="remark-area-inner">{{ row.remark || "-" }}</span>
-        </div>
-      </template>
-      <!-- 默认值 -->
-      <template #default="{ row }">
-        <div class="default-area">
-          <span class="default-area-inner">{{ row.default || "-" }}</span>
-        </div>
-      </template>
-      <!-- 参数 -->
-      <template #params="{ row }">
-        <div class="params-area">
-          <span class="params-area-inner">{{ row.params || "-" }}</span>
-        </div>
-      </template>
-      <!-- 返回值 -->
-      <template #returns="{ row }">
-        <div class="returns-area">
-          <span class="returns-area-inner">{{ row.returns || "-" }}</span>
-        </div>
-      </template>
-      <!-- 类型 -->
-      <template #type="{ row }">
-        <div class="type-area" v-clickOutside="() => onClickoutside(row)">
-          <template v-if="typeof row.type === 'object'">
-            <span class="type-area-inner" v-for="v in row.type">
-              {{ v }}
-            </span>
+    <bp-table :data="list">
+      <template #columns>
+        <bp-table-column title="名称" data-index="name" width="140">
+          <template #cell="{ record }">
+            <span class="name-area-inner">{{ record.name || "-" }}</span>
           </template>
-          <span class="type-area-inner" v-else>{{ row.type || "-" }}</span>
+        </bp-table-column>
+        <bp-table-column title="说明" data-index="remark">
+          <template #cell="{ record }">
+            <span class="remark-area-inner">{{ record.remark || "-" }}</span>
+          </template>
+        </bp-table-column>
+        <bp-table-column title="类型" data-index="type" width="240">
+          <template #cell="{ record }">
+            <div class="type-area" v-clickOutside="() => onClickoutside(record)">
+              <template v-if="typeof record.type === 'object'">
+                <span class="type-area-inner" v-for="v in record.type">
+                  {{ v }}
+                </span>
+              </template>
+              <span class="type-area-inner" v-else>{{ record.type || "-" }}</span>
 
-          <!-- 枚举值展示 -->
-          <span
-            v-if="row.type === 'Enum' || row.type.includes('Enum')"
-            :class="['ri-error-warning-fill', { active: row.showTip }]"
-            @click="handleRowTipShow(row)"
-          ></span>
-          <Transition>
-            <div v-if="row.showTip" class="optional-area">
-              <span>{{ row.optional.join(" | ") }}</span>
+              <bp-tooltip
+                v-if="record.type && (record.type === 'Enum' || record.type.indexOf('Enum') !== -1)"
+                trigger="click"
+                :content="record.optional && record.optional.join(' | ')"
+              >
+                <span
+                  :class="['ri-error-warning-fill', { active: record.showTip }]"
+                  @click="handleRowTipShow(record)"
+                ></span>
+              </bp-tooltip>
             </div>
-          </Transition>
-        </div>
+          </template>
+        </bp-table-column>
+        <bp-table-column title="默认值" data-index="default">
+          <template #cell="{ record }">
+            <span class="default-area-inner">{{ record.default || "-" }}</span>
+          </template>
+        </bp-table-column>
       </template>
     </bp-table>
   </div>
@@ -60,11 +47,10 @@
 
 <script setup lang="ts" name="table-block">
 import { PropType, ref, watch } from "vue";
-import { EventTableItem, header, MethodTableItem, PropTableItem, SlotTableItem } from "./tableBlock";
+import { EventTableItem, MethodTableItem, PropTableItem, SlotTableItem } from "./tableBlock";
 import { vClickOutside } from "../../directives/clickOutside";
 
 const props = defineProps({
-  type: { type: String, default: "props" },
   src: { type: String, default: "" },
   data: {
     type: Array as PropType<PropTableItem[] | EventTableItem[] | MethodTableItem[] | SlotTableItem[]>,
