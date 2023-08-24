@@ -7,10 +7,10 @@
             <span class="name-area-inner">{{ record.name || "-" }}</span>
           </template>
         </bp-table-column>
-        <bp-table-column title="说明" data-index="remark">
-          <template #cell="{ record }">
+        <bp-table-column title="说明" data-index="remark" tooltip ellipsis>
+          <!-- <template #cell="{ record }">
             <span class="remark-area-inner">{{ record.remark || "-" }}</span>
-          </template>
+          </template> -->
         </bp-table-column>
         <bp-table-column title="类型" data-index="type" width="240">
           <template #cell="{ record }">
