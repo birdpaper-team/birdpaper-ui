@@ -8,9 +8,9 @@
           </template>
         </bp-table-column>
         <bp-table-column title="说明" data-index="remark" tooltip ellipsis>
-          <!-- <template #cell="{ record }">
+          <template #cell="{ record }">
             <span class="remark-area-inner">{{ record.remark || "-" }}</span>
-          </template> -->
+          </template>
         </bp-table-column>
         <bp-table-column title="类型" data-index="type" width="240">
           <template #cell="{ record }">

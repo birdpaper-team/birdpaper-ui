@@ -75,15 +75,15 @@ export default defineComponent({
     const openTool = () => {
       show.value = true;
 
-      setTimeout(() => {
+      nextTick(() => {
         handleResize();
         visible.value = true;
-      }, 50);
+      });
     };
 
     /** 关闭提示框 */
     const closeTool = () => {
-      if(!visible.value) return;
+      if (!visible.value) return;
       visible.value = false;
 
       setTimeout(() => {

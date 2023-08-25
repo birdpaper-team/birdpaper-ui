@@ -11,7 +11,15 @@
           {{ record[dataIndex] }}
         </span>
       </template>
-      <slot v-else name="cell" :record="record" :rowIndex="rowIndex" />
+
+      <template v-else>
+        <bp-tooltip :content="record[dataIndex]" v-if="tooltip">
+          <span :class="[{ 'text-ellipsis': ellipsis }]">
+            <slot name="cell" :record="record" :rowIndex="rowIndex" />
+          </span>
+        </bp-tooltip>
+        <slot v-else name="cell" :record="record" :rowIndex="rowIndex" />
+      </template>
     </span>
   </td>
 </template>
