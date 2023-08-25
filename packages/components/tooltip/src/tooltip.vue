@@ -1,7 +1,12 @@
 <template>
   <teleport to="body" v-if="show">
     <transition name="tooltip-fade">
-      <div ref="containerRef" v-show="visible" :class="`${name}-container`" v-clickOutside="closeTool">
+      <div
+        ref="containerRef"
+        v-show="visible"
+        :class="`${name}-container`"
+        v-clickOutside="trigger === 'click' && closeTool"
+      >
         <div :class="`${name}-content`">
           <template v-if="!slots.content">
             {{ content }}
@@ -75,10 +80,10 @@ export default defineComponent({
     const openTool = () => {
       show.value = true;
 
-      nextTick(() => {
+      setTimeout(() => {
         handleResize();
         visible.value = true;
-      });
+      }, 0);
     };
 
     /** 关闭提示框 */
@@ -86,9 +91,9 @@ export default defineComponent({
       if (!visible.value) return;
       visible.value = false;
 
-      setTimeout(() => {
+      nextTick(() => {
         show.value = false;
-      }, 50);
+      });
     };
 
     onMounted(() => {
