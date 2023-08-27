@@ -21,6 +21,12 @@ const list: PropTableItem[] = [
     type: ["String"],
     default: "flex-start",
   },
+  {
+    name: "align",
+    remark: "垂直对其方式",
+    type: ["String"],
+    default: "flex-start",
+  },
 ];
 
 export default list;
