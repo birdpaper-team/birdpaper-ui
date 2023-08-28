@@ -1,4 +1,4 @@
-import { ref, watch, onMounted, nextTick, onBeforeUnmount } from "vue";
+import { ref, watch, onMounted, nextTick, onBeforeUnmount, Comment } from "vue";
 import { off, on, throttle } from "../../../utils/util";
 import { getAllElements } from "../../../utils/dom";
 import { ColumnsItem } from "./types";
