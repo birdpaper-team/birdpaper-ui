@@ -79,7 +79,6 @@ export default defineComponent({
       return cls;
     });
 
-
     /** 外层点击触发，聚焦并打开下拉面板 */
     const handleClick = () => {
       if (props.disabled) return;
@@ -102,6 +101,11 @@ export default defineComponent({
         immediate: true,
         deep: true,
       }
+    );
+
+    watch(
+      () => props.modelValue,
+      () => setValue()
     );
 
     onMounted(() => {
