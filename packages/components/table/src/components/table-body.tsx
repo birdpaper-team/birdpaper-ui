@@ -1,5 +1,5 @@
 import { getAllElements } from "../../../../utils/dom";
-import { Fragment, defineComponent, h, mergeProps } from "vue";
+import { Fragment, defineComponent, Comment, mergeProps } from "vue";
 
 export default defineComponent({
   name: "TableBody",

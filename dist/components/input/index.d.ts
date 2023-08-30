@@ -9,7 +9,7 @@ declare const Input: {
             type?: import("./src/types").InputType;
             size?: import("./src/types").InputSize;
             disabled?: boolean;
-            modelValue?: string;
+            modelValue?: string | number;
             readonly?: boolean;
             isDanger?: boolean;
             placeholder?: string;
@@ -82,12 +82,12 @@ declare const Input: {
         $el: any;
         $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
             modelValue: {
-                type: StringConstructor;
+                type: (StringConstructor | NumberConstructor)[];
                 default: string;
             };
             type: {
                 type: import("vue").PropType<import("./src/types").InputType>;
-                default: import("./src/types").InputType;
+                default: string;
             };
             size: {
                 type: import("vue").PropType<import("./src/types").InputSize>;
@@ -152,7 +152,7 @@ declare const Input: {
             type: import("./src/types").InputType;
             size: import("./src/types").InputSize;
             disabled: boolean;
-            modelValue: string;
+            modelValue: string | number;
             readonly: boolean;
             isDanger: boolean;
             placeholder: string;
@@ -181,12 +181,12 @@ declare const Input: {
         $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
     } & Readonly<import("vue").ExtractPropTypes<{
         modelValue: {
-            type: StringConstructor;
+            type: (StringConstructor | NumberConstructor)[];
             default: string;
         };
         type: {
             type: import("vue").PropType<import("./src/types").InputType>;
-            default: import("./src/types").InputType;
+            default: string;
         };
         size: {
             type: import("vue").PropType<import("./src/types").InputSize>;
@@ -253,12 +253,12 @@ declare const Input: {
     __isSuspense?: never;
 } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
     modelValue: {
-        type: StringConstructor;
+        type: (StringConstructor | NumberConstructor)[];
         default: string;
     };
     type: {
         type: import("vue").PropType<import("./src/types").InputType>;
-        default: import("./src/types").InputType;
+        default: string;
     };
     size: {
         type: import("vue").PropType<import("./src/types").InputSize>;
@@ -323,7 +323,7 @@ declare const Input: {
     type: import("./src/types").InputType;
     size: import("./src/types").InputSize;
     disabled: boolean;
-    modelValue: string;
+    modelValue: string | number;
     readonly: boolean;
     isDanger: boolean;
     placeholder: string;

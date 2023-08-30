@@ -7,7 +7,7 @@
       :spellcheck="false"
       :disabled="disabled"
       :readonly="readonly"
-      :cursor="modelValue.length"
+      :cursor="(modelValue as string).length"
       :placeholder="placeholder"
       :maxlength="maxlength"
       :value="modelValue"
@@ -45,9 +45,9 @@ export default defineComponent({
   name: "Input",
   props: {
     /** 绑定值 Binding value */
-    modelValue: { type: String, default: "" },
+    modelValue: { type: [String, Number], default: "" },
     /** 输入框类型 Type of the input */
-    type: { type: String as PropType<InputType>, default: InputType.Text },
+    type: { type: String as PropType<InputType>, default: "text" },
     /** 输入框尺寸 Size of the input */
     size: { type: String as PropType<InputSize>, default: "normal" },
     /** 是否禁用 Disabled or not */
@@ -69,7 +69,7 @@ export default defineComponent({
   setup(props, { emit, slots }) {
     const name = "bp-input";
     const inpRef = ref();
-    const inpType = computed<InputType>(() => (isPasswordType.value ? InputType.Password : InputType.Text));
+    const inpType = computed<InputType>(() => (isPasswordType.value ? "password" : "text"));
 
     const inpClass = computed(() => {
       const status = getStatus();
@@ -94,12 +94,12 @@ export default defineComponent({
     const showWordLimit = computed(() => {
       return props.maxlength && props.showLimit && props.type === "text";
     });
-    const limitText = computed(() => `${props.modelValue.length}/${props.maxlength}`);
+    const limitText = computed(() => `${(props.modelValue as string).length}/${props.maxlength}`);
 
     /** 是否明文展示密码类型输入框内容 */
     const showPassword = ref<boolean>(false);
     /** 是否为密码类型输入框 */
-    const isPasswordType = computed<boolean>(() => props.type === InputType.Password && !showPassword.value);
+    const isPasswordType = computed<boolean>(() => props.type === 'password' && !showPassword.value);
     /** 明文/匿文切换 */
     const triggerPassword = () => {
       showPassword.value = !showPassword.value;
@@ -138,7 +138,7 @@ export default defineComponent({
       onKeypress,
       onKeyup,
       onInput,
-      triggerPassword
+      triggerPassword,
     };
   },
 });

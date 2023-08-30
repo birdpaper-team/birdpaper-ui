@@ -18,6 +18,10 @@
 在 `col` 上通过设置 `offset` 属性可实现偏移距离。
 <demo-block src="example/grid/offset"></demo-block>
 
+### 响应式布局
+通过分别设置对应尺寸下的属性实现响应式。
+<demo-block src="example/grid/responsive"></demo-block>
+
 ### Row 属性
 <table-block type="props" :data="rowProps"></table-block>
 

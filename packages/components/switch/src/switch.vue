@@ -18,7 +18,7 @@ export default defineComponent({
   name: "Switch",
   props: {
     /** 绑定值 Binding value */
-    modelValue: { type: Boolean, default: false },
+    modelValue: { type: [Boolean, Number, String], default: false },
     /** 是否禁用 Disabled or not */
     disabled: { type: Boolean, default: false },
     /** 选中时的值 */

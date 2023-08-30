@@ -1,7 +1,7 @@
 declare const _sfc_main: import("vue").DefineComponent<{
     /** 绑定值 Binding value */
     modelValue: {
-        type: BooleanConstructor;
+        type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
         default: boolean;
     };
     /** 是否禁用 Disabled or not */
@@ -33,7 +33,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     /** 绑定值 Binding value */
     modelValue: {
-        type: BooleanConstructor;
+        type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
         default: boolean;
     };
     /** 是否禁用 Disabled or not */
@@ -60,7 +60,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     "onUpdate:modelValue"?: (...args: any[]) => any;
 }, {
     disabled: boolean;
-    modelValue: boolean;
+    modelValue: string | number | boolean;
     checkValue: string | number | boolean;
     uncheckValue: string | number | boolean;
     onBeforeOk: Function;

@@ -1,4 +1,4 @@
-import { Slots, VNode, computed, reactive, ref } from "vue";
+import { Slots, VNode, computed, reactive, ref, Comment } from "vue";
 import { SelectOption } from "./type";
 import { getAllElements } from "../../../utils/dom";
 

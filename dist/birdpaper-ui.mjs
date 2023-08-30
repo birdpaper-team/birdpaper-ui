@@ -4,7 +4,7 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { defineComponent, computed, useSlots, openBlock, createElementBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, ref, nextTick, Fragment, toDisplayString, watch, resolveComponent, renderList, createBlock, withCtx, createTextVNode, reactive, provide, onMounted, onBeforeUnmount, resolveDirective, withDirectives, withModifiers, createVNode, Teleport, Transition, vShow, inject, watchEffect, resolveDynamicComponent, mergeProps, toHandlerKey, normalizeStyle, Comment as Comment$1, onUnmounted, TransitionGroup, render } from "vue";
+import { defineComponent, computed, useSlots, openBlock, createElementBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, ref, nextTick, Fragment, toDisplayString, watch, resolveComponent, renderList, createBlock, withCtx, createTextVNode, reactive, Comment, provide, onMounted, onBeforeUnmount, resolveDirective, withDirectives, withModifiers, createVNode, Teleport, Transition, vShow, inject, watchEffect, resolveDynamicComponent, mergeProps, toHandlerKey, normalizeStyle, onUnmounted, TransitionGroup, render } from "vue";
 const _sfc_main$x = defineComponent({
   name: "Button",
   props: {
@@ -92,18 +92,13 @@ const Button = Object.assign(_button, {
     app.component(_button.name, _button);
   }
 });
-var InputType = /* @__PURE__ */ ((InputType2) => {
-  InputType2["Text"] = "text";
-  InputType2["Password"] = "password";
-  return InputType2;
-})(InputType || {});
 const _sfc_main$w = defineComponent({
   name: "Input",
   props: {
     /** 绑定值 Binding value */
-    modelValue: { type: String, default: "" },
+    modelValue: { type: [String, Number], default: "" },
     /** 输入框类型 Type of the input */
-    type: { type: String, default: InputType.Text },
+    type: { type: String, default: "text" },
     /** 输入框尺寸 Size of the input */
     size: { type: String, default: "normal" },
     /** 是否禁用 Disabled or not */
@@ -125,7 +120,7 @@ const _sfc_main$w = defineComponent({
   setup(props, { emit, slots }) {
     const name = "bp-input";
     const inpRef = ref();
-    const inpType = computed(() => isPasswordType.value ? InputType.Password : InputType.Text);
+    const inpType = computed(() => isPasswordType.value ? "password" : "text");
     const inpClass = computed(() => {
       const status = getStatus();
       return [name, `${name}-size-${props.size}`, `${name}-status-${status}`];
@@ -145,7 +140,7 @@ const _sfc_main$w = defineComponent({
     });
     const limitText = computed(() => `${props.modelValue.length}/${props.maxlength}`);
     const showPassword = ref(false);
-    const isPasswordType = computed(() => props.type === InputType.Password && !showPassword.value);
+    const isPasswordType = computed(() => props.type === "password" && !showPassword.value);
     const triggerPassword = () => {
       showPassword.value = !showPassword.value;
       nextTick(() => handleFocus());
@@ -505,7 +500,7 @@ const _sfc_main$r = defineComponent({
   name: "Switch",
   props: {
     /** 绑定值 Binding value */
-    modelValue: { type: Boolean, default: false },
+    modelValue: { type: [Boolean, Number, String], default: false },
     /** 是否禁用 Disabled or not */
     disabled: { type: Boolean, default: false },
     /** 选中时的值 */
@@ -609,6 +604,7 @@ const vClickOutside = {
     delete el.__click_outside__;
   }
 };
+const isNull = (data) => !data && data != 0;
 const isString = (data) => typeof data === "string";
 const throttle = (fn, delay) => {
   var lastTime;
@@ -773,6 +769,10 @@ const _sfc_main$q = defineComponent({
         immediate: true,
         deep: true
       }
+    );
+    watch(
+      () => props.modelValue,
+      () => setValue()
     );
     onMounted(() => {
       nextTick(() => {
@@ -1861,11 +1861,28 @@ function _sfc_render$a(_ctx, _cache, $props, $setup, $data, $options) {
           key: 1,
           class: normalizeClass([{ "text-ellipsis": _ctx.ellipsis }])
         }, toDisplayString(_ctx.record[_ctx.dataIndex]), 3)) : createCommentVNode("", true)
-      ], 64)) : renderSlot(_ctx.$slots, "cell", {
-        key: 1,
-        record: _ctx.record,
-        rowIndex: _ctx.rowIndex
-      })
+      ], 64)) : (openBlock(), createElementBlock(Fragment, { key: 1 }, [
+        _ctx.tooltip ? (openBlock(), createBlock(_component_bp_tooltip, {
+          key: 0,
+          content: _ctx.record[_ctx.dataIndex]
+        }, {
+          default: withCtx(() => [
+            createElementVNode("span", {
+              class: normalizeClass([{ "text-ellipsis": _ctx.ellipsis }])
+            }, [
+              renderSlot(_ctx.$slots, "cell", {
+                record: _ctx.record,
+                rowIndex: _ctx.rowIndex
+              })
+            ], 2)
+          ]),
+          _: 3
+        }, 8, ["content"])) : renderSlot(_ctx.$slots, "cell", {
+          key: 1,
+          record: _ctx.record,
+          rowIndex: _ctx.rowIndex
+        })
+      ], 64))
     ])
   ], 2);
 }
@@ -1881,15 +1898,23 @@ const Table = Object.assign(_table, {
 const _space = /* @__PURE__ */ defineComponent({
   name: "Space",
   props: {
+    /** 间距大小 */
     size: {
       type: [Number, String],
       default: "normal"
     },
+    /** 布局类型 */
     type: {
       type: String,
       default: "horizontal"
     },
+    /** 水平对齐方式 */
     justify: {
+      type: String,
+      default: "flex-start"
+    },
+    /** 垂直对齐方式 */
+    align: {
       type: String,
       default: "flex-start"
     }
@@ -1906,14 +1931,19 @@ const _space = /* @__PURE__ */ defineComponent({
     const size = isString(props.size) ? typeMap[props.size] : props.size;
     const render2 = () => {
       var _a;
-      const children = getAllElements((_a = slots.default) == null ? void 0 : _a.call(slots), true).filter((item) => item.type !== Comment$1);
+      const children = getAllElements((_a = slots.default) == null ? void 0 : _a.call(slots), true).filter((item) => item.type !== Comment);
       return createVNode("div", {
         "class": ["bp-space", `bp-space-${props.type}`],
-        "style": `justify-content:${props.justify}`
+        "style": `justify-content:${props.justify};align-items:${props.align}`
       }, [children.map((child, index) => {
+        var _a2;
+        const hasSplit = slots.split && index > 0;
         return createVNode(Fragment, {
           "key": child.key ?? `item-${index}`
-        }, [createVNode("div", {
+        }, [hasSplit && createVNode("div", {
+          "class": "bp-space-item",
+          "style": props.type === "horizontal" ? `margin: 0 ${size}px` : `margin: ${size}px 0`
+        }, [(_a2 = slots.split) == null ? void 0 : _a2.call(slots)]), createVNode("div", {
           "class": "bp-space-item",
           "style": props.type === "horizontal" ? `margin: 0 ${size}px` : `margin: ${size}px 0`
         }, [child])]);
@@ -2279,7 +2309,17 @@ const _sfc_main$8 = defineComponent({
     /** 栏位数量 1-24 Number of fields 1-24 */
     span: { type: [String, Number], default: 24 },
     /** 偏移量 Number of offset*/
-    offset: { type: [String, Number], default: "" }
+    offset: { type: [String, Number], default: "" },
+    // <768px 响应式栅格数或者栅格属性对象
+    xs: { type: [Object, Number] },
+    // ≥768px 响应式栅格数或者栅格属性对象
+    sm: { type: [Object, Number] },
+    // ≥992px 响应式栅格数或者栅格属性对象
+    md: { type: [Object, Number] },
+    // ≥1200px 响应式栅格数或者栅格属性对象
+    lg: { type: [Object, Number] },
+    // ≥1920px 响应式栅格数或者栅格属性对象
+    xl: { type: [Object, Number] }
   },
   setup(props) {
     const name = "col";
@@ -2287,6 +2327,20 @@ const _sfc_main$8 = defineComponent({
       let className = [`bp-${name}`];
       Number(props.span) !== 0 ? className.push(`bp-${name}-${props.span}`) : "";
       Number(props.offset) !== 0 ? className.push(`bp-${name}-offset-${props.offset}`) : "";
+      const responsive = ["xs", "sm", "md", "lg", "xl"];
+      for (let i = 0; i < responsive.length; i++) {
+        const item = responsive[i];
+        if (!props[item])
+          continue;
+        if (typeof props[item] === "number") {
+          className.push(`bp-${name}-${item}-${props[item]}`);
+          continue;
+        }
+        if (!isNull(props[item])) {
+          props[item].span && className.push(`bp-${name}-${item}-${props[item].span}`);
+          props[item].offset && className.push(`bp-${name}-${item}-offset-${props[item].offset}`);
+        }
+      }
       return className;
     });
     return {
@@ -2313,15 +2367,12 @@ const _sfc_main$7 = defineComponent({
     /** 垂直对齐方式 Vertical alignment */
     align: { type: String, default: "start" }
   },
-  setup(props, { emit, slots }) {
+  setup(props, { slots }) {
     const rowRef = ref();
     const name = "row";
     const cls = computed(() => {
       return [`bp-${name}`, `bp-justify-${props.justify}`, `bp-align-${props.align}`];
     });
-    const init = () => {
-      setGutter(slots.default());
-    };
     const setGutter = (els) => {
       const childrenEls = rowRef.value.children;
       els.forEach((item, index) => {
@@ -2338,13 +2389,12 @@ const _sfc_main$7 = defineComponent({
       });
     };
     onMounted(() => {
-      nextTick(() => init());
+      nextTick(() => setGutter(slots.default()));
     });
     return {
       rowRef,
       name,
-      cls,
-      init
+      cls
     };
   }
 });
@@ -2719,6 +2769,24 @@ const Image = Object.assign(_image, {
     app.component(_image.name, _image);
   }
 });
+const useScroll = () => {
+  const pageLocation = ref(0);
+  function stop() {
+    let scrollTop = window.scrollY;
+    pageLocation.value = scrollTop;
+    document.body.style.position = "fixed";
+    document.body.style.top = "-" + scrollTop + "px";
+  }
+  function move() {
+    document.body.style.position = "static";
+    window.scrollTo(0, pageLocation.value);
+  }
+  return {
+    pageLocation,
+    stop,
+    move
+  };
+};
 const _sfc_main$3 = defineComponent({
   name: "Drawer",
   props: {
@@ -2782,15 +2850,18 @@ const _sfc_main$3 = defineComponent({
         confirmLoading.value = false;
       }
     };
+    const { move, stop } = useScroll();
     watch(
       () => props.modelValue,
       () => {
         if (props.modelValue) {
           containerVisable.value = true;
+          stop();
           return;
         }
         setTimeout(() => {
           containerVisable.value = false;
+          move();
         }, 200);
       }
     );
@@ -2908,8 +2979,11 @@ const _sfc_main$2 = defineComponent({
   name: "Tooltip",
   props: {
     /** 文本提示内容 */
-    content: { type: String, default: "" }
+    content: { type: String, default: "" },
+    /** 触发方式 */
+    trigger: { type: String, default: "hover" }
   },
+  directives: { clickOutside: vClickOutside },
   setup(props, { slots }) {
     const name = "bp-tooltip";
     const containerRef = ref();
@@ -2927,18 +3001,35 @@ const _sfc_main$2 = defineComponent({
         `top:${top}px;left:${slotRect.left + slotRect.width / 2}px;transform: translateX(-50%) translateY(-100%);display:${visible.value ? "block" : "none"}`
       );
     };
+    const handleClick = () => {
+      if (props.trigger === "hover")
+        return;
+      show.value ? closeTool() : openTool();
+    };
     const mouseenter = () => {
+      if (props.trigger === "click")
+        return;
+      openTool();
+    };
+    const mouseleave = () => {
+      if (props.trigger === "click")
+        return;
+      closeTool();
+    };
+    const openTool = () => {
       show.value = true;
       setTimeout(() => {
         handleResize();
         visible.value = true;
-      }, 50);
+      }, 0);
     };
-    const mouseleave = () => {
+    const closeTool = () => {
+      if (!visible.value)
+        return;
       visible.value = false;
-      setTimeout(() => {
+      nextTick(() => {
         show.value = false;
-      }, 50);
+      });
     };
     onMounted(() => {
       nextTick(() => {
@@ -2956,12 +3047,16 @@ const _sfc_main$2 = defineComponent({
       visible,
       slots,
       mouseenter,
-      mouseleave
+      mouseleave,
+      openTool,
+      closeTool,
+      handleClick
     };
   }
 });
 const _hoisted_1$1 = /* @__PURE__ */ createElementVNode("div", { class: "triangle" }, null, -1);
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
+  const _directive_clickOutside = resolveDirective("clickOutside");
   return openBlock(), createElementBlock(Fragment, null, [
     _ctx.show ? (openBlock(), createBlock(Teleport, {
       key: 0,
@@ -2969,7 +3064,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     }, [
       createVNode(Transition, { name: "tooltip-fade" }, {
         default: withCtx(() => [
-          withDirectives(createElementVNode("div", {
+          withDirectives((openBlock(), createElementBlock("div", {
             ref: "containerRef",
             class: normalizeClass(`${_ctx.name}-container`)
           }, [
@@ -2982,8 +3077,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
               renderSlot(_ctx.$slots, "content")
             ], 2),
             _hoisted_1$1
-          ], 2), [
-            [vShow, _ctx.visible]
+          ], 2)), [
+            [vShow, _ctx.visible],
+            [_directive_clickOutside, _ctx.trigger === "click" && _ctx.closeTool]
           ])
         ]),
         _: 3
@@ -2992,8 +3088,9 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
     createElementVNode("div", {
       ref: "slotRef",
       class: normalizeClass(`${_ctx.name}-inner`),
-      onMouseenter: _cache[0] || (_cache[0] = (...args) => _ctx.mouseenter && _ctx.mouseenter(...args)),
-      onMouseleave: _cache[1] || (_cache[1] = (...args) => _ctx.mouseleave && _ctx.mouseleave(...args))
+      onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args)),
+      onMouseenter: _cache[1] || (_cache[1] = (...args) => _ctx.mouseenter && _ctx.mouseenter(...args)),
+      onMouseleave: _cache[2] || (_cache[2] = (...args) => _ctx.mouseleave && _ctx.mouseleave(...args))
     }, [
       renderSlot(_ctx.$slots, "default")
     ], 34)

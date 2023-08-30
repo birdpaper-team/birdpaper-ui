@@ -1,7 +1,12 @@
 <template>
   <teleport to="body" v-if="show">
     <transition name="tooltip-fade">
-      <div ref="containerRef" v-show="visible" :class="`${name}-container`">
+      <div
+        ref="containerRef"
+        v-show="visible"
+        :class="`${name}-container`"
+        v-clickOutside="trigger === 'click' && closeTool"
+      >
         <div :class="`${name}-content`">
           <template v-if="!slots.content">
             {{ content }}
@@ -13,13 +18,15 @@
     </transition>
   </teleport>
 
-  <div ref="slotRef" :class="`${name}-inner`" @mouseenter="mouseenter" @mouseleave="mouseleave">
+  <div ref="slotRef" :class="`${name}-inner`" @click="handleClick" @mouseenter="mouseenter" @mouseleave="mouseleave">
     <slot />
   </div>
 </template>
 
 <script lang="ts">
+import { PropType } from "vue";
 import { off, on, throttle } from "../../../utils/util";
+import { vClickOutside } from "../../../directives/clickOutside";
 import { defineComponent, nextTick, onBeforeUnmount, onMounted, ref } from "vue";
 
 export default defineComponent({
@@ -27,7 +34,10 @@ export default defineComponent({
   props: {
     /** 文本提示内容 */
     content: { type: String, default: "" },
+    /** 触发方式 */
+    trigger: { type: String as PropType<"hover" | "click">, default: "hover" },
   },
+  directives: { clickOutside: vClickOutside },
   setup(props, { slots }) {
     const name = "bp-tooltip";
 
@@ -51,21 +61,39 @@ export default defineComponent({
         );
     };
 
+    const handleClick = () => {
+      if (props.trigger === "hover") return;
+      show.value ? closeTool() : openTool();
+    };
+
     const mouseenter = () => {
+      if (props.trigger === "click") return;
+      openTool();
+    };
+
+    const mouseleave = () => {
+      if (props.trigger === "click") return;
+      closeTool();
+    };
+
+    /** 打开提示框 */
+    const openTool = () => {
       show.value = true;
 
       setTimeout(() => {
         handleResize();
         visible.value = true;
-      }, 50);
+      }, 0);
     };
 
-    const mouseleave = () => {
+    /** 关闭提示框 */
+    const closeTool = () => {
+      if (!visible.value) return;
       visible.value = false;
 
-      setTimeout(() => {
+      nextTick(() => {
         show.value = false;
-      }, 50);
+      });
     };
 
     onMounted(() => {
@@ -87,6 +115,9 @@ export default defineComponent({
       slots,
       mouseenter,
       mouseleave,
+      openTool,
+      closeTool,
+      handleClick,
     };
   },
 });
