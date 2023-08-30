@@ -33,6 +33,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from "vue";
+import { useScroll } from "../../../utils/useScroll";
 
 export default defineComponent({
   name: "Drawer",
@@ -103,16 +104,19 @@ export default defineComponent({
       }
     };
 
+    const { move, stop } = useScroll();
     watch(
       () => props.modelValue,
       () => {
         if (props.modelValue) {
           containerVisable.value = true;
+          stop();
           return;
         }
 
         setTimeout(() => {
           containerVisable.value = false;
+          move();
         }, 200);
       }
     );
