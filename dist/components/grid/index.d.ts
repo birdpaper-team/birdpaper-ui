@@ -7,8 +7,8 @@ declare const Grid: {
         $data: {};
         $props: {
             justify?: import("./src/types").Justify;
-            gutter?: string | number;
             align?: import("./src/types").Align;
+            gutter?: string | number;
             key?: string | number | symbol;
             ref?: import("vue").VNodeRef;
             ref_for?: boolean;
@@ -84,11 +84,10 @@ declare const Grid: {
             rowRef: import("vue").Ref<any>;
             name: string;
             cls: import("vue").ComputedRef<string[]>;
-            init: () => void;
         }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
             justify: import("./src/types").Justify;
-            gutter: string | number;
             align: import("./src/types").Align;
+            gutter: string | number;
         }, {}, string, {}> & {
             beforeCreate?: (() => void) | (() => void)[];
             created?: (() => void) | (() => void)[];
@@ -126,7 +125,6 @@ declare const Grid: {
         rowRef: import("vue").Ref<any>;
         name: string;
         cls: import("vue").ComputedRef<string[]>;
-        init: () => void;
     }> & {} & import("vue").ComponentCustomProperties & {};
     __isFragment?: never;
     __isTeleport?: never;
@@ -148,11 +146,10 @@ declare const Grid: {
     rowRef: import("vue").Ref<any>;
     name: string;
     cls: import("vue").ComputedRef<string[]>;
-    init: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
     justify: import("./src/types").Justify;
-    gutter: string | number;
     align: import("./src/types").Align;
+    gutter: string | number;
 }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
     Col: import("vue").DefineComponent<{
         span: {
@@ -162,6 +159,21 @@ declare const Grid: {
         offset: {
             type: (StringConstructor | NumberConstructor)[];
             default: string;
+        };
+        xs: {
+            type: import("vue").PropType<import("./src/types").ColResponsive>;
+        };
+        sm: {
+            type: import("vue").PropType<import("./src/types").ColResponsive>;
+        };
+        md: {
+            type: import("vue").PropType<import("./src/types").ColResponsive>;
+        };
+        lg: {
+            type: import("vue").PropType<import("./src/types").ColResponsive>;
+        };
+        xl: {
+            type: import("vue").PropType<import("./src/types").ColResponsive>;
         };
     }, {
         name: string;
@@ -174,6 +186,21 @@ declare const Grid: {
         offset: {
             type: (StringConstructor | NumberConstructor)[];
             default: string;
+        };
+        xs: {
+            type: import("vue").PropType<import("./src/types").ColResponsive>;
+        };
+        sm: {
+            type: import("vue").PropType<import("./src/types").ColResponsive>;
+        };
+        md: {
+            type: import("vue").PropType<import("./src/types").ColResponsive>;
+        };
+        lg: {
+            type: import("vue").PropType<import("./src/types").ColResponsive>;
+        };
+        xl: {
+            type: import("vue").PropType<import("./src/types").ColResponsive>;
         };
     }>>, {
         span: string | number;

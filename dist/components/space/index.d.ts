@@ -8,6 +8,7 @@ declare const Space: {
             type?: import("./src/types").SpaceType;
             size?: import("./src/types").SizeType;
             justify?: string;
+            align?: string;
             key?: string | number | symbol;
             ref?: import("vue").VNodeRef;
             ref_for?: boolean;
@@ -79,10 +80,15 @@ declare const Space: {
                 type: StringConstructor;
                 default: string;
             };
+            align: {
+                type: StringConstructor;
+                default: string;
+            };
         }>>, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
             type: import("./src/types").SpaceType;
             size: import("./src/types").SizeType;
             justify: string;
+            align: string;
         }, {}, string, {}> & {
             beforeCreate?: (() => void) | (() => void)[];
             created?: (() => void) | (() => void)[];
@@ -116,6 +122,10 @@ declare const Space: {
             type: StringConstructor;
             default: string;
         };
+        align: {
+            type: StringConstructor;
+            default: string;
+        };
     }>> & import("vue").ShallowUnwrapRef<() => JSX.Element> & {} & import("vue").ComponentCustomProperties & {};
     __isFragment?: never;
     __isTeleport?: never;
@@ -133,10 +143,15 @@ declare const Space: {
         type: StringConstructor;
         default: string;
     };
+    align: {
+        type: StringConstructor;
+        default: string;
+    };
 }>>, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
     type: import("./src/types").SpaceType;
     size: import("./src/types").SizeType;
     justify: string;
+    align: string;
 }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
     install: (app: App) => void;
 };

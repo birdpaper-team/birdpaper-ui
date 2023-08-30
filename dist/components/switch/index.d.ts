@@ -6,7 +6,7 @@ declare const Switch: {
         $data: {};
         $props: {
             disabled?: boolean;
-            modelValue?: boolean;
+            modelValue?: string | number | boolean;
             checkValue?: string | number | boolean;
             uncheckValue?: string | number | boolean;
             onBeforeOk?: Function;
@@ -71,7 +71,7 @@ declare const Switch: {
         $el: any;
         $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
             modelValue: {
-                type: BooleanConstructor;
+                type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
                 default: boolean;
             };
             disabled: {
@@ -100,7 +100,7 @@ declare const Switch: {
             handleClick: () => Promise<void>;
         }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], string, {
             disabled: boolean;
-            modelValue: boolean;
+            modelValue: string | number | boolean;
             checkValue: string | number | boolean;
             uncheckValue: string | number | boolean;
             onBeforeOk: Function;
@@ -126,7 +126,7 @@ declare const Switch: {
         $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
     } & Readonly<import("vue").ExtractPropTypes<{
         modelValue: {
-            type: BooleanConstructor;
+            type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
             default: boolean;
         };
         disabled: {
@@ -159,7 +159,7 @@ declare const Switch: {
     __isSuspense?: never;
 } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
     modelValue: {
-        type: BooleanConstructor;
+        type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
         default: boolean;
     };
     disabled: {
@@ -188,7 +188,7 @@ declare const Switch: {
     handleClick: () => Promise<void>;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", {
     disabled: boolean;
-    modelValue: boolean;
+    modelValue: string | number | boolean;
     checkValue: string | number | boolean;
     uncheckValue: string | number | boolean;
     onBeforeOk: Function;

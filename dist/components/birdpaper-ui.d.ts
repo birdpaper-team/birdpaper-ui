@@ -265,7 +265,7 @@ declare const _default: {
                 type?: import("./input").InputType;
                 size?: import("./input").InputSize;
                 disabled?: boolean;
-                modelValue?: string;
+                modelValue?: string | number;
                 readonly?: boolean;
                 isDanger?: boolean;
                 placeholder?: string;
@@ -338,12 +338,12 @@ declare const _default: {
             $el: any;
             $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
                 modelValue: {
-                    type: StringConstructor;
+                    type: (StringConstructor | NumberConstructor)[];
                     default: string;
                 };
                 type: {
                     type: import("vue").PropType<import("./input").InputType>;
-                    default: import("./input").InputType;
+                    default: string;
                 };
                 size: {
                     type: import("vue").PropType<import("./input").InputSize>;
@@ -408,7 +408,7 @@ declare const _default: {
                 type: import("./input").InputType;
                 size: import("./input").InputSize;
                 disabled: boolean;
-                modelValue: string;
+                modelValue: string | number;
                 readonly: boolean;
                 isDanger: boolean;
                 placeholder: string;
@@ -437,12 +437,12 @@ declare const _default: {
             $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
         } & Readonly<import("vue").ExtractPropTypes<{
             modelValue: {
-                type: StringConstructor;
+                type: (StringConstructor | NumberConstructor)[];
                 default: string;
             };
             type: {
                 type: import("vue").PropType<import("./input").InputType>;
-                default: import("./input").InputType;
+                default: string;
             };
             size: {
                 type: import("vue").PropType<import("./input").InputSize>;
@@ -509,12 +509,12 @@ declare const _default: {
         __isSuspense?: never;
     } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
         modelValue: {
-            type: StringConstructor;
+            type: (StringConstructor | NumberConstructor)[];
             default: string;
         };
         type: {
             type: import("vue").PropType<import("./input").InputType>;
-            default: import("./input").InputType;
+            default: string;
         };
         size: {
             type: import("vue").PropType<import("./input").InputSize>;
@@ -579,7 +579,7 @@ declare const _default: {
         type: import("./input").InputType;
         size: import("./input").InputSize;
         disabled: boolean;
-        modelValue: string;
+        modelValue: string | number;
         readonly: boolean;
         isDanger: boolean;
         placeholder: string;
@@ -1183,7 +1183,7 @@ declare const _default: {
             $data: {};
             $props: {
                 disabled?: boolean;
-                modelValue?: boolean;
+                modelValue?: string | number | boolean;
                 checkValue?: string | number | boolean;
                 uncheckValue?: string | number | boolean;
                 onBeforeOk?: Function;
@@ -1248,7 +1248,7 @@ declare const _default: {
             $el: any;
             $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
                 modelValue: {
-                    type: BooleanConstructor;
+                    type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
                     default: boolean;
                 };
                 disabled: {
@@ -1277,7 +1277,7 @@ declare const _default: {
                 handleClick: () => Promise<void>;
             }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], string, {
                 disabled: boolean;
-                modelValue: boolean;
+                modelValue: string | number | boolean;
                 checkValue: string | number | boolean;
                 uncheckValue: string | number | boolean;
                 onBeforeOk: Function;
@@ -1303,7 +1303,7 @@ declare const _default: {
             $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
         } & Readonly<import("vue").ExtractPropTypes<{
             modelValue: {
-                type: BooleanConstructor;
+                type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
                 default: boolean;
             };
             disabled: {
@@ -1336,7 +1336,7 @@ declare const _default: {
         __isSuspense?: never;
     } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
         modelValue: {
-            type: BooleanConstructor;
+            type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
             default: boolean;
         };
         disabled: {
@@ -1365,7 +1365,7 @@ declare const _default: {
         handleClick: () => Promise<void>;
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", {
         disabled: boolean;
-        modelValue: boolean;
+        modelValue: string | number | boolean;
         checkValue: string | number | boolean;
         uncheckValue: string | number | boolean;
         onBeforeOk: Function;
@@ -2154,6 +2154,7 @@ declare const _default: {
                 type?: import("./space/src/types").SpaceType;
                 size?: import("./space/src/types").SizeType;
                 justify?: string;
+                align?: string;
                 key?: string | number | symbol;
                 ref?: import("vue").VNodeRef;
                 ref_for?: boolean;
@@ -2225,10 +2226,15 @@ declare const _default: {
                     type: StringConstructor;
                     default: string;
                 };
+                align: {
+                    type: StringConstructor;
+                    default: string;
+                };
             }>>, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
                 type: import("./space/src/types").SpaceType;
                 size: import("./space/src/types").SizeType;
                 justify: string;
+                align: string;
             }, {}, string, {}> & {
                 beforeCreate?: (() => void) | (() => void)[];
                 created?: (() => void) | (() => void)[];
@@ -2262,6 +2268,10 @@ declare const _default: {
                 type: StringConstructor;
                 default: string;
             };
+            align: {
+                type: StringConstructor;
+                default: string;
+            };
         }>> & import("vue").ShallowUnwrapRef<() => JSX.Element> & {} & import("vue").ComponentCustomProperties & {};
         __isFragment?: never;
         __isTeleport?: never;
@@ -2279,10 +2289,15 @@ declare const _default: {
             type: StringConstructor;
             default: string;
         };
+        align: {
+            type: StringConstructor;
+            default: string;
+        };
     }>>, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
         type: import("./space/src/types").SpaceType;
         size: import("./space/src/types").SizeType;
         justify: string;
+        align: string;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
     };
@@ -3096,8 +3111,8 @@ declare const _default: {
             $data: {};
             $props: {
                 justify?: import("./grid/src/types").Justify;
-                gutter?: string | number;
                 align?: import("./grid/src/types").Align;
+                gutter?: string | number;
                 key?: string | number | symbol;
                 ref?: import("vue").VNodeRef;
                 ref_for?: boolean;
@@ -3173,11 +3188,10 @@ declare const _default: {
                 rowRef: import("vue").Ref<any>;
                 name: string;
                 cls: import("vue").ComputedRef<string[]>;
-                init: () => void;
             }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
                 justify: import("./grid/src/types").Justify;
-                gutter: string | number;
                 align: import("./grid/src/types").Align;
+                gutter: string | number;
             }, {}, string, {}> & {
                 beforeCreate?: (() => void) | (() => void)[];
                 created?: (() => void) | (() => void)[];
@@ -3215,7 +3229,6 @@ declare const _default: {
             rowRef: import("vue").Ref<any>;
             name: string;
             cls: import("vue").ComputedRef<string[]>;
-            init: () => void;
         }> & {} & import("vue").ComponentCustomProperties & {};
         __isFragment?: never;
         __isTeleport?: never;
@@ -3237,11 +3250,10 @@ declare const _default: {
         rowRef: import("vue").Ref<any>;
         name: string;
         cls: import("vue").ComputedRef<string[]>;
-        init: () => void;
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
         justify: import("./grid/src/types").Justify;
-        gutter: string | number;
         align: import("./grid/src/types").Align;
+        gutter: string | number;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         Col: import("vue").DefineComponent<{
             span: {
@@ -3251,6 +3263,21 @@ declare const _default: {
             offset: {
                 type: (StringConstructor | NumberConstructor)[];
                 default: string;
+            };
+            xs: {
+                type: import("vue").PropType<import("./grid/src/types").ColResponsive>;
+            };
+            sm: {
+                type: import("vue").PropType<import("./grid/src/types").ColResponsive>;
+            };
+            md: {
+                type: import("vue").PropType<import("./grid/src/types").ColResponsive>;
+            };
+            lg: {
+                type: import("vue").PropType<import("./grid/src/types").ColResponsive>;
+            };
+            xl: {
+                type: import("vue").PropType<import("./grid/src/types").ColResponsive>;
             };
         }, {
             name: string;
@@ -3263,6 +3290,21 @@ declare const _default: {
             offset: {
                 type: (StringConstructor | NumberConstructor)[];
                 default: string;
+            };
+            xs: {
+                type: import("vue").PropType<import("./grid/src/types").ColResponsive>;
+            };
+            sm: {
+                type: import("vue").PropType<import("./grid/src/types").ColResponsive>;
+            };
+            md: {
+                type: import("vue").PropType<import("./grid/src/types").ColResponsive>;
+            };
+            lg: {
+                type: import("vue").PropType<import("./grid/src/types").ColResponsive>;
+            };
+            xl: {
+                type: import("vue").PropType<import("./grid/src/types").ColResponsive>;
             };
         }>>, {
             span: string | number;
@@ -4231,6 +4273,7 @@ declare const _default: {
             $data: {};
             $props: {
                 content?: string;
+                trigger?: "click" | "hover";
                 key?: string | number | symbol;
                 ref?: import("vue").VNodeRef;
                 ref_for?: boolean;
@@ -4294,6 +4337,10 @@ declare const _default: {
                     type: StringConstructor;
                     default: string;
                 };
+                trigger: {
+                    type: import("vue").PropType<"click" | "hover">;
+                    default: string;
+                };
             }>>, {
                 name: string;
                 slotRef: import("vue").Ref<any>;
@@ -4305,8 +4352,12 @@ declare const _default: {
                 }>;
                 mouseenter: () => void;
                 mouseleave: () => void;
+                openTool: () => void;
+                closeTool: () => void;
+                handleClick: () => void;
             }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
                 content: string;
+                trigger: "click" | "hover";
             }, {}, string, {}> & {
                 beforeCreate?: (() => void) | (() => void)[];
                 created?: (() => void) | (() => void)[];
@@ -4332,6 +4383,10 @@ declare const _default: {
                 type: StringConstructor;
                 default: string;
             };
+            trigger: {
+                type: import("vue").PropType<"click" | "hover">;
+                default: string;
+            };
         }>> & import("vue").ShallowUnwrapRef<{
             name: string;
             slotRef: import("vue").Ref<any>;
@@ -4343,6 +4398,9 @@ declare const _default: {
             }>;
             mouseenter: () => void;
             mouseleave: () => void;
+            openTool: () => void;
+            closeTool: () => void;
+            handleClick: () => void;
         }> & {} & import("vue").ComponentCustomProperties & {};
         __isFragment?: never;
         __isTeleport?: never;
@@ -4350,6 +4408,10 @@ declare const _default: {
     } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
         content: {
             type: StringConstructor;
+            default: string;
+        };
+        trigger: {
+            type: import("vue").PropType<"click" | "hover">;
             default: string;
         };
     }>>, {
@@ -4363,8 +4425,12 @@ declare const _default: {
         }>;
         mouseenter: () => void;
         mouseleave: () => void;
+        openTool: () => void;
+        closeTool: () => void;
+        handleClick: () => void;
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
         content: string;
+        trigger: "click" | "hover";
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
     };
