@@ -23,7 +23,7 @@
     height: ~"@{input-size-@{size}-height}";
     border-radius: ~"@{input-size-@{size}-radius}";
 
-    .suffix {
+    .@{input-cls}-suffix {
       height: calc(~"@{input-size-@{size}-height}" - 2px);
       border-radius: ~"@{input-size-@{size}-radius}";
     }
@@ -47,7 +47,7 @@
     border: 1px solid ~"@{input-status-@{status}-border-color}";
     transition: all 0.2s ease;
 
-    .bp-input-placeholder {
+    .@{input-cls}-placeholder {
       color: ~"@{input-status-@{status}-placeholder-color}";
       font-weight: normal;
     }
@@ -57,7 +57,7 @@
       border: 1px solid ~"@{input-status-@{status}-border-color-hover}";
       transition: all 0.2s ease;
 
-      .suffix {
+      .bp-input-suffix {
         .ri-close-line {
           opacity: 1;
           transition: all 0.2s ease;
@@ -70,7 +70,7 @@
       border: 1px solid ~"@{input-status-@{status}-border-color-focus}";
       transition: all 0.2s ease;
 
-      .suffix {
+      .bp-input-suffix {
         transition: all 0.2s ease;
       }
     }
@@ -125,7 +125,10 @@
 }
 
 // 后缀元素
-.suffix {
+.@{input-cls}-suffix {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
   display: flex;
   align-items: center;
   justify-content: center;
