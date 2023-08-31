@@ -34,6 +34,7 @@ export const sidebar = {
         { text: "复选框 <span>Checkbox</span>", link: "/component/checkbox" },
         { text: "选择器 <span>Select</span>", link: "/component/select" },
         { text: "开关 <span>Switch</span>", link: "/component/switch" },
+        { text: "数字输入 <span>InputNumber</span>", link: "/component/inputNumber" },
       ],
     },
     {

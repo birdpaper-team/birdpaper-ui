@@ -1,6 +1,7 @@
 import { App, Plugin } from "vue";
 import Button from "./button";
 import Input from "./input";
+import InputNumber from "./inputNumber";
 import Textarea from "./textarea";
 import Radio from "./radio";
 import Checkbox from "./checkbox";
@@ -24,6 +25,7 @@ import Message from "./message";
 const components: Record<string, Plugin> = {
   Button,
   Input,
+  InputNumber,
   Textarea,
   Radio,
   Checkbox,
@@ -57,6 +59,7 @@ export default {
   install,
   Button,
   Input,
+  InputNumber,
   Textarea,
   Radio,
   Checkbox,

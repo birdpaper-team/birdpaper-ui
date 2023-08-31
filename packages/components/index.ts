@@ -6,6 +6,9 @@ export type { ButtonInstance } from "./button";
 export { default as Input } from "./input";
 export type { InputInstance } from "./input";
 
+export { default as InputNumber } from "./inputNumber";
+export type { InputNumberInstance } from "./inputNumber";
+
 export { default as Textarea } from "./textarea";
 export type { TextareaInstance } from "./textarea";
 
