@@ -6,12 +6,11 @@ export const useScroll = () => {
   function stop() {
     let scrollTop = window.scrollY;
     pageLocation.value = scrollTop;
-    document.body.style.position = "fixed";
-    document.body.style.top = "-" + scrollTop + "px";
+    document.body.style.overflow = "hidden";
   }
 
   function move() {
-    document.body.style.position = "static";
+    document.body.style.overflow = "auto";
     window.scrollTo(0, pageLocation.value);
   }
 
