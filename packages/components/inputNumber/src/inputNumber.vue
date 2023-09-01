@@ -1,14 +1,15 @@
 <template>
   <bp-input
     ref="inputRef"
-    v-model="inputValue"
+    v-model="_value"
     :class="name"
     :placeholder="placeholder"
     :disabled="disabled"
     :readonly="readonly"
+    :is-danger="isDanger"
     @input="onInput"
   >
-    <template #suffix>
+    <template #suffix v-if="!hideButton">
       <div :class="`${name}-step`">
         <div :class="`${name}-step-item`" @click="handleStep('up')">
           <i class="ri-arrow-up-s-line"></i>
@@ -23,6 +24,7 @@
 
 <script lang="ts">
 import { InputSize } from "components/input";
+import { nextTick } from "vue";
 import { PropType, defineComponent, ref } from "vue";
 
 export default defineComponent({
@@ -38,31 +40,62 @@ export default defineComponent({
     readonly: { type: Boolean, default: false },
     /** 是否警示状态 Danger or not */
     isDanger: { type: Boolean, default: false },
-    /** 占位提示文字 The placeholder text*/
+    /** 占位提示文字 The placeholder text */
     placeholder: { type: String, default: "" },
+    /** 是否隐藏按钮 */
+    hideButton: { type: Boolean, default: false },
+    /** 数字精度 */
+    precision: { type: Number },
+    /** 数字变化跨度 */
+    step: { type: Number, default: 1 },
+    /** 最小值 */
+    min: { type: Number },
+    /** 最大值 */
+    max: { type: Number },
   },
   emits: ["update:modelValue", "input", "focus", "blur", "keypress", "keyup"],
   setup(props, { emit }) {
     const name = "bp-input-number";
     const inputRef = ref();
-    const inputValue = ref(props.modelValue);
+    const _value = ref<string>(props.modelValue + "");
 
     const handleStep = (type: "up" | "down") => {
-      inputRef.value.handleFocus();
+      if (props.hideButton) return;
 
-      type === "up" ? inputValue.value++ : inputValue.value--;
-      onInput(inputValue.value);
+      inputRef.value.handleFocus();
+      var val = Number(_value.value);
+      type === "up" ? (val += props.step) : (val -= props.step);
+
+      _value.value = val + "";
+      onInput(val);
+    };
+
+    const checkValue = (value: string) => {
+      value = value.trim().replace(/。/g, ".");
+      value = value.replace(/[^\d.]/g, "");
+      value = value.replace(/^\./g, "");
+      value = value.replace(/\.{2,}/g, ".");
+      if (!props.precision) return value;
+
+      value = value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+      let reg = new RegExp("^\\D*([0-9]\\d*\\.?\\d{0," + props.precision + "})?.*$");
+      value = value.replace(reg, "$1");
+      return value;
     };
 
     const onInput = (e: number) => {
-      emit("update:modelValue", e);
+      nextTick(() => {
+        _value.value = checkValue(e + "");
+        emit("update:modelValue", _value.value);
+      });
     };
 
     return {
       name,
       inputRef,
-      inputValue,
+      _value,
       handleStep,
+      checkValue,
       onInput,
     };
   },

@@ -7,7 +7,7 @@
       :spellcheck="false"
       :disabled="disabled"
       :readonly="readonly"
-      :cursor="(modelValue as string).length"
+      :cursor="modelValue.length"
       :placeholder="placeholder"
       :maxlength="maxlength"
       :value="modelValue"
@@ -45,7 +45,7 @@ export default defineComponent({
   name: "Input",
   props: {
     /** 绑定值 Binding value */
-    modelValue: { type: [String, Number], default: "" },
+    modelValue: { type: String, default: "" },
     /** 输入框类型 Type of the input */
     type: { type: String as PropType<InputType>, default: "text" },
     /** 输入框尺寸 Size of the input */
