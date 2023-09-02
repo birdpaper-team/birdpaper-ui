@@ -1,7 +1,7 @@
 <template>
   <bp-input
     ref="inputRef"
-    v-model="_value"
+    :modelValue="_value"
     :class="name"
     :placeholder="placeholder"
     :disabled="disabled"
@@ -26,8 +26,9 @@
 <script lang="ts">
 import { InputSize } from "components/input";
 import { isNull } from "../../../utils/util";
-import { nextTick } from "vue";
+import { nextTick, watch } from "vue";
 import { PropType, defineComponent, ref } from "vue";
+import { computed } from "vue";
 
 export default defineComponent({
   name: "InputNumber",
@@ -61,6 +62,10 @@ export default defineComponent({
     const inputRef = ref();
     const _value = ref<string>(props.modelValue + "");
 
+    const mergePrecision = computed(() => {
+      return props.precision;
+    });
+
     const handleStep = (type: "up" | "down") => {
       if (props.hideButton) return;
 
@@ -68,55 +73,66 @@ export default defineComponent({
       var val = Number(_value.value);
       type === "up" ? (val += props.step) : (val -= props.step);
 
-      _value.value = val + "";
-      onInput(val);
+      _value.value = val.toFixed(mergePrecision.value);
+
+      updateValue();
     };
 
     const limitNumber = (value: string) => {
       value = value.trim().replace(/。/g, ".");
-      value = value.replace(/[^\d.^-]/g, "");
-      value = value.replace(/^\./g, "");
-      value = value.replace(/\.{2,}/g, ".");
 
-      if (props.precision === 0) return Number(value) + "";
-
-      if (props.precision) {
-        value = value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
-        let reg = new RegExp("^\\D*([0-9]\\d*\\.?\\d{0," + props.precision + "})?.*$");
-        value = value.replace(reg, "$1");
-        return value;
+      if (Number(value) || /^(\.|-)$/.test(value)) {
+        updateValue();
       }
-
-      return value;
     };
 
     const handleStatus = () => {
-      const val = Number(_value.value);
-      if (!isNull(props.min) && val < props.min) {
+      let value = _value.value;
+
+      value = Number(value).toFixed(mergePrecision.value);
+
+      if (!isNull(props.min) && Number(value) < props.min) {
         return props.min + "";
       }
 
-      if (!isNull(props.max) && val > props.max) {
+      if (!isNull(props.max) && Number(value) > props.max) {
         return props.max + "";
       }
-      return val + "";
+      return value + "";
     };
 
-    const onInput = (e: number) => {
-      nextTick(() => {
-        _value.value = limitNumber(e + "");
+    const onInput = (value: string) => {
+      value = value.trim().replace(/。/g, ".");
 
-        if (!isNull(props.min) || !isNull(props.max)) {
-          _value.value = handleStatus();
-        }
-        emit("update:modelValue", _value.value);
-        emit("input", _value.value);
-      });
+      if (Number(value) || /^(\.|-)$/.test(value)) {
+        _value.value = value;
+        updateValue();
+      } else {
+        nextTick(() => {
+          _value.value = value.replace(/^(\.|-)$/g, "");
+          _value.value = value.replace(/-+[^\d.]/g, "");
+          _value.value = props.modelValue + "";
+        });
+      }
     };
 
     const onBlur = () => {
+      _value.value = handleStatus();
+      updateValue();
       emit("blur");
     };
+
+    const updateValue = () => {
+      emit("update:modelValue", _value.value);
+      emit("input", _value.value);
+    };
+
+    watch(
+      () => props.modelValue,
+      (value: number | undefined) => {
+        _value.value = value + "";
+      }
+    );
 
     return {
       name,

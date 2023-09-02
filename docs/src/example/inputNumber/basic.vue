@@ -1,6 +1,7 @@
 <template>
   {{ val }}
   <bp-input-number
+    :precision="3"
     :style="{ width: '220px' }"
     :min="-10"
     :max="10"
