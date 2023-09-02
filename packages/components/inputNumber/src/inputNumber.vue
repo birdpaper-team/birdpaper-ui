@@ -8,6 +8,7 @@
     :readonly="readonly"
     :is-danger="isDanger"
     @input="onInput"
+    @blur="onBlur"
   >
     <template #suffix v-if="!hideButton">
       <div :class="`${name}-step`">
@@ -24,6 +25,7 @@
 
 <script lang="ts">
 import { InputSize } from "components/input";
+import { isNull } from "../../../utils/util";
 import { nextTick } from "vue";
 import { PropType, defineComponent, ref } from "vue";
 
@@ -70,24 +72,50 @@ export default defineComponent({
       onInput(val);
     };
 
-    const checkValue = (value: string) => {
+    const limitNumber = (value: string) => {
       value = value.trim().replace(/。/g, ".");
-      value = value.replace(/[^\d.]/g, "");
+      value = value.replace(/[^\d.^-]/g, "");
       value = value.replace(/^\./g, "");
       value = value.replace(/\.{2,}/g, ".");
-      if (!props.precision) return value;
 
-      value = value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
-      let reg = new RegExp("^\\D*([0-9]\\d*\\.?\\d{0," + props.precision + "})?.*$");
-      value = value.replace(reg, "$1");
+      if (props.precision === 0) return Number(value) + "";
+
+      if (props.precision) {
+        value = value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+        let reg = new RegExp("^\\D*([0-9]\\d*\\.?\\d{0," + props.precision + "})?.*$");
+        value = value.replace(reg, "$1");
+        return value;
+      }
+
       return value;
+    };
+
+    const handleStatus = () => {
+      const val = Number(_value.value);
+      if (!isNull(props.min) && val < props.min) {
+        return props.min + "";
+      }
+
+      if (!isNull(props.max) && val > props.max) {
+        return props.max + "";
+      }
+      return val + "";
     };
 
     const onInput = (e: number) => {
       nextTick(() => {
-        _value.value = checkValue(e + "");
+        _value.value = limitNumber(e + "");
+
+        if (!isNull(props.min) || !isNull(props.max)) {
+          _value.value = handleStatus();
+        }
         emit("update:modelValue", _value.value);
+        emit("input", _value.value);
       });
+    };
+
+    const onBlur = () => {
+      emit("blur");
     };
 
     return {
@@ -95,8 +123,9 @@ export default defineComponent({
       inputRef,
       _value,
       handleStep,
-      checkValue,
+      limitNumber,
       onInput,
+      onBlur,
     };
   },
 });
