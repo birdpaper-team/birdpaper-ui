@@ -1,10 +1,10 @@
 <template>
   {{ val }}
   <bp-input-number
-    :precision="3"
+    :precision="2"
     :style="{ width: '220px' }"
-    :min="-10"
-    :max="10"
+    :min="-5"
+    :max="5"
     v-model="val"
     placeholder="请输入"
   ></bp-input-number>

@@ -12,10 +12,10 @@
   >
     <template #suffix v-if="!hideButton">
       <div :class="`${name}-step`">
-        <div :class="`${name}-step-item`" @click="handleStep('up')">
+        <div :class="[isMax ? 'disabled' : '', `${name}-step-item`]" @click="handleStep('up')">
           <i class="ri-arrow-up-s-line"></i>
         </div>
-        <div :class="`${name}-step-item`" @click="handleStep('down')">
+        <div :class="[isMin ? 'disabled' : '', `${name}-step-item`]" @click="handleStep('down')">
           <i class="ri-arrow-down-s-line"></i>
         </div>
       </div>
@@ -60,36 +60,37 @@ export default defineComponent({
   setup(props, { emit }) {
     const name = "bp-input-number";
     const inputRef = ref();
-    const _value = ref<string>(props.modelValue + "");
 
     const mergePrecision = computed(() => {
       return props.precision;
     });
+    const isMin = computed(() => Number(_value.value) <= props.min);
+    const isMax = computed(() => Number(_value.value) >= props.max);
+    const getValue = (val: number | string): string => {
+      if (val === "") return "";
+
+      return Number(val).toFixed(mergePrecision.value);
+    };
+    const _value = ref<string>(getValue(props.modelValue) || "");
 
     const handleStep = (type: "up" | "down") => {
       if (props.hideButton) return;
 
       inputRef.value.handleFocus();
       var val = Number(_value.value);
-      type === "up" ? (val += props.step) : (val -= props.step);
-
-      _value.value = val.toFixed(mergePrecision.value);
-
-      updateValue();
-    };
-
-    const limitNumber = (value: string) => {
-      value = value.trim().replace(/。/g, ".");
-
-      if (Number(value) || /^(\.|-)$/.test(value)) {
-        updateValue();
+      if (type === "up" && !isMax.value) {
+        val += props.step;
       }
+      if (type === "down" && !isMin.value) {
+        val -= props.step;
+      }
+
+      _value.value = getValue(val);
+      updateValue();
     };
 
     const handleStatus = () => {
       let value = _value.value;
-
-      value = Number(value).toFixed(mergePrecision.value);
 
       if (!isNull(props.min) && Number(value) < props.min) {
         return props.min + "";
@@ -106,18 +107,17 @@ export default defineComponent({
 
       if (Number(value) || /^(\.|-)$/.test(value)) {
         _value.value = value;
-        updateValue();
+      } else if (value === "") {
+        _value.value = "";
       } else {
-        nextTick(() => {
-          _value.value = value.replace(/^(\.|-)$/g, "");
-          _value.value = value.replace(/-+[^\d.]/g, "");
-          _value.value = props.modelValue + "";
-        });
+        value = value.replace(/^(\.|-)$/g, "");
+        value = value.replace(/-+[^\d.]/g, "");
+        _value.value = value;
       }
     };
 
     const onBlur = () => {
-      _value.value = handleStatus();
+      _value.value = getValue(handleStatus());
       updateValue();
       emit("blur");
     };
@@ -130,7 +130,7 @@ export default defineComponent({
     watch(
       () => props.modelValue,
       (value: number | undefined) => {
-        _value.value = value + "";
+        _value.value = getValue(value);
       }
     );
 
@@ -138,8 +138,9 @@ export default defineComponent({
       name,
       inputRef,
       _value,
+      isMax,
+      isMin,
       handleStep,
-      limitNumber,
       onInput,
       onBlur,
     };
