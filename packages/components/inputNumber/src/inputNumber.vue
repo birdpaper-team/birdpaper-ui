@@ -7,16 +7,21 @@
     :disabled="disabled"
     :readonly="readonly"
     :is-danger="isDanger"
+    :size="size"
     @input="onInput"
     @blur="onBlur"
   >
-    <template #suffix v-if="!hideButton">
+    <template #suffix v-if="!hideButton && !disabled">
       <div :class="`${name}-step`">
-        <div :class="[isMax ? 'disabled' : '', `${name}-step-item`]" @click="handleStep('up')">
-          <i class="ri-arrow-up-s-line"></i>
-        </div>
-        <div :class="[isMin ? 'disabled' : '', `${name}-step-item`]" @click="handleStep('down')">
-          <i class="ri-arrow-down-s-line"></i>
+        <div
+          :class="[{ disabled: v.disabled }, `${name}-step-item`]"
+          @click="handleStep(v.type)"
+          v-for="v in [
+            { type: 'up', disabled: isMax },
+            { type: 'down', disabled: isMin },
+          ]"
+        >
+          <i :class="`ri-arrow-${v.type}-s-line`"></i>
         </div>
       </div>
     </template>
@@ -26,9 +31,7 @@
 <script lang="ts">
 import { InputSize } from "components/input";
 import { isNull } from "../../../utils/util";
-import { nextTick, watch } from "vue";
-import { PropType, defineComponent, ref } from "vue";
-import { computed } from "vue";
+import { PropType, watch, computed, defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "InputNumber",
@@ -49,29 +52,29 @@ export default defineComponent({
     hideButton: { type: Boolean, default: false },
     /** 数字精度 */
     precision: { type: Number },
-    /** 数字变化跨度 */
+    /** 数字变化步长 */
     step: { type: Number, default: 1 },
     /** 最小值 */
     min: { type: Number },
     /** 最大值 */
     max: { type: Number },
   },
-  emits: ["update:modelValue", "input", "focus", "blur", "keypress", "keyup"],
+  emits: ["update:modelValue", "input", "blur"],
   setup(props, { emit }) {
     const name = "bp-input-number";
     const inputRef = ref();
 
     /** 数字精度，受 step 和 precision 影响, 取精度最大的一个 */
     const mergePrecision = computed<number | null>(() => {
-      if (!props.precision) return null;
-
       const stepPrecisioin = props.step.toString()?.split(".")[1]?.length || 0;
+
+      if (!props.precision) return stepPrecisioin;
       return props.precision > stepPrecisioin ? props.precision : stepPrecisioin;
     });
     const isMin = computed(() => Number(_value.value) === props.min);
     const isMax = computed(() => Number(_value.value) === props.max);
 
-    const handleStep = (type: "up" | "down") => {
+    const handleStep = (type: string) => {
       if (props.hideButton || !props.step) return;
 
       inputRef.value.handleFocus();
