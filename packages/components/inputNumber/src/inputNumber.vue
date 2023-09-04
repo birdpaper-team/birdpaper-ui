@@ -61,23 +61,22 @@ export default defineComponent({
     const name = "bp-input-number";
     const inputRef = ref();
 
-    const mergePrecision = computed(() => {
-      return props.precision;
-    });
-    const isMin = computed(() => Number(_value.value) <= props.min);
-    const isMax = computed(() => Number(_value.value) >= props.max);
-    const getValue = (val: number | string): string => {
-      if (val === "") return "";
+    /** 数字精度，受 step 和 precision 影响, 取精度最大的一个 */
+    const mergePrecision = computed<number | null>(() => {
+      if (!props.precision) return null;
 
-      return Number(val).toFixed(mergePrecision.value);
-    };
-    const _value = ref<string>(getValue(props.modelValue) || "");
+      const stepPrecisioin = props.step.toString()?.split(".")[1]?.length || 0;
+      return props.precision > stepPrecisioin ? props.precision : stepPrecisioin;
+    });
+    const isMin = computed(() => Number(_value.value) === props.min);
+    const isMax = computed(() => Number(_value.value) === props.max);
 
     const handleStep = (type: "up" | "down") => {
-      if (props.hideButton) return;
+      if (props.hideButton || !props.step) return;
 
       inputRef.value.handleFocus();
       var val = Number(_value.value);
+
       if (type === "up" && !isMax.value) {
         val += props.step;
       }
@@ -89,31 +88,50 @@ export default defineComponent({
       updateValue();
     };
 
+    /**
+     * 获取文本框需要的值
+     * @param val
+     */
+    const getValue = (val: number | string): string => {
+      if (!val || val === "") return "";
+
+      return mergePrecision.value && mergePrecision.value >= 0
+        ? Number(val).toFixed(mergePrecision.value)
+        : val.toString();
+    };
+
+    const _value = ref<string>(getValue(props.modelValue) || "");
+
     const handleStatus = () => {
       let value = _value.value;
 
       if (!isNull(props.min) && Number(value) < props.min) {
-        return props.min + "";
+        return props.min.toString();
       }
 
       if (!isNull(props.max) && Number(value) > props.max) {
-        return props.max + "";
+        return props.max.toString();
       }
-      return value + "";
+
+      return value.toString();
     };
 
     const onInput = (value: string) => {
-      value = value.trim().replace(/。/g, ".");
+      if (value === "") {
+        _value.value = "";
+        return updateValue();
+      }
 
+      value = value.trim().replace(/。/g, ".");
       if (Number(value) || /^(\.|-)$/.test(value)) {
         _value.value = value;
-      } else if (value === "") {
-        _value.value = "";
-      } else {
-        value = value.replace(/^(\.|-)$/g, "");
-        value = value.replace(/-+[^\d.]/g, "");
-        _value.value = value;
+        return updateValue();
       }
+
+      _value.value = value.replace(/^(\.?|-)$/g, "");
+      _value.value = value.replace(/[^\d.]/g, "");
+      _value.value = getValue(parseFloat(_value.value));
+      return;
     };
 
     const onBlur = () => {
@@ -123,14 +141,15 @@ export default defineComponent({
     };
 
     const updateValue = () => {
-      emit("update:modelValue", _value.value);
-      emit("input", _value.value);
+      emit("update:modelValue", parseFloat(_value.value) || "");
+      emit("input", parseFloat(_value.value) || "");
     };
+    updateValue();
 
     watch(
       () => props.modelValue,
-      (value: number | undefined) => {
-        _value.value = getValue(value);
+      (value?: number | string) => {
+        _value.value = getValue(value || "");
       }
     );
 
