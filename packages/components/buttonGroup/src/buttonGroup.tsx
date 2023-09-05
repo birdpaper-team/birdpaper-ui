@@ -1,5 +1,5 @@
 import { ButtonShape, ButtonSize, ButtonStatus } from "components/button/src/types";
-import { PropType, defineComponent, Fragment, Comment, mergeProps } from "vue";
+import { PropType, defineComponent, Fragment, Comment, mergeProps, computed } from "vue";
 import { getAllElements } from "../../../utils/dom";
 import { ButtonGroupType } from "./types";
 
@@ -20,11 +20,18 @@ export default defineComponent({
   setup(props, { slots }) {
     const name = "bp-button-group";
 
+    const cls = computed(() => {
+      let clsName = [name];
+      !["plain", "dashed"].includes(props.type) && clsName.push(`${name}-type-${props.type}-status-${props.status}`);
+
+      return clsName;
+    });
+
     const render = () => {
       const children = getAllElements(slots.default?.(), true).filter(item => item.type !== Comment);
 
       return (
-        <div class={name}>
+        <div class={cls.value}>
           {children.map((child, index) => {
             const btn = Object.assign({}, child);
             btn.props = mergeProps(child.props, { ...props });
