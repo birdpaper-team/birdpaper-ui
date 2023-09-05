@@ -3,6 +3,9 @@ export { default } from "./birdpaper-ui";
 export { default as Button } from "./button";
 export type { ButtonInstance } from "./button";
 
+export { default as ButtonGroup } from "./buttonGroup";
+export type { ButtonGroupInstance } from "./buttonGroup";
+
 export { default as Input } from "./input";
 export type { InputInstance } from "./input";
 

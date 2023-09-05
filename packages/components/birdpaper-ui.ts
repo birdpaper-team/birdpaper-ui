@@ -1,5 +1,6 @@
 import { App, Plugin } from "vue";
 import Button from "./button";
+import ButtonGroup from "./buttonGroup";
 import Input from "./input";
 import InputNumber from "./inputNumber";
 import Textarea from "./textarea";
@@ -24,6 +25,7 @@ import Message from "./message";
 
 const components: Record<string, Plugin> = {
   Button,
+  ButtonGroup,
   Input,
   InputNumber,
   Textarea,
@@ -58,6 +60,7 @@ export { default as Message } from "./message";
 export default {
   install,
   Button,
+  ButtonGroup,
   Input,
   InputNumber,
   Textarea,

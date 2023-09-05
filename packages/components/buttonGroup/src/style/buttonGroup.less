@@ -1,0 +1,21 @@
+@btn-group-cls: ~"@{prefix}-button-group";
+
+.@{btn-group-cls} {
+  position: relative;
+
+  .bp-btn {
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    &:not(:last-child) {
+      border-right: 0.5px solid @gary-3;
+    }
+  }
+}
