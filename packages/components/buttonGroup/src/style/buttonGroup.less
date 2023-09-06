@@ -4,6 +4,18 @@
 
 .@{btn-group-cls} {
   position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  opacity: 1;
+  .no-select;
+
+  &-block {
+    width: 100%;
+  }
 
   .bp-btn {
     &:first-child {

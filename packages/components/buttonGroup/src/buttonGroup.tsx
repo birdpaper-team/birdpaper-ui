@@ -23,6 +23,7 @@ export default defineComponent({
     const cls = computed(() => {
       let clsName = [name];
       !["plain", "dashed"].includes(props.type) && clsName.push(`${name}-type-${props.type}-status-${props.status}`);
+      props.block && clsName.push(`${name}-block`)
 
       return clsName;
     });

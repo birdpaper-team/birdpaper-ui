@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import props from "../example/button/props.ts";
+  import groupProps from "../example/button/groupProps.ts";
   import events from "../example/button/events.ts";
 </script>
 
@@ -50,6 +51,10 @@
 ### Button 属性
 
 <table-block type="props" :data="props"></table-block>
+
+### ButtonGroup 属性
+
+<table-block type="props" :data="groupProps"></table-block>
 
 ### Button 事件
 
