@@ -1,8 +1,12 @@
 export { default } from "./birdpaper-ui";
 export { default as Button } from "./button";
 export type { ButtonInstance } from "./button";
+export { default as ButtonGroup } from "./buttonGroup";
+export type { ButtonGroupInstance } from "./buttonGroup";
 export { default as Input } from "./input";
 export type { InputInstance } from "./input";
+export { default as InputNumber } from "./inputNumber";
+export type { InputNumberInstance } from "./inputNumber";
 export { default as Textarea } from "./textarea";
 export type { TextareaInstance } from "./textarea";
 export { default as Radio } from "./radio";

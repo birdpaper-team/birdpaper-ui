@@ -5,7 +5,9 @@ declare module "vue" {
   export interface GlobalComponents {
     BpLink: typeof import("birdpaper-ui")["Link"];
     BpButton: typeof import("birdpaper-ui")["Button"];
+    BpButtonGroup: typeof import("birdpaper-ui")["ButtonGroup"];
     BpInput: typeof import("birdpaper-ui")["Input"];
+    BpInputNumber: typeof import("birdpaper-ui")["InputNumber"];
     BpTextarea: typeof import("birdpaper-ui")["Textarea"];
     BpCheckbox: typeof import("birdpaper-ui")["Checkbox"];
     BpSwitch: typeof import("birdpaper-ui")["Switch"];

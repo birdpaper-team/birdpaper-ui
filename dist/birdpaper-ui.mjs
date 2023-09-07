@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { defineComponent, computed, useSlots, openBlock, createElementBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, ref, nextTick, Fragment, toDisplayString, watch, resolveComponent, renderList, createBlock, withCtx, createTextVNode, reactive, Comment, provide, onMounted, onBeforeUnmount, resolveDirective, withDirectives, withModifiers, createVNode, Teleport, Transition, vShow, inject, watchEffect, resolveDynamicComponent, mergeProps, toHandlerKey, normalizeStyle, onUnmounted, TransitionGroup, render } from "vue";
-const _sfc_main$x = defineComponent({
+import { defineComponent, computed, useSlots, openBlock, createElementBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, Comment, createVNode, mergeProps, Fragment, ref, nextTick, toDisplayString, watch, resolveComponent, createBlock, createSlots, withCtx, renderList, createTextVNode, reactive, provide, onMounted, onBeforeUnmount, resolveDirective, withDirectives, withModifiers, Teleport, Transition, vShow, inject, watchEffect, resolveDynamicComponent, toHandlerKey, normalizeStyle, onUnmounted, TransitionGroup, render } from "vue";
+const _sfc_main$y = defineComponent({
   name: "Button",
   props: {
     /** 按钮类型 Type of the button */
@@ -61,12 +61,12 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _hoisted_1$l = ["disabled"];
+const _hoisted_1$m = ["disabled"];
 const _hoisted_2$f = {
   key: 0,
   class: "left-icon"
 };
-function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("button", {
     class: normalizeClass(_ctx.btnClass),
     type: "button",
@@ -79,9 +79,9 @@ function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 2)
     ])) : createCommentVNode("", true),
     renderSlot(_ctx.$slots, "default")
-  ], 10, _hoisted_1$l);
+  ], 10, _hoisted_1$m);
 }
-const _button = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$m]]);
+const _button = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$n]]);
 const DEFAULT_PREFIX = "Bp";
 const getComponentsPrefix = (name) => {
   return name ?? DEFAULT_PREFIX;
@@ -92,11 +92,121 @@ const Button = Object.assign(_button, {
     app.component(_button.name, _button);
   }
 });
-const _sfc_main$w = defineComponent({
+const isElement = (vn) => {
+  return Boolean(
+    vn && vn.shapeFlag & 1
+    /* ELEMENT */
+  );
+};
+const isComponent = (vn, type) => {
+  return Boolean(
+    vn && vn.shapeFlag & 6
+    /* COMPONENT */
+  );
+};
+const isTextChildren = (child, children) => {
+  return Boolean(child && child.shapeFlag & 8);
+};
+const isArrayChildren = (vn, children) => {
+  return Boolean(
+    vn && vn.shapeFlag & 16
+    /* ARRAY_CHILDREN */
+  );
+};
+const opt = Object.prototype.toString;
+const isArray = (obj) => {
+  return opt.call(obj) === "[object Array]";
+};
+const isSlotsChildren = (vn, children) => {
+  return Boolean(
+    vn && vn.shapeFlag & 32
+    /* SLOTS_CHILDREN */
+  );
+};
+const getAllElements = (children, includeText = false) => {
+  var _a, _b;
+  const results = [];
+  for (const item of children ?? []) {
+    if (isElement(item) || isComponent(item) || includeText && isTextChildren(item, item.children)) {
+      results.push(item);
+    } else if (isArrayChildren(item, item.children)) {
+      results.push(...getAllElements(item.children, includeText));
+    } else if (isSlotsChildren(item, item.children)) {
+      results.push(...getAllElements((_b = (_a = item.children).default) == null ? void 0 : _b.call(_a), includeText));
+    } else if (isArray(item)) {
+      results.push(...getAllElements(item, includeText));
+    }
+  }
+  return results;
+};
+const _buttonGroup = /* @__PURE__ */ defineComponent({
+  name: "ButtonGroup",
+  props: {
+    /** 按钮类型 Type of the button */
+    type: {
+      type: String,
+      default: "normal"
+    },
+    /** 按钮尺寸 Size of the button */
+    size: {
+      type: String,
+      default: "normal"
+    },
+    /** 按钮形状 Shape of the button */
+    shape: {
+      type: String,
+      default: "square"
+    },
+    /** 按钮状态 Status of the button */
+    status: {
+      type: String,
+      default: "normal"
+    },
+    /** 是否撑满父级 Block or not */
+    block: {
+      type: Boolean,
+      default: false
+    }
+  },
+  setup(props, {
+    slots
+  }) {
+    const name = "bp-button-group";
+    const cls = computed(() => {
+      let clsName = [name];
+      !["plain", "dashed"].includes(props.type) && clsName.push(`${name}-type-${props.type}-status-${props.status}`);
+      props.block && clsName.push(`${name}-block`);
+      return clsName;
+    });
+    const render2 = () => {
+      var _a;
+      const children = getAllElements((_a = slots.default) == null ? void 0 : _a.call(slots), true).filter((item) => item.type !== Comment);
+      return createVNode("div", {
+        "class": cls.value
+      }, [children.map((child, index) => {
+        const btn = Object.assign({}, child);
+        btn.props = mergeProps(child.props, {
+          ...props
+        });
+        return createVNode(Fragment, {
+          "key": child.key ?? `item-${index}`
+        }, [btn]);
+      })]);
+    };
+    return render2;
+  }
+});
+_buttonGroup.name = getComponentsPrefix() + _buttonGroup.name;
+const ButtonGroup = Object.assign(_buttonGroup, {
+  install: (app) => {
+    app.component(_buttonGroup.name, _buttonGroup);
+  }
+});
+const _sfc_main$x = defineComponent({
   name: "Input",
   props: {
     /** 绑定值 Binding value */
-    modelValue: { type: [String, Number], default: "" },
+    modelValue: { type: String, default: "" },
     /** 输入框类型 Type of the input */
     type: { type: String, default: "text" },
     /** 输入框尺寸 Size of the input */
@@ -153,9 +263,11 @@ const _sfc_main$w = defineComponent({
     const onKeyup = () => emit("keyup");
     const onInput = (e) => {
       const targetValue = e.target.value;
+      emit("input", targetValue);
       emit("update:modelValue", targetValue);
     };
     return {
+      name,
       inpRef,
       inpType,
       inpClass,
@@ -176,13 +288,9 @@ const _sfc_main$w = defineComponent({
     };
   }
 });
-const _hoisted_1$k = ["type", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
-const _hoisted_2$e = {
-  key: 0,
-  class: "suffix"
-};
-const _hoisted_3$a = ["textContent"];
-function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+const _hoisted_1$l = ["type", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
+const _hoisted_2$e = ["textContent"];
+function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.inpClass)
   }, [
@@ -202,8 +310,11 @@ function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
       onKeypress: _cache[2] || (_cache[2] = (...args) => _ctx.onKeypress && _ctx.onKeypress(...args)),
       onKeyup: _cache[3] || (_cache[3] = (...args) => _ctx.onKeyup && _ctx.onKeyup(...args)),
       onInput: _cache[4] || (_cache[4] = (...args) => _ctx.onInput && _ctx.onInput(...args))
-    }, null, 40, _hoisted_1$k),
-    _ctx.slots.suffix || _ctx.showClear || _ctx.showWordLimit || _ctx.type === "password" ? (openBlock(), createElementBlock("div", _hoisted_2$e, [
+    }, null, 40, _hoisted_1$l),
+    _ctx.slots.suffix || _ctx.showClear || _ctx.showWordLimit || _ctx.type === "password" ? (openBlock(), createElementBlock("div", {
+      key: 0,
+      class: normalizeClass(`${_ctx.name}-suffix`)
+    }, [
       !_ctx.slots.suffix ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
         _ctx.showClear ? (openBlock(), createElementBlock("i", {
           key: 0,
@@ -213,7 +324,7 @@ function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
         _ctx.showWordLimit ? (openBlock(), createElementBlock("span", {
           key: 1,
           textContent: toDisplayString(_ctx.limitText)
-        }, null, 8, _hoisted_3$a)) : createCommentVNode("", true),
+        }, null, 8, _hoisted_2$e)) : createCommentVNode("", true),
         _ctx.type === "password" ? (openBlock(), createElementBlock("i", {
           key: 2,
           onClick: _cache[6] || (_cache[6] = (...args) => _ctx.triggerPassword && _ctx.triggerPassword(...args)),
@@ -221,14 +332,207 @@ function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
         }, null, 2)) : createCommentVNode("", true)
       ], 64)) : createCommentVNode("", true),
       renderSlot(_ctx.$slots, "suffix")
-    ])) : createCommentVNode("", true)
+    ], 2)) : createCommentVNode("", true)
   ], 2);
 }
-const BpInput = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$l]]);
+const BpInput = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$m]]);
 BpInput.name = getComponentsPrefix() + BpInput.name;
 const Input = Object.assign(BpInput, {
   install: (app) => {
     app.component(BpInput.name, BpInput);
+  }
+});
+const isNull = (data) => !data && data != 0;
+const isString = (data) => typeof data === "string";
+const throttle = (fn, delay) => {
+  var lastTime;
+  var timer;
+  var delay = delay || 200;
+  return function() {
+    var args = arguments;
+    var nowTime = Date.now();
+    if (lastTime && nowTime - lastTime < delay) {
+      clearTimeout(timer);
+      timer = setTimeout(function() {
+        lastTime = nowTime;
+        fn.apply(this, args);
+      }, delay);
+    } else {
+      lastTime = nowTime;
+      fn.apply(this, args);
+    }
+  };
+};
+const on = function(element, event, handler, useCapture = false) {
+  if (element && event && handler) {
+    element.addEventListener(event, handler, useCapture);
+  }
+};
+const off = function(element, event, handler, useCapture = false) {
+  if (element && event && handler) {
+    element.removeEventListener(event, handler, useCapture);
+  }
+};
+const warn = (module, info) => {
+  console.warn(`[ A warning of birdpaper-ui ] - ${module}: ` + info);
+};
+const _sfc_main$w = defineComponent({
+  name: "InputNumber",
+  props: {
+    /** 绑定值 Binding value */
+    modelValue: { type: [Number, String] },
+    /** 输入框尺寸 Size of the input */
+    size: { type: String, default: "normal" },
+    /** 是否禁用 Disabled or not */
+    disabled: { type: Boolean, default: false },
+    /** 是否只读状态 Readonly or not */
+    readonly: { type: Boolean, default: false },
+    /** 是否警示状态 Danger or not */
+    isDanger: { type: Boolean, default: false },
+    /** 占位提示文字 The placeholder text */
+    placeholder: { type: String, default: "" },
+    /** 是否隐藏按钮 */
+    hideButton: { type: Boolean, default: false },
+    /** 数字精度 */
+    precision: { type: Number },
+    /** 数字变化步长 */
+    step: { type: Number, default: 1 },
+    /** 最小值 */
+    min: { type: Number },
+    /** 最大值 */
+    max: { type: Number }
+  },
+  emits: ["update:modelValue", "input", "blur"],
+  setup(props, { emit }) {
+    const name = "bp-input-number";
+    const inputRef = ref();
+    const mergePrecision = computed(() => {
+      var _a, _b;
+      const stepPrecisioin = ((_b = (_a = props.step.toString()) == null ? void 0 : _a.split(".")[1]) == null ? void 0 : _b.length) || 0;
+      if (!props.precision)
+        return stepPrecisioin;
+      return props.precision > stepPrecisioin ? props.precision : stepPrecisioin;
+    });
+    const isMin = computed(() => Number(global_value.value) === props.min);
+    const isMax = computed(() => Number(global_value.value) === props.max);
+    const handleStep = (type) => {
+      if (props.hideButton || !props.step)
+        return;
+      inputRef.value.handleFocus();
+      var val = Number(global_value.value);
+      if (type === "up" && !isMax.value) {
+        val += props.step;
+      }
+      if (type === "down" && !isMin.value) {
+        val -= props.step;
+      }
+      global_value.value = getValue(val);
+      updateValue();
+    };
+    const getValue = (val) => {
+      if (!val || val === "")
+        return "";
+      return mergePrecision.value && mergePrecision.value >= 0 ? Number(val).toFixed(mergePrecision.value) : val.toString();
+    };
+    const global_value = ref(getValue(props.modelValue) || "");
+    const handleStatus = () => {
+      let value = global_value.value;
+      if (!isNull(props.min) && Number(value) < props.min) {
+        return props.min.toString();
+      }
+      if (!isNull(props.max) && Number(value) > props.max) {
+        return props.max.toString();
+      }
+      return value.toString();
+    };
+    const onInput = (value) => {
+      if (value === "") {
+        global_value.value = "";
+        return updateValue();
+      }
+      value = value.trim().replace(/。/g, ".");
+      if (Number(value) || /^(\.|-)$/.test(value)) {
+        global_value.value = value;
+        return updateValue();
+      }
+      global_value.value = value.replace(/^(\.?|-)$/g, "");
+      global_value.value = value.replace(/[^\d.]/g, "");
+      global_value.value = getValue(parseFloat(global_value.value));
+      return;
+    };
+    const onBlur = () => {
+      global_value.value = getValue(handleStatus());
+      updateValue();
+      emit("blur");
+    };
+    const updateValue = () => {
+      emit("update:modelValue", parseFloat(global_value.value) || "");
+      emit("input", parseFloat(global_value.value) || "");
+    };
+    updateValue();
+    watch(
+      () => props.modelValue,
+      (value) => {
+        global_value.value = getValue(value || "");
+      }
+    );
+    return {
+      name,
+      inputRef,
+      global_value,
+      isMax,
+      isMin,
+      handleStep,
+      onInput,
+      onBlur
+    };
+  }
+});
+const _hoisted_1$k = ["onClick"];
+function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+  const _component_bp_input = resolveComponent("bp-input");
+  return openBlock(), createBlock(_component_bp_input, {
+    ref: "inputRef",
+    modelValue: _ctx.global_value,
+    class: normalizeClass(_ctx.name),
+    placeholder: _ctx.placeholder,
+    disabled: _ctx.disabled,
+    readonly: _ctx.readonly,
+    "is-danger": _ctx.isDanger,
+    size: _ctx.size,
+    onInput: _ctx.onInput,
+    onBlur: _ctx.onBlur
+  }, createSlots({ _: 2 }, [
+    !_ctx.hideButton && !_ctx.disabled ? {
+      name: "suffix",
+      fn: withCtx(() => [
+        createElementVNode("div", {
+          class: normalizeClass(`${_ctx.name}-step`)
+        }, [
+          (openBlock(true), createElementBlock(Fragment, null, renderList([
+            { type: "up", disabled: _ctx.isMax },
+            { type: "down", disabled: _ctx.isMin }
+          ], (v) => {
+            return openBlock(), createElementBlock("div", {
+              class: normalizeClass([{ disabled: v.disabled }, `${_ctx.name}-step-item`]),
+              onClick: ($event) => _ctx.handleStep(v.type)
+            }, [
+              createElementVNode("i", {
+                class: normalizeClass(`ri-arrow-${v.type}-s-line`)
+              }, null, 2)
+            ], 10, _hoisted_1$k);
+          }), 256))
+        ], 2)
+      ]),
+      key: "0"
+    } : void 0
+  ]), 1032, ["modelValue", "class", "placeholder", "disabled", "readonly", "is-danger", "size", "onInput", "onBlur"]);
+}
+const _inputNumber = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$l]]);
+_inputNumber.name = getComponentsPrefix() + _inputNumber.name;
+const InputNumber = Object.assign(_inputNumber, {
+  install: (app) => {
+    app.component(_inputNumber.name, _inputNumber);
   }
 });
 const _sfc_main$v = defineComponent({
@@ -603,87 +907,6 @@ const vClickOutside = {
     document.removeEventListener("click", el.__click_outside__);
     delete el.__click_outside__;
   }
-};
-const isNull = (data) => !data && data != 0;
-const isString = (data) => typeof data === "string";
-const throttle = (fn, delay) => {
-  var lastTime;
-  var timer;
-  var delay = delay || 200;
-  return function() {
-    var args = arguments;
-    var nowTime = Date.now();
-    if (lastTime && nowTime - lastTime < delay) {
-      clearTimeout(timer);
-      timer = setTimeout(function() {
-        lastTime = nowTime;
-        fn.apply(this, args);
-      }, delay);
-    } else {
-      lastTime = nowTime;
-      fn.apply(this, args);
-    }
-  };
-};
-const on = function(element, event, handler, useCapture = false) {
-  if (element && event && handler) {
-    element.addEventListener(event, handler, useCapture);
-  }
-};
-const off = function(element, event, handler, useCapture = false) {
-  if (element && event && handler) {
-    element.removeEventListener(event, handler, useCapture);
-  }
-};
-const warn = (module, info) => {
-  console.warn(`[ A warning of birdpaper-ui ] - ${module}: ` + info);
-};
-const isElement = (vn) => {
-  return Boolean(
-    vn && vn.shapeFlag & 1
-    /* ELEMENT */
-  );
-};
-const isComponent = (vn, type) => {
-  return Boolean(
-    vn && vn.shapeFlag & 6
-    /* COMPONENT */
-  );
-};
-const isTextChildren = (child, children) => {
-  return Boolean(child && child.shapeFlag & 8);
-};
-const isArrayChildren = (vn, children) => {
-  return Boolean(
-    vn && vn.shapeFlag & 16
-    /* ARRAY_CHILDREN */
-  );
-};
-const opt = Object.prototype.toString;
-const isArray = (obj) => {
-  return opt.call(obj) === "[object Array]";
-};
-const isSlotsChildren = (vn, children) => {
-  return Boolean(
-    vn && vn.shapeFlag & 32
-    /* SLOTS_CHILDREN */
-  );
-};
-const getAllElements = (children, includeText = false) => {
-  var _a, _b;
-  const results = [];
-  for (const item of children ?? []) {
-    if (isElement(item) || isComponent(item) || includeText && isTextChildren(item, item.children)) {
-      results.push(item);
-    } else if (isArrayChildren(item, item.children)) {
-      results.push(...getAllElements(item.children, includeText));
-    } else if (isSlotsChildren(item, item.children)) {
-      results.push(...getAllElements((_b = (_a = item.children).default) == null ? void 0 : _b.call(_a), includeText));
-    } else if (isArray(item)) {
-      results.push(...getAllElements(item, includeText));
-    }
-  }
-  return results;
 };
 const useSelect = (slots) => {
   const currentSelect = reactive(new SelectOption());
@@ -1123,10 +1346,10 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
     const props = __props;
     const name = "bp-pagination";
     const paramsStr = "{jumper}";
-    const val = ref("");
+    const val = ref();
     const text = reactive({ prefix: "", suffix: "" });
     const handleBlur = () => {
-      let num = Number(val.value) ?? 1;
+      let num = val.value ?? 1;
       num < 1 && (num = 1);
       num > props.pages && (num = props.pages);
       emits("change", num);
@@ -1143,12 +1366,15 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
       }
     });
     return (_ctx, _cache) => {
-      const _component_bp_input = resolveComponent("bp-input");
+      const _component_bp_input_number = resolveComponent("bp-input-number");
       return openBlock(), createElementBlock("li", {
         class: normalizeClass([`${name}-item`, `${name}-jumper`])
       }, [
         text.prefix ? (openBlock(), createElementBlock("span", _hoisted_1$c, toDisplayString(text.prefix), 1)) : createCommentVNode("", true),
-        createVNode(_component_bp_input, {
+        createVNode(_component_bp_input_number, {
+          min: 1,
+          precision: 0,
+          "hide-button": "",
           modelValue: val.value,
           "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => val.value = $event),
           size: "small",
@@ -3309,7 +3535,9 @@ const Message = Object.assign({
 });
 const components = {
   Button,
+  ButtonGroup,
   Input,
+  InputNumber,
   Textarea,
   Radio,
   Checkbox,
@@ -3338,7 +3566,9 @@ const install = function(app) {
 const birdpaperUi = {
   install,
   Button,
+  ButtonGroup,
   Input,
+  InputNumber,
   Textarea,
   Radio,
   Checkbox,
@@ -3362,11 +3592,13 @@ const birdpaperUi = {
 export {
   Alert,
   Button,
+  ButtonGroup,
   Checkbox,
   Drawer,
   Grid,
   Image,
   Input,
+  InputNumber,
   BpLink as Link,
   Message,
   Modal,

@@ -1,7 +1,7 @@
 <template>
   <bp-input
     ref="inputRef"
-    :modelValue="_value"
+    :modelValue="global_value"
     :class="name"
     :placeholder="placeholder"
     :disabled="disabled"
@@ -37,7 +37,7 @@ export default defineComponent({
   name: "InputNumber",
   props: {
     /** 绑定值 Binding value */
-    modelValue: { type: Number },
+    modelValue: { type: [Number, String] as PropType<number | ""> },
     /** 输入框尺寸 Size of the input */
     size: { type: String as PropType<InputSize>, default: "normal" },
     /** 是否禁用 Disabled or not */
@@ -71,14 +71,14 @@ export default defineComponent({
       if (!props.precision) return stepPrecisioin;
       return props.precision > stepPrecisioin ? props.precision : stepPrecisioin;
     });
-    const isMin = computed(() => Number(_value.value) === props.min);
-    const isMax = computed(() => Number(_value.value) === props.max);
+    const isMin = computed(() => Number(global_value.value) === props.min);
+    const isMax = computed(() => Number(global_value.value) === props.max);
 
     const handleStep = (type: string) => {
       if (props.hideButton || !props.step) return;
 
       inputRef.value.handleFocus();
-      var val = Number(_value.value);
+      var val = Number(global_value.value);
 
       if (type === "up" && !isMax.value) {
         val += props.step;
@@ -87,7 +87,7 @@ export default defineComponent({
         val -= props.step;
       }
 
-      _value.value = getValue(val);
+      global_value.value = getValue(val);
       updateValue();
     };
 
@@ -103,10 +103,10 @@ export default defineComponent({
         : val.toString();
     };
 
-    const _value = ref<string>(getValue(props.modelValue) || "");
+    const global_value = ref<string>(getValue(props.modelValue) || "");
 
     const handleStatus = () => {
-      let value = _value.value;
+      let value = global_value.value;
 
       if (!isNull(props.min) && Number(value) < props.min) {
         return props.min.toString();
@@ -121,45 +121,45 @@ export default defineComponent({
 
     const onInput = (value: string) => {
       if (value === "") {
-        _value.value = "";
+        global_value.value = "";
         return updateValue();
       }
 
       value = value.trim().replace(/。/g, ".");
       if (Number(value) || /^(\.|-)$/.test(value)) {
-        _value.value = value;
+        global_value.value = value;
         return updateValue();
       }
 
-      _value.value = value.replace(/^(\.?|-)$/g, "");
-      _value.value = value.replace(/[^\d.]/g, "");
-      _value.value = getValue(parseFloat(_value.value));
+      global_value.value = value.replace(/^(\.?|-)$/g, "");
+      global_value.value = value.replace(/[^\d.]/g, "");
+      global_value.value = getValue(parseFloat(global_value.value));
       return;
     };
 
     const onBlur = () => {
-      _value.value = getValue(handleStatus());
+      global_value.value = getValue(handleStatus());
       updateValue();
       emit("blur");
     };
 
     const updateValue = () => {
-      emit("update:modelValue", parseFloat(_value.value) || "");
-      emit("input", parseFloat(_value.value) || "");
+      emit("update:modelValue", parseFloat(global_value.value) || "");
+      emit("input", parseFloat(global_value.value) || "");
     };
     updateValue();
 
     watch(
       () => props.modelValue,
       (value?: number | string) => {
-        _value.value = getValue(value || "");
+        global_value.value = getValue(value || "");
       }
     );
 
     return {
       name,
       inputRef,
-      _value,
+      global_value,
       isMax,
       isMin,
       handleStep,

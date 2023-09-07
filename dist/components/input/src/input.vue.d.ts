@@ -3,7 +3,7 @@ import { InputSize, InputType } from "./types";
 declare const _sfc_main: import("vue").DefineComponent<{
     /** 绑定值 Binding value */
     modelValue: {
-        type: (StringConstructor | NumberConstructor)[];
+        type: StringConstructor;
         default: string;
     };
     /** 输入框类型 Type of the input */
@@ -52,6 +52,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: boolean;
     };
 }, {
+    name: string;
     inpRef: import("vue").Ref<any>;
     inpType: import("vue").ComputedRef<InputType>;
     inpClass: import("vue").ComputedRef<string[]>;
@@ -74,7 +75,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "input" | "focus" | "blur" | "keypress" | "keyup")[], "update:modelValue" | "input" | "focus" | "blur" | "keypress" | "keyup", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     /** 绑定值 Binding value */
     modelValue: {
-        type: (StringConstructor | NumberConstructor)[];
+        type: StringConstructor;
         default: string;
     };
     /** 输入框类型 Type of the input */
@@ -133,7 +134,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     type: InputType;
     size: InputSize;
     disabled: boolean;
-    modelValue: string | number;
+    modelValue: string;
     readonly: boolean;
     isDanger: boolean;
     placeholder: string;
