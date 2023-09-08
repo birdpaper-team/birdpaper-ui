@@ -1,5 +1,9 @@
 <template>
-  <bp-radio-group v-model="val" :option-list="optionList"> </bp-radio-group>
+  <bp-radio-group v-model="val">
+    <template v-for="v in optionList">
+      <bp-radio :value="v.value">{{ v.label }}</bp-radio>
+    </template>
+  </bp-radio-group>
 </template>
 
 <script setup lang="ts">

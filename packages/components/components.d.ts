@@ -8,6 +8,8 @@ declare module "vue" {
     BpButtonGroup: typeof import("birdpaper-ui")["ButtonGroup"];
     BpInput: typeof import("birdpaper-ui")["Input"];
     BpInputNumber: typeof import("birdpaper-ui")["InputNumber"];
+    BpRadio: typeof import("birdpaper-ui")["Radio"];
+    BpRadioGroup: typeof import("birdpaper-ui")["RadioGroup"];
     BpTextarea: typeof import("birdpaper-ui")["Textarea"];
     BpCheckbox: typeof import("birdpaper-ui")["Checkbox"];
     BpSwitch: typeof import("birdpaper-ui")["Switch"];
