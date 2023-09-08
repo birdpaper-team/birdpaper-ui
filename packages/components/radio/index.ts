@@ -1,6 +1,6 @@
 import { App } from "vue";
 import _radio from "./src/radio.vue";
-import _radioGroup from "./src/radioGroup.vue";
+import _radioGroup from "./src/radioGroup";
 import { getComponentsPrefix } from "../../utils/config";
 
 _radio.name = getComponentsPrefix() + _radio.name;

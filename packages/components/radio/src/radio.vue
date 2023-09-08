@@ -1,12 +1,13 @@
 <template>
-  <div :class="[name, disabled ? `${name}-disabled` : '']" @click="handleInput">
+  <label :class="[name, disabled ? `${name}-disabled` : '']" @click="handleInput">
     <input type="radio" :class="`${name}-inner`" />
 
     <span :class="[`${name}-radio`, isCheck ? `${name}-check` : '']"></span>
+
     <span :class="`${name}-label`">
       <slot></slot>
     </span>
-  </div>
+  </label>
 </template>
 
 <script lang="ts">

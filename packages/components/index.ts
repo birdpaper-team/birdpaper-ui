@@ -17,6 +17,7 @@ export type { TextareaInstance } from "./textarea";
 
 export { default as Radio } from "./radio";
 export type { RadioInstance, RadioGroupInstance } from "./radio";
+export { default as RadioGroup } from "./radio";
 
 export { default as Checkbox } from "./checkbox";
 export type { CheckboxInstance } from "./checkbox";
