@@ -2,17 +2,18 @@
   <label :class="[name, disabled ? `${name}-disabled` : '']" @click="handleInput">
     <input type="radio" :class="`${name}-inner`" />
 
-    <span :class="[`${name}-radio`, isCheck ? `${name}-check` : '']"></span>
+    <span v-if="type === 'radio'" :class="[`${name}-radio`, isCheck ? `${name}-check` : '']"></span>
 
-    <span :class="`${name}-label`">
+    <span :class="[`${name}-label`, isCheck ? `${name}-check-label` : '']">
       <slot></slot>
     </span>
   </label>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { PropType, defineComponent } from "vue";
 import { computed } from "vue";
+import { RadioType } from "./type";
 
 export default defineComponent({
   name: "Radio",
@@ -23,6 +24,7 @@ export default defineComponent({
     value: { type: [String, Number, Boolean], default: false },
     /** 是否禁用 */
     disabled: { type: Boolean, default: false },
+    type: { type: String as PropType<RadioType>, default: "radio" },
   },
   emits: ["update:modelValue", "change"],
   setup(props, { emit }) {

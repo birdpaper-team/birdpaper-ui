@@ -1,5 +1,5 @@
 <template>
-  <bp-radio-group v-model="val">
+  <bp-radio-group v-model="val" type="button">
     <template v-for="v in optionList">
       <bp-radio :value="v.value">{{ v.label }}</bp-radio>
     </template>

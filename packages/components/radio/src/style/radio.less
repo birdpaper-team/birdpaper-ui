@@ -1,9 +1,35 @@
 @radio-cls: ~"@{prefix}-radio";
 
 .@{radio-cls}-group {
+  background-color: @gary-4;
+  display: inline-block;
+  padding: 4px;
+  border-radius: 4px;
+
   .@{radio-cls} {
+    cursor: pointer;
+
     &:not(:first-child) {
-      margin-left: 12px;
+      margin-left: 6px;
+    }
+
+    &-label {
+      margin: 0;
+      padding: 0 12px;
+      border-radius: 2px;
+      font-size: 13px;
+
+      &:hover {
+        background-color: @gary-3;
+      }
+    }
+
+    &-check-label {
+      background-color: @gary-1;
+
+      &:hover {
+        background-color: @gary-1;
+      }
     }
   }
 }
