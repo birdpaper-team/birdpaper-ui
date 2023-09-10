@@ -1,5 +1,5 @@
 import { PropType, Fragment, Comment, mergeProps, ref, h, computed } from "vue";
-import { RadioGroupValue, RadioType } from "./type";
+import { DirectionType, RadioGroupValue, RadioType } from "./type";
 import { defineComponent } from "vue";
 import { getAllElements } from "../../../utils/dom";
 
@@ -11,6 +11,7 @@ export default defineComponent({
     /** 是否禁用 */
     disabled: { type: Boolean, default: false },
     type: { type: String as PropType<RadioType>, default: "radio" },
+    direction: { type: String as PropType<DirectionType>, default: "horizontal" },
   },
   emits: ["update:modelValue"],
   setup(props, { emit, slots }) {
@@ -22,6 +23,7 @@ export default defineComponent({
 
     const cls = computed(() => {
       let clsName = [name];
+      clsName.push(`${name}-${props.direction}`);
       props.type === "button" && clsName.push(`${name}-button`);
 
       return clsName;
