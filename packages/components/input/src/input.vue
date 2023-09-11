@@ -7,7 +7,7 @@
       :spellcheck="false"
       :disabled="disabled"
       :readonly="readonly"
-      :cursor="modelValue.length"
+      :cursor="modelValue?.length"
       :placeholder="placeholder"
       :maxlength="maxlength"
       :value="modelValue"
@@ -94,7 +94,7 @@ export default defineComponent({
     const showWordLimit = computed(() => {
       return props.maxlength && props.showLimit && props.type === "text";
     });
-    const limitText = computed(() => `${(props.modelValue as string).length}/${props.maxlength}`);
+    const limitText = computed(() => `${(props.modelValue as string)?.length}/${props.maxlength}`);
 
     /** 是否明文展示密码类型输入框内容 */
     const showPassword = ref<boolean>(false);

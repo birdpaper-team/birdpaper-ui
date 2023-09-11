@@ -1,3 +1,5 @@
+import { PropType } from "vue";
+import { RadioType } from "./type";
 declare const _sfc_main: import("vue").DefineComponent<{
     /** 单选框绑定值 */
     modelValue: {
@@ -13,6 +15,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
     disabled: {
         type: BooleanConstructor;
         default: boolean;
+    };
+    /** 单选框类型 */
+    type: {
+        type: PropType<RadioType>;
+        default: string;
     };
 }, {
     name: string;
@@ -34,11 +41,17 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    /** 单选框类型 */
+    type: {
+        type: PropType<RadioType>;
+        default: string;
+    };
 }>> & {
     "onUpdate:modelValue"?: (...args: any[]) => any;
     onChange?: (...args: any[]) => any;
 }, {
     value: string | number | boolean;
+    type: RadioType;
     disabled: boolean;
     modelValue: string | number | boolean;
 }, {}>;

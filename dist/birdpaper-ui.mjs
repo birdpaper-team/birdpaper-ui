@@ -4,8 +4,8 @@ var __publicField = (obj, key, value) => {
   __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
   return value;
 };
-import { defineComponent, computed, useSlots, openBlock, createElementBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, Comment, createVNode, mergeProps, Fragment, ref, nextTick, toDisplayString, watch, resolveComponent, createBlock, createSlots, withCtx, renderList, createTextVNode, reactive, provide, onMounted, onBeforeUnmount, resolveDirective, withDirectives, withModifiers, Teleport, Transition, vShow, inject, watchEffect, resolveDynamicComponent, toHandlerKey, normalizeStyle, onUnmounted, TransitionGroup, render } from "vue";
-const _sfc_main$y = defineComponent({
+import { defineComponent, computed, useSlots, openBlock, createElementBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, Comment, createVNode, mergeProps, Fragment, ref, nextTick, toDisplayString, watch, resolveComponent, createBlock, createSlots, withCtx, renderList, h, reactive, provide, onMounted, onBeforeUnmount, resolveDirective, withDirectives, withModifiers, Teleport, Transition, vShow, inject, watchEffect, createTextVNode, resolveDynamicComponent, toHandlerKey, normalizeStyle, onUnmounted, TransitionGroup, render } from "vue";
+const _sfc_main$x = defineComponent({
   name: "Button",
   props: {
     /** 按钮类型 Type of the button */
@@ -66,7 +66,7 @@ const _hoisted_2$f = {
   key: 0,
   class: "left-icon"
 };
-function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("button", {
     class: normalizeClass(_ctx.btnClass),
     type: "button",
@@ -81,7 +81,7 @@ function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
     renderSlot(_ctx.$slots, "default")
   ], 10, _hoisted_1$m);
 }
-const _button = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$n]]);
+const _button = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$m]]);
 const DEFAULT_PREFIX = "Bp";
 const getComponentsPrefix = (name) => {
   return name ?? DEFAULT_PREFIX;
@@ -202,7 +202,7 @@ const ButtonGroup = Object.assign(_buttonGroup, {
     app.component(_buttonGroup.name, _buttonGroup);
   }
 });
-const _sfc_main$x = defineComponent({
+const _sfc_main$w = defineComponent({
   name: "Input",
   props: {
     /** 绑定值 Binding value */
@@ -290,7 +290,7 @@ const _sfc_main$x = defineComponent({
 });
 const _hoisted_1$l = ["type", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
 const _hoisted_2$e = ["textContent"];
-function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.inpClass)
   }, [
@@ -335,7 +335,7 @@ function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
     ], 2)) : createCommentVNode("", true)
   ], 2);
 }
-const BpInput = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$m]]);
+const BpInput = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$l]]);
 BpInput.name = getComponentsPrefix() + BpInput.name;
 const Input = Object.assign(BpInput, {
   install: (app) => {
@@ -376,7 +376,7 @@ const off = function(element, event, handler, useCapture = false) {
 const warn = (module, info) => {
   console.warn(`[ A warning of birdpaper-ui ] - ${module}: ` + info);
 };
-const _sfc_main$w = defineComponent({
+const _sfc_main$v = defineComponent({
   name: "InputNumber",
   props: {
     /** 绑定值 Binding value */
@@ -489,7 +489,7 @@ const _sfc_main$w = defineComponent({
   }
 });
 const _hoisted_1$k = ["onClick"];
-function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_bp_input = resolveComponent("bp-input");
   return openBlock(), createBlock(_component_bp_input, {
     ref: "inputRef",
@@ -528,14 +528,14 @@ function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     } : void 0
   ]), 1032, ["modelValue", "class", "placeholder", "disabled", "readonly", "is-danger", "size", "onInput", "onBlur"]);
 }
-const _inputNumber = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$l]]);
+const _inputNumber = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$k]]);
 _inputNumber.name = getComponentsPrefix() + _inputNumber.name;
 const InputNumber = Object.assign(_inputNumber, {
   install: (app) => {
     app.component(_inputNumber.name, _inputNumber);
   }
 });
-const _sfc_main$v = defineComponent({
+const _sfc_main$u = defineComponent({
   name: "Textarea",
   props: {
     /** 绑定值 Binding value */
@@ -596,7 +596,7 @@ const _sfc_main$v = defineComponent({
 const _hoisted_1$j = ["rows", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
 const _hoisted_2$d = { class: "suffix" };
 const _hoisted_3$9 = ["textContent"];
-function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.inpClass)
   }, [
@@ -625,14 +625,14 @@ function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ], 2);
 }
-const _textarea = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$k]]);
+const _textarea = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$j]]);
 _textarea.name = getComponentsPrefix() + _textarea.name;
 const Textarea = Object.assign(_textarea, {
   install: (app) => {
     app.component(_textarea.name, _textarea);
   }
 });
-const _sfc_main$u = defineComponent({
+const _sfc_main$t = defineComponent({
   name: "Radio",
   props: {
     /** 单选框绑定值 */
@@ -640,7 +640,9 @@ const _sfc_main$u = defineComponent({
     /** 选项的值 */
     value: { type: [String, Number, Boolean], default: false },
     /** 是否禁用 */
-    disabled: { type: Boolean, default: false }
+    disabled: { type: Boolean, default: false },
+    /** 单选框类型 */
+    type: { type: String, default: "radio" }
   },
   emits: ["update:modelValue", "change"],
   setup(props, { emit }) {
@@ -659,8 +661,8 @@ const _sfc_main$u = defineComponent({
     };
   }
 });
-function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", {
+function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("label", {
     class: normalizeClass([_ctx.name, _ctx.disabled ? `${_ctx.name}-disabled` : ""]),
     onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleInput && _ctx.handleInput(...args))
   }, [
@@ -668,68 +670,79 @@ function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
       type: "radio",
       class: normalizeClass(`${_ctx.name}-inner`)
     }, null, 2),
-    createElementVNode("span", {
+    _ctx.type === "radio" ? (openBlock(), createElementBlock("span", {
+      key: 0,
       class: normalizeClass([`${_ctx.name}-radio`, _ctx.isCheck ? `${_ctx.name}-check` : ""])
-    }, null, 2),
+    }, null, 2)) : createCommentVNode("", true),
     createElementVNode("span", {
-      class: normalizeClass(`${_ctx.name}-label`)
+      class: normalizeClass([`${_ctx.name}-label`, _ctx.isCheck ? `${_ctx.name}-check-label` : ""])
     }, [
       renderSlot(_ctx.$slots, "default")
     ], 2)
   ], 2);
 }
-const _radio = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$j]]);
-const _sfc_main$t = defineComponent({
+const _radio = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$i]]);
+const _radioGroup = /* @__PURE__ */ defineComponent({
   name: "RadioGroup",
-  components: { bpRadio: _radio },
   props: {
     /** 单选框绑定值 */
-    modelValue: { type: [String, Number] },
-    /** 选项列表 */
-    optionList: { type: Array, default: () => [] },
+    modelValue: {
+      type: [String, Number]
+    },
     /** 是否禁用 */
-    disabled: { type: Boolean, default: false }
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    /** 单选框组类型 */
+    type: {
+      type: String,
+      default: "radio"
+    },
+    /** 排列方向 */
+    direction: {
+      type: String,
+      default: "horizontal"
+    }
   },
   emits: ["update:modelValue"],
-  setup(props, { emit }) {
+  setup(props, {
+    emit,
+    slots
+  }) {
     const name = "bp-radio-group";
-    const val = ref(props.modelValue ?? "");
-    const updateValue = (val2) => {
-      emit("update:modelValue", val2);
+    const updateValue = (v) => {
+      emit("update:modelValue", v);
     };
-    watch(
-      () => props.modelValue,
-      () => val.value = props.modelValue
-    );
-    return {
-      name,
-      val,
-      updateValue
+    const cls = computed(() => {
+      let clsName = [name];
+      clsName.push(`${name}-${props.direction}`);
+      props.type === "button" && clsName.push(`${name}-button`);
+      return clsName;
+    });
+    const render2 = () => {
+      var _a;
+      const children = getAllElements((_a = slots.default) == null ? void 0 : _a.call(slots), true).filter((item) => item.type !== Comment);
+      return createVNode("div", {
+        "class": cls.value
+      }, [children.map((child, index) => {
+        const radio = Object.assign({}, child);
+        radio.props = mergeProps(child.props, {
+          ...props
+        });
+        return createVNode(Fragment, {
+          "key": child.key ?? `item-${index}`
+        }, [h(radio, {
+          modelValue: props.modelValue,
+          "onUpdate:modelValue"(e) {
+            updateValue(e);
+          }
+        })]);
+      })]);
     };
+    return render2;
   }
 });
-function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
-  const _component_bp_radio = resolveComponent("bp-radio");
-  return openBlock(), createElementBlock("div", {
-    class: normalizeClass(_ctx.name)
-  }, [
-    (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.optionList, (v) => {
-      return openBlock(), createBlock(_component_bp_radio, {
-        modelValue: _ctx.val,
-        "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.val = $event),
-        disabled: _ctx.disabled,
-        value: v.value,
-        onChange: _ctx.updateValue
-      }, {
-        default: withCtx(() => [
-          createTextVNode(toDisplayString(v.label), 1)
-        ]),
-        _: 2
-      }, 1032, ["modelValue", "disabled", "value", "onChange"]);
-    }), 256))
-  ], 2);
-}
-const _radioGroup = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$i]]);
 _radio.name = getComponentsPrefix() + _radio.name;
 _radioGroup.name = getComponentsPrefix() + _radioGroup.name;
 const Radio = Object.assign(_radio, {
@@ -3605,6 +3618,7 @@ export {
   Pagination,
   Popconfirm,
   Radio,
+  Radio as RadioGroup,
   Select,
   Space,
   Spin,

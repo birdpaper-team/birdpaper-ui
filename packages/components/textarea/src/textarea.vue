@@ -7,7 +7,7 @@
       :spellcheck="false"
       :disabled="disabled"
       :readonly="readonly"
-      :cursor="modelValue.length"
+      :cursor="modelValue?.length"
       :placeholder="placeholder"
       :maxlength="maxlength"
       :value="modelValue"
@@ -67,7 +67,7 @@ export default defineComponent({
     const showWordLimit = computed(() => {
       return props.maxlength && props.showLimit;
     });
-    const limitText = computed(() => `${props.modelValue.length}/${props.maxlength}`);
+    const limitText = computed(() => `${props.modelValue?.length}/${props.maxlength}`);
 
     const onFocus = () => emit("focus");
     const onBlur = () => emit("blur");

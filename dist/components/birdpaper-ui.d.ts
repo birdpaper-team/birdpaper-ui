@@ -1328,6 +1328,7 @@ declare const _default: {
             $data: {};
             $props: {
                 value?: string | number | boolean;
+                type?: import("./radio/src/type").RadioType;
                 disabled?: boolean;
                 modelValue?: string | number | boolean;
                 "onUpdate:modelValue"?: (...args: any[]) => any;
@@ -1403,6 +1404,10 @@ declare const _default: {
                     type: BooleanConstructor;
                     default: boolean;
                 };
+                type: {
+                    type: import("vue").PropType<import("./radio/src/type").RadioType>;
+                    default: string;
+                };
             }>> & {
                 "onUpdate:modelValue"?: (...args: any[]) => any;
                 onChange?: (...args: any[]) => any;
@@ -1412,6 +1417,7 @@ declare const _default: {
                 isCheck: import("vue").ComputedRef<boolean>;
             }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], string, {
                 value: string | number | boolean;
+                type: import("./radio/src/type").RadioType;
                 disabled: boolean;
                 modelValue: string | number | boolean;
             }, {}, string, {}> & {
@@ -1447,6 +1453,10 @@ declare const _default: {
                 type: BooleanConstructor;
                 default: boolean;
             };
+            type: {
+                type: import("vue").PropType<import("./radio/src/type").RadioType>;
+                default: string;
+            };
         }>> & {
             "onUpdate:modelValue"?: (...args: any[]) => any;
             onChange?: (...args: any[]) => any;
@@ -1471,6 +1481,10 @@ declare const _default: {
             type: BooleanConstructor;
             default: boolean;
         };
+        type: {
+            type: import("vue").PropType<import("./radio/src/type").RadioType>;
+            default: string;
+        };
     }>> & {
         "onUpdate:modelValue"?: (...args: any[]) => any;
         onChange?: (...args: any[]) => any;
@@ -1480,6 +1494,7 @@ declare const _default: {
         isCheck: import("vue").ComputedRef<boolean>;
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", {
         value: string | number | boolean;
+        type: import("./radio/src/type").RadioType;
         disabled: boolean;
         modelValue: string | number | boolean;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
