@@ -10,7 +10,9 @@ export default defineComponent({
     modelValue: { type: [String, Number] as PropType<RadioGroupValue> },
     /** 是否禁用 */
     disabled: { type: Boolean, default: false },
+    /** 单选框组类型 */
     type: { type: String as PropType<RadioType>, default: "radio" },
+    /** 排列方向 */
     direction: { type: String as PropType<DirectionType>, default: "horizontal" },
   },
   emits: ["update:modelValue"],

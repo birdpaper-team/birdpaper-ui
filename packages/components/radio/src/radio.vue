@@ -24,6 +24,7 @@ export default defineComponent({
     value: { type: [String, Number, Boolean], default: false },
     /** 是否禁用 */
     disabled: { type: Boolean, default: false },
+    /** 单选框类型 */
     type: { type: String as PropType<RadioType>, default: "radio" },
   },
   emits: ["update:modelValue", "change"],
