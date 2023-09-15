@@ -68,6 +68,9 @@ export type { DrawerInstance } from "./drawer";
 export { default as Tooltip } from "./tooltip";
 export type { TooltipInstance } from "./tooltip";
 
+export { default as Trigger } from "./trigger";
+export type { TriggerInstance } from "./trigger";
+
 export { default as Message } from "./message";
 
 export type {} from "./components";
