@@ -2,15 +2,19 @@
 
   &-warpper {
     position: absolute;
-    width: 200px;
-    height: 100px;
+    min-width: 120px;
+    max-height: 200px;
+    width: auto;
+    height: auto;
     background-color: @gary-1;
     border-radius: 6px;
     z-index: 999;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: all .2s ease;
+    // transition: all .2s ease;
   }
 
   &-content {
+    width: 100%;
+    overflow-y: auto;
   }
 }

@@ -1,10 +1,13 @@
-import { PropType, Teleport, Transition, defineComponent, h, ref } from "vue";
+import { PropType, Teleport, Transition, defineComponent, h, nextTick, ref, watch } from "vue";
 import { TriggerPosition } from "./types";
 import { setPositionData } from "./core";
+import { vClickOutside } from "../../../directives/clickOutside";
 
 export default defineComponent({
   name: "Trigger",
+  directives: { clickOutside: vClickOutside },
   props: {
+    popupVisible: { type: Boolean, default: false },
     /** 触发方式 */
     trigger: { type: String, default: "click" },
     /** 弹出位置 */
@@ -13,25 +16,39 @@ export default defineComponent({
     popupOffset: { type: Number, default: 0 },
     /** 是否显示箭头 */
     showArrow: { type: Boolean, default: false },
+    /** 是否填充触发器宽度 */
+    fitWidth: { type: Boolean, default: false },
   },
+  emits: ["update:popupVisible"],
   setup(props, { emit, slots }) {
     const name = "bp-trigger";
 
     const triggerRef = ref();
     const warpperRef = ref();
-    const visible = ref<boolean>(false);
+    const visible = ref<boolean>(props.popupVisible || false);
     const handleClick = () => {
-      visible.value = !visible.value;
-
       const info = setPositionData(triggerRef.value.children[0], props.position, props.popupOffset);
-      const { top, left, transform } = info;
+      const { top, left, transform, width } = info;
 
-      warpperRef.value &&
-        warpperRef.value.setAttribute(
-          "style",
-          `top:${top}px;left:${left}px;transform:${transform}; display:${visible.value ? "block" : "none"}`
-        );
+      let attrStr = `display:${visible.value ? "block" : "none"};top:${top}px;left:${left}px;transform:${transform};`;
+      if (props.fitWidth) {
+        attrStr += `width:${width}px`;
+      }
+
+      warpperRef.value && warpperRef.value.setAttribute("style", attrStr);
+
+      nextTick(() => {
+        visible.value = !visible.value;
+        emit("update:popupVisible", visible.value);
+      });
     };
+
+    watch(
+      () => props.popupVisible,
+      (v: boolean) => {
+        visible.value = v;
+      }
+    );
 
     const render = () => {
       const children = slots.default?.() || [];
@@ -44,9 +61,7 @@ export default defineComponent({
           <Teleport to="body">
             <Transition name="fade-select" appear>
               <div ref={warpperRef} v-show={visible.value} class={`${name}-warpper`}>
-                <div class={`${name}-content`}>
-                  <slot name="content"></slot>
-                </div>
+                <div class={`${name}-content`}>{slots.content?.()}</div>
               </div>
             </Transition>
           </Teleport>

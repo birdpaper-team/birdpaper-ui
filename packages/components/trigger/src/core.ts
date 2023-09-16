@@ -4,6 +4,7 @@ class PositionInfo {
   top: number = 0;
   left: number = 0;
   transform?: string;
+  width?: number;
 }
 /**
  * 设置触发器定位信息
@@ -23,15 +24,14 @@ export const setPositionData = (el: Element, position: TriggerPosition, popupOff
     case "top":
       positionData = {
         top: top + scrollTop - popupOffset,
-        left: left + width / 2,
-        transform: "translateX(-50%) translateY(-100%);",
+        left: left,
+        transform: "translateY(-100%);",
       };
       break;
     case "bottom":
       positionData = {
         top: top + height + scrollTop + popupOffset,
-        left: left + width / 2,
-        transform: "translateX(-50%)",
+        left,
       };
       break;
     case "left":
@@ -51,6 +51,8 @@ export const setPositionData = (el: Element, position: TriggerPosition, popupOff
     default:
       break;
   }
+
+  positionData.width = width;
 
   return positionData;
 };
