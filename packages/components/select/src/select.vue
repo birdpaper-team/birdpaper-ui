@@ -1,5 +1,5 @@
 <template>
-  <div
+  <!-- <div
     ref="selectRef"
     :class="clsName"
     @click.stop="handleClick"
@@ -21,7 +21,20 @@
         </div>
       </Transition>
     </teleport>
-  </div>
+  </div> -->
+  <bp-trigger v-model:popup-visible="isFocus" ref="selectRef" :class="clsName" :popup-offset="10" fit-width>
+    <bp-input ref="inpRef" :disabled="disabled" v-model="currentSelect.label" readonly :placeholder="placeholder">
+      <template #suffix>
+        <i :class="[`${name}-icon-inner`, `ri-arrow-${isFocus ? 'up' : 'down'}-s-line`]"></i>
+      </template>
+    </bp-input>
+
+    <template #content>
+      <ul :class="`${name}-option-list`">
+        <slot></slot>
+      </ul>
+    </template>
+  </bp-trigger>
 </template>
 
 <script lang="ts">
@@ -33,6 +46,7 @@ import { defineComponent } from "vue";
 import BpInput from "../../input/src/input.vue";
 import { watch } from "vue";
 import { useSelect } from "./select";
+import BpTrigger from "../../trigger/src/trigger";
 import { computed } from "vue";
 
 export default defineComponent({
@@ -120,16 +134,15 @@ export default defineComponent({
 
     /** 展开/收起选项面板 */
     const handleTrigger = () => {
-      const rect = selectRef.value?.getBoundingClientRect();
-      if (!rect) return;
-
-      optionBoxRef.value.setAttribute(
-        "style",
-        `display: ${isFocus.value ? "block" : "none"};
-         width: ${rect.width}px;
-         left: ${rect.left}px;
-         top: ${rect.top + rect.height + document.documentElement.scrollTop}px;`
-      );
+      // const rect = selectRef.value?.getBoundingClientRect();
+      // if (!rect) return;
+      // optionBoxRef.value.setAttribute(
+      //   "style",
+      //   `display: ${isFocus.value ? "block" : "none"};
+      //    width: ${rect.width}px;
+      //    left: ${rect.left}px;
+      //    top: ${rect.top + rect.height + document.documentElement.scrollTop}px;`
+      // );
     };
 
     return {
