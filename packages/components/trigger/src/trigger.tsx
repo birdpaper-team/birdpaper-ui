@@ -1,6 +1,6 @@
-import { PropType, Teleport, Transition, defineComponent, h, nextTick, ref, watch } from "vue";
+import { PropType, Teleport, Transition, defineComponent, h, nextTick, ref, toRef, watch } from "vue";
 import { TriggerPosition } from "./types";
-import { setPositionData } from "./core";
+import { getPositionData, getWrapperSize } from "./core";
 import { vClickOutside } from "../../../directives/clickOutside";
 
 export default defineComponent({
@@ -16,8 +16,8 @@ export default defineComponent({
     popupOffset: { type: Number, default: 0 },
     /** 是否显示箭头 */
     showArrow: { type: Boolean, default: false },
-    /** 是否填充触发器宽度 */
-    fitWidth: { type: Boolean, default: false },
+    /** 弹出层是否填充触发器宽度 */
+    autoFitWidth: { type: Boolean, default: false },
   },
   emits: ["update:popupVisible"],
   setup(props, { emit, slots }) {
@@ -27,15 +27,15 @@ export default defineComponent({
     const warpperRef = ref();
     const visible = ref<boolean>(props.popupVisible || false);
     const handleClick = () => {
-      const info = setPositionData(triggerRef.value.children[0], props.position, props.popupOffset);
-      const { top, left, transform, width } = info;
+      const { top, left } = getPositionData(
+        triggerRef.value.children[0],
+        props.position,
+        getWrapperSize(warpperRef.value),
+        props.popupOffset
+      );
 
-      let attrStr = `display:${visible.value ? "block" : "none"};top:${top}px;left:${left}px;transform:${transform};`;
-      if (props.fitWidth) {
-        attrStr += `width:${width}px`;
-      }
-
-      warpperRef.value && warpperRef.value.setAttribute("style", attrStr);
+      const attrString = `top:${top}px;left:${left}px;display:${visible.value ? "block" : "none"};`;
+      warpperRef.value.setAttribute("style", attrString);
 
       nextTick(() => {
         visible.value = !visible.value;
@@ -50,11 +50,16 @@ export default defineComponent({
       }
     );
 
+    const onClickOutside = () => {
+      visible.value = false;
+        emit("update:popupVisible", visible.value);
+    };
+
     const render = () => {
       const children = slots.default?.() || [];
 
       return (
-        <div class={name} ref={triggerRef}>
+        <div class={name} ref={triggerRef} v-clickOutside={onClickOutside}>
           {h(children[0], {
             onClick: handleClick,
           })}

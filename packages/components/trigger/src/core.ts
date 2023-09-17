@@ -3,16 +3,25 @@ import { TriggerPosition } from "./types";
 class PositionInfo {
   top: number = 0;
   left: number = 0;
-  transform?: string;
   width?: number;
 }
+interface SizeInfo {
+  width: number;
+  height: number;
+}
 /**
- * 设置触发器定位信息
+ * 获取弹层定位信息
  * @param el 包含元素
  * @param position 定位类型
+ * @param wrapperSize 容器尺寸
  * @param popupOffset 偏移量
  */
-export const setPositionData = (el: Element, position: TriggerPosition, popupOffset?: number): PositionInfo => {
+export const getPositionData = (
+  el: Element,
+  position: TriggerPosition,
+  wrapperSize: SizeInfo,
+  popupOffset?: number
+): PositionInfo => {
   const rect = el && el?.getBoundingClientRect();
   if (!rect) return new PositionInfo();
 
@@ -23,29 +32,26 @@ export const setPositionData = (el: Element, position: TriggerPosition, popupOff
   switch (position) {
     case "top":
       positionData = {
-        top: top + scrollTop - popupOffset,
-        left: left,
-        transform: "translateY(-100%);",
+        top: top + scrollTop - popupOffset - wrapperSize.height,
+        left: left + width / 2 - wrapperSize.width / 2,
       };
       break;
     case "bottom":
       positionData = {
         top: top + height + scrollTop + popupOffset,
-        left,
+        left: left + width / 2 - wrapperSize.width / 2,
       };
       break;
     case "left":
       positionData = {
-        top: top + height / 2 + scrollTop,
-        left: left - popupOffset,
-        transform: "translateX(-100%) translateY(-50%);",
+        top: top + height / 2 + scrollTop - wrapperSize.height / 2,
+        left: left - popupOffset - wrapperSize.width,
       };
       break;
     case "right":
       positionData = {
-        top: top + height / 2 + scrollTop,
+        top: top + height / 2 + scrollTop - wrapperSize.height / 2,
         left: left + width + popupOffset,
-        transform: "translateY(-50%);",
       };
       break;
     default:
@@ -53,6 +59,18 @@ export const setPositionData = (el: Element, position: TriggerPosition, popupOff
   }
 
   positionData.width = width;
-
   return positionData;
+};
+
+/**
+ * 获取容器尺寸
+ * @param el 容器元素
+ * @returns SizeInfo
+ */
+export const getWrapperSize = (el: Element): SizeInfo => {
+  el.setAttribute("style", `display:block;opacity:0;visibility: hidden;`);
+  const { width, height } = el && el?.getBoundingClientRect();
+
+  el.setAttribute("style", `display:none`);
+  return { width, height };
 };

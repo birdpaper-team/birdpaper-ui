@@ -1,28 +1,5 @@
 <template>
-  <!-- <div
-    ref="selectRef"
-    :class="clsName"
-    @click.stop="handleClick"
-    @mouseleave="onMouseleave"
-    v-clickOutside="onClickOutside"
-  >
-    <bp-input ref="inpRef" :disabled="disabled" v-model="currentSelect.label" readonly :placeholder="placeholder">
-      <template #suffix>
-        <i :class="[`${name}-icon-inner`, `ri-arrow-${isFocus ? 'up' : 'down'}-s-line`]"></i>
-      </template>
-    </bp-input>
-
-    <teleport to="body">
-      <Transition name="fade-select" appear>
-        <div ref="optionBoxRef" :class="`${name}-option-box`" v-show="isFocus">
-          <ul :class="`${name}-option-list`">
-            <slot></slot>
-          </ul>
-        </div>
-      </Transition>
-    </teleport>
-  </div> -->
-  <bp-trigger v-model:popup-visible="isFocus" ref="selectRef" :class="clsName" :popup-offset="10" fit-width>
+  <bp-trigger v-model:popup-visible="isFocus" ref="selectRef" :class="clsName" :popup-offset="10" auto-fit-width>
     <bp-input ref="inpRef" :disabled="disabled" v-model="currentSelect.label" readonly :placeholder="placeholder">
       <template #suffix>
         <i :class="[`${name}-icon-inner`, `ri-arrow-${isFocus ? 'up' : 'down'}-s-line`]"></i>
@@ -93,14 +70,6 @@ export default defineComponent({
       return cls;
     });
 
-    /** 外层点击触发，聚焦并打开下拉面板 */
-    const handleClick = () => {
-      if (props.disabled) return;
-      handleTrigger();
-
-      isFocus.value = !isFocus.value;
-      isFocus.value && inpRef.value.handleFocus();
-    };
     const onClickOutside = () => (isFocus.value = false);
     const onMouseleave = () => !isFocus.value && inpRef.value.handleBlur();
 
@@ -122,29 +91,6 @@ export default defineComponent({
       () => setValue()
     );
 
-    onMounted(() => {
-      nextTick(() => {
-        on(window, "resize", throttle(handleTrigger, 100));
-      });
-    });
-
-    onBeforeUnmount(() => {
-      off(window, "resize", handleTrigger);
-    });
-
-    /** 展开/收起选项面板 */
-    const handleTrigger = () => {
-      // const rect = selectRef.value?.getBoundingClientRect();
-      // if (!rect) return;
-      // optionBoxRef.value.setAttribute(
-      //   "style",
-      //   `display: ${isFocus.value ? "block" : "none"};
-      //    width: ${rect.width}px;
-      //    left: ${rect.left}px;
-      //    top: ${rect.top + rect.height + document.documentElement.scrollTop}px;`
-      // );
-    };
-
     return {
       name,
       selectRef,
@@ -153,7 +99,6 @@ export default defineComponent({
       currentSelect,
       isFocus,
       clsName,
-      handleClick,
       onClickOutside,
       onMouseleave,
     };
