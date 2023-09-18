@@ -1,0 +1,46 @@
+// 淡入淡出
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+// 下拉面板
+.fade-dropdown-enter-from,
+.fade-dropdown-appear-from {
+  transform: scaleY(0.9);
+  transform-origin: 0 0;
+  opacity: 0;
+}
+
+.fade-dropdown-enter-to,
+.fade-dropdown-appear-to {
+  transform: scaleY(1);
+  transform-origin: 0 0;
+  opacity: 1;
+}
+
+.fade-dropdown-enter-active,
+.fade-dropdown-appear-active {
+  transition: all 0.2s cubic-bezier(0, 0, 1, 1);
+}
+
+.fade-dropdown-leave-from {
+  transform: scaleY(1);
+  transform-origin: 0 0;
+  opacity: 1;
+}
+
+.fade-dropdown-leave-to {
+  transform: scaleY(0.9);
+  transform-origin: 0 0;
+  opacity: 0;
+}
+
+.fade-dropdown-leave-active {
+  transition: all 0.2s cubic-bezier(0, 0, 1, 1);
+}
