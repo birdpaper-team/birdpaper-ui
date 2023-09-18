@@ -1,5 +1,5 @@
 <template>
-  <bp-trigger v-model:popup-visible="isFocus" ref="selectRef" :class="clsName" :popup-offset="10" auto-fit-width>
+  <bp-trigger v-model:popup-visible="isFocus" ref="selectRef" transition="fade-dropdown" :class="clsName" :popup-offset="10" auto-fit-width>
     <bp-input ref="inpRef" :disabled="disabled" v-model="currentSelect.label" readonly :placeholder="placeholder">
       <template #suffix>
         <i :class="[`${name}-icon-inner`, `ri-arrow-${isFocus ? 'up' : 'down'}-s-line`]"></i>
@@ -15,10 +15,9 @@
 </template>
 
 <script lang="ts">
-import { PropType, nextTick, onBeforeUnmount, onMounted, provide, ref } from "vue";
+import { PropType, provide, ref } from "vue";
 import { SelectBindValue, selectInjectionKey } from "./type";
 import { vClickOutside } from "../../../directives/clickOutside";
-import { off, on, throttle } from "../../../utils/util";
 import { defineComponent } from "vue";
 import BpInput from "../../input/src/input.vue";
 import { watch } from "vue";

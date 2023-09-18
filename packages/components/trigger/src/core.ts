@@ -1,11 +1,11 @@
 import { TriggerPosition } from "./types";
 
-class PositionInfo {
+export class PositionInfo {
   top: number = 0;
   left: number = 0;
   width?: number;
 }
-interface SizeInfo {
+export interface SizeInfo {
   width: number;
   height: number;
 }
@@ -73,4 +73,19 @@ export const getWrapperSize = (el: Element): SizeInfo => {
 
   el.setAttribute("style", `display:none`);
   return { width, height };
+};
+
+/**
+ * 获取需要设置的定位样式
+ * @param top 距离顶部
+ * @param left 距离左侧
+ * @param visible 是否 display
+ * @param width 自定义宽度
+ * @returns string
+ */
+export const getWrapperPositionStyle = (top: number, left: number, visible: boolean, width?: number): string => {
+  let innerStyleStr = `top:${top}px;left:${left}px;display:${visible ? "block" : "none"};`;
+  width && (innerStyleStr += `width:${width}px`);
+
+  return innerStyleStr;
 };
