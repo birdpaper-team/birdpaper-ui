@@ -55,7 +55,7 @@
   &-option-list {
     min-height: 80px;
     max-height: 200px;
-    padding: 8px 6px;
+    padding: 6px;
     overflow-y: auto;
 
     .@{option-cls}-item {
@@ -68,13 +68,17 @@
       border-radius: 6px;
       cursor: pointer;
 
+      &:not(:first-child) {
+        margin-top: 1px;
+      }
+
       span {
         padding: 0 10px;
         .text-ellipsis;
       }
 
       &:hover {
-        background-color: @gary-2;
+        background-color: @gary-3;
         transition: all 0.2s ease;
       }
     }
@@ -85,6 +89,7 @@
 
       span {
         font-weight: 500;
+        color: @gary-11;
         transition: all 0.2s ease;
       }
 

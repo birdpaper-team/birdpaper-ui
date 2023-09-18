@@ -124,7 +124,8 @@ textarea {
 }
 
 .input-font-family {
-  font-family: -apple-system,BlinkMacSystemFont,segoe ui,Roboto,helvetica neue,Arial,noto sans,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol,noto color emoji;
+  font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif,
+    apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
 }
 
 .text-ellipsis {
@@ -146,4 +147,25 @@ textarea {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
+}
+
+.click-icon {
+  color: @gary-7;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &::before {
+    padding: 1px;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+  }
+
+  &:hover {
+    color: @gary-8;
+
+    &::before {
+      background-color: @gary-5;
+      transition: all 0.2s ease;
+    }
+  }
 }
