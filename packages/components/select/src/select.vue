@@ -1,8 +1,23 @@
 <template>
-  <bp-trigger v-model:popup-visible="isFocus" ref="selectRef" transition="fade-dropdown" :class="clsName" :popup-offset="10" auto-fit-width>
-    <bp-input ref="inpRef" :disabled="disabled" v-model="currentSelect.label" readonly :placeholder="placeholder">
+  <bp-trigger
+    v-model:popup-visible="isFocus"
+    transition="fade-dropdown"
+    :class="clsName"
+    :popup-offset="10"
+    auto-fit-width
+  >
+    <bp-input
+      ref="inpRef"
+      :disabled="disabled"
+      v-model="currentSelect.label"
+      readonly
+      :placeholder="placeholder"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
+    >
       <template #suffix>
-        <i :class="[`${name}-icon-inner`, `ri-arrow-${isFocus ? 'up' : 'down'}-s-line`]"></i>
+        <i v-if="showClear && currentSelect.label" class="ri-close-line click-icon" @click.stop="hancleClear"></i>
+        <i v-else :class="[`${name}-icon-inner`, `ri-arrow-${isFocus ? 'up' : 'down'}-s-line`]"></i>
       </template>
     </bp-input>
 
@@ -36,15 +51,15 @@ export default defineComponent({
     disabled: { type: Boolean, default: false },
     /** 占位提示文字 The placeholder text */
     placeholder: { type: String, default: "" },
-    // TODO /** 是否允许清空 Clearable or not */
+    /** 是否允许清空 Clearable or not */
     clearable: { type: Boolean, default: false },
   },
   emits: ["update:modelValue", "change"],
   setup(props, { emit, slots }) {
     const name = "bp-select";
-    const selectRef = ref();
     const inpRef = ref();
-    const optionBoxRef = ref();
+    const showClear = ref<boolean>(false);
+
     const { currentSelect, valueMap, isFocus } = useSelect(slots);
 
     provide(selectInjectionKey, {
@@ -69,13 +84,25 @@ export default defineComponent({
       return cls;
     });
 
-    const onClickOutside = () => (isFocus.value = false);
-    const onMouseleave = () => !isFocus.value && inpRef.value.handleBlur();
-
     const setValue = () => {
       currentSelect.value = props.modelValue;
       currentSelect.label = valueMap.value[currentSelect.value];
     };
+
+    const handleMouseEnter = () => {
+      if (!props.clearable) return;
+      showClear.value = true;
+    };
+    const handleMouseLeave = () => {
+      if (!props.clearable) return;
+      showClear.value = false;
+    };
+
+    const hancleClear = () => {
+      currentSelect.value = '';
+      currentSelect.label = '';
+    };
+
     watch(
       () => valueMap.value,
       () => setValue(),
@@ -92,14 +119,14 @@ export default defineComponent({
 
     return {
       name,
-      selectRef,
       inpRef,
-      optionBoxRef,
       currentSelect,
       isFocus,
       clsName,
-      onClickOutside,
-      onMouseleave,
+      handleMouseEnter,
+      handleMouseLeave,
+      showClear,
+      hancleClear,
     };
   },
 });

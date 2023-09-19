@@ -15,8 +15,12 @@ import { computed } from "vue";
 export default defineComponent({
   name: "Option",
   props: {
-    value: { type: [String, Number, Boolean] as PropType<SelectBindValue>, default: "" },
+    /** 选项的值 */
+    value: { type: [String, Number] as PropType<SelectBindValue>, default: "" },
+    /** 选项文本内容 */
     label: { type: String, default: "" },
+    /** 是否禁用 Disabled or not */
+    disabled: { type: Boolean, default: false },
   },
   setup(props) {
     const name = "bp-option";
@@ -34,11 +38,14 @@ export default defineComponent({
     const clsName = computed(() => {
       let cls = [`${name}-item`];
       if (ctx.value.currentSelect.value === props.value) cls.push(`${name}-active`);
+      if(props.disabled) cls.push(`${name}-disabled`);
 
       return cls;
     });
 
     const handleClick = () => {
+      if (props.disabled) return;
+
       ctx.value?.onSelect(option.value, { ...option });
     };
 
