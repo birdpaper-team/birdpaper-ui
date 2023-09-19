@@ -1,5 +1,5 @@
 <template>
-  <bp-trigger trigger="hover">
+  <bp-trigger>
     <bp-button>Trigger</bp-button>
   </bp-trigger>
 </template>

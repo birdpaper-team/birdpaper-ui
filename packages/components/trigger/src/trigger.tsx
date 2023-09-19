@@ -38,34 +38,24 @@ export default defineComponent({
     const triggerRef = ref();
     const warpperRef = ref();
     const visible = ref<boolean>(props.popupVisible || false);
+    const clickOutsideLock = ref<boolean>(true);
 
     const handleClick = () => {
       if (props.trigger === "hover") return;
 
       handleResize();
-      nextTick(() => {
-        visible.value = !visible.value;
-        emit("update:popupVisible", visible.value);
-      });
+      updateVisible(!visible.value);
     };
     const handleMouseEnter = () => {
       if (props.trigger === "click") return;
 
       handleResize();
-      setTimeout(() => {
-        nextTick(() => {
-          visible.value = true;
-          emit("update:popupVisible", visible.value);
-        });
-      }, 100);
+      updateVisible(true);
     };
     const handleMouseLeave = () => {
       if (props.trigger === "click") return;
 
-      setTimeout(() => {
-        visible.value = false;
-        emit("update:popupVisible", visible.value);
-      }, 100);
+      updateVisible(false);
     };
 
     const handleResize = () => {
@@ -76,10 +66,23 @@ export default defineComponent({
         props.popupOffset
       );
 
-      warpperRef.value.setAttribute(
-        "style",
-        getWrapperPositionStyle(top, left, visible.value, props.autoFitWidth ? width : null)
-      );
+      const styleStr = getWrapperPositionStyle(top, left, visible.value, props.autoFitWidth ? width : null);
+      warpperRef.value.setAttribute("style", styleStr);
+    };
+
+    const onClickOutside = () => !clickOutsideLock.value && updateVisible(false);
+
+    const updateVisible = (val: boolean, delay: number = 100) => {
+      visible.value = val;
+      emit("update:popupVisible", visible.value);
+
+      nextTick(() => {
+        setTimeout(() => {
+          if (props.trigger === "click") {
+            clickOutsideLock.value = !visible.value;
+          }
+        }, delay);
+      });
     };
 
     onMounted(() => {
@@ -96,19 +99,15 @@ export default defineComponent({
       () => props.popupVisible,
       (v: boolean) => {
         visible.value = v;
+        clickOutsideLock.value = visible.value;
       }
     );
-
-    const onClickOutside = () => {
-      visible.value = false;
-      emit("update:popupVisible", visible.value);
-    };
 
     const render = () => {
       const children = slots.default?.() || [];
 
       return (
-        <div class={name} ref={triggerRef} v-clickOutside={onClickOutside}>
+        <div class={name} ref={triggerRef}>
           {h(children[0], {
             onClick: handleClick,
             onMouseenter: handleMouseEnter,
@@ -122,6 +121,7 @@ export default defineComponent({
                 class={`${name}-warpper`}
                 onMouseenter={handleMouseEnter}
                 onMouseleave={handleMouseLeave}
+                v-clickOutside={onClickOutside}
               >
                 <div class={`${name}-content`}>{slots.content?.()}</div>
               </div>
