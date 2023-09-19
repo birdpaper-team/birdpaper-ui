@@ -123,7 +123,7 @@ export default defineComponent({
                 onMouseleave={handleMouseLeave}
                 v-clickOutside={onClickOutside}
               >
-                <div class={`${name}-content`}>{slots.content?.()}</div>
+                {slots.content?.()}
               </div>
             </Transition>
           </Teleport>
