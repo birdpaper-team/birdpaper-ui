@@ -10,9 +10,9 @@ import {
   ref,
   watch,
 } from "vue";
-import { getPositionData, getWrapperPositionStyle, getWrapperSize } from "./core";
+import { getPositionData, getWrapperPositionStyle, getWarpperSize } from "./core";
 import { TriggerPosition } from "./types";
-import { off, on, throttle } from "../../../utils/util";
+import { off, on } from "../../../utils/util";
 import { vClickOutside } from "../../../directives/clickOutside";
 
 export default defineComponent({
@@ -59,11 +59,15 @@ export default defineComponent({
     };
 
     const handleResize = () => {
+      if (!triggerRef.value) return;
+
+      const warpperSize = getWarpperSize(warpperRef.value);
       const { top, left, width } = getPositionData(
         triggerRef.value.children[0],
         props.position,
-        getWrapperSize(warpperRef.value),
-        props.popupOffset
+        { ...warpperSize },
+        props.popupOffset,
+        props.autoFitWidth
       );
 
       const styleStr = getWrapperPositionStyle(top, left, visible.value, props.autoFitWidth ? width : null);
@@ -87,7 +91,7 @@ export default defineComponent({
 
     onMounted(() => {
       nextTick(() => {
-        on(window, "resize", throttle(handleResize, 100));
+        on(window, "resize", handleResize);
       });
     });
 

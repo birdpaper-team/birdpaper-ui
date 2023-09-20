@@ -2,11 +2,11 @@ import { PropTableItem } from "../../../components/table-block/src/tableBlock";
 
 const list: PropTableItem[] = [
   { name: "popup-visible(v-model)", remark: "触发器绑定值", type: "Boolean", default: "false" },
-  { name: "trigger", remark: "触发方式", type: "enum", optional: ["click", "hover"], default: "click" },
+  { name: "trigger", remark: "触发方式", type: "Enum", optional: ["click", "hover"], default: "click" },
   {
     name: "position",
     remark: "弹出位置",
-    type: "enum",
+    type: "Enum",
     optional: ["top", "bottom", "left", "right"],
     default: "bottom",
   },
