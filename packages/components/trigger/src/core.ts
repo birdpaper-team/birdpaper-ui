@@ -13,13 +13,13 @@ export interface SizeInfo {
  * 获取弹层定位信息
  * @param el 包含元素
  * @param position 定位类型
- * @param warpperSize 容器尺寸
+ * @param wrapperSize 容器尺寸
  * @param popupOffset 偏移量
  */
 export const getPositionData = (
   el: Element,
   position: TriggerPosition,
-  warpperSize: SizeInfo,
+  wrapperSize: SizeInfo,
   popupOffset?: number,
   autoFitWidth?: boolean
 ): PositionInfo => {
@@ -28,31 +28,31 @@ export const getPositionData = (
 
   const { top, left, width, height } = rect;
   const scrollTop = document.documentElement.scrollTop || 0;
-  const warpperWidth = autoFitWidth ? width : warpperSize.width;
+  const wrapperWidth = autoFitWidth ? width : wrapperSize.width;
 
   let positionData: PositionInfo = new PositionInfo();
   switch (position) {
     case "top":
       positionData = {
-        top: top + scrollTop - popupOffset - warpperSize.height,
-        left: left + width / 2 - warpperWidth / 2,
+        top: top + scrollTop - popupOffset - wrapperSize.height,
+        left: left + width / 2 - wrapperWidth / 2,
       };
       break;
     case "bottom":
       positionData = {
         top: top + height + scrollTop + popupOffset,
-        left: left + width / 2 - warpperWidth / 2,
+        left: left + width / 2 - wrapperWidth / 2,
       };
       break;
     case "left":
       positionData = {
-        top: top + height / 2 + scrollTop - warpperSize.height / 2,
-        left: left - popupOffset - warpperWidth,
+        top: top + height / 2 + scrollTop - wrapperSize.height / 2,
+        left: left - popupOffset - wrapperWidth,
       };
       break;
     case "right":
       positionData = {
-        top: top + height / 2 + scrollTop - warpperSize.height / 2,
+        top: top + height / 2 + scrollTop - wrapperSize.height / 2,
         left: left + width + popupOffset,
       };
       break;
@@ -69,7 +69,7 @@ export const getPositionData = (
  * @param el 容器元素
  * @returns SizeInfo
  */
-export const getWarpperSize = (el: Element): SizeInfo => {
+export const getWrapperSize = (el: Element): SizeInfo => {
   el.setAttribute("style", `display:block;opacity:0;visibility: hidden;`);
   const { width, height } = el && el?.getBoundingClientRect();
 

@@ -10,7 +10,7 @@ import {
   ref,
   watch,
 } from "vue";
-import { getPositionData, getWrapperPositionStyle, getWarpperSize } from "./core";
+import { getPositionData, getWrapperPositionStyle, getWrapperSize } from "./core";
 import { TriggerPosition } from "./types";
 import { off, on } from "../../../utils/util";
 import { vClickOutside } from "../../../directives/clickOutside";
@@ -36,7 +36,7 @@ export default defineComponent({
     const name = "bp-trigger";
 
     const triggerRef = ref();
-    const warpperRef = ref();
+    const wrapperRef = ref();
     const visible = ref<boolean>(props.popupVisible || false);
     const clickOutsideLock = ref<boolean>(true);
 
@@ -61,17 +61,17 @@ export default defineComponent({
     const handleResize = () => {
       if (!triggerRef.value) return;
 
-      const warpperSize = getWarpperSize(warpperRef.value);
+      const wrapperSize = getWrapperSize(wrapperRef.value);
       const { top, left, width } = getPositionData(
         triggerRef.value.children[0],
         props.position,
-        { ...warpperSize },
+        { ...wrapperSize },
         props.popupOffset,
         props.autoFitWidth
       );
 
       const styleStr = getWrapperPositionStyle(top, left, visible.value, props.autoFitWidth ? width : null);
-      warpperRef.value.setAttribute("style", styleStr);
+      wrapperRef.value.setAttribute("style", styleStr);
     };
 
     const onClickOutside = () => !clickOutsideLock.value && updateVisible(false);
@@ -120,9 +120,9 @@ export default defineComponent({
           <Teleport to="body">
             <Transition name={props.transition} appear>
               <div
-                ref={warpperRef}
+                ref={wrapperRef}
                 v-show={visible.value}
-                class={`${name}-warpper`}
+                class={`${name}-wrapper`}
                 onMouseenter={handleMouseEnter}
                 onMouseleave={handleMouseLeave}
                 v-clickOutside={onClickOutside}
