@@ -1,0 +1,85 @@
+@form-cls: ~"@{prefix}-form";
+@formItem-cls: ~"@{prefix}-form-item";
+
+.@{form-cls} {
+  position: relative;
+
+  .@{formItem-cls} {
+    &-label {
+      display: flex;
+      line-height: 32px;
+      .no-select;
+
+      .label-asterisk {
+        &::before {
+          content: "*";
+        }
+        display: block;
+        color: @danger-6;
+        font-size: 12px;
+        margin-right: 2px;
+      }
+
+      label {
+        color: @gary-8;
+        font-size: 14px;
+        font-weight: normal;
+        white-space: normal;
+      }
+    }
+
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-message {
+      font-size: 12px;
+      color: @danger-6;
+    }
+  }
+
+  .has-message {
+    margin-bottom: 0;
+  }
+}
+
+.@{form-cls}-horizontal {
+  .@{formItem-cls} {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    &-label {
+      margin-right: 8px;
+    }
+
+    &-wrapper {
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.@{form-cls}-vertical {
+  .@{formItem-cls} {
+    &:not(:first-child) {
+      margin-top: 10px;
+    }
+  }
+}
+
+.@{form-cls}-inline {
+  .@{formItem-cls} {
+    display: inline-flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    &-label {
+      margin-right: 8px;
+    }
+  }
+}

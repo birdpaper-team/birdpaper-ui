@@ -21,7 +21,8 @@ import Popconfirm from "./popconfirm";
 import Image from "./image";
 import Drawer from "./drawer";
 import Tooltip from "./tooltip";
-import Trigger from "./trigger"
+import Trigger from "./trigger";
+import Form from "./form";
 import Message from "./message";
 
 const components: Record<string, Plugin> = {
@@ -48,6 +49,7 @@ const components: Record<string, Plugin> = {
   Drawer,
   Tooltip,
   Trigger,
+  Form,
   Message,
 };
 
@@ -84,5 +86,6 @@ export default {
   Drawer,
   Tooltip,
   Trigger,
+  Form,
   Message,
 };
