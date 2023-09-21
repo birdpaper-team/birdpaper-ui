@@ -28,12 +28,13 @@ export const sidebar = {
     {
       text: "数据输入",
       items: [
+        { text: "表单 <span>Form</span>", link: "/component/form" },
         { text: "输入框 <span>Input</span>", link: "/component/input" },
         { text: "文本域 <span>Textarea</span>", link: "/component/textarea" },
         { text: "单选框 <span>Radio</span>", link: "/component/radio" },
         { text: "复选框 <span>Checkbox</span>", link: "/component/checkbox" },
-        { text: "选择器 <span>Select</span>", link: "/component/select" },
         { text: "开关 <span>Switch</span>", link: "/component/switch" },
+        { text: "选择器 <span>Select</span>", link: "/component/select" },
         { text: "数字输入 <span>InputNumber</span>", link: "/component/inputNumber" },
       ],
     },
