@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@vueuse/core": "^10.1.2",
+    "async-validator": "^4.2.5",
     "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.2.0",
     "gulp-sourcemaps": "^3.0.0",

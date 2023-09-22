@@ -7,10 +7,14 @@ export default defineComponent({
     field: { type: String },
     required: { type: Boolean, default: false },
     message: { type: String, default: "" },
+    rules: { type: Object },
+    labelStyle: { type: [Object, String], default: "" },
+    wrapperStyle: { type: [Object, String], default: "" },
   },
   setup(props, { emit, slots }) {
     const name = "bp-form-item";
     const showMessage = ref<boolean>(false);
+    const defaultMessage = `${props.field} is unvalidate`;
 
     const formItemCls = computed(() => {
       let clsName = [name];
@@ -25,20 +29,25 @@ export default defineComponent({
       return clsName;
     });
 
+    const isRequire = computed(() => {
+      return props.required;
+    });
     const render = () => {
       return (
         <div class={formItemCls.value}>
-          <div class={`${name}-label`}>
-            <span class="label-asterisk"></span>
+          <div class={`${name}-label`} style={props.labelStyle}>
+            {isRequire.value ? <span class="label-asterisk"></span> : ""}
             <label>{props.label}</label>
           </div>
-          <div class={wrapperCls.value}>
+          <div class={wrapperCls.value} style={props.wrapperStyle}>
             {slots.default?.()}
             {showMessage.value ? (
               <div class={`${name}-message`}>
-                <span>请填写内容</span>
+                <span>{props.message || defaultMessage}</span>
               </div>
-            ) : null}
+            ) : (
+              ""
+            )}
           </div>
         </div>
       );

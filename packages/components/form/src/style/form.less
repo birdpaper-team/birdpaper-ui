@@ -8,6 +8,7 @@
     &-label {
       display: flex;
       line-height: 32px;
+      min-width: 60px;
       .no-select;
 
       .label-asterisk {
@@ -52,10 +53,13 @@
 
     &-label {
       margin-right: 8px;
+      justify-content: flex-end;
     }
 
-    &-wrapper {
-      margin-bottom: 24px;
+    &:not(:last-child){
+      .@{formItem-cls}-wrapper {
+        margin-bottom: 24px;
+      }
     }
   }
 }
