@@ -1,20 +1,19 @@
-import { computed, defineComponent, ref } from "vue";
+import { RuleItem } from "async-validator";
+import { PropType, computed, defineComponent, ref } from "vue";
 
 export default defineComponent({
   name: "FormItem",
   props: {
     label: { type: String },
     field: { type: String },
-    required: { type: Boolean, default: false },
-    message: { type: String, default: "" },
-    rules: { type: Object },
+    rules: { type: Array as PropType<RuleItem[]>, default: () => [] },
     labelStyle: { type: [Object, String], default: "" },
     wrapperStyle: { type: [Object, String], default: "" },
   },
-  setup(props, { emit, slots }) {
+  setup(props, { slots, expose }) {
     const name = "bp-form-item";
-    const showMessage = ref<boolean>(false);
-    const defaultMessage = `${props.field} is unvalidate`;
+    const messageVisible = ref<boolean>(false);
+    const message = ref<string>("");
 
     const formItemCls = computed(() => {
       let clsName = [name];
@@ -24,13 +23,23 @@ export default defineComponent({
 
     const wrapperCls = computed(() => {
       let clsName = [`${name}-wrapper`];
-      if (showMessage.value) clsName.push(`has-message`);
+      if (messageVisible.value) clsName.push(`has-message`);
 
       return clsName;
     });
 
+    const handleError = (msg: string) => {
+      message.value = msg;
+      messageVisible.value = true;
+    };
+    expose({
+      handleError,
+    });
+
     const isRequire = computed(() => {
-      return props.required;
+      return props.rules.some(item => {
+        return item.required;
+      });
     });
     const render = () => {
       return (
@@ -41,9 +50,9 @@ export default defineComponent({
           </div>
           <div class={wrapperCls.value} style={props.wrapperStyle}>
             {slots.default?.()}
-            {showMessage.value ? (
+            {messageVisible.value ? (
               <div class={`${name}-message`}>
-                <span>{props.message || defaultMessage}</span>
+                <span>{message.value}</span>
               </div>
             ) : (
               ""
