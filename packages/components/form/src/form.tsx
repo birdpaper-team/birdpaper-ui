@@ -3,6 +3,7 @@ import { FormLayout } from "./types";
 import { getAllElements } from "../../../utils/dom";
 import Schema, { RuleItem, ValidateCallback, ValidateError } from "async-validator";
 import { getValidateInfo } from "./core";
+import { FormItemInstance } from "..";
 
 export default defineComponent({
   name: "Form",
@@ -13,7 +14,7 @@ export default defineComponent({
     labelStyle: { type: [Object, String], default: "" },
     wrapperStyle: { type: [Object, String], default: "" },
   },
-  setup(props, context) {
+  setup(props, { slots, expose }) {
     const name = "bp-form";
 
     const cls = computed(() => {
@@ -23,7 +24,8 @@ export default defineComponent({
       return clsName;
     });
 
-    const formItemRef = ref<any>({});
+    const formRef = ref();
+    const formItemRef = ref({});
 
     /**
      * 表单校验
@@ -51,28 +53,34 @@ export default defineComponent({
       });
     };
 
-    context.expose({ validate });
+    const resetFields = () => {
+      console.log("[ formRef.value ]-59", formRef.value.resetFields);
+    };
+
     const render = () => {
-      const children = getAllElements(context.slots.default?.(), true).filter(
+      const children = getAllElements(slots.default?.(), true).filter(
         item => item.type !== Comment && (item.type as any).name === "BpFormItem"
       );
       return (
-        <div class={cls.value}>
+        <form ref={formRef} class={cls.value}>
           {children.map((child, index) => {
             const FormItem = Object.assign({}, child);
 
             return (
               <Fragment key={child.key ?? `item-${index}`}>
                 {h(FormItem, {
-                  ref: (el)=>{formItemRef.value[child.props?.field] = el},
+                  ref: el => {
+                    formItemRef.value[child.props?.field] = el;
+                  },
                 })}
               </Fragment>
             );
           })}
-        </div>
+        </form>
       );
     };
 
+    expose({ validate, resetFields });
     return render;
   },
 });
