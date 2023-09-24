@@ -12,7 +12,7 @@
             <span class="remark-area-inner">{{ record.remark || "-" }}</span>
           </template>
         </bp-table-column>
-        <bp-table-column title="类型" data-index="type" width="220" tooltip ellipsis>
+        <bp-table-column title="类型" data-index="type" width="220">
           <template #cell="{ record }">
             <div class="type-area" v-clickOutside="() => onClickoutside(record)">
               <template v-if="typeof record.type === 'object'">
