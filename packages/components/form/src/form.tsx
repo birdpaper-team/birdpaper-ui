@@ -1,5 +1,5 @@
-import { PropType, computed, defineComponent, Comment, Fragment, h, ref } from "vue";
-import { FormLayout } from "./types";
+import { PropType, computed, defineComponent, Comment, Fragment, h, ref, provide } from "vue";
+import { FormInjectionKey, FormLayout } from "./types";
 import { getAllElements } from "../../../utils/dom";
 import Schema, { RuleItem, ValidateCallback, ValidateError } from "async-validator";
 import { getValidateInfo } from "./core";
@@ -16,6 +16,10 @@ export default defineComponent({
   },
   setup(props, { slots, expose }) {
     const name = "bp-form";
+
+    provide(FormInjectionKey, {
+      model: props.model,
+    });
 
     const cls = computed(() => {
       let clsName = [name];
@@ -34,7 +38,7 @@ export default defineComponent({
      */
     const validate = async (callback?: ValidateCallback): Promise<undefined | ValidateError[]> => {
       return new Promise(resove => {
-        const rules = getValidateInfo(props.rules, context?.slots);
+        const rules = getValidateInfo(props.rules, slots);
         const validator = new Schema(rules || {});
 
         const defaultCallback = (errors: ValidateError[] | null) => {
@@ -54,7 +58,10 @@ export default defineComponent({
     };
 
     const resetFields = () => {
-      console.log("[ formRef.value ]-59", formRef.value.resetFields);
+      for (const key in formItemRef.value) {
+        formItemRef.value[key].resetFields();
+      }
+      // console.log("[ formRef.value ]-59", formRef.value.resetFields);
     };
 
     const render = () => {
@@ -70,7 +77,7 @@ export default defineComponent({
               <Fragment key={child.key ?? `item-${index}`}>
                 {h(FormItem, {
                   ref: el => {
-                    formItemRef.value[child.props?.field] = el;
+                    child.props?.field && (formItemRef.value[child.props?.field] = el);
                   },
                 })}
               </Fragment>
