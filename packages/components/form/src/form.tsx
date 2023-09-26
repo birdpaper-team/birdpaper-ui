@@ -3,7 +3,6 @@ import { FormInjectionKey, FormLayout } from "./types";
 import { getAllElements } from "../../../utils/dom";
 import Schema, { RuleItem, ValidateCallback, ValidateError } from "async-validator";
 import { getValidateInfo } from "./core";
-import { FormItemInstance } from "..";
 
 export default defineComponent({
   name: "Form",
