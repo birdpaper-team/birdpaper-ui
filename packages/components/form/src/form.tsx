@@ -60,7 +60,10 @@ export default defineComponent({
       for (const key in formItemRef.value) {
         formItemRef.value[key].resetFields();
       }
-      // console.log("[ formRef.value ]-59", formRef.value.resetFields);
+    };
+
+    const clearValidate = () => {
+      // TODO
     };
 
     const render = () => {
@@ -86,7 +89,7 @@ export default defineComponent({
       );
     };
 
-    expose({ validate, resetFields });
+    expose({ validate, clearValidate, resetFields });
     return render;
   },
 });

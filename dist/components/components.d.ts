@@ -26,6 +26,9 @@ declare module "vue" {
     BpImage: typeof import("birdpaper-ui")["Image"];
     BpDrawer: typeof import("birdpaper-ui")["Drawer"];
     BpTooltip: typeof import("birdpaper-ui")["Tooltip"];
+    BpTrigger: typeof import("birdpaper-ui")["Trigger"];
+    BpForm: typeof import("birdpaper-ui")["Form"];
+    BpFormItem: typeof import("birdpaper-ui")["FormItem"];
   }
 }
 

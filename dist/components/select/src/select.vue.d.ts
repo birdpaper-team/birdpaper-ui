@@ -16,24 +16,24 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: StringConstructor;
         default: string;
     };
+    /** 是否允许清空 Clearable or not */
     clearable: {
         type: BooleanConstructor;
         default: boolean;
     };
 }, {
     name: string;
-    selectRef: import("vue").Ref<any>;
     inpRef: import("vue").Ref<any>;
-    optionBoxRef: import("vue").Ref<any>;
     currentSelect: {
         label: string;
         value: SelectBindValue;
     };
     isFocus: import("vue").Ref<boolean>;
     clsName: import("vue").ComputedRef<string[]>;
-    handleClick: () => void;
-    onClickOutside: () => boolean;
-    onMouseleave: () => any;
+    handleMouseEnter: () => void;
+    handleMouseLeave: () => void;
+    showClear: import("vue").Ref<boolean>;
+    hancleClear: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     /** 绑定值 Binding value */
     modelValue: {
@@ -50,6 +50,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: StringConstructor;
         default: string;
     };
+    /** 是否允许清空 Clearable or not */
     clearable: {
         type: BooleanConstructor;
         default: boolean;

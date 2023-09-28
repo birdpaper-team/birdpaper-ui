@@ -9,6 +9,7 @@
   opacity: 0;
 }
 
+
 // 下拉面板
 .fade-dropdown-enter-from,
 .fade-dropdown-appear-from {
@@ -43,4 +44,34 @@
 
 .fade-dropdown-leave-active {
   transition: all 0.2s cubic-bezier(0, 0, 1, 1);
+}
+
+.form-error-enter-from,
+.form-error-appear-from {
+  opacity: 0;
+}
+
+.form-error-enter-to,
+.form-error-appear-to {
+  opacity: 1;
+}
+
+.form-error-enter-active,
+.form-error-appear-active {
+  transition: opacity .2s cubic-bezier(0, 0, 1, 1);
+  animation: bp-form-error .4s cubic-bezier(0, 0, 1, 1);
+}
+
+@keyframes bp-form-error {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.2;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }

@@ -1,5 +1,5 @@
 import { RuleItem } from "async-validator";
-import { PropType, computed, defineComponent, inject, ref } from "vue";
+import { PropType, Transition, computed, defineComponent, inject, ref, watch } from "vue";
 import { FormContext, FormInjectionKey } from "./types";
 
 export default defineComponent({
@@ -18,17 +18,16 @@ export default defineComponent({
     const message = ref<string>("");
 
     ctx.value = inject(FormInjectionKey, null);
-    // console.log("[ ctx.value ]-21", ctx.value.model[props.field]);
 
     const formItemCls = computed(() => {
       let clsName = [name];
+      if (messageVisible.value) clsName.push(`${name}-has-message`);
 
       return clsName;
     });
 
     const wrapperCls = computed(() => {
       let clsName = [`${name}-wrapper`];
-      if (messageVisible.value) clsName.push(`has-message`);
 
       return clsName;
     });
@@ -43,10 +42,25 @@ export default defineComponent({
       message.value = msg;
       messageVisible.value = true;
     };
+    const clearError = () => {
+      if (!messageVisible.value) return;
+
+      messageVisible.value = false;
+      message.value = "";
+    };
 
     const resetFields = () => {
-      ctx.value.model[props.field] = ''
+      // TODO
+      ctx.value.model[props.field] = "";
+      clearError();
     };
+
+    watch(
+      () => ctx.value.model[props.field],
+      () => {
+        messageVisible.value && clearError();
+      }
+    );
 
     const render = () => {
       return (
@@ -57,19 +71,20 @@ export default defineComponent({
           </div>
           <div class={wrapperCls.value} style={props.wrapperStyle}>
             {slots.default?.()}
+
             {messageVisible.value ? (
-              <div class={`${name}-message`}>
-                <span>{message.value}</span>
-              </div>
-            ) : (
-              ""
-            )}
+              <Transition name="form-error" appear>
+                <div class={`${name}-message`} v-show={messageVisible.value}>
+                  {message.value}
+                </div>
+              </Transition>
+            ) : null}
           </div>
         </div>
       );
     };
 
-    expose({ handleError,resetFields });
+    expose({ handleError, clearError, resetFields });
     return render;
   },
 });

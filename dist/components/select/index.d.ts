@@ -91,18 +91,17 @@ declare const Select: {
             onChange?: (...args: any[]) => any;
         }, {
             name: string;
-            selectRef: import("vue").Ref<any>;
             inpRef: import("vue").Ref<any>;
-            optionBoxRef: import("vue").Ref<any>;
             currentSelect: {
                 label: string;
                 value: import("./src/type").SelectBindValue;
             };
             isFocus: import("vue").Ref<boolean>;
             clsName: import("vue").ComputedRef<string[]>;
-            handleClick: () => void;
-            onClickOutside: () => boolean;
-            onMouseleave: () => any;
+            handleMouseEnter: () => void;
+            handleMouseLeave: () => void;
+            showClear: import("vue").Ref<boolean>;
+            hancleClear: () => void;
         }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], string, {
             disabled: boolean;
             modelValue: import("./src/type").SelectBindValue;
@@ -150,18 +149,17 @@ declare const Select: {
         onChange?: (...args: any[]) => any;
     } & import("vue").ShallowUnwrapRef<{
         name: string;
-        selectRef: import("vue").Ref<any>;
         inpRef: import("vue").Ref<any>;
-        optionBoxRef: import("vue").Ref<any>;
         currentSelect: {
             label: string;
             value: import("./src/type").SelectBindValue;
         };
         isFocus: import("vue").Ref<boolean>;
         clsName: import("vue").ComputedRef<string[]>;
-        handleClick: () => void;
-        onClickOutside: () => boolean;
-        onMouseleave: () => any;
+        handleMouseEnter: () => void;
+        handleMouseLeave: () => void;
+        showClear: import("vue").Ref<boolean>;
+        hancleClear: () => void;
     }> & {} & import("vue").ComponentCustomProperties & {};
     __isFragment?: never;
     __isTeleport?: never;
@@ -188,18 +186,17 @@ declare const Select: {
     onChange?: (...args: any[]) => any;
 }, {
     name: string;
-    selectRef: import("vue").Ref<any>;
     inpRef: import("vue").Ref<any>;
-    optionBoxRef: import("vue").Ref<any>;
     currentSelect: {
         label: string;
         value: import("./src/type").SelectBindValue;
     };
     isFocus: import("vue").Ref<boolean>;
     clsName: import("vue").ComputedRef<string[]>;
-    handleClick: () => void;
-    onClickOutside: () => boolean;
-    onMouseleave: () => any;
+    handleMouseEnter: () => void;
+    handleMouseLeave: () => void;
+    showClear: import("vue").Ref<boolean>;
+    hancleClear: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", {
     disabled: boolean;
     modelValue: import("./src/type").SelectBindValue;
