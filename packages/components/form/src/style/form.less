@@ -69,24 +69,30 @@
 
 .@{form-cls}-vertical {
   .@{formItem-cls} {
-    &:not(:first-child) {
-      margin-top: 10px;
+    &:not(:last-child) {
+      margin-bottom: 20px;
     }
   }
 }
 
 .@{form-cls}-inline {
+  display: flex;
+  align-items: center;
+
   .@{formItem-cls} {
     display: inline-flex;
     align-items: flex-start;
     justify-content: flex-start;
+    margin-bottom: 20px;
 
     &:not(:last-child) {
-      margin-right: 20px;
+      margin-right: 10px;
     }
 
     &-label {
       margin-right: 8px;
+      justify-content: flex-end;
+      width: auto;
     }
   }
 }

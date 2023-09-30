@@ -10,8 +10,8 @@ export default defineComponent({
     model: { type: Object, default: () => {} },
     rules: { type: Object as PropType<Record<string, RuleItem[]>> },
     layout: { type: String as PropType<FormLayout>, default: "horizontal" },
-    labelStyle: { type: [Object, String], default: "" },
-    wrapperStyle: { type: [Object, String], default: "" },
+    // labelStyle: { type: [Object, String], default: "" },
+    // wrapperStyle: { type: [Object, String], default: "" },
   },
   setup(props, { slots, expose }) {
     const name = "bp-form";

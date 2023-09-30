@@ -1,9 +1,11 @@
 <script setup lang="ts">
   import props from "../example/input/props.ts";
   import events from "../example/input/events.ts";
+  import slots from "../example/input/slots.ts";
 </script>
 
 # 输入框 Input
+
 基础的文本输入控件。
 
 ### 基础用法
@@ -33,3 +35,7 @@
 ### Input 事件
 
 <table-block type="events" :data="events"></table-block>
+
+### Input 插槽
+
+<table-block type="slots" :data="slots"></table-block>
