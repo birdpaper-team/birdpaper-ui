@@ -4,7 +4,7 @@
       <bp-input :style="{ width: '280px' }" v-model="form.name" clearable placeholder="请输入内容"></bp-input>
     </bp-form-item>
     <bp-form-item field="intro" label="介绍">
-      <bp-input :style="{ width: '280px' }" v-model="form.intro" clearable placeholder="请输入内容"></bp-input>
+      <bp-input :style="{ width: '280px' }" :maxlength="500" show-limit v-model="form.intro" clearable placeholder="请输入内容"></bp-input>
     </bp-form-item>
     <bp-form-item>
       <bp-space size="mini">
