@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import props from "../example/textarea/props.ts";
   import events from "../example/textarea/events.ts";
+  import slots from "../example/input/slots.ts";
 </script>
 
 # 文本域 Textarea
@@ -29,3 +30,7 @@
 ### Textarea 事件
 
 <table-block type="events" :data="events"></table-block>
+
+### Textarea 插槽
+
+<table-block type="slots" :data="slots"></table-block>
