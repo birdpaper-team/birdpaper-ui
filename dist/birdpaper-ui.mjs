@@ -557,10 +557,12 @@ const _sfc_main$u = defineComponent({
     /** 行数 */
     rows: { type: Number, default: 3 },
     /** 是否展示字数限制提示 Display word limit prompts or not */
-    showLimit: { type: Boolean, default: false }
+    showLimit: { type: Boolean, default: false },
+    /** 是否允许清空 Clearable or not */
+    clearable: { type: Boolean, default: false }
   },
   emits: ["update:modelValue", "input", "focus", "blur", "keypress", "keyup"],
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const name = "bp-textarea";
     const inpRef = ref();
     const inpClass = computed(() => {
@@ -577,6 +579,12 @@ const _sfc_main$u = defineComponent({
       var _a;
       return `${(_a = props.modelValue) == null ? void 0 : _a.length}/${props.maxlength}`;
     });
+    const handleFocus = () => inpRef.value.focus();
+    const showClear = computed(() => props.modelValue && props.clearable && !props.disabled && !props.readonly);
+    const handleClear = () => {
+      emit("update:modelValue", "");
+      nextTick(() => handleFocus());
+    };
     const onFocus = () => emit("focus");
     const onBlur = () => emit("blur");
     const onKeypress = () => emit("keypress");
@@ -596,7 +604,10 @@ const _sfc_main$u = defineComponent({
       onBlur,
       onKeypress,
       onKeyup,
-      onInput
+      onInput,
+      slots,
+      showClear,
+      handleClear
     };
   }
 });
@@ -626,10 +637,18 @@ function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
       onInput: _cache[4] || (_cache[4] = (...args) => _ctx.onInput && _ctx.onInput(...args))
     }, null, 40, _hoisted_1$j),
     createElementVNode("div", _hoisted_2$d, [
-      _ctx.showWordLimit ? (openBlock(), createElementBlock("span", {
-        key: 0,
-        textContent: toDisplayString(_ctx.limitText)
-      }, null, 8, _hoisted_3$9)) : createCommentVNode("", true)
+      !_ctx.slots.suffix ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
+        _ctx.showClear ? (openBlock(), createElementBlock("i", {
+          key: 0,
+          class: "ri-close-line click-icon",
+          onClick: _cache[5] || (_cache[5] = (...args) => _ctx.handleClear && _ctx.handleClear(...args))
+        })) : createCommentVNode("", true),
+        _ctx.showWordLimit ? (openBlock(), createElementBlock("span", {
+          key: 1,
+          textContent: toDisplayString(_ctx.limitText)
+        }, null, 8, _hoisted_3$9)) : createCommentVNode("", true)
+      ], 64)) : createCommentVNode("", true),
+      renderSlot(_ctx.$slots, "suffix")
     ])
   ], 2);
 }
@@ -4573,15 +4592,9 @@ const _form = /* @__PURE__ */ defineComponent({
     layout: {
       type: String,
       default: "horizontal"
-    },
-    labelStyle: {
-      type: [Object, String],
-      default: ""
-    },
-    wrapperStyle: {
-      type: [Object, String],
-      default: ""
     }
+    // labelStyle: { type: [Object, String], default: "" },
+    // wrapperStyle: { type: [Object, String], default: "" },
   },
   setup(props, {
     slots,
