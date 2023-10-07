@@ -65,7 +65,7 @@ export default defineComponent({
     const render = () => {
       return (
         <div class={formItemCls.value}>
-          <div v-show={props.label} class={`${name}-label`} style={props.labelStyle}>
+          <div v-show={props.label || ctx.value.layout !== "inline"} class={`${name}-label`} style={props.labelStyle}>
             {isRequire.value ? <span class="label-asterisk"></span> : ""}
             <label>{props.label}</label>
           </div>

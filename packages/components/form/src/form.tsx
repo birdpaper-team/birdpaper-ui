@@ -18,6 +18,7 @@ export default defineComponent({
 
     provide(FormInjectionKey, {
       model: props.model,
+      layout: props.layout,
     });
 
     const cls = computed(() => {
