@@ -4602,7 +4602,8 @@ const _form = /* @__PURE__ */ defineComponent({
   }) {
     const name = "bp-form";
     provide(FormInjectionKey, {
-      model: props.model
+      model: props.model,
+      layout: props.layout
     });
     const cls = computed(() => {
       let clsName = [name];
@@ -4732,12 +4733,12 @@ const _formItem = /* @__PURE__ */ defineComponent({
       var _a;
       return createVNode("div", {
         "class": formItemCls.value
-      }, [createVNode("div", {
+      }, [withDirectives(createVNode("div", {
         "class": `${name}-label`,
         "style": props.labelStyle
       }, [isRequire.value ? createVNode("span", {
         "class": "label-asterisk"
-      }, null) : "", createVNode("label", null, [props.label])]), createVNode("div", {
+      }, null) : "", createVNode("label", null, [props.label])]), [[vShow, props.label || ctx.value.layout !== "inline"]]), createVNode("div", {
         "class": wrapperCls.value,
         "style": props.wrapperStyle
       }, [(_a = slots.default) == null ? void 0 : _a.call(slots), messageVisible.value ? createVNode(Transition, {
