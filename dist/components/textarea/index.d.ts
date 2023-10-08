@@ -12,6 +12,7 @@ declare const Textarea: {
             placeholder?: string;
             maxlength?: number;
             showLimit?: boolean;
+            clearable?: boolean;
             rows?: number;
             onInput?: (...args: any[]) => any;
             "onUpdate:modelValue"?: (...args: any[]) => any;
@@ -110,6 +111,10 @@ declare const Textarea: {
                 type: BooleanConstructor;
                 default: boolean;
             };
+            clearable: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
         }>> & {
             onInput?: (...args: any[]) => any;
             "onUpdate:modelValue"?: (...args: any[]) => any;
@@ -129,6 +134,11 @@ declare const Textarea: {
             onKeypress: () => void;
             onKeyup: () => void;
             onInput: (e: Event) => void;
+            slots: Readonly<{
+                [name: string]: import("vue").Slot<any>;
+            }>;
+            showClear: import("vue").ComputedRef<boolean>;
+            handleClear: () => void;
         }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "input" | "focus" | "blur" | "keypress" | "keyup")[], string, {
             disabled: boolean;
             modelValue: string;
@@ -137,6 +147,7 @@ declare const Textarea: {
             placeholder: string;
             maxlength: number;
             showLimit: boolean;
+            clearable: boolean;
             rows: number;
         }, {}, string, {}> & {
             beforeCreate?: (() => void) | (() => void)[];
@@ -191,6 +202,10 @@ declare const Textarea: {
             type: BooleanConstructor;
             default: boolean;
         };
+        clearable: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
     }>> & {
         onInput?: (...args: any[]) => any;
         "onUpdate:modelValue"?: (...args: any[]) => any;
@@ -210,6 +225,11 @@ declare const Textarea: {
         onKeypress: () => void;
         onKeyup: () => void;
         onInput: (e: Event) => void;
+        slots: Readonly<{
+            [name: string]: import("vue").Slot<any>;
+        }>;
+        showClear: import("vue").ComputedRef<boolean>;
+        handleClear: () => void;
     }> & {} & import("vue").ComponentCustomProperties & {};
     __isFragment?: never;
     __isTeleport?: never;
@@ -247,6 +267,10 @@ declare const Textarea: {
         type: BooleanConstructor;
         default: boolean;
     };
+    clearable: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
 }>> & {
     onInput?: (...args: any[]) => any;
     "onUpdate:modelValue"?: (...args: any[]) => any;
@@ -266,6 +290,11 @@ declare const Textarea: {
     onKeypress: () => void;
     onKeyup: () => void;
     onInput: (e: Event) => void;
+    slots: Readonly<{
+        [name: string]: import("vue").Slot<any>;
+    }>;
+    showClear: import("vue").ComputedRef<boolean>;
+    handleClear: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "input" | "focus" | "blur" | "keypress" | "keyup")[], "update:modelValue" | "input" | "focus" | "blur" | "keypress" | "keyup", {
     disabled: boolean;
     modelValue: string;
@@ -274,6 +303,7 @@ declare const Textarea: {
     placeholder: string;
     maxlength: number;
     showLimit: boolean;
+    clearable: boolean;
     rows: number;
 }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
     install: (app: App) => void;

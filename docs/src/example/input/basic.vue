@@ -1,5 +1,8 @@
 <template>
-  <bp-input :style="{ width: '220px' }" v-model="val" clearable placeholder="请输入内容"></bp-input>
+  <bp-space>
+    <bp-input :style="{ width: '180px' }" v-model="val" clearable placeholder="请输入内容"></bp-input>
+    <bp-input disabled :style="{ width: '180px' }" v-model="val" placeholder="请输入内容"></bp-input>
+  </bp-space>
 </template>
 
 <script setup lang="ts">

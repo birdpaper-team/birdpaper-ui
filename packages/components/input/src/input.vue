@@ -7,7 +7,7 @@
       :spellcheck="false"
       :disabled="disabled"
       :readonly="readonly"
-      :cursor="(modelValue as string).length"
+      :cursor="modelValue?.length"
       :placeholder="placeholder"
       :maxlength="maxlength"
       :value="modelValue"
@@ -17,7 +17,7 @@
       @keyup="onKeyup"
       @input="onInput"
     />
-    <div class="suffix" v-if="slots.suffix || showClear || showWordLimit || type === 'password'">
+    <div :class="`${name}-suffix`" v-if="slots.suffix || showClear || showWordLimit || type === 'password'">
       <!-- TODO: Need to Optim -->
       <template v-if="!slots.suffix">
         <!-- 清空按钮 -->
@@ -45,7 +45,7 @@ export default defineComponent({
   name: "Input",
   props: {
     /** 绑定值 Binding value */
-    modelValue: { type: [String, Number], default: "" },
+    modelValue: { type: String, default: "" },
     /** 输入框类型 Type of the input */
     type: { type: String as PropType<InputType>, default: "text" },
     /** 输入框尺寸 Size of the input */
@@ -94,7 +94,7 @@ export default defineComponent({
     const showWordLimit = computed(() => {
       return props.maxlength && props.showLimit && props.type === "text";
     });
-    const limitText = computed(() => `${(props.modelValue as string).length}/${props.maxlength}`);
+    const limitText = computed(() => `${(props.modelValue as string)?.length}/${props.maxlength}`);
 
     /** 是否明文展示密码类型输入框内容 */
     const showPassword = ref<boolean>(false);
@@ -118,10 +118,12 @@ export default defineComponent({
 
     const onInput = (e: Event) => {
       const targetValue = (e.target as HTMLInputElement).value;
+      emit("input", targetValue);
       emit("update:modelValue", targetValue);
     };
 
     return {
+      name,
       inpRef,
       inpType,
       inpClass,

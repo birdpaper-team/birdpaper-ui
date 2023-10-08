@@ -3,14 +3,21 @@ export { default } from "./birdpaper-ui";
 export { default as Button } from "./button";
 export type { ButtonInstance } from "./button";
 
+export { default as ButtonGroup } from "./buttonGroup";
+export type { ButtonGroupInstance } from "./buttonGroup";
+
 export { default as Input } from "./input";
 export type { InputInstance } from "./input";
+
+export { default as InputNumber } from "./inputNumber";
+export type { InputNumberInstance } from "./inputNumber";
 
 export { default as Textarea } from "./textarea";
 export type { TextareaInstance } from "./textarea";
 
 export { default as Radio } from "./radio";
 export type { RadioInstance, RadioGroupInstance } from "./radio";
+export { default as RadioGroup } from "./radio";
 
 export { default as Checkbox } from "./checkbox";
 export type { CheckboxInstance } from "./checkbox";
@@ -60,6 +67,12 @@ export type { DrawerInstance } from "./drawer";
 
 export { default as Tooltip } from "./tooltip";
 export type { TooltipInstance } from "./tooltip";
+
+export { default as Trigger } from "./trigger";
+export type { TriggerInstance } from "./trigger";
+
+export { default as Form } from "./form";
+export type { FormInstance, FormItemInstance } from "./form";
 
 export { default as Message } from "./message";
 

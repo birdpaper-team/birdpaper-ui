@@ -8,6 +8,7 @@ const list: PropTableItem[] = [
   { name: "placeholder", remark: "占位提示文字", type: "String", default: "" },
   { name: "maxlength", remark: "限制输入最大长度", type: "Number", default: "" },
   { name: "showLimit", remark: "是否展示字数限制提示", type: "Boolean", default: "false" },
+  { name: "clearable", remark: "是否允许清空", type: "Boolean", default: "false" },
 ];
 
 export default list;

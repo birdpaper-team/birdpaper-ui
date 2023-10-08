@@ -1,38 +1,43 @@
 <template>
-  <div
-    ref="selectRef"
+  <bp-trigger
+    v-model:popup-visible="isFocus"
+    transition="fade-dropdown"
     :class="clsName"
-    @click.stop="handleClick"
-    @mouseleave="onMouseleave"
-    v-clickOutside="onClickOutside"
+    :popup-offset="10"
+    auto-fit-width
   >
-    <bp-input ref="inpRef" :disabled="disabled" v-model="currentSelect.label" readonly :placeholder="placeholder">
+    <bp-input
+      ref="inpRef"
+      :disabled="disabled"
+      v-model="currentSelect.label"
+      readonly
+      :placeholder="placeholder"
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
+    >
       <template #suffix>
-        <i :class="[`${name}-icon-inner`, `ri-arrow-${isFocus ? 'up' : 'down'}-s-line`]"></i>
+        <i v-if="showClear && currentSelect.label" class="ri-close-line click-icon" @click.stop="hancleClear"></i>
+        <i v-else :class="[`${name}-icon-inner`, `ri-arrow-${isFocus ? 'up' : 'down'}-s-line`]"></i>
       </template>
     </bp-input>
 
-    <teleport to="body">
-      <Transition name="fade-select" appear>
-        <div ref="optionBoxRef" :class="`${name}-option-box`" v-show="isFocus">
-          <ul :class="`${name}-option-list`">
-            <slot></slot>
-          </ul>
-        </div>
-      </Transition>
-    </teleport>
-  </div>
+    <template #content>
+      <ul :class="`${name}-option-list`">
+        <slot></slot>
+      </ul>
+    </template>
+  </bp-trigger>
 </template>
 
 <script lang="ts">
-import { PropType, nextTick, onBeforeUnmount, onMounted, provide, ref } from "vue";
+import { PropType, provide, ref } from "vue";
 import { SelectBindValue, selectInjectionKey } from "./type";
 import { vClickOutside } from "../../../directives/clickOutside";
-import { off, on, throttle } from "../../../utils/util";
 import { defineComponent } from "vue";
 import BpInput from "../../input/src/input.vue";
 import { watch } from "vue";
 import { useSelect } from "./select";
+import BpTrigger from "../../trigger/src/trigger";
 import { computed } from "vue";
 
 export default defineComponent({
@@ -46,15 +51,15 @@ export default defineComponent({
     disabled: { type: Boolean, default: false },
     /** 占位提示文字 The placeholder text */
     placeholder: { type: String, default: "" },
-    // TODO /** 是否允许清空 Clearable or not */
+    /** 是否允许清空 Clearable or not */
     clearable: { type: Boolean, default: false },
   },
   emits: ["update:modelValue", "change"],
   setup(props, { emit, slots }) {
     const name = "bp-select";
-    const selectRef = ref();
     const inpRef = ref();
-    const optionBoxRef = ref();
+    const showClear = ref<boolean>(false);
+
     const { currentSelect, valueMap, isFocus } = useSelect(slots);
 
     provide(selectInjectionKey, {
@@ -79,21 +84,25 @@ export default defineComponent({
       return cls;
     });
 
-    /** 外层点击触发，聚焦并打开下拉面板 */
-    const handleClick = () => {
-      if (props.disabled) return;
-      handleTrigger();
-
-      isFocus.value = !isFocus.value;
-      isFocus.value && inpRef.value.handleFocus();
-    };
-    const onClickOutside = () => (isFocus.value = false);
-    const onMouseleave = () => !isFocus.value && inpRef.value.handleBlur();
-
     const setValue = () => {
       currentSelect.value = props.modelValue;
       currentSelect.label = valueMap.value[currentSelect.value];
     };
+
+    const handleMouseEnter = () => {
+      if (!props.clearable) return;
+      showClear.value = true;
+    };
+    const handleMouseLeave = () => {
+      if (!props.clearable) return;
+      showClear.value = false;
+    };
+
+    const hancleClear = () => {
+      currentSelect.value = '';
+      currentSelect.label = '';
+    };
+
     watch(
       () => valueMap.value,
       () => setValue(),
@@ -108,41 +117,16 @@ export default defineComponent({
       () => setValue()
     );
 
-    onMounted(() => {
-      nextTick(() => {
-        on(window, "resize", throttle(handleTrigger, 100));
-      });
-    });
-
-    onBeforeUnmount(() => {
-      off(window, "resize", handleTrigger);
-    });
-
-    /** 展开/收起选项面板 */
-    const handleTrigger = () => {
-      const rect = selectRef.value?.getBoundingClientRect();
-      if (!rect) return;
-
-      optionBoxRef.value.setAttribute(
-        "style",
-        `display: ${isFocus.value ? "block" : "none"};
-         width: ${rect.width}px;
-         left: ${rect.left}px;
-         top: ${rect.top + rect.height + document.documentElement.scrollTop}px;`
-      );
-    };
-
     return {
       name,
-      selectRef,
       inpRef,
-      optionBoxRef,
       currentSelect,
       isFocus,
       clsName,
-      handleClick,
-      onClickOutside,
-      onMouseleave,
+      handleMouseEnter,
+      handleMouseLeave,
+      showClear,
+      hancleClear,
     };
   },
 });

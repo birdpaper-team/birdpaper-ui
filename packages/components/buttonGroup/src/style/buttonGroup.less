@@ -1,0 +1,62 @@
+@import "./token.less";
+
+@btn-group-cls: ~"@{prefix}-button-group";
+
+.@{btn-group-cls} {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  opacity: 1;
+  .no-select;
+
+  &-block {
+    width: 100%;
+  }
+
+  .bp-btn {
+    &:first-child {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: none;
+    }
+
+    &:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}
+
+.btnGroup-status(@type, @status) {
+  .@{btn-group-cls}-type-@{type}-status-@{status} {
+    .bp-btn {
+      &:not(:last-child) {
+        border-right: 1px solid ~"@{btnGroup-type-@{type}-status-@{status}-border}";
+      }
+    }
+  }
+}
+
+.btnGroup-status(normal, normal);
+.btnGroup-status(primary, normal);
+
+.btnGroup-status(normal, primary);
+.btnGroup-status(primary, primary);
+
+.btnGroup-status(normal, success);
+.btnGroup-status(primary, success);
+
+.btnGroup-status(normal, warning);
+.btnGroup-status(primary, warning);
+
+.btnGroup-status(normal, danger);
+.btnGroup-status(primary, danger);

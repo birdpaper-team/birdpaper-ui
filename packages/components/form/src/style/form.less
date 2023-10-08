@@ -1,0 +1,98 @@
+@form-cls: ~"@{prefix}-form";
+@formItem-cls: ~"@{prefix}-form-item";
+
+.@{form-cls} {
+  position: relative;
+
+  .@{formItem-cls} {
+    &-label {
+      display: flex;
+      line-height: 32px;
+      min-width: 60px;
+      .no-select;
+
+      .label-asterisk {
+        &::before {
+          content: "*";
+        }
+        display: block;
+        color: @danger-6;
+        font-size: 12px;
+        margin-right: 2px;
+      }
+
+      label {
+        color: @gary-8;
+        font-size: 14px;
+        font-weight: normal;
+        white-space: normal;
+      }
+    }
+
+    &-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 32px;
+      box-sizing: border-box;
+    }
+
+    &-message {
+      font-size: 12px;
+      color: @danger-6;
+      line-height: 20px;
+      min-height: 20px;
+    }
+  }
+}
+
+.@{formItem-cls}-has-message {
+  margin-bottom: 0 !important;
+}
+
+.@{form-cls}-horizontal {
+  .@{formItem-cls} {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    &-label {
+      margin-right: 8px;
+      justify-content: flex-end;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.@{form-cls}-vertical {
+  .@{formItem-cls} {
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.@{form-cls}-inline {
+  display: flex;
+  align-items: center;
+
+  .@{formItem-cls} {
+    display: inline-flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    &-label {
+      margin-right: 8px;
+      justify-content: flex-end;
+      width: auto;
+    }
+  }
+}

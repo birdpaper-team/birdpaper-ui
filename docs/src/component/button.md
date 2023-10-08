@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import props from "../example/button/props.ts";
+  import groupProps from "../example/button/groupProps.ts";
   import events from "../example/button/events.ts";
 </script>
 
@@ -42,9 +43,18 @@
 通过 `loading` 属性控制按钮的加载状态。
 <demo-block src="example/button/loading"></demo-block>
 
+### 按钮组
+
+通过 `bp-button-group` 将多个同类型或同级按钮组合到一起
+<demo-block src="example/button/group"></demo-block>
+
 ### Button 属性
 
 <table-block type="props" :data="props"></table-block>
+
+### ButtonGroup 属性
+
+<table-block type="props" :data="groupProps"></table-block>
 
 ### Button 事件
 

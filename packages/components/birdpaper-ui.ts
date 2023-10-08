@@ -1,6 +1,8 @@
 import { App, Plugin } from "vue";
 import Button from "./button";
+import ButtonGroup from "./buttonGroup";
 import Input from "./input";
+import InputNumber from "./inputNumber";
 import Textarea from "./textarea";
 import Radio from "./radio";
 import Checkbox from "./checkbox";
@@ -19,11 +21,15 @@ import Popconfirm from "./popconfirm";
 import Image from "./image";
 import Drawer from "./drawer";
 import Tooltip from "./tooltip";
+import Trigger from "./trigger";
+import Form from "./form";
 import Message from "./message";
 
 const components: Record<string, Plugin> = {
   Button,
+  ButtonGroup,
   Input,
+  InputNumber,
   Textarea,
   Radio,
   Checkbox,
@@ -42,6 +48,8 @@ const components: Record<string, Plugin> = {
   Image,
   Drawer,
   Tooltip,
+  Trigger,
+  Form,
   Message,
 };
 
@@ -56,7 +64,9 @@ export { default as Message } from "./message";
 export default {
   install,
   Button,
+  ButtonGroup,
   Input,
+  InputNumber,
   Textarea,
   Radio,
   Checkbox,
@@ -75,5 +85,7 @@ export default {
   Image,
   Drawer,
   Tooltip,
+  Trigger,
+  Form,
   Message,
 };

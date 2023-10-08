@@ -2,7 +2,7 @@
   <div class="table-block">
     <bp-table :data="list">
       <template #columns>
-        <bp-table-column title="名称" data-index="name" width="140">
+        <bp-table-column title="名称" data-index="name" width="180">
           <template #cell="{ record }">
             <span class="name-area-inner">{{ record.name || "-" }}</span>
           </template>
@@ -12,7 +12,12 @@
             <span class="remark-area-inner">{{ record.remark || "-" }}</span>
           </template>
         </bp-table-column>
-        <bp-table-column title="类型" data-index="type" width="240">
+        <bp-table-column v-if="type !== 'props'" title="参数" data-index="params" tooltip ellipsis>
+          <template #cell="{ record }">
+            <span class="params-area-inner">{{ record.params || "-" }}</span>
+          </template>
+        </bp-table-column>
+        <bp-table-column v-if="type === 'props'" title="类型" data-index="type" width="220">
           <template #cell="{ record }">
             <div class="type-area" v-clickOutside="() => onClickoutside(record)">
               <template v-if="typeof record.type === 'object'">
@@ -35,9 +40,14 @@
             </div>
           </template>
         </bp-table-column>
-        <bp-table-column title="默认值" data-index="default">
+        <bp-table-column v-if="type === 'props'" title="默认值" data-index="default" tooltip ellipsis>
           <template #cell="{ record }">
             <span class="default-area-inner">{{ record.default || "-" }}</span>
+          </template>
+        </bp-table-column>
+        <bp-table-column v-if="type === 'methods'" title="返回值" data-index="returns" tooltip ellipsis>
+          <template #cell="{ record }">
+            <span class="default-area-inner">{{ record.returns || "-" }}</span>
           </template>
         </bp-table-column>
       </template>
@@ -52,6 +62,7 @@ import { vClickOutside } from "../../directives/clickOutside";
 
 const props = defineProps({
   src: { type: String, default: "" },
+  type: { type: String, default: "props" },
   data: {
     type: Array as PropType<PropTableItem[] | EventTableItem[] | MethodTableItem[] | SlotTableItem[]>,
     default: () => [],

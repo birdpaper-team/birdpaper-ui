@@ -9,7 +9,7 @@ declare const Input: {
             type?: import("./src/types").InputType;
             size?: import("./src/types").InputSize;
             disabled?: boolean;
-            modelValue?: string | number;
+            modelValue?: string;
             readonly?: boolean;
             isDanger?: boolean;
             placeholder?: string;
@@ -82,7 +82,7 @@ declare const Input: {
         $el: any;
         $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
             modelValue: {
-                type: (StringConstructor | NumberConstructor)[];
+                type: StringConstructor;
                 default: string;
             };
             type: {
@@ -129,6 +129,7 @@ declare const Input: {
             onKeypress?: (...args: any[]) => any;
             onKeyup?: (...args: any[]) => any;
         }, {
+            name: string;
             inpRef: import("vue").Ref<any>;
             inpType: import("vue").ComputedRef<import("./src/types").InputType>;
             inpClass: import("vue").ComputedRef<string[]>;
@@ -152,7 +153,7 @@ declare const Input: {
             type: import("./src/types").InputType;
             size: import("./src/types").InputSize;
             disabled: boolean;
-            modelValue: string | number;
+            modelValue: string;
             readonly: boolean;
             isDanger: boolean;
             placeholder: string;
@@ -181,7 +182,7 @@ declare const Input: {
         $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
     } & Readonly<import("vue").ExtractPropTypes<{
         modelValue: {
-            type: (StringConstructor | NumberConstructor)[];
+            type: StringConstructor;
             default: string;
         };
         type: {
@@ -228,6 +229,7 @@ declare const Input: {
         onKeypress?: (...args: any[]) => any;
         onKeyup?: (...args: any[]) => any;
     } & import("vue").ShallowUnwrapRef<{
+        name: string;
         inpRef: import("vue").Ref<any>;
         inpType: import("vue").ComputedRef<import("./src/types").InputType>;
         inpClass: import("vue").ComputedRef<string[]>;
@@ -253,7 +255,7 @@ declare const Input: {
     __isSuspense?: never;
 } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
     modelValue: {
-        type: (StringConstructor | NumberConstructor)[];
+        type: StringConstructor;
         default: string;
     };
     type: {
@@ -300,6 +302,7 @@ declare const Input: {
     onKeypress?: (...args: any[]) => any;
     onKeyup?: (...args: any[]) => any;
 }, {
+    name: string;
     inpRef: import("vue").Ref<any>;
     inpType: import("vue").ComputedRef<import("./src/types").InputType>;
     inpClass: import("vue").ComputedRef<string[]>;
@@ -323,7 +326,7 @@ declare const Input: {
     type: import("./src/types").InputType;
     size: import("./src/types").InputSize;
     disabled: boolean;
-    modelValue: string | number;
+    modelValue: string;
     readonly: boolean;
     isDanger: boolean;
     placeholder: string;

@@ -257,6 +257,176 @@ declare const _default: {
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
     };
+    ButtonGroup: {
+        new (...args: any[]): {
+            $: import("vue").ComponentInternalInstance;
+            $data: {};
+            $props: {
+                type?: import("./buttonGroup/src/types").ButtonGroupType;
+                size?: import("./button").ButtonSize;
+                shape?: import("./button").ButtonShape;
+                status?: import("./button").ButtonStatus;
+                block?: boolean;
+                key?: string | number | symbol;
+                ref?: import("vue").VNodeRef;
+                ref_for?: boolean;
+                ref_key?: string;
+                onVnodeBeforeMount?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeMounted?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeBeforeUpdate?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeUpdated?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeBeforeUnmount?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeUnmounted?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                class?: unknown;
+                style?: unknown;
+            };
+            $attrs: {
+                [x: string]: unknown;
+            };
+            $refs: {
+                [x: string]: unknown;
+            };
+            $slots: Readonly<{
+                [name: string]: import("vue").Slot<any>;
+            }>;
+            $root: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
+            $parent: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
+            $emit: (event: string, ...args: any[]) => void;
+            $el: any;
+            $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
+                type: {
+                    type: import("vue").PropType<import("./buttonGroup/src/types").ButtonGroupType>;
+                    default: string;
+                };
+                size: {
+                    type: import("vue").PropType<import("./button").ButtonSize>;
+                    default: string;
+                };
+                shape: {
+                    type: import("vue").PropType<import("./button").ButtonShape>;
+                    default: string;
+                };
+                status: {
+                    type: import("vue").PropType<import("./button").ButtonStatus>;
+                    default: string;
+                };
+                block: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+            }>>, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
+                type: import("./buttonGroup/src/types").ButtonGroupType;
+                size: import("./button").ButtonSize;
+                shape: import("./button").ButtonShape;
+                status: import("./button").ButtonStatus;
+                block: boolean;
+            }, {}, string, {}> & {
+                beforeCreate?: (() => void) | (() => void)[];
+                created?: (() => void) | (() => void)[];
+                beforeMount?: (() => void) | (() => void)[];
+                mounted?: (() => void) | (() => void)[];
+                beforeUpdate?: (() => void) | (() => void)[];
+                updated?: (() => void) | (() => void)[];
+                activated?: (() => void) | (() => void)[];
+                deactivated?: (() => void) | (() => void)[];
+                beforeDestroy?: (() => void) | (() => void)[];
+                beforeUnmount?: (() => void) | (() => void)[];
+                destroyed?: (() => void) | (() => void)[];
+                unmounted?: (() => void) | (() => void)[];
+                renderTracked?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
+                renderTriggered?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
+                errorCaptured?: ((err: unknown, instance: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>, info: string) => boolean | void) | ((err: unknown, instance: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>, info: string) => boolean | void)[];
+            };
+            $forceUpdate: () => void;
+            $nextTick: typeof import("vue").nextTick;
+            $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
+        } & Readonly<import("vue").ExtractPropTypes<{
+            type: {
+                type: import("vue").PropType<import("./buttonGroup/src/types").ButtonGroupType>;
+                default: string;
+            };
+            size: {
+                type: import("vue").PropType<import("./button").ButtonSize>;
+                default: string;
+            };
+            shape: {
+                type: import("vue").PropType<import("./button").ButtonShape>;
+                default: string;
+            };
+            status: {
+                type: import("vue").PropType<import("./button").ButtonStatus>;
+                default: string;
+            };
+            block: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+        }>> & import("vue").ShallowUnwrapRef<() => JSX.Element> & {} & import("vue").ComponentCustomProperties & {};
+        __isFragment?: never;
+        __isTeleport?: never;
+        __isSuspense?: never;
+    } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
+        type: {
+            type: import("vue").PropType<import("./buttonGroup/src/types").ButtonGroupType>;
+            default: string;
+        };
+        size: {
+            type: import("vue").PropType<import("./button").ButtonSize>;
+            default: string;
+        };
+        shape: {
+            type: import("vue").PropType<import("./button").ButtonShape>;
+            default: string;
+        };
+        status: {
+            type: import("vue").PropType<import("./button").ButtonStatus>;
+            default: string;
+        };
+        block: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+    }>>, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
+        type: import("./buttonGroup/src/types").ButtonGroupType;
+        size: import("./button").ButtonSize;
+        shape: import("./button").ButtonShape;
+        status: import("./button").ButtonStatus;
+        block: boolean;
+    }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
+        install: (app: App<any>) => void;
+    };
     Input: {
         new (...args: any[]): {
             $: import("vue").ComponentInternalInstance;
@@ -265,7 +435,7 @@ declare const _default: {
                 type?: import("./input").InputType;
                 size?: import("./input").InputSize;
                 disabled?: boolean;
-                modelValue?: string | number;
+                modelValue?: string;
                 readonly?: boolean;
                 isDanger?: boolean;
                 placeholder?: string;
@@ -338,7 +508,7 @@ declare const _default: {
             $el: any;
             $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
                 modelValue: {
-                    type: (StringConstructor | NumberConstructor)[];
+                    type: StringConstructor;
                     default: string;
                 };
                 type: {
@@ -385,6 +555,7 @@ declare const _default: {
                 onKeypress?: (...args: any[]) => any;
                 onKeyup?: (...args: any[]) => any;
             }, {
+                name: string;
                 inpRef: import("vue").Ref<any>;
                 inpType: import("vue").ComputedRef<import("./input").InputType>;
                 inpClass: import("vue").ComputedRef<string[]>;
@@ -408,7 +579,7 @@ declare const _default: {
                 type: import("./input").InputType;
                 size: import("./input").InputSize;
                 disabled: boolean;
-                modelValue: string | number;
+                modelValue: string;
                 readonly: boolean;
                 isDanger: boolean;
                 placeholder: string;
@@ -437,7 +608,7 @@ declare const _default: {
             $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
         } & Readonly<import("vue").ExtractPropTypes<{
             modelValue: {
-                type: (StringConstructor | NumberConstructor)[];
+                type: StringConstructor;
                 default: string;
             };
             type: {
@@ -484,6 +655,7 @@ declare const _default: {
             onKeypress?: (...args: any[]) => any;
             onKeyup?: (...args: any[]) => any;
         } & import("vue").ShallowUnwrapRef<{
+            name: string;
             inpRef: import("vue").Ref<any>;
             inpType: import("vue").ComputedRef<import("./input").InputType>;
             inpClass: import("vue").ComputedRef<string[]>;
@@ -509,7 +681,7 @@ declare const _default: {
         __isSuspense?: never;
     } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
         modelValue: {
-            type: (StringConstructor | NumberConstructor)[];
+            type: StringConstructor;
             default: string;
         };
         type: {
@@ -556,6 +728,7 @@ declare const _default: {
         onKeypress?: (...args: any[]) => any;
         onKeyup?: (...args: any[]) => any;
     }, {
+        name: string;
         inpRef: import("vue").Ref<any>;
         inpType: import("vue").ComputedRef<import("./input").InputType>;
         inpClass: import("vue").ComputedRef<string[]>;
@@ -579,13 +752,295 @@ declare const _default: {
         type: import("./input").InputType;
         size: import("./input").InputSize;
         disabled: boolean;
-        modelValue: string | number;
+        modelValue: string;
         readonly: boolean;
         isDanger: boolean;
         placeholder: string;
         maxlength: number;
         showLimit: boolean;
         clearable: boolean;
+    }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
+        install: (app: App<any>) => void;
+    };
+    InputNumber: {
+        new (...args: any[]): {
+            $: import("vue").ComponentInternalInstance;
+            $data: {};
+            $props: {
+                size?: import("./input").InputSize;
+                disabled?: boolean;
+                readonly?: boolean;
+                isDanger?: boolean;
+                placeholder?: string;
+                hideButton?: boolean;
+                step?: number;
+                onInput?: (...args: any[]) => any;
+                "onUpdate:modelValue"?: (...args: any[]) => any;
+                onBlur?: (...args: any[]) => any;
+                readonly modelValue?: number | "";
+                readonly precision?: number;
+                readonly min?: number;
+                readonly max?: number;
+                key?: string | number | symbol;
+                ref?: import("vue").VNodeRef;
+                ref_for?: boolean;
+                ref_key?: string;
+                onVnodeBeforeMount?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeMounted?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeBeforeUpdate?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeUpdated?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeBeforeUnmount?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeUnmounted?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                class?: unknown;
+                style?: unknown;
+            };
+            $attrs: {
+                [x: string]: unknown;
+            };
+            $refs: {
+                [x: string]: unknown;
+            };
+            $slots: Readonly<{
+                [name: string]: import("vue").Slot<any>;
+            }>;
+            $root: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
+            $parent: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
+            $emit: (event: "update:modelValue" | "input" | "blur", ...args: any[]) => void;
+            $el: any;
+            $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
+                modelValue: {
+                    type: import("vue").PropType<number | "">;
+                };
+                size: {
+                    type: import("vue").PropType<import("./input").InputSize>;
+                    default: string;
+                };
+                disabled: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                readonly: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                isDanger: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                placeholder: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                hideButton: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                precision: {
+                    type: NumberConstructor;
+                };
+                step: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                min: {
+                    type: NumberConstructor;
+                };
+                max: {
+                    type: NumberConstructor;
+                };
+            }>> & {
+                onInput?: (...args: any[]) => any;
+                "onUpdate:modelValue"?: (...args: any[]) => any;
+                onBlur?: (...args: any[]) => any;
+            }, {
+                name: string;
+                inputRef: import("vue").Ref<any>;
+                global_value: import("vue").Ref<string>;
+                isMax: import("vue").ComputedRef<boolean>;
+                isMin: import("vue").ComputedRef<boolean>;
+                handleStep: (type: string) => void;
+                onInput: (value: string) => void;
+                onBlur: () => void;
+            }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "input" | "blur")[], string, {
+                size: import("./input").InputSize;
+                disabled: boolean;
+                readonly: boolean;
+                isDanger: boolean;
+                placeholder: string;
+                hideButton: boolean;
+                step: number;
+            }, {}, string, {}> & {
+                beforeCreate?: (() => void) | (() => void)[];
+                created?: (() => void) | (() => void)[];
+                beforeMount?: (() => void) | (() => void)[];
+                mounted?: (() => void) | (() => void)[];
+                beforeUpdate?: (() => void) | (() => void)[];
+                updated?: (() => void) | (() => void)[];
+                activated?: (() => void) | (() => void)[];
+                deactivated?: (() => void) | (() => void)[];
+                beforeDestroy?: (() => void) | (() => void)[];
+                beforeUnmount?: (() => void) | (() => void)[];
+                destroyed?: (() => void) | (() => void)[];
+                unmounted?: (() => void) | (() => void)[];
+                renderTracked?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
+                renderTriggered?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
+                errorCaptured?: ((err: unknown, instance: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>, info: string) => boolean | void) | ((err: unknown, instance: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>, info: string) => boolean | void)[];
+            };
+            $forceUpdate: () => void;
+            $nextTick: typeof import("vue").nextTick;
+            $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
+        } & Readonly<import("vue").ExtractPropTypes<{
+            modelValue: {
+                type: import("vue").PropType<number | "">;
+            };
+            size: {
+                type: import("vue").PropType<import("./input").InputSize>;
+                default: string;
+            };
+            disabled: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            readonly: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            isDanger: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            placeholder: {
+                type: StringConstructor;
+                default: string;
+            };
+            hideButton: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            precision: {
+                type: NumberConstructor;
+            };
+            step: {
+                type: NumberConstructor;
+                default: number;
+            };
+            min: {
+                type: NumberConstructor;
+            };
+            max: {
+                type: NumberConstructor;
+            };
+        }>> & {
+            onInput?: (...args: any[]) => any;
+            "onUpdate:modelValue"?: (...args: any[]) => any;
+            onBlur?: (...args: any[]) => any;
+        } & import("vue").ShallowUnwrapRef<{
+            name: string;
+            inputRef: import("vue").Ref<any>;
+            global_value: import("vue").Ref<string>;
+            isMax: import("vue").ComputedRef<boolean>;
+            isMin: import("vue").ComputedRef<boolean>;
+            handleStep: (type: string) => void;
+            onInput: (value: string) => void;
+            onBlur: () => void;
+        }> & {} & import("vue").ComponentCustomProperties & {};
+        __isFragment?: never;
+        __isTeleport?: never;
+        __isSuspense?: never;
+    } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
+        modelValue: {
+            type: import("vue").PropType<number | "">;
+        };
+        size: {
+            type: import("vue").PropType<import("./input").InputSize>;
+            default: string;
+        };
+        disabled: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        readonly: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        isDanger: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        placeholder: {
+            type: StringConstructor;
+            default: string;
+        };
+        hideButton: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        precision: {
+            type: NumberConstructor;
+        };
+        step: {
+            type: NumberConstructor;
+            default: number;
+        };
+        min: {
+            type: NumberConstructor;
+        };
+        max: {
+            type: NumberConstructor;
+        };
+    }>> & {
+        onInput?: (...args: any[]) => any;
+        "onUpdate:modelValue"?: (...args: any[]) => any;
+        onBlur?: (...args: any[]) => any;
+    }, {
+        name: string;
+        inputRef: import("vue").Ref<any>;
+        global_value: import("vue").Ref<string>;
+        isMax: import("vue").ComputedRef<boolean>;
+        isMin: import("vue").ComputedRef<boolean>;
+        handleStep: (type: string) => void;
+        onInput: (value: string) => void;
+        onBlur: () => void;
+    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "input" | "blur")[], "update:modelValue" | "input" | "blur", {
+        size: import("./input").InputSize;
+        disabled: boolean;
+        readonly: boolean;
+        isDanger: boolean;
+        placeholder: string;
+        hideButton: boolean;
+        step: number;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
     };
@@ -601,6 +1056,7 @@ declare const _default: {
                 placeholder?: string;
                 maxlength?: number;
                 showLimit?: boolean;
+                clearable?: boolean;
                 rows?: number;
                 onInput?: (...args: any[]) => any;
                 "onUpdate:modelValue"?: (...args: any[]) => any;
@@ -699,6 +1155,10 @@ declare const _default: {
                     type: BooleanConstructor;
                     default: boolean;
                 };
+                clearable: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
             }>> & {
                 onInput?: (...args: any[]) => any;
                 "onUpdate:modelValue"?: (...args: any[]) => any;
@@ -718,6 +1178,11 @@ declare const _default: {
                 onKeypress: () => void;
                 onKeyup: () => void;
                 onInput: (e: Event) => void;
+                slots: Readonly<{
+                    [name: string]: import("vue").Slot<any>;
+                }>;
+                showClear: import("vue").ComputedRef<boolean>;
+                handleClear: () => void;
             }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "input" | "focus" | "blur" | "keypress" | "keyup")[], string, {
                 disabled: boolean;
                 modelValue: string;
@@ -726,6 +1191,7 @@ declare const _default: {
                 placeholder: string;
                 maxlength: number;
                 showLimit: boolean;
+                clearable: boolean;
                 rows: number;
             }, {}, string, {}> & {
                 beforeCreate?: (() => void) | (() => void)[];
@@ -780,6 +1246,10 @@ declare const _default: {
                 type: BooleanConstructor;
                 default: boolean;
             };
+            clearable: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
         }>> & {
             onInput?: (...args: any[]) => any;
             "onUpdate:modelValue"?: (...args: any[]) => any;
@@ -799,6 +1269,11 @@ declare const _default: {
             onKeypress: () => void;
             onKeyup: () => void;
             onInput: (e: Event) => void;
+            slots: Readonly<{
+                [name: string]: import("vue").Slot<any>;
+            }>;
+            showClear: import("vue").ComputedRef<boolean>;
+            handleClear: () => void;
         }> & {} & import("vue").ComponentCustomProperties & {};
         __isFragment?: never;
         __isTeleport?: never;
@@ -836,6 +1311,10 @@ declare const _default: {
             type: BooleanConstructor;
             default: boolean;
         };
+        clearable: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
     }>> & {
         onInput?: (...args: any[]) => any;
         "onUpdate:modelValue"?: (...args: any[]) => any;
@@ -855,6 +1334,11 @@ declare const _default: {
         onKeypress: () => void;
         onKeyup: () => void;
         onInput: (e: Event) => void;
+        slots: Readonly<{
+            [name: string]: import("vue").Slot<any>;
+        }>;
+        showClear: import("vue").ComputedRef<boolean>;
+        handleClear: () => void;
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "input" | "focus" | "blur" | "keypress" | "keyup")[], "update:modelValue" | "input" | "focus" | "blur" | "keypress" | "keyup", {
         disabled: boolean;
         modelValue: string;
@@ -863,6 +1347,7 @@ declare const _default: {
         placeholder: string;
         maxlength: number;
         showLimit: boolean;
+        clearable: boolean;
         rows: number;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
@@ -873,6 +1358,7 @@ declare const _default: {
             $data: {};
             $props: {
                 value?: string | number | boolean;
+                type?: import("./radio/src/type").RadioType;
                 disabled?: boolean;
                 modelValue?: string | number | boolean;
                 "onUpdate:modelValue"?: (...args: any[]) => any;
@@ -948,6 +1434,10 @@ declare const _default: {
                     type: BooleanConstructor;
                     default: boolean;
                 };
+                type: {
+                    type: import("vue").PropType<import("./radio/src/type").RadioType>;
+                    default: string;
+                };
             }>> & {
                 "onUpdate:modelValue"?: (...args: any[]) => any;
                 onChange?: (...args: any[]) => any;
@@ -957,6 +1447,7 @@ declare const _default: {
                 isCheck: import("vue").ComputedRef<boolean>;
             }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], string, {
                 value: string | number | boolean;
+                type: import("./radio/src/type").RadioType;
                 disabled: boolean;
                 modelValue: string | number | boolean;
             }, {}, string, {}> & {
@@ -992,6 +1483,10 @@ declare const _default: {
                 type: BooleanConstructor;
                 default: boolean;
             };
+            type: {
+                type: import("vue").PropType<import("./radio/src/type").RadioType>;
+                default: string;
+            };
         }>> & {
             "onUpdate:modelValue"?: (...args: any[]) => any;
             onChange?: (...args: any[]) => any;
@@ -1016,6 +1511,10 @@ declare const _default: {
             type: BooleanConstructor;
             default: boolean;
         };
+        type: {
+            type: import("vue").PropType<import("./radio/src/type").RadioType>;
+            default: string;
+        };
     }>> & {
         "onUpdate:modelValue"?: (...args: any[]) => any;
         onChange?: (...args: any[]) => any;
@@ -1025,6 +1524,7 @@ declare const _default: {
         isCheck: import("vue").ComputedRef<boolean>;
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", {
         value: string | number | boolean;
+        type: import("./radio/src/type").RadioType;
         disabled: boolean;
         modelValue: string | number | boolean;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
@@ -1463,18 +1963,17 @@ declare const _default: {
                 onChange?: (...args: any[]) => any;
             }, {
                 name: string;
-                selectRef: import("vue").Ref<any>;
                 inpRef: import("vue").Ref<any>;
-                optionBoxRef: import("vue").Ref<any>;
                 currentSelect: {
                     label: string;
                     value: import("./select/src/type").SelectBindValue;
                 };
                 isFocus: import("vue").Ref<boolean>;
                 clsName: import("vue").ComputedRef<string[]>;
-                handleClick: () => void;
-                onClickOutside: () => boolean;
-                onMouseleave: () => any;
+                handleMouseEnter: () => void;
+                handleMouseLeave: () => void;
+                showClear: import("vue").Ref<boolean>;
+                hancleClear: () => void;
             }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], string, {
                 disabled: boolean;
                 modelValue: import("./select/src/type").SelectBindValue;
@@ -1522,18 +2021,17 @@ declare const _default: {
             onChange?: (...args: any[]) => any;
         } & import("vue").ShallowUnwrapRef<{
             name: string;
-            selectRef: import("vue").Ref<any>;
             inpRef: import("vue").Ref<any>;
-            optionBoxRef: import("vue").Ref<any>;
             currentSelect: {
                 label: string;
                 value: import("./select/src/type").SelectBindValue;
             };
             isFocus: import("vue").Ref<boolean>;
             clsName: import("vue").ComputedRef<string[]>;
-            handleClick: () => void;
-            onClickOutside: () => boolean;
-            onMouseleave: () => any;
+            handleMouseEnter: () => void;
+            handleMouseLeave: () => void;
+            showClear: import("vue").Ref<boolean>;
+            hancleClear: () => void;
         }> & {} & import("vue").ComponentCustomProperties & {};
         __isFragment?: never;
         __isTeleport?: never;
@@ -1560,18 +2058,17 @@ declare const _default: {
         onChange?: (...args: any[]) => any;
     }, {
         name: string;
-        selectRef: import("vue").Ref<any>;
         inpRef: import("vue").Ref<any>;
-        optionBoxRef: import("vue").Ref<any>;
         currentSelect: {
             label: string;
             value: import("./select/src/type").SelectBindValue;
         };
         isFocus: import("vue").Ref<boolean>;
         clsName: import("vue").ComputedRef<string[]>;
-        handleClick: () => void;
-        onClickOutside: () => boolean;
-        onMouseleave: () => any;
+        handleMouseEnter: () => void;
+        handleMouseLeave: () => void;
+        showClear: import("vue").Ref<boolean>;
+        hancleClear: () => void;
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", {
         disabled: boolean;
         modelValue: import("./select/src/type").SelectBindValue;
@@ -3607,10 +4104,7 @@ declare const _default: {
             }, {
                 name: string;
                 show: import("vue").Ref<boolean>;
-                slotRef: import("vue").Ref<any>;
-                innerRef: import("vue").Ref<any>;
                 okLoading: import("vue").Ref<boolean>;
-                handleClick: () => void;
                 handleCancle: () => void;
                 handleOk: () => Promise<void>;
             }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("ok" | "cancle")[], string, {
@@ -3671,10 +4165,7 @@ declare const _default: {
         } & import("vue").ShallowUnwrapRef<{
             name: string;
             show: import("vue").Ref<boolean>;
-            slotRef: import("vue").Ref<any>;
-            innerRef: import("vue").Ref<any>;
             okLoading: import("vue").Ref<boolean>;
-            handleClick: () => void;
             handleCancle: () => void;
             handleOk: () => Promise<void>;
         }> & {} & import("vue").ComponentCustomProperties & {};
@@ -3712,10 +4203,7 @@ declare const _default: {
     }, {
         name: string;
         show: import("vue").Ref<boolean>;
-        slotRef: import("vue").Ref<any>;
-        innerRef: import("vue").Ref<any>;
         okLoading: import("vue").Ref<boolean>;
-        handleClick: () => void;
         handleCancle: () => void;
         handleOk: () => Promise<void>;
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("ok" | "cancle")[], "ok" | "cancle", {
@@ -4431,6 +4919,333 @@ declare const _default: {
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
         content: string;
         trigger: "click" | "hover";
+    }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
+        install: (app: App<any>) => void;
+    };
+    Trigger: {
+        new (...args: any[]): {
+            $: import("vue").ComponentInternalInstance;
+            $data: {};
+            $props: {
+                position?: import("./trigger/src/types").TriggerPosition;
+                trigger?: string;
+                popupVisible?: boolean;
+                popupOffset?: number;
+                autoFitWidth?: boolean;
+                transition?: string;
+                key?: string | number | symbol;
+                ref?: import("vue").VNodeRef;
+                ref_for?: boolean;
+                ref_key?: string;
+                onVnodeBeforeMount?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeMounted?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeBeforeUpdate?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeUpdated?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeBeforeUnmount?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeUnmounted?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                class?: unknown;
+                style?: unknown;
+                "onUpdate:popupVisible"?: (...args: any[]) => any;
+            };
+            $attrs: {
+                [x: string]: unknown;
+            };
+            $refs: {
+                [x: string]: unknown;
+            };
+            $slots: Readonly<{
+                [name: string]: import("vue").Slot<any>;
+            }>;
+            $root: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
+            $parent: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
+            $emit: (event: "update:popupVisible", ...args: any[]) => void;
+            $el: any;
+            $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
+                popupVisible: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                trigger: {
+                    type: StringConstructor;
+                    default: string;
+                };
+                position: {
+                    type: import("vue").PropType<import("./trigger/src/types").TriggerPosition>;
+                    default: string;
+                };
+                popupOffset: {
+                    type: NumberConstructor;
+                    default: number;
+                };
+                autoFitWidth: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                transition: {
+                    type: StringConstructor;
+                    default: string;
+                };
+            }>> & {
+                "onUpdate:popupVisible"?: (...args: any[]) => any;
+            }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:popupVisible"[], string, {
+                position: import("./trigger/src/types").TriggerPosition;
+                trigger: string;
+                popupVisible: boolean;
+                popupOffset: number;
+                autoFitWidth: boolean;
+                transition: string;
+            }, {}, string, {}> & {
+                beforeCreate?: (() => void) | (() => void)[];
+                created?: (() => void) | (() => void)[];
+                beforeMount?: (() => void) | (() => void)[];
+                mounted?: (() => void) | (() => void)[];
+                beforeUpdate?: (() => void) | (() => void)[];
+                updated?: (() => void) | (() => void)[];
+                activated?: (() => void) | (() => void)[];
+                deactivated?: (() => void) | (() => void)[];
+                beforeDestroy?: (() => void) | (() => void)[];
+                beforeUnmount?: (() => void) | (() => void)[];
+                destroyed?: (() => void) | (() => void)[];
+                unmounted?: (() => void) | (() => void)[];
+                renderTracked?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
+                renderTriggered?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
+                errorCaptured?: ((err: unknown, instance: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>, info: string) => boolean | void) | ((err: unknown, instance: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>, info: string) => boolean | void)[];
+            };
+            $forceUpdate: () => void;
+            $nextTick: typeof import("vue").nextTick;
+            $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
+        } & Readonly<import("vue").ExtractPropTypes<{
+            popupVisible: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            trigger: {
+                type: StringConstructor;
+                default: string;
+            };
+            position: {
+                type: import("vue").PropType<import("./trigger/src/types").TriggerPosition>;
+                default: string;
+            };
+            popupOffset: {
+                type: NumberConstructor;
+                default: number;
+            };
+            autoFitWidth: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            transition: {
+                type: StringConstructor;
+                default: string;
+            };
+        }>> & {
+            "onUpdate:popupVisible"?: (...args: any[]) => any;
+        } & import("vue").ShallowUnwrapRef<() => JSX.Element> & {} & import("vue").ComponentCustomProperties & {};
+        __isFragment?: never;
+        __isTeleport?: never;
+        __isSuspense?: never;
+    } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
+        popupVisible: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        trigger: {
+            type: StringConstructor;
+            default: string;
+        };
+        position: {
+            type: import("vue").PropType<import("./trigger/src/types").TriggerPosition>;
+            default: string;
+        };
+        popupOffset: {
+            type: NumberConstructor;
+            default: number;
+        };
+        autoFitWidth: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        transition: {
+            type: StringConstructor;
+            default: string;
+        };
+    }>> & {
+        "onUpdate:popupVisible"?: (...args: any[]) => any;
+    }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:popupVisible"[], "update:popupVisible", {
+        position: import("./trigger/src/types").TriggerPosition;
+        trigger: string;
+        popupVisible: boolean;
+        popupOffset: number;
+        autoFitWidth: boolean;
+        transition: string;
+    }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
+        install: (app: App<any>) => void;
+    };
+    Form: {
+        new (...args: any[]): {
+            $: import("vue").ComponentInternalInstance;
+            $data: {};
+            $props: {
+                layout?: import("./form/src/types").FormLayout;
+                model?: Record<string, any>;
+                key?: string | number | symbol;
+                ref?: import("vue").VNodeRef;
+                ref_for?: boolean;
+                ref_key?: string;
+                onVnodeBeforeMount?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeMounted?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeBeforeUpdate?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeUpdated?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>, oldVNode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeBeforeUnmount?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                onVnodeUnmounted?: ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void) | ((vnode: import("vue").VNode<import("vue").RendererNode, import("vue").RendererElement, {
+                    [key: string]: any;
+                }>) => void)[];
+                class?: unknown;
+                style?: unknown;
+                readonly rules?: Record<string, import("async-validator").RuleItem[]>;
+            };
+            $attrs: {
+                [x: string]: unknown;
+            };
+            $refs: {
+                [x: string]: unknown;
+            };
+            $slots: Readonly<{
+                [name: string]: import("vue").Slot<any>;
+            }>;
+            $root: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
+            $parent: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
+            $emit: (event: string, ...args: any[]) => void;
+            $el: any;
+            $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
+                model: {
+                    type: ObjectConstructor;
+                    default: () => void;
+                };
+                rules: {
+                    type: import("vue").PropType<Record<string, import("async-validator").RuleItem[]>>;
+                };
+                layout: {
+                    type: import("vue").PropType<import("./form/src/types").FormLayout>;
+                    default: string;
+                };
+            }>>, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
+                layout: import("./form/src/types").FormLayout;
+                model: Record<string, any>;
+            }, {}, string, {}> & {
+                beforeCreate?: (() => void) | (() => void)[];
+                created?: (() => void) | (() => void)[];
+                beforeMount?: (() => void) | (() => void)[];
+                mounted?: (() => void) | (() => void)[];
+                beforeUpdate?: (() => void) | (() => void)[];
+                updated?: (() => void) | (() => void)[];
+                activated?: (() => void) | (() => void)[];
+                deactivated?: (() => void) | (() => void)[];
+                beforeDestroy?: (() => void) | (() => void)[];
+                beforeUnmount?: (() => void) | (() => void)[];
+                destroyed?: (() => void) | (() => void)[];
+                unmounted?: (() => void) | (() => void)[];
+                renderTracked?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
+                renderTriggered?: ((e: import("vue").DebuggerEvent) => void) | ((e: import("vue").DebuggerEvent) => void)[];
+                errorCaptured?: ((err: unknown, instance: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>, info: string) => boolean | void) | ((err: unknown, instance: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>, info: string) => boolean | void)[];
+            };
+            $forceUpdate: () => void;
+            $nextTick: typeof import("vue").nextTick;
+            $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
+        } & Readonly<import("vue").ExtractPropTypes<{
+            model: {
+                type: ObjectConstructor;
+                default: () => void;
+            };
+            rules: {
+                type: import("vue").PropType<Record<string, import("async-validator").RuleItem[]>>;
+            };
+            layout: {
+                type: import("vue").PropType<import("./form/src/types").FormLayout>;
+                default: string;
+            };
+        }>> & import("vue").ShallowUnwrapRef<() => JSX.Element> & {} & import("vue").ComponentCustomProperties & {};
+        __isFragment?: never;
+        __isTeleport?: never;
+        __isSuspense?: never;
+    } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
+        model: {
+            type: ObjectConstructor;
+            default: () => void;
+        };
+        rules: {
+            type: import("vue").PropType<Record<string, import("async-validator").RuleItem[]>>;
+        };
+        layout: {
+            type: import("vue").PropType<import("./form/src/types").FormLayout>;
+            default: string;
+        };
+    }>>, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
+        layout: import("./form/src/types").FormLayout;
+        model: Record<string, any>;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
     };

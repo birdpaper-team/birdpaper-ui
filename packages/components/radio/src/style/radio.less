@@ -1,9 +1,63 @@
 @radio-cls: ~"@{prefix}-radio";
 
 .@{radio-cls}-group {
+  display: inline-flex;
+
+  &-vertical {
+    flex-direction: column;
+
+    .@{radio-cls} {
+      &:not(:first-child) {
+        margin-top: 8px;
+      }
+    }
+  }
+
+  &-horizontal {
+    .@{radio-cls} {
+      &:not(:first-child) {
+        margin-left: 8px;
+      }
+    }
+  }
+}
+
+.@{radio-cls}-group-button {
+  background-color: @gary-4;
+  display: inline-flex;
+  padding: 4px;
+  border-radius: 4px;
+
   .@{radio-cls} {
-    &:not(:first-child) {
-      margin-left: 12px;
+    cursor: pointer;
+
+    &-label {
+      margin: 0;
+      padding: 0 6px;
+      min-width: 68px;
+      width: 100%;
+      border-radius: 2px;
+      text-align: center;
+      font-size: 13px;
+      background-color: @gary-4;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: @gary-3;
+        transition: all 0.2s ease;
+      }
+    }
+
+    &-check-label {
+      background-color: @gary-1;
+      transition: all 0.2s ease;
+      color: @primary-7;
+      font-weight: bold;
+
+      &:hover {
+        background-color: @gary-1;
+        transition: all 0.2s ease;
+      }
     }
   }
 }

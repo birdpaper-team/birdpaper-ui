@@ -39,6 +39,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    /** 是否允许清空 Clearable or not */
+    clearable: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
 }, {
     name: string;
     inpRef: import("vue").Ref<any>;
@@ -51,6 +56,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
     onKeypress: () => void;
     onKeyup: () => void;
     onInput: (e: Event) => void;
+    slots: Readonly<{
+        [name: string]: import("vue").Slot<any>;
+    }>;
+    showClear: import("vue").ComputedRef<boolean>;
+    handleClear: () => void;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "input" | "focus" | "blur" | "keypress" | "keyup")[], "update:modelValue" | "input" | "focus" | "blur" | "keypress" | "keyup", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     /** 绑定值 Binding value */
     modelValue: {
@@ -92,6 +102,11 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
+    /** 是否允许清空 Clearable or not */
+    clearable: {
+        type: BooleanConstructor;
+        default: boolean;
+    };
 }>> & {
     onInput?: (...args: any[]) => any;
     "onUpdate:modelValue"?: (...args: any[]) => any;
@@ -107,6 +122,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     placeholder: string;
     maxlength: number;
     showLimit: boolean;
+    clearable: boolean;
     rows: number;
 }, {}>;
 export default _sfc_main;

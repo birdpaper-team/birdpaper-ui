@@ -5,7 +5,11 @@ declare module "vue" {
   export interface GlobalComponents {
     BpLink: typeof import("birdpaper-ui")["Link"];
     BpButton: typeof import("birdpaper-ui")["Button"];
+    BpButtonGroup: typeof import("birdpaper-ui")["ButtonGroup"];
     BpInput: typeof import("birdpaper-ui")["Input"];
+    BpInputNumber: typeof import("birdpaper-ui")["InputNumber"];
+    BpRadio: typeof import("birdpaper-ui")["Radio"];
+    BpRadioGroup: typeof import("birdpaper-ui")["RadioGroup"];
     BpTextarea: typeof import("birdpaper-ui")["Textarea"];
     BpCheckbox: typeof import("birdpaper-ui")["Checkbox"];
     BpSwitch: typeof import("birdpaper-ui")["Switch"];
@@ -22,6 +26,9 @@ declare module "vue" {
     BpImage: typeof import("birdpaper-ui")["Image"];
     BpDrawer: typeof import("birdpaper-ui")["Drawer"];
     BpTooltip: typeof import("birdpaper-ui")["Tooltip"];
+    BpTrigger: typeof import("birdpaper-ui")["Trigger"];
+    BpForm: typeof import("birdpaper-ui")["Form"];
+    BpFormItem: typeof import("birdpaper-ui")["FormItem"];
   }
 }
 
