@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import props from "../example/form/props.ts";
   import itemProps from "../example/form/itemProps.ts";
+  import methods from "../example/form/methods.ts";
 </script>
 
 # 表单 Form
@@ -15,3 +16,6 @@
 
 ### FormItem 属性
 <table-block type="props" :data="itemProps"></table-block>
+
+### Form 方法
+<table-block type="methods" :data="methods"></table-block>
