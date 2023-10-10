@@ -5,6 +5,11 @@
         <bp-radio :value="v.value">{{ v.label }}</bp-radio>
       </template>
     </bp-radio-group>
+    <bp-radio-group v-model="val" type="button">
+      <template v-for="v in optionList2">
+        <bp-radio :value="v.value">{{ v.label }}</bp-radio>
+      </template>
+    </bp-radio-group>
 
     <bp-trigger :position="val" trigger="hover">
       <bp-button>鼠标移入</bp-button>
@@ -24,6 +29,12 @@ const optionList = [
   { value: "top", label: "上方" },
   { value: "right", label: "右侧" },
   { value: "bottom", label: "下方" },
+];
+const optionList2 = [
+  { value: "left-top", label: "左上" },
+  { value: "left-bottom", label: "左下" },
+  { value: "right-top", label: "右上" },
+  { value: "right-bottom", label: "右下" },
 ];
 </script>
 

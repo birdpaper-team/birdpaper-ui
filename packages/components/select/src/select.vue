@@ -3,6 +3,7 @@
     v-model:popup-visible="isFocus"
     transition="fade-dropdown"
     :class="clsName"
+    :disabled="disabled"
     :popup-offset="10"
     auto-fit-width
   >
@@ -16,7 +17,7 @@
       @mouseleave="handleMouseLeave"
     >
       <template #suffix>
-        <i v-if="showClear && currentSelect.label" class="ri-close-line click-icon" @click.stop="hancleClear"></i>
+        <i v-if="!disabled && showClear && currentSelect.label" class="ri-close-line click-icon" @click.stop="hancleClear"></i>
         <i v-else :class="[`${name}-icon-inner`, `ri-arrow-${isFocus ? 'up' : 'down'}-s-line`]"></i>
       </template>
     </bp-input>
@@ -99,8 +100,8 @@ export default defineComponent({
     };
 
     const hancleClear = () => {
-      currentSelect.value = '';
-      currentSelect.label = '';
+      currentSelect.value = "";
+      currentSelect.label = "";
     };
 
     watch(

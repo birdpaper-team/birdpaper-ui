@@ -30,6 +30,10 @@ export default defineComponent({
     autoFitWidth: { type: Boolean, default: false },
     /** 过渡动画名称 */
     transition: { type: String, default: "fade" },
+    /** 点击其他元素关闭触发器 */
+    clickOutside: { type: Boolean, default: true },
+    /** 是否禁用 Disabled or not */
+    disabled: { type: Boolean, default: false },
   },
   emits: ["update:popupVisible"],
   setup(props, { emit, slots }) {
@@ -41,7 +45,7 @@ export default defineComponent({
     const clickOutsideLock = ref<boolean>(true);
 
     const handleClick = () => {
-      if (props.trigger === "hover") return;
+      if (props.trigger === "hover" || props.disabled) return;
 
       handleResize();
       updateVisible(!visible.value);
@@ -74,7 +78,11 @@ export default defineComponent({
       wrapperRef.value.setAttribute("style", styleStr);
     };
 
-    const onClickOutside = () => !clickOutsideLock.value && updateVisible(false);
+    const onClickOutside = () => {
+      if (!props.clickOutside) return;
+
+      !clickOutsideLock.value && updateVisible(false);
+    };
 
     const updateVisible = (val: boolean, delay: number = 100) => {
       visible.value = val;
