@@ -4927,6 +4927,8 @@ declare const _default: {
             $: import("vue").ComponentInternalInstance;
             $data: {};
             $props: {
+                disabled?: boolean;
+                clickOutside?: boolean;
                 position?: import("./trigger/src/types").TriggerPosition;
                 trigger?: string;
                 popupVisible?: boolean;
@@ -5017,9 +5019,19 @@ declare const _default: {
                     type: StringConstructor;
                     default: string;
                 };
+                clickOutside: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
+                disabled: {
+                    type: BooleanConstructor;
+                    default: boolean;
+                };
             }>> & {
                 "onUpdate:popupVisible"?: (...args: any[]) => any;
             }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:popupVisible"[], string, {
+                disabled: boolean;
+                clickOutside: boolean;
                 position: import("./trigger/src/types").TriggerPosition;
                 trigger: string;
                 popupVisible: boolean;
@@ -5071,6 +5083,14 @@ declare const _default: {
                 type: StringConstructor;
                 default: string;
             };
+            clickOutside: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
+            disabled: {
+                type: BooleanConstructor;
+                default: boolean;
+            };
         }>> & {
             "onUpdate:popupVisible"?: (...args: any[]) => any;
         } & import("vue").ShallowUnwrapRef<() => JSX.Element> & {} & import("vue").ComponentCustomProperties & {};
@@ -5102,9 +5122,19 @@ declare const _default: {
             type: StringConstructor;
             default: string;
         };
+        clickOutside: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
+        disabled: {
+            type: BooleanConstructor;
+            default: boolean;
+        };
     }>> & {
         "onUpdate:popupVisible"?: (...args: any[]) => any;
     }, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:popupVisible"[], "update:popupVisible", {
+        disabled: boolean;
+        clickOutside: boolean;
         position: import("./trigger/src/types").TriggerPosition;
         trigger: string;
         popupVisible: boolean;
