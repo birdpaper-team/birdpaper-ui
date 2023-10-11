@@ -1062,6 +1062,7 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:popupVisible": _cache[2] || (_cache[2] = ($event) => _ctx.isFocus = $event),
     transition: "fade-dropdown",
     class: normalizeClass(_ctx.clsName),
+    disabled: _ctx.disabled,
     "popup-offset": 10,
     "auto-fit-width": ""
   }, {
@@ -1084,7 +1085,7 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
         onMouseleave: _ctx.handleMouseLeave
       }, {
         suffix: withCtx(() => [
-          _ctx.showClear && _ctx.currentSelect.label ? (openBlock(), createElementBlock("i", {
+          !_ctx.disabled && _ctx.showClear && _ctx.currentSelect.label ? (openBlock(), createElementBlock("i", {
             key: 0,
             class: "ri-close-line click-icon",
             onClick: _cache[0] || (_cache[0] = withModifiers((...args) => _ctx.hancleClear && _ctx.hancleClear(...args), ["stop"]))
@@ -1097,7 +1098,7 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
       }, 8, ["disabled", "modelValue", "placeholder", "onMouseenter", "onMouseleave"])
     ]),
     _: 3
-  }, 8, ["popup-visible", "class"]);
+  }, 8, ["popup-visible", "class", "disabled"]);
 }
 const _select = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$f]]);
 const _sfc_main$p = defineComponent({
@@ -3356,6 +3357,30 @@ const getPositionData = (el, position, wrapperSize, popupOffset, autoFitWidth) =
         left: left + width + popupOffset
       };
       break;
+    case "left-top":
+      positionData = {
+        top: top + scrollTop - popupOffset - wrapperSize.height,
+        left: left - wrapperWidth
+      };
+      break;
+    case "left-bottom":
+      positionData = {
+        top: top + height + scrollTop + popupOffset,
+        left: left - wrapperWidth
+      };
+      break;
+    case "right-top":
+      positionData = {
+        top: top + scrollTop - wrapperSize.height,
+        left: left + width + popupOffset
+      };
+      break;
+    case "right-bottom":
+      positionData = {
+        top: top + scrollTop + height,
+        left: left + width + popupOffset
+      };
+      break;
   }
   positionData.width = width;
   return positionData;
@@ -3405,6 +3430,16 @@ const _trigger = /* @__PURE__ */ defineComponent({
     transition: {
       type: String,
       default: "fade"
+    },
+    /** 点击其他元素关闭触发器 */
+    clickOutside: {
+      type: Boolean,
+      default: true
+    },
+    /** 是否禁用 Disabled or not */
+    disabled: {
+      type: Boolean,
+      default: false
     }
   },
   emits: ["update:popupVisible"],
@@ -3418,7 +3453,7 @@ const _trigger = /* @__PURE__ */ defineComponent({
     const visible = ref(props.popupVisible || false);
     const clickOutsideLock = ref(true);
     const handleClick = () => {
-      if (props.trigger === "hover")
+      if (props.trigger === "hover" || props.disabled)
         return;
       handleResize();
       updateVisible(!visible.value);
@@ -3448,7 +3483,11 @@ const _trigger = /* @__PURE__ */ defineComponent({
       const styleStr = getWrapperPositionStyle(top, left, visible.value, props.autoFitWidth ? width : null);
       wrapperRef.value.setAttribute("style", styleStr);
     };
-    const onClickOutside = () => !clickOutsideLock.value && updateVisible(false);
+    const onClickOutside = () => {
+      if (!props.clickOutside)
+        return;
+      !clickOutsideLock.value && updateVisible(false);
+    };
     const updateVisible = (val, delay = 100) => {
       visible.value = val;
       emit("update:popupVisible", visible.value);

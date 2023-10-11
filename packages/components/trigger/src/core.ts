@@ -56,7 +56,29 @@ export const getPositionData = (
         left: left + width + popupOffset,
       };
       break;
-    default:
+    case "left-top":
+      positionData = {
+        top: top + scrollTop - popupOffset - wrapperSize.height,
+        left: left - wrapperWidth,
+      };
+      break;
+    case "left-bottom":
+      positionData = {
+        top: top + height + scrollTop + popupOffset,
+        left: left - wrapperWidth,
+      };
+      break;
+    case "right-top":
+      positionData = {
+        top: top + scrollTop - wrapperSize.height,
+        left: left + width + popupOffset,
+      };
+      break;
+    case "right-bottom":
+      positionData = {
+        top: top + scrollTop + height,
+        left: left + width + popupOffset,
+      };
       break;
   }
 
