@@ -3,6 +3,9 @@
     <input type="checkbox" :class="`${name}-inner`" />
 
     <div :class="[`${name}-slider`, isCheck ? `${name}-check` : '']">
+      <span v-if="checkText || uncheckText" :class="`${name}-slider-inner`">
+        {{ isCheck ? checkText : uncheckText }}
+      </span>
       <span :class="`${name}-slider-dot`">
         <i v-if="loading" class="switch-icon-loading ri-loader-4-line"></i>
       </span>
@@ -21,10 +24,14 @@ export default defineComponent({
     modelValue: { type: [Boolean, Number, String], default: false },
     /** 是否禁用 Disabled or not */
     disabled: { type: Boolean, default: false },
-    /** 选中时的值 */
+    /** 开启时的值 */
     checkValue: { type: [Boolean, Number, String], default: true },
-    /** 未选中时的值 */
+    /** 关闭时的值 */
     uncheckValue: { type: [Boolean, Number, String], default: false },
+    /** 开启时的文本内容 */
+    checkText: { type: String, default: "" },
+    /** 关闭时的文本内容 */
+    uncheckText: { type: String, default: "" },
     /** 触发改变前的回调，返回 false 则中断 */
     onBeforeOk: { type: Function, default: () => true },
   },

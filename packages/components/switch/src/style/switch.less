@@ -6,7 +6,7 @@
   align-items: center;
   flex-direction: row;
   justify-content: flex-start;
-  min-width: 44px;
+  min-width: 54px;
   height: 24px;
   cursor: pointer;
   .no-select;
@@ -33,6 +33,15 @@
     border-radius: 20px;
     transition: all 0.2s ease;
 
+    &-inner {
+      position: absolute;
+      right: 4px;
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      color: @gary-10;
+    }
+
     &-dot {
       position: absolute;
       top: 3px;
@@ -52,6 +61,13 @@
     background-color: @primary-6;
     border: 1px solid @primary-6;
     transition: all 0.2s ease;
+
+    .@{switch-cls}-slider-inner {
+      left: 4px;
+      right: 0;
+      color: @gary-1;
+      transition: all 0.2s ease;
+    }
 
     .@{switch-cls}-slider-dot {
       left: calc(100% - 20px);

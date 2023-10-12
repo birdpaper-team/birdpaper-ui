@@ -58,14 +58,16 @@ export const useTable = (props: any, slots: any) => {
     _min_width_list = [];
 
     for (let i = 0; i < cols.length; i++) {
-      const { width, minWidth } = cols[i];
+      const { width } = cols[i];
+      const minWidth = cols[i]["minWidth"] || cols[i]["min-width"];
 
       // 如果含有自定义的宽和最小宽，则需要单独处理这些列，使其不参与剩余宽度自适应当中
       if (width) {
         _fixed_width += Number(width);
         _remainder_col--;
       }
-      minWidth && _min_width_list.push(minWidth);
+
+      minWidth && _min_width_list.push(Number(minWidth));
     }
 
     table_width.value = el && el.offsetWidth - 2;

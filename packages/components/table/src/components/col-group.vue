@@ -4,7 +4,7 @@
       v-for="(item, index) in cols"
       :key="`bp-table-tr-${index}`"
       :name="`bp_table_tr_${index}`"
-      :style="`width:${item.width}px;min-width:${item.width}px;max-width:${item.width}px`"
+      :width="item.width"
     />
   </colgroup>
 </template>
