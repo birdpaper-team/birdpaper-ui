@@ -9,6 +9,8 @@ declare const Switch: {
             modelValue?: string | number | boolean;
             checkValue?: string | number | boolean;
             uncheckValue?: string | number | boolean;
+            checkText?: string;
+            uncheckText?: string;
             onBeforeOk?: Function;
             "onUpdate:modelValue"?: (...args: any[]) => any;
             key?: string | number | symbol;
@@ -86,6 +88,14 @@ declare const Switch: {
                 type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
                 default: boolean;
             };
+            checkText: {
+                type: StringConstructor;
+                default: string;
+            };
+            uncheckText: {
+                type: StringConstructor;
+                default: string;
+            };
             onBeforeOk: {
                 type: FunctionConstructor;
                 default: () => boolean;
@@ -103,6 +113,8 @@ declare const Switch: {
             modelValue: string | number | boolean;
             checkValue: string | number | boolean;
             uncheckValue: string | number | boolean;
+            checkText: string;
+            uncheckText: string;
             onBeforeOk: Function;
         }, {}, string, {}> & {
             beforeCreate?: (() => void) | (() => void)[];
@@ -141,6 +153,14 @@ declare const Switch: {
             type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
             default: boolean;
         };
+        checkText: {
+            type: StringConstructor;
+            default: string;
+        };
+        uncheckText: {
+            type: StringConstructor;
+            default: string;
+        };
         onBeforeOk: {
             type: FunctionConstructor;
             default: () => boolean;
@@ -174,6 +194,14 @@ declare const Switch: {
         type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
         default: boolean;
     };
+    checkText: {
+        type: StringConstructor;
+        default: string;
+    };
+    uncheckText: {
+        type: StringConstructor;
+        default: string;
+    };
     onBeforeOk: {
         type: FunctionConstructor;
         default: () => boolean;
@@ -191,6 +219,8 @@ declare const Switch: {
     modelValue: string | number | boolean;
     checkValue: string | number | boolean;
     uncheckValue: string | number | boolean;
+    checkText: string;
+    uncheckText: string;
     onBeforeOk: Function;
 }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
     install: (app: App) => void;

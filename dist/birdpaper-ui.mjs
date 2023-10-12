@@ -847,10 +847,14 @@ const _sfc_main$r = defineComponent({
     modelValue: { type: [Boolean, Number, String], default: false },
     /** 是否禁用 Disabled or not */
     disabled: { type: Boolean, default: false },
-    /** 选中时的值 */
+    /** 开启时的值 */
     checkValue: { type: [Boolean, Number, String], default: true },
-    /** 未选中时的值 */
+    /** 关闭时的值 */
     uncheckValue: { type: [Boolean, Number, String], default: false },
+    /** 开启时的文本内容 */
+    checkText: { type: String, default: "" },
+    /** 关闭时的文本内容 */
+    uncheckText: { type: String, default: "" },
     /** 触发改变前的回调，返回 false 则中断 */
     onBeforeOk: { type: Function, default: () => true }
   },
@@ -906,6 +910,10 @@ function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
     createElementVNode("div", {
       class: normalizeClass([`${_ctx.name}-slider`, _ctx.isCheck ? `${_ctx.name}-check` : ""])
     }, [
+      _ctx.checkText || _ctx.uncheckText ? (openBlock(), createElementBlock("span", {
+        key: 0,
+        class: normalizeClass(`${_ctx.name}-slider-inner`)
+      }, toDisplayString(_ctx.isCheck ? _ctx.checkText : _ctx.uncheckText), 3)) : createCommentVNode("", true),
       createElementVNode("span", {
         class: normalizeClass(`${_ctx.name}-slider-dot`)
       }, [
@@ -1685,12 +1693,13 @@ const useTable = (props, slots) => {
     _remainder_col = cols.length;
     _min_width_list = [];
     for (let i = 0; i < cols.length; i++) {
-      const { width, minWidth } = cols[i];
+      const { width } = cols[i];
+      const minWidth = cols[i]["minWidth"] || cols[i]["min-width"];
       if (width) {
         _fixed_width += Number(width);
         _remainder_col--;
       }
-      minWidth && _min_width_list.push(minWidth);
+      minWidth && _min_width_list.push(Number(minWidth));
     }
     table_width.value = el && el.offsetWidth - 2;
     _col_width_list = getWidthList() || [];
@@ -1756,7 +1765,7 @@ const useTable = (props, slots) => {
     columns
   };
 };
-const _hoisted_1$b = ["name"];
+const _hoisted_1$b = ["name", "width"];
 const __default__$4 = defineComponent({
   name: "TableColumns"
 });
@@ -1773,8 +1782,8 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
           return openBlock(), createElementBlock("col", {
             key: `bp-table-tr-${index}`,
             name: `bp_table_tr_${index}`,
-            style: normalizeStyle(`width:${item.width}px;min-width:${item.width}px;max-width:${item.width}px`)
-          }, null, 12, _hoisted_1$b);
+            width: item.width
+          }, null, 8, _hoisted_1$b);
         }), 128))
       ]);
     };

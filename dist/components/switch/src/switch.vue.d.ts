@@ -9,15 +9,25 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
-    /** 选中时的值 */
+    /** 开启时的值 */
     checkValue: {
         type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
         default: boolean;
     };
-    /** 未选中时的值 */
+    /** 关闭时的值 */
     uncheckValue: {
         type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
         default: boolean;
+    };
+    /** 开启时的文本内容 */
+    checkText: {
+        type: StringConstructor;
+        default: string;
+    };
+    /** 关闭时的文本内容 */
+    uncheckText: {
+        type: StringConstructor;
+        default: string;
     };
     /** 触发改变前的回调，返回 false 则中断 */
     onBeforeOk: {
@@ -41,15 +51,25 @@ declare const _sfc_main: import("vue").DefineComponent<{
         type: BooleanConstructor;
         default: boolean;
     };
-    /** 选中时的值 */
+    /** 开启时的值 */
     checkValue: {
         type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
         default: boolean;
     };
-    /** 未选中时的值 */
+    /** 关闭时的值 */
     uncheckValue: {
         type: (StringConstructor | BooleanConstructor | NumberConstructor)[];
         default: boolean;
+    };
+    /** 开启时的文本内容 */
+    checkText: {
+        type: StringConstructor;
+        default: string;
+    };
+    /** 关闭时的文本内容 */
+    uncheckText: {
+        type: StringConstructor;
+        default: string;
     };
     /** 触发改变前的回调，返回 false 则中断 */
     onBeforeOk: {
@@ -63,6 +83,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
     modelValue: string | number | boolean;
     checkValue: string | number | boolean;
     uncheckValue: string | number | boolean;
+    checkText: string;
+    uncheckText: string;
     onBeforeOk: Function;
 }, {}>;
 export default _sfc_main;
