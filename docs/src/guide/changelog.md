@@ -4,8 +4,10 @@
 
 ::: timeline 2023-10-12
 <!--@include: ../change-log/2.1.2.md-->
+:::
 ::: timeline 2023-10-10
 <!--@include: ../change-log/2.1.1.md-->
+:::
 ::: timeline 2023-10-08
 <!--@include: ../change-log/2.1.0.md-->
 :::
