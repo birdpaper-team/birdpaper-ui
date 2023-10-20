@@ -42,7 +42,7 @@ export const useTable = (props: any, slots: any) => {
     return arr;
   };
 
-  const cols: ColumnsItem[] = getColumnsBySlot() || props.cols;
+  let cols: ColumnsItem[] = [];
 
   /**
    * 初始化表头列表
@@ -50,12 +50,24 @@ export const useTable = (props: any, slots: any) => {
    */
   const initColumns = () => {
     const el = bpTable.value;
+    cols = getColumnsBySlot() || props.cols;
 
     if (cols.length === 0 || cols.length > 99) return;
 
     _fixed_width = 0;
     _remainder_col = cols.length;
     _min_width_list = [];
+
+    // 选择器相关
+    if (!slots.columns?.() && props.selection.type && !cols[0].type) {
+      cols.unshift({
+        type: props.selection.type,
+        width: 46,
+        align: "center",
+      });
+
+      _remainder_col++;
+    }
 
     for (let i = 0; i < cols.length; i++) {
       const { width } = cols[i];
