@@ -59,7 +59,7 @@ export const useTable = (props: any, slots: any) => {
     _min_width_list = [];
 
     // 选择器相关
-    if (!slots.columns?.() && props.selection.type && !cols[0].type) {
+    if (!slots.columns?.() && props.selection?.type && !cols[0]?.type) {
       cols.unshift({
         type: props.selection.type,
         width: 46,
