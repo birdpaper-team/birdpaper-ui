@@ -37,8 +37,8 @@ declare const _sfc_main: import("vue").DefineComponent<{
         default: string;
     };
 }>>, {
-    justify: Justify;
     align: Align;
+    justify: Justify;
     gutter: string | number;
 }, {}>;
 export default _sfc_main;

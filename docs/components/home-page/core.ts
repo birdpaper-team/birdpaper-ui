@@ -47,9 +47,9 @@ export const quickEntryList = [
     icon: "ri-file-list-3-line",
     intro: "查看历史版本记录，了解功能新增、优化、Bug 修复和产品计划等信息。",
     action: {
-      btnName: "稍晚推出",
-      link: "",
-      disabled: true,
+      btnName: "查看详情",
+      link: "/guide/changelog",
+      disabled: false,
     },
   },
 ];

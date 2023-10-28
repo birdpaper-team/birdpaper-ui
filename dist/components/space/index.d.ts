@@ -7,8 +7,8 @@ declare const Space: {
         $props: {
             type?: import("./src/types").SpaceType;
             size?: import("./src/types").SizeType;
-            justify?: string;
             align?: string;
+            justify?: string;
             key?: string | number | symbol;
             ref?: import("vue").VNodeRef;
             ref_for?: boolean;
@@ -87,8 +87,8 @@ declare const Space: {
         }>>, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
             type: import("./src/types").SpaceType;
             size: import("./src/types").SizeType;
-            justify: string;
             align: string;
+            justify: string;
         }, {}, string, {}> & {
             beforeCreate?: (() => void) | (() => void)[];
             created?: (() => void) | (() => void)[];
@@ -150,8 +150,8 @@ declare const Space: {
 }>>, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
     type: import("./src/types").SpaceType;
     size: import("./src/types").SizeType;
-    justify: string;
     align: string;
+    justify: string;
 }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
     install: (app: App) => void;
 };

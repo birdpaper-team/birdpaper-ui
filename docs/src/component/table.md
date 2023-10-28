@@ -12,6 +12,10 @@
 基础的表格数据展示
 <demo-block src="example/table/basic"></demo-block>
 
+### 数据选择
+目前，你可以通过 `selection` 属性配置数据的单项选择
+<demo-block src="example/table/select"></demo-block>
+
 ### 自定义列渲染
 
 通过 `columns` 插槽或者 `scope.customRender` 自定义渲染内容

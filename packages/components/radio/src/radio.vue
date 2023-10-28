@@ -34,8 +34,10 @@ export default defineComponent({
     const handleInput = () => {
       if (props.disabled) return;
 
-      emit("update:modelValue", props.value);
-      emit("change", props.value);
+      if (props.modelValue !== props.value) {
+        emit("update:modelValue", props.value);
+        emit("change", props.value);
+      }
     };
 
     const isCheck = computed(() => props.modelValue === props.value);

@@ -45,7 +45,7 @@ declare const _default: import("vue").DefineComponent<{
 }>>, {
     type: SpaceType;
     size: SizeType;
-    justify: string;
     align: string;
+    justify: string;
 }, {}>;
 export default _default;
