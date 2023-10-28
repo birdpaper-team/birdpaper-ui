@@ -677,8 +677,10 @@ const _sfc_main$t = defineComponent({
     const handleInput = () => {
       if (props.disabled)
         return;
-      emit("update:modelValue", props.value);
-      emit("change", props.value);
+      if (props.modelValue !== props.value) {
+        emit("update:modelValue", props.value);
+        emit("change", props.value);
+      }
     };
     const isCheck = computed(() => props.modelValue === props.value);
     return {
@@ -1684,14 +1686,24 @@ const useTable = (props, slots) => {
     }
     return arr;
   };
-  const cols = getColumnsBySlot() || props.cols;
+  let cols = [];
   const initColumns = () => {
+    var _a, _b, _c;
     const el = bpTable.value;
+    cols = getColumnsBySlot() || props.cols;
     if (cols.length === 0 || cols.length > 99)
       return;
     _fixed_width = 0;
     _remainder_col = cols.length;
     _min_width_list = [];
+    if (!((_a = slots.columns) == null ? void 0 : _a.call(slots)) && ((_b = props.selection) == null ? void 0 : _b.type) && !((_c = cols[0]) == null ? void 0 : _c.type)) {
+      cols.unshift({
+        type: props.selection.type,
+        width: 46,
+        align: "center"
+      });
+      _remainder_col++;
+    }
     for (let i = 0; i < cols.length; i++) {
       const { width } = cols[i];
       const minWidth = cols[i]["minWidth"] || cols[i]["min-width"];
@@ -1951,14 +1963,22 @@ const _sfc_main$d = defineComponent({
     /* 展示边框 Bordered or not */
     border: { type: Boolean, default: false },
     /* 斑马纹 Stripe or not */
-    stripe: { type: Boolean, default: false }
+    stripe: { type: Boolean, default: false },
+    /** 行 Key 字段名称 */
+    rowKey: { type: [String, Number] },
+    /** 选择器配置 */
+    selection: { type: Object },
+    /** 选择的数据 */
+    selectedKey: { type: Array, default: () => [] }
   },
-  setup(props, { slots }) {
-    const { bpTable, columns, table_width } = useTable(props, slots);
+  emits: ["update:selectedKey", "selection-change"],
+  setup(props, { slots, emit }) {
+    let { bpTable, columns, table_width } = useTable(props, slots);
     const isEmpty = computed(() => props.data.length === 0);
     const hasBorder = computed(() => props.border);
     const isStripe = computed(() => props.stripe);
     const fixedHeight = computed(() => props.height);
+    const selectedData = ref([]);
     const bodyAreaStyle = computed(() => {
       if (props.height) {
         return `width:${table_width.value}px;max-height:${props.height}px;height:${props.height}px;overflow-y:auto`;
@@ -1979,15 +1999,20 @@ const _sfc_main$d = defineComponent({
       let name = ["bp-table-td", align];
       return name;
     };
+    const onRadioChange = (record) => {
+      emit("selection-change", record, selectedData.value);
+    };
     return {
       slots,
       bpTable,
       columns,
       table_width,
       isEmpty,
+      selectedData,
       bodyAreaStyle,
       innerClass,
-      tdClass
+      tdClass,
+      onRadioChange
     };
   }
 });
@@ -2000,12 +2025,24 @@ const _hoisted_3$5 = {
   key: 2,
   class: "bp-table-body-tbody"
 };
-const _hoisted_4$5 = { class: "bp-table-td-content" };
-const _hoisted_5$3 = { key: 0 };
+const _hoisted_4$5 = {
+  key: 0,
+  class: "bp-table-td-content"
+};
+const _hoisted_5$3 = {
+  key: 1,
+  class: "bp-table-td-content"
+};
+const _hoisted_6$2 = {
+  key: 2,
+  class: "bp-table-td-content"
+};
+const _hoisted_7$1 = { key: 0 };
 function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_table_header = resolveComponent("table-header");
   const _component_table_empty = resolveComponent("table-empty");
   const _component_table_body = resolveComponent("table-body");
+  const _component_bp_radio = resolveComponent("bp-radio");
   const _component_bp_spin = resolveComponent("bp-spin");
   return openBlock(), createBlock(_component_bp_spin, { loading: _ctx.loading }, {
     default: withCtx(() => [
@@ -2044,14 +2081,21 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
                         key: `bp-table-tbody-td-${index}-${k}`,
                         class: normalizeClass(_ctx.tdClass(v))
                       }, [
-                        createElementVNode("span", _hoisted_4$5, [
-                          !v.scope ? (openBlock(), createElementBlock("span", _hoisted_5$3, toDisplayString(item[v.dataIndex]), 1)) : renderSlot(_ctx.$slots, v.scope.customRender, {
+                        v.type === "radio" ? (openBlock(), createElementBlock("span", _hoisted_4$5, [
+                          createVNode(_component_bp_radio, {
+                            modelValue: _ctx.selectedData,
+                            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.selectedData = $event),
+                            value: item[_ctx.rowKey],
+                            onChange: ($event) => _ctx.onRadioChange(item)
+                          }, null, 8, ["modelValue", "value", "onChange"])
+                        ])) : v.type === "checkbox" ? (openBlock(), createElementBlock("span", _hoisted_5$3)) : (openBlock(), createElementBlock("span", _hoisted_6$2, [
+                          !v.scope ? (openBlock(), createElementBlock("span", _hoisted_7$1, toDisplayString(item[v.dataIndex]), 1)) : renderSlot(_ctx.$slots, v.scope.customRender, {
                             key: 1,
                             row: item,
                             index,
                             data: item[v.dataIndex]
                           })
-                        ])
+                        ]))
                       ], 2);
                     }), 128))
                   ]);

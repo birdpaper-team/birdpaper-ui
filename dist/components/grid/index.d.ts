@@ -6,8 +6,8 @@ declare const Grid: {
         $: import("vue").ComponentInternalInstance;
         $data: {};
         $props: {
-            justify?: import("./src/types").Justify;
             align?: import("./src/types").Align;
+            justify?: import("./src/types").Justify;
             gutter?: string | number;
             key?: string | number | symbol;
             ref?: import("vue").VNodeRef;
@@ -85,8 +85,8 @@ declare const Grid: {
             name: string;
             cls: import("vue").ComputedRef<string[]>;
         }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
-            justify: import("./src/types").Justify;
             align: import("./src/types").Align;
+            justify: import("./src/types").Justify;
             gutter: string | number;
         }, {}, string, {}> & {
             beforeCreate?: (() => void) | (() => void)[];
@@ -147,8 +147,8 @@ declare const Grid: {
     name: string;
     cls: import("vue").ComputedRef<string[]>;
 }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
-    justify: import("./src/types").Justify;
     align: import("./src/types").Align;
+    justify: import("./src/types").Justify;
     gutter: string | number;
 }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
     Col: import("vue").DefineComponent<{

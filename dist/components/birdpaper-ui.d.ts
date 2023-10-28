@@ -2406,6 +2406,7 @@ declare const _default: {
                 height?: string;
                 border?: boolean;
                 stripe?: boolean;
+                selectedKey?: string[] | number[];
                 key?: string | number | symbol;
                 ref?: import("vue").VNodeRef;
                 ref_for?: boolean;
@@ -2450,6 +2451,10 @@ declare const _default: {
                 }>) => void)[];
                 class?: unknown;
                 style?: unknown;
+                "onUpdate:selectedKey"?: (...args: any[]) => any;
+                "onSelection-change"?: (...args: any[]) => any;
+                readonly rowKey?: string | number;
+                readonly selection?: import("./table/src/types").SelectionConfig;
             };
             $attrs: {
                 [x: string]: unknown;
@@ -2462,7 +2467,7 @@ declare const _default: {
             }>;
             $root: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
             $parent: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
-            $emit: (event: string, ...args: any[]) => void;
+            $emit: (event: "update:selectedKey" | "selection-change", ...args: any[]) => void;
             $el: any;
             $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
                 cols: {
@@ -2489,22 +2494,38 @@ declare const _default: {
                     type: BooleanConstructor;
                     default: boolean;
                 };
-            }>>, {
+                rowKey: {
+                    type: (StringConstructor | NumberConstructor)[];
+                };
+                selection: {
+                    type: import("vue").PropType<import("./table/src/types").SelectionConfig>;
+                };
+                selectedKey: {
+                    type: import("vue").PropType<string[] | number[]>;
+                    default: () => any[];
+                };
+            }>> & {
+                "onUpdate:selectedKey"?: (...args: any[]) => any;
+                "onSelection-change"?: (...args: any[]) => any;
+            }, {
                 slots: Readonly<{
                     [name: string]: import("vue").Slot<any>;
                 }>;
                 bpTable: any;
                 columns: import("vue").Ref<{
                     title?: string;
+                    type: "radio" | "inner" | "checkbox";
                     dataIndex?: string;
                     width?: number;
                     minWidth?: number;
+                    align: "left" | "center" | "right";
                     scope?: {
                         customRender: string;
                     };
                 }[]>;
                 table_width: import("vue").Ref<any>;
                 isEmpty: import("vue").ComputedRef<boolean>;
+                selectedData: import("vue").Ref<string | number | string[] | number[]>;
                 bodyAreaStyle: import("vue").ComputedRef<string>;
                 innerClass: import("vue").ComputedRef<(string | {
                     "bp-table-border": boolean;
@@ -2520,13 +2541,15 @@ declare const _default: {
                     "bp-table-stripe"?: undefined;
                 })[]>;
                 tdClass: (v: any) => string[];
-            }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
+                onRadioChange: (record: unknown) => void;
+            }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:selectedKey" | "selection-change")[], string, {
                 data: unknown[];
                 loading: boolean;
                 cols: import("./table/src/types").ColumnsItem[];
                 height: string;
                 border: boolean;
                 stripe: boolean;
+                selectedKey: string[] | number[];
             }, {}, string, {}> & {
                 beforeCreate?: (() => void) | (() => void)[];
                 created?: (() => void) | (() => void)[];
@@ -2572,22 +2595,38 @@ declare const _default: {
                 type: BooleanConstructor;
                 default: boolean;
             };
-        }>> & import("vue").ShallowUnwrapRef<{
+            rowKey: {
+                type: (StringConstructor | NumberConstructor)[];
+            };
+            selection: {
+                type: import("vue").PropType<import("./table/src/types").SelectionConfig>;
+            };
+            selectedKey: {
+                type: import("vue").PropType<string[] | number[]>;
+                default: () => any[];
+            };
+        }>> & {
+            "onUpdate:selectedKey"?: (...args: any[]) => any;
+            "onSelection-change"?: (...args: any[]) => any;
+        } & import("vue").ShallowUnwrapRef<{
             slots: Readonly<{
                 [name: string]: import("vue").Slot<any>;
             }>;
             bpTable: any;
             columns: import("vue").Ref<{
                 title?: string;
+                type: "radio" | "inner" | "checkbox";
                 dataIndex?: string;
                 width?: number;
                 minWidth?: number;
+                align: "left" | "center" | "right";
                 scope?: {
                     customRender: string;
                 };
             }[]>;
             table_width: import("vue").Ref<any>;
             isEmpty: import("vue").ComputedRef<boolean>;
+            selectedData: import("vue").Ref<string | number | string[] | number[]>;
             bodyAreaStyle: import("vue").ComputedRef<string>;
             innerClass: import("vue").ComputedRef<(string | {
                 "bp-table-border": boolean;
@@ -2603,6 +2642,7 @@ declare const _default: {
                 "bp-table-stripe"?: undefined;
             })[]>;
             tdClass: (v: any) => string[];
+            onRadioChange: (record: unknown) => void;
         }> & {} & import("vue").ComponentCustomProperties & {};
         __isFragment?: never;
         __isTeleport?: never;
@@ -2632,22 +2672,38 @@ declare const _default: {
             type: BooleanConstructor;
             default: boolean;
         };
-    }>>, {
+        rowKey: {
+            type: (StringConstructor | NumberConstructor)[];
+        };
+        selection: {
+            type: import("vue").PropType<import("./table/src/types").SelectionConfig>;
+        };
+        selectedKey: {
+            type: import("vue").PropType<string[] | number[]>;
+            default: () => any[];
+        };
+    }>> & {
+        "onUpdate:selectedKey"?: (...args: any[]) => any;
+        "onSelection-change"?: (...args: any[]) => any;
+    }, {
         slots: Readonly<{
             [name: string]: import("vue").Slot<any>;
         }>;
         bpTable: any;
         columns: import("vue").Ref<{
             title?: string;
+            type: "radio" | "inner" | "checkbox";
             dataIndex?: string;
             width?: number;
             minWidth?: number;
+            align: "left" | "center" | "right";
             scope?: {
                 customRender: string;
             };
         }[]>;
         table_width: import("vue").Ref<any>;
         isEmpty: import("vue").ComputedRef<boolean>;
+        selectedData: import("vue").Ref<string | number | string[] | number[]>;
         bodyAreaStyle: import("vue").ComputedRef<string>;
         innerClass: import("vue").ComputedRef<(string | {
             "bp-table-border": boolean;
@@ -2663,13 +2719,15 @@ declare const _default: {
             "bp-table-stripe"?: undefined;
         })[]>;
         tdClass: (v: any) => string[];
-    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
+        onRadioChange: (record: unknown) => void;
+    }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:selectedKey" | "selection-change")[], "update:selectedKey" | "selection-change", {
         data: unknown[];
         loading: boolean;
         cols: import("./table/src/types").ColumnsItem[];
         height: string;
         border: boolean;
         stripe: boolean;
+        selectedKey: string[] | number[];
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
     };
@@ -2680,8 +2738,8 @@ declare const _default: {
             $props: {
                 type?: import("./space/src/types").SpaceType;
                 size?: import("./space/src/types").SizeType;
-                justify?: string;
                 align?: string;
+                justify?: string;
                 key?: string | number | symbol;
                 ref?: import("vue").VNodeRef;
                 ref_for?: boolean;
@@ -2760,8 +2818,8 @@ declare const _default: {
             }>>, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
                 type: import("./space/src/types").SpaceType;
                 size: import("./space/src/types").SizeType;
-                justify: string;
                 align: string;
+                justify: string;
             }, {}, string, {}> & {
                 beforeCreate?: (() => void) | (() => void)[];
                 created?: (() => void) | (() => void)[];
@@ -2823,8 +2881,8 @@ declare const _default: {
     }>>, () => JSX.Element, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
         type: import("./space/src/types").SpaceType;
         size: import("./space/src/types").SizeType;
-        justify: string;
         align: string;
+        justify: string;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
     };
@@ -3637,8 +3695,8 @@ declare const _default: {
             $: import("vue").ComponentInternalInstance;
             $data: {};
             $props: {
-                justify?: import("./grid/src/types").Justify;
                 align?: import("./grid/src/types").Align;
+                justify?: import("./grid/src/types").Justify;
                 gutter?: string | number;
                 key?: string | number | symbol;
                 ref?: import("vue").VNodeRef;
@@ -3716,8 +3774,8 @@ declare const _default: {
                 name: string;
                 cls: import("vue").ComputedRef<string[]>;
             }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
-                justify: import("./grid/src/types").Justify;
                 align: import("./grid/src/types").Align;
+                justify: import("./grid/src/types").Justify;
                 gutter: string | number;
             }, {}, string, {}> & {
                 beforeCreate?: (() => void) | (() => void)[];
@@ -3778,8 +3836,8 @@ declare const _default: {
         name: string;
         cls: import("vue").ComputedRef<string[]>;
     }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, {}, string, {
-        justify: import("./grid/src/types").Justify;
         align: import("./grid/src/types").Align;
+        justify: import("./grid/src/types").Justify;
         gutter: string | number;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         Col: import("vue").DefineComponent<{
