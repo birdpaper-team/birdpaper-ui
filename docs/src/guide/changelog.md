@@ -2,6 +2,9 @@
 
 `birdpaper-ui` 遵循 Semver 语义化版本规范。
 
+::: timeline 2023-10-28
+<!--@include: ../change-log/2.1.3.md-->
+:::
 ::: timeline 2023-10-12
 <!--@include: ../change-log/2.1.2.md-->
 :::
