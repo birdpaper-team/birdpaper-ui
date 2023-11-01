@@ -12,16 +12,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { computed } from "vue";
+import { PropType, defineComponent, computed } from "vue";
+import { CheckboxValue } from "./type";
 
 export default defineComponent({
   name: "Checkbox",
   props: {
     /** 绑定值 Binding value */
-    modelValue: { type: Boolean, default: false },
+    modelValue: { type: [Boolean, Array] as PropType<CheckboxValue>, default: false },
     /** 是否禁用 Disabled or not */
     disabled: { type: Boolean, default: false },
+    /** 复选框的值 */
+    value: { type: [String, Number] },
   },
   emits: ["update:modelValue"],
   setup(props, { emit }) {
@@ -34,9 +36,26 @@ export default defineComponent({
       return clsName;
     });
 
-    const isCheck = computed(() => props.modelValue);
+    const isCheck = computed(() => {
+      if (Array.isArray(props.modelValue)) {
+        if (!props.value) return false;
+
+        return props.modelValue.includes(props.value);
+      }
+      return props.modelValue;
+    });
 
     const handleClick = () => {
+      if (Array.isArray(props.modelValue)) {
+        if (!props.value) return false;
+
+        let arr = JSON.parse(JSON.stringify(props.modelValue));
+
+        const index = arr.indexOf(props.value);
+        index === -1 ? arr.push(props.value) : arr.splice(index, 1);
+
+        return emit("update:modelValue", arr);
+      }
       emit("update:modelValue", !props.modelValue);
     };
     return {
