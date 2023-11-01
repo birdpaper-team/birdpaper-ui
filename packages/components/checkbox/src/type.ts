@@ -1,5 +1,4 @@
-// TODO
-export type CheckboxValue = string | number | boolean;
+export type CheckboxValue = boolean | Array<string | number | boolean>;
 
 interface Props {
   modelValue: boolean;

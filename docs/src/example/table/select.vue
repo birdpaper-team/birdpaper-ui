@@ -21,6 +21,6 @@ const cols = [
 ];
 
 const selection = {
-  type: "radio",
+  type: "checkbox",
 };
 </script>
