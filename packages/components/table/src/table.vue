@@ -22,7 +22,9 @@
                     <bp-radio v-model="selectedData" :value="item[rowKey]" @change="onRadioChange(item)"></bp-radio>
                   </span>
                   <!-- 复选 -->
-                  <span v-else-if="v.type === 'checkbox'" class="bp-table-td-content"> </span>
+                  <span v-else-if="v.type === 'checkbox'" class="bp-table-td-content">
+                    <bp-checkbox :value="item[rowKey]"></bp-checkbox>
+                  </span>
                   <!-- 文本和自定义列 -->
                   <span class="bp-table-td-content" v-else>
                     <template v-if="!v.scope">
