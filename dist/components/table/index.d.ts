@@ -12,7 +12,7 @@ declare const Table: {
             height?: string;
             border?: boolean;
             stripe?: boolean;
-            selectedKey?: string[] | number[];
+            selectedKey?: string | number | (string | number)[];
             key?: string | number | symbol;
             ref?: import("vue").VNodeRef;
             ref_for?: boolean;
@@ -57,8 +57,10 @@ declare const Table: {
             }>) => void)[];
             class?: unknown;
             style?: unknown;
+            onSelect?: (...args: any[]) => any;
             "onUpdate:selectedKey"?: (...args: any[]) => any;
             "onSelection-change"?: (...args: any[]) => any;
+            "onSelect-all"?: (...args: any[]) => any;
             readonly rowKey?: string | number;
             readonly selection?: import("./src/types").SelectionConfig;
         };
@@ -73,7 +75,7 @@ declare const Table: {
         }>;
         $root: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
         $parent: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
-        $emit: (event: "update:selectedKey" | "selection-change", ...args: any[]) => void;
+        $emit: (event: "update:selectedKey" | "selection-change" | "select-all" | "select", ...args: any[]) => void;
         $el: any;
         $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
             cols: {
@@ -107,12 +109,14 @@ declare const Table: {
                 type: import("vue").PropType<import("./src/types").SelectionConfig>;
             };
             selectedKey: {
-                type: import("vue").PropType<string[] | number[]>;
+                type: import("vue").PropType<string | number | (string | number)[]>;
                 default: () => any[];
             };
         }>> & {
+            onSelect?: (...args: any[]) => any;
             "onUpdate:selectedKey"?: (...args: any[]) => any;
             "onSelection-change"?: (...args: any[]) => any;
+            "onSelect-all"?: (...args: any[]) => any;
         }, {
             slots: Readonly<{
                 [name: string]: import("vue").Slot<any>;
@@ -131,7 +135,7 @@ declare const Table: {
             }[]>;
             table_width: import("vue").Ref<any>;
             isEmpty: import("vue").ComputedRef<boolean>;
-            selectedData: import("vue").Ref<string | number | string[] | number[]>;
+            selectedData: import("vue").Ref<string | number | (string | number | boolean)[]>;
             bodyAreaStyle: import("vue").ComputedRef<string>;
             innerClass: import("vue").ComputedRef<(string | {
                 "bp-table-border": boolean;
@@ -147,15 +151,16 @@ declare const Table: {
                 "bp-table-stripe"?: undefined;
             })[]>;
             tdClass: (v: any) => string[];
-            onRadioChange: (record: unknown) => void;
-        }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:selectedKey" | "selection-change")[], string, {
+            onSelectChange: (record: unknown) => void;
+            onSelectAll: (isSelectAll: boolean) => void;
+        }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:selectedKey" | "selection-change" | "select-all" | "select")[], string, {
             data: unknown[];
             loading: boolean;
             cols: import("./src/types").ColumnsItem[];
             height: string;
             border: boolean;
             stripe: boolean;
-            selectedKey: string[] | number[];
+            selectedKey: string | number | (string | number)[];
         }, {}, string, {}> & {
             beforeCreate?: (() => void) | (() => void)[];
             created?: (() => void) | (() => void)[];
@@ -208,12 +213,14 @@ declare const Table: {
             type: import("vue").PropType<import("./src/types").SelectionConfig>;
         };
         selectedKey: {
-            type: import("vue").PropType<string[] | number[]>;
+            type: import("vue").PropType<string | number | (string | number)[]>;
             default: () => any[];
         };
     }>> & {
+        onSelect?: (...args: any[]) => any;
         "onUpdate:selectedKey"?: (...args: any[]) => any;
         "onSelection-change"?: (...args: any[]) => any;
+        "onSelect-all"?: (...args: any[]) => any;
     } & import("vue").ShallowUnwrapRef<{
         slots: Readonly<{
             [name: string]: import("vue").Slot<any>;
@@ -232,7 +239,7 @@ declare const Table: {
         }[]>;
         table_width: import("vue").Ref<any>;
         isEmpty: import("vue").ComputedRef<boolean>;
-        selectedData: import("vue").Ref<string | number | string[] | number[]>;
+        selectedData: import("vue").Ref<string | number | (string | number | boolean)[]>;
         bodyAreaStyle: import("vue").ComputedRef<string>;
         innerClass: import("vue").ComputedRef<(string | {
             "bp-table-border": boolean;
@@ -248,7 +255,8 @@ declare const Table: {
             "bp-table-stripe"?: undefined;
         })[]>;
         tdClass: (v: any) => string[];
-        onRadioChange: (record: unknown) => void;
+        onSelectChange: (record: unknown) => void;
+        onSelectAll: (isSelectAll: boolean) => void;
     }> & {} & import("vue").ComponentCustomProperties & {};
     __isFragment?: never;
     __isTeleport?: never;
@@ -285,12 +293,14 @@ declare const Table: {
         type: import("vue").PropType<import("./src/types").SelectionConfig>;
     };
     selectedKey: {
-        type: import("vue").PropType<string[] | number[]>;
+        type: import("vue").PropType<string | number | (string | number)[]>;
         default: () => any[];
     };
 }>> & {
+    onSelect?: (...args: any[]) => any;
     "onUpdate:selectedKey"?: (...args: any[]) => any;
     "onSelection-change"?: (...args: any[]) => any;
+    "onSelect-all"?: (...args: any[]) => any;
 }, {
     slots: Readonly<{
         [name: string]: import("vue").Slot<any>;
@@ -309,7 +319,7 @@ declare const Table: {
     }[]>;
     table_width: import("vue").Ref<any>;
     isEmpty: import("vue").ComputedRef<boolean>;
-    selectedData: import("vue").Ref<string | number | string[] | number[]>;
+    selectedData: import("vue").Ref<string | number | (string | number | boolean)[]>;
     bodyAreaStyle: import("vue").ComputedRef<string>;
     innerClass: import("vue").ComputedRef<(string | {
         "bp-table-border": boolean;
@@ -325,15 +335,16 @@ declare const Table: {
         "bp-table-stripe"?: undefined;
     })[]>;
     tdClass: (v: any) => string[];
-    onRadioChange: (record: unknown) => void;
-}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:selectedKey" | "selection-change")[], "update:selectedKey" | "selection-change", {
+    onSelectChange: (record: unknown) => void;
+    onSelectAll: (isSelectAll: boolean) => void;
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:selectedKey" | "selection-change" | "select-all" | "select")[], "update:selectedKey" | "selection-change" | "select-all" | "select", {
     data: unknown[];
     loading: boolean;
     cols: import("./src/types").ColumnsItem[];
     height: string;
     border: boolean;
     stripe: boolean;
-    selectedKey: string[] | number[];
+    selectedKey: string | number | (string | number)[];
 }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
     install: (app: App) => void;
 };

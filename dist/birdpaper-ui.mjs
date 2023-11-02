@@ -784,11 +784,13 @@ const _sfc_main$s = defineComponent({
   name: "Checkbox",
   props: {
     /** 绑定值 Binding value */
-    modelValue: { type: Boolean, default: false },
+    modelValue: { type: [Boolean, Array], default: false },
     /** 是否禁用 Disabled or not */
-    disabled: { type: Boolean, default: false }
+    disabled: { type: Boolean, default: false },
+    /** 复选框的值 */
+    value: { type: [String, Number] }
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "change"],
   setup(props, { emit }) {
     const name = "bp-checkbox";
     const cls = computed(() => {
@@ -798,9 +800,26 @@ const _sfc_main$s = defineComponent({
       }
       return clsName;
     });
-    const isCheck = computed(() => props.modelValue);
+    const isCheck = computed(() => {
+      if (Array.isArray(props.modelValue)) {
+        if (!props.value)
+          return false;
+        return props.modelValue.includes(props.value);
+      }
+      return props.modelValue;
+    });
     const handleClick = () => {
+      if (Array.isArray(props.modelValue)) {
+        if (!props.value)
+          return false;
+        let arr = JSON.parse(JSON.stringify(props.modelValue));
+        const index = arr.indexOf(props.value);
+        index === -1 ? arr.push(props.value) : arr.splice(index, 1);
+        emit("update:modelValue", arr);
+        return emit("change", arr);
+      }
       emit("update:modelValue", !props.modelValue);
+      return emit("change", !props.modelValue);
     };
     return {
       cls,
@@ -1808,26 +1827,42 @@ const __default__$3 = defineComponent({
 const _sfc_main$g = /* @__PURE__ */ defineComponent({
   ...__default__$3,
   props: {
-    // TODO
     headerList: { type: Array, default: () => [] }
   },
-  setup(__props) {
+  emits: ["on-select-all"],
+  setup(__props, { emit: emits }) {
     const thClass = (item) => {
       let align = `text-${item["headerAlign"] || item["align"] || "left"}`;
       let name = ["bp-table-th", align];
       return name;
     };
+    const isSelectAll = ref(false);
+    const onSelectChange = () => {
+      emits("on-select-all", isSelectAll.value);
+    };
     return (_ctx, _cache) => {
+      const _component_bp_checkbox = resolveComponent("bp-checkbox");
       return openBlock(), createElementBlock(Fragment, null, [
         createVNode(_sfc_main$h, { cols: __props.headerList }, null, 8, ["cols"]),
         createElementVNode("thead", _hoisted_1$a, [
           createElementVNode("tr", null, [
-            (openBlock(true), createElementBlock(Fragment, null, renderList(__props.headerList, (item, index) => {
-              return openBlock(), createElementBlock("th", {
-                key: `bp-table-thead-${index}`,
-                class: normalizeClass(thClass(item))
-              }, toDisplayString(item.title), 3);
-            }), 128))
+            (openBlock(true), createElementBlock(Fragment, null, renderList(__props.headerList, (item) => {
+              return openBlock(), createElementBlock(Fragment, null, [
+                item.type === "checkbox" ? (openBlock(), createElementBlock("th", {
+                  key: 0,
+                  class: normalizeClass(thClass(item))
+                }, [
+                  createVNode(_component_bp_checkbox, {
+                    modelValue: isSelectAll.value,
+                    "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => isSelectAll.value = $event),
+                    onChange: onSelectChange
+                  }, null, 8, ["modelValue"])
+                ], 2)) : (openBlock(), createElementBlock("th", {
+                  key: 1,
+                  class: normalizeClass(thClass(item))
+                }, toDisplayString(item.title), 3))
+              ], 64);
+            }), 256))
           ])
         ])
       ], 64);
@@ -1968,10 +2003,10 @@ const _sfc_main$d = defineComponent({
     rowKey: { type: [String, Number] },
     /** 选择器配置 */
     selection: { type: Object },
-    /** 选择的数据 */
+    /** 选择数据的Key */
     selectedKey: { type: Array, default: () => [] }
   },
-  emits: ["update:selectedKey", "selection-change"],
+  emits: ["update:selectedKey", "selection-change", "select-all", "select"],
   setup(props, { slots, emit }) {
     let { bpTable, columns, table_width } = useTable(props, slots);
     const isEmpty = computed(() => props.data.length === 0);
@@ -1999,9 +2034,25 @@ const _sfc_main$d = defineComponent({
       let name = ["bp-table-td", align];
       return name;
     };
-    const onRadioChange = (record) => {
-      emit("selection-change", record, selectedData.value);
+    const onSelectChange = (record) => {
+      emit("select", selectedData.value, record[props.rowKey], record);
     };
+    const onSelectAll = (isSelectAll) => {
+      emit("select-all", isSelectAll);
+      if (!isSelectAll) {
+        selectedData.value = [];
+        return;
+      }
+      selectedData.value = [];
+      for (let i = 0; i < props.data.length; i++) {
+        const element = props.data[i];
+        selectedData.value.push(element[props.rowKey]);
+      }
+    };
+    watch(selectedData, () => {
+      emit("selection-change", selectedData.value);
+      emit("update:selectedKey", selectedData.value);
+    });
     return {
       slots,
       bpTable,
@@ -2012,7 +2063,8 @@ const _sfc_main$d = defineComponent({
       bodyAreaStyle,
       innerClass,
       tdClass,
-      onRadioChange
+      onSelectChange,
+      onSelectAll
     };
   }
 });
@@ -2043,6 +2095,7 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_table_empty = resolveComponent("table-empty");
   const _component_table_body = resolveComponent("table-body");
   const _component_bp_radio = resolveComponent("bp-radio");
+  const _component_bp_checkbox = resolveComponent("bp-checkbox");
   const _component_bp_spin = resolveComponent("bp-spin");
   return openBlock(), createBlock(_component_bp_spin, { loading: _ctx.loading }, {
     default: withCtx(() => [
@@ -2059,7 +2112,10 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
               class: "bp-table-body",
               style: normalizeStyle(`width:${_ctx.table_width}px`)
             }, [
-              createVNode(_component_table_header, { "header-list": _ctx.columns }, null, 8, ["header-list"]),
+              createVNode(_component_table_header, {
+                "header-list": _ctx.columns,
+                onOnSelectAll: _ctx.onSelectAll
+              }, null, 8, ["header-list", "onOnSelectAll"]),
               _ctx.isEmpty ? (openBlock(), createBlock(_component_table_empty, {
                 key: 0,
                 colspan: _ctx.columns.length
@@ -2086,9 +2142,16 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
                             modelValue: _ctx.selectedData,
                             "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.selectedData = $event),
                             value: item[_ctx.rowKey],
-                            onChange: ($event) => _ctx.onRadioChange(item)
+                            onChange: ($event) => _ctx.onSelectChange(item)
                           }, null, 8, ["modelValue", "value", "onChange"])
-                        ])) : v.type === "checkbox" ? (openBlock(), createElementBlock("span", _hoisted_5$3)) : (openBlock(), createElementBlock("span", _hoisted_6$2, [
+                        ])) : v.type === "checkbox" ? (openBlock(), createElementBlock("span", _hoisted_5$3, [
+                          createVNode(_component_bp_checkbox, {
+                            modelValue: _ctx.selectedData,
+                            "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => _ctx.selectedData = $event),
+                            value: item[_ctx.rowKey],
+                            onChange: ($event) => _ctx.onSelectChange(item)
+                          }, null, 8, ["modelValue", "value", "onChange"])
+                        ])) : (openBlock(), createElementBlock("span", _hoisted_6$2, [
                           !v.scope ? (openBlock(), createElementBlock("span", _hoisted_7$1, toDisplayString(item[v.dataIndex]), 1)) : renderSlot(_ctx.$slots, v.scope.customRender, {
                             key: 1,
                             row: item,

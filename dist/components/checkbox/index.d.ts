@@ -6,8 +6,10 @@ declare const Checkbox: {
         $data: {};
         $props: {
             disabled?: boolean;
-            modelValue?: boolean;
+            modelValue?: import("./src/type").CheckboxValue;
+            readonly value?: string | number;
             "onUpdate:modelValue"?: (...args: any[]) => any;
+            onChange?: (...args: any[]) => any;
             key?: string | number | symbol;
             ref?: import("vue").VNodeRef;
             ref_for?: boolean;
@@ -64,27 +66,31 @@ declare const Checkbox: {
         }>;
         $root: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
         $parent: import("vue").ComponentPublicInstance<{}, {}, {}, {}, {}, {}, {}, {}, false, import("vue").ComponentOptionsBase<any, any, any, any, any, any, any, any, any, {}, {}, string, {}>, {}, {}>;
-        $emit: (event: "update:modelValue", ...args: any[]) => void;
+        $emit: (event: "update:modelValue" | "change", ...args: any[]) => void;
         $el: any;
         $options: import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
             modelValue: {
-                type: BooleanConstructor;
+                type: import("vue").PropType<import("./src/type").CheckboxValue>;
                 default: boolean;
             };
             disabled: {
                 type: BooleanConstructor;
                 default: boolean;
             };
+            value: {
+                type: (StringConstructor | NumberConstructor)[];
+            };
         }>> & {
             "onUpdate:modelValue"?: (...args: any[]) => any;
+            onChange?: (...args: any[]) => any;
         }, {
             cls: import("vue").ComputedRef<string[]>;
             name: string;
             isCheck: import("vue").ComputedRef<boolean>;
-            handleClick: () => void;
-        }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], string, {
+            handleClick: () => false | void;
+        }, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], string, {
             disabled: boolean;
-            modelValue: boolean;
+            modelValue: import("./src/type").CheckboxValue;
         }, {}, string, {}> & {
             beforeCreate?: (() => void) | (() => void)[];
             created?: (() => void) | (() => void)[];
@@ -107,43 +113,51 @@ declare const Checkbox: {
         $watch<T extends string | ((...args: any) => any)>(source: T, cb: T extends (...args: any) => infer R ? (args_0: R, args_1: R) => any : (...args: any) => any, options?: import("vue").WatchOptions<boolean>): import("vue").WatchStopHandle;
     } & Readonly<import("vue").ExtractPropTypes<{
         modelValue: {
-            type: BooleanConstructor;
+            type: import("vue").PropType<import("./src/type").CheckboxValue>;
             default: boolean;
         };
         disabled: {
             type: BooleanConstructor;
             default: boolean;
         };
+        value: {
+            type: (StringConstructor | NumberConstructor)[];
+        };
     }>> & {
         "onUpdate:modelValue"?: (...args: any[]) => any;
+        onChange?: (...args: any[]) => any;
     } & import("vue").ShallowUnwrapRef<{
         cls: import("vue").ComputedRef<string[]>;
         name: string;
         isCheck: import("vue").ComputedRef<boolean>;
-        handleClick: () => void;
+        handleClick: () => false | void;
     }> & {} & import("vue").ComponentCustomProperties & {};
     __isFragment?: never;
     __isTeleport?: never;
     __isSuspense?: never;
 } & import("vue").ComponentOptionsBase<Readonly<import("vue").ExtractPropTypes<{
     modelValue: {
-        type: BooleanConstructor;
+        type: import("vue").PropType<import("./src/type").CheckboxValue>;
         default: boolean;
     };
     disabled: {
         type: BooleanConstructor;
         default: boolean;
     };
+    value: {
+        type: (StringConstructor | NumberConstructor)[];
+    };
 }>> & {
     "onUpdate:modelValue"?: (...args: any[]) => any;
+    onChange?: (...args: any[]) => any;
 }, {
     cls: import("vue").ComputedRef<string[]>;
     name: string;
     isCheck: import("vue").ComputedRef<boolean>;
-    handleClick: () => void;
-}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, "update:modelValue"[], "update:modelValue", {
+    handleClick: () => false | void;
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:modelValue" | "change")[], "update:modelValue" | "change", {
     disabled: boolean;
-    modelValue: boolean;
+    modelValue: import("./src/type").CheckboxValue;
 }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
     install: (app: App) => void;
 };

@@ -33,9 +33,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
     selection: {
         type: PropType<SelectionConfig>;
     };
-    /** 选择的数据 */
+    /** 选择数据的Key */
     selectedKey: {
-        type: PropType<string[] | number[]>;
+        type: PropType<string | number | (string | number)[]>;
         default: () => any[];
     };
 }, {
@@ -56,7 +56,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     }[]>;
     table_width: import("vue").Ref<any>;
     isEmpty: import("vue").ComputedRef<boolean>;
-    selectedData: import("vue").Ref<string | number | string[] | number[]>;
+    selectedData: import("vue").Ref<string | number | (string | number | boolean)[]>;
     bodyAreaStyle: import("vue").ComputedRef<string>;
     innerClass: import("vue").ComputedRef<(string | {
         "bp-table-border": boolean;
@@ -72,8 +72,9 @@ declare const _sfc_main: import("vue").DefineComponent<{
         "bp-table-stripe"?: undefined;
     })[]>;
     tdClass: (v: any) => string[];
-    onRadioChange: (record: unknown) => void;
-}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:selectedKey" | "selection-change")[], "update:selectedKey" | "selection-change", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
+    onSelectChange: (record: unknown) => void;
+    onSelectAll: (isSelectAll: boolean) => void;
+}, unknown, {}, {}, import("vue").ComponentOptionsMixin, import("vue").ComponentOptionsMixin, ("update:selectedKey" | "selection-change" | "select-all" | "select")[], "update:selectedKey" | "selection-change" | "select-all" | "select", import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps, Readonly<import("vue").ExtractPropTypes<{
     cols: {
         type: PropType<ColumnsItem[]>;
         default: () => any[];
@@ -106,14 +107,16 @@ declare const _sfc_main: import("vue").DefineComponent<{
     selection: {
         type: PropType<SelectionConfig>;
     };
-    /** 选择的数据 */
+    /** 选择数据的Key */
     selectedKey: {
-        type: PropType<string[] | number[]>;
+        type: PropType<string | number | (string | number)[]>;
         default: () => any[];
     };
 }>> & {
+    onSelect?: (...args: any[]) => any;
     "onUpdate:selectedKey"?: (...args: any[]) => any;
     "onSelection-change"?: (...args: any[]) => any;
+    "onSelect-all"?: (...args: any[]) => any;
 }, {
     data: unknown[];
     loading: boolean;
@@ -121,6 +124,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
     height: string;
     border: boolean;
     stripe: boolean;
-    selectedKey: string[] | number[];
+    selectedKey: string | number | (string | number)[];
 }, {}>;
 export default _sfc_main;
