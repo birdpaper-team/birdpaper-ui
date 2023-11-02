@@ -25,7 +25,7 @@ export default defineComponent({
     /** 复选框的值 */
     value: { type: [String, Number] },
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "change"],
   setup(props, { emit }) {
     const name = "bp-checkbox";
     const cls = computed(() => {
@@ -54,9 +54,11 @@ export default defineComponent({
         const index = arr.indexOf(props.value);
         index === -1 ? arr.push(props.value) : arr.splice(index, 1);
 
-        return emit("update:modelValue", arr);
+        emit("update:modelValue", arr);
+        return emit("change", arr);
       }
       emit("update:modelValue", !props.modelValue);
+      return emit("change", !props.modelValue);
     };
     return {
       cls,
