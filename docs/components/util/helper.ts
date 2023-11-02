@@ -16,3 +16,26 @@ export const getTagLabel = (tagText: string, tagName: string, attr?: string): st
   }
   return "";
 };
+
+/**
+ * 事件埋点触发
+ * @param name
+ */
+export const eventTrack = (name: string) => {
+  try {
+    // @ts-ignore
+    LA.track(name);
+  } catch (error) {
+    console.error('[ eventTrack ]', error);
+  }
+};
+
+/**
+ * 跳转外部链接
+ * @param url
+ */
+export const goToLink = (url: string) => {
+  if (!url) return;
+
+  window.open(url);
+};

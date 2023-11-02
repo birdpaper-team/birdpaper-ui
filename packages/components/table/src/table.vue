@@ -6,7 +6,7 @@
           <div class="scrollbar"></div>
 
           <table class="bp-table-body" :style="`width:${table_width}px`">
-            <table-header :header-list="columns"></table-header>
+            <table-header :header-list="columns" @on-select-all="onSelectAll"></table-header>
 
             <table-empty v-if="isEmpty" :colspan="columns.length"></table-empty>
 
@@ -19,10 +19,16 @@
                 <td v-for="(v, k) in columns" :key="`bp-table-tbody-td-${index}-${k}`" :class="tdClass(v)">
                   <!-- 单选 -->
                   <span v-if="v.type === 'radio'" class="bp-table-td-content">
-                    <bp-radio v-model="selectedData" :value="item[rowKey]" @change="onRadioChange(item)"></bp-radio>
+                    <bp-radio v-model="selectedData" :value="item[rowKey]" @change="onSelectChange(item)"></bp-radio>
                   </span>
                   <!-- 复选 -->
-                  <span v-else-if="v.type === 'checkbox'" class="bp-table-td-content"> </span>
+                  <span v-else-if="v.type === 'checkbox'" class="bp-table-td-content">
+                    <bp-checkbox
+                      v-model="selectedData"
+                      :value="item[rowKey]"
+                      @change="onSelectChange(item)"
+                    ></bp-checkbox>
+                  </span>
                   <!-- 文本和自定义列 -->
                   <span class="bp-table-td-content" v-else>
                     <template v-if="!v.scope">
@@ -55,6 +61,7 @@ import TableEmpty from "./components/empty.vue";
 import bpSpin from "../../spin/index";
 import { defineComponent } from "vue";
 import { ColumnsItem, SelectionConfig } from "./types";
+import { watch } from "vue";
 
 export default defineComponent({
   name: "Table",
@@ -76,10 +83,10 @@ export default defineComponent({
     rowKey: { type: [String, Number] },
     /** 选择器配置 */
     selection: { type: Object as PropType<SelectionConfig> },
-    /** 选择的数据 */
-    selectedKey: { type: Array as PropType<number[] | string[]>, default: () => [] },
+    /** 选择数据的Key */
+    selectedKey: { type: Array as PropType<string | number | Array<string | number>>, default: () => [] },
   },
-  emits: ["update:selectedKey", "selection-change"],
+  emits: ["update:selectedKey", "selection-change", "select-all", "select"],
   setup(props, { slots, emit }) {
     let { bpTable, columns, table_width } = useTable(props, slots);
 
@@ -87,7 +94,7 @@ export default defineComponent({
     const hasBorder = computed(() => props.border);
     const isStripe = computed(() => props.stripe);
     const fixedHeight = computed(() => props.height);
-    const selectedData = ref<string | number | string[] | number[]>([]);
+    const selectedData = ref<string | number | Array<string | number | boolean>>([]);
 
     const bodyAreaStyle = computed(() => {
       if (props.height) {
@@ -106,7 +113,6 @@ export default defineComponent({
       return name;
     });
 
-    // TODO
     const tdClass = (v: any) => {
       let align = `text-${v["align"] || "left"}`;
 
@@ -114,9 +120,28 @@ export default defineComponent({
       return name;
     };
 
-    const onRadioChange = (record: unknown) => {
-      emit("selection-change", record, selectedData.value);
+    const onSelectChange = (record: unknown) => {
+      emit("select", selectedData.value, record[props.rowKey], record);
     };
+    const onSelectAll = (isSelectAll: boolean) => {
+      emit("select-all", isSelectAll);
+
+      if (!isSelectAll) {
+        selectedData.value = [];
+        return;
+      }
+
+      selectedData.value = [];
+      for (let i = 0; i < props.data.length; i++) {
+        const element = props.data[i];
+        selectedData.value.push(element[props.rowKey]);
+      }
+    };
+
+    watch(selectedData, () => {
+      emit("selection-change", selectedData.value);
+      emit("update:selectedKey", selectedData.value);
+    });
 
     return {
       slots,
@@ -128,7 +153,8 @@ export default defineComponent({
       bodyAreaStyle,
       innerClass,
       tdClass,
-      onRadioChange,
+      onSelectChange,
+      onSelectAll,
     };
   },
 });

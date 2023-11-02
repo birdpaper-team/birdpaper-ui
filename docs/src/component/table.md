@@ -1,6 +1,8 @@
 <script setup lang="ts">
   import props from "../example/table/props.ts";
+  import event from "../example/table/event.ts";
   import columnProps from "../example/table/column-props.ts";
+  import selectProps from "../example/table/select-props.ts";
 </script>
 
 # 表格 Table
@@ -30,6 +32,14 @@
 
 <table-block type="props" :data="props"></table-block>
 
+### Table 事件
+
+<table-block type="event" :data="event"></table-block>
+
 ### TableColumn 属性
 
 <table-block type="props" :data="columnProps"></table-block>
+
+### Selection 配置
+
+<table-block type="props" :data="selectProps"></table-block>

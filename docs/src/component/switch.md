@@ -14,7 +14,7 @@
 <demo-block src="example/switch/disabled"></demo-block>
 
 
-### 异步关闭
+### 异步操作
 通过 `on-before-ok` 控制开关的异步操作
 <demo-block src="example/switch/async"></demo-block>
 
