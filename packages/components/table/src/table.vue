@@ -83,8 +83,8 @@ export default defineComponent({
     rowKey: { type: [String, Number] },
     /** 选择器配置 */
     selection: { type: Object as PropType<SelectionConfig> },
-    /** 选择的数据 */
-    selectedKey: { type: Array as PropType<number[] | string[]>, default: () => [] },
+    /** 选择数据的Key */
+    selectedKey: { type: Array as PropType<string | number | Array<string | number>>, default: () => [] },
   },
   emits: ["update:selectedKey", "selection-change", "select-all", "select"],
   setup(props, { slots, emit }) {
@@ -139,7 +139,8 @@ export default defineComponent({
     };
 
     watch(selectedData, () => {
-      return emit("selection-change", selectedData.value);
+      emit("selection-change", selectedData.value);
+      emit("update:selectedKey", selectedData.value);
     });
 
     return {
