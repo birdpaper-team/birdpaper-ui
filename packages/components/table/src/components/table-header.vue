@@ -3,26 +3,39 @@
 
   <thead class="bp-table-header-thead">
     <tr>
-      <th v-for="(item, index) in headerList" :key="`bp-table-thead-${index}`" :class="thClass(item)">
-        {{ item.title }}
-      </th>
+      <template v-for="item in headerList">
+        <th v-if="item.type === 'checkbox'" :class="thClass(item)">
+          <bp-checkbox v-model="isSelectAll" @change="onSelectChange"></bp-checkbox>
+        </th>
+        <th v-else :class="thClass(item)">
+          {{ item.title }}
+        </th>
+      </template>
     </tr>
   </thead>
 </template>
 
 <script setup lang="ts" name="TableHeader">
+import { PropType, ref } from "vue";
+import { ColumnsItem } from "../types";
 import ColGroup from "./col-group.vue";
 
 const props = defineProps({
-  // TODO
-  headerList: { type: Array<any>, default: () => [] },
+  headerList: { type: Array as PropType<ColumnsItem[]>, default: () => [] },
 });
+const emits = defineEmits<{
+  (e: "on-select-all", isSelectAll: boolean): void;
+}>();
 
-// TODO
 const thClass = (item: any) => {
   let align = `text-${item["headerAlign"] || item["align"] || "left"}`;
 
   let name = ["bp-table-th", align];
   return name;
+};
+
+const isSelectAll = ref<boolean>(false);
+const onSelectChange = () => {
+  emits("on-select-all", isSelectAll.value);
 };
 </script>
