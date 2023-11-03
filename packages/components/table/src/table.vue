@@ -6,29 +6,33 @@
           <div class="scrollbar"></div>
 
           <table class="bp-table-body" :style="`width:${table_width}px`">
-            <table-header :header-list="columns" @on-select-all="onSelectAll"></table-header>
+            <table-header ref="tableHeaderRef" :header-list="columns" @on-select-all="onSelectAll"></table-header>
 
             <table-empty v-if="isEmpty" :colspan="columns.length"></table-empty>
 
-            <table-body v-else-if="!isEmpty && slots.columns" :data="data">
+            <table-body
+              v-else-if="!isEmpty && slots.columns"
+              v-model="selectedData"
+              :data="data"
+              :selection="selection"
+              :row-key="rowKey"
+              @change="onSelectChange"
+            >
               <slot name="columns"> </slot>
             </table-body>
 
+            <!-- TODO 后续版本考虑弃用这种模式 -->
             <tbody class="bp-table-body-tbody" v-else>
               <tr v-for="(item, index) in data" :key="`bp-table-tbody-tr-${index}`">
                 <td v-for="(v, k) in columns" :key="`bp-table-tbody-td-${index}-${k}`" :class="tdClass(v)">
-                  <!-- 单选 -->
-                  <span v-if="v.type === 'radio'" class="bp-table-td-content">
-                    <bp-radio v-model="selectedData" :value="item[rowKey]" @change="onSelectChange(item)"></bp-radio>
-                  </span>
-                  <!-- 复选 -->
-                  <span v-else-if="v.type === 'checkbox'" class="bp-table-td-content">
-                    <bp-checkbox
-                      v-model="selectedData"
-                      :value="item[rowKey]"
-                      @change="onSelectChange(item)"
-                    ></bp-checkbox>
-                  </span>
+                  <table-select
+                    v-if="['radio', 'checkbox'].includes(v.type)"
+                    v-model="selectedData"
+                    :type="v.type"
+                    :record="item"
+                    :value="item[rowKey]"
+                    @change="onSelectChange"
+                  ></table-select>
                   <!-- 文本和自定义列 -->
                   <span class="bp-table-td-content" v-else>
                     <template v-if="!v.scope">
@@ -58,14 +62,15 @@ import { useTable } from "./table";
 import TableHeader from "./components/table-header.vue";
 import TableBody from "./components/table-body";
 import TableEmpty from "./components/empty.vue";
+import TableSelect from "./components/table-select.vue";
 import bpSpin from "../../spin/index";
 import { defineComponent } from "vue";
-import { ColumnsItem, SelectionConfig } from "./types";
-import { watch } from "vue";
+import { ColumnsItem, SelectedValue, SelectionConfig } from "./types";
+import { useTableSelect } from "./table-select";
 
 export default defineComponent({
   name: "Table",
-  components: { TableHeader, TableEmpty, TableBody, bpSpin },
+  components: { TableHeader, TableEmpty, TableBody, TableSelect, bpSpin },
   props: {
     /* 表格头部列表 Table header list */
     cols: { type: Array as PropType<ColumnsItem[]>, default: () => [] },
@@ -80,21 +85,22 @@ export default defineComponent({
     /* 斑马纹 Stripe or not */
     stripe: { type: Boolean, default: false },
     /** 行 Key 字段名称 */
-    rowKey: { type: [String, Number] },
+    rowKey: { type: String },
     /** 选择器配置 */
     selection: { type: Object as PropType<SelectionConfig> },
     /** 选择数据的Key */
-    selectedKey: { type: Array as PropType<string | number | Array<string | number>>, default: () => [] },
+    selectedKey: { type: Array as PropType<SelectedValue>, default: () => [] },
   },
   emits: ["update:selectedKey", "selection-change", "select-all", "select"],
   setup(props, { slots, emit }) {
-    let { bpTable, columns, table_width } = useTable(props, slots);
+    const tableHeaderRef = ref();
+    let { bpTable, columns, table_width } = useTable(props, slots, emit);
+    let { selectedData, onSelectChange, onSelectAll } = useTableSelect(props, emit, tableHeaderRef);
 
     const isEmpty = computed(() => props.data.length === 0);
     const hasBorder = computed(() => props.border);
     const isStripe = computed(() => props.stripe);
     const fixedHeight = computed(() => props.height);
-    const selectedData = ref<string | number | Array<string | number | boolean>>([]);
 
     const bodyAreaStyle = computed(() => {
       if (props.height) {
@@ -120,32 +126,10 @@ export default defineComponent({
       return name;
     };
 
-    const onSelectChange = (record: unknown) => {
-      emit("select", selectedData.value, record[props.rowKey], record);
-    };
-    const onSelectAll = (isSelectAll: boolean) => {
-      emit("select-all", isSelectAll);
-
-      if (!isSelectAll) {
-        selectedData.value = [];
-        return;
-      }
-
-      selectedData.value = [];
-      for (let i = 0; i < props.data.length; i++) {
-        const element = props.data[i];
-        selectedData.value.push(element[props.rowKey]);
-      }
-    };
-
-    watch(selectedData, () => {
-      emit("selection-change", selectedData.value);
-      emit("update:selectedKey", selectedData.value);
-    });
-
     return {
       slots,
       bpTable,
+      tableHeaderRef,
       columns,
       table_width,
       isEmpty,

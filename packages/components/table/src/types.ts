@@ -14,3 +14,5 @@ export interface ColumnsItem {
 export interface SelectionConfig {
   type: "radio" | "checkbox";
 }
+
+export type SelectedValue = Array<string | number>;
