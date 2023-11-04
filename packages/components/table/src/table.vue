@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import { PropType, computed, ref } from "vue";
+import { PropType, computed, ref, watch } from "vue";
 import { useTable } from "./table";
 import TableHeader from "./components/table-header.vue";
 import TableBody from "./components/table-body";
@@ -101,6 +101,14 @@ export default defineComponent({
     const hasBorder = computed(() => props.border);
     const isStripe = computed(() => props.stripe);
     const fixedHeight = computed(() => props.height);
+
+    watch(
+      () => props.selectedKey,
+      () => {
+        selectedData.value = props.selectedKey;
+      },
+      { immediate: true }
+    );
 
     const bodyAreaStyle = computed(() => {
       if (props.height) {
