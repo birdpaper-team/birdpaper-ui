@@ -5,7 +5,7 @@ var __publicField = (obj, key, value) => {
   return value;
 };
 import { defineComponent, computed, useSlots, openBlock, createElementBlock, normalizeClass, createElementVNode, createCommentVNode, renderSlot, Comment, createVNode, mergeProps, Fragment, ref, nextTick, toDisplayString, watch, resolveComponent, createBlock, createSlots, withCtx, renderList, h, reactive, provide, withModifiers, inject, watchEffect, createTextVNode, resolveDynamicComponent, toHandlerKey, onMounted, onBeforeUnmount, normalizeStyle, Teleport, withDirectives, Transition, vShow, resolveDirective, onUnmounted, TransitionGroup, render } from "vue";
-const _sfc_main$x = defineComponent({
+const _sfc_main$y = defineComponent({
   name: "Button",
   props: {
     /** 按钮类型 Type of the button */
@@ -61,12 +61,12 @@ const _export_sfc = (sfc, props) => {
   }
   return target;
 };
-const _hoisted_1$m = ["disabled"];
+const _hoisted_1$n = ["disabled"];
 const _hoisted_2$f = {
   key: 0,
   class: "left-icon"
 };
-function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$n(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("button", {
     class: normalizeClass(_ctx.btnClass),
     type: "button",
@@ -79,9 +79,9 @@ function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
       }, null, 2)
     ])) : createCommentVNode("", true),
     renderSlot(_ctx.$slots, "default")
-  ], 10, _hoisted_1$m);
+  ], 10, _hoisted_1$n);
 }
-const _button = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$m]]);
+const _button = /* @__PURE__ */ _export_sfc(_sfc_main$y, [["render", _sfc_render$n]]);
 const DEFAULT_PREFIX = "Bp";
 const getComponentsPrefix = (name) => {
   return name ?? DEFAULT_PREFIX;
@@ -202,7 +202,7 @@ const ButtonGroup = Object.assign(_buttonGroup, {
     app.component(_buttonGroup.name, _buttonGroup);
   }
 });
-const _sfc_main$w = defineComponent({
+const _sfc_main$x = defineComponent({
   name: "Input",
   props: {
     /** 绑定值 Binding value */
@@ -291,9 +291,9 @@ const _sfc_main$w = defineComponent({
     };
   }
 });
-const _hoisted_1$l = ["type", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
+const _hoisted_1$m = ["type", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
 const _hoisted_2$e = ["textContent"];
-function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$m(_ctx, _cache, $props, $setup, $data, $options) {
   var _a;
   return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.inpClass)
@@ -314,7 +314,7 @@ function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
       onKeypress: _cache[2] || (_cache[2] = (...args) => _ctx.onKeypress && _ctx.onKeypress(...args)),
       onKeyup: _cache[3] || (_cache[3] = (...args) => _ctx.onKeyup && _ctx.onKeyup(...args)),
       onInput: _cache[4] || (_cache[4] = (...args) => _ctx.onInput && _ctx.onInput(...args))
-    }, null, 40, _hoisted_1$l),
+    }, null, 40, _hoisted_1$m),
     _ctx.slots.suffix || _ctx.showClear || _ctx.showWordLimit || _ctx.type === "password" ? (openBlock(), createElementBlock("div", {
       key: 0,
       class: normalizeClass(`${_ctx.name}-suffix`)
@@ -339,7 +339,7 @@ function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
     ], 2)) : createCommentVNode("", true)
   ], 2);
 }
-const BpInput = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$l]]);
+const BpInput = /* @__PURE__ */ _export_sfc(_sfc_main$x, [["render", _sfc_render$m]]);
 BpInput.name = getComponentsPrefix() + BpInput.name;
 const Input = Object.assign(BpInput, {
   install: (app) => {
@@ -380,7 +380,7 @@ const off = function(element, event, handler, useCapture = false) {
 const warn = (module, info) => {
   console.warn(`[ A warning of birdpaper-ui ] - ${module}: ` + info);
 };
-const _sfc_main$v = defineComponent({
+const _sfc_main$w = defineComponent({
   name: "InputNumber",
   props: {
     /** 绑定值 Binding value */
@@ -492,8 +492,8 @@ const _sfc_main$v = defineComponent({
     };
   }
 });
-const _hoisted_1$k = ["onClick"];
-function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
+const _hoisted_1$l = ["onClick"];
+function _sfc_render$l(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_bp_input = resolveComponent("bp-input");
   return openBlock(), createBlock(_component_bp_input, {
     ref: "inputRef",
@@ -524,7 +524,7 @@ function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
               createElementVNode("i", {
                 class: normalizeClass(`ri-arrow-${v.type}-s-line`)
               }, null, 2)
-            ], 10, _hoisted_1$k);
+            ], 10, _hoisted_1$l);
           }), 256))
         ], 2)
       ]),
@@ -532,14 +532,14 @@ function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
     } : void 0
   ]), 1032, ["modelValue", "class", "placeholder", "disabled", "readonly", "is-danger", "size", "onInput", "onBlur"]);
 }
-const _inputNumber = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$k]]);
+const _inputNumber = /* @__PURE__ */ _export_sfc(_sfc_main$w, [["render", _sfc_render$l]]);
 _inputNumber.name = getComponentsPrefix() + _inputNumber.name;
 const InputNumber = Object.assign(_inputNumber, {
   install: (app) => {
     app.component(_inputNumber.name, _inputNumber);
   }
 });
-const _sfc_main$u = defineComponent({
+const _sfc_main$v = defineComponent({
   name: "Textarea",
   props: {
     /** 绑定值 Binding value */
@@ -611,10 +611,10 @@ const _sfc_main$u = defineComponent({
     };
   }
 });
-const _hoisted_1$j = ["rows", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
+const _hoisted_1$k = ["rows", "disabled", "readonly", "cursor", "placeholder", "maxlength", "value"];
 const _hoisted_2$d = { class: "suffix" };
 const _hoisted_3$9 = ["textContent"];
-function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$k(_ctx, _cache, $props, $setup, $data, $options) {
   var _a;
   return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.inpClass)
@@ -635,7 +635,7 @@ function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
       onKeypress: _cache[2] || (_cache[2] = (...args) => _ctx.onKeypress && _ctx.onKeypress(...args)),
       onKeyup: _cache[3] || (_cache[3] = (...args) => _ctx.onKeyup && _ctx.onKeyup(...args)),
       onInput: _cache[4] || (_cache[4] = (...args) => _ctx.onInput && _ctx.onInput(...args))
-    }, null, 40, _hoisted_1$j),
+    }, null, 40, _hoisted_1$k),
     createElementVNode("div", _hoisted_2$d, [
       !_ctx.slots.suffix ? (openBlock(), createElementBlock(Fragment, { key: 0 }, [
         _ctx.showClear ? (openBlock(), createElementBlock("i", {
@@ -652,14 +652,14 @@ function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ], 2);
 }
-const _textarea = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$j]]);
+const _textarea = /* @__PURE__ */ _export_sfc(_sfc_main$v, [["render", _sfc_render$k]]);
 _textarea.name = getComponentsPrefix() + _textarea.name;
 const Textarea = Object.assign(_textarea, {
   install: (app) => {
     app.component(_textarea.name, _textarea);
   }
 });
-const _sfc_main$t = defineComponent({
+const _sfc_main$u = defineComponent({
   name: "Radio",
   props: {
     /** 单选框绑定值 */
@@ -690,7 +690,7 @@ const _sfc_main$t = defineComponent({
     };
   }
 });
-function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$j(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("label", {
     class: normalizeClass([_ctx.name, _ctx.disabled ? `${_ctx.name}-disabled` : ""]),
     onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleInput && _ctx.handleInput(...args))
@@ -710,7 +710,7 @@ function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
     ], 2)
   ], 2);
 }
-const _radio = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$i]]);
+const _radio = /* @__PURE__ */ _export_sfc(_sfc_main$u, [["render", _sfc_render$j]]);
 const _radioGroup = /* @__PURE__ */ defineComponent({
   name: "RadioGroup",
   props: {
@@ -780,7 +780,7 @@ const Radio = Object.assign(_radio, {
     app.component(_radioGroup.name, _radioGroup);
   }
 });
-const _sfc_main$s = defineComponent({
+const _sfc_main$t = defineComponent({
   name: "Checkbox",
   props: {
     /** 绑定值 Binding value */
@@ -829,11 +829,11 @@ const _sfc_main$s = defineComponent({
     };
   }
 });
-const _hoisted_1$i = {
+const _hoisted_1$j = {
   key: 0,
   class: "ri-check-line"
 };
-function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$i(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.cls),
     onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args))
@@ -845,7 +845,7 @@ function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     createElementVNode("span", {
       class: normalizeClass([`${_ctx.name}-checkbox`, _ctx.isCheck ? `${_ctx.name}-check` : ""])
     }, [
-      _ctx.isCheck ? (openBlock(), createElementBlock("i", _hoisted_1$i)) : createCommentVNode("", true)
+      _ctx.isCheck ? (openBlock(), createElementBlock("i", _hoisted_1$j)) : createCommentVNode("", true)
     ], 2),
     createElementVNode("span", {
       class: normalizeClass(`${_ctx.name}-label`)
@@ -854,14 +854,14 @@ function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
     ], 2)
   ], 2);
 }
-const _checkbox = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$h]]);
+const _checkbox = /* @__PURE__ */ _export_sfc(_sfc_main$t, [["render", _sfc_render$i]]);
 _checkbox.name = getComponentsPrefix() + _checkbox.name;
 const Checkbox = Object.assign(_checkbox, {
   install: (app) => {
     app.component(_checkbox.name, _checkbox);
   }
 });
-const _sfc_main$r = defineComponent({
+const _sfc_main$s = defineComponent({
   name: "Switch",
   props: {
     /** 绑定值 Binding value */
@@ -915,11 +915,11 @@ const _sfc_main$r = defineComponent({
     };
   }
 });
-const _hoisted_1$h = {
+const _hoisted_1$i = {
   key: 0,
   class: "switch-icon-loading ri-loader-4-line"
 };
-function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$h(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.cls),
     onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args))
@@ -938,12 +938,12 @@ function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
       createElementVNode("span", {
         class: normalizeClass(`${_ctx.name}-slider-dot`)
       }, [
-        _ctx.loading ? (openBlock(), createElementBlock("i", _hoisted_1$h)) : createCommentVNode("", true)
+        _ctx.loading ? (openBlock(), createElementBlock("i", _hoisted_1$i)) : createCommentVNode("", true)
       ], 2)
     ], 2)
   ], 2);
 }
-const _switch = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$g]]);
+const _switch = /* @__PURE__ */ _export_sfc(_sfc_main$s, [["render", _sfc_render$h]]);
 _switch.name = getComponentsPrefix() + _switch.name;
 const Switch = Object.assign(_switch, {
   install: (app) => {
@@ -1001,7 +1001,7 @@ const useSelect = (slots) => {
     valueMap
   };
 };
-const _sfc_main$q = defineComponent({
+const _sfc_main$r = defineComponent({
   name: "Select",
   components: { BpInput },
   directives: { clickOutside: vClickOutside },
@@ -1083,7 +1083,7 @@ const _sfc_main$q = defineComponent({
     };
   }
 });
-function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$g(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_bp_input = resolveComponent("bp-input");
   const _component_bp_trigger = resolveComponent("bp-trigger");
   return openBlock(), createBlock(_component_bp_trigger, {
@@ -1129,8 +1129,8 @@ function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
     _: 3
   }, 8, ["popup-visible", "class", "disabled"]);
 }
-const _select = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$f]]);
-const _sfc_main$p = defineComponent({
+const _select = /* @__PURE__ */ _export_sfc(_sfc_main$r, [["render", _sfc_render$g]]);
+const _sfc_main$q = defineComponent({
   name: "Option",
   props: {
     /** 选项的值 */
@@ -1181,7 +1181,7 @@ const _sfc_main$p = defineComponent({
     };
   }
 });
-function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$f(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("li", {
     class: normalizeClass(_ctx.clsName),
     onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args))
@@ -1191,7 +1191,7 @@ function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ], 2);
 }
-const _option = /* @__PURE__ */ _export_sfc(_sfc_main$p, [["render", _sfc_render$e]]);
+const _option = /* @__PURE__ */ _export_sfc(_sfc_main$q, [["render", _sfc_render$f]]);
 _select.name = getComponentsPrefix() + _select.name;
 _option.name = getComponentsPrefix() + _option.name;
 const Select = Object.assign(_select, {
@@ -1200,7 +1200,7 @@ const Select = Object.assign(_select, {
     app.component(_option.name, _option);
   }
 });
-const _hoisted_1$g = ["textContent"];
+const _hoisted_1$h = ["textContent"];
 const _hoisted_2$c = {
   key: 1,
   class: "ri-arrow-left-s-line"
@@ -1208,7 +1208,7 @@ const _hoisted_2$c = {
 const __default__$a = defineComponent({
   name: "PaginationPrev"
 });
-const _sfc_main$o = /* @__PURE__ */ defineComponent({
+const _sfc_main$p = /* @__PURE__ */ defineComponent({
   ...__default__$a,
   props: {
     text: { type: String, default: "" },
@@ -1238,12 +1238,12 @@ const _sfc_main$o = /* @__PURE__ */ defineComponent({
         __props.text ? (openBlock(), createElementBlock("span", {
           key: 0,
           textContent: toDisplayString(__props.text)
-        }, null, 8, _hoisted_1$g)) : (openBlock(), createElementBlock("i", _hoisted_2$c))
+        }, null, 8, _hoisted_1$h)) : (openBlock(), createElementBlock("i", _hoisted_2$c))
       ], 2);
     };
   }
 });
-const _hoisted_1$f = ["textContent"];
+const _hoisted_1$g = ["textContent"];
 const _hoisted_2$b = {
   key: 1,
   class: "ri-arrow-right-s-line"
@@ -1251,7 +1251,7 @@ const _hoisted_2$b = {
 const __default__$9 = defineComponent({
   name: "PaginationNext"
 });
-const _sfc_main$n = /* @__PURE__ */ defineComponent({
+const _sfc_main$o = /* @__PURE__ */ defineComponent({
   ...__default__$9,
   props: {
     text: { type: String, default: "" },
@@ -1281,16 +1281,16 @@ const _sfc_main$n = /* @__PURE__ */ defineComponent({
         __props.text ? (openBlock(), createElementBlock("span", {
           key: 0,
           textContent: toDisplayString(__props.text)
-        }, null, 8, _hoisted_1$f)) : (openBlock(), createElementBlock("i", _hoisted_2$b))
+        }, null, 8, _hoisted_1$g)) : (openBlock(), createElementBlock("i", _hoisted_2$b))
       ], 2);
     };
   }
 });
-const _hoisted_1$e = ["textContent"];
+const _hoisted_1$f = ["textContent"];
 const __default__$8 = defineComponent({
   name: "PaginationTotal"
 });
-const _sfc_main$m = /* @__PURE__ */ defineComponent({
+const _sfc_main$n = /* @__PURE__ */ defineComponent({
   ...__default__$8,
   props: {
     value: { type: Number, default: 0 },
@@ -1311,12 +1311,12 @@ const _sfc_main$m = /* @__PURE__ */ defineComponent({
         createElementVNode("span", {
           class: "page-text",
           textContent: toDisplayString(text.value)
-        }, null, 8, _hoisted_1$e)
+        }, null, 8, _hoisted_1$f)
       ], 2);
     };
   }
 });
-const _hoisted_1$d = ["onClick"];
+const _hoisted_1$e = ["onClick"];
 const _hoisted_2$a = { key: 0 };
 const _hoisted_3$8 = {
   key: 1,
@@ -1325,7 +1325,7 @@ const _hoisted_3$8 = {
 const __default__$7 = defineComponent({
   name: "PaginationPager"
 });
-const _sfc_main$l = /* @__PURE__ */ defineComponent({
+const _sfc_main$m = /* @__PURE__ */ defineComponent({
   ...__default__$7,
   props: {
     currentPage: { type: Number, default: 1 },
@@ -1373,12 +1373,12 @@ const _sfc_main$l = /* @__PURE__ */ defineComponent({
           onClick: ($event) => onClick(item.index)
         }, [
           item.type === "number" ? (openBlock(), createElementBlock("span", _hoisted_2$a, toDisplayString(item.index), 1)) : (openBlock(), createElementBlock("i", _hoisted_3$8))
-        ], 10, _hoisted_1$d);
+        ], 10, _hoisted_1$e);
       }), 128);
     };
   }
 });
-const _hoisted_1$c = {
+const _hoisted_1$d = {
   key: 0,
   class: "page-text"
 };
@@ -1389,7 +1389,7 @@ const _hoisted_2$9 = {
 const __default__$6 = defineComponent({
   name: "PaginationJumper"
 });
-const _sfc_main$k = /* @__PURE__ */ defineComponent({
+const _sfc_main$l = /* @__PURE__ */ defineComponent({
   ...__default__$6,
   props: {
     currentPage: { type: Number, default: 1 },
@@ -1425,7 +1425,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
       return openBlock(), createElementBlock("li", {
         class: normalizeClass([`${name}-item`, `${name}-jumper`])
       }, [
-        text.prefix ? (openBlock(), createElementBlock("span", _hoisted_1$c, toDisplayString(text.prefix), 1)) : createCommentVNode("", true),
+        text.prefix ? (openBlock(), createElementBlock("span", _hoisted_1$d, toDisplayString(text.prefix), 1)) : createCommentVNode("", true),
         createVNode(_component_bp_input_number, {
           min: 1,
           precision: 0,
@@ -1443,7 +1443,7 @@ const _sfc_main$k = /* @__PURE__ */ defineComponent({
 const __default__$5 = defineComponent({
   name: "PaginationSizes"
 });
-const _sfc_main$j = /* @__PURE__ */ defineComponent({
+const _sfc_main$k = /* @__PURE__ */ defineComponent({
   ...__default__$5,
   props: {
     currentSize: { type: Number, default: "" },
@@ -1498,7 +1498,7 @@ const _sfc_main$j = /* @__PURE__ */ defineComponent({
   }
 });
 const usePagination = (props, emits) => {
-  const layoutMap = { prev: _sfc_main$o, next: _sfc_main$n, total: _sfc_main$m, pager: _sfc_main$l, jumper: _sfc_main$k, sizes: _sfc_main$j };
+  const layoutMap = { prev: _sfc_main$p, next: _sfc_main$o, total: _sfc_main$n, pager: _sfc_main$m, jumper: _sfc_main$l, sizes: _sfc_main$k };
   const currentPage = ref(props.current || 1);
   const currentPageSize = ref(props.pageSize);
   const totalPagesNum = ref(0);
@@ -1625,7 +1625,7 @@ const usePagination = (props, emits) => {
     componentsList
   };
 };
-const _sfc_main$i = defineComponent({
+const _sfc_main$j = defineComponent({
   name: "Pagination",
   props: {
     /** 布局配置 The layout config */
@@ -1661,7 +1661,7 @@ const _sfc_main$i = defineComponent({
     };
   }
 });
-function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+function _sfc_render$e(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
     class: normalizeClass(_ctx.name)
   }, [
@@ -1676,14 +1676,14 @@ function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
     ], 2)
   ], 2);
 }
-const _pagination = /* @__PURE__ */ _export_sfc(_sfc_main$i, [["render", _sfc_render$d]]);
+const _pagination = /* @__PURE__ */ _export_sfc(_sfc_main$j, [["render", _sfc_render$e]]);
 _pagination.name = getComponentsPrefix() + _pagination.name;
 const Pagination = Object.assign(_pagination, {
   install: (app) => {
     app.component(_pagination.name, _pagination);
   }
 });
-const useTable = (props, slots) => {
+const useTable = (props, slots, emit) => {
   const bpTable = ref(null);
   const columns = ref([]);
   const table_width = ref();
@@ -1707,7 +1707,7 @@ const useTable = (props, slots) => {
   };
   let cols = [];
   const initColumns = () => {
-    var _a, _b, _c;
+    var _a, _b;
     const el = bpTable.value;
     cols = getColumnsBySlot() || props.cols;
     if (cols.length === 0 || cols.length > 99)
@@ -1715,7 +1715,7 @@ const useTable = (props, slots) => {
     _fixed_width = 0;
     _remainder_col = cols.length;
     _min_width_list = [];
-    if (!((_a = slots.columns) == null ? void 0 : _a.call(slots)) && ((_b = props.selection) == null ? void 0 : _b.type) && !((_c = cols[0]) == null ? void 0 : _c.type)) {
+    if (((_a = props.selection) == null ? void 0 : _a.type) && !((_b = cols[0]) == null ? void 0 : _b.type)) {
       cols.unshift({
         type: props.selection.type,
         width: 46,
@@ -1796,11 +1796,11 @@ const useTable = (props, slots) => {
     columns
   };
 };
-const _hoisted_1$b = ["name", "width"];
+const _hoisted_1$c = ["name", "width"];
 const __default__$4 = defineComponent({
   name: "TableColumns"
 });
-const _sfc_main$h = /* @__PURE__ */ defineComponent({
+const _sfc_main$i = /* @__PURE__ */ defineComponent({
   ...__default__$4,
   props: {
     // TODO
@@ -1814,23 +1814,23 @@ const _sfc_main$h = /* @__PURE__ */ defineComponent({
             key: `bp-table-tr-${index}`,
             name: `bp_table_tr_${index}`,
             width: item.width
-          }, null, 8, _hoisted_1$b);
+          }, null, 8, _hoisted_1$c);
         }), 128))
       ]);
     };
   }
 });
-const _hoisted_1$a = { class: "bp-table-header-thead" };
+const _hoisted_1$b = { class: "bp-table-header-thead" };
 const __default__$3 = defineComponent({
   name: "TableHeader"
 });
-const _sfc_main$g = /* @__PURE__ */ defineComponent({
+const _sfc_main$h = /* @__PURE__ */ defineComponent({
   ...__default__$3,
   props: {
     headerList: { type: Array, default: () => [] }
   },
   emits: ["on-select-all"],
-  setup(__props, { emit: emits }) {
+  setup(__props, { expose: __expose, emit: emits }) {
     const thClass = (item) => {
       let align = `text-${item["headerAlign"] || item["align"] || "left"}`;
       let name = ["bp-table-th", align];
@@ -1840,11 +1840,14 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
     const onSelectChange = () => {
       emits("on-select-all", isSelectAll.value);
     };
+    __expose({
+      isSelectAll
+    });
     return (_ctx, _cache) => {
       const _component_bp_checkbox = resolveComponent("bp-checkbox");
       return openBlock(), createElementBlock(Fragment, null, [
-        createVNode(_sfc_main$h, { cols: __props.headerList }, null, 8, ["cols"]),
-        createElementVNode("thead", _hoisted_1$a, [
+        createVNode(_sfc_main$i, { cols: __props.headerList }, null, 8, ["cols"]),
+        createElementVNode("thead", _hoisted_1$b, [
           createElementVNode("tr", null, [
             (openBlock(true), createElementBlock(Fragment, null, renderList(__props.headerList, (item) => {
               return openBlock(), createElementBlock(Fragment, null, [
@@ -1869,24 +1872,114 @@ const _sfc_main$g = /* @__PURE__ */ defineComponent({
     };
   }
 });
+const _sfc_main$g = defineComponent({
+  name: "TableSelect",
+  props: {
+    /** 已选择数据绑定值 */
+    modelValue: { type: Array, default: () => [] },
+    /** 选择器类型 */
+    type: { type: String, default: "radio" },
+    /** 数据记录 */
+    record: { type: Object },
+    /** 数据 key 值 */
+    value: { type: [String, Number] }
+  },
+  emits: ["update:modelValue", "change"],
+  setup(props, { emit }) {
+    const selectionType = {
+      radio: Radio,
+      checkbox: Checkbox
+    };
+    const selectValue = ref([]);
+    const onSelectChange = () => {
+      emit("update:modelValue", selectValue.value);
+      setTimeout(() => {
+        emit("change", props.record);
+      }, 20);
+    };
+    watch(
+      () => props.modelValue,
+      (v) => {
+        selectValue.value = v;
+      },
+      { immediate: true }
+    );
+    return {
+      selectValue,
+      onSelectChange,
+      selectionType
+    };
+  }
+});
+const _hoisted_1$a = { class: "bp-table-td-content" };
+function _sfc_render$d(_ctx, _cache, $props, $setup, $data, $options) {
+  return openBlock(), createElementBlock("span", _hoisted_1$a, [
+    (openBlock(), createBlock(resolveDynamicComponent(_ctx.selectionType[_ctx.type]), {
+      modelValue: _ctx.selectValue,
+      "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.selectValue = $event),
+      value: _ctx.value,
+      onChange: _ctx.onSelectChange
+    }, null, 40, ["modelValue", "value", "onChange"]))
+  ]);
+}
+const TableSelect = /* @__PURE__ */ _export_sfc(_sfc_main$g, [["render", _sfc_render$d]]);
 const TableBody = /* @__PURE__ */ defineComponent({
   name: "TableBody",
   props: {
+    /** 表格数据 */
     data: {
       type: Array,
       default: () => []
+    },
+    /** 已选数据 key */
+    modelValue: {
+      type: Array,
+      default: () => []
+    },
+    /** 选择器配置 */
+    selection: {
+      type: Object
+    },
+    /** 行 Key 字段名称 */
+    rowKey: {
+      type: String
     }
   },
+  components: {
+    TableSelect
+  },
+  emits: ["update:modelValue", "change"],
   setup(props, {
-    slots
+    slots,
+    emit
   }) {
     var _a;
     const children = getAllElements((_a = slots.default) == null ? void 0 : _a.call(slots), true).filter((item) => item.type !== Comment);
+    const val = ref(props.modelValue || []);
+    watch(val, () => {
+      emit("update:modelValue", val.value);
+    });
+    watch(() => props.modelValue, () => {
+      val.value = props.modelValue;
+    });
+    const onChange = (record) => {
+      emit("change", record);
+    };
     const bodyRender = () => {
       return createVNode("tbody", {
         "class": "bp-table-body-tbody"
       }, [props.data.map((record, rowIndex) => {
-        return createVNode("tr", null, [children.map((child, childIndex) => {
+        var _a2, _b;
+        return createVNode("tr", null, [["radio", "checkbox"].includes((_a2 = props.selection) == null ? void 0 : _a2.type) ? createVNode("td", {
+          "class": "bp-table-td"
+        }, [createVNode(resolveComponent("table-select"), {
+          "modelValue": val.value,
+          "onUpdate:modelValue": ($event) => val.value = $event,
+          "record": record,
+          "type": (_b = props.selection) == null ? void 0 : _b.type,
+          "value": record[props.rowKey],
+          "onChange": onChange
+        }, null)]) : null, children.map((child, childIndex) => {
           const {
             dataIndex = childIndex
           } = child == null ? void 0 : child.props;
@@ -1983,9 +2076,38 @@ const Spin = Object.assign(_spin, {
     app.component(_spin.name, _spin);
   }
 });
+const useTableSelect = (props, emit, tableHeaderRef) => {
+  const selectedData = ref([]);
+  const onSelectChange = (record) => {
+    emit("select", selectedData.value, record[props.rowKey], record);
+  };
+  const onSelectAll = (isSelectAll) => {
+    emit("select-all", isSelectAll);
+    if (!isSelectAll) {
+      selectedData.value = [];
+      return;
+    }
+    selectedData.value = [];
+    for (let i = 0; i < props.data.length; i++) {
+      const element = props.data[i];
+      selectedData.value.push(element[props.rowKey]);
+    }
+  };
+  watch(selectedData, () => {
+    var _a;
+    tableHeaderRef.value && (tableHeaderRef.value.isSelectAll = ((_a = selectedData.value) == null ? void 0 : _a.length) === props.data.length);
+    emit("selection-change", selectedData.value);
+    emit("update:selectedKey", selectedData.value);
+  });
+  return {
+    onSelectChange,
+    onSelectAll,
+    selectedData
+  };
+};
 const _sfc_main$d = defineComponent({
   name: "Table",
-  components: { TableHeader: _sfc_main$g, TableEmpty: _sfc_main$f, TableBody, bpSpin: Spin },
+  components: { TableHeader: _sfc_main$h, TableEmpty: _sfc_main$f, TableBody, TableSelect, bpSpin: Spin },
   props: {
     /* 表格头部列表 Table header list */
     cols: { type: Array, default: () => [] },
@@ -2000,7 +2122,7 @@ const _sfc_main$d = defineComponent({
     /* 斑马纹 Stripe or not */
     stripe: { type: Boolean, default: false },
     /** 行 Key 字段名称 */
-    rowKey: { type: [String, Number] },
+    rowKey: { type: String },
     /** 选择器配置 */
     selection: { type: Object },
     /** 选择数据的Key */
@@ -2008,12 +2130,20 @@ const _sfc_main$d = defineComponent({
   },
   emits: ["update:selectedKey", "selection-change", "select-all", "select"],
   setup(props, { slots, emit }) {
+    const tableHeaderRef = ref();
     let { bpTable, columns, table_width } = useTable(props, slots);
+    let { selectedData, onSelectChange, onSelectAll } = useTableSelect(props, emit, tableHeaderRef);
     const isEmpty = computed(() => props.data.length === 0);
     const hasBorder = computed(() => props.border);
     const isStripe = computed(() => props.stripe);
     const fixedHeight = computed(() => props.height);
-    const selectedData = ref([]);
+    watch(
+      () => props.selectedKey,
+      () => {
+        selectedData.value = props.selectedKey;
+      },
+      { immediate: true }
+    );
     const bodyAreaStyle = computed(() => {
       if (props.height) {
         return `width:${table_width.value}px;max-height:${props.height}px;height:${props.height}px;overflow-y:auto`;
@@ -2034,28 +2164,10 @@ const _sfc_main$d = defineComponent({
       let name = ["bp-table-td", align];
       return name;
     };
-    const onSelectChange = (record) => {
-      emit("select", selectedData.value, record[props.rowKey], record);
-    };
-    const onSelectAll = (isSelectAll) => {
-      emit("select-all", isSelectAll);
-      if (!isSelectAll) {
-        selectedData.value = [];
-        return;
-      }
-      selectedData.value = [];
-      for (let i = 0; i < props.data.length; i++) {
-        const element = props.data[i];
-        selectedData.value.push(element[props.rowKey]);
-      }
-    };
-    watch(selectedData, () => {
-      emit("selection-change", selectedData.value);
-      emit("update:selectedKey", selectedData.value);
-    });
     return {
       slots,
       bpTable,
+      tableHeaderRef,
       columns,
       table_width,
       isEmpty,
@@ -2078,24 +2190,15 @@ const _hoisted_3$5 = {
   class: "bp-table-body-tbody"
 };
 const _hoisted_4$5 = {
-  key: 0,
-  class: "bp-table-td-content"
-};
-const _hoisted_5$3 = {
   key: 1,
   class: "bp-table-td-content"
 };
-const _hoisted_6$2 = {
-  key: 2,
-  class: "bp-table-td-content"
-};
-const _hoisted_7$1 = { key: 0 };
+const _hoisted_5$3 = { key: 0 };
 function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_table_header = resolveComponent("table-header");
   const _component_table_empty = resolveComponent("table-empty");
   const _component_table_body = resolveComponent("table-body");
-  const _component_bp_radio = resolveComponent("bp-radio");
-  const _component_bp_checkbox = resolveComponent("bp-checkbox");
+  const _component_table_select = resolveComponent("table-select");
   const _component_bp_spin = resolveComponent("bp-spin");
   return openBlock(), createBlock(_component_bp_spin, { loading: _ctx.loading }, {
     default: withCtx(() => [
@@ -2113,6 +2216,7 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
               style: normalizeStyle(`width:${_ctx.table_width}px`)
             }, [
               createVNode(_component_table_header, {
+                ref: "tableHeaderRef",
                 "header-list": _ctx.columns,
                 onOnSelectAll: _ctx.onSelectAll
               }, null, 8, ["header-list", "onOnSelectAll"]),
@@ -2121,13 +2225,18 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
                 colspan: _ctx.columns.length
               }, null, 8, ["colspan"])) : !_ctx.isEmpty && _ctx.slots.columns ? (openBlock(), createBlock(_component_table_body, {
                 key: 1,
-                data: _ctx.data
+                modelValue: _ctx.selectedData,
+                "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.selectedData = $event),
+                data: _ctx.data,
+                selection: _ctx.selection,
+                "row-key": _ctx.rowKey,
+                onChange: _ctx.onSelectChange
               }, {
                 default: withCtx(() => [
                   renderSlot(_ctx.$slots, "columns")
                 ]),
                 _: 3
-              }, 8, ["data"])) : (openBlock(), createElementBlock("tbody", _hoisted_3$5, [
+              }, 8, ["modelValue", "data", "selection", "row-key", "onChange"])) : (openBlock(), createElementBlock("tbody", _hoisted_3$5, [
                 (openBlock(true), createElementBlock(Fragment, null, renderList(_ctx.data, (item, index) => {
                   return openBlock(), createElementBlock("tr", {
                     key: `bp-table-tbody-tr-${index}`
@@ -2137,22 +2246,16 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
                         key: `bp-table-tbody-td-${index}-${k}`,
                         class: normalizeClass(_ctx.tdClass(v))
                       }, [
-                        v.type === "radio" ? (openBlock(), createElementBlock("span", _hoisted_4$5, [
-                          createVNode(_component_bp_radio, {
-                            modelValue: _ctx.selectedData,
-                            "onUpdate:modelValue": _cache[0] || (_cache[0] = ($event) => _ctx.selectedData = $event),
-                            value: item[_ctx.rowKey],
-                            onChange: ($event) => _ctx.onSelectChange(item)
-                          }, null, 8, ["modelValue", "value", "onChange"])
-                        ])) : v.type === "checkbox" ? (openBlock(), createElementBlock("span", _hoisted_5$3, [
-                          createVNode(_component_bp_checkbox, {
-                            modelValue: _ctx.selectedData,
-                            "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => _ctx.selectedData = $event),
-                            value: item[_ctx.rowKey],
-                            onChange: ($event) => _ctx.onSelectChange(item)
-                          }, null, 8, ["modelValue", "value", "onChange"])
-                        ])) : (openBlock(), createElementBlock("span", _hoisted_6$2, [
-                          !v.scope ? (openBlock(), createElementBlock("span", _hoisted_7$1, toDisplayString(item[v.dataIndex]), 1)) : renderSlot(_ctx.$slots, v.scope.customRender, {
+                        ["radio", "checkbox"].includes(v.type) ? (openBlock(), createBlock(_component_table_select, {
+                          key: 0,
+                          modelValue: _ctx.selectedData,
+                          "onUpdate:modelValue": _cache[1] || (_cache[1] = ($event) => _ctx.selectedData = $event),
+                          type: v.type,
+                          record: item,
+                          value: item[_ctx.rowKey],
+                          onChange: _ctx.onSelectChange
+                        }, null, 8, ["modelValue", "type", "record", "value", "onChange"])) : (openBlock(), createElementBlock("span", _hoisted_4$5, [
+                          !v.scope ? (openBlock(), createElementBlock("span", _hoisted_5$3, toDisplayString(item[v.dataIndex]), 1)) : renderSlot(_ctx.$slots, v.scope.customRender, {
                             key: 1,
                             row: item,
                             index,

@@ -1,4 +1,4 @@
-export declare const useTable: (props: any, slots: any) => {
+export declare const useTable: (props: any, slots: any, emit: any) => {
     initColumns: () => {
         title?: string;
         type: "radio" | "inner" | "checkbox";

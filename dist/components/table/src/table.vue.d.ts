@@ -1,5 +1,5 @@
 import { PropType } from "vue";
-import { ColumnsItem, SelectionConfig } from "./types";
+import { ColumnsItem, SelectedValue, SelectionConfig } from "./types";
 declare const _sfc_main: import("vue").DefineComponent<{
     cols: {
         type: PropType<ColumnsItem[]>;
@@ -27,7 +27,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
     /** 行 Key 字段名称 */
     rowKey: {
-        type: (StringConstructor | NumberConstructor)[];
+        type: StringConstructor;
     };
     /** 选择器配置 */
     selection: {
@@ -35,7 +35,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
     /** 选择数据的Key */
     selectedKey: {
-        type: PropType<string | number | (string | number)[]>;
+        type: PropType<SelectedValue>;
         default: () => any[];
     };
 }, {
@@ -43,6 +43,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
         [name: string]: import("vue").Slot<any>;
     }>;
     bpTable: any;
+    tableHeaderRef: import("vue").Ref<any>;
     columns: import("vue").Ref<{
         title?: string;
         type: "radio" | "inner" | "checkbox";
@@ -56,7 +57,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     }[]>;
     table_width: import("vue").Ref<any>;
     isEmpty: import("vue").ComputedRef<boolean>;
-    selectedData: import("vue").Ref<string | number | (string | number | boolean)[]>;
+    selectedData: import("vue").Ref<(string | number)[]>;
     bodyAreaStyle: import("vue").ComputedRef<string>;
     innerClass: import("vue").ComputedRef<(string | {
         "bp-table-border": boolean;
@@ -101,7 +102,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
     /** 行 Key 字段名称 */
     rowKey: {
-        type: (StringConstructor | NumberConstructor)[];
+        type: StringConstructor;
     };
     /** 选择器配置 */
     selection: {
@@ -109,7 +110,7 @@ declare const _sfc_main: import("vue").DefineComponent<{
     };
     /** 选择数据的Key */
     selectedKey: {
-        type: PropType<string | number | (string | number)[]>;
+        type: PropType<SelectedValue>;
         default: () => any[];
     };
 }>> & {
@@ -124,6 +125,6 @@ declare const _sfc_main: import("vue").DefineComponent<{
     height: string;
     border: boolean;
     stripe: boolean;
-    selectedKey: string | number | (string | number)[];
+    selectedKey: SelectedValue;
 }, {}>;
 export default _sfc_main;
