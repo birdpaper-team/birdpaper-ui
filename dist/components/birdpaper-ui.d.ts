@@ -2420,7 +2420,7 @@ declare const _default: {
                 height?: string;
                 border?: boolean;
                 stripe?: boolean;
-                selectedKey?: string | number | (string | number)[];
+                selectedKey?: import("./table/src/types").SelectedValue;
                 key?: string | number | symbol;
                 ref?: import("vue").VNodeRef;
                 ref_for?: boolean;
@@ -2465,12 +2465,12 @@ declare const _default: {
                 }>) => void)[];
                 class?: unknown;
                 style?: unknown;
+                readonly selection?: import("./table/src/types").SelectionConfig;
+                readonly rowKey?: string;
                 onSelect?: (...args: any[]) => any;
                 "onUpdate:selectedKey"?: (...args: any[]) => any;
                 "onSelection-change"?: (...args: any[]) => any;
                 "onSelect-all"?: (...args: any[]) => any;
-                readonly rowKey?: string | number;
-                readonly selection?: import("./table/src/types").SelectionConfig;
             };
             $attrs: {
                 [x: string]: unknown;
@@ -2511,13 +2511,13 @@ declare const _default: {
                     default: boolean;
                 };
                 rowKey: {
-                    type: (StringConstructor | NumberConstructor)[];
+                    type: StringConstructor;
                 };
                 selection: {
                     type: import("vue").PropType<import("./table/src/types").SelectionConfig>;
                 };
                 selectedKey: {
-                    type: import("vue").PropType<string | number | (string | number)[]>;
+                    type: import("vue").PropType<import("./table/src/types").SelectedValue>;
                     default: () => any[];
                 };
             }>> & {
@@ -2530,6 +2530,7 @@ declare const _default: {
                     [name: string]: import("vue").Slot<any>;
                 }>;
                 bpTable: any;
+                tableHeaderRef: import("vue").Ref<any>;
                 columns: import("vue").Ref<{
                     title?: string;
                     type: "radio" | "inner" | "checkbox";
@@ -2543,7 +2544,7 @@ declare const _default: {
                 }[]>;
                 table_width: import("vue").Ref<any>;
                 isEmpty: import("vue").ComputedRef<boolean>;
-                selectedData: import("vue").Ref<string | number | (string | number | boolean)[]>;
+                selectedData: import("vue").Ref<(string | number)[]>;
                 bodyAreaStyle: import("vue").ComputedRef<string>;
                 innerClass: import("vue").ComputedRef<(string | {
                     "bp-table-border": boolean;
@@ -2568,7 +2569,7 @@ declare const _default: {
                 height: string;
                 border: boolean;
                 stripe: boolean;
-                selectedKey: string | number | (string | number)[];
+                selectedKey: import("./table/src/types").SelectedValue;
             }, {}, string, {}> & {
                 beforeCreate?: (() => void) | (() => void)[];
                 created?: (() => void) | (() => void)[];
@@ -2615,13 +2616,13 @@ declare const _default: {
                 default: boolean;
             };
             rowKey: {
-                type: (StringConstructor | NumberConstructor)[];
+                type: StringConstructor;
             };
             selection: {
                 type: import("vue").PropType<import("./table/src/types").SelectionConfig>;
             };
             selectedKey: {
-                type: import("vue").PropType<string | number | (string | number)[]>;
+                type: import("vue").PropType<import("./table/src/types").SelectedValue>;
                 default: () => any[];
             };
         }>> & {
@@ -2634,6 +2635,7 @@ declare const _default: {
                 [name: string]: import("vue").Slot<any>;
             }>;
             bpTable: any;
+            tableHeaderRef: import("vue").Ref<any>;
             columns: import("vue").Ref<{
                 title?: string;
                 type: "radio" | "inner" | "checkbox";
@@ -2647,7 +2649,7 @@ declare const _default: {
             }[]>;
             table_width: import("vue").Ref<any>;
             isEmpty: import("vue").ComputedRef<boolean>;
-            selectedData: import("vue").Ref<string | number | (string | number | boolean)[]>;
+            selectedData: import("vue").Ref<(string | number)[]>;
             bodyAreaStyle: import("vue").ComputedRef<string>;
             innerClass: import("vue").ComputedRef<(string | {
                 "bp-table-border": boolean;
@@ -2695,13 +2697,13 @@ declare const _default: {
             default: boolean;
         };
         rowKey: {
-            type: (StringConstructor | NumberConstructor)[];
+            type: StringConstructor;
         };
         selection: {
             type: import("vue").PropType<import("./table/src/types").SelectionConfig>;
         };
         selectedKey: {
-            type: import("vue").PropType<string | number | (string | number)[]>;
+            type: import("vue").PropType<import("./table/src/types").SelectedValue>;
             default: () => any[];
         };
     }>> & {
@@ -2714,6 +2716,7 @@ declare const _default: {
             [name: string]: import("vue").Slot<any>;
         }>;
         bpTable: any;
+        tableHeaderRef: import("vue").Ref<any>;
         columns: import("vue").Ref<{
             title?: string;
             type: "radio" | "inner" | "checkbox";
@@ -2727,7 +2730,7 @@ declare const _default: {
         }[]>;
         table_width: import("vue").Ref<any>;
         isEmpty: import("vue").ComputedRef<boolean>;
-        selectedData: import("vue").Ref<string | number | (string | number | boolean)[]>;
+        selectedData: import("vue").Ref<(string | number)[]>;
         bodyAreaStyle: import("vue").ComputedRef<string>;
         innerClass: import("vue").ComputedRef<(string | {
             "bp-table-border": boolean;
@@ -2752,7 +2755,7 @@ declare const _default: {
         height: string;
         border: boolean;
         stripe: boolean;
-        selectedKey: string | number | (string | number)[];
+        selectedKey: import("./table/src/types").SelectedValue;
     }, {}, string, {}> & import("vue").VNodeProps & import("vue").AllowedComponentProps & import("vue").ComponentCustomProps & {
         install: (app: App<any>) => void;
     };

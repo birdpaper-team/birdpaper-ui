@@ -38,4 +38,8 @@ const isSelectAll = ref<boolean>(false);
 const onSelectChange = () => {
   emits("on-select-all", isSelectAll.value);
 };
+
+defineExpose({
+  isSelectAll
+});
 </script>

@@ -1,5 +1,12 @@
 <template>
-  <bp-table row-key="seat" :selection="selection" border :cols="cols" :data="list"></bp-table>
+  <bp-table row-key="seat" :selection="selection" border :data="list">
+    <template #columns>
+      <bp-table-column title="座号" data-index="seat" width="100"></bp-table-column>
+      <bp-table-column title="姓名" data-index="name"></bp-table-column>
+      <bp-table-column title="成绩" data-index="results"></bp-table-column>
+      <bp-table-column title="班级排名" data-index="ranking"></bp-table-column>
+    </template>
+  </bp-table>
 </template>
 
 <script setup lang="ts">
@@ -13,14 +20,8 @@ const list = [
   { seat: "46", name: "木小亦", results: "409", ranking: "40" },
   { seat: "43", name: "邹小辉", results: "293", ranking: "53" },
 ];
-const cols = [
-  { title: "座号", dataIndex: "seat", width: 100 },
-  { title: "姓名", dataIndex: "name" },
-  { title: "成绩", dataIndex: "results" },
-  { title: "班级排名", dataIndex: "ranking" },
-];
 
 const selection = {
-  type: "radio",
+  type: "checkbox",
 };
 </script>

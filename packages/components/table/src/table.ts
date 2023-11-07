@@ -3,7 +3,7 @@ import { off, on, throttle } from "../../../utils/util";
 import { getAllElements } from "../../../utils/dom";
 import { ColumnsItem } from "./types";
 
-export const useTable = (props: any, slots: any) => {
+export const useTable = (props: any, slots: any, emit: any) => {
   /** Table 实例 */
   const bpTable = ref(null);
 
@@ -59,7 +59,7 @@ export const useTable = (props: any, slots: any) => {
     _min_width_list = [];
 
     // 选择器相关
-    if (!slots.columns?.() && props.selection?.type && !cols[0]?.type) {
+    if (props.selection?.type && !cols[0]?.type) {
       cols.unshift({
         type: props.selection.type,
         width: 46,

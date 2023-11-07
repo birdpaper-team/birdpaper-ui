@@ -15,7 +15,7 @@
 <demo-block src="example/table/basic"></demo-block>
 
 ### 数据选择
-目前，你可以通过 `selection` 属性配置数据的单项选择
+目前，你可以通过 `selection` 属性配置数据的选择
 <demo-block src="example/table/select"></demo-block>
 
 ### 自定义列渲染
