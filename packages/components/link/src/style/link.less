@@ -3,21 +3,13 @@
 @link-cls: ~"@{prefix}-link";
 
 .@{link-cls} {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
   cursor: pointer;
 
-  a,
-  &-inner {
-    font-size: 13px;
-    font-weight: 400;
-    line-height: 1.2;
-    text-decoration: none;
-
-    .left-icon {
-      margin-right: 4px;
-    }
+  .left-icon {
+    margin-right: 4px;
   }
 }
 
@@ -30,17 +22,14 @@
 
 .link-status(@status) {
   .@{link-cls}-status-@{status} {
-    a,
-    &-inner {
+    color: ~"@{link-status-@{status}-color}" !important;
+    transition: all 0.2s ease;
+
+    &:hover {
+      opacity: 0.6;
+      text-decoration: none;
       color: ~"@{link-status-@{status}-color}";
       transition: all 0.2s ease;
-
-      &:hover {
-        opacity: 0.6;
-        text-decoration: none;
-        color: ~"@{link-status-@{status}-color}";
-        transition: all 0.2s ease;
-      }
     }
   }
 }

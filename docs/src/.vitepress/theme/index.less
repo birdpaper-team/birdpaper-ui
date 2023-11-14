@@ -56,6 +56,17 @@ pre code {
   font-size: 14px;
 }
 
+.vp-doc a {
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  color: #1677ff;
+}
+
+.vp-doc :not(pre) > code{
+  color: #1f1f1f;
+}
+
 .vp-doc table {
   margin: 0;
   overflow-x: inherit;
@@ -121,7 +132,7 @@ pre code {
 
   &:hover {
     background-color: #f5f5f5;
-    transition: all .2s ease;
+    transition: all 0.2s ease;
   }
 
   .item {
@@ -129,7 +140,7 @@ pre code {
       font-size: 14px;
       color: #262626 !important;
       font-weight: normal !important;
-      transition: all .2s ease;
+      transition: all 0.2s ease;
 
       span {
         color: #434343;
@@ -143,17 +154,17 @@ pre code {
 
 .VPSidebarItem .is-active {
   background-color: #e6f4ff;
-  transition: all .2s ease;
+  transition: all 0.2s ease;
 
   .item {
     .text {
       color: #262626 !important;
       font-weight: bold !important;
-      transition: all .2s ease;
+      transition: all 0.2s ease;
 
       span {
         color: #262626 !important;
-        transition: all .2s ease;
+        transition: all 0.2s ease;
       }
     }
   }
@@ -205,6 +216,6 @@ pre code {
   }
 }
 
-.timeline-dot{
+.timeline-dot {
   padding: 0 0 0 24px !important;
 }

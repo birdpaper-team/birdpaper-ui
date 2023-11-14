@@ -1,12 +1,10 @@
 <template>
-  <div :class="clsName" @click="handleClick">
-    <a :disabled="disabled" :class="`${name}-inner`" :href="href" :target="target">
-      <span v-if="loading" class="left-icon">
-        <i class="bp-icon-loading ri-loader-4-line"></i>
-      </span>
-      <slot></slot>
-    </a>
-  </div>
+  <a @click="handleClick" :disabled="disabled" :class="clsName" :href="href" :target="target">
+    <span v-if="loading" class="left-icon">
+      <i class="bp-icon-loading ri-loader-4-line"></i>
+    </span>
+    <slot></slot>
+  </a>
 </template>
 
 <script lang="ts">

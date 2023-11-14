@@ -27,7 +27,8 @@ export const useTableSelect = (props: any, emit: any, tableHeaderRef: any) => {
   };
 
   watch(selectedData, () => {
-    tableHeaderRef.value && (tableHeaderRef.value.isSelectAll = selectedData.value?.length === props.data.length);
+    tableHeaderRef.value &&
+      (tableHeaderRef.value.isSelectAll = props.data.length !== 0 && selectedData.value?.length === props.data.length);
 
     emit("selection-change", selectedData.value);
     emit("update:selectedKey", selectedData.value);
