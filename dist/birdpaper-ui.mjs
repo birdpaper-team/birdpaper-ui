@@ -2934,20 +2934,16 @@ const _hoisted_4$3 = [
   _hoisted_3$3
 ];
 function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
-  return openBlock(), createElementBlock("div", {
+  return openBlock(), createElementBlock("a", {
+    onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args)),
+    disabled: _ctx.disabled,
     class: normalizeClass(_ctx.clsName),
-    onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClick && _ctx.handleClick(...args))
+    href: _ctx.href,
+    target: _ctx.target
   }, [
-    createElementVNode("a", {
-      disabled: _ctx.disabled,
-      class: normalizeClass(`${_ctx.name}-inner`),
-      href: _ctx.href,
-      target: _ctx.target
-    }, [
-      _ctx.loading ? (openBlock(), createElementBlock("span", _hoisted_2$3, _hoisted_4$3)) : createCommentVNode("", true),
-      renderSlot(_ctx.$slots, "default")
-    ], 10, _hoisted_1$4)
-  ], 2);
+    _ctx.loading ? (openBlock(), createElementBlock("span", _hoisted_2$3, _hoisted_4$3)) : createCommentVNode("", true),
+    renderSlot(_ctx.$slots, "default")
+  ], 10, _hoisted_1$4);
 }
 const _link = /* @__PURE__ */ _export_sfc(_sfc_main$6, [["render", _sfc_render$4]]);
 _link.name = getComponentsPrefix() + _link.name;
