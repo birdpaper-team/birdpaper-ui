@@ -26,10 +26,7 @@
     width: max-content;
     height: 46px;
     border-radius: 6px;
-    background: @gary-1;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 0 14px;
-    border: 1px solid @gary-4;
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
@@ -67,15 +64,14 @@
     &-content {
       font-size: 14px;
       font-weight: normal;
-      letter-spacing: .2px;
-      color: @gary-10;
+      letter-spacing: 0.2px;
     }
 
     &-close {
       margin-left: 6px;
 
       .ri-close-line {
-        color: @gary-7;
+        color: @gary-6;
         cursor: pointer;
         transition: all 0.2s ease;
 
@@ -86,11 +82,94 @@
         }
 
         &:hover {
+          color: @gary-9;
+
+          &::before {
+            background-color: @gary-3;
+            transition: all 0.2s ease;
+          }
+        }
+      }
+    }
+  }
+
+  .@{message-cls}-text,
+  .@{message-cls}-loading {
+    background: @gary-1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid @gary-4;
+
+    .@{message-cls}-content {
+      color: @gary-10;
+    }
+  }
+
+  .@{message-cls}-success {
+    background-color: @success-0;
+    border: 1px solid @success-7;
+    box-shadow: 0 4px 12px rgba(32, 145, 36, 0.1);
+
+    .@{message-cls}-content {
+      color: @success-7;
+    }
+  }
+
+  .@{message-cls}-warning {
+    background-color: @warning-0;
+    border: 1px solid @warning-7;
+    box-shadow: 0 4px 12px rgba(212, 107, 8, 0.1);
+
+    .@{message-cls}-content {
+      color: @warning-7;
+    }
+  }
+
+  .@{message-cls}-error {
+    background-color: @danger-0;
+    border: 1px solid @danger-7;
+    box-shadow: 0 4px 12px rgba(207, 19, 43, 0.1);
+
+    .@{message-cls}-content {
+      color: @danger-7;
+    }
+  }
+
+  .@{message-cls}-plain {
+    background: @gary-1;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid @gary-4;
+
+    &-icon {
+      .ri-checkbox-circle-fill {
+        color: @success-6;
+      }
+
+      .ri-close-circle-fill {
+        color: @danger-6;
+      }
+
+      .ri-error-warning-fill {
+        color: @warning-6;
+      }
+
+      .ri-loader-4-line {
+        color: @primary-6;
+      }
+    }
+
+    &-content {
+      color: @gary-10;
+    }
+
+    &-close {
+      .ri-close-line {
+        color: @gary-7;
+
+        &:hover {
           color: @gary-8;
 
           &::before {
             background-color: @gary-4;
-            transition: all 0.2s ease;
           }
         }
       }

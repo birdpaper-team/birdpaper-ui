@@ -15,7 +15,7 @@ class MessageManager {
 
     const vm = createVNode(Message, {
       list: this.messageList.value,
-      onClose: this.remove,
+      onRemove: this.remove,
     });
 
     if (appContext) {
@@ -31,7 +31,7 @@ class MessageManager {
    * @returns
    */
   add = (config: MessageItem) => {
-    const id = config.id ?? `_bp_message_${Math.random().toString()}`;
+    const id = config.id ?? `_bp_message_${Math.random().toString(36).slice(-8)}`;
 
     const message: MessageItem = reactive({ id, ...config });
     this.messageList.value.push(message);
@@ -43,15 +43,15 @@ class MessageManager {
     }
 
     return {
-      close: () => this.remove(id),
+      remove: () => this.remove(id),
     };
   };
 
   /**
    * 移除消息提示
-   * @param {string | number} id 消息id
+   * @param {string} id 消息id
    */
-  remove = (id: string | number) => {
+  remove = (id: string) => {
     for (let i = 0; i < this.messageList.value.length; i++) {
       const { id: itemId } = this.messageList.value[i];
 

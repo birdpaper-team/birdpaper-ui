@@ -1,5 +1,5 @@
 <template>
-  <li :class="name">
+  <li :class="clsName">
     <span v-if="type !== 'text'" :class="`${name}-icon`">
       <i :class="iconType[type]"></i>
     </span>
@@ -13,6 +13,7 @@
 <script setup lang="ts" name="MessageList">
 import { PropType, nextTick, onMounted, onUnmounted, ref } from "vue";
 import { MessageType } from "./type";
+import { computed } from "vue";
 
 const name = "bp-message";
 
@@ -27,9 +28,13 @@ const props = defineProps({
   duration: { type: Number, default: 3000 },
   /** 是否允许手动关闭 Closeable or not */
   closeable: { type: Boolean, default: false },
+  /** 是否开启无背景展示 */
+  plain: { type: Boolean, default: false },
+  /** 关闭后的回调函数 */
+  onClose: { type: Function },
 });
 const emits = defineEmits<{
-  close: [id: string | number];
+  remove: [id: string];
 }>();
 
 const timer = ref(0);
@@ -46,6 +51,13 @@ const init = () => {
   }
 };
 
+const clsName = computed(() => {
+  let cls = [name];
+  cls.push(props.plain ? `${name}-plain` : `${name}-${props.type}`);
+
+  return cls;
+});
+
 const clearTimer = () => {
   if (timer) {
     window.clearTimeout(timer.value);
@@ -54,7 +66,8 @@ const clearTimer = () => {
 };
 
 const handleClose = () => {
-  emits("close", props.id);
+  emits("remove", props.id);
+  props.onClose && props.onClose(props.id);
 };
 
 onMounted(() => {

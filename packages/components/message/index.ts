@@ -28,9 +28,7 @@ const message = types.reduce((pre, value) => {
 
 const Message = Object.assign({
   ...message,
-  install: (app: App) => {
-    app.component(_message.name, _message);
-  },
+  removeAll: () => {},
 });
 
 export default Message;
