@@ -1,6 +1,6 @@
 import { AppContext, Ref, createVNode, reactive, ref, render } from "vue";
 import Message from "./messageList.vue";
-import { MessageConfig, MessageItem } from "./type";
+import { MessageItem } from "./type";
 
 class MessageManager {
   private container: HTMLElement | null;
@@ -27,10 +27,10 @@ class MessageManager {
 
   /**
    * 添加消息提示
-   * @param {MessageConfig} config
+   * @param {MessageItem} config
    * @returns
    */
-  add = (config: MessageConfig) => {
+  add = (config: MessageItem) => {
     const id = config.id ?? `_bp_message_${Math.random().toString()}`;
 
     const message: MessageItem = reactive({ id, ...config });

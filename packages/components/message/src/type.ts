@@ -1,23 +1,10 @@
 /** 消息类型 */
-export enum MessageType {
-  Text = "text",
-  Success = "success",
-  Warning = "warning",
-  Error = "error",
-  Loading = "loading",
-}
+export type MessageType = "text" | "success" | "warning" | "error" | "loading";
 
-/** 消息配置 */
-export interface MessageConfig {
-  id?: string;
-  type?: MessageType;
-  content: string;
-  duration?: number;
-  closeable?: boolean;
-}
+export type MessageInstance = string | MessageItem;
 
 export interface MessageItem {
-  id: number | string;
+  id: string;
   type?: MessageType;
   content: string;
   duration?: number;
