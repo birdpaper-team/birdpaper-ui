@@ -9,7 +9,7 @@ const handleClick = () => {
   const msg = Message.loading("正在加载...");
 
   setTimeout(() => {
-    msg.close();
+    msg.remove();
   }, 4000);
 };
 </script>

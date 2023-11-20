@@ -28,7 +28,9 @@ const message = types.reduce((pre, value) => {
 
 const Message = Object.assign({
   ...message,
-  removeAll: () => {},
+  removeAll: () => {
+    msg.clear();
+  },
 });
 
 export default Message;

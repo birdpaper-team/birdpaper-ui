@@ -1,13 +1,14 @@
 import { AppContext, Ref, createVNode, reactive, ref, render } from "vue";
 import Message from "./messageList.vue";
 import { MessageItem } from "./type";
+import { deepClone } from "../../../utils/util";
 
 class MessageManager {
   private container: HTMLElement | null;
-  private readonly messageList: Ref<MessageItem[]>;
+  private messageList: Ref<MessageItem[]>;
 
   constructor(appContext?: AppContext) {
-    this.messageList = ref([]);
+    this.messageList = ref<MessageItem[]>([]);
 
     const mask = document.createElement("div");
     mask.setAttribute("class", `bp-mask-message`);
@@ -62,9 +63,14 @@ class MessageManager {
     }
   };
 
-  clear = ()=>{
-    this.messageList.value = [];
-  }
+  /** 清除消息列表 */
+  clear = () => {
+    const arr = deepClone(this.messageList.value);
+    for (let i = 0; i < arr.length; i++) {
+      const element = arr[i];
+      this.remove(element.id);
+    }
+  };
 }
 
 export default MessageManager;
