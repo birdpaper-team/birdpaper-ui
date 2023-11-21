@@ -34,8 +34,9 @@ class MessageManager {
 
     const message: MessageItem = reactive({ id, ...config });
 
-    const isUpdate = arrayIndexOf(this.messageList.value, "id", id);
-    isUpdate !== -1 ? (this.messageList.value[isUpdate] = config) : this.messageList.value.push(message);
+    // Check whether the message instance already exists. If has, update the message config, or push new one.
+    const updateIdx = arrayIndexOf(this.messageList.value, "id", id);
+    updateIdx !== -1 ? (this.messageList.value[updateIdx] = config) : this.messageList.value.push(message);
 
     // 处理可能存在的同时移除情况。
     const len = this.messageList.value.length;

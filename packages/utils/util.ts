@@ -162,6 +162,13 @@ export function deepClone<T>(tSource: T, tTarget?: Record<string, any> | T): T {
   return tTarget as T;
 }
 
+/**
+ * 找出数组里是否含有某个属性值
+ * @param arr
+ * @param field
+ * @param fieldValue
+ * @returns number
+ */
 export function arrayIndexOf(arr: unknown[], field: string, fieldValue: unknown) {
   for (let i = 0; i < arr.length; i++) {
     const element = arr[i];
