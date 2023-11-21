@@ -2,7 +2,6 @@
 
 .bp-mask-message {
   position: fixed;
-  top: 0;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -12,9 +11,24 @@
   z-index: 999;
 }
 
+.bp-message-bottom {
+  bottom: 0;
+
+  .@{message-cls}-list {
+    bottom: 40px;
+  }
+}
+
+.bp-message-top {
+  top: 0;
+
+  .@{message-cls}-list {
+    top: 40px;
+  }
+}
+
 .@{message-cls}-list {
   position: relative;
-  top: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;

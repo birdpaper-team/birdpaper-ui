@@ -1,18 +1,15 @@
 import { AppContext, Ref, createVNode, reactive, ref, render } from "vue";
 import Message from "./messageList.vue";
 import { MessageItem } from "./type";
-import { deepClone } from "../../../utils/util";
+import { arrayIndexOf, deepClone } from "../../../utils/util";
 
 class MessageManager {
-  private container: HTMLElement | null;
+  private mask: HTMLElement = document.createElement("div");
   private messageList: Ref<MessageItem[]>;
 
   constructor(appContext?: AppContext) {
     this.messageList = ref<MessageItem[]>([]);
-
-    const mask = document.createElement("div");
-    mask.setAttribute("class", `bp-mask-message`);
-    this.container = mask;
+    this.mask.setAttribute("class", `bp-mask-message`);
 
     const vm = createVNode(Message, {
       list: this.messageList.value,
@@ -22,8 +19,8 @@ class MessageManager {
     if (appContext) {
       vm.appContext = appContext;
     }
-    render(vm, this.container);
-    document.body.appendChild(this.container);
+    render(vm, this.mask);
+    document.body.appendChild(this.mask);
   }
 
   /**
@@ -33,9 +30,12 @@ class MessageManager {
    */
   add = (config: MessageItem) => {
     const id = config.id ?? `_bp_message_${Math.random().toString(36).slice(-8)}`;
+    this.mask.setAttribute("class", `bp-mask-message bp-message-${config.position || "top"}`);
 
     const message: MessageItem = reactive({ id, ...config });
-    this.messageList.value.push(message);
+
+    const isUpdate = arrayIndexOf(this.messageList.value, "id", id);
+    isUpdate !== -1 ? (this.messageList.value[isUpdate] = config) : this.messageList.value.push(message);
 
     // 处理可能存在的同时移除情况。
     const len = this.messageList.value.length;

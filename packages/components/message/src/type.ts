@@ -1,14 +1,10 @@
-/** 消息类型 */
-export type MessageType =
-  | "text"
-  | "success"
-  | "successPlain"
-  | "warning"
-  | "warningPlain"
-  | "error"
-  | "errorPlain"
-  | "loading";
+/** 消息提示位置 */
+export type MessagePosition = "top" | "bottom";
 
+/** 消息类型 */
+export type MessageType = "text" | "success" | "warning" | "error" | "loading";
+
+/** 传入的消息类型 */
 export type MessageInstance = string | MessageItem;
 
 export interface MessageItem {
@@ -18,5 +14,6 @@ export interface MessageItem {
   duration?: number;
   closeable?: boolean;
   plain: boolean;
+  position: MessagePosition;
   onClose?: Function;
 }
