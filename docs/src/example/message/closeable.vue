@@ -9,6 +9,7 @@ const handleClick = () => {
   Message.text({
     content: "这是一条可手动关闭的消息提示",
     closeable: true,
+    duration: 10000,
   });
 };
 </script>

@@ -1,4 +1,4 @@
-import { App, AppContext } from "vue";
+import { AppContext } from "vue";
 import _message from "./src/messageList.vue";
 import { getComponentsPrefix } from "../../utils/config";
 import MessageManager from "./src/instance";
@@ -29,7 +29,7 @@ const message = types.reduce((pre, value) => {
 const Message = Object.assign({
   ...message,
   removeAll: () => {
-    msg.clear();
+    msg && msg.clear();
   },
 });
 

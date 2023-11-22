@@ -38,7 +38,7 @@ class MessageManager {
     const updateIdx = arrayIndexOf(this.messageList.value, "id", id);
     updateIdx !== -1 ? (this.messageList.value[updateIdx] = config) : this.messageList.value.push(message);
 
-    // 处理可能存在的同时移除情况。
+    // Handle possible simultaneous removal cases, step up 200ms to make the removal visual experience better.
     const len = this.messageList.value.length;
     if (len > 1 && this.messageList.value[len - 1]?.duration === message.duration) {
       message.duration = message.duration ?? 3000 + 200 * len;
