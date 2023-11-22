@@ -7,7 +7,9 @@
         :content="v.content"
         :duration="v.duration"
         :closeable="v.closeable"
-        @close="onClose"
+        :plain="v.plain"
+        :on-close="v.onClose"
+        @remove="onRemove"
       ></message>
     </template>
   </TransitionGroup>
@@ -22,8 +24,8 @@ const props = defineProps({
   list: { type: Array as PropType<MessageItem[]>, default: () => [] },
 });
 const emits = defineEmits<{
-  (e: "close", id: string | number): void;
+  (e: "remove", id: string): void;
 }>();
 
-const onClose = (id: string | number) => emits("close", id);
+const onRemove = (id: string) => emits("remove", id);
 </script>

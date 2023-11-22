@@ -7,9 +7,16 @@
 
     <!-- 操作区域 -->
     <div class="demo-block-footer">
-      <div :class="['icon-item', { active: showCode }]" @click="showCode = !showCode">
-        <i class="ri-code-s-slash-line"></i>
-      </div>
+      <bp-tooltip content="展示代码">
+        <div :class="['icon-item', { active: showCode }]" @click="showCode = !showCode">
+          <i class="ri-code-s-slash-line"></i>
+        </div>
+      </bp-tooltip>
+      <bp-tooltip v-if="false" content="在 Stackblitz 中调试">
+        <div class="icon-item">
+          <i class="ri-flashlight-line"></i>
+        </div>
+      </bp-tooltip>
     </div>
 
     <!-- 源码 -->

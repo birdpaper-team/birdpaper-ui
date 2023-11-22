@@ -1,57 +1,59 @@
 import { AppContext, Ref, createVNode, reactive, ref, render } from "vue";
 import Message from "./messageList.vue";
-import { MessageConfig, MessageItem } from "./type";
+import { MessageItem } from "./type";
+import { arrayIndexOf, deepClone } from "../../../utils/util";
 
 class MessageManager {
-  private container: HTMLElement | null;
-  private readonly messageList: Ref<MessageItem[]>;
+  private mask: HTMLElement = document.createElement("div");
+  private messageList: Ref<MessageItem[]>;
 
   constructor(appContext?: AppContext) {
-    this.messageList = ref([]);
-
-    const mask = document.createElement("div");
-    mask.setAttribute("class", `bp-mask-message`);
-    this.container = mask;
+    this.messageList = ref<MessageItem[]>([]);
+    this.mask.setAttribute("class", `bp-mask-message`);
 
     const vm = createVNode(Message, {
       list: this.messageList.value,
-      onClose: this.remove,
+      onRemove: this.remove,
     });
 
     if (appContext) {
       vm.appContext = appContext;
     }
-    render(vm, this.container);
-    document.body.appendChild(this.container);
+    render(vm, this.mask);
+    document.body.appendChild(this.mask);
   }
 
   /**
    * 添加消息提示
-   * @param {MessageConfig} config
+   * @param {MessageItem} config
    * @returns
    */
-  add = (config: MessageConfig) => {
-    const id = config.id ?? `_bp_message_${Math.random().toString()}`;
+  add = (config: MessageItem) => {
+    const id = config.id ?? `_bp_message_${Math.random().toString(36).slice(-8)}`;
+    this.mask.setAttribute("class", `bp-mask-message bp-message-${config.position || "top"}`);
 
     const message: MessageItem = reactive({ id, ...config });
-    this.messageList.value.push(message);
 
-    // 处理可能存在的同时移除情况。
+    // Check whether the message instance already exists. If has, update the message config, or push new one.
+    const updateIdx = arrayIndexOf(this.messageList.value, "id", id);
+    updateIdx !== -1 ? (this.messageList.value[updateIdx] = config) : this.messageList.value.push(message);
+
+    // Handle possible simultaneous removal cases, step up 200ms to make the removal visual experience better.
     const len = this.messageList.value.length;
     if (len > 1 && this.messageList.value[len - 1]?.duration === message.duration) {
       message.duration = message.duration ?? 3000 + 200 * len;
     }
 
     return {
-      close: () => this.remove(id),
+      remove: () => this.remove(id),
     };
   };
 
   /**
    * 移除消息提示
-   * @param {string | number} id 消息id
+   * @param {string} id 消息id
    */
-  remove = (id: string | number) => {
+  remove = (id: string) => {
     for (let i = 0; i < this.messageList.value.length; i++) {
       const { id: itemId } = this.messageList.value[i];
 
@@ -62,9 +64,14 @@ class MessageManager {
     }
   };
 
-  clear = ()=>{
-    this.messageList.value = [];
-  }
+  /** 清除消息列表 */
+  clear = () => {
+    const arr = deepClone(this.messageList.value);
+    for (let i = 0; i < arr.length; i++) {
+      const element = arr[i];
+      this.remove(element.id);
+    }
+  };
 }
 
 export default MessageManager;
