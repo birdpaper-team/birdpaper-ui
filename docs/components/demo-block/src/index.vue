@@ -12,8 +12,8 @@
           <i class="ri-code-s-slash-line"></i>
         </div>
       </bp-tooltip>
-      <bp-tooltip v-if="false" content="在 Stackblitz 中调试">
-        <div class="icon-item">
+      <bp-tooltip v-if="stackBlitzUrl" content="在 StackBlitz 中调试">
+        <div class="icon-item" @click="handleToStackBlitz">
           <i class="ri-flashlight-line"></i>
         </div>
       </bp-tooltip>
@@ -33,11 +33,13 @@ interface Prop {
   src: string;
   codeString?: string;
   lang?: string;
+  stackBlitzUrl?: string;
 }
 const props = withDefaults(defineProps<Prop>(), {
   src: "",
   codeString: "",
   lang: "vue",
+  stackBlitzUrl: "",
 });
 
 const exampleGlob = import.meta.glob(`../../../src/example/**/*.vue`);
@@ -52,6 +54,10 @@ onMounted(() => {
 
 const init = () => {
   demoComponent.value = markRaw(defineAsyncComponent(exampleGlob[`../../../src/${props.src}.vue`] as any));
+};
+
+const handleToStackBlitz = () => {
+  window.open(props.stackBlitzUrl);
 };
 </script>
 
