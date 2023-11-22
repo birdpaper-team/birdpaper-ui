@@ -23,7 +23,10 @@
   "author": "木亦Sam",
   "license": "MIT",
   "dependencies": {
-    "@icon-park/vue-next": "^1.4.2",
+    "remixicon": "^3.3.0",
+    "vue": "^3.3.2"
+  },
+  "devDependencies": {
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "cz-customizable": "^7.0.0",
     "vue": "3.3"
