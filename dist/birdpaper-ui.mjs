@@ -114,7 +114,7 @@ const isArrayChildren = (vn, children) => {
   );
 };
 const opt = Object.prototype.toString;
-const isArray = (obj) => {
+const isArray$1 = (obj) => {
   return opt.call(obj) === "[object Array]";
 };
 const isSlotsChildren = (vn, children) => {
@@ -133,7 +133,7 @@ const getAllElements = (children, includeText = false) => {
       results.push(...getAllElements(item.children, includeText));
     } else if (isSlotsChildren(item, item.children)) {
       results.push(...getAllElements((_b = (_a = item.children).default) == null ? void 0 : _b.call(_a), includeText));
-    } else if (isArray(item)) {
+    } else if (isArray$1(item)) {
       results.push(...getAllElements(item, includeText));
     }
   }
@@ -380,6 +380,35 @@ const off = function(element, event, handler, useCapture = false) {
 const warn = (module, info) => {
   console.warn(`[ A warning of birdpaper-ui ] - ${module}: ` + info);
 };
+const isArray = (obj) => {
+  return obj && typeof obj == "object" && obj instanceof Array;
+};
+function deepClone(tSource, tTarget) {
+  if (isArray(tSource)) {
+    tTarget = tTarget || [];
+  } else {
+    tTarget = tTarget || {};
+  }
+  for (const key in tSource) {
+    if (Object.prototype.hasOwnProperty.call(tSource, key)) {
+      if (typeof tSource[key] === "object" && typeof tSource[key] !== null) {
+        tTarget[key] = isArray(tSource[key]) ? [] : {};
+        deepClone(tSource[key], tTarget[key]);
+      } else {
+        tTarget[key] = tSource[key];
+      }
+    }
+  }
+  return tTarget;
+}
+function arrayIndexOf(arr, field, fieldValue) {
+  for (let i = 0; i < arr.length; i++) {
+    const element = arr[i];
+    if (element[field] === fieldValue)
+      return i;
+  }
+  return -1;
+}
 const _sfc_main$w = defineComponent({
   name: "InputNumber",
   props: {
@@ -2000,12 +2029,12 @@ const TableBody = /* @__PURE__ */ defineComponent({
 const _hoisted_1$9 = { class: "bp-table-body-tbody" };
 const _hoisted_2$8 = { class: "bp-table-empty-tr" };
 const _hoisted_3$7 = ["colspan"];
-const _hoisted_4$6 = /* @__PURE__ */ createElementVNode("div", { class: "bp-table-empty-tr-inner" }, [
+const _hoisted_4$5 = /* @__PURE__ */ createElementVNode("div", { class: "bp-table-empty-tr-inner" }, [
   /* @__PURE__ */ createElementVNode("i", { class: "ri-inbox-2-line" }),
   /* @__PURE__ */ createElementVNode("span", null, "暂无数据")
 ], -1);
-const _hoisted_5$4 = [
-  _hoisted_4$6
+const _hoisted_5$3 = [
+  _hoisted_4$5
 ];
 const __default__$2 = defineComponent({
   name: "TableEmpty"
@@ -2019,7 +2048,7 @@ const _sfc_main$f = /* @__PURE__ */ defineComponent({
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("tbody", _hoisted_1$9, [
         createElementVNode("tr", _hoisted_2$8, [
-          createElementVNode("td", { colspan: __props.colspan }, _hoisted_5$4, 8, _hoisted_3$7)
+          createElementVNode("td", { colspan: __props.colspan }, _hoisted_5$3, 8, _hoisted_3$7)
         ])
       ]);
     };
@@ -2189,11 +2218,11 @@ const _hoisted_3$5 = {
   key: 2,
   class: "bp-table-body-tbody"
 };
-const _hoisted_4$5 = {
+const _hoisted_4$4 = {
   key: 1,
   class: "bp-table-td-content"
 };
-const _hoisted_5$3 = { key: 0 };
+const _hoisted_5$2 = { key: 0 };
 function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
   const _component_table_header = resolveComponent("table-header");
   const _component_table_empty = resolveComponent("table-empty");
@@ -2254,8 +2283,8 @@ function _sfc_render$b(_ctx, _cache, $props, $setup, $data, $options) {
                           record: item,
                           value: item[_ctx.rowKey],
                           onChange: _ctx.onSelectChange
-                        }, null, 8, ["modelValue", "type", "record", "value", "onChange"])) : (openBlock(), createElementBlock("span", _hoisted_4$5, [
-                          !v.scope ? (openBlock(), createElementBlock("span", _hoisted_5$3, toDisplayString(item[v.dataIndex]), 1)) : renderSlot(_ctx.$slots, v.scope.customRender, {
+                        }, null, 8, ["modelValue", "type", "record", "value", "onChange"])) : (openBlock(), createElementBlock("span", _hoisted_4$4, [
+                          !v.scope ? (openBlock(), createElementBlock("span", _hoisted_5$2, toDisplayString(item[v.dataIndex]), 1)) : renderSlot(_ctx.$slots, v.scope.customRender, {
                             key: 1,
                             row: item,
                             index,
@@ -2468,12 +2497,12 @@ const _hoisted_3$4 = {
   key: 2,
   class: "ri-error-warning-fill"
 };
-const _hoisted_4$4 = {
+const _hoisted_4$3 = {
   key: 3,
   class: "ri-close-circle-fill"
 };
-const _hoisted_5$2 = ["textContent"];
-const _hoisted_6$1 = {
+const _hoisted_5$1 = ["textContent"];
+const _hoisted_6 = {
   key: 0,
   class: "ri-close-line"
 };
@@ -2489,7 +2518,7 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
       _ctx.type === "info" ? (openBlock(), createElementBlock("i", _hoisted_1$5)) : createCommentVNode("", true),
       _ctx.type === "success" ? (openBlock(), createElementBlock("i", _hoisted_2$4)) : createCommentVNode("", true),
       _ctx.type === "warning" ? (openBlock(), createElementBlock("i", _hoisted_3$4)) : createCommentVNode("", true),
-      _ctx.type === "error" ? (openBlock(), createElementBlock("i", _hoisted_4$4)) : createCommentVNode("", true)
+      _ctx.type === "error" ? (openBlock(), createElementBlock("i", _hoisted_4$3)) : createCommentVNode("", true)
     ], 2),
     createElementVNode("div", {
       class: normalizeClass(`${_ctx.name}-body`)
@@ -2500,7 +2529,7 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
       }, [
         createElementVNode("span", {
           textContent: toDisplayString(_ctx.title)
-        }, null, 8, _hoisted_5$2)
+        }, null, 8, _hoisted_5$1)
       ], 2)) : createCommentVNode("", true),
       createElementVNode("div", {
         class: normalizeClass(`${_ctx.name}-content`)
@@ -2518,7 +2547,7 @@ function _sfc_render$9(_ctx, _cache, $props, $setup, $data, $options) {
         class: normalizeClass(`${_ctx.name}-close-inner`),
         onClick: _cache[0] || (_cache[0] = (...args) => _ctx.handleClose && _ctx.handleClose(...args))
       }, [
-        !_ctx.slots.close ? (openBlock(), createElementBlock("i", _hoisted_6$1)) : (openBlock(), createElementBlock("span", _hoisted_7, [
+        !_ctx.slots.close ? (openBlock(), createElementBlock("i", _hoisted_6)) : (openBlock(), createElementBlock("span", _hoisted_7, [
           renderSlot(_ctx.$slots, "close")
         ]))
       ], 2)) : createCommentVNode("", true)
@@ -2930,7 +2959,7 @@ const _hoisted_2$3 = {
   class: "left-icon"
 };
 const _hoisted_3$3 = /* @__PURE__ */ createElementVNode("i", { class: "bp-icon-loading ri-loader-4-line" }, null, -1);
-const _hoisted_4$3 = [
+const _hoisted_4$2 = [
   _hoisted_3$3
 ];
 function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
@@ -2941,7 +2970,7 @@ function _sfc_render$4(_ctx, _cache, $props, $setup, $data, $options) {
     href: _ctx.href,
     target: _ctx.target
   }, [
-    _ctx.loading ? (openBlock(), createElementBlock("span", _hoisted_2$3, _hoisted_4$3)) : createCommentVNode("", true),
+    _ctx.loading ? (openBlock(), createElementBlock("span", _hoisted_2$3, _hoisted_4$2)) : createCommentVNode("", true),
     renderSlot(_ctx.$slots, "default")
   ], 10, _hoisted_1$4);
 }
@@ -3013,7 +3042,7 @@ const _hoisted_3$2 = {
   key: 2,
   class: "ri-error-warning-fill"
 };
-const _hoisted_4$2 = {
+const _hoisted_4$1 = {
   key: 3,
   class: "ri-information-fill"
 };
@@ -3041,7 +3070,7 @@ function _sfc_render$3(_ctx, _cache, $props, $setup, $data, $options) {
             _ctx.type === "success" ? (openBlock(), createElementBlock("i", _hoisted_1$3)) : createCommentVNode("", true),
             _ctx.type === "danger" ? (openBlock(), createElementBlock("i", _hoisted_2$2)) : createCommentVNode("", true),
             _ctx.type === "warning" ? (openBlock(), createElementBlock("i", _hoisted_3$2)) : createCommentVNode("", true),
-            _ctx.type === "info" ? (openBlock(), createElementBlock("i", _hoisted_4$2)) : createCommentVNode("", true)
+            _ctx.type === "info" ? (openBlock(), createElementBlock("i", _hoisted_4$1)) : createCommentVNode("", true)
           ], 2),
           createElementVNode("span", {
             class: normalizeClass(`${_ctx.name}-text`)
@@ -3163,9 +3192,9 @@ const _hoisted_2$1 = /* @__PURE__ */ createElementVNode("span", null, "加载中
 const _hoisted_3$1 = [
   _hoisted_2$1
 ];
-const _hoisted_4$1 = /* @__PURE__ */ createElementVNode("i", { class: "ri-image-2-line" }, null, -1);
-const _hoisted_5$1 = [
-  _hoisted_4$1
+const _hoisted_4 = /* @__PURE__ */ createElementVNode("i", { class: "ri-image-2-line" }, null, -1);
+const _hoisted_5 = [
+  _hoisted_4
 ];
 function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock("div", {
@@ -3188,7 +3217,7 @@ function _sfc_render$2(_ctx, _cache, $props, $setup, $data, $options) {
     !_ctx.isLoading && _ctx.isError ? renderSlot(_ctx.$slots, "error", { key: 1 }, () => [
       createElementVNode("div", {
         class: normalizeClass(`${_ctx.name}-error`)
-      }, _hoisted_5$1, 2)
+      }, _hoisted_5, 2)
     ]) : createCommentVNode("", true)
   ], 6);
 }
@@ -5020,33 +5049,10 @@ const Form = Object.assign(_form, {
     app.component(_formItem.name, _formItem);
   }
 });
-var MessageType = /* @__PURE__ */ ((MessageType2) => {
-  MessageType2["Text"] = "text";
-  MessageType2["Success"] = "success";
-  MessageType2["Warning"] = "warning";
-  MessageType2["Error"] = "error";
-  MessageType2["Loading"] = "loading";
-  return MessageType2;
-})(MessageType || {});
-const _hoisted_1 = {
-  key: 0,
-  class: "ri-checkbox-circle-fill"
-};
-const _hoisted_2 = {
-  key: 1,
-  class: "ri-close-circle-fill"
-};
-const _hoisted_3 = {
-  key: 2,
-  class: "ri-error-warning-fill"
-};
-const _hoisted_4 = {
-  key: 3,
-  class: "ri-loader-4-line"
-};
-const _hoisted_5 = /* @__PURE__ */ createElementVNode("i", { class: "ri-close-line" }, null, -1);
-const _hoisted_6 = [
-  _hoisted_5
+const _hoisted_1 = ["innerHTML"];
+const _hoisted_2 = /* @__PURE__ */ createElementVNode("i", { class: "ri-close-line" }, null, -1);
+const _hoisted_3 = [
+  _hoisted_2
 ];
 const __default__$1 = defineComponent({
   name: "MessageList"
@@ -5055,26 +5061,41 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
   ...__default__$1,
   props: {
     /** 消息ID Message id */
-    id: { type: [String, Number], default: "" },
+    id: { type: String },
     /** 消息提示类型 Message prompt type */
-    type: { type: String, default: MessageType.Text },
+    type: { type: String, default: "text" },
     /** 消息提示内容 Message prompt content */
     content: { type: String, default: "" },
     /** 延迟关闭时间 Delayed shutdown time */
     duration: { type: Number, default: 3e3 },
     /** 是否允许手动关闭 Closeable or not */
-    closeable: { type: Boolean, default: false }
+    closeable: { type: Boolean, default: false },
+    /** 是否开启无背景展示 */
+    plain: { type: Boolean, default: false },
+    /** 关闭后的回调函数 */
+    onClose: { type: Function }
   },
-  emits: ["close"],
+  emits: ["remove"],
   setup(__props, { emit: emits }) {
     const props = __props;
     const name = "bp-message";
     const timer = ref(0);
+    const iconType = {
+      success: "ri-checkbox-circle-fill",
+      error: "ri-close-circle-fill",
+      warning: "ri-error-warning-fill",
+      loading: "ri-loader-4-line"
+    };
     const init = () => {
-      if (props.duration > 0 && props.type !== MessageType.Loading) {
+      if (props.duration > 0 && props.type !== "loading") {
         timer.value = window.setTimeout(handleClose, props.duration);
       }
     };
+    const clsName = computed(() => {
+      let cls = [name];
+      cls.push(props.plain ? `${name}-plain` : `${name}-${props.type}`);
+      return cls;
+    });
     const clearTimer = () => {
       if (timer) {
         window.clearTimeout(timer.value);
@@ -5082,7 +5103,8 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
       }
     };
     const handleClose = () => {
-      emits("close", props.id);
+      emits("remove", props.id);
+      props.onClose && props.onClose(props.id);
     };
     onMounted(() => {
       nextTick(() => init());
@@ -5092,26 +5114,26 @@ const _sfc_main$1 = /* @__PURE__ */ defineComponent({
     });
     return (_ctx, _cache) => {
       return openBlock(), createElementBlock("li", {
-        class: normalizeClass(name)
+        class: normalizeClass(clsName.value)
       }, [
         __props.type !== "text" ? (openBlock(), createElementBlock("span", {
           key: 0,
           class: normalizeClass(`${name}-icon`)
         }, [
-          __props.type === "success" ? (openBlock(), createElementBlock("i", _hoisted_1)) : createCommentVNode("", true),
-          __props.type === "error" ? (openBlock(), createElementBlock("i", _hoisted_2)) : createCommentVNode("", true),
-          __props.type === "warning" ? (openBlock(), createElementBlock("i", _hoisted_3)) : createCommentVNode("", true),
-          __props.type === "loading" ? (openBlock(), createElementBlock("i", _hoisted_4)) : createCommentVNode("", true)
+          createElementVNode("i", {
+            class: normalizeClass(iconType[__props.type])
+          }, null, 2)
         ], 2)) : createCommentVNode("", true),
         createElementVNode("span", {
-          class: normalizeClass(`${name}-content`)
-        }, toDisplayString(__props.content), 3),
+          class: normalizeClass(`${name}-content`),
+          innerHTML: __props.content
+        }, null, 10, _hoisted_1),
         __props.closeable ? (openBlock(), createElementBlock("span", {
           key: 1,
           class: normalizeClass(`${name}-close`),
           onClick: handleClose
-        }, _hoisted_6, 2)) : createCommentVNode("", true)
-      ]);
+        }, _hoisted_3, 2)) : createCommentVNode("", true)
+      ], 2);
     };
   }
 });
@@ -5123,9 +5145,9 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
   props: {
     list: { type: Array, default: () => [] }
   },
-  emits: ["close"],
+  emits: ["remove"],
   setup(__props, { emit: emits }) {
-    const onClose = (id) => emits("close", id);
+    const onRemove = (id) => emits("remove", id);
     return (_ctx, _cache) => {
       return openBlock(), createBlock(TransitionGroup, {
         class: "bp-message-list",
@@ -5141,8 +5163,10 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
               content: v.content,
               duration: v.duration,
               closeable: v.closeable,
-              onClose
-            }, null, 8, ["id", "type", "content", "duration", "closeable"]);
+              plain: v.plain,
+              "on-close": v.onClose,
+              onRemove
+            }, null, 8, ["id", "type", "content", "duration", "closeable", "plain", "on-close"]);
           }), 128))
         ]),
         _: 1
@@ -5152,29 +5176,31 @@ const _sfc_main = /* @__PURE__ */ defineComponent({
 });
 class MessageManager {
   constructor(appContext) {
-    __publicField(this, "container");
+    __publicField(this, "mask", document.createElement("div"));
     __publicField(this, "messageList");
     /**
      * 添加消息提示
-     * @param {MessageConfig} config
+     * @param {MessageItem} config
      * @returns
      */
     __publicField(this, "add", (config) => {
       var _a;
-      const id = config.id ?? `_bp_message_${Math.random().toString()}`;
+      const id = config.id ?? `_bp_message_${Math.random().toString(36).slice(-8)}`;
+      this.mask.setAttribute("class", `bp-mask-message bp-message-${config.position || "top"}`);
       const message2 = reactive({ id, ...config });
-      this.messageList.value.push(message2);
+      const updateIdx = arrayIndexOf(this.messageList.value, "id", id);
+      updateIdx !== -1 ? this.messageList.value[updateIdx] = config : this.messageList.value.push(message2);
       const len = this.messageList.value.length;
       if (len > 1 && ((_a = this.messageList.value[len - 1]) == null ? void 0 : _a.duration) === message2.duration) {
         message2.duration = message2.duration ?? 3e3 + 200 * len;
       }
       return {
-        close: () => this.remove(id)
+        remove: () => this.remove(id)
       };
     });
     /**
      * 移除消息提示
-     * @param {string | number} id 消息id
+     * @param {string} id 消息id
      */
     __publicField(this, "remove", (id) => {
       for (let i = 0; i < this.messageList.value.length; i++) {
@@ -5185,22 +5211,25 @@ class MessageManager {
         }
       }
     });
+    /** 清除消息列表 */
     __publicField(this, "clear", () => {
-      this.messageList.value = [];
+      const arr = deepClone(this.messageList.value);
+      for (let i = 0; i < arr.length; i++) {
+        const element = arr[i];
+        this.remove(element.id);
+      }
     });
     this.messageList = ref([]);
-    const mask = document.createElement("div");
-    mask.setAttribute("class", `bp-mask-message`);
-    this.container = mask;
+    this.mask.setAttribute("class", `bp-mask-message`);
     const vm = createVNode(_sfc_main, {
       list: this.messageList.value,
-      onClose: this.remove
+      onRemove: this.remove
     });
     if (appContext) {
       vm.appContext = appContext;
     }
-    render(vm, this.container);
-    document.body.appendChild(this.container);
+    render(vm, this.mask);
+    document.body.appendChild(this.mask);
   }
 }
 _sfc_main.name = getComponentsPrefix() + _sfc_main.name;
@@ -5221,8 +5250,8 @@ const message = types.reduce((pre, value) => {
 }, {});
 const Message = Object.assign({
   ...message,
-  install: (app) => {
-    app.component(_sfc_main.name, _sfc_main);
+  removeAll: () => {
+    msg && msg.clear();
   }
 });
 const components = {

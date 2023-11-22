@@ -1,22 +1,23 @@
 import { AppContext } from "vue";
-import { MessageConfig } from "./type";
+import { MessageItem } from "./type";
 declare class MessageManager {
-    private container;
-    private readonly messageList;
+    private mask;
+    private messageList;
     constructor(appContext?: AppContext);
     /**
      * 添加消息提示
-     * @param {MessageConfig} config
+     * @param {MessageItem} config
      * @returns
      */
-    add: (config: MessageConfig) => {
-        close: () => void;
+    add: (config: MessageItem) => {
+        remove: () => void;
     };
     /**
      * 移除消息提示
-     * @param {string | number} id 消息id
+     * @param {string} id 消息id
      */
-    remove: (id: string | number) => void;
+    remove: (id: string) => void;
+    /** 清除消息列表 */
     clear: () => void;
 }
 export default MessageManager;
