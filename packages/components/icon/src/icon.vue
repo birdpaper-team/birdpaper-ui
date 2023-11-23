@@ -24,8 +24,13 @@ export default defineComponent({
     function getUrl() {
       if (!props.name) return;
 
-      const url = new URL(`./remixicon.symbol.svg`, import.meta.url).href;
-      return `${url}#${props.name}`;
+      try {
+        // @ts-ignore
+        const url = import.meta.glob("./remixicon.symbol.svg", { eager: true })["./remixicon.symbol.svg"].default;
+        return `${url}#${props.name}`;
+      } catch (error) {
+        return "";
+      }
     }
 
     return {
