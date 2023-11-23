@@ -1,7 +1,7 @@
 <template>
   <button :class="btnClass" type="button" :disabled="isDisabled" @click="onClick">
-    <span v-if="btnIcon" class="left-icon">
-      <i :class="btnIcon"></i>
+    <span v-if="btnIcon || loading" class="left-icon">
+      <bp-icon :class="{ 'bp-icon-loading': loading }" :name="btnIcon"></bp-icon>
     </span>
     <slot></slot>
   </button>
@@ -49,7 +49,7 @@ export default defineComponent({
     });
 
     const btnIcon = computed<string>(() => {
-      return props.loading ? "bp-icon-loading ri-loader-4-line" : props.icon;
+      return props.loading ? "ri-loader-4-line" : props.icon;
     });
 
     const onClick = () => {

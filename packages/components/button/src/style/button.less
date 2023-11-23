@@ -34,6 +34,11 @@
     font-size: ~"@{btn-size-@{size}-font-size}";
     padding: ~"@{btn-@{size}-@{shape}-padding}";
     border-radius: ~"@{btn-@{size}-@{shape}-radius}";
+
+    .bp-icon {
+      width: ~"@{btn-size-@{size}-font-size}";
+      height: ~"@{btn-size-@{size}-font-size}";
+    }
   }
 }
 
@@ -43,16 +48,28 @@
     background-color: ~"@{btn-type-@{type}-status-@{status}-bg}";
     border: 1px~ "@{btn-type-@{type}-border}" ~"@{btn-type-@{type}-status-@{status}-border}";
 
+    .bp-icon {
+      fill: ~"@{btn-type-@{type}-status-@{status}-color}";
+    }
+
     &:hover {
       color: ~"@{btn-type-@{type}-status-@{status}-color-hover}";
       background-color: ~"@{btn-type-@{type}-status-@{status}-bg-hover}";
       border: 1px ~"@{btn-type-@{type}-border}" ~"@{btn-type-@{type}-status-@{status}-border-hover}";
+
+      .bp-icon {
+        fill: ~"@{btn-type-@{type}-status-@{status}-color-hover}";
+      }
     }
 
     &:active {
       color: ~"@{btn-type-@{type}-status-@{status}-color-active}";
       background-color: ~"@{btn-type-@{type}-status-@{status}-bg-active}";
       border: 1px~ "@{btn-type-@{type}-border}" ~"@{btn-type-@{type}-status-@{status}-border-active}";
+
+      .bp-icon {
+        fill: ~"@{btn-type-@{type}-status-@{status}-color-active}";
+      }
     }
   }
 }

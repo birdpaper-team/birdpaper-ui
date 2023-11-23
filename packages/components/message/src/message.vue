@@ -72,7 +72,7 @@ const handleClose = () => {
 };
 
 onMounted(() => {
-  // nextTick(() => init());
+  nextTick(() => init());
 });
 
 onUnmounted(() => {
