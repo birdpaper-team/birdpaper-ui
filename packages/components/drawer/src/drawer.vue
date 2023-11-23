@@ -10,7 +10,7 @@
           <div :class="cls" :style="`width:${width};`">
             <div :class="`${name}-header`">
               <p :class="`${name}-header-title`">{{ title }}</p>
-              <i v-if="!hideClose" :class="`${name}-header-close`" class="ri-close-line" @click="handleCancle"></i>
+              <bp-icon v-if="!hideClose" :class="`${name}-header-close`" name="ri-close-line" @click="handleCancle"></bp-icon>
             </div>
             <div :class="`${name}-body`">
               <slot></slot>

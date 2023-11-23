@@ -3,13 +3,18 @@
 @link-cls: ~"@{prefix}-link";
 
 .@{link-cls} {
+  display: inline-block;
   font-size: 14px;
   font-weight: 400;
   text-decoration: none;
   cursor: pointer;
 
   .left-icon {
+    position: relative;
+    top: 2px;
     margin-right: 4px;
+    width: 14px;
+    height: 14px;
   }
 }
 
@@ -24,6 +29,10 @@
   .@{link-cls}-status-@{status} {
     color: ~"@{link-status-@{status}-color}" !important;
     transition: all 0.2s ease;
+
+    .bp-icon {
+      fill: ~"@{link-status-@{status}-color}" !important;
+    }
 
     &:hover {
       opacity: 0.6;

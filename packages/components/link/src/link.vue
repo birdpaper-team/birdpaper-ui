@@ -1,8 +1,6 @@
 <template>
   <a @click="handleClick" :disabled="disabled" :class="clsName" :href="href" :target="target">
-    <span v-if="loading" class="left-icon">
-      <i class="bp-icon-loading ri-loader-4-line"></i>
-    </span>
+    <bp-icon v-if="loading" class="left-icon bp-icon-loading" name="ri-loader-4-line"></bp-icon>
     <slot></slot>
   </a>
 </template>

@@ -3,7 +3,7 @@
     <div class="icon-page-inner">
       <template v-for="item in iconList">
         <div class="icon-item" @click="handleCopy(item)">
-          <i :class="`ri-${item}`"></i>
+          <bp-icon :name="`ri-${item}`"></bp-icon>
           <span v-text="item"></span>
         </div>
       </template>

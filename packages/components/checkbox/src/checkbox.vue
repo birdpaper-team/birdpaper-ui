@@ -3,7 +3,7 @@
     <input type="checkbox" :class="`${name}-inner`" />
 
     <span :class="[`${name}-checkbox`, isCheck ? `${name}-check` : '']">
-      <i v-if="isCheck" class="ri-check-line"></i>
+      <bp-icon v-if="isCheck" name="ri-check-line"></bp-icon>
     </span>
     <span :class="`${name}-label`">
       <slot></slot>

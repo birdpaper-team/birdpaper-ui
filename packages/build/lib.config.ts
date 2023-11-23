@@ -19,7 +19,7 @@ export default defineConfig({
     cssCodeSplit: true,
     outDir: "../dist",
     rollupOptions: {
-      external: ["vue"],
+      external: ["vue", /\.less/],
       output: {
         globals: {
           vue: "Vue",
@@ -34,6 +34,6 @@ export default defineConfig({
     // dts({
     //   insertTypesEntry: true, copyDtsFiles: false
     // }),
-    dts()
+    dts(),
   ],
 });

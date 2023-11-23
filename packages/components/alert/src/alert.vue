@@ -1,10 +1,10 @@
 <template>
   <div :class="cls" v-if="isRender">
     <div :class="`${name}-icon`">
-      <i v-if="type === 'info'" class="ri-information-fill"></i>
-      <i v-if="type === 'success'" class="ri-checkbox-circle-fill"></i>
-      <i v-if="type === 'warning'" class="ri-error-warning-fill"></i>
-      <i v-if="type === 'error'" class="ri-close-circle-fill"></i>
+      <bp-icon v-if="type === 'info'" name="ri-information-fill"></bp-icon>
+      <bp-icon v-if="type === 'success'" name="ri-checkbox-circle-fill"></bp-icon>
+      <bp-icon v-if="type === 'warning'" name="ri-error-warning-fill"></bp-icon>
+      <bp-icon v-if="type === 'error'" name="ri-close-circle-fill"></bp-icon>
     </div>
 
     <div :class="`${name}-body`">
@@ -18,7 +18,7 @@
 
     <div :class="`${name}-option`">
       <div v-if="closeable" :class="`${name}-close-inner`" @click="handleClose">
-        <i class="ri-close-line" v-if="!slots.close"></i>
+        <bp-icon name="ri-close-line" v-if="!slots.close"></bp-icon>
         <span v-else><slot name="close"></slot></span>
       </div>
     </div>

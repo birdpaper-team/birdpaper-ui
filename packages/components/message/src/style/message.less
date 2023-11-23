@@ -52,26 +52,31 @@
     .no-select;
 
     &-icon {
-      font-size: 18px;
+      width: 16px;
+      height: 16px;
       margin-right: 6px;
-
-      .ri-checkbox-circle-fill {
-        color: @success-6;
-      }
-
-      .ri-close-circle-fill {
-        color: @danger-6;
-      }
-
-      .ri-error-warning-fill {
-        color: @warning-6;
-      }
-
-      .ri-loader-4-line {
+    }
+    .icon-loading {
+      .bp-icon {
         display: inline-block;
-        color: @primary-6;
+        fill: @primary-6;
         animation: rotating 0.8s linear infinite;
         -webkit-animation: rotating 0.8s linear infinite;
+      }
+    }
+    .icon-success {
+      .bp-icon {
+        fill: @success-6;
+      }
+    }
+    .icon-error {
+      .bp-icon {
+        fill: @danger-6;
+      }
+    }
+    .icon-warning {
+      .bp-icon {
+        fill: @warning-6;
       }
     }
 
@@ -85,8 +90,10 @@
     &-close {
       margin-left: 6px;
 
-      .ri-close-line {
-        color: @gary-6;
+      .bp-icon {
+        width: 16px;
+        height: 16px;
+        fill: @gary-6;
         cursor: pointer;
         transition: all 0.2s ease;
 
@@ -97,7 +104,7 @@
         }
 
         &:hover {
-          color: @gary-9;
+          fill: @gary-9;
 
           &::before {
             background-color: @gary-3;
@@ -155,20 +162,30 @@
     border: 1px solid @gary-4;
 
     &-icon {
-      .ri-checkbox-circle-fill {
-        color: @success-6;
+      .bp-icon {
+        width: 16px;
+        height: 16px;
       }
+    }
 
-      .ri-close-circle-fill {
-        color: @danger-6;
+    .icon-success {
+      .bp-icon {
+        fill: @success-6;
       }
-
-      .ri-error-warning-fill {
-        color: @warning-6;
+    }
+    .icon-error {
+      .bp-icon {
+        fill: @danger-6;
       }
-
-      .ri-loader-4-line {
-        color: @primary-6;
+    }
+    .icon-warning {
+      .bp-icon {
+        fill: @warning-6;
+      }
+    }
+    .icon-loading {
+      .bp-icon {
+        fill: @primary-6;
       }
     }
 
@@ -177,11 +194,11 @@
     }
 
     &-close {
-      .ri-close-line {
-        color: @gary-7;
+      .bp-icon {
+        fill: @gary-7;
 
         &:hover {
-          color: @gary-8;
+          fill: @gary-8;
 
           &::before {
             background-color: @gary-4;

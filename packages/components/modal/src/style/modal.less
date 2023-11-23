@@ -51,24 +51,18 @@
         }
 
         &-close {
-          color: @gary-7;
+          width: 22px;
+          height: 22px;
+          fill: @gary-7;
           cursor: pointer;
+          padding: 2px;
+          border-radius: 10px;
           transition: all 0.2s ease;
 
-          &::before {
-            padding: 2px;
-            border-radius: 10px;
-            font-size: 18px;
-            transition: all 0.2s ease;
-          }
-
           &:hover {
-            color: @gary-8;
-
-            &::before {
-              background-color: @gary-4;
-              transition: all 0.2s ease;
-            }
+            fill: @gary-8;
+            background-color: @gary-4;
+            transition: all 0.2s ease;
           }
         }
       }

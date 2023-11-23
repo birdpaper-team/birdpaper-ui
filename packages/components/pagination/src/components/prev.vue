@@ -1,7 +1,7 @@
 <template>
   <li :class="clsName" @click="handleClick">
     <span v-if="text" v-text="text"></span>
-    <i v-else class="ri-arrow-left-s-line"></i>
+    <bp-icon v-else name="ri-arrow-left-s-line"></bp-icon>
   </li>
 </template>
 

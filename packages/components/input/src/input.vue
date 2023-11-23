@@ -21,15 +21,16 @@
       <!-- TODO: Need to Optim -->
       <template v-if="!slots.suffix">
         <!-- 清空按钮 -->
-        <i v-if="showClear" class="ri-close-line click-icon" @click="handleClear"></i>
+        <bp-icon v-if="showClear" class="click-icon" name="ri-close-line" @click="handleClear"></bp-icon>
         <!-- 字数限制提示 -->
         <span v-if="showWordLimit" v-text="limitText"></span>
         <!-- 密码/明文切换 -->
-        <i
+        <bp-icon
           v-if="type === 'password'"
           @click="triggerPassword"
-          :class="['click-icon', showPassword ? 'ri-eye-fill' : 'ri-eye-close-fill']"
-        ></i>
+          class="click-icon"
+          :name="showPassword ? 'ri-eye-fill' : 'ri-eye-close-fill'"
+        ></bp-icon>
       </template>
       <slot name="suffix"></slot>
     </div>
@@ -99,7 +100,7 @@ export default defineComponent({
     /** 是否明文展示密码类型输入框内容 */
     const showPassword = ref<boolean>(false);
     /** 是否为密码类型输入框 */
-    const isPasswordType = computed<boolean>(() => props.type === 'password' && !showPassword.value);
+    const isPasswordType = computed<boolean>(() => props.type === "password" && !showPassword.value);
     /** 明文/匿文切换 */
     const triggerPassword = () => {
       showPassword.value = !showPassword.value;
