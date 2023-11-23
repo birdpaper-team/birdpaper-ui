@@ -1,11 +1,11 @@
 <template>
   <li :class="clsName">
-    <span v-if="type !== 'text'" :class="`${name}-icon`">
-      <i :class="iconType[type]"></i>
+    <span v-if="type !== 'text'" :class="[`${name}-icon`, `icon-${type}`]">
+      <bp-icon :name="iconType[type]"></bp-icon>
     </span>
     <span :class="`${name}-content`" v-html="content"></span>
     <span v-if="closeable" :class="`${name}-close`" @click="handleClose">
-      <i class="ri-close-line"></i>
+      <bp-icon name="ri-close-line"></bp-icon>
     </span>
   </li>
 </template>
@@ -14,6 +14,7 @@
 import { PropType, nextTick, onMounted, onUnmounted, ref } from "vue";
 import { MessageType } from "./type";
 import { computed } from "vue";
+import bpIcon from "../../icon/index";
 
 const name = "bp-message";
 
@@ -71,7 +72,7 @@ const handleClose = () => {
 };
 
 onMounted(() => {
-  nextTick(() => init());
+  // nextTick(() => init());
 });
 
 onUnmounted(() => {
