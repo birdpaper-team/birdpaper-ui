@@ -150,22 +150,16 @@ textarea {
 }
 
 .click-icon {
-  color: @gary-7;
+  display: block;
+  fill: @gary-7;
   cursor: pointer;
   transition: all 0.2s ease;
-
-  &::before {
-    padding: 1px;
-    border-radius: 10px;
-    transition: all 0.2s ease;
-  }
+  padding: 1px;
+  border-radius: 10px;
 
   &:hover {
-    color: @gary-8;
-
-    &::before {
-      background-color: @gary-5;
-      transition: all 0.2s ease;
-    }
+    fill: @gary-8;
+    background-color: @gary-5;
+    transition: all 0.2s ease;
   }
 }

@@ -4,13 +4,13 @@
 
     <div :class="`${name}-mask`" v-if="slots.default && loading">
       <div :class="`${name}-loading`">
-        <i class="bp-icon-loading ri-loader-4-line"></i>
+        <bp-icon class="bp-icon-loading" name="ri-loader-4-line"></bp-icon>
         <p :class="`${name}-tip`">{{ tip }}</p>
       </div>
     </div>
 
     <div v-else-if="loading" :class="`${name}-loading`">
-      <i class="bp-icon-loading ri-loader-4-line"></i>
+      <bp-icon class="bp-icon-loading" name="ri-loader-4-line"></bp-icon>
     </div>
   </div>
 </template>

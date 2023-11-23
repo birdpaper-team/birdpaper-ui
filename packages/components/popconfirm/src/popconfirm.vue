@@ -8,10 +8,10 @@
       <div :class="`${name}-inner`">
         <div :class="`${name}-inner-content`">
           <span :class="`${name}-icon`">
-            <i v-if="type === 'success'" class="ri-checkbox-circle-fill"></i>
-            <i v-if="type === 'danger'" class="ri-close-circle-fill"></i>
-            <i v-if="type === 'warning'" class="ri-error-warning-fill"></i>
-            <i v-if="type === 'info'" class="ri-information-fill"></i>
+            <bp-icon v-if="type === 'info'" name="ri-information-fill"></bp-icon>
+            <bp-icon v-if="type === 'success'" name="ri-checkbox-circle-fill"></bp-icon>
+            <bp-icon v-if="type === 'warning'" name="ri-error-warning-fill"></bp-icon>
+            <bp-icon v-if="type === 'danger'" name="ri-close-circle-fill"></bp-icon>
           </span>
           <span :class="`${name}-text`">
             {{ content }}

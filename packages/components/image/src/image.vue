@@ -15,7 +15,7 @@
     </slot>
     <slot name="error" v-if="!isLoading && isError">
       <div :class="`${name}-error`">
-        <i class="ri-image-2-line"></i>
+        <bp-icon name="ri-image-2-line"></bp-icon>
       </div>
     </slot>
   </div>

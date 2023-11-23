@@ -21,7 +21,7 @@
             { type: 'down', disabled: isMin },
           ]"
         >
-          <i :class="`ri-arrow-${v.type}-s-line`"></i>
+          <bp-icon :name="`ri-arrow-${v.type}-s-line`"></bp-icon>
         </div>
       </div>
     </template>

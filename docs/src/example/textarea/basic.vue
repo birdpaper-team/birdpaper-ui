@@ -1,5 +1,5 @@
 <template>
-  <bp-textarea :style="{ width: '380px' }" v-model="val" placeholder="请输入"></bp-textarea>
+  <bp-textarea :style="{ width: '380px' }" v-model="val" clearable placeholder="请输入"></bp-textarea>
 </template>
 
 <script setup lang="ts">

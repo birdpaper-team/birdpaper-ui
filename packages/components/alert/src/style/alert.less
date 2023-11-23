@@ -25,8 +25,13 @@
   }
 
   &-icon {
+    display: flex;
     margin-right: 8px;
-    font-size: 16px;
+
+    .bp-icon {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   &-body {
@@ -37,7 +42,8 @@
       color: @gary-11;
       font-size: 16px;
       font-weight: 500;
-      line-height: 38px;
+      line-height: 20px;
+      margin-bottom: 8px;
     }
 
     .@{alert-cls}-content {
@@ -52,7 +58,10 @@
 
   &-option {
     .@{alert-cls}-close-inner {
+      display: flex;
+
       .close-inner {
+        fill: @gary-6;
         color: @gary-6;
         font-size: 14px;
         cursor: pointer;
@@ -63,6 +72,7 @@
         transition: all 0.2s ease;
 
         &:hover {
+          fill: @gary-7;
           color: @gary-7;
           transition: all 0.2s ease;
         }
@@ -96,7 +106,9 @@
     border: 1px solid ~"@{alert-@{type}-border}";
 
     .@{alert-cls}-icon {
-      color: ~"@{alert-@{type}-icon-color}";
+      .bp-icon {
+        fill: ~"@{alert-@{type}-icon-color}";
+      }
     }
   }
 }

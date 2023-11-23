@@ -17,8 +17,13 @@
       @mouseleave="handleMouseLeave"
     >
       <template #suffix>
-        <i v-if="!disabled && showClear && currentSelect.label" class="ri-close-line click-icon" @click.stop="hancleClear"></i>
-        <i v-else :class="[`${name}-icon-inner`, `ri-arrow-${isFocus ? 'up' : 'down'}-s-line`]"></i>
+        <bp-icon
+          v-if="!disabled && showClear && currentSelect.label"
+          class="click-icon"
+          name="ri-close-line"
+          @click.stop="hancleClear"
+        ></bp-icon>
+        <bp-icon v-else :class="`${name}-icon-inner`" :name="`ri-arrow-${isFocus ? 'up' : 'down'}-s-line`"></bp-icon>
       </template>
     </bp-input>
 

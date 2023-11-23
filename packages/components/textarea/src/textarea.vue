@@ -20,7 +20,7 @@
     <div class="suffix">
       <template v-if="!slots.suffix">
         <!-- 清空按钮 -->
-        <i v-if="showClear" class="ri-close-line click-icon" @click="handleClear"></i>
+        <bp-icon v-if="showClear" class="click-icon" name="ri-close-line" @click="handleClear"></bp-icon>
         <!-- 字数限制提示 -->
         <span v-if="showWordLimit" v-text="limitText"></span>
       </template>

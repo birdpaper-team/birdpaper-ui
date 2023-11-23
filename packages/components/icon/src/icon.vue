@@ -1,10 +1,11 @@
 <template>
-  <svg :class="name">
+  <svg :class="clsName">
     <use :xlink:href="getUrl()"></use>
   </svg>
 </template>
 
 <script lang="ts">
+import { computed } from "vue";
 import { defineComponent } from "vue";
 
 export default defineComponent({
@@ -15,6 +16,10 @@ export default defineComponent({
   },
   setup(props) {
     const name = "bp-icon";
+    const clsName = computed(() => {
+      let cls = [name, props.name];
+      return cls;
+    });
 
     function getUrl() {
       if (!props.name) return;
@@ -24,7 +29,7 @@ export default defineComponent({
     }
 
     return {
-      name,
+      clsName,
       getUrl,
     };
   },
