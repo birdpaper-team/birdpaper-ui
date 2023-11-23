@@ -9,12 +9,12 @@
     <div class="demo-block-footer">
       <bp-tooltip content="展示代码">
         <div :class="['icon-item', { active: showCode }]" @click="showCode = !showCode">
-          <i class="ri-code-s-slash-line"></i>
+          <bp-icon name="ri-code-s-slash-line"></bp-icon>
         </div>
       </bp-tooltip>
       <bp-tooltip v-if="false" content="在 Stackblitz 中调试">
         <div class="icon-item">
-          <i class="ri-flashlight-line"></i>
+          <bp-icon name="ri-flashlight-line"></bp-icon>
         </div>
       </bp-tooltip>
     </div>

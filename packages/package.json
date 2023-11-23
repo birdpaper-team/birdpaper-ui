@@ -15,7 +15,6 @@
     "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.2.0",
     "gulp-sourcemaps": "^3.0.0",
-    "remixicon": "^3.3.0",
     "terser": "^5.16.6",
     "vite": "^4.2.1",
     "vite-plugin-dts": "1.4.1",

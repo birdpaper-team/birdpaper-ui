@@ -1,15 +1,8 @@
 <template>
   <bp-space>
-    <span class="ri-tools-line"></span>
-    <span class="ri-palette-line"></span>
-    <span class="ri-drag-drop-line"></span>
-    <span class="ri-map-pin-2-line"></span>
+    <bp-icon name="ri-tools-line"></bp-icon>
+    <bp-icon name="ri-palette-line"></bp-icon>
+    <bp-icon name="ri-drag-drop-line"></bp-icon>
+    <bp-icon name="ri-map-pin-2-line"></bp-icon>
   </bp-space>
 </template>
-
-<style lang="less" scoped>
-span {
-  font-size: 20px;
-  color: #434343;
-}
-</style>

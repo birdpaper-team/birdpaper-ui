@@ -23,7 +23,6 @@
   "author": "木亦Sam",
   "license": "MIT",
   "dependencies": {
-    "remixicon": "^3.3.0",
     "vue": "^3.3.2"
   },
   "devDependencies": {
