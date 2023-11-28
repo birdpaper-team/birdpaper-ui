@@ -74,9 +74,6 @@ export type { TriggerInstance } from "./trigger";
 export { default as Form } from "./form";
 export type { FormInstance, FormItemInstance } from "./form";
 
-export { default as Icon } from "./icon";
-export type { IconInstance } from "./icon";
-
 export { default as Message } from "./message";
 
 export type {} from "./components";

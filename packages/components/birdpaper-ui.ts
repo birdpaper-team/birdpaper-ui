@@ -23,7 +23,6 @@ import Drawer from "./drawer";
 import Tooltip from "./tooltip";
 import Trigger from "./trigger";
 import Form from "./form";
-import Icon from "./icon";
 import Message from "./message";
 
 const components: Record<string, Plugin> = {
@@ -51,7 +50,6 @@ const components: Record<string, Plugin> = {
   Tooltip,
   Trigger,
   Form,
-  Icon,
   Message,
 };
 
@@ -89,6 +87,5 @@ export default {
   Tooltip,
   Trigger,
   Form,
-  Icon,
   Message,
 };

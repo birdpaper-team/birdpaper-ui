@@ -7,8 +7,10 @@
     "docs"
   ],
   "scripts": {
+    "icon:generate": "pnpm run -C packages icon:generate",
     "docs": "pnpm run -C docs dev",
     "build": "pnpm run -C packages build",
+    "scripts:dev": "pnpm run -C scripts dev",
     "build:docs": "pnpm run -C docs build",
     "build:docs-root": "pnpm run -C docs build:root",
     "preview:docs": "pnpm run -C docs preview",

@@ -13,6 +13,7 @@ import DemoBlock from "../../../components/demo-block";
 import TableBlock from "../../../components/table-block";
 
 import BirdpaperUI from "birdpaper-ui";
+import BirdpaperIcon from "birdpaper-ui/components/icon"
 import "birdpaper-ui/style/index.less";
 
 import "remixicon/fonts/remixicon.css";
@@ -25,6 +26,7 @@ export default {
   enhanceApp(ctx: EnhanceAppContext) {
     DefaultTheme.enhanceApp(ctx);
     ctx.app.use(BirdpaperUI);
+    ctx.app.use(BirdpaperIcon);
 
     ctx.app.component("demo-block", DemoBlock);
     ctx.app.component("table-block", TableBlock);
