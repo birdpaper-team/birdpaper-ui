@@ -4585,32 +4585,8 @@ var __publicField = (obj, key, value) => {
     }
   };
   const birdpaperUi = {
-    install,
-    Button,
-    ButtonGroup,
-    Input,
-    InputNumber,
-    Textarea,
-    Radio,
-    Checkbox,
-    Switch,
-    Select,
-    Pagination,
-    Table,
-    Space,
-    Alert,
-    Tag,
-    Modal,
-    Spin,
-    Grid,
-    Link: BpLink,
-    Popconfirm,
-    Image,
-    Drawer,
-    Tooltip,
-    Trigger,
-    Form,
-    Message
+    ...components,
+    install
   };
   exports2.Alert = Alert;
   exports2.Button = Button;

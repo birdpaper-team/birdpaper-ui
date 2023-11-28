@@ -14,7 +14,7 @@ import TableBlock from "../../../components/table-block";
 
 import BirdpaperUI from "birdpaper-ui";
 import BirdpaperIcon from "birdpaper-ui/components/icon"
-import "birdpaper-ui/style/index.less";
+import "birdpaper-ui/components/index.less";
 
 import "remixicon/fonts/remixicon.css";
 

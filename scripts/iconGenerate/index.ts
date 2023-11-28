@@ -103,14 +103,14 @@ export function buildIndex(data: IconData[]) {
     exports.push(`export { default as ${item.componentName} } from './${item.name}';`);
   }
 
-  const arcoContent = getBpVueIcon({ imports, components });
+  const bpContent = getBpVueIcon({ imports, components });
   const indexContent = getIndex({ exports });
 
-  fs.outputFile(path.resolve(resolvePath("./components/icon"), "birdpaper-ui-icon.ts"), arcoContent, err => {
+  fs.outputFile(path.resolve(resolvePath("./components/icon"), "birdpaper-ui-icon.ts"), bpContent, err => {
     if (err) {
-      console.log(`Build ArcoVueIcon Failed: ${err}`);
+      console.log(`Build BpVueIcon Failed: ${err}`);
     } else {
-      console.log("Build ArcoVueIcon Success!");
+      console.log("Build BpVueIcon Success!");
     }
   });
 

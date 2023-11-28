@@ -37,23 +37,19 @@
       "path": "node_modules/cz-customizable"
     }
   },
-  "main": "dist/birdpaper-ui.js",
-  "module": "dist/birdpaper-ui.js",
-  "exports": {
-    ".": {
-      "import": "./dist/birdpaper-ui.js",
-      "require": "./dist/birdpaper-ui.umd.js"
-    },
-    "./*": "./*"
-  },
+  "main": "lib/index.js",
+  "module": "es/index.js",
   "types": "dist/components/index.d.ts",
   "sideEffects": [
     "dist/*",
-    "packages/components/*",
-    "packages/style/*"
+    "es/**/style/*",
+    "lib/**/style/*",
+    "*.less"
   ],
   "files": [
-    "dist"
+    "dist",
+    "es",
+    "lib"
   ],
   "repository": {
     "type": "git",

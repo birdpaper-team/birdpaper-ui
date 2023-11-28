@@ -3,33 +3,27 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import external from "../plugins/vite-plugin-external";
 import vueExportHelper from "../plugins/vite-plugin-vue-export-helper";
-import VueSetupExtend from "vite-plugin-vue-setup-extend";
-import dts from "vite-plugin-dts";
 
 const config: InlineConfig = {
   mode: "production",
   build: {
     target: "modules",
-    outDir: "../dist",
+    outDir: "../es",
     emptyOutDir: false,
-    minify: "terser",
-    sourcemap: true,
-    reportCompressedSize: true,
-    cssCodeSplit: true,
-    brotliSize: false,
+    minify: false,
     rollupOptions: {
       input: ["components/index.ts", "components/icon/index.ts"],
       output: [
         {
           format: "es",
-          dir: "../dist/es",
+          dir: "../es",
           entryFileNames: "[name].js",
           preserveModules: true,
           preserveModulesRoot: "components",
         },
         {
           format: "commonjs",
-          dir: "../dist/lib",
+          dir: "../lib",
           entryFileNames: "[name].js",
           preserveModules: true,
           preserveModulesRoot: "components",
@@ -54,8 +48,6 @@ const config: InlineConfig = {
     ,
     vueJsx(),
     vueExportHelper(),
-    VueSetupExtend(),
-    dts(),
   ],
 };
 

@@ -19,7 +19,6 @@ export default (type: "component" | "icon"): InlineConfig => {
       emptyOutDir: false,
       sourcemap: true,
       minify: false,
-      brotliSize: false,
       rollupOptions: {
         external: "vue",
         output: [
