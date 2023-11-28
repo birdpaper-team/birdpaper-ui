@@ -35,9 +35,8 @@ program
   program
   .command('build:style')
   .description('build:style...')
-  .option('-M, --material', 'generate style for material')
-  .action(async ({ material }) => {
-    await buildStyle({ material });
+  .action(async () => {
+    await buildStyle();
   });
 
 program.parse(process.argv);

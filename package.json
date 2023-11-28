@@ -11,6 +11,7 @@
     "docs": "pnpm run -C docs dev",
     "build": "pnpm run -C packages build",
     "scripts:dev": "pnpm run -C scripts dev",
+    "scripts:build": "pnpm run -C scripts build",
     "build:docs": "pnpm run -C docs build",
     "build:docs-root": "pnpm run -C docs build:root",
     "preview:docs": "pnpm run -C docs preview",
