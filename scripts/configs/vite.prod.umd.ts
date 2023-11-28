@@ -1,9 +1,6 @@
 import { InlineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import external from "../plugins/vite-plugin-external";
-import vueExportHelper from "../plugins/vite-plugin-vue-export-helper";
-import VueSetupExtend from "vite-plugin-vue-setup-extend";
 import dts from "vite-plugin-dts";
 
 export default (type: "component" | "icon"): InlineConfig => {
@@ -47,19 +44,19 @@ export default (type: "component" | "icon"): InlineConfig => {
         name,
       },
     },
+    optimizeDeps: {
+      exclude: ["async-validator"],
+    },
     // @ts-ignore vite内部类型错误
     plugins: [
-      external(),
       {
         ...vue(),
         apply: config => {
           return config.mode === "test";
         },
       },
-      vueJsx(),
-      vueExportHelper(),
-      VueSetupExtend(),
       dts(),
+      vueJsx(),
     ],
   };
 };

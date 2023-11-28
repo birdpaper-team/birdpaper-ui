@@ -2,6 +2,7 @@ import { InlineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import external from "../plugins/vite-plugin-external";
+import dts from "vite-plugin-dts";
 import vueExportHelper from "../plugins/vite-plugin-vue-export-helper";
 
 const config: InlineConfig = {
@@ -36,6 +37,9 @@ const config: InlineConfig = {
       formats: ["es", "cjs"],
     },
   },
+  optimizeDeps: {
+    exclude: ["async-validator"],
+  },
   // @ts-ignore vite内部类型错误
   plugins: [
     external(),
@@ -47,6 +51,7 @@ const config: InlineConfig = {
     },
     ,
     vueJsx(),
+    dts(),
     vueExportHelper(),
   ],
 };

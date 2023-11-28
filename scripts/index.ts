@@ -6,7 +6,6 @@ import { Command } from "commander";
 import { getIconComponents, generateIconComponent, buildIndex, buildType } from "./iconGenerate";
 import buildComponent from "./buildComponent";
 import buildStyle from "./buildStyle";
-import dtsgen from "./dtsGenerate";
 
 const program = new Command();
 
@@ -40,17 +39,5 @@ program
   .action(async ({ material }) => {
     await buildStyle({ material });
   });
-
-  program
-  .command('dtsgen <files>')
-  .description('emit .d.ts files for vue files.')
-  .option(
-    '-o, --outDir <direname>',
-    'Specify an output folder for all emitted files'
-  )
-  .action((files, options) => {
-    dtsgen(files, options);
-  });
-
 
 program.parse(process.argv);

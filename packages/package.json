@@ -2,12 +2,10 @@
   "name": "packages",
   "description": "组件库",
   "scripts": {
-    "icon:generate": "bp-vue-scripts icon:generate && npm run dts:generate:icon",
+    "icon:generate": "bp-vue-scripts icon:generate",
     "build:style": "bp-vue-scripts build:style",
     "build:components": "bp-vue-scripts build:components -u",
-    "dts:generate": "bp-vue-scripts dtsgen 'components/**/*.{ts,tsx,vue}'",
-    "dts:generate:icon": "bp-vue-scripts dtsgen 'components/icon/**/*.{ts,tsx,vue}' -o 'components/icon/@types'",
-    "build": "npm run build:components && npm run dts:generate && npm run build:style "
+    "build": "npm run build:components && npm run build:style"
   },
   "keywords": [],
   "author": "木亦Sam",
