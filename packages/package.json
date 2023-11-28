@@ -2,9 +2,10 @@
   "name": "packages",
   "description": "组件库",
   "scripts": {
-    "gulp": "gulp -f build/gulpStyle.ts",
-    "vite": "vite build --config build/lib.config.ts",
-    "build": "npm run vite && npm run gulp"
+    "icon:generate": "bp-vue-scripts icon:generate",
+    "build:style": "bp-vue-scripts build:style",
+    "build:components": "bp-vue-scripts build:components -u",
+    "build": "npm run build:components && npm run build:style"
   },
   "keywords": [],
   "author": "木亦Sam",
@@ -22,6 +23,7 @@
     "vue": "^3.3.2"
   },
   "devDependencies": {
+    "bp-vue-scripts": "workspace:bp-vue-scripts@*",
     "@types/node": "^18.13.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",

@@ -2,3 +2,7 @@ node_modules
 cache
 pnpm-lock.yaml
 dist/
+es/
+lib/
+
+!scripts/dist/
