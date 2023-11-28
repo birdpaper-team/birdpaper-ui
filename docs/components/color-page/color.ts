@@ -1,4 +1,4 @@
-import theme from "../../../packages/style/common/theme.module.less";
+import theme from "../../../packages/components/common/theme.module.less";
 
 export enum ColorType {
   Primary = "primary",
