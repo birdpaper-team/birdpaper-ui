@@ -1,8 +1,5 @@
 import type { App } from 'vue';
 import _IconRunLine from './icon-run-line.vue';
-import { getComponentsPrefix } from "../../../utils/config";
-
-_IconRunLine.name = getComponentsPrefix() + _IconRunLine.name;
 
 const IconRunLine = Object.assign(_IconRunLine, {
   install: (app: App) => {

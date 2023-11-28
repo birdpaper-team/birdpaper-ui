@@ -1,8 +1,5 @@
 import type { App } from 'vue';
 import _IconGitMergeLine from './icon-git-merge-line.vue';
-import { getComponentsPrefix } from "../../../utils/config";
-
-_IconGitMergeLine.name = getComponentsPrefix() + _IconGitMergeLine.name;
 
 const IconGitMergeLine = Object.assign(_IconGitMergeLine, {
   install: (app: App) => {

@@ -1,8 +1,5 @@
 import type { App } from 'vue';
 import _IconH2 from './icon-h-2.vue';
-import { getComponentsPrefix } from "../../../utils/config";
-
-_IconH2.name = getComponentsPrefix() + _IconH2.name;
 
 const IconH2 = Object.assign(_IconH2, {
   install: (app: App) => {

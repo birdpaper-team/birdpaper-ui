@@ -1,8 +1,5 @@
 import type { App } from 'vue';
 import _IconFontFamily from './icon-font-family.vue';
-import { getComponentsPrefix } from "../../../utils/config";
-
-_IconFontFamily.name = getComponentsPrefix() + _IconFontFamily.name;
 
 const IconFontFamily = Object.assign(_IconFontFamily, {
   install: (app: App) => {

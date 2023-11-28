@@ -1,8 +1,5 @@
 import type { App } from 'vue';
 import _IconDonutChartLine from './icon-donut-chart-line.vue';
-import { getComponentsPrefix } from "../../../utils/config";
-
-_IconDonutChartLine.name = getComponentsPrefix() + _IconDonutChartLine.name;
 
 const IconDonutChartLine = Object.assign(_IconDonutChartLine, {
   install: (app: App) => {

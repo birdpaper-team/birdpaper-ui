@@ -1,8 +1,5 @@
 import type { App } from 'vue';
 import _IconArrowTurnBackLine from './icon-arrow-turn-back-line.vue';
-import { getComponentsPrefix } from "../../../utils/config";
-
-_IconArrowTurnBackLine.name = getComponentsPrefix() + _IconArrowTurnBackLine.name;
 
 const IconArrowTurnBackLine = Object.assign(_IconArrowTurnBackLine, {
   install: (app: App) => {

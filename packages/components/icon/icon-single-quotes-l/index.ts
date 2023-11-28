@@ -1,8 +1,5 @@
 import type { App } from 'vue';
 import _IconSingleQuotesL from './icon-single-quotes-l.vue';
-import { getComponentsPrefix } from "../../../utils/config";
-
-_IconSingleQuotesL.name = getComponentsPrefix() + _IconSingleQuotesL.name;
 
 const IconSingleQuotesL = Object.assign(_IconSingleQuotesL, {
   install: (app: App) => {

@@ -1,8 +1,5 @@
 import type { App } from 'vue';
 import _IconSunLine from './icon-sun-line.vue';
-import { getComponentsPrefix } from "../../../utils/config";
-
-_IconSunLine.name = getComponentsPrefix() + _IconSunLine.name;
 
 const IconSunLine = Object.assign(_IconSunLine, {
   install: (app: App) => {

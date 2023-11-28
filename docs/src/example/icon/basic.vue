@@ -1,13 +1,11 @@
 <template>
   <bp-space>
-    <IconZoom></IconZoom>
-    <!-- <bp-icon name="ri-tools-line"></bp-icon>
-    <bp-icon name="ri-palette-line"></bp-icon>
-    <bp-icon name="ri-drag-drop-line"></bp-icon>
-    <bp-icon name="ri-map-pin-2-line"></bp-icon> -->
+    <IconAncientGateLine />
+    <IconBugLine />
+    <IconDiscLine />
+    <IconMenuSearchLine />
   </bp-space>
 </template>
 
 <script setup lang="ts">
-import { IconZoom } from "birdpaper-ui/components/icon";
 </script>

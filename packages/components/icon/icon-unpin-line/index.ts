@@ -1,8 +1,5 @@
 import type { App } from 'vue';
 import _IconUnpinLine from './icon-unpin-line.vue';
-import { getComponentsPrefix } from "../../../utils/config";
-
-_IconUnpinLine.name = getComponentsPrefix() + _IconUnpinLine.name;
 
 const IconUnpinLine = Object.assign(_IconUnpinLine, {
   install: (app: App) => {

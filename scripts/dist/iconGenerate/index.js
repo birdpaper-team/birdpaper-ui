@@ -119,6 +119,17 @@ function buildIconIndex(data) {
         }
         console.log("Build Index Success!");
     });
+    // fs.outputFile(
+    //   path.resolve(paths.icon, 'icons.json'),
+    //   JSON.stringify(data, null, 2),
+    //   (err) => {
+    //     if (err) {
+    //       console.log(`Build JSON Failed: ${err}`);
+    //     } else {
+    //       console.log('Build JSON Success!');
+    //     }
+    //   }
+    // );
 }
 exports.buildIconIndex = buildIconIndex;
 /**

@@ -3,7 +3,7 @@
     <span v-if="type !== 'text'" :class="[`${name}-icon`, `icon-${type}`]">
       <bp-icon :name="iconType[type]"></bp-icon>
     </span>
-    <span :class="`${name}-content`" v-html="content"></span>
+    <span :class="`${name}-content`">{{ content }}</span>
     <span v-if="closeable" :class="`${name}-close`" @click="handleClose">
       <bp-icon name="ri-close-line"></bp-icon>
     </span>

@@ -72,9 +72,6 @@ exports.getIconVueComponent = getIconVueComponent;
 const getComponentIndex = ({ name, componentName }) => {
     return `import type { App } from 'vue';
 import _${componentName} from './${name}.vue';
-import { getComponentsPrefix } from "../../../utils/config";
-
-_${componentName}.name = getComponentsPrefix() + _${componentName}.name;
 
 const ${componentName} = Object.assign(_${componentName}, {
   install: (app: App) => {

@@ -1,8 +1,5 @@
 import type { App } from 'vue';
 import _IconInformationLine from './icon-information-line.vue';
-import { getComponentsPrefix } from "../../../utils/config";
-
-_IconInformationLine.name = getComponentsPrefix() + _IconInformationLine.name;
 
 const IconInformationLine = Object.assign(_IconInformationLine, {
   install: (app: App) => {
