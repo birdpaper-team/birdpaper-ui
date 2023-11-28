@@ -1,0 +1,63 @@
+<template>
+  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" :class="iconClass" :style="innerStyle" :stroke-width="strokeWidth" :stroke-linecap="strokeLinecap" :stroke-linejoin="strokeLinejoin" @click="onClick"><path d="M28.416 21.847c-.116 2.586.542 4.399 1.974 5.438 2.148 1.56 7.447 1.742 11.644-5.438 4.197-7.181.126-11.082-1.42-11.732-1.032-.434-2.068-.596-3.11-.488M31.014 28.006c-1.22 1.414-1.355 3.112-.402 5.094 1.428 2.974 5.087 2.439 6.916 4.916 1.219 1.651 1.68 3.313 1.385 4.984" stroke="#333"></path><path clip-rule="evenodd" d="M8.504 23.64c2.26 3.02 7.662 3.415 13.996.99 2.564-.981 5.282-2.425 8.005-4.343 2.053-1.447 3.54-2.923 4.587-4.367 3.771-5.204 1.824-9.998 0-11.514-1.976-1.642-5.77-2.317-12.592.627a48.607 48.607 0 0 0-3.965 1.947c-2.798 1.523-5.101 3.243-6.873 5.02-4.162 4.175-5.385 8.662-3.158 11.64Z" stroke="#333"></path><path d="M16.245 8.84c.44 2.949 1.671 5.528 3.697 7.736 2.025 2.209 4.446 3.619 8.058 4.924M9.981 25c-5.825 5.65-7.395 9.929-4.71 12.835 4.028 4.359 7.817-1.208 12.896-1.208 3.385 0 5.997 2.124 7.833 6.373" stroke="#333"></path><path d="M35.092 15.92c-1.047 1.444-2.534 2.92-4.587 4.367-2.723 1.918-5.44 3.362-8.005 4.344M22.5 5.033a48.61 48.61 0 0 0-3.966 1.947c-2.797 1.523-5.1 3.243-6.872 5.02" stroke="#333"></path></svg>
+</template>
+
+<script lang="ts">
+import { defineComponent, computed, CSSProperties } from 'vue';
+
+export default defineComponent({
+  name: 'IconCell',
+  props: {
+    /** 图标尺寸 */
+    size: { type: String },
+    /** 线宽 */
+    strokeWidth: { type: Number, default: 4 },
+    /** 端点类型 */
+    strokeLinecap: {
+      type: String,
+      default: "butt",
+      validator: (value: any) => {
+        return ["butt", "round", "square"].includes(value);
+      },
+    },
+    /** 拐角类型 */
+    strokeLinejoin: {
+      type: String,
+      default: "miter",
+      validator: (value: any) => {
+        return ["arcs", "bevel", "miter", "miter-clip", "round"].includes(value);
+      },
+    },
+    /** 旋转角度 */
+    rotate: { type: Number },
+    /** 是否旋转 */
+    spin: { type: Boolean },
+  },
+  emits: {
+    click: (ev: MouseEvent) => true,
+  },
+  setup(props, { emit }) {
+    const name = 'bp-icon';
+
+    const iconClass = computed(() => [name, `${name}-cell`, { [`${name}-spin`]: props.spin }]);
+
+    const innerStyle = computed(() => {
+      const styles: CSSProperties = {};
+        props.size && (styles.fontSize = props.size);
+        props.rotate && (styles.transform = `rotate(${props.rotate}deg)`);
+
+        return styles;
+    });
+
+    const onClick = (ev: MouseEvent) => {
+      emit('click', ev);
+    };
+
+    return {
+      iconClass,
+      innerStyle,
+      onClick,
+    };
+  }
+});
+</script>

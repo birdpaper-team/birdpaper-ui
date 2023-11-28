@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.buildType = exports.buildIndex = exports.generateIconComponent = exports.getIconComponents = void 0;
+exports.buildType = exports.buildIconIndex = exports.generateIconComponent = exports.getIconComponents = void 0;
 const path_1 = __importDefault(require("path"));
 const glob_1 = __importDefault(require("glob"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
@@ -24,6 +24,9 @@ const helper_1 = require("../utils/helper");
 const root = process.cwd();
 /** SVG 资源路径 */
 const svgIconCwd = (0, helper_1.resolvePath)(root, "./components/icon_svg");
+const paths = {
+    icon: (0, helper_1.resolvePath)("./components/icon"),
+};
 /**
  * 获取需要转换的 Icon 列表
  * @returns IconData[]
@@ -63,37 +66,35 @@ function generateIconComponent(iconList) {
                 const { data } = optimizedSvg;
                 const svgElement = jsdom_1.JSDOM.fragment(data).firstElementChild;
                 if (svgElement) {
-                    fs_extra_1.default.outputFile(path_1.default.resolve((0, helper_1.resolvePath)("./components/icon"), `${item.name}/${item.name}.vue`), (0, vue_template_1.getIconVueComponent)({
+                    fs_extra_1.default.outputFile(path_1.default.resolve(paths.icon, `${item.name}/${item.name}.vue`), (0, vue_template_1.getIconVueComponent)({
                         name: item.name,
                         componentName: item.componentName,
                         svgHtml: svgElement.outerHTML,
                     }), (err) => {
                         if (err) {
-                            console.log(`Build ${item.componentName} Failed: ${err}`);
+                            console.log(`BuildComponents ${item.componentName} Failed: ${err}`);
+                            return;
                         }
-                        else {
-                            console.log(`Build ${item.componentName} Success!`);
-                        }
+                        console.log(`BuildComponents ${item.componentName} Success!`);
                     });
                 }
             }
-            const indexContent = (0, vue_template_1.getComponentIndex)({
-                name: item.name,
-                componentName: item.componentName,
-            });
-            fs_extra_1.default.outputFile(path_1.default.resolve((0, helper_1.resolvePath)("./components/icon"), `${item.name}/index.ts`), indexContent, err => {
+            fs_extra_1.default.outputFile(path_1.default.resolve(paths.icon, `${item.name}/index.ts`), (0, vue_template_1.getComponentIndex)(item), err => {
                 if (err) {
-                    console.log(`Build ${item.componentName} Failed: ${err}`);
+                    console.log(`BuildIndex ${item.componentName} Failed: ${err}`);
+                    return;
                 }
-                else {
-                    console.log(`Build ${item.componentName} Success!`);
-                }
+                console.log(`BuildIndex ${item.componentName} Success!`);
             });
         }
     });
 }
 exports.generateIconComponent = generateIconComponent;
-function buildIndex(data) {
+/**
+ * 构建 Icon 集合 birdpaper-ui-icon.ts && index.ts
+ * @param data IconData[]
+ */
+function buildIconIndex(data) {
     const imports = [];
     const exports = [];
     const components = [];
@@ -104,37 +105,38 @@ function buildIndex(data) {
     }
     const bpContent = (0, vue_template_1.getBpVueIcon)({ imports, components });
     const indexContent = (0, vue_template_1.getIndex)({ exports });
-    fs_extra_1.default.outputFile(path_1.default.resolve((0, helper_1.resolvePath)("./components/icon"), "birdpaper-ui-icon.ts"), bpContent, err => {
+    fs_extra_1.default.outputFile(path_1.default.resolve(paths.icon, "birdpaper-ui-icon.ts"), bpContent, err => {
         if (err) {
             console.log(`Build BpVueIcon Failed: ${err}`);
+            return;
         }
-        else {
-            console.log("Build BpVueIcon Success!");
-        }
+        console.log("Build BpVueIcon Success!");
     });
-    fs_extra_1.default.outputFile(path_1.default.resolve((0, helper_1.resolvePath)("./components/icon"), "index.ts"), indexContent, err => {
+    fs_extra_1.default.outputFile(path_1.default.resolve(paths.icon, "index.ts"), indexContent, err => {
         if (err) {
             console.log(`Build Index Failed: ${err}`);
+            return;
         }
-        else {
-            console.log("Build Index Success!");
-        }
+        console.log("Build Index Success!");
     });
 }
-exports.buildIndex = buildIndex;
+exports.buildIconIndex = buildIconIndex;
+/**
+ * 构建 icon-components.ts
+ * @param data IconData[]
+ */
 function buildType(data) {
     const exports = [];
     for (const item of data) {
         exports.push(`${item.componentName}: typeof import('birdpaper-ui/components/icon')['${item.componentName}'];`);
     }
     const typeContent = (0, vue_template_1.getType)({ exports });
-    fs_extra_1.default.outputFile(path_1.default.resolve((0, helper_1.resolvePath)("./components/icon"), "icon-components.ts"), typeContent, err => {
+    fs_extra_1.default.outputFile(path_1.default.resolve(paths.icon, "icon-components.ts"), typeContent, err => {
         if (err) {
             console.log(`Build Type Failed: ${err}`);
+            return;
         }
-        else {
-            console.log("Build Type Success!");
-        }
+        console.log("Build Type Success!");
     });
 }
 exports.buildType = buildType;

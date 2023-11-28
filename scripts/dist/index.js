@@ -25,11 +25,11 @@ const packageData = JSON.parse(packageContent);
 program.version(packageData.version).name("bp-vue-scripts").usage("command [options]");
 program
     .command("icon:generate")
-    .description("icongenerate...")
+    .description("icon:generate...")
     .action(() => __awaiter(void 0, void 0, void 0, function* () {
     const data = (0, iconGenerate_1.getIconComponents)();
     yield (0, iconGenerate_1.generateIconComponent)(data);
-    (0, iconGenerate_1.buildIndex)(data);
+    (0, iconGenerate_1.buildIconIndex)(data);
     (0, iconGenerate_1.buildType)(data);
 }));
 program

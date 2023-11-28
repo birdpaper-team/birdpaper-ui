@@ -3,7 +3,7 @@
 import path from "path";
 import fs from "fs-extra";
 import { Command } from "commander";
-import { getIconComponents, generateIconComponent, buildIndex, buildType } from "./iconGenerate";
+import { getIconComponents, generateIconComponent, buildIconIndex, buildType } from "./iconGenerate";
 import buildComponent from "./buildComponent";
 import buildStyle from "./buildStyle";
 
@@ -16,11 +16,11 @@ program.version(packageData.version).name("bp-vue-scripts").usage("command [opti
 
 program
   .command("icon:generate")
-  .description("icongenerate...")
+  .description("icon:generate...")
   .action(async () => {
     const data = getIconComponents();
     await generateIconComponent(data);
-    buildIndex(data);
+    buildIconIndex(data);
     buildType(data);
   });
 

@@ -1,0 +1,63 @@
+<template>
+  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" :class="iconClass" :style="innerStyle" :stroke-width="strokeWidth" :stroke-linecap="strokeLinecap" :stroke-linejoin="strokeLinejoin" @click="onClick"><path d="M22 43c-4.726-1.767-8.668-7.815-10.64-11.357-.852-1.53-.403-3.408.964-4.502a3.83 3.83 0 0 1 5.1.283L19 29V17.5a2.5 2.5 0 0 1 5 0v6a2.5 2.5 0 0 1 5 0v2a2.5 2.5 0 0 1 5 0v2a2.5 2.5 0 0 1 5 0v7.868c0 1.07-.265 2.128-.882 3.003C37.095 39.82 35.255 42.034 33 43c-3.5 1.5-6.63 1.634-11 0ZM29 12a8 8 0 1 0-15.748 2m0 0c.088.343.199.677.33 1l-.33-1Z" stroke="#333"></path></svg>
+</template>
+
+<script lang="ts">
+import { defineComponent, computed, CSSProperties } from 'vue';
+
+export default defineComponent({
+  name: 'IconPress',
+  props: {
+    /** 图标尺寸 */
+    size: { type: String },
+    /** 线宽 */
+    strokeWidth: { type: Number, default: 4 },
+    /** 端点类型 */
+    strokeLinecap: {
+      type: String,
+      default: "butt",
+      validator: (value: any) => {
+        return ["butt", "round", "square"].includes(value);
+      },
+    },
+    /** 拐角类型 */
+    strokeLinejoin: {
+      type: String,
+      default: "miter",
+      validator: (value: any) => {
+        return ["arcs", "bevel", "miter", "miter-clip", "round"].includes(value);
+      },
+    },
+    /** 旋转角度 */
+    rotate: { type: Number },
+    /** 是否旋转 */
+    spin: { type: Boolean },
+  },
+  emits: {
+    click: (ev: MouseEvent) => true,
+  },
+  setup(props, { emit }) {
+    const name = 'bp-icon';
+
+    const iconClass = computed(() => [name, `${name}-press`, { [`${name}-spin`]: props.spin }]);
+
+    const innerStyle = computed(() => {
+      const styles: CSSProperties = {};
+        props.size && (styles.fontSize = props.size);
+        props.rotate && (styles.transform = `rotate(${props.rotate}deg)`);
+
+        return styles;
+    });
+
+    const onClick = (ev: MouseEvent) => {
+      emit('click', ev);
+    };
+
+    return {
+      iconClass,
+      innerStyle,
+      onClick,
+    };
+  }
+});
+</script>

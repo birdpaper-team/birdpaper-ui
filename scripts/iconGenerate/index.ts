@@ -10,6 +10,9 @@ import { resolvePath, toPascalCase } from "../utils/helper";
 const root = process.cwd();
 /** SVG 资源路径 */
 const svgIconCwd = resolvePath(root, "./components/icon_svg");
+const paths = {
+  icon: resolvePath("./components/icon"),
+};
 
 interface IconData {
   name: string;
@@ -60,7 +63,7 @@ export async function generateIconComponent(iconList: IconData[]) {
       const svgElement = JSDOM.fragment(data).firstElementChild;
       if (svgElement) {
         fs.outputFile(
-          path.resolve(resolvePath("./components/icon"), `${item.name}/${item.name}.vue`),
+          path.resolve(paths.icon, `${item.name}/${item.name}.vue`),
           getIconVueComponent({
             name: item.name,
             componentName: item.componentName,
@@ -68,31 +71,30 @@ export async function generateIconComponent(iconList: IconData[]) {
           }),
           (err: any) => {
             if (err) {
-              console.log(`Build ${item.componentName} Failed: ${err}`);
-            } else {
-              console.log(`Build ${item.componentName} Success!`);
+              console.log(`BuildComponents ${item.componentName} Failed: ${err}`);
+              return;
             }
+            console.log(`BuildComponents ${item.componentName} Success!`);
           }
         );
       }
     }
 
-    const indexContent = getComponentIndex({
-      name: item.name,
-      componentName: item.componentName,
-    });
-
-    fs.outputFile(path.resolve(resolvePath("./components/icon"), `${item.name}/index.ts`), indexContent, err => {
+    fs.outputFile(path.resolve(paths.icon, `${item.name}/index.ts`), getComponentIndex(item), err => {
       if (err) {
-        console.log(`Build ${item.componentName} Failed: ${err}`);
-      } else {
-        console.log(`Build ${item.componentName} Success!`);
+        console.log(`BuildIndex ${item.componentName} Failed: ${err}`);
+        return;
       }
+      console.log(`BuildIndex ${item.componentName} Success!`);
     });
   }
 }
 
-export function buildIndex(data: IconData[]) {
+/**
+ * 构建 Icon 集合 birdpaper-ui-icon.ts && index.ts
+ * @param data IconData[]
+ */
+export function buildIconIndex(data: IconData[]) {
   const imports = [];
   const exports = [];
   const components = [];
@@ -106,23 +108,27 @@ export function buildIndex(data: IconData[]) {
   const bpContent = getBpVueIcon({ imports, components });
   const indexContent = getIndex({ exports });
 
-  fs.outputFile(path.resolve(resolvePath("./components/icon"), "birdpaper-ui-icon.ts"), bpContent, err => {
+  fs.outputFile(path.resolve(paths.icon, "birdpaper-ui-icon.ts"), bpContent, err => {
     if (err) {
       console.log(`Build BpVueIcon Failed: ${err}`);
-    } else {
-      console.log("Build BpVueIcon Success!");
+      return;
     }
+    console.log("Build BpVueIcon Success!");
   });
 
-  fs.outputFile(path.resolve(resolvePath("./components/icon"), "index.ts"), indexContent, err => {
+  fs.outputFile(path.resolve(paths.icon, "index.ts"), indexContent, err => {
     if (err) {
       console.log(`Build Index Failed: ${err}`);
-    } else {
-      console.log("Build Index Success!");
+      return;
     }
+    console.log("Build Index Success!");
   });
 }
 
+/**
+ * 构建 icon-components.ts
+ * @param data IconData[]
+ */
 export function buildType(data: IconData[]) {
   const exports = [];
   for (const item of data) {
@@ -131,11 +137,11 @@ export function buildType(data: IconData[]) {
 
   const typeContent = getType({ exports });
 
-  fs.outputFile(path.resolve(resolvePath("./components/icon"), "icon-components.ts"), typeContent, err => {
+  fs.outputFile(path.resolve(paths.icon, "icon-components.ts"), typeContent, err => {
     if (err) {
       console.log(`Build Type Failed: ${err}`);
-    } else {
-      console.log("Build Type Success!");
+      return;
     }
+    console.log("Build Type Success!");
   });
 }
