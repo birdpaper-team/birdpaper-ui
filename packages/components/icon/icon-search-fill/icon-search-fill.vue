@@ -1,5 +1,5 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" :class="iconClass" :style="innerStyle" :stroke-width="strokeWidth" :stroke-linecap="strokeLinecap" :stroke-linejoin="strokeLinejoin" @click="onClick"><path d="m18.031 16.617 4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617Z"></path></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" :class="iconClass" :style="innerStyle" @click="onClick"><path d="m18.031 16.617 4.283 4.282-1.415 1.415-4.282-4.283A8.96 8.96 0 0 1 11 20c-4.968 0-9-4.032-9-9s4.032-9 9-9 9 4.032 9 9a8.96 8.96 0 0 1-1.969 5.617Z"></path></svg>
 </template>
 
 <script lang="ts">
@@ -10,24 +10,6 @@ export default defineComponent({
   props: {
     /** 图标尺寸 */
     size: { type: String },
-    /** 线宽 */
-    strokeWidth: { type: Number, default: 4 },
-    /** 端点类型 */
-    strokeLinecap: {
-      type: String,
-      default: "butt",
-      validator: (value: any) => {
-        return ["butt", "round", "square"].includes(value);
-      },
-    },
-    /** 拐角类型 */
-    strokeLinejoin: {
-      type: String,
-      default: "miter",
-      validator: (value: any) => {
-        return ["arcs", "bevel", "miter", "miter-clip", "round"].includes(value);
-      },
-    },
     /** 旋转角度 */
     rotate: { type: Number },
     /** 是否旋转 */
@@ -43,7 +25,8 @@ export default defineComponent({
 
     const innerStyle = computed(() => {
       const styles: CSSProperties = {};
-        props.size && (styles.fontSize = props.size);
+        props.size && (styles.width = props.size);
+        props.size && (styles.height = props.size);
         props.rotate && (styles.transform = `rotate(${props.rotate}deg)`);
 
         return styles;

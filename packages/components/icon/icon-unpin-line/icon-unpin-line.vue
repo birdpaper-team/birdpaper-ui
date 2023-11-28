@@ -1,5 +1,5 @@
 <template>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" :class="iconClass" :style="innerStyle" :stroke-width="strokeWidth" :stroke-linecap="strokeLinecap" :stroke-linejoin="strokeLinejoin" @click="onClick"><path d="m20.97 17.172-1.414 1.414-3.535-3.535-.073.074-.707 3.535-1.415 1.415-4.242-4.243-4.95 4.95-1.414-1.414 4.95-4.95-4.243-4.243L5.34 8.761l3.536-.707.073-.074-3.536-3.536 1.414-1.415L20.97 17.172ZM10.365 9.394l-.502.502-2.822.565 6.5 6.5.564-2.822.502-.502-4.242-4.243Zm8.411.074-1.34 1.34 1.414 1.415 1.34-1.34.707.706 1.415-1.414-8.486-8.485-1.414 1.414.707.707-1.34 1.34 1.414 1.415 1.34-1.34 4.243 4.242Z"></path></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" :class="iconClass" :style="innerStyle" @click="onClick"><path d="m20.97 17.172-1.414 1.414-3.535-3.535-.073.074-.707 3.535-1.415 1.415-4.242-4.243-4.95 4.95-1.414-1.414 4.95-4.95-4.243-4.243L5.34 8.761l3.536-.707.073-.074-3.536-3.536 1.414-1.415L20.97 17.172ZM10.365 9.394l-.502.502-2.822.565 6.5 6.5.564-2.822.502-.502-4.242-4.243Zm8.411.074-1.34 1.34 1.414 1.415 1.34-1.34.707.706 1.415-1.414-8.486-8.485-1.414 1.414.707.707-1.34 1.34 1.414 1.415 1.34-1.34 4.243 4.242Z"></path></svg>
 </template>
 
 <script lang="ts">
@@ -10,24 +10,6 @@ export default defineComponent({
   props: {
     /** 图标尺寸 */
     size: { type: String },
-    /** 线宽 */
-    strokeWidth: { type: Number, default: 4 },
-    /** 端点类型 */
-    strokeLinecap: {
-      type: String,
-      default: "butt",
-      validator: (value: any) => {
-        return ["butt", "round", "square"].includes(value);
-      },
-    },
-    /** 拐角类型 */
-    strokeLinejoin: {
-      type: String,
-      default: "miter",
-      validator: (value: any) => {
-        return ["arcs", "bevel", "miter", "miter-clip", "round"].includes(value);
-      },
-    },
     /** 旋转角度 */
     rotate: { type: Number },
     /** 是否旋转 */
@@ -43,7 +25,8 @@ export default defineComponent({
 
     const innerStyle = computed(() => {
       const styles: CSSProperties = {};
-        props.size && (styles.fontSize = props.size);
+        props.size && (styles.width = props.size);
+        props.size && (styles.height = props.size);
         props.rotate && (styles.transform = `rotate(${props.rotate}deg)`);
 
         return styles;

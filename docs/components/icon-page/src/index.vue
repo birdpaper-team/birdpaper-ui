@@ -1,10 +1,9 @@
 <template>
   <div class="icon-page">
     <div class="icon-page-inner">
-      <template v-for="item in iconList">
+      <template v-for="item in icons">
         <div class="icon-item" @click="handleCopy(item)">
           <component :is="item"></component>
-          <span v-text="item.name"></span>
         </div>
       </template>
     </div>
@@ -12,7 +11,7 @@
 </template>
 
 <script setup lang="ts" name="icon-page">
-import * as iconList from "birdpaper-ui/components/icon";
+import * as icons from "birdpaper-ui/components/icon";
 import * as useClipboard from "vue-clipboard3/dist/esm/index";
 import { Message } from "birdpaper-ui";
 
