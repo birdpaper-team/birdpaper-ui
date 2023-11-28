@@ -1,0 +1,13 @@
+import type { App } from 'vue';
+import _IconArrowRightSLine from './icon-arrow-right-s-line.vue';
+import { getComponentsPrefix } from "../../../utils/config";
+
+_IconArrowRightSLine.name = getComponentsPrefix() + _IconArrowRightSLine.name;
+
+const IconArrowRightSLine = Object.assign(_IconArrowRightSLine, {
+  install: (app: App) => {
+    app.component(_IconArrowRightSLine.name, _IconArrowRightSLine);
+  }
+});
+
+export default IconArrowRightSLine;

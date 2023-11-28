@@ -1,5 +1,5 @@
 <template>
-  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" :class="iconClass" :style="innerStyle" :stroke-width="strokeWidth" :stroke-linecap="strokeLinecap" :stroke-linejoin="strokeLinejoin" @click="onClick"><path d="M24.707 9.565 9.858 24.415a9 9 0 0 0 0 12.727v0a9 9 0 0 0 12.728 0l17.678-17.677a6 6 0 0 0 0-8.486v0a6 6 0 0 0-8.486 0L14.101 28.657a3 3 0 0 0 0 4.243v0a3 3 0 0 0 4.242 0l14.85-14.85" stroke="#333"></path></svg>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" :class="iconClass" :style="innerStyle" :stroke-width="strokeWidth" :stroke-linecap="strokeLinecap" :stroke-linejoin="strokeLinejoin" @click="onClick"><path d="m18.364 15.535-1.414-1.414 1.414-1.414a5 5 0 0 0-7.07-7.071L9.878 7.05 8.465 5.636l1.414-1.414a7 7 0 0 1 9.9 9.9l-1.415 1.413Zm-2.828 2.829-1.414 1.414a7 7 0 1 1-9.9-9.9l1.414-1.414 1.415 1.414-1.415 1.415a5 5 0 0 0 7.071 7.07l1.415-1.413 1.414 1.414Zm-.707-10.607 1.414 1.414-7.071 7.072-1.414-1.415 7.07-7.07Z"></path></svg>
 </template>
 
 <script lang="ts">
