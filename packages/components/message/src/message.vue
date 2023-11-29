@@ -5,7 +5,7 @@
     </span>
     <span :class="`${name}-content`">{{ content }}</span>
     <span v-if="closeable" :class="`${name}-close`" @click="handleClose">
-      <IconCloseSmall />
+      <!-- <IconCloseSmall /> -->
     </span>
   </li>
 </template>
@@ -14,7 +14,7 @@
 import { PropType, nextTick, onMounted, onUnmounted, ref } from "vue";
 import { MessageType } from "./type";
 import { computed } from "vue";
-import { IconCloseSmall, IconCheckOne, IconCloseOne } from "birdpaper-icon";
+// import { IconCloseSmall, IconCheckOne, IconCloseOne } from "birdpaper-icon";
 
 const name = "bp-message";
 
@@ -40,8 +40,8 @@ const emits = defineEmits<{
 
 const timer = ref(0);
 const iconType = {
-  success: IconCheckOne,
-  error: IconCloseOne,
+  // success: IconCheckOne,
+  // error: IconCloseOne,
   // warning: "ri-error-warning-fill",
   // loading: "ri-loader-4-line",
 };
