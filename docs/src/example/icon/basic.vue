@@ -1,11 +1,9 @@
 <template>
   <bp-space>
-    <IconAncientGateLine />
-    <IconBugLine />
-    <IconDiscLine />
-    <IconMenuSearchLine />
+    <IconCloseOne />
   </bp-space>
 </template>
 
 <script setup lang="ts">
+import { IconCloseOne } from "birdpaper-icon";
 </script>

@@ -91,25 +91,18 @@
       margin-left: 6px;
 
       .bp-icon {
-        width: 16px;
-        height: 16px;
-        fill: @gary-6;
+        width: 20px;
+        height: 20px;
+        stroke: @gary-7;
         cursor: pointer;
+        padding: 2px;
+        border-radius: 10px;
         transition: all 0.2s ease;
 
-        &::before {
-          padding: 2px;
-          border-radius: 10px;
-          transition: all 0.2s ease;
-        }
-
         &:hover {
-          fill: @gary-9;
-
-          &::before {
-            background-color: @gary-3;
-            transition: all 0.2s ease;
-          }
+          stroke: @gary-9;
+          background-color: @gary-3;
+          transition: all 0.2s ease;
         }
       }
     }

@@ -3,10 +3,10 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import dts from "vite-plugin-dts";
 
-export default (type: "component" | "icon"): InlineConfig => {
-  const entry = type === "component" ? "components/index.ts" : "components/icon/index.ts";
-  const entryFileName = type === "component" ? "birdpaper-ui" : "birdpaper-ui-icon";
-  const name = type === "component" ? "BirdpaperUI" : "BirdpaperUIIcon";
+export default (type: "component"): InlineConfig => {
+  const entry = "components/index.ts";
+  const entryFileName = "birdpaper-ui";
+  const name = "BirdpaperUI";
 
   return {
     mode: "production",

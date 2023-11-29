@@ -12,7 +12,6 @@ async function run({ umd = false }) {
   if (umd) {
     await fs.emptyDir(path.resolve(process.cwd(), "../dist"));
     await build(getUmdConfig("component"));
-    await build(getUmdConfig("icon"));
   }
 }
 

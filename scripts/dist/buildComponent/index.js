@@ -25,7 +25,6 @@ function run({ umd = false }) {
         if (umd) {
             yield fs_extra_1.default.emptyDir(path_1.default.resolve(process.cwd(), "../dist"));
             yield (0, vite_1.build)((0, vite_prod_umd_1.default)("component"));
-            yield (0, vite_1.build)((0, vite_prod_umd_1.default)("icon"));
         }
     });
 }

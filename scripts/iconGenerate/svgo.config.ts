@@ -21,9 +21,6 @@ const options: OptimizeOptions = {
         attrs: [
           'class',
           'style',
-          'stroke-width',
-          'stroke-linecap',
-          'stroke-linejoin',
         ],
       },
     },
@@ -33,9 +30,6 @@ const options: OptimizeOptions = {
         attributes: [
           { ':class': 'iconClass' },
           { ':style': 'innerStyle' },
-          { ':stroke-width': 'strokeWidth' },
-          { ':stroke-linecap': 'strokeLinecap' },
-          { ':stroke-linejoin': 'strokeLinejoin' },
           { '@click': 'onClick' },
         ],
       },
