@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts" name="icon-page">
-import * as icons from "birdpaper-ui/components/icon";
+import * as icons from "birdpaper-icon";
 import * as useClipboard from "vue-clipboard3/dist/esm/index";
 import { Message } from "birdpaper-ui";
 

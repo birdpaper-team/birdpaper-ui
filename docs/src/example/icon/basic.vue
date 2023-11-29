@@ -1,11 +1,9 @@
 <template>
   <bp-space>
-    <IconAncientGateLine />
-    <IconBugLine />
-    <IconDiscLine />
-    <IconMenuSearchLine />
+    <IconBringToFront />
   </bp-space>
 </template>
 
 <script setup lang="ts">
+import { IconBringToFront } from "birdpaper-icon";
 </script>

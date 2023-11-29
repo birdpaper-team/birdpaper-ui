@@ -13,7 +13,7 @@ const config: InlineConfig = {
     emptyOutDir: false,
     minify: false,
     rollupOptions: {
-      input: ["components/index.ts", "components/icon/index.ts"],
+      input: ["components/index.ts"],
       output: [
         {
           format: "es",

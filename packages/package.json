@@ -11,6 +11,7 @@
   "author": "木亦Sam",
   "license": "MIT",
   "dependencies": {
+    "birdpaper-icon": "^0.0.2",
     "@vueuse/core": "^10.1.2",
     "async-validator": "^4.2.5",
     "gulp-concat": "^2.6.1",
