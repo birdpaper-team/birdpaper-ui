@@ -1,9 +1,9 @@
 <template>
   <bp-space>
-    <IconCloseOne />
+    <!-- <IconCloseOne /> -->
   </bp-space>
 </template>
 
 <script setup lang="ts">
-import { IconCloseOne } from "birdpaper-icon";
+// import { IconCloseOne } from "birdpaper-icon";
 </script>
