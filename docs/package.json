@@ -13,7 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "babel-plugin-import": "^1.13.6",
-    "birdpaper-icon": "^0.0.2",
+    "birdpaper-icon": "^0.0.8",
     "birdpaper-ui": "workspace:packages@*",
     "markdown-it-anchor": "^8.6.7",
     "remixicon": "^3.5.0",

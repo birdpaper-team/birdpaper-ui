@@ -4,6 +4,7 @@
       <template v-for="item in icons">
         <div class="icon-item" @click="handleCopy(item)">
           <component :is="item"></component>
+          <span>{{ item.name }}</span>
         </div>
       </template>
     </div>
