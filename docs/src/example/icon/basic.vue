@@ -1,8 +1,13 @@
 <template>
   <bp-space>
-    <bp-icon name="ri-tools-line"></bp-icon>
-    <bp-icon name="ri-palette-line"></bp-icon>
-    <bp-icon name="ri-drag-drop-line"></bp-icon>
-    <bp-icon name="ri-map-pin-2-line"></bp-icon>
+    <IconBrush3Line />
+    <IconBardLine />
+    <IconCompass3Line />
+    <IconVuejsLine />
+    <IconCelsiusFill />
   </bp-space>
 </template>
+
+<script setup lang="ts">
+import { IconBrush3Line, IconBardLine, IconCompass3Line, IconVuejsLine, IconCelsiusFill } from "birdpaper-icon";
+</script>

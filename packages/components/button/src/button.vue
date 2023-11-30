@@ -1,7 +1,7 @@
 <template>
   <button :class="btnClass" type="button" :disabled="isDisabled" @click="onClick">
     <span v-if="btnIcon || loading" class="left-icon">
-      <bp-icon :class="{ 'bp-icon-loading': loading }" :name="btnIcon"></bp-icon>
+      <component :class="{ 'bp-icon-loading': loading }" :is="btnIcon" size="14px"></component>
     </span>
     <slot></slot>
   </button>
@@ -10,6 +10,7 @@
 <script lang="ts">
 import { ButtonType, ButtonSize, ButtonShape, ButtonStatus } from "./types";
 import { computed, useSlots, PropType, defineComponent } from "vue";
+import { IconLoader4Line } from "birdpaper-icon";
 
 export default defineComponent({
   name: "Button",
@@ -27,7 +28,7 @@ export default defineComponent({
     /** 是否禁用 Disabled or not */
     disabled: { type: Boolean, default: false },
     /** 按钮图标 Button icon */
-    icon: { type: String, default: "" },
+    icon: { type: Object },
     /** 是否撑满父级 Block or not */
     block: { type: Boolean, default: false },
   },
@@ -48,8 +49,8 @@ export default defineComponent({
       return className;
     });
 
-    const btnIcon = computed<string>(() => {
-      return props.loading ? "ri-loader-4-line" : props.icon;
+    const btnIcon = computed<object>(() => {
+      return props.loading ? IconLoader4Line : props.icon;
     });
 
     const onClick = () => {

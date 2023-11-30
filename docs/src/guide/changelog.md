@@ -13,6 +13,14 @@ const  handleClick = ()=>{
 
 `birdpaper-ui` 遵循 Semver 语义化版本规范。如果你想了解该项目的开发，可以访问 <a @click="handleClick">产品计划</a>
 
+## 2.1.10
+
+::: timeline 2023-11-30
+
+<!--@include: ../change-log/2.1.10.md-->
+
+:::
+
 ## 2.1.9
 
 ::: timeline 2023-11-23

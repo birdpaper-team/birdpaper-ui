@@ -3,7 +3,7 @@
     <input type="checkbox" :class="`${name}-inner`" />
 
     <span :class="[`${name}-checkbox`, isCheck ? `${name}-check` : '']">
-      <bp-icon v-if="isCheck" name="ri-check-line"></bp-icon>
+      <IconCheckLine v-if="isCheck" />
     </span>
     <span :class="`${name}-label`">
       <slot></slot>
@@ -14,6 +14,7 @@
 <script lang="ts">
 import { PropType, defineComponent, computed } from "vue";
 import { CheckboxValue } from "./type";
+import { IconCheckLine } from "birdpaper-icon";
 
 export default defineComponent({
   name: "Checkbox",
@@ -25,6 +26,7 @@ export default defineComponent({
     /** 复选框的值 */
     value: { type: [String, Number] },
   },
+  components: { IconCheckLine },
   emits: ["update:modelValue", "change"],
   setup(props, { emit }) {
     const name = "bp-checkbox";

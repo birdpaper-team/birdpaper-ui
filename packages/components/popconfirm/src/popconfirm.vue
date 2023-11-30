@@ -8,10 +8,7 @@
       <div :class="`${name}-inner`">
         <div :class="`${name}-inner-content`">
           <span :class="`${name}-icon`">
-            <bp-icon v-if="type === 'info'" name="ri-information-fill"></bp-icon>
-            <bp-icon v-if="type === 'success'" name="ri-checkbox-circle-fill"></bp-icon>
-            <bp-icon v-if="type === 'warning'" name="ri-error-warning-fill"></bp-icon>
-            <bp-icon v-if="type === 'danger'" name="ri-close-circle-fill"></bp-icon>
+            <component :is="iconType[type]" size="16px"></component>
           </span>
           <span :class="`${name}-text`">
             {{ content }}
@@ -36,6 +33,7 @@ import { PropType, defineComponent, ref } from "vue";
 import { PopconfirmPosition, PopconfirmType } from "./types";
 import { vClickOutside } from "../../../directives/clickOutside";
 import BpTrigger from "../../trigger/src/trigger";
+import { IconCheckboxCircleFill, IconCloseCircleFill, IconErrorWarningFill, IconInformationFill } from "birdpaper-icon";
 
 export default defineComponent({
   name: "Popconfirm",
@@ -58,6 +56,12 @@ export default defineComponent({
   setup(props, { emit }) {
     const name = "bp-popconfirm";
     const show = ref<boolean>(false);
+    const iconType = {
+      info: IconInformationFill,
+      success: IconCheckboxCircleFill,
+      error: IconCloseCircleFill,
+      warning: IconErrorWarningFill,
+    };
 
     const handleCancle = () => {
       show.value = false;
@@ -84,6 +88,7 @@ export default defineComponent({
       name,
       show,
       okLoading,
+      iconType,
       handleCancle,
       handleOk,
     };

@@ -23,7 +23,6 @@ import Drawer from "./drawer";
 import Tooltip from "./tooltip";
 import Trigger from "./trigger";
 import Form from "./form";
-import Icon from "./icon";
 import Message from "./message";
 
 const components: Record<string, Plugin> = {
@@ -51,7 +50,6 @@ const components: Record<string, Plugin> = {
   Tooltip,
   Trigger,
   Form,
-  Icon,
   Message,
 };
 
@@ -64,31 +62,6 @@ const install = function (app: App) {
 export { default as Message } from "./message";
 
 export default {
+  ...components,
   install,
-  Button,
-  ButtonGroup,
-  Input,
-  InputNumber,
-  Textarea,
-  Radio,
-  Checkbox,
-  Switch,
-  Select,
-  Pagination,
-  Table,
-  Space,
-  Alert,
-  Tag,
-  Modal,
-  Spin,
-  Grid,
-  Link,
-  Popconfirm,
-  Image,
-  Drawer,
-  Tooltip,
-  Trigger,
-  Form,
-  Icon,
-  Message,
 };

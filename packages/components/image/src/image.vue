@@ -15,7 +15,7 @@
     </slot>
     <slot name="error" v-if="!isLoading && isError">
       <div :class="`${name}-error`">
-        <bp-icon name="ri-image-2-line"></bp-icon>
+        <IconImage2Line />
       </div>
     </slot>
   </div>
@@ -24,6 +24,7 @@
 <script lang="ts">
 import { CSSProperties, PropType, computed, defineComponent, ref, watchEffect } from "vue";
 import { ImageFit } from "./types";
+import { IconImage2Line } from "birdpaper-icon";
 
 export default defineComponent({
   name: "Image",
@@ -31,7 +32,7 @@ export default defineComponent({
     /** 图片资源地址 */
     src: { type: String, default: "" },
     /** 图片适应类型 */
-    fit: { type: String as PropType<ImageFit>, default: 'fill' },
+    fit: { type: String as PropType<ImageFit>, default: "fill" },
     /** 文字描述 */
     alt: { type: String, default: "" },
     /** 标题 */

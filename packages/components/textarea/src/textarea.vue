@@ -20,7 +20,7 @@
     <div class="suffix">
       <template v-if="!slots.suffix">
         <!-- 清空按钮 -->
-        <bp-icon v-if="showClear" class="click-icon" name="ri-close-line" @click="handleClear"></bp-icon>
+        <IconCloseLine v-if="showClear" class="click-icon" @click="handleClear" />
         <!-- 字数限制提示 -->
         <span v-if="showWordLimit" v-text="limitText"></span>
       </template>
@@ -32,6 +32,7 @@
 <script lang="ts">
 import { defineComponent, nextTick } from "vue";
 import { computed, ref } from "vue";
+import { IconCloseLine } from "birdpaper-icon";
 
 export default defineComponent({
   name: "Textarea",
@@ -55,6 +56,7 @@ export default defineComponent({
     /** 是否允许清空 Clearable or not */
     clearable: { type: Boolean, default: false },
   },
+  components: { IconCloseLine },
   emits: ["update:modelValue", "input", "focus", "blur", "keypress", "keyup"],
   setup(props, { emit, slots }) {
     const name = "bp-textarea";

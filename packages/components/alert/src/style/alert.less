@@ -27,11 +27,6 @@
   &-icon {
     display: flex;
     margin-right: 8px;
-
-    .bp-icon {
-      width: 16px;
-      height: 16px;
-    }
   }
 
   &-body {
@@ -78,22 +73,16 @@
         }
       }
 
-      .ri-close-line {
+      .bp-icon {
         .close-inner;
-
-        &::before {
-          padding: 1px;
-          border-radius: 10px;
-          transition: all 0.2s ease;
-        }
+        padding: 1px;
+        border-radius: 10px;
+        transition: all 0.2s ease;
 
         &:hover {
-          color: @gary-7;
-
-          &::before {
-            background-color: @gary-1;
-            transition: all 0.2s ease;
-          }
+          fill: @gary-7;
+          background-color: @gary-1;
+          transition: all 0.2s ease;
         }
       }
     }

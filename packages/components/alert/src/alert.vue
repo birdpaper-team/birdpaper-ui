@@ -1,10 +1,7 @@
 <template>
   <div :class="cls" v-if="isRender">
     <div :class="`${name}-icon`">
-      <bp-icon v-if="type === 'info'" name="ri-information-fill"></bp-icon>
-      <bp-icon v-if="type === 'success'" name="ri-checkbox-circle-fill"></bp-icon>
-      <bp-icon v-if="type === 'warning'" name="ri-error-warning-fill"></bp-icon>
-      <bp-icon v-if="type === 'error'" name="ri-close-circle-fill"></bp-icon>
+      <component :is="iconType[type]" size="16px"></component>
     </div>
 
     <div :class="`${name}-body`">
@@ -18,7 +15,7 @@
 
     <div :class="`${name}-option`">
       <div v-if="closeable" :class="`${name}-close-inner`" @click="handleClose">
-        <bp-icon name="ri-close-line" v-if="!slots.close"></bp-icon>
+        <IconCloseLine v-if="!slots.close" />
         <span v-else><slot name="close"></slot></span>
       </div>
     </div>
@@ -26,9 +23,15 @@
 </template>
 
 <script lang="ts">
-import { PropType, computed, ref } from "vue";
+import { defineComponent, PropType, computed, ref } from "vue";
 import { AlertType } from "./types";
-import { defineComponent } from "vue";
+import {
+  IconCloseLine,
+  IconCheckboxCircleFill,
+  IconCloseCircleFill,
+  IconErrorWarningFill,
+  IconLoader5Line,
+} from "birdpaper-icon";
 
 export default defineComponent({
   name: "Alert",
@@ -38,8 +41,16 @@ export default defineComponent({
     closeable: { type: Boolean, default: false },
   },
   emits: ["close"],
+  components: { IconCloseLine },
   setup(props, { emit, slots }) {
     const name = "bp-alert";
+
+    const iconType = {
+      success: IconCheckboxCircleFill,
+      error: IconCloseCircleFill,
+      warning: IconErrorWarningFill,
+      loading: IconLoader5Line,
+    };
 
     const cls = computed(() => {
       return [name, `${name}-${props.type}`, props.title ? `${name}-with-title` : ""];
@@ -55,6 +66,7 @@ export default defineComponent({
     return {
       name,
       cls,
+      iconType,
       isRender,
       handleClose,
       slots,

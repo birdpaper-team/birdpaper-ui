@@ -17,13 +17,17 @@
       @mouseleave="handleMouseLeave"
     >
       <template #suffix>
-        <bp-icon
+        <IconCloseLine
           v-if="!disabled && showClear && currentSelect.label"
           class="click-icon"
-          name="ri-close-line"
-          @click.stop="hancleClear"
-        ></bp-icon>
-        <bp-icon v-else :class="`${name}-icon-inner`" :name="`ri-arrow-${isFocus ? 'up' : 'down'}-s-line`"></bp-icon>
+          @click.stop="handleClear"
+        />
+        <component
+          v-else
+          :class="`${name}-icon-inner`"
+          :is="isFocus ? IconArrowUpSLine : IconArrowDownSLine"
+          size="16px"
+        ></component>
       </template>
     </bp-input>
 
@@ -36,19 +40,17 @@
 </template>
 
 <script lang="ts">
-import { PropType, provide, ref } from "vue";
+import { defineComponent, PropType, provide, ref, computed, watch } from "vue";
 import { SelectBindValue, selectInjectionKey } from "./type";
 import { vClickOutside } from "../../../directives/clickOutside";
-import { defineComponent } from "vue";
 import BpInput from "../../input/src/input.vue";
-import { watch } from "vue";
 import { useSelect } from "./select";
 import BpTrigger from "../../trigger/src/trigger";
-import { computed } from "vue";
+import { IconCloseLine, IconArrowDownSLine, IconArrowUpSLine } from "birdpaper-icon";
 
 export default defineComponent({
   name: "Select",
-  components: { BpInput },
+  components: { BpInput, IconCloseLine },
   directives: { clickOutside: vClickOutside },
   props: {
     /** 绑定值 Binding value */
@@ -104,7 +106,7 @@ export default defineComponent({
       showClear.value = false;
     };
 
-    const hancleClear = () => {
+    const handleClear = () => {
       currentSelect.value = "";
       currentSelect.label = "";
     };
@@ -132,7 +134,9 @@ export default defineComponent({
       handleMouseEnter,
       handleMouseLeave,
       showClear,
-      hancleClear,
+      handleClear,
+      IconArrowDownSLine,
+      IconArrowUpSLine,
     };
   },
 });
