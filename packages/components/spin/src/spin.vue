@@ -4,7 +4,6 @@
 
     <div :class="`${name}-mask`" v-if="slots.default && loading">
       <div :class="`${name}-loading`">
-        <bp-icon class="bp-icon-loading" name="ri-loader-4-line"></bp-icon>
         <IconLoader4Line class="bp-icon-loading" size="14px" />
         <p :class="`${name}-tip`">{{ tip }}</p>
       </div>

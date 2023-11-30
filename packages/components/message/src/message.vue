@@ -1,7 +1,7 @@
 <template>
   <li :class="clsName">
     <span v-if="type !== 'text'" :class="[`${name}-icon`, `icon-${type}`]">
-      <component :is="iconType[type]"></component>
+      <component :is="iconType[type]" size="18px"></component>
     </span>
     <span :class="`${name}-content`">{{ content }}</span>
     <span v-if="closeable" :class="`${name}-close`" @click="handleClose">

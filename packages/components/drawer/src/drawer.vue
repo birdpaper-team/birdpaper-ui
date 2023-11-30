@@ -10,7 +10,7 @@
           <div :class="cls" :style="`width:${width};`">
             <div :class="`${name}-header`">
               <p :class="`${name}-header-title`">{{ title }}</p>
-              <bp-icon v-if="!hideClose" :class="`${name}-header-close`" name="ri-close-line" @click="handleCancle"></bp-icon>
+              <IconCloseLine v-if="!hideClose" :class="`${name}-header-close`" @click="handleCancle" size="20px" />
             </div>
             <div :class="`${name}-body`">
               <slot></slot>
@@ -34,6 +34,7 @@
 <script lang="ts">
 import { computed, defineComponent, ref, watch } from "vue";
 import { useScroll } from "../../../utils/useScroll";
+import { IconCloseLine } from "birdpaper-icon";
 
 export default defineComponent({
   name: "Drawer",
@@ -63,6 +64,7 @@ export default defineComponent({
     onBeforeOk: { type: Function, default: () => true },
   },
   emits: ["update:modelValue", "ok", "cancle"],
+  components: { IconCloseLine },
   setup(props, { emit, slots }) {
     const name = "bp-drawer";
     const containerVisable = ref<boolean>(false);
