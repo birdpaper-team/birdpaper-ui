@@ -31,25 +31,18 @@
     -o-text-overflow: ellipsis;
   }
 
-  .ri-close-line {
-    color: @gary-7;
+  .bp-icon {
+    fill: @gary-7;
     margin-left: 6px;
     cursor: pointer;
+    padding: 1px;
+    border-radius: 10px;
     transition: all 0.2s ease;
-
-    &::before {
-      padding: 1px;
-      border-radius: 10px;
-      transition: all 0.2s ease;
-    }
 
     &:hover {
       color: @gary-8;
-
-      &::before {
-        background-color: @gary-4;
-        transition: all 0.2s ease;
-      }
+      background-color: @gary-4;
+      transition: all 0.2s ease;
     }
   }
 }

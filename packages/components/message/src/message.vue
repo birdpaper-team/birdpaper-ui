@@ -1,11 +1,11 @@
 <template>
   <li :class="clsName">
     <span v-if="type !== 'text'" :class="[`${name}-icon`, `icon-${type}`]">
-      <component :is='iconType[type]'></component>
+      <component :is="iconType[type]"></component>
     </span>
     <span :class="`${name}-content`">{{ content }}</span>
     <span v-if="closeable" :class="`${name}-close`" @click="handleClose">
-      <!-- <IconCloseSmall /> -->
+      <IconCloseLine />
     </span>
   </li>
 </template>
@@ -14,7 +14,13 @@
 import { PropType, nextTick, onMounted, onUnmounted, ref } from "vue";
 import { MessageType } from "./type";
 import { computed } from "vue";
-// import { IconCloseSmall, IconCheckOne, IconCloseOne } from "birdpaper-icon";
+import {
+  IconCloseLine,
+  IconCheckboxCircleFill,
+  IconCloseCircleFill,
+  IconErrorWarningFill,
+  IconLoader5Line,
+} from "birdpaper-icon";
 
 const name = "bp-message";
 
@@ -40,10 +46,10 @@ const emits = defineEmits<{
 
 const timer = ref(0);
 const iconType = {
-  // success: IconCheckOne,
-  // error: IconCloseOne,
-  // warning: "ri-error-warning-fill",
-  // loading: "ri-loader-4-line",
+  success: IconCheckboxCircleFill,
+  error: IconCloseCircleFill,
+  warning: IconErrorWarningFill,
+  loading: IconLoader5Line,
 };
 
 const init = () => {

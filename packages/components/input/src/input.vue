@@ -21,16 +21,16 @@
       <!-- TODO: Need to Optim -->
       <template v-if="!slots.suffix">
         <!-- 清空按钮 -->
-        <bp-icon v-if="showClear" class="click-icon" name="ri-close-line" @click="handleClear"></bp-icon>
+        <IconCloseLine v-if="showClear" class="click-icon" @click="handleClear" />
         <!-- 字数限制提示 -->
         <span v-if="showWordLimit" v-text="limitText"></span>
         <!-- 密码/明文切换 -->
-        <bp-icon
+        <component
           v-if="type === 'password'"
           @click="triggerPassword"
           class="click-icon"
-          :name="showPassword ? 'ri-eye-fill' : 'ri-eye-close-fill'"
-        ></bp-icon>
+          :is="showPassword ? IconEyeFill : IconEyeCloseFill"
+        ></component>
       </template>
       <slot name="suffix"></slot>
     </div>
@@ -38,9 +38,9 @@
 </template>
 
 <script lang="ts">
-import { computed, nextTick, PropType, ref, useSlots } from "vue";
+import { defineComponent, computed, nextTick, PropType, ref } from "vue";
 import { InputSize, InputType } from "./types";
-import { defineComponent } from "vue";
+import { IconCloseLine, IconEyeFill, IconEyeCloseFill } from "birdpaper-icon";
 
 export default defineComponent({
   name: "Input",
@@ -66,6 +66,7 @@ export default defineComponent({
     /** 是否允许清空 Clearable or not */
     clearable: { type: Boolean, default: false },
   },
+  components: { IconCloseLine },
   emits: ["update:modelValue", "input", "focus", "blur", "keypress", "keyup"],
   setup(props, { emit, slots }) {
     const name = "bp-input";
@@ -142,6 +143,8 @@ export default defineComponent({
       onKeyup,
       onInput,
       triggerPassword,
+      IconEyeFill,
+      IconEyeCloseFill,
     };
   },
 });

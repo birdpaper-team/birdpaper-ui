@@ -7,7 +7,7 @@
     <div class="icon-page-inner">
       <template v-for="item in searchList">
         <div class="icon-item" @click="handleCopy(`Icon${item}`)">
-          <component :is="iconList[`Icon${item}`]" size="18"></component>
+          <component :is="allIcons[`Icon${item}`]" size="20"></component>
           <p>{{ item }}</p>
         </div>
       </template>
@@ -16,7 +16,7 @@
 </template>
 
 <script setup lang="ts" name="icon-page">
-import * as iconList from "birdpaper-icon";
+import * as allIcons from "birdpaper-icon";
 import * as useClipboard from "vue-clipboard3/dist/esm/index";
 import { Message } from "birdpaper-ui";
 import { ref } from "vue";
@@ -34,7 +34,7 @@ const iconNames = ref<string[]>([]);
 
 iconNames.value = [];
 const init = () => {
-  for (const key in iconList) {
+  for (const key in allIcons) {
     if (key !== "default") {
       iconNames.value.push(filterName(key));
     }

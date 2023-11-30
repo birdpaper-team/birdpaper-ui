@@ -52,6 +52,7 @@
     "es",
     "lib"
   ],
+  "homepage": "https://www.birdpaper.design",
   "repository": {
     "type": "git",
     "url": "https://github.com/birdpaper-team/birdpaper-ui"

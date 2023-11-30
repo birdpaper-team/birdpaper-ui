@@ -7,13 +7,17 @@
 
     <bp-button-group type="primary" status="primary">
       <bp-button>更多操作</bp-button>
-      <bp-button icon="ri-arrow-down-s-line"></bp-button>
+      <bp-button :icon="IconArrowDownSLine"></bp-button>
     </bp-button-group>
 
     <bp-button-group type="primary" block status="danger">
-      <bp-button icon="ri-heart-3-fill"></bp-button>
-      <bp-button icon="ri-star-fill"></bp-button>
-      <bp-button icon="ri-thumb-up-fill"></bp-button>
+      <bp-button :icon="IconHeart3Fill"></bp-button>
+      <bp-button :icon="IconStarFill"></bp-button>
+      <bp-button :icon="IconThumbUpFill"></bp-button>
     </bp-button-group>
   </bp-space>
 </template>
+
+<script setup lang="ts">
+import { IconArrowDownSLine, IconHeart3Fill, IconStarFill, IconThumbUpFill } from "birdpaper-icon";
+</script>

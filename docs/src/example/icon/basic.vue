@@ -1,9 +1,13 @@
 <template>
   <bp-space>
-    <!-- <IconCloseOne /> -->
+    <IconBrush3Line />
+    <IconBardLine />
+    <IconCompass3Line />
+    <IconVuejsLine />
+    <IconCelsiusFill />
   </bp-space>
 </template>
 
 <script setup lang="ts">
-// import { IconCloseOne } from "birdpaper-icon";
+import { IconBrush3Line, IconBardLine, IconCompass3Line, IconVuejsLine, IconCelsiusFill } from "birdpaper-icon";
 </script>
