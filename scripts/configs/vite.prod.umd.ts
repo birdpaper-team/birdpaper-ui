@@ -17,7 +17,7 @@ export default (type: "component"): InlineConfig => {
       sourcemap: true,
       minify: false,
       rollupOptions: {
-        external: "vue",
+        external: ["vue"],
         output: [
           {
             format: "umd",
@@ -43,9 +43,6 @@ export default (type: "component"): InlineConfig => {
         formats: ["umd"],
         name,
       },
-    },
-    optimizeDeps: {
-      exclude: ["async-validator"],
     },
     // @ts-ignore vite内部类型错误
     plugins: [

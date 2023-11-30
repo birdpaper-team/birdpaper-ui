@@ -2,7 +2,6 @@
   "name": "packages",
   "description": "组件库",
   "scripts": {
-    "icon:generate": "bp-vue-scripts icon:generate",
     "build:style": "bp-vue-scripts build:style",
     "build:components": "bp-vue-scripts build:components -u",
     "build": "npm run build:components && npm run build:style"
@@ -11,9 +10,9 @@
   "author": "木亦Sam",
   "license": "MIT",
   "dependencies": {
-    "birdpaper-icon": "^0.0.10",
     "@vueuse/core": "^10.1.2",
     "async-validator": "^4.2.5",
+    "birdpaper-icon": "^0.0.10",
     "gulp-concat": "^2.6.1",
     "gulp-cssmin": "^0.2.0",
     "gulp-sourcemaps": "^3.0.0",
@@ -24,11 +23,11 @@
     "vue": "^3.3.2"
   },
   "devDependencies": {
-    "bp-vue-scripts": "workspace:bp-vue-scripts@*",
     "@types/node": "^18.13.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "@vue/babel-plugin-jsx": "^1.1.1",
+    "bp-vue-scripts": "workspace:bp-vue-scripts@*",
     "gulp": "^4.0.2",
     "gulp-less": "^5.0.0",
     "less": "^4.1.3",

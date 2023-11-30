@@ -7,7 +7,6 @@
     "docs"
   ],
   "scripts": {
-    "icon:generate": "pnpm run -C packages icon:generate",
     "docs": "pnpm run -C docs dev",
     "build": "pnpm run -C packages build",
     "scripts:dev": "pnpm run -C scripts dev",
@@ -26,6 +25,7 @@
   "author": "木亦Sam",
   "license": "MIT",
   "dependencies": {
+    "async-validator": "^4.2.5",
     "vue": "^3.3.2"
   },
   "devDependencies": {

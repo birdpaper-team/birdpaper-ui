@@ -40,9 +40,6 @@ const config = {
             formats: ["es", "cjs"],
         },
     },
-    optimizeDeps: {
-        exclude: ["async-validator"],
-    },
     // @ts-ignore vite内部类型错误
     plugins: [
         (0, vite_plugin_external_1.default)(),

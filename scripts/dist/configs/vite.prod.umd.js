@@ -19,7 +19,7 @@ exports.default = (type) => {
             sourcemap: true,
             minify: false,
             rollupOptions: {
-                external: "vue",
+                external: ["vue"],
                 output: [
                     {
                         format: "umd",
@@ -45,9 +45,6 @@ exports.default = (type) => {
                 formats: ["umd"],
                 name,
             },
-        },
-        optimizeDeps: {
-            exclude: ["async-validator"],
         },
         // @ts-ignore vite内部类型错误
         plugins: [

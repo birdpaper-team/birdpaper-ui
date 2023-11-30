@@ -1,6 +1,6 @@
 <template>
   <bp-form ref="formRef" :model="form">
-    <bp-form-item field="name" label="姓名" :rules="[{ required: true, message: '请输入姓名' }]">
+    <bp-form-item field="name" label="姓名" :rules="[{type:'string', required: true, message: '请输入姓名' }]">
       <bp-input :style="{ width: '280px' }" v-model="form.name" clearable placeholder="请输入内容"></bp-input>
     </bp-form-item>
     <bp-form-item field="intro" label="介绍">

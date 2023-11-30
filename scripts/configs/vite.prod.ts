@@ -37,9 +37,6 @@ const config: InlineConfig = {
       formats: ["es", "cjs"],
     },
   },
-  optimizeDeps: {
-    exclude: ["async-validator"],
-  },
   // @ts-ignore vite内部类型错误
   plugins: [
     external(),

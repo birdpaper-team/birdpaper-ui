@@ -11,13 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 function externalPlugin() {
     return {
-        name: 'vite:external-node_modules',
-        enforce: 'pre',
+        name: "vite:external-node_modules",
+        enforce: "pre",
         resolveId(source, importer) {
             return __awaiter(this, void 0, void 0, function* () {
                 const result = yield this.resolve(source, importer, {
                     skipSelf: true,
-                    custom: { 'node-resolve': {} },
+                    custom: { "node-resolve": {} },
                 });
                 if (result && /node_modules/.test(result.id)) {
                     return false;
