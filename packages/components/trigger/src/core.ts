@@ -20,8 +20,8 @@ export const getPositionData = (
   el: Element,
   position: TriggerPosition,
   wrapperSize: SizeInfo,
+  popupTranslate: [number, number] = [0, 0],
   popupOffset?: number,
-  popupTranslate?: [number, number],
   autoFitWidth?: boolean
 ): PositionInfo => {
   const rect = el && el?.getBoundingClientRect();
@@ -35,50 +35,50 @@ export const getPositionData = (
   switch (position) {
     case "top":
       positionData = {
-        top: top + scrollTop - popupOffset - wrapperSize.height + +popupTranslate[1],
-        left: left + width / 2 - wrapperWidth / 2 + popupTranslate[0],
+        top: top + scrollTop - popupOffset - wrapperSize.height + popupTranslate[1] || 0,
+        left: left + width / 2 - wrapperWidth / 2 + popupTranslate[0] || 0,
       };
       break;
     case "bottom":
       positionData = {
-        top: top + height + scrollTop + popupOffset + popupTranslate[1],
-        left: left + width / 2 - wrapperWidth / 2 + popupTranslate[0],
+        top: top + height + scrollTop + popupOffset + popupTranslate[1] || 0,
+        left: left + width / 2 - wrapperWidth / 2 + popupTranslate[0] || 0,
       };
       break;
     case "left":
       positionData = {
-        top: top + height / 2 + scrollTop - wrapperSize.height / 2 + popupTranslate[1],
-        left: left - popupOffset - wrapperWidth + popupTranslate[0],
+        top: top + height / 2 + scrollTop - wrapperSize.height / 2 + popupTranslate[1] || 0,
+        left: left - popupOffset - wrapperWidth + popupTranslate[0] || 0,
       };
       break;
     case "right":
       positionData = {
-        top: top + height / 2 + scrollTop - wrapperSize.height / 2 + popupTranslate[1],
-        left: left + width + popupOffset + popupTranslate[0],
+        top: top + height / 2 + scrollTop - wrapperSize.height / 2 + popupTranslate[1] || 0,
+        left: left + width + popupOffset + popupTranslate[0] || 0,
       };
       break;
     case "left-top":
       positionData = {
-        top: top + scrollTop - popupOffset - wrapperSize.height + popupTranslate[1],
-        left: left - wrapperWidth + popupTranslate[0],
+        top: top + scrollTop - popupOffset - wrapperSize.height + popupTranslate[1] || 0,
+        left: left - wrapperWidth + popupTranslate[0] || 0,
       };
       break;
     case "left-bottom":
       positionData = {
-        top: top + height + scrollTop + popupOffset,
-        left: left - wrapperWidth + popupTranslate[0],
+        top: top + height + scrollTop + popupOffset + popupTranslate[1] || 0,
+        left: left - wrapperWidth + popupTranslate[0] || 0,
       };
       break;
     case "right-top":
       positionData = {
-        top: top + scrollTop - wrapperSize.height + popupTranslate[1],
-        left: left + width + popupOffset + popupTranslate[0],
+        top: top + scrollTop - wrapperSize.height + popupTranslate[1] || 0,
+        left: left + width + popupOffset + popupTranslate[0] || 0,
       };
       break;
     case "right-bottom":
       positionData = {
-        top: top + scrollTop + height + popupTranslate[1],
-        left: left + width + popupOffset + popupTranslate[0],
+        top: top + scrollTop + height + popupTranslate[1] || 0,
+        left: left + width + popupOffset + popupTranslate[0] || 0,
       };
       break;
   }
