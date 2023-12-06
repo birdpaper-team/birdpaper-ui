@@ -11,6 +11,7 @@ const list: PropTableItem[] = [
     default: "bottom",
   },
   { name: "popup-offset", remark: "距离弹出位置的偏移量", type: "Number", default: "10" },
+  { name: "popup-translate", remark: "距离弹出位置的移动距离", type: "[Number, Number]", default: "[0, 0]" },
   { name: "auto-fitWidth", remark: "弹出层是否填充触发器宽度", type: "Boolean", default: "false" },
   { name: "transition", remark: "过渡动画名称", type: "String", default: "fade" },
   { name: "click-outside", remark: "点击其他元素关闭触发器", type: "Boolean", default: "true" },

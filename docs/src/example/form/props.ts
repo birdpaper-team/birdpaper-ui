@@ -17,7 +17,19 @@ const list: PropTableItem[] = [
     type: ["Enum"],
     optional: ["vertical", "horizontal", "inline"],
     default: "horizontal",
-  }
+  },
+  {
+    name: "labelCol",
+    remark: "标签区域栏位数",
+    type: "Number",
+    default: "4",
+  },
+  {
+    name: "wrapperCol",
+    remark: "控件区域栏位数",
+    type: "Number",
+    default: "20",
+  },
 ];
 
 export default list;

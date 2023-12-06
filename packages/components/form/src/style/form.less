@@ -58,7 +58,7 @@
     justify-content: flex-start;
 
     &-label {
-      margin-right: 12px;
+      // margin-right: 12px;
       justify-content: flex-end;
     }
 
@@ -79,19 +79,21 @@
 .@{form-cls}-inline {
   display: flex;
   align-items: center;
+  flex-flow: row wrap;
 
   .@{formItem-cls} {
+    flex-wrap: nowrap;
     display: inline-flex;
     align-items: flex-start;
     justify-content: flex-start;
-    margin-bottom: 20px;
+    // margin-bottom: 20px;
 
     &:not(:last-child) {
       margin-right: 10px;
     }
 
     &-label {
-      margin-right: 8px;
+      // margin-right: 8px;
       justify-content: flex-end;
       width: auto;
     }

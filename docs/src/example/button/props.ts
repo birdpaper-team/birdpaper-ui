@@ -31,7 +31,7 @@ const list: PropTableItem[] = [
   },
   { name: "loading", remark: "是否加载", type: "Boolean", default: "false" },
   { name: "disabled", remark: "是否禁用", type: "Boolean", default: "false" },
-  { name: "icon", remark: "按钮图标", type: "String", default: "" },
+  { name: "icon", remark: "按钮图标", type: "BirdpaperIcon", default: "" },
   { name: "block", remark: "是否撑满父级", type: "Boolean", default: "false" },
 ];
 
