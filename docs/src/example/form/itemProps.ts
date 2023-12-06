@@ -17,14 +17,16 @@ const list: PropTableItem[] = [
     type: "Record<string, RuleItem[]>",
   },
   {
-    name: "labelStyle",
-    remark: "标签区域样式",
-    type: [" Object", "String"],
+    name: "labelCol",
+    remark: "标签区域栏位数",
+    type: "Number",
+    default: "4",
   },
   {
-    name: "wrapperStyle",
-    remark: "控件区域样式",
-    type: [" Object", "String"],
+    name: "wrapperCol",
+    remark: "控件区域栏位数",
+    type: "Number",
+    default: "20",
   },
 ];
 
