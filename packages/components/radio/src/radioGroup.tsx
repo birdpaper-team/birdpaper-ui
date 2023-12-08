@@ -15,7 +15,7 @@ export default defineComponent({
     /** 排列方向 */
     direction: { type: String as PropType<DirectionType>, default: "horizontal" },
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "change"],
   setup(props, { emit, slots }) {
     const name = "bp-radio-group";
 
@@ -44,6 +44,9 @@ export default defineComponent({
               <Fragment key={child.key ?? `item-${index}`}>
                 {h(radio, {
                   modelValue: props.modelValue,
+                  onChange(e: RadioGroupValue) {
+                    emit("change", e);
+                  },
                   "onUpdate:modelValue"(e: RadioGroupValue) {
                     updateValue(e);
                   },

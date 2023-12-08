@@ -26,7 +26,9 @@ export { default as Switch } from "./switch";
 export type { SwitchInstance } from "./switch";
 
 export { default as Select } from "./select";
-export type { SelectInstance } from "./select";
+export type { SelectInstance,SelectOptionInstance } from "./select";
+export { default as Option } from "./select";
+
 
 export { default as Pagination } from "./pagination";
 export type { PaginationInstance } from "./pagination";
