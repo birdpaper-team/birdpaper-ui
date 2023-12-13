@@ -1,7 +1,8 @@
 <template>
-  <div :class="name" :style="imgStyle">
+  <div :class="clsName" :style="imgStyle">
     <img
       ref="imageRef"
+      :class="`${name}-img`"
       :alt="alt"
       :title="title"
       :style="{ ...imgStyle, ...fitStyle }"
@@ -15,7 +16,7 @@
     </slot>
     <slot name="error" v-if="!isLoading && isError">
       <div :class="`${name}-error`">
-        <IconImage2Line />
+        <IconImage2Line size="28" />
       </div>
     </slot>
   </div>
@@ -34,15 +35,16 @@ export default defineComponent({
     /** 图片适应类型 */
     fit: { type: String as PropType<ImageFit>, default: "fill" },
     /** 文字描述 */
-    alt: { type: String, default: "" },
+    alt: { type: String },
     /** 标题 */
-    title: { type: String, default: "" },
+    title: { type: String },
     /** 图片宽度 */
     width: { type: [String, Number] as PropType<string | number> },
     /** 图片高度 */
     height: { type: [String, Number] as PropType<string | number> },
   },
   emits: ["load", "error"],
+  components: { IconImage2Line },
   setup(props, { emit }) {
     const name = "bp-image";
     const imageRef = ref();
@@ -51,7 +53,7 @@ export default defineComponent({
     const isLoading = computed<boolean>(() => loadStatus.value === "loading");
     const isError = computed<boolean>(() => loadStatus.value === "error");
     const imgStyle = computed<CSSProperties>(() => ({
-      width: `${props.width}px`,
+      width: `${props.width || props.height}px`,
       height: `${props.height}px`,
     }));
     const fitStyle = computed<CSSProperties>(() => {
@@ -61,7 +63,12 @@ export default defineComponent({
       return {};
     });
 
-    const onLoad = () => {
+    const clsName = computed(() => {
+      let cls = [name, { "bp-image-auto-ratio": loadStatus.value === "load" }];
+      return cls;
+    });
+
+    const onLoad = e => {
       loadStatus.value = "load";
       emit("load");
     };
@@ -78,6 +85,7 @@ export default defineComponent({
 
     return {
       name,
+      clsName,
       imageRef,
       loadStatus,
       onLoad,
