@@ -51,6 +51,8 @@ export default defineComponent({
     });
 
     const handleClick = () => {
+      if (props.disabled) return;
+
       if (Array.isArray(props.modelValue)) {
         if (!props.value) return false;
 
