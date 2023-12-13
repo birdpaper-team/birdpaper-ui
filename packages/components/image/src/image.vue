@@ -9,16 +9,16 @@
       @load="onLoad"
       @error="onError"
     />
-    <slot name="loading" v-if="isLoading">
-      <div :class="`${name}-loading`">
+    <div :class="`${name}-loading`" v-if="isLoading">
+      <slot name="loading">
         <span>加载中</span>
-      </div>
-    </slot>
-    <slot name="error" v-if="!isLoading && isError">
-      <div :class="`${name}-error`">
-        <IconImage2Line size="28" />
-      </div>
-    </slot>
+      </slot>
+    </div>
+    <div :class="`${name}-error`" v-if="!isLoading && isError">
+      <slot name="error">
+        <IconImage2Line size="32" />
+      </slot>
+    </div>
   </div>
 </template>
 
@@ -45,7 +45,7 @@ export default defineComponent({
   },
   emits: ["load", "error"],
   components: { IconImage2Line },
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const name = "bp-image";
     const imageRef = ref();
     const loadStatus = ref<"loading" | "load" | "error">("loading");
@@ -53,7 +53,7 @@ export default defineComponent({
     const isLoading = computed<boolean>(() => loadStatus.value === "loading");
     const isError = computed<boolean>(() => loadStatus.value === "error");
     const imgStyle = computed<CSSProperties>(() => ({
-      width: `${props.width || props.height}px`,
+      width: `${props.width}px`,
       height: `${props.height}px`,
     }));
     const fitStyle = computed<CSSProperties>(() => {
@@ -90,6 +90,7 @@ export default defineComponent({
       loadStatus,
       onLoad,
       onError,
+      slots,
       imgStyle,
       fitStyle,
       isLoading,
