@@ -14,8 +14,10 @@ declare module "@vue/runtime-core" {
     BpCheckbox: typeof import("birdpaper-ui")["Checkbox"];
     BpSwitch: typeof import("birdpaper-ui")["Switch"];
     BpSelect: typeof import("birdpaper-ui")["Select"];
+    BpOption: typeof import("birdpaper-ui")["Option"];
     BpPagination: typeof import("birdpaper-ui")["Pagination"];
     BpTable: typeof import("birdpaper-ui")["Table"];
+    BpTableColumn: typeof import("birdpaper-ui")["TableColumn"];
     BpAlert: typeof import("birdpaper-ui")["Alert"];
     BpTag: typeof import("birdpaper-ui")["Tag"];
     BpModal: typeof import("birdpaper-ui")["Modal"];

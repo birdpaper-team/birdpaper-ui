@@ -33,7 +33,8 @@
 
     <template #content>
       <ul :class="`${name}-option-list`">
-        <slot></slot>
+        <slot v-if="hasOptions"></slot>
+        <div v-else style="text-align: center; font-size: 13px; opacity: 0.6">暂无数据</div>
       </ul>
     </template>
   </bp-trigger>
@@ -44,9 +45,10 @@ import { defineComponent, PropType, provide, ref, computed, watch } from "vue";
 import { SelectBindValue, selectInjectionKey } from "./type";
 import { vClickOutside } from "../../../directives/clickOutside";
 import BpInput from "../../input/src/input.vue";
-import { useSelect } from "./select";
 import BpTrigger from "../../trigger/src/trigger";
 import { IconCloseLine, IconArrowDownSLine, IconArrowUpSLine } from "birdpaper-icon";
+import { getAllElements } from "../../../utils/dom";
+import { useSelect } from "./select";
 
 export default defineComponent({
   name: "Select",
@@ -67,6 +69,11 @@ export default defineComponent({
     const name = "bp-select";
     const inpRef = ref();
     const showClear = ref<boolean>(false);
+
+    const hasOptions = computed(() => {
+      const children = getAllElements(slots.default?.(), true).filter(item => item.type["name"] === "BpOption");
+      return children.length !== 0;
+    });
 
     const { currentSelect, valueMap, isFocus } = useSelect(slots);
 
@@ -128,6 +135,7 @@ export default defineComponent({
     return {
       name,
       inpRef,
+      hasOptions,
       currentSelect,
       isFocus,
       clsName,
