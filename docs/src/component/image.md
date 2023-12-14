@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import props from "../example/image/props.ts";
   import events from "../example/image/events.ts";
+  import slots from "../example/image/slots.ts";
 </script>
 
 # 图片 Image
@@ -13,7 +14,7 @@
 <demo-block src="example/image/basic"></demo-block>
 
 ### 图片适应
-通过 `fit`属性设置不同的适应类型
+通过 `fit` 属性设置不同的适应类型
 <demo-block src="example/image/fit"></demo-block>
 
 ### Image 属性
@@ -23,3 +24,7 @@
 ### Image 事件
 
 <table-block type="events" :data="events"></table-block>
+
+### Image 插槽
+
+<table-block type="slots" :data="slots"></table-block>
