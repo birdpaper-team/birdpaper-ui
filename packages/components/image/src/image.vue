@@ -26,6 +26,7 @@
 import { CSSProperties, PropType, computed, defineComponent, ref, watchEffect } from "vue";
 import { ImageFit } from "./types";
 import { IconImage2Line } from "birdpaper-icon";
+import { isString } from "../../../utils/util";
 
 export default defineComponent({
   name: "Image",
@@ -53,8 +54,8 @@ export default defineComponent({
     const isLoading = computed<boolean>(() => loadStatus.value === "loading");
     const isError = computed<boolean>(() => loadStatus.value === "error");
     const imgStyle = computed<CSSProperties>(() => ({
-      width: `${props.width}px`,
-      height: `${props.height}px`,
+      width: isString(props.width) ? props.width : `${props.width}px`,
+      height: isString(props.height) ? props.height : `${props.height}px`,
     }));
     const fitStyle = computed<CSSProperties>(() => {
       if (props.fit) {
@@ -68,7 +69,7 @@ export default defineComponent({
       return cls;
     });
 
-    const onLoad = e => {
+    const onLoad = () => {
       loadStatus.value = "load";
       emit("load");
     };
@@ -80,6 +81,7 @@ export default defineComponent({
     watchEffect(() => {
       if (!props.src || !imageRef.value) return;
 
+      loadStatus.value = "loading";
       imageRef.value.src = props.src;
     });
 
