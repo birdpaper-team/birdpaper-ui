@@ -23,6 +23,7 @@ export const sidebar = {
         { text: "布局 <span>Layout</span>", link: "/component/grid" },
         { text: "间距 <span>Space</span>", link: "/component/space" },
         { text: "按钮 <span>Button</span>", link: "/component/button" },
+        { text: "图标 <span>Icon</span>", link: "/component/icon" },
       ],
     },
     {

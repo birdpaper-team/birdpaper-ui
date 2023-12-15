@@ -2,6 +2,7 @@
   import props from "../example/radio/props.ts";
   import groupProps from "../example/radio/group-props.ts";
   import events from "../example/radio/events.ts";
+  import groupEvents from "../example/radio/group-events.ts";
 </script>
 
 # 单选框 Radio
@@ -15,7 +16,7 @@
 
 ### 单选框组
 
-通过 `option-list` 设定选项数据。
+通过外层包裹 `radio-group` 实现选项组
 <demo-block src="example/radio/group"></demo-block>
 
 ### Radio 属性
@@ -29,3 +30,7 @@
 ### RadioGroup 属性
 
 <table-block type="props" :data="groupProps"></table-block>
+
+### RadioGroup 事件
+
+<table-block type="props" :data="groupEvents"></table-block>

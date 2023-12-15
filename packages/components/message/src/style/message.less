@@ -52,26 +52,31 @@
     .no-select;
 
     &-icon {
-      font-size: 18px;
+      width: 18px;
+      height: 18px;
       margin-right: 6px;
-
-      .ri-checkbox-circle-fill {
-        color: @success-6;
-      }
-
-      .ri-close-circle-fill {
-        color: @danger-6;
-      }
-
-      .ri-error-warning-fill {
-        color: @warning-6;
-      }
-
-      .ri-loader-4-line {
+    }
+    .icon-loading {
+      .bp-icon {
         display: inline-block;
-        color: @primary-6;
+        fill: @primary-6;
         animation: rotating 0.8s linear infinite;
         -webkit-animation: rotating 0.8s linear infinite;
+      }
+    }
+    .icon-success {
+      .bp-icon {
+        fill: @success-6;
+      }
+    }
+    .icon-error {
+      .bp-icon {
+        fill: @danger-6;
+      }
+    }
+    .icon-warning {
+      .bp-icon {
+        fill: @warning-6;
       }
     }
 
@@ -85,24 +90,19 @@
     &-close {
       margin-left: 6px;
 
-      .ri-close-line {
-        color: @gary-6;
+      .bp-icon {
+        width: 18px;
+        height: 18px;
+        fill: @gary-7;
         cursor: pointer;
+        padding: 2px;
+        border-radius: 10px;
         transition: all 0.2s ease;
 
-        &::before {
-          padding: 2px;
-          border-radius: 10px;
-          transition: all 0.2s ease;
-        }
-
         &:hover {
-          color: @gary-9;
-
-          &::before {
-            background-color: @gary-3;
-            transition: all 0.2s ease;
-          }
+          fill: @gary-9;
+          background-color: @gary-3;
+          transition: all 0.2s ease;
         }
       }
     }
@@ -155,20 +155,30 @@
     border: 1px solid @gary-4;
 
     &-icon {
-      .ri-checkbox-circle-fill {
-        color: @success-6;
+      .bp-icon {
+        width: 18px;
+        height: 18px;
       }
+    }
 
-      .ri-close-circle-fill {
-        color: @danger-6;
+    .icon-success {
+      .bp-icon {
+        fill: @success-6;
       }
-
-      .ri-error-warning-fill {
-        color: @warning-6;
+    }
+    .icon-error {
+      .bp-icon {
+        fill: @danger-6;
       }
-
-      .ri-loader-4-line {
-        color: @primary-6;
+    }
+    .icon-warning {
+      .bp-icon {
+        fill: @warning-6;
+      }
+    }
+    .icon-loading {
+      .bp-icon {
+        fill: @primary-6;
       }
     }
 
@@ -177,11 +187,11 @@
     }
 
     &-close {
-      .ri-close-line {
-        color: @gary-7;
+      .bp-icon {
+        fill: @gary-7;
 
         &:hover {
-          color: @gary-8;
+          fill: @gary-8;
 
           &::before {
             background-color: @gary-4;

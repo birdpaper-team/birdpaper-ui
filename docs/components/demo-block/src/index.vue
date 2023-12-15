@@ -9,7 +9,7 @@
     <div class="demo-block-footer">
       <bp-tooltip content="展示代码">
         <div :class="['icon-item', { active: showCode }]" @click="showCode = !showCode">
-          <i class="ri-code-s-slash-line"></i>
+          <IconCodeView />
         </div>
       </bp-tooltip>
       <bp-tooltip v-if="stackBlitzUrl" content="在 StackBlitz 中调试">
@@ -27,6 +27,7 @@
 </template>
 
 <script setup lang="ts" name="demo-block">
+import { IconCodeView } from "birdpaper-icon";
 import { defineAsyncComponent, markRaw, onMounted, ref } from "vue";
 
 interface Prop {

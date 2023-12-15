@@ -10,7 +10,7 @@
           <div :class="cls" :style="`width:${width};top:${top}`">
             <div :class="`${name}-header`">
               <p :class="`${name}-header-title`">{{ title }}</p>
-              <i v-if="!hideClose" :class="`${name}-header-close`" class="ri-close-line" @click="handleCancle"></i>
+              <IconCloseLine v-if="!hideClose" :class="`${name}-header-close`" @click="handleCancle" size="20px" />
             </div>
             <div :class="`${name}-body`">
               <slot></slot>
@@ -32,8 +32,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { computed, ref, watch } from "vue";
+import { defineComponent, computed, ref, watch } from "vue";
+import { IconCloseLine } from "birdpaper-icon";
 
 export default defineComponent({
   name: "Modal",
@@ -66,6 +66,7 @@ export default defineComponent({
     onBeforeOk: { type: Function, default: () => true },
   },
   emits: ["update:modelValue", "ok", "cancle"],
+  components: { IconCloseLine },
   setup(props, { emit, slots }) {
     const name = "bp-modal";
     const containerVisable = ref<boolean>(false);

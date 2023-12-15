@@ -3,7 +3,8 @@
     <input type="checkbox" :class="`${name}-inner`" />
 
     <span :class="[`${name}-checkbox`, isCheck ? `${name}-check` : '']">
-      <i v-if="isCheck" class="ri-check-line"></i>
+      <IconCheckLine v-if="isCheck && !indeterminate" />
+      <IconSubtractLine v-if="isCheck && indeterminate" />
     </span>
     <span :class="`${name}-label`">
       <slot></slot>
@@ -14,6 +15,7 @@
 <script lang="ts">
 import { PropType, defineComponent, computed } from "vue";
 import { CheckboxValue } from "./type";
+import { IconCheckLine, IconSubtractLine } from "birdpaper-icon";
 
 export default defineComponent({
   name: "Checkbox",
@@ -24,7 +26,10 @@ export default defineComponent({
     disabled: { type: Boolean, default: false },
     /** 复选框的值 */
     value: { type: [String, Number] },
+    /** 是否为不确定状态 */
+    indeterminate: { type: Boolean, default: false },
   },
+  components: { IconCheckLine, IconSubtractLine },
   emits: ["update:modelValue", "change"],
   setup(props, { emit }) {
     const name = "bp-checkbox";
@@ -46,6 +51,8 @@ export default defineComponent({
     });
 
     const handleClick = () => {
+      if (props.disabled) return;
+
       if (Array.isArray(props.modelValue)) {
         if (!props.value) return false;
 

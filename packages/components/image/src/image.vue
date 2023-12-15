@@ -1,29 +1,32 @@
 <template>
-  <div :class="name" :style="imgStyle">
+  <div :class="clsName" :style="imgStyle">
     <img
       ref="imageRef"
+      :class="`${name}-img`"
       :alt="alt"
       :title="title"
       :style="{ ...imgStyle, ...fitStyle }"
       @load="onLoad"
       @error="onError"
     />
-    <slot name="loading" v-if="isLoading">
-      <div :class="`${name}-loading`">
+    <div :class="`${name}-loading`" v-if="isLoading">
+      <slot name="loading">
         <span>加载中</span>
-      </div>
-    </slot>
-    <slot name="error" v-if="!isLoading && isError">
-      <div :class="`${name}-error`">
-        <i class="ri-image-2-line"></i>
-      </div>
-    </slot>
+      </slot>
+    </div>
+    <div :class="`${name}-error`" v-if="!isLoading && isError">
+      <slot name="error">
+        <IconImage2Line size="32" />
+      </slot>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { CSSProperties, PropType, computed, defineComponent, ref, watchEffect } from "vue";
 import { ImageFit } from "./types";
+import { IconImage2Line } from "birdpaper-icon";
+import { isString } from "../../../utils/util";
 
 export default defineComponent({
   name: "Image",
@@ -31,18 +34,19 @@ export default defineComponent({
     /** 图片资源地址 */
     src: { type: String, default: "" },
     /** 图片适应类型 */
-    fit: { type: String as PropType<ImageFit>, default: 'fill' },
+    fit: { type: String as PropType<ImageFit>, default: "fill" },
     /** 文字描述 */
-    alt: { type: String, default: "" },
+    alt: { type: String },
     /** 标题 */
-    title: { type: String, default: "" },
+    title: { type: String },
     /** 图片宽度 */
     width: { type: [String, Number] as PropType<string | number> },
     /** 图片高度 */
     height: { type: [String, Number] as PropType<string | number> },
   },
   emits: ["load", "error"],
-  setup(props, { emit }) {
+  components: { IconImage2Line },
+  setup(props, { emit, slots }) {
     const name = "bp-image";
     const imageRef = ref();
     const loadStatus = ref<"loading" | "load" | "error">("loading");
@@ -50,14 +54,19 @@ export default defineComponent({
     const isLoading = computed<boolean>(() => loadStatus.value === "loading");
     const isError = computed<boolean>(() => loadStatus.value === "error");
     const imgStyle = computed<CSSProperties>(() => ({
-      width: `${props.width}px`,
-      height: `${props.height}px`,
+      width: isString(props.width) ? props.width : `${props.width}px`,
+      height: isString(props.height) ? props.height : `${props.height}px`,
     }));
     const fitStyle = computed<CSSProperties>(() => {
       if (props.fit) {
         return { objectFit: props.fit };
       }
       return {};
+    });
+
+    const clsName = computed(() => {
+      let cls = [name, { "bp-image-auto-ratio": loadStatus.value === "load" }];
+      return cls;
     });
 
     const onLoad = () => {
@@ -72,15 +81,18 @@ export default defineComponent({
     watchEffect(() => {
       if (!props.src || !imageRef.value) return;
 
+      loadStatus.value = "loading";
       imageRef.value.src = props.src;
     });
 
     return {
       name,
+      clsName,
       imageRef,
       loadStatus,
       onLoad,
       onError,
+      slots,
       imgStyle,
       fitStyle,
       isLoading,

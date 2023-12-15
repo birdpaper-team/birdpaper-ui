@@ -10,8 +10,8 @@ export default defineComponent({
     model: { type: Object, default: () => {} },
     rules: { type: Object as PropType<Record<string, RuleItem[]>> },
     layout: { type: String as PropType<FormLayout>, default: "horizontal" },
-    // labelStyle: { type: [Object, String], default: "" },
-    // wrapperStyle: { type: [Object, String], default: "" },
+    labelCol: { type: Number, default: 4 },
+    wrapperCol: { type: Number, default: 20 },
   },
   setup(props, { slots, expose }) {
     const name = "bp-form";
@@ -79,6 +79,9 @@ export default defineComponent({
             return (
               <Fragment key={child.key ?? `item-${index}`}>
                 {h(FormItem, {
+                  gutter: props.layout !== "vertical" ? 4 : 0,
+                  labelCol: props.layout === "vertical" ? 24 : props.labelCol,
+                  wrapperCol: props.layout === "vertical" ? 24 : props.wrapperCol,
                   ref: el => {
                     child.props?.field && (formItemRef.value[child.props?.field] = el);
                   },

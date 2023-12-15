@@ -1,0 +1,165 @@
+/**
+ * @Author: Sam
+ * @Date: 2021-05-28 15:21:34
+ * @Last Modified by: Sam
+ * @Last Modified time: 2022-04-09 11:29:41
+ */
+::-webkit-scrollbar-track-piece {
+  background-color: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  background-clip: padding-box;
+  min-height: 28px;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #bbb;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  border: 0;
+  padding: 0;
+  background: 0 0;
+  line-height: inherit;
+  color: inherit;
+  outline: none;
+}
+
+.no-select {
+  -webkit-appearance: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.transition-all-2-ease {
+  transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+}
+
+.bp-large-height {
+  height: @size-large;
+  min-height: @size-large;
+  font-size: 16px;
+}
+
+.bp-normal-height {
+  height: @size-normal;
+  min-height: @size-normal;
+  font-size: 13px;
+}
+
+.bp-small-height {
+  height: @size-small;
+  min-height: @size-small;
+  font-size: 12px;
+}
+
+.bp-mini-height {
+  height: @size-mini;
+  height: @size-mini;
+  min-height: @size-mini;
+  font-size: 12px;
+}
+
+.bp-btn-padding-large {
+  padding: 0 20px;
+}
+
+.bp-btn-padding-normal {
+  padding: 0 18px;
+}
+
+.bp-btn-padding-small {
+  padding: 0 14px;
+}
+
+.bp-btn-padding-mini {
+  padding: 0 10px;
+}
+
+.bp-icon-right {
+  margin-left: 4px;
+}
+
+.for(@i, @n) {
+  .-each(@i);
+}
+
+.for(@n) when (isnumber(@n)) {
+  .for(1, @n);
+}
+
+.for(@i, @n) when not (@i =@n) {
+  .for((@i + (@n - @i) / abs(@n - @i)), @n);
+}
+
+.for(@array) when (default()) {
+  .for-impl_(length(@array));
+}
+
+.for-impl_(@i) when (@i > 1) {
+  .for-impl_((@i - 1));
+}
+
+.for-impl_(@i) when (@i > 0) {
+  .-each(extract(@array, @i));
+}
+
+.input-font-family {
+  font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, helvetica neue, Arial, noto sans, sans-serif,
+    apple color emoji, segoe ui emoji, segoe ui symbol, noto color emoji;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
+
+.text-ellipsis-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.text-ellipsis-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.click-icon {
+  display: block;
+  fill: @gary-7;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 1px;
+  border-radius: 10px;
+
+  &:hover {
+    fill: @gary-8;
+    background-color: @gary-5;
+    transition: all 0.2s ease;
+  }
+}

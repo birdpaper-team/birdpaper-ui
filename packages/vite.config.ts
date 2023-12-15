@@ -14,7 +14,7 @@ export default defineConfig({
       less: {
         charset: false,
         javascriptEnabled: true,
-        additionalData: '@import "./style/index.less";',
+        additionalData: '@import "./components/index.less";',
       },
     },
   },

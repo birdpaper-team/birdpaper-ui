@@ -25,8 +25,8 @@
   }
 
   &-icon {
+    display: flex;
     margin-right: 8px;
-    font-size: 16px;
   }
 
   &-body {
@@ -37,7 +37,8 @@
       color: @gary-11;
       font-size: 16px;
       font-weight: 500;
-      line-height: 38px;
+      line-height: 20px;
+      margin-bottom: 8px;
     }
 
     .@{alert-cls}-content {
@@ -52,7 +53,10 @@
 
   &-option {
     .@{alert-cls}-close-inner {
+      display: flex;
+
       .close-inner {
+        fill: @gary-6;
         color: @gary-6;
         font-size: 14px;
         cursor: pointer;
@@ -63,27 +67,22 @@
         transition: all 0.2s ease;
 
         &:hover {
+          fill: @gary-7;
           color: @gary-7;
           transition: all 0.2s ease;
         }
       }
 
-      .ri-close-line {
+      .bp-icon {
         .close-inner;
-
-        &::before {
-          padding: 1px;
-          border-radius: 10px;
-          transition: all 0.2s ease;
-        }
+        padding: 1px;
+        border-radius: 10px;
+        transition: all 0.2s ease;
 
         &:hover {
-          color: @gary-7;
-
-          &::before {
-            background-color: @gary-1;
-            transition: all 0.2s ease;
-          }
+          fill: @gary-7;
+          background-color: @gary-1;
+          transition: all 0.2s ease;
         }
       }
     }
@@ -96,7 +95,9 @@
     border: 1px solid ~"@{alert-@{type}-border}";
 
     .@{alert-cls}-icon {
-      color: ~"@{alert-@{type}-icon-color}";
+      .bp-icon {
+        fill: ~"@{alert-@{type}-icon-color}";
+      }
     }
   }
 }

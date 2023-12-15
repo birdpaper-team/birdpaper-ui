@@ -1,8 +1,6 @@
 <template>
   <a @click="handleClick" :disabled="disabled" :class="clsName" :href="href" :target="target">
-    <span v-if="loading" class="left-icon">
-      <i class="bp-icon-loading ri-loader-4-line"></i>
-    </span>
+    <IconLoader4Line v-if="loading" class="left-icon bp-icon-loading" size="14px"/>
     <slot></slot>
   </a>
 </template>
@@ -10,6 +8,7 @@
 <script lang="ts">
 import { PropType, computed, defineComponent } from "vue";
 import { LinkStatus } from "./types";
+import { IconLoader4Line } from "birdpaper-icon";
 
 export default defineComponent({
   name: "Link",
@@ -25,6 +24,7 @@ export default defineComponent({
     /** 跳转链接方式 */
     target: { type: String, default: "_self" },
   },
+  components: { IconLoader4Line },
   emits: {
     click: (ev: MouseEvent) => true,
   },

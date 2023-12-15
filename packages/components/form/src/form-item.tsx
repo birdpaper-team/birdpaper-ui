@@ -8,8 +8,9 @@ export default defineComponent({
     label: { type: String },
     field: { type: String },
     rules: { type: Array as PropType<RuleItem[]>, default: () => [] },
-    labelStyle: { type: [Object, String], default: "" },
-    wrapperStyle: { type: [Object, String], default: "" },
+    labelCol: { type: Number, default: 4 },
+    wrapperCol: { type: Number, default: 20 },
+    gutter: { type: Number, default: 4 },
   },
   setup(props, { slots, expose }) {
     const name = "bp-form-item";
@@ -64,12 +65,12 @@ export default defineComponent({
 
     const render = () => {
       return (
-        <div class={formItemCls.value}>
-          <div v-show={props.label || ctx.value.layout !== "inline"} class={`${name}-label`} style={props.labelStyle}>
+        <bp-row class={formItemCls.value} gutter={props.gutter}>
+          <bp-col span={props.labelCol} v-show={props.label || ctx.value.layout !== "inline"} class={`${name}-label`}>
             {isRequire.value ? <span class="label-asterisk"></span> : ""}
             <label>{props.label}</label>
-          </div>
-          <div class={wrapperCls.value} style={props.wrapperStyle}>
+          </bp-col>
+          <bp-col span={props.wrapperCol} class={wrapperCls.value}>
             {slots.default?.()}
 
             {messageVisible.value ? (
@@ -79,8 +80,8 @@ export default defineComponent({
                 </div>
               </Transition>
             ) : null}
-          </div>
-        </div>
+          </bp-col>
+        </bp-row>
       );
     };
 

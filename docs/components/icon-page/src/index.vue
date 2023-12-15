@@ -1,10 +1,14 @@
 <template>
   <div class="icon-page">
+    <div class="icon-page-search-inner">
+      <bp-input v-model="searchKey" size="large" placeholder="Search 2598 Icons" clearable></bp-input>
+    </div>
+
     <div class="icon-page-inner">
-      <template v-for="item in iconList">
-        <div class="icon-item" @click="handleCopy(item)">
-          <i :class="`ri-${item}`"></i>
-          <span v-text="item"></span>
+      <template v-for="item in searchList">
+        <div class="icon-item" @click="handleCopy(`Icon${item}`)">
+          <component :is="allIcons[`Icon${item}`]" size="20"></component>
+          <p>{{ item }}</p>
         </div>
       </template>
     </div>
@@ -12,16 +16,46 @@
 </template>
 
 <script setup lang="ts" name="icon-page">
+import * as allIcons from "birdpaper-icon";
 import * as useClipboard from "vue-clipboard3/dist/esm/index";
 import { Message } from "birdpaper-ui";
-import iconList from "./icon";
+import { ref } from "vue";
+import { computed } from "vue";
+
+const filterName = (str: string) => {
+  if (str) {
+    return str.replace("Icon", "");
+  }
+  return "";
+};
+
+const searchKey = ref<string>("");
+const iconNames = ref<string[]>([]);
+
+iconNames.value = [];
+const init = () => {
+  for (const key in allIcons) {
+    if (key !== "default") {
+      iconNames.value.push(filterName(key));
+    }
+  }
+};
+
+const searchList = computed<string[]>(() => {
+  return iconNames.value.filter(item => {
+    return item.toLocaleUpperCase().includes(searchKey.value.toLocaleUpperCase());
+  });
+});
+
+init();
 
 /** 复制到剪贴板 */
 const { toClipboard } = useClipboard.default();
 const handleCopy = async (item: any) => {
   try {
-    await toClipboard(`ri-${item}`);
-    Message.success(`已复制到剪贴板: ri-${item}`);
+    const str = `<${item} />`;
+    await toClipboard(str);
+    Message.success(`已复制到剪贴板: ${str}`);
   } catch (err) {
     Message.error((err as Error).message);
   }

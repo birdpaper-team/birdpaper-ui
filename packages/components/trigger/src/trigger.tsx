@@ -26,6 +26,8 @@ export default defineComponent({
     position: { type: String as PropType<TriggerPosition>, default: "bottom" },
     /** 距离弹出位置的偏移量 */
     popupOffset: { type: Number, default: 10 },
+    /** 距离弹出位置的移动距离 */
+    popupTranslate: { type: Array as unknown as PropType<[number, number]>, default: [0, 0] },
     /** 弹出层是否填充触发器宽度 */
     autoFitWidth: { type: Boolean, default: false },
     /** 过渡动画名称 */
@@ -70,6 +72,7 @@ export default defineComponent({
         triggerRef.value.children[0],
         props.position,
         { ...wrapperSize },
+        props.popupTranslate,
         props.popupOffset,
         props.autoFitWidth
       );

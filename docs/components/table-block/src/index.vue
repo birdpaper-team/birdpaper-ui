@@ -32,10 +32,11 @@
                 trigger="click"
                 :content="record.optional && record.optional.join(' | ')"
               >
-                <span
-                  :class="['ri-error-warning-fill', { active: record.showTip }]"
+                <IconInformationFill
+                  size="14px"
+                  :class="['warning-fill', { active: record.showTip }]"
                   @click="handleRowTipShow(record)"
-                ></span>
+                />
               </bp-tooltip>
             </div>
           </template>
@@ -59,6 +60,7 @@
 import { PropType, ref, watch } from "vue";
 import { EventTableItem, MethodTableItem, PropTableItem, SlotTableItem } from "./tableBlock";
 import { vClickOutside } from "../../directives/clickOutside";
+import { IconInformationFill } from "birdpaper-icon";
 
 const props = defineProps({
   src: { type: String, default: "" },

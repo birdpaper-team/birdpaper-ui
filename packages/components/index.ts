@@ -26,14 +26,13 @@ export { default as Switch } from "./switch";
 export type { SwitchInstance } from "./switch";
 
 export { default as Select } from "./select";
-export type { SelectInstance } from "./select";
+export type { SelectInstance, SelectOptionInstance } from "./select";
 
 export { default as Pagination } from "./pagination";
 export type { PaginationInstance } from "./pagination";
 
 export { default as Table } from "./table";
-export type { TableInstance } from "./table";
-export type { TableColumnsInstance } from "./table";
+export type { TableInstance, TableColumnsInstance } from "./table";
 
 export { default as Space } from "./space";
 export type { SpaceInstance } from "./space";

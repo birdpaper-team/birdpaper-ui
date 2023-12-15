@@ -1,11 +1,12 @@
 <template>
   <li :class="clsName" @click="handleClick">
     <span v-if="text" v-text="text"></span>
-    <i v-else class="ri-arrow-right-s-line"></i>
+    <IconArrowRightSLine v-else size="16px" />
   </li>
 </template>
 
 <script setup lang="ts" name="PaginationNext">
+import { IconArrowRightSLine } from "birdpaper-icon";
 import { computed } from "vue";
 
 const props = defineProps({

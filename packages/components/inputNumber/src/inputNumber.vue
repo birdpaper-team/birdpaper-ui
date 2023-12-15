@@ -21,7 +21,7 @@
             { type: 'down', disabled: isMin },
           ]"
         >
-          <i :class="`ri-arrow-${v.type}-s-line`"></i>
+          <component :is="v.type === 'up' ? IconArrowUpSLine : IconArrowDownSLine" size="14px"></component>
         </div>
       </div>
     </template>
@@ -32,6 +32,7 @@
 import { InputSize } from "components/input";
 import { isNull } from "../../../utils/util";
 import { PropType, watch, computed, defineComponent, ref } from "vue";
+import { IconArrowDownSLine, IconArrowUpSLine } from "birdpaper-icon";
 
 export default defineComponent({
   name: "InputNumber",
@@ -165,6 +166,8 @@ export default defineComponent({
       handleStep,
       onInput,
       onBlur,
+      IconArrowDownSLine,
+      IconArrowUpSLine,
     };
   },
 });

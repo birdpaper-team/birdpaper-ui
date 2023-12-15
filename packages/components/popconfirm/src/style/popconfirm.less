@@ -13,7 +13,7 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 12px 10px;
     z-index: 99;
-    transition: all .2s ease;
+    transition: all 0.2s ease;
     .no-select;
 
     &-content {
@@ -21,7 +21,7 @@
       align-items: center;
 
       .bp-popconfirm-icon {
-        font-size: 18px;
+        display: flex;
         margin-right: 6px;
       }
 
@@ -32,24 +32,24 @@
         letter-spacing: 0.2px;
       }
 
-      .ri-information-fill {
-        color: @primary-6;
+      .bp-icon-information-fill {
+        fill: @primary-6;
       }
 
-      .ri-checkbox-circle-fill {
-        color: @success-6;
+      .bp-icon-checkbox-circle-fill {
+        fill: @success-6;
       }
 
-      .ri-close-circle-fill {
-        color: @danger-6;
+      .bp-icon-close-circle-fill {
+        fill: @danger-6;
       }
 
-      .ri-error-warning-fill {
-        color: @warning-6;
+      .bp-icon-error-warning-fill {
+        fill: @warning-6;
       }
     }
 
-  &-footer {
+    &-footer {
       margin-top: 12px;
     }
   }
