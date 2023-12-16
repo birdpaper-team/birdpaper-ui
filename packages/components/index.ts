@@ -58,6 +58,9 @@ export type { LinkInstance } from "./link";
 export { default as Popconfirm } from "./popconfirm";
 export type { PopconfirmInstance } from "./popconfirm";
 
+export { default as DatePicker } from "./datePicker";
+export type { DatePickerInstance } from "./datePicker";
+
 export { default as Image } from "./image";
 export type { ImageInstance } from "./image";
 
