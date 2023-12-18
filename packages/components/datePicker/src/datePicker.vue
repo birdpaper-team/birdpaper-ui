@@ -1,26 +1,32 @@
 <template>
-  <bp-input
-    ref="inputRef"
-    :modelValue="global_value"
-    :class="name"
-    :placeholder="placeholder"
-    :disabled="disabled"
-    :readonly="readonly"
-    :is-danger="isDanger"
-    :size="size"
-    @input="onInput"
-    @blur="onBlur"
-  >
-    <template #suffix>
-      <IconCalendarLine />
-    </template>
-  </bp-input>
+  <!-- <bp-trigger transition="fade-dropdown" :disabled="disabled" :popup-offset="10" position="left-bottom">
+    <bp-input
+      ref="inputRef"
+      :modelValue="global_value"
+      :class="name"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :readonly="readonly"
+      :is-danger="isDanger"
+      :size="size"
+      @input="onInput"
+      @blur="onBlur"
+    >
+      <template #suffix>
+        <IconCalendarLine />
+      </template>
+    </bp-input>
+    <template #content> -->
+      <picker-panel></picker-panel>
+    <!-- </template> -->
+  <!-- </bp-trigger> -->
 </template>
 
 <script lang="ts">
 import { InputSize } from "components/input/src/types";
 import { defineComponent, PropType, ref, watch } from "vue";
 import { IconCalendarLine } from "birdpaper-icon";
+import pickerPanel from "./pickerPanel.vue";
 
 export default defineComponent({
   name: "DatePicker",
@@ -32,7 +38,7 @@ export default defineComponent({
     /** 是否禁用 Disabled or not */
     disabled: { type: Boolean, default: false },
     /** 是否只读状态 Readonly or not */
-    readonly: { type: Boolean, default: false },
+    readonly: { type: Boolean, default: true },
     /** 是否警示状态 Danger or not */
     isDanger: { type: Boolean, default: false },
     /** 占位提示文字 The placeholder text */
@@ -40,7 +46,7 @@ export default defineComponent({
     /** 是否允许清空 Clearable or not */
     clearable: { type: Boolean, default: false },
   },
-  components: { IconCalendarLine },
+  components: { pickerPanel, IconCalendarLine },
   emits: ["update:modelValue", "input", "focus", "blur", "keypress", "keyup"],
   setup(props, { emit, slots }) {
     const name = "bp-date-picker";
@@ -63,7 +69,7 @@ export default defineComponent({
       inputRef,
       global_value,
       onInput,
-      onBlur
+      onBlur,
     };
   },
 });
