@@ -60,25 +60,25 @@ export const getPositionData = (
     case "left-top":
       positionData = {
         top: top + scrollTop - popupOffset - wrapperSize.height + popupTranslate[1] || 0,
-        left: left - wrapperWidth + popupTranslate[0] || 0,
+        left: left + popupTranslate[0] || 0,
       };
       break;
     case "left-bottom":
       positionData = {
         top: top + height + scrollTop + popupOffset + popupTranslate[1] || 0,
-        left: left - wrapperWidth + popupTranslate[0] || 0,
+        left: left + popupTranslate[0] || 0,
       };
       break;
     case "right-top":
       positionData = {
-        top: top + scrollTop - wrapperSize.height + popupTranslate[1] || 0,
-        left: left + width + popupOffset + popupTranslate[0] || 0,
+        top: top + scrollTop - popupOffset - wrapperSize.height + popupTranslate[1] || 0,
+        left: left - wrapperWidth + width + popupTranslate[0] || 0,
       };
       break;
     case "right-bottom":
       positionData = {
-        top: top + scrollTop + height + popupTranslate[1] || 0,
-        left: left + width + popupOffset + popupTranslate[0] || 0,
+        top: top + scrollTop + popupOffset + height + popupTranslate[1] || 0,
+        left: left - wrapperWidth + width + popupTranslate[0] || 0,
       };
       break;
   }
