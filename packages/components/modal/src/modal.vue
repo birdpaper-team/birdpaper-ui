@@ -12,7 +12,7 @@
               <p :class="`${name}-header-title`">{{ title }}</p>
               <IconCloseLine v-if="!hideClose" :class="`${name}-header-close`" @click="handleCancle" size="20px" />
             </div>
-            <div :class="`${name}-body`">
+            <div :class="[`${name}-body`, { 'no-footer': hideFooter }]">
               <slot></slot>
             </div>
             <div :class="`${name}-footer`" v-if="!hideFooter">
