@@ -11,12 +11,12 @@
 ### 基础用法
 
 按钮支持 5 中基础类型，分别是 `normal` - 常规（默认），`primary` - 主要，`plain` - 线框，`dashed` - 虚线，`text` - 文本。
-<demo-block src="example/button/basic"></demo-block>
+<demo-block src="example/button/basic" stack-blitz-url="https://stackblitz.com/edit/button-basic?file=src%2FApp.vue"></demo-block>
 
 ### 按钮尺寸
 
 你可以根据不同使用场景选择合适尺寸的按钮，分别有 `large` - 大型，`normal` - 常规（默认），`small` - 小型，`mini` - 迷你。
-<demo-block src="example/button/size"></demo-block>
+<demo-block src="example/button/size" stack-blitz-url="https://stackblitz.com/edit/button-size?file=src%2FApp.vue"></demo-block>
 
 ### 按钮形状
 

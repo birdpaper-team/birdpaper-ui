@@ -7,15 +7,23 @@
 
     <!-- 操作区域 -->
     <div class="demo-block-footer">
-      <bp-tooltip content="展示代码">
-        <div :class="['icon-item', { active: showCode }]" @click="showCode = !showCode">
-          <IconCodeView />
-        </div>
-      </bp-tooltip>
-      <bp-tooltip v-if="false" content="在 Stackblitz 中调试">
-        <div class="icon-item">
-        </div>
-      </bp-tooltip>
+      <bp-space size="mini" justify="flex-end">
+        <bp-tooltip content="展示代码">
+          <div :class="['icon-item', { active: showCode }]" @click="showCode = !showCode">
+            <IconCodeLine size="13" />
+          </div>
+        </bp-tooltip>
+        <bp-tooltip v-if="stackBlitzUrl" content="在 StackBlitz 中调试">
+          <div class="icon-item" @click="handleToStackBlitz">
+            <IconFlashlightLine size="13" />
+          </div>
+        </bp-tooltip>
+        <bp-tooltip content="在 Github 上编辑">
+          <div class="icon-item" @click="handleToGithub">
+            <IconEditLine size="13" />
+          </div>
+        </bp-tooltip>
+      </bp-space>
     </div>
 
     <!-- 源码 -->
@@ -26,18 +34,20 @@
 </template>
 
 <script setup lang="ts" name="demo-block">
-import { IconCodeView } from "birdpaper-icon";
+import { IconCodeLine, IconFlashlightLine, IconEditLine } from "birdpaper-icon";
 import { defineAsyncComponent, markRaw, onMounted, ref } from "vue";
 
 interface Prop {
   src: string;
   codeString?: string;
   lang?: string;
+  stackBlitzUrl?: string;
 }
 const props = withDefaults(defineProps<Prop>(), {
   src: "",
   codeString: "",
   lang: "vue",
+  stackBlitzUrl: "",
 });
 
 const exampleGlob = import.meta.glob(`../../../src/example/**/*.vue`);
@@ -52,6 +62,14 @@ onMounted(() => {
 
 const init = () => {
   demoComponent.value = markRaw(defineAsyncComponent(exampleGlob[`../../../src/${props.src}.vue`] as any));
+};
+
+const handleToStackBlitz = () => {
+  window.open(props.stackBlitzUrl);
+};
+
+const handleToGithub = () => {
+  window.open(`https://github.com/birdpaper-team/birdpaper-ui/blob/main/docs/src/${props.src}.vue`);
 };
 </script>
 
