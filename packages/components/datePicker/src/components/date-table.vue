@@ -12,10 +12,13 @@
     </div>
     <div :class="`${name}-body`">
       <div :class="`${name}-body-row`" v-for="row in days">
-        <span :class="`${name}-body-inner`" v-for="col in row">
+        <span :class="[`${name}-body-inner`, `day-cell-${col.type}`]" v-for="col in row">
           {{ col.label }}
         </span>
       </div>
+    </div>
+    <div :class="`${name}-footer`">
+      <bp-link>今天</bp-link>
     </div>
   </div>
 </template>
@@ -23,13 +26,13 @@
 <script lang="ts">
 import { defineComponent, ref, computed, PropType } from "vue";
 import dayjs, { Dayjs } from "dayjs";
-import localeData from "dayjs/plugin/localeData.js";
 import {
   IconArrowLeftSLine,
   IconArrowRightSLine,
   IconArrowLeftDoubleFill,
   IconArrowRightDoubleFill,
 } from "birdpaper-icon";
+import { DayCell, DayType } from "../types";
 
 export default defineComponent({
   name: "DateTable",
@@ -41,10 +44,9 @@ export default defineComponent({
     const name = "bp-date-table";
 
     const weeks = ["日", "一", "二", "三", "四", "五", "六"];
-    const days = ref([[], [], [], [], [], []]);
+    const days = ref<DayCell[][]>([[], [], [], [], [], []]);
 
     const current = dayjs();
-    dayjs.extend(localeData);
 
     const firstDay = current.startOf("month").day();
     const lastDate = current.endOf("month").date();
@@ -58,9 +60,9 @@ export default defineComponent({
       for (let row = 0; row < days.value.length; row++) {
         for (let col = 0; col < 7; col++) {
           const value = startDate.value.add(sum, "day");
-          const label = value.date();
+          const label = value.date().toString();
 
-          let type = "normal";
+          let type: DayType = "normal";
           if (sum < firstDay) {
             type = "prev";
           }
@@ -68,12 +70,7 @@ export default defineComponent({
             type = "next";
           }
 
-          days.value[row][col] = {
-            type,
-            value,
-            label,
-          };
-
+          days.value[row][col] = { type, value, label };
           sum++;
         }
       }

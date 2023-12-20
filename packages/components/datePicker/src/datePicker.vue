@@ -1,5 +1,5 @@
 <template>
-  <!-- <bp-trigger transition="fade-dropdown" :disabled="disabled" :popup-offset="10" position="left-bottom">
+  <bp-trigger transition="fade-dropdown" :disabled="disabled" :popup-offset="10" position="left-bottom">
     <bp-input
       ref="inputRef"
       :modelValue="global_value"
@@ -16,17 +16,17 @@
         <IconCalendarLine />
       </template>
     </bp-input>
-    <template #content> -->
+    <template #content>
       <picker-panel></picker-panel>
-    <!-- </template> -->
-  <!-- </bp-trigger> -->
+    </template>
+  </bp-trigger>
 </template>
 
 <script lang="ts">
 import { InputSize } from "components/input/src/types";
 import { defineComponent, PropType, ref, watch } from "vue";
-import { IconCalendarLine } from "birdpaper-icon";
 import pickerPanel from "./pickerPanel.vue";
+import { IconCalendarLine } from "birdpaper-icon";
 
 export default defineComponent({
   name: "DatePicker",
