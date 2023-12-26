@@ -3,8 +3,7 @@
     <div :class="`${name}-header`">
       <div :class="`${name}-header-inner`">
         <span :class="`${name}-header-inner-year`">2024</span>
-        <span :class="`${name}-header-inner-split`"></span>
-        <span :class="`${name}-header-inner-month`">12</span>
+        <span :class="`${name}-header-inner-month`">12月</span>
       </div>
       <div :class="`${name}-header-option`">
         <IconArrowLeftDoubleFill size="20px" />
@@ -18,19 +17,22 @@
     </div>
     <div :class="`${name}-body`">
       <div :class="`${name}-body-row`" v-for="row in days">
-        <span :class="[`${name}-body-inner`, `day-cell-${col.type}`]" v-for="col in row">
+        <span
+          v-for="col in row"
+          :class="[`${name}-body-inner`, `day-cell-${col.type}`, { active: currentVal === col.value }]"
+        >
           {{ col.label }}
         </span>
       </div>
     </div>
     <div :class="`${name}-footer`">
-      <bp-link>今天</bp-link>
+      <bp-button type="text" status="primary">今天</bp-button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, PropType } from "vue";
+import { defineComponent, ref, computed, inject } from "vue";
 import dayjs, { Dayjs } from "dayjs";
 import {
   IconArrowLeftSLine,
@@ -38,21 +40,23 @@ import {
   IconArrowLeftDoubleFill,
   IconArrowRightDoubleFill,
 } from "birdpaper-icon";
-import { DayCell, DayType } from "../types";
+import { DayCell, DayType, dateInjectionKey } from "../types";
+import { getWeeksList } from "../core";
 
 export default defineComponent({
   name: "DateTable",
-  props: {
-    date: { type: Object as PropType<Dayjs>, default: () => dayjs() },
-  },
   components: { IconArrowLeftSLine, IconArrowRightSLine, IconArrowLeftDoubleFill, IconArrowRightDoubleFill },
   setup(props) {
     const name = "bp-date-table";
+    const ctx = ref<any>();
 
-    const weeks = ["日", "一", "二", "三", "四", "五", "六"];
+    ctx.value = inject(dateInjectionKey);
+
+    const weeks = getWeeksList(ctx.value.langs);
     const days = ref<DayCell[][]>([[], [], [], [], [], []]);
 
     const current = dayjs();
+    const currentVal = current.format(ctx.value.valueFormat);
 
     const firstDay = current.startOf("month").day();
     const lastDate = current.endOf("month").date();
@@ -76,7 +80,7 @@ export default defineComponent({
             type = "next";
           }
 
-          days.value[row][col] = { type, value, label };
+          days.value[row][col] = { type, value: value.format(ctx.value.valueFormat), label };
           sum++;
         }
       }
@@ -85,6 +89,9 @@ export default defineComponent({
     setDays();
 
     return {
+      ctx,
+      current,
+      currentVal,
       name,
       weeks,
       days,

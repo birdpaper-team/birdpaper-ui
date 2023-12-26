@@ -17,16 +17,17 @@
       </template>
     </bp-input>
     <template #content> -->
-      <picker-panel></picker-panel>
+      <picker-panel :langs="langs"></picker-panel>
     <!-- </template>
   </bp-trigger> -->
 </template>
 
 <script lang="ts">
 import { InputSize } from "components/input/src/types";
-import { defineComponent, PropType, ref, watch } from "vue";
+import { defineComponent, PropType, provide, ref, watch } from "vue";
 import pickerPanel from "./pickerPanel.vue";
 import { IconCalendarLine } from "birdpaper-icon";
+import { dateInjectionKey, LangsType } from "./types";
 
 export default defineComponent({
   name: "DatePicker",
@@ -45,6 +46,10 @@ export default defineComponent({
     placeholder: { type: String, default: "" },
     /** 是否允许清空 Clearable or not */
     clearable: { type: Boolean, default: false },
+    /** 语言包 */
+    langs: { type: String as PropType<LangsType>, default: "CN" },
+    /** 值格式 */
+    valueFormat: { type: String, default: "YYYY-MM-DD" },
   },
   components: { pickerPanel, IconCalendarLine },
   emits: ["update:modelValue", "input", "focus", "blur", "keypress", "keyup"],
@@ -53,6 +58,16 @@ export default defineComponent({
     const inputRef = ref();
 
     const global_value = ref<string>(props.modelValue || "");
+
+    provide(dateInjectionKey, {
+      modelValue: props.modelValue,
+      langs: props.langs,
+      valueFormat: props.valueFormat,
+      onSelect: (v: string, payload: any) => {
+        global_value.value = v;
+        emit("update:modelValue", global_value.value);
+      },
+    });
 
     const onInput = () => {};
     const onBlur = () => {};

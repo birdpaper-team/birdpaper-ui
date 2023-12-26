@@ -34,14 +34,9 @@
     &-inner {
       flex: 2;
 
-      &-split::after {
-        content: "·";
-        color: @gary-10;
-      }
-
       &-year,
       &-month {
-        color: @gary-10;
+        color: @gary-9;
         font-size: 16px;
         font-weight: bold;
         padding: 2px 4px;
@@ -49,6 +44,7 @@
         cursor: pointer;
 
         &:hover {
+          color: @gary-11;
           background-color: @gary-3;
           transition: all 0.4s ease;
         }
@@ -83,7 +79,7 @@
     align-items: center;
     justify-content: space-around;
     padding: 0 12px;
-    margin-top: 12px;
+    margin-top: 10px;
 
     &-inner {
       width: 32px;
@@ -93,6 +89,7 @@
       font-size: 12px;
       color: @gary-8;
       padding: 0;
+      transform: scale(0.9);
     }
   }
 
@@ -101,18 +98,23 @@
     align-items: center;
     flex-direction: column;
     padding: 0 12px;
+    margin-bottom: 10px;
 
     &-row {
       display: flex;
       justify-content: space-around;
       width: 100%;
+
+      &:not(:first-child) {
+        margin-top: 8px;
+      }
     }
 
     &-inner {
       display: block;
-      width: 32px;
-      height: 32px;
-      line-height: 32px;
+      width: 26px;
+      height: 26px;
+      line-height: 26px;
       text-align: center;
       font-size: 12px;
       cursor: pointer;
@@ -135,6 +137,13 @@
         transition: all 0.2s ease;
       }
     }
+
+    .active {
+      border-radius: 50%;
+      background-color: @primary-6;
+      color: @gary-1;
+      pointer-events: none;
+    }
   }
 
   &-footer {
@@ -144,7 +153,7 @@
     height: 40px;
     border-top: 1px dashed @gary-4;
 
-    .bp-link {
+    .bp-btn {
       font-size: 13px;
     }
   }
