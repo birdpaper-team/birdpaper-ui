@@ -1,6 +1,11 @@
 import { weeks_lang } from "./langs";
 import { LangsType } from "./types";
 
+/**
+ * 获取周列表头数据
+ * @param lang LangsType
+ * @returns string[]
+ */
 export const getWeeksList = (lang: LangsType) => {
   return [
     weeks_lang[lang].Sunday,

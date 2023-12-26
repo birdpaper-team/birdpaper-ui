@@ -1,5 +1,5 @@
 <template>
-  <!-- <bp-trigger transition="fade-dropdown" :disabled="disabled" :popup-offset="10" position="left-bottom">
+  <bp-trigger transition="fade-dropdown" :disabled="disabled" :popup-offset="10" position="left-bottom">
     <bp-input
       ref="inputRef"
       :modelValue="global_value"
@@ -16,10 +16,10 @@
         <IconCalendarLine />
       </template>
     </bp-input>
-    <template #content> -->
+    <template #content>
       <picker-panel :langs="langs"></picker-panel>
-    <!-- </template>
-  </bp-trigger> -->
+    </template>
+  </bp-trigger>
 </template>
 
 <script lang="ts">
