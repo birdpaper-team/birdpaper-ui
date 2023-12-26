@@ -1,11 +1,17 @@
 <template>
   <div :class="name">
     <div :class="`${name}-header`">
-      <IconArrowLeftDoubleFill size="20px" />
-      <IconArrowLeftSLine size="20px" />
-      <span :class="`${name}-header-inner`">2024 - 12</span>
-      <IconArrowRightSLine size="20px" />
-      <IconArrowRightDoubleFill size="20px" />
+      <div :class="`${name}-header-inner`">
+        <span :class="`${name}-header-inner-year`">2024</span>
+        <span :class="`${name}-header-inner-split`"></span>
+        <span :class="`${name}-header-inner-month`">12</span>
+      </div>
+      <div :class="`${name}-header-option`">
+        <IconArrowLeftDoubleFill size="20px" />
+        <IconArrowLeftSLine size="20px" />
+        <IconArrowRightSLine size="20px" />
+        <IconArrowRightDoubleFill size="20px" />
+      </div>
     </div>
     <div :class="`${name}-week`">
       <span :class="`${name}-week-inner`" v-for="v in weeks">{{ v }}</span>

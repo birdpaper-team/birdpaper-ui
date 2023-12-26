@@ -25,26 +25,55 @@
   &-header {
     display: flex;
     align-items: center;
-    justify-content: space-around;
-    padding: 0 8px;
+    justify-content: space-between;
+    padding: 0 12px;
     height: 46px;
-    border-bottom: 1px solid @gary-4;
+    border-bottom: 1px dashed @gary-4;
+    border-width: 1px;
 
     &-inner {
-      font-size: 13px;
-      color: @gary-11;
+      flex: 2;
+
+      &-split::after {
+        content: "·";
+        color: @gary-10;
+      }
+
+      &-year,
+      &-month {
+        color: @gary-10;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 2px 4px;
+        border-radius: 6px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: @gary-3;
+          transition: all 0.4s ease;
+        }
+      }
     }
 
-    .bp-icon {
-      fill: @gary-7;
-      cursor: pointer;
-      border-radius: 50%;
-      padding: 3px;
+    &-option {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-      &:hover {
-        fill: @gary-9;
-        background-color: @gary-4;
-        transition: all 0.2s ease;
+      .bp-icon {
+        fill: @gary-7;
+        cursor: pointer;
+        border-radius: 50%;
+        padding: 4px;
+        background-color: @gary-1;
+        transition: all 0.4s ease;
+
+        &:hover {
+          fill: @gary-10;
+          background-color: @gary-3;
+          transition: all 0.4s ease;
+        }
       }
     }
   }
@@ -113,7 +142,7 @@
     align-items: center;
     justify-content: center;
     height: 40px;
-    border-top: 1px solid @gary-4;
+    border-top: 1px dashed @gary-4;
 
     .bp-link {
       font-size: 13px;
