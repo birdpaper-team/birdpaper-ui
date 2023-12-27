@@ -47,7 +47,7 @@ export default defineComponent({
     /** 是否允许清空 Clearable or not */
     clearable: { type: Boolean, default: false },
     /** 语言包 */
-    langs: { type: String as PropType<LangsType>, default: "CN" },
+    langs: { type: String as PropType<LangsType>, default: "zh-cn" },
     /** 值格式 */
     valueFormat: { type: String, default: "YYYY-MM-DD" },
   },

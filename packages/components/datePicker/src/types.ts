@@ -2,7 +2,7 @@ import type { Dayjs } from "dayjs";
 import { InjectionKey } from "vue";
 
 /** 语言类型 */
-export type LangsType = "EN" | "CN";
+export type LangsType = "en" | "zh-cn";
 
 /** 日历中日期类型 */
 export type DayType = "prev" | "normal" | "next";

@@ -41,7 +41,7 @@ import {
   IconArrowRightDoubleFill,
 } from "birdpaper-icon";
 import { DayCell, DayType, dateInjectionKey } from "../types";
-import { getWeeksList } from "../core";
+import { useDayJs } from "../core";
 
 export default defineComponent({
   name: "DateTable",
@@ -51,8 +51,9 @@ export default defineComponent({
     const ctx = ref<any>();
 
     ctx.value = inject(dateInjectionKey);
+    const { getWeeksList } = useDayJs(ctx.value.langs);
 
-    const weeks = getWeeksList(ctx.value.langs);
+    const weeks = getWeeksList();
     const days = ref<DayCell[][]>([[], [], [], [], [], []]);
 
     const current = dayjs();
