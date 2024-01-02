@@ -1,5 +1,5 @@
 <template>
-  <bp-trigger transition="fade-dropdown" :disabled="disabled" :popup-offset="10" position="left-bottom">
+  <bp-trigger transition="fade-dropdown" :hideTrigger="hideTrigger" :disabled="disabled" :popup-offset="10" position="left-bottom">
     <bp-input
       ref="inputRef"
       :modelValue="global_value"
@@ -50,6 +50,8 @@ export default defineComponent({
     langs: { type: String as PropType<LangsType>, default: "zh-cn" },
     /** 值格式 */
     valueFormat: { type: String, default: "YYYY-MM-DD" },
+    /** 隐藏触发器 */
+    hideTrigger: { type: Boolean, default: false },
   },
   components: { pickerPanel, IconCalendarLine },
   emits: ["update:modelValue", "input", "focus", "blur", "keypress", "keyup"],
