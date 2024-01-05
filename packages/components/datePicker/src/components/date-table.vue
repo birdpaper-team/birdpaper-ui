@@ -6,10 +6,10 @@
         <span :class="`${name}-header-inner-month`">{{ months[currentMonth] }}</span>
       </div>
       <div :class="`${name}-header-option`">
-        <IconArrowLeftDoubleFill size="20px" />
+        <IconArrowLeftDoubleFill @click="onChangeYear('prev')" size="20px" />
         <IconArrowLeftSLine @click="onChangeMonth('prev')" size="20px" />
         <IconArrowRightSLine @click="onChangeMonth('next')" size="20px" />
-        <IconArrowRightDoubleFill size="20px" />
+        <IconArrowRightDoubleFill @click="onChangeYear('next')" size="20px" />
       </div>
     </div>
     <div :class="`${name}-week`">
@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed, inject } from "vue";
+import { defineComponent, ref, inject } from "vue";
 import {
   IconArrowLeftSLine,
   IconArrowRightSLine,
@@ -50,7 +50,7 @@ export default defineComponent({
     const ctx = ref<any>();
 
     ctx.value = inject(dateInjectionKey);
-    const { current, currentMonth, currentYear, dates, setDates, changeMonth, weeks, months } = useDayJs(
+    const { current, currentMonth, currentYear, dates, setDates, changeMonth, changeYear, weeks, months } = useDayJs(
       ctx.value.langs
     );
 
@@ -58,10 +58,25 @@ export default defineComponent({
 
     setDates(ctx.value.valueFormat);
 
+    /**
+     * 月份切换
+     * @param type
+     */
     const onChangeMonth = (type: "prev" | "next") => {
       let v = currentMonth.value;
       type === "next" ? v++ : v--;
       changeMonth(v);
+      setDates(ctx.value.valueFormat);
+    };
+
+    /**
+     * 年份切换
+     * @param type
+     */
+    const onChangeYear = (type: "prev" | "next") => {
+      let v = currentYear.value;
+      type === "next" ? v++ : v--;
+      changeYear(v);
       setDates(ctx.value.valueFormat);
     };
 
@@ -76,6 +91,7 @@ export default defineComponent({
       currentYear,
       currentMonth,
       onChangeMonth,
+      onChangeYear,
     };
   },
 });

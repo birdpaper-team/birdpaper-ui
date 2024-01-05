@@ -11,14 +11,6 @@ export const useDayJs = (lang: LangsType) => {
   const current = ref(dayjs());
   const currentMonth = computed(() => current.value.month());
   const currentYear = computed(() => current.value.year());
-  /** 当前月起始周N */
-  const firstDay = computed(() => current.value.startOf("month").day());
-  /** 当前最后一天 */
-  const lastDate = computed(() => current.value.endOf("month").date());
-  /** 当前月视图起始日期 */
-  const startDate = computed(() => {
-    return current.value.startOf("month").subtract(firstDay.value || 7, "day");
-  });
 
   const weeks = dayjs.weekdaysMin();
   const months = dayjs.monthsShort();
@@ -26,16 +18,23 @@ export const useDayJs = (lang: LangsType) => {
   const dates = ref<DayCell[][]>([[], [], [], [], [], []]);
   const setDates = (valueFormat: string) => {
     let sum = 0;
+    /** 当前月起始周N */
+    const firstDay = current.value.startOf("month").day() || 6;
+    /** 当前最后一天 */
+    const lastDate = current.value.endOf("month").date();
+    /** 当前月视图起始日期 */
+    const startDate = current.value.startOf("month").subtract(firstDay || 7, "day");
+
     for (let row = 0; row < dates.value.length; row++) {
       for (let col = 0; col < 7; col++) {
-        const value = startDate.value.add(sum, "day");
+        const value = startDate.add(sum, "day");
         const label = value.date().toString();
 
         let type: DayType = "normal";
-        if (sum < firstDay.value) {
+        if (sum < firstDay) {
           type = "prev";
         }
-        if (sum - firstDay.value >= lastDate.value) {
+        if (sum - firstDay >= lastDate) {
           type = "next";
         }
 
@@ -45,9 +44,8 @@ export const useDayJs = (lang: LangsType) => {
     }
   };
 
-  const changeMonth = (m: number) => {
-    current.value = current.value.month(m);
-  };
+  const changeMonth = (m: number) => (current.value = current.value.month(m));
+  const changeYear = (y: number) => (current.value = current.value.year(y));
 
   return {
     current,
@@ -58,5 +56,6 @@ export const useDayJs = (lang: LangsType) => {
     weeks,
     months,
     changeMonth,
+    changeYear
   };
 };
