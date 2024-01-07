@@ -1,5 +1,5 @@
 import { DayCell, DayType, LangsType } from "./types";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import localeData from "dayjs/plugin/localeData";
 import "dayjs/locale/zh-cn";
 import { computed, ref } from "vue";
@@ -8,7 +8,8 @@ export const useDayJs = (lang: LangsType) => {
   dayjs.locale(lang);
   dayjs.extend(localeData);
 
-  const current = ref(dayjs());
+  const toDay = dayjs();
+  const current = ref(toDay.add(1, "day"));
   const currentMonth = computed(() => current.value.month());
   const currentYear = computed(() => current.value.year());
 
@@ -19,7 +20,7 @@ export const useDayJs = (lang: LangsType) => {
   const setDates = (valueFormat: string) => {
     let sum = 0;
     /** 当前月起始周N */
-    const firstDay = current.value.startOf("month").day() || 6;
+    const firstDay = current.value.startOf("month").day() || 1;
     /** 当前最后一天 */
     const lastDate = current.value.endOf("month").date();
     /** 当前月视图起始日期 */
@@ -48,6 +49,7 @@ export const useDayJs = (lang: LangsType) => {
   const changeYear = (y: number) => (current.value = current.value.year(y));
 
   return {
+    toDay,
     current,
     currentMonth,
     currentYear,
@@ -56,6 +58,6 @@ export const useDayJs = (lang: LangsType) => {
     weeks,
     months,
     changeMonth,
-    changeYear
+    changeYear,
   };
 };

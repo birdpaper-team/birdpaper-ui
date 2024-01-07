@@ -19,7 +19,12 @@
       <div :class="`${name}-body-row`" v-for="row in dates">
         <span
           v-for="col in row"
-          :class="[`${name}-body-inner`, `day-cell-${col.type}`, { active: currentVal === col.value }]"
+          :class="[
+            `${name}-body-inner`,
+            `day-cell-${col.type}`,
+            { active: currentVal === col.value },
+            { 'to-day': col.value === toDay.format(ctx.valueFormat) },
+          ]"
         >
           {{ col.label }}
         </span>
@@ -50,11 +55,10 @@ export default defineComponent({
     const ctx = ref<any>();
 
     ctx.value = inject(dateInjectionKey);
-    const { current, currentMonth, currentYear, dates, setDates, changeMonth, changeYear, weeks, months } = useDayJs(
-      ctx.value.langs
-    );
+    const { toDay, current, currentMonth, currentYear, dates, setDates, changeMonth, changeYear, weeks, months } =
+      useDayJs(ctx.value.langs);
 
-    const currentVal = current.value.format(ctx.value.valueFormat);
+    const currentVal = current.value&&current.value.format(ctx.value.valueFormat);
 
     setDates(ctx.value.valueFormat);
 
@@ -82,6 +86,7 @@ export default defineComponent({
 
     return {
       ctx,
+      toDay,
       current,
       currentVal,
       name,

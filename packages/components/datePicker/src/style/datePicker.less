@@ -149,6 +149,21 @@
       color: @gary-1;
       pointer-events: none;
     }
+
+    .to-day {
+      &::after {
+        content: "";
+        display: block;
+        position: relative;
+        left: 50%;
+        bottom: 2px;
+        width: 4px;
+        height: 4px;
+        margin-left: -2px;
+        border-radius: 4px;
+        background-color: @primary-6;
+      }
+    }
   }
 
   &-footer {
