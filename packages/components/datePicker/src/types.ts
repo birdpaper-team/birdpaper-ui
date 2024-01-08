@@ -1,4 +1,3 @@
-import type { Dayjs } from "dayjs";
 import { InjectionKey } from "vue";
 
 /** 语言类型 */
@@ -14,4 +13,14 @@ export interface DayCell {
   label?: string;
 }
 
-export const dateInjectionKey: InjectionKey<any> = Symbol("DatePickerCtxKey");
+export interface DatePickerContext {
+  /** 绑定值 */
+  modelValue: string;
+  /** 语言类型 */
+  langs: LangsType;
+  /** 值格式 */
+  valueFormat: string;
+  /** 选择后触发 */
+  onSelect: (value: string, payload: object) => void;
+}
+export const dateInjectionKey: InjectionKey<DatePickerContext> = Symbol("DatePickerCtxKey");

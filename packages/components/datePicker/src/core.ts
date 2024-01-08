@@ -1,5 +1,5 @@
 import { DayCell, DayType, LangsType } from "./types";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import localeData from "dayjs/plugin/localeData";
 import "dayjs/locale/zh-cn";
 import { computed, ref } from "vue";

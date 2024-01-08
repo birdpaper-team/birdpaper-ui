@@ -6,10 +6,10 @@
         <span :class="`${name}-header-inner-month`">{{ months[currentMonth] }}</span>
       </div>
       <div :class="`${name}-header-option`">
-        <IconArrowLeftDoubleFill @click="onChangeYear('prev')" size="20px" />
-        <IconArrowLeftSLine @click="onChangeMonth('prev')" size="20px" />
-        <IconArrowRightSLine @click="onChangeMonth('next')" size="20px" />
-        <IconArrowRightDoubleFill @click="onChangeYear('next')" size="20px" />
+        <IconArrowLeftDoubleFill @click="handleChange('year', 'prev')" size="20px" />
+        <IconArrowLeftSLine @click="handleChange('month', 'prev')" size="20px" />
+        <IconArrowRightSLine @click="handleChange('month', 'next')" size="20px" />
+        <IconArrowRightDoubleFill @click="handleChange('year', 'next')" size="20px" />
       </div>
     </div>
     <div :class="`${name}-week`">
@@ -32,9 +32,9 @@
       </div>
     </div>
     <div :class="`${name}-footer`">
-      <bp-button type="text" status="primary" @click="handleSelect({ value: toDay.format(ctx.valueFormat) })"
-        >今天</bp-button
-      >
+      <bp-button type="text" status="primary" @click="handleSelect({ value: toDay.format(ctx.valueFormat) })">
+        今天
+      </bp-button>
     </div>
   </div>
 </template>
@@ -71,24 +71,15 @@ export default defineComponent({
     };
 
     /**
-     * 月份切换
-     * @param type
+     * 月份/年份切换
+     * @param mode 切换模式
+     * @param type 类型
+     * @param step 跨度
      */
-    const onChangeMonth = (type: "prev" | "next") => {
-      let v = currentMonth.value;
-      type === "next" ? v++ : v--;
-      changeMonth(v);
-      setDates(ctx.value.valueFormat);
-    };
-
-    /**
-     * 年份切换
-     * @param type
-     */
-    const onChangeYear = (type: "prev" | "next") => {
-      let v = currentYear.value;
-      type === "next" ? v++ : v--;
-      changeYear(v);
+    const handleChange = (mode: "month" | "year", type: "prev" | "next", step: number = 1) => {
+      let v = mode === "month" ? currentMonth.value : currentYear.value;
+      v = type === "next" ? v + step : v - step
+      mode === "month" ? changeMonth(v) : changeYear(v);
       setDates(ctx.value.valueFormat);
     };
 
@@ -103,8 +94,7 @@ export default defineComponent({
       dates,
       currentYear,
       currentMonth,
-      onChangeMonth,
-      onChangeYear,
+      handleChange,
       handleSelect,
     };
   },
