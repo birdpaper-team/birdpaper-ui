@@ -4,12 +4,12 @@ import localeData from "dayjs/plugin/localeData";
 import "dayjs/locale/zh-cn";
 import { computed, ref } from "vue";
 
-export const useDayJs = (lang: LangsType) => {
+export const useDayJs = (lang: LangsType, modelValue: string) => {
   dayjs.locale(lang);
   dayjs.extend(localeData);
 
   const toDay = dayjs();
-  const current = ref(toDay.add(1, "day"));
+  const current = ref(!modelValue ? dayjs() : dayjs(modelValue));
   const currentMonth = computed(() => current.value.month());
   const currentYear = computed(() => current.value.year());
 

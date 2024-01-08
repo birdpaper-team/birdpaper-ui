@@ -134,20 +134,13 @@
     .day-cell-normal {
       color: @gary-10;
       font-weight: 500;
-      border-radius: 4px;
+      border-radius: 50%;
 
       &:hover {
         background-color: @gary-4;
         color: @gary-11;
         transition: all 0.2s ease;
       }
-    }
-
-    .active {
-      border-radius: 50%;
-      background-color: @primary-6;
-      color: @gary-1;
-      pointer-events: none;
     }
 
     .to-day {
@@ -163,6 +156,12 @@
         border-radius: 4px;
         background-color: @primary-6;
       }
+    }
+
+    .active {
+      background-color: @primary-6 !important;
+      color: @gary-1 !important;
+      pointer-events: none;
     }
   }
 

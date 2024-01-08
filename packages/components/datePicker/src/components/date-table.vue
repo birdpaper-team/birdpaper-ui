@@ -23,15 +23,18 @@
             `${name}-body-inner`,
             `day-cell-${col.type}`,
             { active: currentVal === col.value },
-            { 'to-day': col.value === toDay.format(ctx.valueFormat) },
+            { 'to-day': currentVal !== col.value && col.value === toDay.format(ctx.valueFormat) },
           ]"
+          @click="handleSelect(col)"
         >
           {{ col.label }}
         </span>
       </div>
     </div>
     <div :class="`${name}-footer`">
-      <bp-button type="text" status="primary">今天</bp-button>
+      <bp-button type="text" status="primary" @click="handleSelect({ value: toDay.format(ctx.valueFormat) })"
+        >今天</bp-button
+      >
     </div>
   </div>
 </template>
@@ -44,7 +47,7 @@ import {
   IconArrowLeftDoubleFill,
   IconArrowRightDoubleFill,
 } from "birdpaper-icon";
-import { dateInjectionKey } from "../types";
+import { DayCell, dateInjectionKey } from "../types";
 import { useDayJs } from "../core";
 
 export default defineComponent({
@@ -56,11 +59,16 @@ export default defineComponent({
 
     ctx.value = inject(dateInjectionKey);
     const { toDay, current, currentMonth, currentYear, dates, setDates, changeMonth, changeYear, weeks, months } =
-      useDayJs(ctx.value.langs);
+      useDayJs(ctx.value.langs, ctx.value.modelValue);
 
-    const currentVal = current.value&&current.value.format(ctx.value.valueFormat);
+    const currentVal = ref(current.value && current.value.format(ctx.value.valueFormat));
 
     setDates(ctx.value.valueFormat);
+
+    const handleSelect = (date: DayCell) => {
+      currentVal.value = date.value;
+      ctx.value.onSelect(currentVal.value);
+    };
 
     /**
      * 月份切换
@@ -97,6 +105,7 @@ export default defineComponent({
       currentMonth,
       onChangeMonth,
       onChangeYear,
+      handleSelect,
     };
   },
 });

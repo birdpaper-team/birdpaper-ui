@@ -1,5 +1,5 @@
 <template>
-  <bp-trigger transition="fade-dropdown" :hideTrigger="hideTrigger" :disabled="disabled" :popup-offset="10" position="left-bottom">
+  <bp-trigger v-model:popupVisible="showPopup" transition="fade-dropdown" :hideTrigger="hideTrigger" :disabled="disabled" :popup-offset="10" position="left-bottom">
     <bp-input
       ref="inputRef"
       :modelValue="global_value"
@@ -59,6 +59,7 @@ export default defineComponent({
     const name = "bp-date-picker";
     const inputRef = ref();
 
+    const showPopup = ref<boolean>(false);
     const global_value = ref<string>(props.modelValue || "");
 
     provide(dateInjectionKey, {
@@ -67,6 +68,7 @@ export default defineComponent({
       valueFormat: props.valueFormat,
       onSelect: (v: string, payload: any) => {
         global_value.value = v;
+        showPopup.value = false;
         emit("update:modelValue", global_value.value);
       },
     });
@@ -85,6 +87,7 @@ export default defineComponent({
       name,
       inputRef,
       global_value,
+      showPopup,
       onInput,
       onBlur,
     };
