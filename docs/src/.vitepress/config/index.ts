@@ -22,6 +22,9 @@ const config: import("vitepress").UserConfig = {
     },
     socialLinks: [{ icon: "github", link: "https://github.com/birdpaper-team/birdpaper-ui" }],
     sidebar,
+    search: {
+      provider: 'local'
+    }
   },
   head: [
     [

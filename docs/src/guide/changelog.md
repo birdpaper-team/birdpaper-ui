@@ -1,5 +1,3 @@
-# 更新日志
-
 <script setup lang="ts">
 import { ref } from "vue";
 import changelogPage from "../../components/changelog-page/index.vue";
