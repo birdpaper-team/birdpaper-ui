@@ -1,5 +1,12 @@
 <template>
-  <bp-trigger v-model:popupVisible="showPopup" transition="fade-dropdown" :hideTrigger="hideTrigger" :disabled="disabled" :popup-offset="10" position="left-bottom">
+  <bp-trigger
+    v-model:popupVisible="showPopup"
+    transition="fade-dropdown"
+    :hideTrigger="hideTrigger"
+    :disabled="disabled"
+    :popup-offset="10"
+    position="left-bottom"
+  >
     <bp-input
       ref="inputRef"
       v-model="global_value"
@@ -13,8 +20,8 @@
       @input="onInput"
       @blur="onBlur"
     >
-      <template #suffix>
-        <IconCalendarLine />
+      <template #perfix>
+        <IconCalendarLine style="position: relative; top: 1px" />
       </template>
     </bp-input>
     <template #content>

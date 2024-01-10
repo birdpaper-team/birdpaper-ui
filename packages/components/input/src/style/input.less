@@ -23,6 +23,7 @@
     height: ~"@{input-size-@{size}-height}";
     border-radius: ~"@{input-size-@{size}-radius}";
 
+    .@{input-cls}-perfix,
     .@{input-cls}-suffix {
       height: calc(~"@{input-size-@{size}-height}" - 2px);
       border-radius: ~"@{input-size-@{size}-radius}";
@@ -35,7 +36,11 @@
       border-radius: ~"@{input-size-@{size}-radius}";
       padding: ~"@{input-size-@{size}-padding}";
       font-size: ~"@{input-size-@{size}-font-size}";
-      .input-font-family;
+      line-height: 1;
+    }
+
+    .has-perfix {
+      margin-left: 24px;
     }
   }
 }
@@ -58,7 +63,7 @@
       transition: all 0.2s ease;
 
       .bp-input-suffix {
-        .ri-close-line {
+        .bp-icon-close-line {
           opacity: 1;
           transition: all 0.2s ease;
         }
@@ -125,6 +130,32 @@
   }
 }
 
+// 前置元素
+.@{input-cls}-perfix {
+  position: absolute;
+  left: 10px;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100px;
+  flex: 0 0 auto;
+  margin-right: 2px;
+  min-width: 16px;
+  .no-select();
+
+  .bp-icon {
+    width: 16px !important;
+    height: 16px !important;
+    fill: @gary-7;
+  }
+
+  span {
+    font-size: 12px;
+    color: @gary-7;
+  }
+}
+
 // 后缀元素
 .@{input-cls}-suffix {
   position: absolute;
@@ -145,7 +176,7 @@
     fill: @gary-7;
   }
 
-  .ri-close-line {
+  .bp-icon-close-line {
     opacity: 0;
     transition: all 0.2s ease;
   }

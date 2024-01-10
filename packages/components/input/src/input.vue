@@ -1,8 +1,11 @@
 <template>
   <div :class="inpClass">
+    <div :class="`${name}-perfix`" v-if="slots.perfix">
+      <slot name="perfix"></slot>
+    </div>
     <input
       ref="inpRef"
-      class="bp-input-inner"
+      :class="['bp-input-inner', { 'has-perfix': slots.perfix }]"
       :type="inpType"
       :spellcheck="false"
       :disabled="disabled"
@@ -84,9 +87,7 @@ export default defineComponent({
     }
 
     // 清空文本内容
-    const showClear = computed(
-      () => props.type === "text" && props.modelValue && props.clearable && !props.disabled
-    );
+    const showClear = computed(() => props.type === "text" && props.modelValue && props.clearable && !props.disabled);
     const handleClear = () => {
       emit("update:modelValue", "");
       nextTick(() => handleFocus());
