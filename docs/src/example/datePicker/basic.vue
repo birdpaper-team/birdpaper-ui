@@ -1,5 +1,5 @@
 <template>
-  <bp-date-picker v-model="val" style="width: 230px" placeholder="请选择"> </bp-date-picker>
+  <bp-date-picker v-model="val" clearable style="width: 200px" placeholder="请选择"> </bp-date-picker>
 </template>
 
 <script setup lang="ts">

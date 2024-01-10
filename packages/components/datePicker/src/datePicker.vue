@@ -2,12 +2,13 @@
   <bp-trigger v-model:popupVisible="showPopup" transition="fade-dropdown" :hideTrigger="hideTrigger" :disabled="disabled" :popup-offset="10" position="left-bottom">
     <bp-input
       ref="inputRef"
-      :modelValue="global_value"
+      v-model="global_value"
       :class="name"
       :placeholder="placeholder"
       :disabled="disabled"
       :readonly="readonly"
       :is-danger="isDanger"
+      :clearable="clearable"
       :size="size"
       @input="onInput"
       @blur="onBlur"
