@@ -63,7 +63,7 @@ export default defineComponent({
   },
   components: { pickerPanel, IconCalendarLine },
   emits: ["update:modelValue", "input", "focus", "blur", "keypress", "keyup"],
-  setup(props, { emit, slots }) {
+  setup(props, { emit }) {
     const name = "bp-date-picker";
     const inputRef = ref();
 
