@@ -1,7 +1,7 @@
 <template>
   <bp-space>
-    <bp-input :style="{ width: '180px' }" v-model="val" clearable placeholder="请输入内容"></bp-input>
-    <bp-input disabled :style="{ width: '180px' }" v-model="val" placeholder="请输入内容"></bp-input>
+    <bp-input :style="{ width: '180px' }" v-model="val" clearable placeholder="Please enter"></bp-input>
+    <bp-input disabled :style="{ width: '180px' }" v-model="val" placeholder="Please enter"></bp-input>
   </bp-space>
 </template>
 

@@ -62,7 +62,7 @@ export default defineComponent({
     hideTrigger: { type: Boolean, default: false },
   },
   components: { pickerPanel, IconCalendarLine },
-  emits: ["update:modelValue", "input", "focus", "blur", "keypress", "keyup"],
+  emits: ["update:modelValue", "input", "blur"],
   setup(props, { emit }) {
     const name = "bp-date-picker";
     const inputRef = ref();
@@ -81,8 +81,8 @@ export default defineComponent({
       },
     });
 
-    const onInput = () => {};
-    const onBlur = () => {};
+    const onInput = () => emit("input");
+    const onBlur = () => emit("blur");
 
     watch(
       () => props.modelValue,
