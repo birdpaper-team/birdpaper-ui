@@ -13,3 +13,8 @@ declare module '*.module.less' {
   export default classes
   declare module '*.less'
 }
+
+declare module 'vue-virtual-scroller' {
+  const vis: any;
+  export default vis;
+}

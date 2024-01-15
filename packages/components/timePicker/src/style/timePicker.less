@@ -23,7 +23,6 @@
 // 时间选择
 .bp-time-table {
   width: fit-content;
-  min-height: 200px;
   border-radius: 6px;
   border: 1px solid @gary-4;
   background-color: @gary-1;
@@ -36,9 +35,14 @@
   }
 
   &-time-col {
-    width: 60px;
-    max-height: 200px;
-    overflow-y: hidden;
+    width: 64px;
+    height: 200px;
+    padding: 4px 0;
+    overflow-y: hidden !important;
+
+    &:hover {
+      overflow-y: auto !important;
+    }
 
     &:not(:first-child) {
       border-left: 1px solid @gary-4;
@@ -46,13 +50,14 @@
   }
 
   &-col-cell {
-    text-align: center;
-    height: 28px;
-    line-height: 28px;
+    padding-left: 24px;
+    height: 24px;
+    line-height: 24px;
     cursor: pointer;
 
     &-inner {
       font-size: 12px;
+      font-weight: 500;
       color: @gary-10;
     }
 

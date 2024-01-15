@@ -15,7 +15,8 @@
     "birdpaper-icon": "^0.0.11",
     "vite": "^4.2.1",
     "vite-plugin-dts": "1.4.1",
-    "vue": "^3.3.2"
+    "vue": "^3.3.2",
+    "vue-virtual-scroller": "2.0.0-beta.8"
   },
   "devDependencies": {
     "@types/node": "^18.13.0",
