@@ -26,6 +26,7 @@ declare module "@vue/runtime-core" {
     BpSpace: typeof import("birdpaper-ui")["Space"];
     BpPopconfirm: typeof import("birdpaper-ui")["Popconfirm"];
     BpDatePicker: typeof import("birdpaper-ui")["DatePicker"];
+    BpTimePicker: typeof import("birdpaper-ui")["TimePicker"];
     BpImage: typeof import("birdpaper-ui")["Image"];
     BpDrawer: typeof import("birdpaper-ui")["Drawer"];
     BpTooltip: typeof import("birdpaper-ui")["Tooltip"];

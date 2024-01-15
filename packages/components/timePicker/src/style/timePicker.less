@@ -1,0 +1,79 @@
+.bp-time-picker {
+  position: relative;
+}
+
+.bp-trigger-wrapper {
+  .bp-time-picker-panel {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.bp-time-picker-panel {
+  width: fit-content;
+  border-radius: 6px;
+  .no-select;
+
+  &-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// 时间选择
+.bp-time-table {
+  width: fit-content;
+  min-height: 200px;
+  border-radius: 6px;
+  border: 1px solid @gary-4;
+  background-color: @gary-1;
+
+  &-body {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  &-time-col {
+    width: 60px;
+    max-height: 200px;
+    overflow-y: hidden;
+
+    &:not(:first-child) {
+      border-left: 1px solid @gary-4;
+    }
+  }
+
+  &-col-cell {
+    text-align: center;
+    height: 28px;
+    line-height: 28px;
+    cursor: pointer;
+
+    &-inner {
+      font-size: 12px;
+      color: @gary-10;
+    }
+
+    &:hover {
+      background-color: @gary-3;
+
+      .bp-time-table-col-cell-inner {
+        color: @gary-11;
+      }
+    }
+  }
+
+  &-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border-top: 1px dashed @gary-4;
+
+    .bp-btn {
+      font-size: 13px;
+    }
+  }
+}

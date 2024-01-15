@@ -19,6 +19,7 @@ import Grid from "./grid";
 import Link from "./link";
 import Popconfirm from "./popconfirm";
 import DatePicker from "./datePicker";
+import TimePicker from "./timePicker";
 import Image from "./image";
 import Drawer from "./drawer";
 import Tooltip from "./tooltip";
@@ -47,6 +48,7 @@ const components: Record<string, Plugin> = {
   Link,
   Popconfirm,
   DatePicker,
+  TimePicker,
   Image,
   Drawer,
   Tooltip,
