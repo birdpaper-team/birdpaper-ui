@@ -1,5 +1,5 @@
 <template>
-  <bp-time-picker hideTrigger v-model="val" style="width: 200px" placeholder="请选择时间"> </bp-time-picker>
+  <bp-time-picker v-model="val" style="width: 200px" placeholder="请选择时间"> </bp-time-picker>
 </template>
 
 <script setup lang="ts">
