@@ -21,6 +21,6 @@ export interface DatePickerContext {
   /** 值格式 */
   valueFormat: string;
   /** 选择后触发 */
-  onSelect: (value: string, payload: object) => void;
+  onSelect: (value: string, payload?: object) => void;
 }
 export const dateInjectionKey: InjectionKey<DatePickerContext> = Symbol("DatePickerCtxKey");

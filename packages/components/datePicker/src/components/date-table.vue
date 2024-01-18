@@ -47,7 +47,7 @@ import {
   IconArrowLeftDoubleFill,
   IconArrowRightDoubleFill,
 } from "birdpaper-icon";
-import { DayCell, dateInjectionKey } from "../types";
+import { DatePickerContext, DayCell, dateInjectionKey } from "../types";
 import { useDayJs } from "../core";
 
 export default defineComponent({
@@ -55,7 +55,7 @@ export default defineComponent({
   components: { IconArrowLeftSLine, IconArrowRightSLine, IconArrowLeftDoubleFill, IconArrowRightDoubleFill },
   setup(props) {
     const name = "bp-date-table";
-    const ctx = ref<any>();
+    const ctx = ref<DatePickerContext>();
 
     ctx.value = inject(dateInjectionKey);
     const { toDay, current, currentMonth, currentYear, dates, setDates, changeMonth, changeYear, weeks, months } =

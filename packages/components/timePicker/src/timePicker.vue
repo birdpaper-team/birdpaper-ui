@@ -9,7 +9,7 @@
   >
     <bp-input
       ref="inputRef"
-      v-model="global_value"
+      v-model="globalValue"
       :class="name"
       :placeholder="placeholder"
       :disabled="disabled"
@@ -21,7 +21,7 @@
       @blur="onBlur"
     >
       <template #perfix>
-        <IconTimeLine  />
+        <IconTimeLine />
       </template>
     </bp-input>
     <template #content>
@@ -35,6 +35,7 @@ import { InputSize } from "components/input/src/types";
 import { IconTimeLine } from "birdpaper-icon";
 import pickerPanel from "./pickerPanel.vue";
 import { defineComponent, PropType, provide, ref, watch } from "vue";
+import { timeInjectionKey } from "./types";
 
 export default defineComponent({
   name: "TimePicker",
@@ -65,7 +66,15 @@ export default defineComponent({
     const inputRef = ref();
 
     const showPopup = ref<boolean>(false);
-    const global_value = ref<string>(props.modelValue || "");
+    const globalValue = ref<string>(props.modelValue || "");
+
+    provide(timeInjectionKey, {
+      modelValue: props.modelValue,
+      onSelect: (v: string, payload: any) => {
+        globalValue.value = v;
+        emit("update:modelValue", globalValue.value);
+      },
+    });
 
     const onInput = () => emit("input");
     const onBlur = () => emit("blur");
@@ -73,14 +82,14 @@ export default defineComponent({
     watch(
       () => props.modelValue,
       (value?: string) => {
-        global_value.value = value || "";
+        globalValue.value = value || "";
       }
     );
 
     return {
       name,
       inputRef,
-      global_value,
+      globalValue,
       showPopup,
       onInput,
       onBlur,
