@@ -25,7 +25,11 @@
       </template>
     </bp-input>
     <template #content>
-      <picker-panel></picker-panel>
+      <div class="bp-time-picker-panel">
+        <div class="bp-time-picker-panel-wrapper">
+          <time-table :visible="showPopup"></time-table>
+        </div>
+      </div>
     </template>
   </bp-trigger>
 </template>
@@ -33,7 +37,7 @@
 <script lang="ts">
 import { InputSize } from "components/input/src/types";
 import { IconTimeLine } from "birdpaper-icon";
-import pickerPanel from "./pickerPanel.vue";
+import timeTable from "./components/time-table.vue";
 import { defineComponent, PropType, provide, ref, watch } from "vue";
 import { timeInjectionKey } from "./types";
 
@@ -59,7 +63,7 @@ export default defineComponent({
     /** 隐藏触发器 */
     hideTrigger: { type: Boolean, default: false },
   },
-  components: { pickerPanel, IconTimeLine },
+  components: { timeTable, IconTimeLine },
   emits: ["update:modelValue", "input", "blur"],
   setup(props, { emit }) {
     const name = "bp-time-picker";
@@ -73,6 +77,7 @@ export default defineComponent({
       onSelect: (v: string, payload: any) => {
         globalValue.value = v;
         emit("update:modelValue", globalValue.value);
+        showPopup.value = false;
       },
     });
 

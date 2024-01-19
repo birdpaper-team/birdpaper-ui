@@ -18,13 +18,15 @@
     </div>
     <div :class="`${name}-footer`">
       <bp-button size="mini" @click="setNow">现在</bp-button>
-      <bp-button :disabled="confirmDisabled" size="mini" type="primary" status="primary">确认</bp-button>
+      <bp-button :disabled="confirmDisabled" size="mini" type="primary" status="primary" @click="handleSelect">
+        确认
+      </bp-button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, inject, ref, Ref } from "vue";
+import { computed, defineComponent, inject, nextTick, ref, Ref, watch } from "vue";
 import { generateArray } from "../../../../utils/util";
 // @ts-ignore
 import { RecycleScroller } from "vue-virtual-scroller";
@@ -35,7 +37,10 @@ import { timeInjectionKey, TimePickerContext } from "../types";
 export default defineComponent({
   name: "TimeTable",
   components: { RecycleScroller },
-  setup() {
+  props: {
+    visible: { type: Boolean, default: false },
+  },
+  setup(props) {
     const name = "bp-time-table";
     const ctx = ref<TimePickerContext>();
 
@@ -46,16 +51,15 @@ export default defineComponent({
 
     ctx.value = inject(timeInjectionKey);
 
-    const globalValue = ref<string[]>(["", "", ""]);
+    const globalValue = ref<string[]>([]);
     /** 确认按钮禁用判断 */
     const confirmDisabled = computed(() => globalValue.value.filter(item => item === "").length > 0);
 
-    const typeRefs = ref([]) as Ref<unknown>;
+    const typeRefs = ref([]) as Ref<any>;
     const handleClick = (index: number, item: string) => {
       globalValue.value[index] = item;
       scrollTo(index, item);
       setDefault();
-      handleSelect();
     };
 
     const setDefault = () => {
@@ -93,6 +97,34 @@ export default defineComponent({
       ctx.value.onSelect(globalValue.value.join(":"));
     };
 
+    watch(
+      () => ctx.value.modelValue,
+      (val: string) => {
+        if (!val) return;
+
+        globalValue.value = [];
+        const arr = ctx.value.modelValue.split(":");
+        for (let i = 0; i < arr.length; i++) {
+          const element = arr[i];
+          globalValue.value.push(Number(element).toString().padStart(2, "0"));
+        }
+      },
+      { immediate: true }
+    );
+
+    watch(
+      () => props.visible,
+      () => {
+        if (props.visible) {
+          nextTick(() => {
+            globalValue.value.map((item: string, index: number) => {
+              scrollTo(index, item);
+            });
+          });
+        }
+      }
+    );
+
     return {
       ctx,
       name,
@@ -104,6 +136,7 @@ export default defineComponent({
       confirmDisabled,
       setNow,
       handleClick,
+      handleSelect,
     };
   },
 });
