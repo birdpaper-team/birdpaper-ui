@@ -51,7 +51,7 @@ export default defineComponent({
 
     ctx.value = inject(timeInjectionKey);
 
-    const globalValue = ref<string[]>([]);
+    const globalValue = ref<string[]>(["", "", ""]);
     /** 确认按钮禁用判断 */
     const confirmDisabled = computed(() => globalValue.value.filter(item => item === "").length > 0);
 
@@ -98,24 +98,18 @@ export default defineComponent({
     };
 
     watch(
-      () => ctx.value.modelValue,
-      (val: string) => {
-        if (!val) return;
-
-        globalValue.value = [];
-        const arr = ctx.value.modelValue.split(":");
-        for (let i = 0; i < arr.length; i++) {
-          const element = arr[i];
-          globalValue.value.push(Number(element).toString().padStart(2, "0"));
-        }
-      },
-      { immediate: true }
-    );
-
-    watch(
       () => props.visible,
       () => {
         if (props.visible) {
+          if (!ctx.value.modelValue) return;
+
+          globalValue.value = ["", "", ""];
+          const arr = ctx.value.modelValue.split(":");
+          for (let i = 0; i < arr.length; i++) {
+            const element = arr[i];
+            globalValue.value.push(Number(element).toString().padStart(2, "0"));
+          }
+
           nextTick(() => {
             globalValue.value.map((item: string, index: number) => {
               scrollTo(index, item);
