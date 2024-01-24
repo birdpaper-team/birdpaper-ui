@@ -1,16 +1,16 @@
 <template>
-  <bp-modal v-model="modalShow" :title="iconName" width="600px">
+  <bp-modal v-model="modalConfig.show" :title="modalConfig.icon" width="560px">
     <div class="icon-modal-body">
       <div class="icon-area">
-        <component :is="allIcons[`Icon${iconName}`]" size="40" :fill="color"></component>
+        <component :is="allIcons[`Icon${modalConfig.icon}`]" size="40" :fill="modalConfig.color"></component>
       </div>
       <div class="icon-info">
         <div class="icon-info-title">
-          <p>{{ iconName }}</p>
-          <component :is="allIcons[`IconFileCopyLine`]" size="18" @click="handleCopy(iconName)"></component>
+          <p>{{ modalConfig.icon }}</p>
+          <component :is="allIcons[`IconFileCopyLine`]" size="18" @click="handleCopy(modalConfig.icon)"></component>
         </div>
         <div class="icon-info-component">
-          <bp-input :modelValue="componentTag" readonly style="width: 280px">
+          <bp-input :modelValue="componentTag" readonly style="width: 100%">
             <template #perfix>
               <component :is="allIcons[`IconCodeView`]"></component>
             </template>
@@ -22,7 +22,7 @@
       </div>
     </div>
     <template #footer>
-      <input v-model="color" type="color" />
+      <input v-model="modalConfig.color" type="color" />
     </template>
   </bp-modal>
 </template>
@@ -33,11 +33,15 @@ import { Message } from "birdpaper-ui";
 import { computed, ref } from "vue";
 import * as useClipboard from "vue-clipboard3/dist/esm/index";
 
-const modalShow = ref<boolean>(false);
-const iconName = ref<string>("");
-const color = ref<string>("#262626");
+class ModalConfig {
+  show: boolean = false;
+  icon: string = "";
+  color: string = "#262626";
+}
+const modalConfig = ref<ModalConfig>(new ModalConfig());
+
 const componentTag = computed<string>(() => {
-  return `<Icon${iconName.value} ${color ? 'fill="' + color.value + '"' : ""}/>`;
+  return `<Icon${modalConfig.value.icon} ${modalConfig.value.color ? 'fill="' + modalConfig.value.color + '"' : ""}/>`;
 });
 
 /** 复制到剪贴板 */
@@ -52,8 +56,9 @@ const handleCopy = async (str: string) => {
 };
 
 const open = (icon: string) => {
-  iconName.value = icon;
-  modalShow.value = true;
+  modalConfig.value = new ModalConfig();
+  modalConfig.value.icon = icon;
+  modalConfig.value.show = true;
 };
 
 defineExpose({
