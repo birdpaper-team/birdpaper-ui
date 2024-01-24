@@ -63,3 +63,51 @@
     }
   }
 }
+
+.icon-modal-body {
+  display: flex;
+
+  .icon-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 76px;
+    height: 76px;
+    border-radius: 10px;
+    border: 1px solid @gary-4;
+  }
+
+  .icon-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 20px;
+
+    &-title {
+      display: flex;
+      align-items: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: @gary-10;
+      letter-spacing: 0.4px;
+      .font-quick;
+
+      .bp-icon {
+        margin-left: 4px;
+        fill: @gary-7;
+        cursor: pointer;
+        transform: scale(1);
+        transition: all 0.2s ease;
+
+        &:hover {
+          fill: @gary-10;
+          transform: scale(1.08);
+          transition: all 0.2s ease;
+        }
+      }
+    }
+
+    &-component {
+    }
+  }
+}
