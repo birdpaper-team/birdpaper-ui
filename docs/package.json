@@ -23,7 +23,8 @@
     "vitepress": "1.0.0-rc.25",
     "vitepress-markdown-timeline": "^1.2.1",
     "vue": "^3.3.2",
-    "vue-clipboard3": "^2.0.0"
+    "vue-clipboard3": "^2.0.0",
+    "vue3-colorpicker": "^2.2.3"
   },
   "devDependencies": {
     "@types/node": "^18.13.0",
