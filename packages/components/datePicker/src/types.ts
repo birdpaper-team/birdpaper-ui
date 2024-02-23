@@ -13,6 +13,19 @@ export interface DayCell {
   label?: string;
 }
 
+/** 日历中月份单元格 */
+export interface MonthCell {
+  value: string;
+  label?: string;
+}
+
+/** 日历面板类型 */
+export enum PanelType {
+  Date = "date",
+  Month = "month",
+  Year = "year",
+}
+
 export interface DatePickerContext {
   /** 绑定值 */
   modelValue: string;

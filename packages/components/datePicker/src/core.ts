@@ -1,4 +1,4 @@
-import { DayCell, DayType, LangsType } from "./types";
+import { DayCell, DayType, LangsType, MonthCell } from "./types";
 import dayjs from "dayjs";
 import localeData from "dayjs/plugin/localeData";
 import "dayjs/locale/zh-cn";
@@ -48,6 +48,19 @@ export const useDayJs = (lang: LangsType, modelValue: string) => {
   const changeMonth = (m: number) => (current.value = current.value.month(m));
   const changeYear = (y: number) => (current.value = current.value.year(y));
 
+  const monthCell = ref<MonthCell[]>([]);
+  const setMonthCell = (valueFormat: string) => {
+    for (let i = 0; i < months.length; i++) {
+      const label = months[i];
+      const value = current.value.add(i - 1, "month");
+
+      monthCell.value[i] = {
+        value: value.format(valueFormat),
+        label,
+      };
+    }
+  };
+
   return {
     toDay,
     current,
@@ -57,6 +70,8 @@ export const useDayJs = (lang: LangsType, modelValue: string) => {
     setDates,
     weeks,
     months,
+    monthCell,
+    setMonthCell,
     changeMonth,
     changeYear,
   };

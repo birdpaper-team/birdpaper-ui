@@ -2,8 +2,12 @@
   <div :class="name">
     <div :class="`${name}-header`">
       <div :class="`${name}-header-inner`">
-        <span :class="`${name}-header-inner-year`">{{ currentYear }}</span>
-        <span :class="`${name}-header-inner-month`">{{ months[currentMonth] }}</span>
+        <span :class="`${name}-header-inner-year`" @click.stop="handleChangePicker(PanelType.Year, currentYear)">
+          {{ currentYear }}
+        </span>
+        <span :class="`${name}-header-inner-month`" @click.stop="handleChangePicker(PanelType.Month, currentMonth)">
+          {{ months[currentMonth] }}
+        </span>
       </div>
       <div :class="`${name}-header-option`">
         <IconArrowLeftDoubleFill @click="handleChange('year', 'prev')" size="20px" />
@@ -47,13 +51,15 @@ import {
   IconArrowLeftDoubleFill,
   IconArrowRightDoubleFill,
 } from "birdpaper-icon";
-import { DatePickerContext, DayCell, dateInjectionKey } from "../types";
+import { DatePickerContext, DayCell, PanelType, dateInjectionKey } from "../types";
 import { useDayJs } from "../core";
+import { emit } from "process";
 
 export default defineComponent({
   name: "DateTable",
   components: { IconArrowLeftSLine, IconArrowRightSLine, IconArrowLeftDoubleFill, IconArrowRightDoubleFill },
-  setup(props) {
+  emits: ["change-picker"],
+  setup(props, { emit }) {
     const name = "bp-date-table";
     const ctx = ref<DatePickerContext>();
 
@@ -78,9 +84,13 @@ export default defineComponent({
      */
     const handleChange = (mode: "month" | "year", type: "prev" | "next", step: number = 1) => {
       let v = mode === "month" ? currentMonth.value : currentYear.value;
-      v = type === "next" ? v + step : v - step
+      v = type === "next" ? v + step : v - step;
       mode === "month" ? changeMonth(v) : changeYear(v);
       setDates(ctx.value.valueFormat);
+    };
+
+    const handleChangePicker = (typeName: PanelType, val: number) => {
+      emit("change-picker", typeName, val);
     };
 
     return {
@@ -96,6 +106,8 @@ export default defineComponent({
       currentMonth,
       handleChange,
       handleSelect,
+      handleChangePicker,
+      PanelType,
     };
   },
 });
