@@ -1,4 +1,4 @@
-import { InjectionKey } from "vue";
+import { InjectionKey, Ref } from "vue";
 
 /** 语言类型 */
 export type LangsType = "en" | "zh-cn";
@@ -28,12 +28,12 @@ export enum PanelType {
 
 export interface DatePickerContext {
   /** 绑定值 */
-  modelValue: string;
+  modelValue: Ref<string>;
   /** 语言类型 */
   langs: LangsType;
   /** 值格式 */
   valueFormat: string;
   /** 选择后触发 */
-  onSelect: (value: string, payload?: object) => void;
+  onSelect: (value: string, payload: object, closePopup: boolean) => void;
 }
 export const dateInjectionKey: InjectionKey<DatePickerContext> = Symbol("DatePickerCtxKey");

@@ -17,7 +17,7 @@
           { active: currentVal === col.value },
           { 'to-month': currentVal !== col.value && col.value === toDay.format(ctx.valueFormat) },
         ]"
-        @click="handleSelect(col)"
+        @click.stop="handleSelect(col)"
       >
         <span :class="[`${name}-month-cell-inner`]">{{ col.label }}</span>
       </div>
@@ -58,7 +58,7 @@ export default defineComponent({
 
     const handleSelect = (date: MonthCell) => {
       currentVal.value = date.value;
-      ctx.value.onSelect(currentVal.value);
+      ctx.value.onSelect(currentVal.value, {}, false);
       emit("change-picker", "date");
     };
 

@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import { InputSize } from "components/input/src/types";
-import { defineComponent, PropType, provide, ref, watch } from "vue";
+import { computed, defineComponent, PropType, provide, ref, watch } from "vue";
 import pickerPanel from "./pickerPanel.vue";
 import { IconCalendarLine } from "birdpaper-icon";
 import { dateInjectionKey, LangsType } from "./types";
@@ -71,12 +71,13 @@ export default defineComponent({
     const global_value = ref<string>(props.modelValue || "");
 
     provide(dateInjectionKey, {
-      modelValue: props.modelValue,
+      modelValue: global_value,
       langs: props.langs,
       valueFormat: props.valueFormat,
-      onSelect: (v: string, payload: any) => {
+      onSelect: (v: string, payload: any, closePopup = true) => {
         global_value.value = v;
-        showPopup.value = false;
+
+        if (closePopup) showPopup.value = false;
         emit("update:modelValue", global_value.value);
       },
     });

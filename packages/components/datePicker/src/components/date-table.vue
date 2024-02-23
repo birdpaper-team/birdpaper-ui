@@ -66,6 +66,7 @@ export default defineComponent({
     ctx.value = inject(dateInjectionKey);
     const { toDay, current, currentMonth, currentYear, dates, setDates, changeMonth, changeYear, weeks, months } =
       useDayJs(ctx.value.langs, ctx.value.modelValue);
+      console.log('[ ctx.value.modelValue ]-69', ctx.value.modelValue);
 
     const currentVal = ref(current.value && current.value.format(ctx.value.valueFormat));
 
@@ -73,7 +74,7 @@ export default defineComponent({
 
     const handleSelect = (date: DayCell) => {
       currentVal.value = date.value;
-      ctx.value.onSelect(currentVal.value);
+      ctx.value.onSelect(currentVal.value, {}, true);
     };
 
     /**
