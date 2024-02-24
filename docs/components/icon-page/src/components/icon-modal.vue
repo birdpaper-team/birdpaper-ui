@@ -18,9 +18,9 @@
         </div>
       </div>
     </div>
-    <template #footer>
+    <!-- <template #footer>
       <color-picker v-model:pureColor="modalConfig.color" format="hex" disableHistory />
-    </template>
+    </template> -->
   </bp-modal>
 </template>
 
@@ -29,7 +29,7 @@ import * as allIcons from "birdpaper-icon";
 import { Message } from "birdpaper-ui";
 import { computed, ref } from "vue";
 import * as useClipboard from "vue-clipboard3/dist/esm/index";
-import { ColorPicker } from "vue3-colorpicker";
+// import { ColorPicker } from "vue3-colorpicker";
 import "vue3-colorpicker/style.css";
 
 class ModalConfig {
