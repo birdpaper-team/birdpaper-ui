@@ -245,3 +245,62 @@
     }
   }
 }
+
+.bp-year-table {
+  &-body {
+    padding: 16px 12px;
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+    grid-gap: 10px 0;
+  }
+
+  &-year-cell {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+
+    &-inner {
+      color: @gary-10;
+      line-height: 26px;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 0 8px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    &:hover {
+      .bp-year-table-year-cell-inner {
+        color: @gary-11;
+        background-color: @gary-3;
+        transition: all 0.2s ease;
+      }
+    }
+  }
+
+  .active {
+    pointer-events: none;
+
+    .bp-year-table-year-cell-inner {
+      background-color: @primary-6 !important;
+      color: @gary-1 !important;
+    }
+  }
+
+  .to-year {
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: -2px;
+      width: 4px;
+      height: 4px;
+      margin-left: -2px;
+      border-radius: 4px;
+      background-color: @primary-6;
+    }
+  }
+}

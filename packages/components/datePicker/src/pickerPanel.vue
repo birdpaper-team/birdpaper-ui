@@ -10,7 +10,7 @@
 import { ref } from "vue";
 import dateTable from "./components/date-table.vue";
 import monthTable from "./components/month-table.vue";
-// import yearTable from "./components/year-table.vue";
+import yearTable from "./components/year-table.vue";
 import { PanelType } from "./types";
 
 const name = "bp-date-picker-panel";
@@ -18,7 +18,7 @@ const currentTable = ref<string>("date");
 const tableMap = {
   date: dateTable,
   month: monthTable,
-  // year: yearTable,
+  year: yearTable,
 };
 
 const onChangePicker = (typeName: PanelType, val: number) => {

@@ -1,5 +1,5 @@
-import { DayCell, DayType, LangsType, MonthCell } from "./types";
-import dayjs from "dayjs";
+import { DayCell, DayType, LangsType, MonthCell, YearCell } from "./types";
+import dayjs, { Dayjs } from "dayjs";
 import localeData from "dayjs/plugin/localeData";
 import "dayjs/locale/zh-cn";
 import { computed, ref } from "vue";
@@ -52,11 +52,24 @@ export const useDayJs = (lang: LangsType, modelValue: string) => {
   const setMonthCell = (valueFormat: string) => {
     for (let i = 0; i < months.length; i++) {
       const label = months[i];
-      const value = current.value.add(i - 1, "month");
+      const value = current.value.month(i);
 
       monthCell.value[i] = {
         value: value.format(valueFormat),
         label,
+      };
+    }
+  };
+
+  const yearCell = ref<YearCell[]>([]);
+  const firstYear = ref<number>(current.value.subtract(5, "year").year());
+  const setYearCell = (valueFormat: string) => {
+    for (let i = 1; i < 13; i++) {
+      const value = current.value.year(firstYear.value + i);
+
+      yearCell.value[i - 1] = {
+        value: value.format(valueFormat),
+        label: value.year() + "",
       };
     }
   };
@@ -74,5 +87,8 @@ export const useDayJs = (lang: LangsType, modelValue: string) => {
     setMonthCell,
     changeMonth,
     changeYear,
+    yearCell,
+    firstYear,
+    setYearCell,
   };
 };

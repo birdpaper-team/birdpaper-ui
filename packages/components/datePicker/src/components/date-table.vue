@@ -53,7 +53,6 @@ import {
 } from "birdpaper-icon";
 import { DatePickerContext, DayCell, PanelType, dateInjectionKey } from "../types";
 import { useDayJs } from "../core";
-import { emit } from "process";
 
 export default defineComponent({
   name: "DateTable",
@@ -61,20 +60,20 @@ export default defineComponent({
   emits: ["change-picker"],
   setup(props, { emit }) {
     const name = "bp-date-table";
-    const ctx = ref<DatePickerContext>();
 
-    ctx.value = inject(dateInjectionKey);
+    let ctx: DatePickerContext = null;
+    ctx = inject(dateInjectionKey);
+
     const { toDay, current, currentMonth, currentYear, dates, setDates, changeMonth, changeYear, weeks, months } =
-      useDayJs(ctx.value.langs, ctx.value.modelValue);
-      console.log('[ ctx.value.modelValue ]-69', ctx.value.modelValue);
+      useDayJs(ctx.langs, ctx.modelValue.value);
 
-    const currentVal = ref(current.value && current.value.format(ctx.value.valueFormat));
+    const currentVal = ref(current.value && current.value.format(ctx.valueFormat));
 
-    setDates(ctx.value.valueFormat);
+    setDates(ctx.valueFormat);
 
     const handleSelect = (date: DayCell) => {
       currentVal.value = date.value;
-      ctx.value.onSelect(currentVal.value, {}, true);
+      ctx.onSelect(currentVal.value, {}, true);
     };
 
     /**
@@ -87,7 +86,7 @@ export default defineComponent({
       let v = mode === "month" ? currentMonth.value : currentYear.value;
       v = type === "next" ? v + step : v - step;
       mode === "month" ? changeMonth(v) : changeYear(v);
-      setDates(ctx.value.valueFormat);
+      setDates(ctx.valueFormat);
     };
 
     const handleChangePicker = (typeName: PanelType, val: number) => {

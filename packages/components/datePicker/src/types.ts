@@ -19,6 +19,12 @@ export interface MonthCell {
   label?: string;
 }
 
+/** 日历中的年份单元格 */
+export interface YearCell {
+  value: string;
+  label?: string;
+}
+
 /** 日历面板类型 */
 export enum PanelType {
   Date = "date",
