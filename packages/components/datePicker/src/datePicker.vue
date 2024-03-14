@@ -32,7 +32,7 @@
 
 <script lang="ts">
 import { InputSize } from "components/input/src/types";
-import { computed, defineComponent, PropType, provide, ref, watch } from "vue";
+import { defineComponent, PropType, provide, ref, watch } from "vue";
 import pickerPanel from "./pickerPanel.vue";
 import { IconCalendarLine } from "birdpaper-icon";
 import { dateInjectionKey, LangsType } from "./types";
