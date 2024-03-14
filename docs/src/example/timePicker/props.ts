@@ -14,7 +14,6 @@ const list: PropTableItem[] = [
   { name: "is-danger", remark: "是否警示状态", type: "Boolean", default: "false" },
   { name: "placeholder", remark: "占位提示文字", type: "String", default: "" },
   { name: "clearable", remark: "是否允许清空", type: "Boolean", default: "false" },
-  { name: "langs", remark: "语言包", type: "String", optional: ["en", "zh-cn"], default: "zh-cn" },
   { name: "value-format", remark: "值格式", type: "String", default: "YYYY-MM-DD" },
   { name: "hide-trigger", remark: "隐藏触发器", type: "Boolean", default: "false" },
 ];
