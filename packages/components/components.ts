@@ -19,6 +19,7 @@ declare module "@vue/runtime-core" {
     BpTable: typeof import("birdpaper-ui")["Table"];
     BpTableColumn: typeof import("birdpaper-ui")["TableColumn"];
     BpAlert: typeof import("birdpaper-ui")["Alert"];
+    BpAvatar: typeof import("birdpaper-ui")["Avatar"];
     BpTag: typeof import("birdpaper-ui")["Tag"];
     BpModal: typeof import("birdpaper-ui")["Modal"];
     BpSpin: typeof import("birdpaper-ui")["Spin"];

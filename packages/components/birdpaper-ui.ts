@@ -12,6 +12,7 @@ import Pagination from "./pagination";
 import Table from "./table";
 import Space from "./space";
 import Alert from "./alert";
+import Avatar from "./avatar";
 import Tag from "./tag";
 import Modal from "./modal";
 import Spin from "./spin";
@@ -41,6 +42,7 @@ const components: Record<string, Plugin> = {
   Table,
   Space,
   Alert,
+  Avatar,
   Tag,
   Modal,
   Spin,

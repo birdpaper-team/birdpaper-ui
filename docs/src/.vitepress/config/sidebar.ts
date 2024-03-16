@@ -44,6 +44,7 @@ export const sidebar = {
     {
       text: "展示",
       items: [
+        { text: "头像 <span>Avatar</span>", link: "/component/avatar" },
         { text: "分页 <span>Pagination</span>", link: "/component/pagination" },
         { text: "表格 <span>Table</span>", link: "/component/table" },
         { text: "标签 <span>Tag</span>", link: "/component/tag" },

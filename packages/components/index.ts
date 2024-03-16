@@ -40,6 +40,9 @@ export type { SpaceInstance } from "./space";
 export { default as Alert } from "./alert";
 export type { AlertInstance } from "./alert";
 
+export { default as Avatar } from "./avatar";
+export type { AvatarInstance } from "./avatar";
+
 export { default as Tag } from "./tag";
 export type { TagInstance } from "./tag";
 

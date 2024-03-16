@@ -1,0 +1,52 @@
+@import "./token.less";
+
+@avatar-cls: ~"@{prefix}-avatar";
+
+.@{avatar-cls} {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // border: 1px solid @gary-5;
+  background-color: @gary-6;
+
+  &-text {
+    font-weight: 500;
+  }
+}
+
+.@{avatar-cls}-shape-circle {
+  border-radius: 50%;
+
+  img {
+    border-radius: 50%;
+  }
+}
+
+.@{avatar-cls}-shape-square {
+  border-radius: 6px;
+
+  img {
+    border-radius: 6px;
+  }
+}
+
+.avatar-size(@size) {
+  .@{avatar-cls}-size-@{size} {
+    width: ~"@{avatar-size-@{size}}";
+    height: ~"@{avatar-size-@{size}}";
+
+    .@{avatar-cls} {
+      &-text {
+        color: @gary-1;
+        font-size: ~"@{avatar-size-@{size}-font-size}";
+        transform: scale(0.7);
+      }
+    }
+  }
+}
+
+.avatar-size(mini);
+.avatar-size(small);
+.avatar-size(normal);
+.avatar-size(large);
