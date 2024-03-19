@@ -1,12 +1,19 @@
 <script setup lang="ts">
-  import props from "../example/avatar/props.ts";
-  import events from "../example/avatar/events.ts";
+  import props from "../example/empty/props.ts";
 </script>
 
 # 空状态  Empty
 
-以图片、图标、文字的形式展现头像
+在无数据时呈现的默认状态
 
 ### 基础用法
-基础使用，设置头像为文本或着图片信息。
+通过 `<bp-empty />` 使用基础空状态
 <demo-block src="example/empty/basic"></demo-block>
+
+### 自定义内容
+通过设置文本和图标内容实现组件自定义
+<demo-block src="example/empty/custom"></demo-block>
+
+### Empty 属性
+
+<table-block type="props" :data="props"></table-block>

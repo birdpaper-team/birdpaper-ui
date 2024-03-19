@@ -16,6 +16,7 @@ import { PropType, computed, defineComponent } from "vue";
 export default defineComponent({
   name: "Empty",
   props: {
+    /** 图标 */
     icon: { type: Object as PropType<Comment>, default: IconInbox2Line },
     /** 描述文字 */
     description: { type: String, default: "暂无数据" },

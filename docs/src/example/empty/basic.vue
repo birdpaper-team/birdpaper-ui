@@ -1,3 +1,3 @@
 <template>
-  <bp-empty></bp-empty>
+  <bp-empty />
 </template>
