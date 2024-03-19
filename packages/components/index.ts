@@ -43,6 +43,9 @@ export type { AlertInstance } from "./alert";
 export { default as Avatar } from "./avatar";
 export type { AvatarInstance } from "./avatar";
 
+export { default as Empty } from "./empty";
+export type { EmptyInstance } from "./empty";
+
 export { default as Tag } from "./tag";
 export type { TagInstance } from "./tag";
 

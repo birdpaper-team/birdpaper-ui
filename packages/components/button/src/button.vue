@@ -1,7 +1,7 @@
 <template>
   <button :class="btnClass" type="button" :disabled="isDisabled" @click="onClick">
     <span v-if="btnIcon || loading" class="left-icon">
-      <component :class="{ 'bp-icon-loading': loading }" :is="btnIcon" size="14px"></component>
+      <component :class="{ 'bp-icon-loading': loading }" :is="btnIcon" size="14"></component>
     </span>
     <slot></slot>
   </button>

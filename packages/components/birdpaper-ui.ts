@@ -22,6 +22,7 @@ import Popconfirm from "./popconfirm";
 import DatePicker from "./datePicker";
 import TimePicker from "./timePicker";
 import Image from "./image";
+import Empty from "./empty";
 import Drawer from "./drawer";
 import Tooltip from "./tooltip";
 import Trigger from "./trigger";
@@ -52,6 +53,7 @@ const components: Record<string, Plugin> = {
   DatePicker,
   TimePicker,
   Image,
+  Empty,
   Drawer,
   Tooltip,
   Trigger,

@@ -35,13 +35,13 @@ export default defineComponent({
       return clsName;
     });
 
-    const handleClick = emit("click")
+    const handleClick = () => emit("click");
 
     return {
       name,
       cls,
       slots,
-      handleClick
+      handleClick,
     };
   },
 });

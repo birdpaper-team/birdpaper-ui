@@ -1,0 +1,27 @@
+@empty-cls: ~"@{prefix}-empty";
+
+.@{empty-cls} {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  .no-select;
+
+  &-icon {
+    margin-bottom: 4px;
+
+    .bp-icon {
+      fill: @gary-7;
+    }
+  }
+
+  &-inner {
+    font-size: 13px;
+    color: @gary-7;
+  }
+}
