@@ -23,7 +23,7 @@ export default defineComponent({
   },
   components: { IconInbox2Line },
   emits: ["click"],
-  setup: function (props, { emit, slots }) {
+  setup: function () {
     const name = "bp-empty";
 
     const cls = computed(() => {
@@ -36,7 +36,6 @@ export default defineComponent({
     return {
       name,
       cls,
-      slots,
     };
   },
 });
