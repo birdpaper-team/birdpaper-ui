@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import props from "../example/datepicker/props.ts";
-  import events from "../example/datepicker/events.ts";
+  import props from "../example/datePicker/props.ts";
+  import events from "../example/datePicker/events.ts";
 </script>
 
 # 日期选择 DatePicker

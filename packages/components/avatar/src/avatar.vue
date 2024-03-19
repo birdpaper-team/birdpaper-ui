@@ -1,7 +1,7 @@
 <template>
   <div :class="cls">
-    <bp-image v-if="imgSrc && !slots.default?.()" :fit="fit" :class="`${name}-image-inner`" :src="imgSrc"></bp-image>
-    <span :class="`${name}-text`" v-if="slots.default?.()">
+    <bp-image v-if="imgSrc" :fit="fit" :class="`${name}-image-inner`" :src="imgSrc"></bp-image>
+    <span :class="`${name}-text`" v-if="slots.default?.() && !imgSrc">
       <slot></slot>
     </span>
   </div>

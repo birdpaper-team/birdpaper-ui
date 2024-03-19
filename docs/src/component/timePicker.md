@@ -1,6 +1,6 @@
 <script setup lang="ts">
-  import props from "../example/timepicker/props.ts";
-  import events from "../example/timepicker/events.ts";
+  import props from "../example/timePicker/props.ts";
+  import events from "../example/timePicker/events.ts";
 </script>
 
 # 时间选择 TimePicker

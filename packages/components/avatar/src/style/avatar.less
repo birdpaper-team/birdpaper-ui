@@ -7,8 +7,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  // border: 1px solid @gary-5;
   background-color: @gary-6;
+  color: @gary-1;
+  cursor: pointer;
 
   &-text {
     font-weight: 500;
@@ -18,7 +19,7 @@
 .@{avatar-cls}-shape-circle {
   border-radius: 50%;
 
-  img {
+  .bp-image, img {
     border-radius: 50%;
   }
 }
@@ -26,7 +27,7 @@
 .@{avatar-cls}-shape-square {
   border-radius: 6px;
 
-  img {
+  .bp-image, img {
     border-radius: 6px;
   }
 }
@@ -38,9 +39,14 @@
 
     .@{avatar-cls} {
       &-text {
-        color: @gary-1;
         font-size: ~"@{avatar-size-@{size}-font-size}";
         transform: scale(0.7);
+
+        .bp-icon {
+          fill: @gary-1;
+          width: ~"@{avatar-size-@{size}-icon-size}" !important;
+          height: ~"@{avatar-size-@{size}-icon-size}" !important;
+        }
       }
     }
   }
