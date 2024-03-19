@@ -1,4 +1,4 @@
-<script lang="ts">
+<script setup lang="ts">
   import props from "../example/avatar/props.ts";
   import events from "../example/avatar/events.ts";
 </script>
