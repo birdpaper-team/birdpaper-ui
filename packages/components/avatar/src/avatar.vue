@@ -1,5 +1,5 @@
 <template>
-  <div :class="cls">
+  <div :class="cls" @click="handleClick">
     <bp-image v-if="imgSrc" :fit="fit" :class="`${name}-image-inner`" :src="imgSrc"></bp-image>
     <span :class="`${name}-text`" v-if="slots.default?.() && !imgSrc">
       <slot></slot>
@@ -25,19 +25,23 @@ export default defineComponent({
     size: { type: [String, Number] as PropType<AvatarSize>, default: "normal" },
   },
   emits: ["click"],
-  setup(props, { emit, slots }) {
+  setup: function (props, { emit, slots }) {
     const name = "bp-avatar";
 
     const cls = computed(() => {
-      let clsName = [name, `${name}-shape-${props.shape}`, `${name}-size-${props.size}`];
+      let clsName: string[];
+      clsName = [name, `${name}-shape-${props.shape}`, `${name}-size-${props.size}`];
 
       return clsName;
     });
+
+    const handleClick = emit("click")
 
     return {
       name,
       cls,
       slots,
+      handleClick
     };
   },
 });
