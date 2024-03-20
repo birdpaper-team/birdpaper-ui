@@ -1,5 +1,5 @@
 <template>
-  <bp-button @click="handleOpen">打开抽屉</bp-button>
+  <bp-button @click="handleOpen">Open drawer</bp-button>
 
   <bp-drawer v-model="show"></bp-drawer>
 </template>

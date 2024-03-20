@@ -1,19 +1,19 @@
 <template>
   <bp-space type="vertical" size="small">
     <div>
-      <p class="demo-text">无背景和边框</p>
+      <p class="demo-text">No background or border.</p>
       <bp-space>
-        <bp-button type="plain" @click="handleClick('success', true)">成功提示</bp-button>
-        <bp-button type="plain" @click="handleClick('warning', true)">警告提示</bp-button>
-        <bp-button type="plain" @click="handleClick('error', true)">错误提示</bp-button>
+        <bp-button type="plain" @click="handleClick('success', true)">Success</bp-button>
+        <bp-button type="plain" @click="handleClick('warning', true)">Warning</bp-button>
+        <bp-button type="plain" @click="handleClick('error', true)">Error</bp-button>
       </bp-space>
     </div>
     <div>
-      <p class="demo-text">带背景和边框</p>
+      <p class="demo-text">With background and border.</p>
       <bp-space>
-        <bp-button type="plain" status="success" @click="handleClick('success')">成功提示</bp-button>
-        <bp-button type="plain" status="warning" @click="handleClick('warning')">警告提示</bp-button>
-        <bp-button type="plain" status="danger" @click="handleClick('error')">错误提示</bp-button>
+        <bp-button type="plain" status="success" @click="handleClick('success')">Success</bp-button>
+        <bp-button type="plain" status="warning" @click="handleClick('warning')">Warning</bp-button>
+        <bp-button type="plain" status="danger" @click="handleClick('error')">Error</bp-button>
       </bp-space>
     </div>
   </bp-space>
@@ -23,7 +23,7 @@
 import { Message } from "birdpaper-ui";
 
 const handleClick = (type: "success" | "warning" | "error", plain: boolean = false) => {
-  Message[type]({ content: `这是 ${type} 类型的消息提示`, plain });
+  Message[type]({ content: `This is a ${type} message.`, plain });
 };
 </script>
 

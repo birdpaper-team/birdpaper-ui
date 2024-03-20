@@ -1,12 +1,12 @@
 <template>
-  <bp-button @click="handleClick">点击加载</bp-button>
+  <bp-button @click="handleClick">Loading</bp-button>
 </template>
 
 <script setup lang="ts">
 import { Message } from "birdpaper-ui";
 
 const handleClick = () => {
-  const msg = Message.loading("正在加载...");
+  const msg = Message.loading("Loading...");
 
   setTimeout(() => {
     msg.remove();
