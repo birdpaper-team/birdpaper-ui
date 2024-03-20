@@ -1,5 +1,5 @@
 <template>
-  <bp-checkbox v-model="val">选项一</bp-checkbox>
+  <bp-checkbox v-model="val">Option</bp-checkbox>
 </template>
 
 <script setup lang="ts">

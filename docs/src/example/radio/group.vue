@@ -11,8 +11,8 @@ import { ref } from "vue";
 
 const val = ref(0);
 const optionList = [
-  { value: 0, label: "选项一" },
-  { value: 1, label: "选项二" },
-  { value: 2, label: "选项三" },
+  { value: 0, label: "Option 1" },
+  { value: 1, label: "Option 2" },
+  { value: 2, label: "Option 3" },
 ];
 </script>

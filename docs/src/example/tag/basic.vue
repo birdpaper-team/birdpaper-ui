@@ -1,3 +1,3 @@
 <template>
-  <bp-tag>标签一</bp-tag>
+  <bp-tag>Tag 1</bp-tag>
 </template>

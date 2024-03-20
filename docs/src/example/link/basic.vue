@@ -1,6 +1,6 @@
 <template>
   <bp-space>
-    <bp-link >链接</bp-link>
-    <bp-link disabled>链接</bp-link>
+    <bp-link>Link</bp-link>
+    <bp-link disabled>Link</bp-link>
   </bp-space>
 </template>

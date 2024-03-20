@@ -1,5 +1,5 @@
 <template>
- <bp-checkbox disabled v-model="val">禁用选项</bp-checkbox>
+ <bp-checkbox disabled v-model="val">Disabled option</bp-checkbox>
 </template>
 
 <script setup lang="ts">

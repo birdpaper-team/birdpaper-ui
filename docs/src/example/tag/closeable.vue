@@ -1,5 +1,5 @@
 <template>
-  <bp-tag v-if="show" @close="onClose" closeable>标签一</bp-tag>
+  <bp-tag v-if="show" @close="onClose" closeable>Closeable tag</bp-tag>
 </template>
 
 <script setup lang="ts">
