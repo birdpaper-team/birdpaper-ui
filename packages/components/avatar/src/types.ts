@@ -3,4 +3,4 @@ export type AvatarShape = "circle" | "square";
 
 
 /** 头像尺寸，迷你、小型、普通、大型 */
-export type AvatarSize = "mini" | "small" | "normal" | "large" | number;
+export type AvatarSize = "mini" | "small" | "normal" | "large";

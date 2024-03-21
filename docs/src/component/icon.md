@@ -8,7 +8,7 @@
 ### 基础使用
 
 通过使用 `birdpaper-icon` 组件使用图标库
-<demo-block src="example/icon/basic"></demo-block>
+<demo-block src="example/icon/basic" stack-blitz-name="icon-basic"></demo-block>
 
 ### Icon 属性
 
