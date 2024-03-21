@@ -13,7 +13,7 @@
             <IconCodeLine size="13" />
           </div>
         </bp-tooltip>
-        <bp-tooltip v-if="stackBlitzUrl" content="在 StackBlitz 中调试">
+        <bp-tooltip v-if="stackBlitzName" content="在 StackBlitz 中调试">
           <div class="icon-item" @click="handleToStackBlitz">
             <IconFlashlightLine size="13" />
           </div>
@@ -41,13 +41,13 @@ interface Prop {
   src: string;
   codeString?: string;
   lang?: string;
-  stackBlitzUrl?: string;
+  stackBlitzName?: string;
 }
 const props = withDefaults(defineProps<Prop>(), {
   src: "",
   codeString: "",
   lang: "vue",
-  stackBlitzUrl: "",
+  stackBlitzName: "",
 });
 
 const exampleGlob = import.meta.glob(`../../../src/example/**/*.vue`);
@@ -65,7 +65,7 @@ const init = () => {
 };
 
 const handleToStackBlitz = () => {
-  window.open(props.stackBlitzUrl);
+  window.open(`https://stackblitz.com/edit/${props.stackBlitzName}?file=src%2FApp.vue`);
 };
 
 const handleToGithub = () => {
