@@ -6,17 +6,17 @@
 
 ### 基础用法
 通过绑定 `Boolean` 值控制选择状态
-<demo-block src="example/switch/basic"></demo-block>
+<demo-block src="example/switch/basic" stack-blitz-name="switch-basic"></demo-block>
 
 ### 选项禁用
 
 通过 `disabled` 属性控制不可选状态
-<demo-block src="example/switch/disabled"></demo-block>
+<demo-block src="example/switch/disabled" stack-blitz-name="switch-disabled"></demo-block>
 
 
 ### 异步操作
 通过 `on-before-ok` 控制开关的异步操作
-<demo-block src="example/switch/async"></demo-block>
+<demo-block src="example/switch/async" stack-blitz-name="switch-async"></demo-block>
 
 
 ### Switch 属性

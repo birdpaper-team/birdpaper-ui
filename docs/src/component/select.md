@@ -11,12 +11,12 @@
 ### 基础用法
 
 基础的选择器用法
-<demo-block src="example/select/basic"></demo-block>
+<demo-block src="example/select/basic" stack-blitz-name="select-basic"></demo-block>
 
 ### 选项禁用
 
 通过控制选项的 `disabled` 属性以实现不可选择某一项
-<demo-block src="example/select/disabled"></demo-block>
+<demo-block src="example/select/disabled" stack-blitz-name="select-disabled"></demo-block>
 
 ### Select 属性
 

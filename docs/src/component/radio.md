@@ -12,12 +12,12 @@
 ### 基础用法
 
 基础单选框的使用方式。
-<demo-block src="example/radio/basic"></demo-block>
+<demo-block src="example/radio/basic" stack-blitz-name="radio-basic"></demo-block>
 
 ### 单选框组
 
 通过外层包裹 `radio-group` 实现选项组
-<demo-block src="example/radio/group"></demo-block>
+<demo-block src="example/radio/group" stack-blitz-name="radio-group"></demo-block>
 
 ### Radio 属性
 

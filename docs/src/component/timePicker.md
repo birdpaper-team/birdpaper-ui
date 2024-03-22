@@ -10,12 +10,12 @@
 ### 基础用法
 
 配合 `v-mdoel` 实现日期选择
-<demo-block src="example/timePicker/basic"></demo-block>
+<demo-block src="example/timePicker/basic" stack-blitz-name="timepicker-basic"></demo-block>
 
 ### 仅面板
 
 通过 `hide-trigger` 属性可以控制组件只展示选择面板
-<demo-block src="example/timePicker/only-panel"></demo-block>
+<demo-block src="example/timePicker/only-panel" stack-blitz-name="timepicker-only-panel"></demo-block>
 
 ### TimePicker 属性
 
