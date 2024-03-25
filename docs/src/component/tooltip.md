@@ -10,7 +10,7 @@
 ### 基础用法
 
 通过 `content` 属性或插槽设置提示内容
-<demo-block src="example/tooltip/basic"></demo-block>
+<demo-block src="example/tooltip/basic" stack-blitz-name="tooltip-basic"></demo-block>
 
 ### Tooltip 属性
 

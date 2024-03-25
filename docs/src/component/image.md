@@ -11,11 +11,11 @@
 
 ### 基础用法
 基础展示图片
-<demo-block src="example/image/basic"></demo-block>
+<demo-block src="example/image/basic" stack-blitz-name="image-basic"></demo-block>
 
 ### 图片适应
 通过 `fit` 属性设置不同的适应类型
-<demo-block src="example/image/fit"></demo-block>
+<demo-block src="example/image/fit" stack-blitz-name="image-fit"></demo-block>
 
 ### Image 属性
 

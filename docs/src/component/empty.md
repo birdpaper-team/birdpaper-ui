@@ -8,11 +8,11 @@
 
 ### 基础用法
 通过 `<bp-empty />` 使用基础空状态
-<demo-block src="example/empty/basic"></demo-block>
+<demo-block src="example/empty/basic" stack-blitz-name="empty-basic"></demo-block>
 
 ### 自定义内容
 通过设置文本和图标内容实现组件自定义
-<demo-block src="example/empty/custom"></demo-block>
+<demo-block src="example/empty/custom" stack-blitz-name="empty-custom"></demo-block>
 
 ### Empty 属性
 

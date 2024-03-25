@@ -8,11 +8,11 @@
 
 ### 基础用法
 基础的弹框使用方式
-<demo-block src="example/modal/basic"></demo-block>
+<demo-block src="example/modal/basic" stack-blitz-name="modal-basic"></demo-block>
 
 ### 自定义底部
 通过底部插槽 `footer` 自定义内容
-<demo-block src="example/modal/footer"></demo-block>
+<demo-block src="example/modal/footer" stack-blitz-name="modal-footer"></demo-block>
 
 ### Modal 属性
 

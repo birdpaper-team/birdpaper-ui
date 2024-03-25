@@ -8,11 +8,11 @@
 ### 基础用法
 
 基础的气泡确认框
-<demo-block src="example/popconfirm/basic"></demo-block>
+<demo-block src="example/popconfirm/basic" stack-blitz-name="popconfirm-basic"></demo-block>
 
 ### 异步关闭
 通过 `on-before-ok` 控制确认框的异步关闭功能
-<demo-block src="example/popconfirm/asyncClose"></demo-block>
+<demo-block src="example/popconfirm/asyncClose" stack-blitz-name="popconfirm-asyncclose"></demo-block>
 
 ### Popconfirm 属性
 

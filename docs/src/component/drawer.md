@@ -7,11 +7,11 @@
 
 ### 基础用法
 通过 `v-model` 控制抽屉弹出/收起
-<demo-block src="example/drawer/basic"></demo-block>
+<demo-block src="example/drawer/basic" stack-blitz-name="drawer-basic"></demo-block>
 
 ### 异步关闭
 通过 `on-before-ok` 控制抽屉的异步关闭功能
-<demo-block src="example/drawer/asyncClose"></demo-block>
+<demo-block src="example/drawer/asyncClose" stack-blitz-name="drawer-asyncclose"></demo-block>
 
 ### Drawer 属性
 
