@@ -3,14 +3,14 @@
     v-for="(item, index) in pageList"
     :key="`page-item-${index}`"
     :class="[`${name}-pager`, `${name}-item`, item.index === currentPage ? `${name}-item-active` : '']"
-    @click="onClick(item.index)"
-  >
+    @click="onClick(item.index)">
     <span v-if="item.type === 'number'">{{ item.index }}</span>
-    <i class="ri-more-fill" v-else></i>
+    <IconMoreFill v-else />
   </li>
 </template>
 
 <script setup lang="ts" name="PaginationPager">
+import { IconMoreFill } from "birdpaper-icon";
 import { ref, watchEffect } from "vue";
 
 const props = defineProps({
