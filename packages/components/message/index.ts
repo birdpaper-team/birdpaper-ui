@@ -1,4 +1,4 @@
-import { AppContext } from "vue";
+import { App, AppContext } from "vue";
 import _message from "./src/messageList.vue";
 import { getComponentsPrefix } from "../../utils/config";
 import MessageManager from "./src/instance";
@@ -31,6 +31,7 @@ const Message = Object.assign({
   removeAll: () => {
     msg && msg.clear();
   },
+  install:(app: App, option?: unknown)=>{return {}}
 });
 
 export default Message;

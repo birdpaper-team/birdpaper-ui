@@ -9,7 +9,7 @@
 
 ### 基础用法
 基础的表单使用方式。
-<demo-block src="example/form/basic" stack-blitz-name="icon-basic"></demo-block>
+<demo-block src="example/form/basic" stack-blitz-name="form-basic-1"></demo-block>
 
 ### Form 属性
 <table-block type="props" :data="props"></table-block>

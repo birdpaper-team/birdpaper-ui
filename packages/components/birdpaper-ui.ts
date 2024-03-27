@@ -29,6 +29,12 @@ import Trigger from "./trigger";
 import Form from "./form";
 import Message from "./message";
 
+const install = (app: App, option?: unknown) => {
+  for (const key of Object.keys(components)) {
+    app.use(components[key]);
+  }
+};
+
 const components: Record<string, Plugin> = {
   Button,
   ButtonGroup,
@@ -60,16 +66,9 @@ const components: Record<string, Plugin> = {
   Form,
   Message,
 };
-
-const install = function (app: App) {
-  for (const key of Object.keys(components)) {
-    app.use(components[key]);
-  }
-};
-
 export { default as Message } from "./message";
 
 export default {
   ...components,
-  install,
+  install
 };

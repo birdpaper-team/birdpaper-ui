@@ -25,6 +25,7 @@ export default {
 
   enhanceApp(ctx: EnhanceAppContext) {
     DefaultTheme.enhanceApp(ctx);
+    // @ts-ignore
     ctx.app.use(BirdpaperUI);
     // ctx.app.use(BirdpaperIcon);
 
