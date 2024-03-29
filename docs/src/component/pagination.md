@@ -10,27 +10,27 @@
 ### 基础用法
 
 基础分页用法，支持页码跳转、上下翻页。
-<demo-block src="example/pagination/basic"></demo-block>
+<demo-block src="example/pagination/basic" stack-blitz-name="pagination-basic"></demo-block>
 
 ### 最大页码控制
 
 通过 `max-pager` 控制显示的页码数量，默认为 7 个，其余省略展示。
-<demo-block src="example/pagination/max"></demo-block>
+<demo-block src="example/pagination/max" stack-blitz-name="pagination-max"></demo-block>
 
 ### 每页条数
 
 通过 `layout` 属性配置，开启每页条数配置。
-<demo-block src="example/pagination/sizes"></demo-block>
+<demo-block src="example/pagination/sizes" stack-blitz-name="pagination-sizes"></demo-block>
 
 ### 页码跳转
 
 通过 `layout` 属性配置，开启页码跳转。
-<demo-block src="example/pagination/jumper"></demo-block>
+<demo-block src="example/pagination/jumper" stack-blitz-name="pagination-jumper"></demo-block>
 
 ### 自定义布局和文案
 
 分页器文案和布局顺序均支持自定义。
-<demo-block src="example/pagination/custom"></demo-block>
+<demo-block src="example/pagination/custom" stack-blitz-name="pagination-custom"></demo-block>
 
 ### Pagination 属性
 

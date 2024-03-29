@@ -43,7 +43,7 @@ const config = {
     // @ts-ignore vite内部类型错误
     plugins: [
         (0, vite_plugin_external_1.default)(),
-        Object.assign(Object.assign({}, (0, plugin_vue_1.default)()), { apply: config => {
+        Object.assign(Object.assign({}, (0, plugin_vue_1.default)()), { apply: (config) => {
                 return config.mode === "test";
             } }),
         ,

@@ -1,16 +1,20 @@
 <template>
   <bp-space align="center">
     <bp-trigger>
-      <bp-button>点击触发</bp-button>
+      <bp-button>Click me</bp-button>
       <template #content>
-        <div class="demo">暂无内容</div>
+        <div class="demo">
+          <bp-empty description="No content."></bp-empty>
+        </div>
       </template>
     </bp-trigger>
 
     <bp-trigger trigger="hover">
-      <bp-link>鼠标移入</bp-link>
+      <bp-link>Hover me</bp-link>
       <template #content>
-        <div class="demo">暂无内容</div>
+        <div class="demo">
+          <bp-empty description="No content."></bp-empty>
+        </div>
       </template>
     </bp-trigger>
   </bp-space>

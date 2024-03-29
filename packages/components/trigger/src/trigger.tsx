@@ -36,6 +36,8 @@ export default defineComponent({
     clickOutside: { type: Boolean, default: true },
     /** 是否禁用 Disabled or not */
     disabled: { type: Boolean, default: false },
+    /** 隐藏触发器 */
+    hideTrigger: { type: Boolean, default: false },
   },
   emits: ["update:popupVisible"],
   setup(props, { emit, slots }) {
@@ -121,7 +123,9 @@ export default defineComponent({
     const render = () => {
       const children = slots.default?.() || [];
 
-      return (
+      return props.hideTrigger ? (
+        slots.content?.()
+      ) : (
         <div class={name} ref={triggerRef}>
           {h(children[0], {
             onClick: handleClick,

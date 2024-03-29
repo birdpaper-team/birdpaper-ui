@@ -1,5 +1,5 @@
 <template>
-  <bp-input :style="{ width: '220px' }" v-model="val" show-limit :maxlength="11" placeholder="请输入内容"></bp-input>
+  <bp-input :style="{ width: '220px' }" v-model="val" show-limit :maxlength="11" placeholder="Please enter"></bp-input>
 </template>
 
 <script setup lang="ts">

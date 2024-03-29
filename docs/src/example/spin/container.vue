@@ -1,5 +1,5 @@
 <template>
-  <bp-spin loading tip="加载中，请稍候">
+  <bp-spin loading tip="Just a minute...">
     <div class="demo-spin-box"></div>
   </bp-spin>
 </template>

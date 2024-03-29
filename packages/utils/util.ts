@@ -177,3 +177,11 @@ export function arrayIndexOf(arr: unknown[], field: string, fieldValue: unknown)
 
   return -1;
 }
+
+export function generateArray(len: number): string[] {
+  const result:string[] = [];
+  for (let i = 0; i < len; i++) {
+    result.push(i.toString().padStart(2, '0'));
+  }
+  return result;
+}

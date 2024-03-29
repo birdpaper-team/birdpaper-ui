@@ -1,7 +1,7 @@
 <template>
   <bp-space>
-    <bp-button @click="handleClick('top')">顶部弹出</bp-button>
-    <bp-button @click="handleClick('bottom')">底部弹出</bp-button>
+    <bp-button @click="handleClick('top')">Top</bp-button>
+    <bp-button @click="handleClick('bottom')">Bottom</bp-button>
   </bp-space>
 </template>
 
@@ -9,6 +9,6 @@
 import { Message } from "birdpaper-ui";
 
 const handleClick = (position: "top" | "bottom") => {
-  Message.text({ content: "这是一条文本类型的消息提示", position });
+  Message.text({ content: "This is a text message.", position });
 };
 </script>

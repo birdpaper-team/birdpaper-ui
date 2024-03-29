@@ -26,7 +26,7 @@ export const eventTrack = (name: string) => {
     // @ts-ignore
     LA.track(name);
   } catch (error) {
-    console.error('[ eventTrack ]', error);
+    console.error("[ eventTrack ]", error);
   }
 };
 
@@ -39,3 +39,19 @@ export const goToLink = (url: string) => {
 
   window.open(url);
 };
+
+/**
+ * 获取 URL 参数
+ * @returns
+ */
+export function getUrlParams(): { [key: string]: string } {
+  const url = new URL(window.location.href);
+  const searchParams = new URLSearchParams(url.search);
+  const params: { [key: string]: string } = {};
+
+  searchParams.forEach((value, key) => {
+    params[key] = value;
+  });
+
+  return params;
+}

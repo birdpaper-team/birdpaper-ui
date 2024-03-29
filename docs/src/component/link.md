@@ -8,15 +8,15 @@
 
 ### 基础用法
 链接组件的基本用法
-<demo-block src="example/link/basic"></demo-block>
+<demo-block src="example/link/basic" stack-blitz-name="link-basic"></demo-block>
 
 ### 链接状态
 一共有 5 种链接状态，它们通过`status` 属性控制，分别是`normal` - 普通，`primary` - 主要，`success` - 成功，`warning` - 警告，`danger` - 危险。
-<demo-block src="example/link/status"></demo-block>
+<demo-block src="example/link/status" stack-blitz-name="link-status"></demo-block>
 
 ### 加载中
 通过 `loading` 使链接处于加载状态
-<demo-block src="example/link/loading"></demo-block>
+<demo-block src="example/link/loading" stack-blitz-name="link-loading"></demo-block>
 
 ### Link 属性
 

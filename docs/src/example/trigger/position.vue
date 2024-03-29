@@ -12,9 +12,11 @@
     </bp-radio-group>
 
     <bp-trigger :position="val" trigger="hover">
-      <bp-button>鼠标移入</bp-button>
+      <bp-button>Hover me</bp-button>
       <template #content>
-        <div class="demo">暂无内容</div>
+        <div class="demo">
+          <bp-empty description="No content."></bp-empty>
+        </div>
       </template>
     </bp-trigger>
   </bp-space>
@@ -25,16 +27,16 @@ import { ref } from "vue";
 
 const val = ref("left");
 const optionList = [
-  { value: "left", label: "左侧" },
-  { value: "top", label: "上方" },
-  { value: "right", label: "右侧" },
-  { value: "bottom", label: "下方" },
+  { value: "left", label: "Left" },
+  { value: "top", label: "Top" },
+  { value: "right", label: "Right" },
+  { value: "bottom", label: "Bottom" },
 ];
 const optionList2 = [
-  { value: "left-top", label: "左上" },
-  { value: "left-bottom", label: "左下" },
-  { value: "right-top", label: "右上" },
-  { value: "right-bottom", label: "右下" },
+  { value: "left-top", label: "Left-Top" },
+  { value: "left-bottom", label: "Left-Bottom" },
+  { value: "right-top", label: "Right-Top" },
+  { value: "right-bottom", label: "Right-Bottom" },
 ];
 </script>
 

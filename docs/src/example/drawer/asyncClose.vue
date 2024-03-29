@@ -1,5 +1,5 @@
 <template>
-  <bp-button @click="handleOpen">异步关闭</bp-button>
+  <bp-button @click="handleOpen">Async close</bp-button>
 
   <bp-drawer v-model="show" :on-before-ok="handleBeforeOk"></bp-drawer>
 </template>

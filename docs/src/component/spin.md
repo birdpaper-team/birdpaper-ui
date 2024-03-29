@@ -7,11 +7,11 @@
 
 ### 基础用法
 基础的加载状态。
-<demo-block src="example/spin/basic"></demo-block>
+<demo-block src="example/spin/basic" stack-blitz-name="spin-basic"></demo-block>
 
 ### 在容器中使用
 支持在容器中使用 `loading` 控制加载状态。
-<demo-block src="example/spin/container"></demo-block>
+<demo-block src="example/spin/container" stack-blitz-name="spin-container"></demo-block>
 
 ### Spin 属性
 

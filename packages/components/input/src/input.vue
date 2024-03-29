@@ -1,8 +1,11 @@
 <template>
   <div :class="inpClass">
+    <div :class="`${name}-perfix`" v-if="slots.perfix">
+      <slot name="perfix"></slot>
+    </div>
     <input
       ref="inpRef"
-      class="bp-input-inner"
+      :class="['bp-input-inner', { 'has-perfix': slots.perfix }]"
       :type="inpType"
       :spellcheck="false"
       :disabled="disabled"
@@ -19,9 +22,9 @@
     />
     <div :class="`${name}-suffix`" v-if="slots.suffix || showClear || showWordLimit || type === 'password'">
       <!-- TODO: Need to Optim -->
+      <!-- 清空按钮 -->
+      <IconCloseLine v-if="showClear" class="click-icon" @click.stop="handleClear" />
       <template v-if="!slots.suffix">
-        <!-- 清空按钮 -->
-        <IconCloseLine v-if="showClear" class="click-icon" @click="handleClear" />
         <!-- 字数限制提示 -->
         <span v-if="showWordLimit" v-text="limitText"></span>
         <!-- 密码/明文切换 -->
@@ -84,9 +87,7 @@ export default defineComponent({
     }
 
     // 清空文本内容
-    const showClear = computed(
-      () => props.type === "text" && props.modelValue && props.clearable && !props.disabled && !props.readonly
-    );
+    const showClear = computed(() => props.type === "text" && props.modelValue && props.clearable && !props.disabled);
     const handleClear = () => {
       emit("update:modelValue", "");
       nextTick(() => handleFocus());

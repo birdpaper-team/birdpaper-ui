@@ -10,12 +10,12 @@
 ### 基础用法
 
 通过设定 `size` 属性，控制元素之间的间距，支持传入设定的尺寸，或者自定义大小。
-<demo-block src="example/space/basic"></demo-block>
+<demo-block src="example/space/basic" stack-blitz-name="space-basic"></demo-block>
 
 ### 分隔符
 
 通过 `split` 插槽设置分割内容
-<demo-block src="example/space/split"></demo-block>
+<demo-block src="example/space/split" stack-blitz-name="space-split"></demo-block>
 
 ### Space 属性
 

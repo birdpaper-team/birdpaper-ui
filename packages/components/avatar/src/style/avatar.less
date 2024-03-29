@@ -1,0 +1,58 @@
+@import "./token.less";
+
+@avatar-cls: ~"@{prefix}-avatar";
+
+.@{avatar-cls} {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: @gary-6;
+  color: @gary-1;
+  cursor: pointer;
+
+  &-text {
+    font-weight: 500;
+  }
+}
+
+.@{avatar-cls}-shape-circle {
+  border-radius: 50%;
+
+  .bp-image, img {
+    border-radius: 50%;
+  }
+}
+
+.@{avatar-cls}-shape-square {
+  border-radius: 6px;
+
+  .bp-image, img {
+    border-radius: 6px;
+  }
+}
+
+.avatar-size(@size) {
+  .@{avatar-cls}-size-@{size} {
+    width: ~"@{avatar-size-@{size}}";
+    height: ~"@{avatar-size-@{size}}";
+
+    .@{avatar-cls} {
+      &-text {
+        font-size: ~"@{avatar-size-@{size}-font-size}";
+        transform: scale(0.7);
+
+        .bp-icon {
+          fill: @gary-1;
+          width: ~"@{avatar-size-@{size}-icon-size}" !important;
+          height: ~"@{avatar-size-@{size}-icon-size}" !important;
+        }
+      }
+    }
+  }
+}
+
+.avatar-size(mini);
+.avatar-size(small);
+.avatar-size(normal);
+.avatar-size(large);

@@ -7,12 +7,12 @@
 ### 基础用法
 
 通过绑定 `Boolean` 值控制选择状态
-<demo-block src="example/checkbox/basic"></demo-block>
+<demo-block src="example/checkbox/basic" stack-blitz-name="checkbox-basic"></demo-block>
 
 ### 选项禁用
 
 通过 `disabled` 属性控制不可选状态
-<demo-block src="example/checkbox/disabled"></demo-block>
+<demo-block src="example/checkbox/disabled" stack-blitz-name="checkbox-disabled"></demo-block>
 
 ### Checkbox 属性
 

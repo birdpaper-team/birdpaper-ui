@@ -1,6 +1,6 @@
 {
   "name": "birdpaper-ui",
-  "version": "2.1.14",
+  "version": "2.2.0-beat.2",
   "description": "一个通用的 vue3 UI组件库。A common vue3 UI component library.",
   "workspaces": [
     "packages",
@@ -26,7 +26,9 @@
   "license": "MIT",
   "dependencies": {
     "async-validator": "^4.2.5",
-    "birdpaper-icon": "^0.0.11",
+    "birdpaper-icon": "^0.1.0",
+    "dayjs": "^1.11.10",
+    "vue-virtual-scroller": "2.0.0-beta.8",
     "vue": "^3.3.2"
   },
   "devDependencies": {

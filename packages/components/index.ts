@@ -40,6 +40,12 @@ export type { SpaceInstance } from "./space";
 export { default as Alert } from "./alert";
 export type { AlertInstance } from "./alert";
 
+export { default as Avatar } from "./avatar";
+export type { AvatarInstance } from "./avatar";
+
+export { default as Empty } from "./empty";
+export type { EmptyInstance } from "./empty";
+
 export { default as Tag } from "./tag";
 export type { TagInstance } from "./tag";
 
@@ -57,6 +63,12 @@ export type { LinkInstance } from "./link";
 
 export { default as Popconfirm } from "./popconfirm";
 export type { PopconfirmInstance } from "./popconfirm";
+
+export { default as DatePicker } from "./datePicker";
+export type { DatePickerInstance } from "./datePicker";
+
+export { default as TimePicker } from "./timePicker";
+export type { TimePickerInstance } from "./timePicker";
 
 export { default as Image } from "./image";
 export type { ImageInstance } from "./image";

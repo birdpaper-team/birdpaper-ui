@@ -34,7 +34,9 @@
     <template #content>
       <ul :class="`${name}-option-list`">
         <slot v-if="hasOptions"></slot>
-        <div v-else style="text-align: center; font-size: 13px; opacity: 0.6">暂无数据</div>
+        <div v-else style="text-align: center; font-size: 13px; opacity: 0.6">
+          <bp-empty />
+        </div>
       </ul>
     </template>
   </bp-trigger>

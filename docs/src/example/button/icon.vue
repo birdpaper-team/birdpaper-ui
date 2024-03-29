@@ -1,9 +1,9 @@
 <template>
   <bp-space size="mini">
-    <bp-button :icon="IconSearch2Line" type="primary" status="primary">搜索</bp-button>
-    <bp-button :icon="IconShareFill" type="plain" status="primary">分享</bp-button>
-    <bp-button :icon="IconDeleteBin6Line" type="dashed" status="danger">确认删除</bp-button>
-    <bp-button :icon="IconUploadCloud2Line" type="text" status="primary">选择文件</bp-button>
+    <bp-button :icon="IconSearch2Line" type="primary" status="primary">Search</bp-button>
+    <bp-button :icon="IconShareFill" type="plain" status="primary">Share</bp-button>
+    <bp-button :icon="IconDeleteBin6Line" type="dashed" status="danger">Confirm Delete</bp-button>
+    <bp-button :icon="IconUploadCloud2Line" type="text" status="primary">Upload</bp-button>
   </bp-space>
 </template>
 

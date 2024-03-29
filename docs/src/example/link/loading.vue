@@ -1,3 +1,3 @@
 <template>
-  <bp-link loading>加载中</bp-link>
+  <bp-link loading>Loading</bp-link>
 </template>

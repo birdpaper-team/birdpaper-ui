@@ -42,7 +42,7 @@ const config: InlineConfig = {
     external(),
     {
       ...vue(),
-      apply: config => {
+      apply: (config) => {
         return config.mode === "test";
       },
     },

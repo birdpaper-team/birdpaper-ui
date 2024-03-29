@@ -1,8 +1,8 @@
 <template>
-  <bp-button @click="handleOpen">打开对话框</bp-button>
+  <bp-button @click="handleOpen">Open modal</bp-button>
 
-  <bp-modal v-model="show">
-    <p>对话框内容</p>
+  <bp-modal v-model="show" title="Title">
+    <p>Modal content.</p>
   </bp-modal>
 </template>
 
