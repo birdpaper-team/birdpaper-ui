@@ -9,7 +9,7 @@ export const sidebar = {
       text: "指南",
       items: [
         { text: "快速上手", link: "/guide/easystart" },
-        { text: "更新日志", link: "/guide/changelog" },
+        { text: "更新日志", link: "/guide/changelog/2-2-x" },
         { text: "颜色", link: "/guide/color" },
         { text: "图标", link: "/guide/icon" },
       ],
