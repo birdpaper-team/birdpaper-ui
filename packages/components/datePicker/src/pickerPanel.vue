@@ -21,7 +21,7 @@ const tableMap = {
   year: yearTable,
 };
 
-const onChangePicker = (typeName: PanelType, val: number) => {
+const onChangePicker = (typeName: PanelType) => {
   currentTable.value = typeName;
 };
 </script>

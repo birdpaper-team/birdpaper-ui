@@ -1,31 +1,31 @@
 <template>
   <bp-trigger
-    v-model:popupVisible="showPopup"
-    transition="fade-dropdown"
-    :hideTrigger="hideTrigger"
-    :disabled="disabled"
-    :popup-offset="10"
-    position="left-bottom"
+      v-model:popupVisible="showPopup"
+      transition="fade-dropdown"
+      :hideTrigger="hideTrigger"
+      :disabled="disabled"
+      :popup-offset="10"
+      position="left-bottom"
   >
     <bp-input
-      ref="inputRef"
-      v-model="global_value"
-      :class="name"
-      :placeholder="placeholder"
-      :disabled="disabled"
-      :readonly="readonly"
-      :is-danger="isDanger"
-      :clearable="clearable"
-      :size="size"
-      @input="onInput"
-      @blur="onBlur"
+        ref="inputRef"
+        v-model="global_value"
+        :class="name"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        :readonly="readonly"
+        :is-danger="isDanger"
+        :clearable="clearable"
+        :size="size"
+        @input="onInput"
+        @blur="onBlur"
     >
       <template #perfix>
-        <IconCalendarLine style="position: relative; top: 1px" />
+        <IconCalendarLine style="position: relative; top: 1px"/>
       </template>
     </bp-input>
     <template #content>
-      <picker-panel :langs="langs"></picker-panel>
+      <picker-panel></picker-panel>
     </template>
   </bp-trigger>
 </template>
@@ -60,6 +60,8 @@ export default defineComponent({
     valueFormat: { type: String, default: "YYYY-MM-DD" },
     /** 隐藏触发器 */
     hideTrigger: { type: Boolean, default: false },
+    /** 是否显示时间选择器 */
+    showTime: { type: Boolean, default: false },
   },
   components: { pickerPanel, IconCalendarLine },
   emits: ["update:modelValue", "input", "blur"],
@@ -74,6 +76,7 @@ export default defineComponent({
       modelValue: global_value,
       langs: props.langs,
       valueFormat: props.valueFormat,
+      showTime: props.showTime,
       onSelect: (v: string, payload: any, closePopup = true) => {
         global_value.value = v;
 
@@ -86,10 +89,10 @@ export default defineComponent({
     const onBlur = () => emit("blur");
 
     watch(
-      () => props.modelValue,
-      (value?: string) => {
-        global_value.value = value || "";
-      }
+        () => props.modelValue,
+        (value?: string) => {
+          global_value.value = value || "";
+        }
     );
 
     return {
