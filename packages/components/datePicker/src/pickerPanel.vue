@@ -2,16 +2,18 @@
   <div :class="name">
     <div :class="`${name}-wrapper`">
       <component :is="tableMap[currentTable]" @change-picker="onChangePicker"></component>
+      <time-table v-if="ctx.showTime && currentTable === 'date'"></time-table>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { inject, ref } from "vue";
 import dateTable from "./components/date-table.vue";
 import monthTable from "./components/month-table.vue";
 import yearTable from "./components/year-table.vue";
-import { PanelType } from "./types";
+import timeTable from "./components/time-table.vue";
+import { dateInjectionKey, DatePickerContext, PanelType } from "./types";
 
 const name = "bp-date-picker-panel";
 const currentTable = ref<string>("date");
@@ -20,6 +22,9 @@ const tableMap = {
   month: monthTable,
   year: yearTable,
 };
+
+let ctx: DatePickerContext = null;
+ctx = inject(dateInjectionKey);
 
 const onChangePicker = (typeName: PanelType) => {
   currentTable.value = typeName;

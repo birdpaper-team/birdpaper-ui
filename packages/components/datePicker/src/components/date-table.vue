@@ -35,7 +35,7 @@
         </span>
       </div>
     </div>
-    <div :class="`${name}-footer`">
+    <div v-if="!ctx.showTime" :class="`${name}-footer`">
       <bp-button type="text" status="primary" @click="handleSelect({ value: toDay.format(ctx.valueFormat) })">
         今天
       </bp-button>
