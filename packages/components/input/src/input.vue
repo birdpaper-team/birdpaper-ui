@@ -121,8 +121,8 @@ export default defineComponent({
 
     const onInput = (e: Event) => {
       const targetValue = (e.target as HTMLInputElement).value;
-      emit("input", targetValue);
       emit("update:modelValue", targetValue);
+      emit("input", targetValue);
     };
 
     return {
