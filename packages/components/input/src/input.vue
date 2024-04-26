@@ -5,6 +5,7 @@
     </div>
     <input
       ref="inpRef"
+      :name="inputName"
       :class="['bp-input-inner', { 'has-perfix': slots.perfix }]"
       :type="inpType"
       :spellcheck="false"
@@ -50,6 +51,8 @@ export default defineComponent({
   props: {
     /** 绑定值 Binding value */
     modelValue: { type: String, default: "" },
+    /** 对应原生属性 name */
+    inputName: { type: String, default: "" },
     /** 输入框类型 Type of the input */
     type: { type: String as PropType<InputType>, default: "text" },
     /** 输入框尺寸 Size of the input */
