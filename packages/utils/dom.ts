@@ -128,3 +128,29 @@ export const getAllElements = (children: VNode[] | undefined, includeText = fals
   }
   return results;
 };
+
+/**
+ * 判断是否是可滚动元素
+ * @param element
+ * @returns boolean
+ */
+export const isScrollElement = (element: HTMLElement) => {
+  return element.scrollHeight > element.offsetHeight || element.scrollWidth > element.offsetWidth;
+};
+
+/**
+ * 获取可滚动区域元素
+ * @param el
+ * @returns
+ */
+export const getScrollElements = (el: HTMLElement | undefined) => {
+  const scrollElements: HTMLElement[] = [];
+  let element: HTMLElement | undefined = el;
+  while (element && element !== document.documentElement) {
+    if (isScrollElement(element)) {
+      scrollElements.push(element);
+    }
+    element = element.parentElement ?? undefined;
+  }
+  return scrollElements;
+};

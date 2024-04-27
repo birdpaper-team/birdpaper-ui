@@ -35,31 +35,19 @@ export const strToObject = (str: string): object => {
   return finalObj;
 };
 
-/**
- * 函数节流
- */
-export const throttle = (fn: { apply: (arg0: any, arg1: IArguments) => void }, delay?: number) => {
-  var lastTime: number;
-  var timer: any;
-  var delay = delay || 200;
-  return function () {
-    var args = arguments;
-    // 记录当前函数触发的时间
-    var nowTime = Date.now();
-    if (lastTime && nowTime - lastTime < delay) {
-      clearTimeout(timer);
-      timer = setTimeout(function () {
-        // 记录上一次函数触发的时间
-        lastTime = nowTime;
-        // 修正this指向问题
-        fn.apply(this, args);
-      }, delay);
-    } else {
-      lastTime = nowTime;
-      fn.apply(this, args);
+type ThrottledFunction<T extends (...args: any[]) => void> = (...args: Parameters<T>) => void;
+
+export function throttle<T extends (...args: any[]) => void>(func: T, delay: number = 20): ThrottledFunction<T> {
+  let lastExecution = 0;
+
+  return function (...args: Parameters<T>) {
+    const now = Date.now();
+    if (now - lastExecution >= delay) {
+      lastExecution = now;
+      func(...args);
     }
   };
-};
+}
 
 /**
  * 新增事件监听
@@ -179,9 +167,9 @@ export function arrayIndexOf(arr: unknown[], field: string, fieldValue: unknown)
 }
 
 export function generateArray(len: number): string[] {
-  const result:string[] = [];
+  const result: string[] = [];
   for (let i = 0; i < len; i++) {
-    result.push(i.toString().padStart(2, '0'));
+    result.push(i.toString().padStart(2, "0"));
   }
   return result;
 }
