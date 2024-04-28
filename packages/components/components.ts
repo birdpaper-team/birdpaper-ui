@@ -35,6 +35,7 @@ declare module "@vue/runtime-core" {
     BpTrigger: typeof import("birdpaper-ui")["Trigger"];
     BpForm: typeof import("birdpaper-ui")["Form"];
     BpFormItem: typeof import("birdpaper-ui")["FormItem"];
+    BpVerifyCode: typeof import("birdpaper-ui")["VerifyCode"];
   }
 }
 
