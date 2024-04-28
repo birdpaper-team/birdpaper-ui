@@ -6,7 +6,7 @@
     :disabled="disabled"
     :popup-offset="10"
     position="left-bottom"
-  >
+    update-at-scroll>
     <bp-input
       ref="inputRef"
       v-model="globalValue"
@@ -18,8 +18,7 @@
       :clearable="clearable"
       :size="size"
       @input="onInput"
-      @blur="onBlur"
-    >
+      @blur="onBlur">
       <template #perfix>
         <IconTimeLine />
       </template>

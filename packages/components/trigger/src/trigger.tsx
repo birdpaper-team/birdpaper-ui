@@ -1,15 +1,4 @@
-import {
-  PropType,
-  Teleport,
-  Transition,
-  defineComponent,
-  h,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  watch,
-} from "vue";
+import { PropType, Teleport, Transition, defineComponent, h, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { getPositionData, getWrapperPositionStyle, getWrapperSize } from "./core";
 import { TriggerPosition } from "./types";
 import { off, on, throttle } from "../../../utils/util";
@@ -92,7 +81,7 @@ export default defineComponent({
 
       if (props.scrollToClose && visible.value) {
         setTimeout(() => {
-          updateVisible(!visible.value);
+          updateVisible(false);
         }, props.scrollToCloseTime);
       }
     };
@@ -119,6 +108,7 @@ export default defineComponent({
     onMounted(() => {
       nextTick(() => {
         on(window, "resize", throttle(handleResize));
+        on(window, "scroll", throttle(handleResize));
 
         if (props.updateAtScroll) {
           scrollElements.value = getScrollElements(triggerRef.value);
@@ -132,6 +122,7 @@ export default defineComponent({
 
     onBeforeUnmount(() => {
       off(window, "resize", throttle(handleResize));
+      off(window, "scroll", throttle(handleResize));
 
       if (props.updateAtScroll) {
         scrollElements.value = getScrollElements(triggerRef.value);
@@ -170,8 +161,7 @@ export default defineComponent({
                 class={`${name}-wrapper`}
                 onMouseenter={handleMouseEnter}
                 onMouseleave={handleMouseLeave}
-                v-clickOutside={onClickOutside}
-              >
+                v-clickOutside={onClickOutside}>
                 {slots.content?.()}
               </div>
             </Transition>

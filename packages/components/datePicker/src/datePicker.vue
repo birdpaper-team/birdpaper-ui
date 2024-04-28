@@ -6,6 +6,7 @@
       :disabled="disabled"
       :popup-offset="10"
       position="left-bottom"
+      update-at-scroll
   >
     <bp-input
         ref="inputRef"
