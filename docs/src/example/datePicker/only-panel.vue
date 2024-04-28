@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="../../../../packages/components/timePicker/src/style/timePicker.less">
 <template>
   <bp-date-picker show-time v-model="val" hide-trigger style="width: 200px" placeholder="Please select"> </bp-date-picker>
 </template>
