@@ -16,10 +16,6 @@
   &-inner {
     background-color: @gary-4;
     text-align: center;
-
-    &:not(:first-child) {
-      margin-left: 8px;
-    }
   }
 }
 
@@ -33,6 +29,10 @@
       border-radius:~"@{verifycode-size-@{size}-radius}";
       font-size:~"@{verifycode-size-@{size}-font-size}";
       line-height: 1;
+
+      &:not(:first-child) {
+        margin-left:~"@{verifycode-size-@{size}-space}";
+      }
     }
   }
 }

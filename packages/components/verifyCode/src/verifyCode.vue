@@ -1,14 +1,25 @@
 <template>
   <div :class="inpClass">
     <template v-for="v in length">
-      <input :ref="setItemRef" :class="['bp-verifycode-inner']" type="text" :spellcheck="false" :disabled="disabled" :readonly="readonly" />
+      <input
+        v-model.trim="globalValue[v - 1]"
+        type="text"
+        :ref="setItemRef"
+        :class="['bp-verifycode-inner']"
+        :spellcheck="false"
+        :disabled="disabled"
+        :readonly="readonly"
+        :maxlength="1"
+        @keydown="onKeydown"
+        @keydown.space.prevent=""
+        @input="onInput($event, v - 1)" />
     </template>
   </div>
 </template>
 
 <script lang="ts">
 import { InputSize } from "../../input/src/types";
-import { PropType, computed, defineComponent } from "vue";
+import { PropType, computed, defineComponent, ref, watch } from "vue";
 
 export default defineComponent({
   name: "VerifyCode",
@@ -35,6 +46,20 @@ export default defineComponent({
       inpRefs.push(el);
     };
 
+    const globalValue = ref<string[]>([]);
+    const onInput = (e: Event, index: number) => {
+      const targetValue = (e.target as HTMLInputElement).value.replace(/\s+/g, "");
+      !!targetValue && index + 1 < props.length && inpRefs[index + 1].focus();
+
+      emit("update:modelValue", globalValue.value.join("").substring(0, props.length));
+    };
+
+    const onKeydown = (e: KeyboardEvent) => {
+      if (e.key === 'Backspace') {
+        // 
+      }
+    };
+
     const inpClass = computed(() => {
       const status = getStatus();
       return [name, `${name}-size-${props.size}`, `${name}-status-${status}`];
@@ -43,10 +68,21 @@ export default defineComponent({
       return (props.disabled && "disabled") || (props.readonly && "readonly") || (props.isDanger && "danger") || "normal";
     }
 
+    watch(
+      () => props.modelValue,
+      () => {
+        globalValue.value = props.modelValue.split("") || [];
+      },
+      { immediate: true }
+    );
+
     return {
       name,
       setItemRef,
       inpClass,
+      globalValue,
+      onInput,
+      onKeydown
     };
   },
 });
