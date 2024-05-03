@@ -18,6 +18,7 @@
 </template>
 
 <script lang="ts">
+import { getChildrenIndex } from "../../../utils/dom";
 import { InputSize } from "../../input/src/types";
 import { PropType, computed, defineComponent, ref, watch } from "vue";
 
@@ -55,8 +56,20 @@ export default defineComponent({
     };
 
     const onKeydown = (e: KeyboardEvent) => {
-      if (e.key === 'Backspace') {
-        // 
+      const index = getChildrenIndex(e.target);
+      switch (e.key) {
+        case "Backspace":
+          index && inpRefs[index - 1].focus();
+          break;
+        case "ArrowRight":
+          index < props.length - 1 && inpRefs[index + 1].focus();
+          break;
+        case "ArrowLeft":
+          index > 0 && inpRefs[index - 1].focus();
+          break;
+
+        default:
+          break;
       }
     };
 
@@ -82,7 +95,7 @@ export default defineComponent({
       inpClass,
       globalValue,
       onInput,
-      onKeydown
+      onKeydown,
     };
   },
 });

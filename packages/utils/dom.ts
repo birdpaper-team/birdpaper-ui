@@ -1,7 +1,7 @@
 import { Component, Slots, VNode, VNodeTypes } from "vue";
 
 // 返回是否是 HTML 元素
-export const isHtmlEl = e => e && e.nodeType === 1;
+export const isHtmlEl = (e) => e && e.nodeType === 1;
 
 /**
  * 获取滚动容器
@@ -35,11 +35,7 @@ export const getScrollContainer = (el, isVertical) => {
 export const isScroll = (el, isVertical) => {
   const determinedDirection = isVertical === null || isVertical === undefined;
 
-  const overflow = determinedDirection
-    ? getStyle(el, "overflow")
-    : isVertical
-    ? getStyle(el, "overflow-y")
-    : getStyle(el, "overflow-x");
+  const overflow = determinedDirection ? getStyle(el, "overflow") : isVertical ? getStyle(el, "overflow-y") : getStyle(el, "overflow-x");
 
   return overflow.match(/(scroll|auto)/);
 };
@@ -153,4 +149,20 @@ export const getScrollElements = (el: HTMLElement | undefined) => {
     element = element.parentElement ?? undefined;
   }
   return scrollElements;
+};
+
+/**
+ * 获取元素所在父元素的下标
+ * @param ele
+ * @returns
+ */
+export const getChildrenIndex = (ele: any) => {
+  if (ele.sourceIndex) {
+    return ele.sourceIndex - ele.parentNode.sourceIndex - 1;
+  }
+  var i = 0;
+  while ((ele = ele.previousElementSibling)) {
+    i++;
+  }
+  return i;
 };
