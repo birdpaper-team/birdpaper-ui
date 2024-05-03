@@ -10,6 +10,7 @@
         :disabled="disabled"
         :readonly="readonly"
         :maxlength="1"
+        @focus="onFocus"
         @keydown="onKeydown"
         @keydown.space.prevent=""
         @input="onInput($event, v - 1)" />
@@ -52,20 +53,23 @@ export default defineComponent({
       const targetValue = (e.target as HTMLInputElement).value.replace(/\s+/g, "");
       !!targetValue && index + 1 < props.length && inpRefs[index + 1].focus();
 
-      emit("update:modelValue", globalValue.value.join("").substring(0, props.length));
+      emit("input", globalValue.value.join("").substring(0, props.length));
+    };
+
+    const onFocus = () => {
+      const len = globalValue.value.length;
+      return inpRefs[len >= props.length ? len - 1 : len].focus();
     };
 
     const onKeydown = (e: KeyboardEvent) => {
       const index = getChildrenIndex(e.target);
+      const val = globalValue.value[index];
+      const isLastEl = index === props.length - 1;
+
       switch (e.key) {
         case "Backspace":
-          index && inpRefs[index - 1].focus();
-          break;
-        case "ArrowRight":
-          index < props.length - 1 && inpRefs[index + 1].focus();
-          break;
-        case "ArrowLeft":
-          index > 0 && inpRefs[index - 1].focus();
+          globalValue.value.splice(isLastEl && val? index : index - 1, 1);
+          onFocus();
           break;
 
         default:
@@ -94,6 +98,7 @@ export default defineComponent({
       setItemRef,
       inpClass,
       globalValue,
+      onFocus,
       onInput,
       onKeydown,
     };
