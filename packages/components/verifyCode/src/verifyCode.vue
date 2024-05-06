@@ -13,6 +13,7 @@
         @focus="onFocus"
         @keydown="onKeydown"
         @keydown.space.prevent=""
+        @paste="onPaste"
         @input="onInput($event, v - 1)" />
     </template>
   </div>
@@ -39,7 +40,7 @@ export default defineComponent({
     /** 是否警示状态 Danger or not */
     isDanger: { type: Boolean, default: false },
   },
-  emits: ["update:modelValue", "input"],
+  emits: ["update:modelValue"],
   setup(props, { emit }) {
     const name = "bp-verifycode";
 
@@ -53,7 +54,13 @@ export default defineComponent({
       const targetValue = (e.target as HTMLInputElement).value.replace(/\s+/g, "");
       !!targetValue && index + 1 < props.length && inpRefs[index + 1].focus();
 
-      emit("input", globalValue.value.join("").substring(0, props.length));
+      updateValue();
+    };
+
+    const onPaste = (e: ClipboardEvent) => {
+      var clipboardData = e.clipboardData || window["clipboardData"];
+      var pastedData = clipboardData.getData("Text");
+      globalValue.value = [...pastedData].slice(0, props.length);
     };
 
     const onFocus = () => {
@@ -68,13 +75,18 @@ export default defineComponent({
 
       switch (e.key) {
         case "Backspace":
-          globalValue.value.splice(isLastEl && val? index : index - 1, 1);
+          globalValue.value.splice(isLastEl && val ? index : index - 1, 1);
           onFocus();
+          updateValue();
           break;
 
         default:
           break;
       }
+    };
+
+    const updateValue = () => {
+      emit("update:modelValue", globalValue.value.join("").substring(0, props.length));
     };
 
     const inpClass = computed(() => {
@@ -100,6 +112,7 @@ export default defineComponent({
       globalValue,
       onFocus,
       onInput,
+      onPaste,
       onKeydown,
     };
   },
