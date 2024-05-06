@@ -3,7 +3,7 @@
     <template v-for="v in length">
       <input
         v-model.trim="globalValue[v - 1]"
-        type="text"
+        :type="inpType"
         :ref="setItemRef"
         :class="['bp-verifycode-inner']"
         :spellcheck="false"
@@ -39,8 +39,10 @@ export default defineComponent({
     readonly: { type: Boolean, default: false },
     /** 是否警示状态 Danger or not */
     isDanger: { type: Boolean, default: false },
+    /** 是否匿文模式 */
+    isPassword: { type: Boolean, default: false },
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "finish"],
   setup(props, { emit }) {
     const name = "bp-verifycode";
 
@@ -51,6 +53,8 @@ export default defineComponent({
 
     const globalValue = ref<string[]>([]);
     const onInput = (e: Event, index: number) => {
+      if (props.disabled || props.readonly) return;
+
       const targetValue = (e.target as HTMLInputElement).value.replace(/\s+/g, "");
       !!targetValue && index + 1 < props.length && inpRefs[index + 1].focus();
 
@@ -58,17 +62,23 @@ export default defineComponent({
     };
 
     const onPaste = (e: ClipboardEvent) => {
+      if (props.disabled || props.readonly) return;
+
       var clipboardData = e.clipboardData || window["clipboardData"];
       var pastedData = clipboardData.getData("Text");
       globalValue.value = [...pastedData].slice(0, props.length);
     };
 
     const onFocus = () => {
+      if (props.disabled || props.readonly) return;
+
       const len = globalValue.value.length;
       return inpRefs[len >= props.length ? len - 1 : len].focus();
     };
 
     const onKeydown = (e: KeyboardEvent) => {
+      if (props.disabled || props.readonly) return;
+
       const index = getChildrenIndex(e.target);
       const val = globalValue.value[index];
       const isLastEl = index === props.length - 1;
@@ -86,8 +96,16 @@ export default defineComponent({
     };
 
     const updateValue = () => {
+      if (props.disabled || props.readonly) return;
+
       emit("update:modelValue", globalValue.value.join("").substring(0, props.length));
+
+      if (globalValue.value.length === props.length) {
+        emit("finish");
+      }
     };
+
+    const inpType = computed(() => (props.isPassword ? "password" : "text"));
 
     const inpClass = computed(() => {
       const status = getStatus();
@@ -108,6 +126,7 @@ export default defineComponent({
     return {
       name,
       setItemRef,
+      inpType,
       inpClass,
       globalValue,
       onFocus,

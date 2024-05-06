@@ -41,7 +41,8 @@
 .verifycode-status(@status) {
   .@{verifycode-cls}-status-@{status} {
     .@{verifycode-cls}-inner {
-      border: 1px solid~"@{verifycode-status-@{status}-border-color}";
+      border: 1px solid ~"@{verifycode-status-@{status}-border-color}";
+      background-color:~"@{verifycode-status-@{status}-background}";
       transition: all 0.2s ease;
 
       &:hover {
@@ -73,6 +74,7 @@
 .@{verifycode-cls}-status-disabled {
   opacity: 0.6;
   cursor: not-allowed;
+  .no-select;
 
   .@{input-cls}-inner {
     cursor: not-allowed;
