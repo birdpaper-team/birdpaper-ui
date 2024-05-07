@@ -1,28 +1,26 @@
 <template>
   <bp-trigger
-      v-model:popupVisible="showPopup"
-      transition="fade-dropdown"
-      :hideTrigger="hideTrigger"
-      :disabled="disabled"
-      :popup-offset="10"
-      position="left-bottom"
-      update-at-scroll
-  >
+    v-model:popupVisible="showPopup"
+    transition="fade-dropdown"
+    :hideTrigger="hideTrigger"
+    :disabled="disabled"
+    :popup-offset="10"
+    position="left-bottom"
+    update-at-scroll>
     <bp-input
-        ref="inputRef"
-        v-model="global_value"
-        :class="name"
-        :placeholder="placeholder"
-        :disabled="disabled"
-        :readonly="readonly"
-        :is-danger="isDanger"
-        :clearable="clearable"
-        :size="size"
-        @input="onInput"
-        @blur="onBlur"
-    >
+      ref="inputRef"
+      v-model="global_value"
+      :class="name"
+      :placeholder="placeholder"
+      :disabled="disabled"
+      :readonly="readonly"
+      :is-danger="isDanger"
+      :clearable="clearable"
+      :size="size"
+      @input="onInput"
+      @blur="onBlur">
       <template #perfix>
-        <IconCalendarLine style="position: relative; top: 1px"/>
+        <IconCalendarLine style="position: relative; top: 1px" />
       </template>
     </bp-input>
     <template #content>
@@ -90,10 +88,10 @@ export default defineComponent({
     const onBlur = () => emit("blur");
 
     watch(
-        () => props.modelValue,
-        (value?: string) => {
-          global_value.value = value || "";
-        }
+      () => props.modelValue,
+      (value?: string) => {
+        global_value.value = value || "";
+      }
     );
 
     return {
