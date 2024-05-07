@@ -39,6 +39,8 @@ export interface DatePickerContext {
   langs: LangsType;
   /** 值格式 */
   valueFormat: string;
+  /** 是否显示时间选择器 */
+  showTime:boolean;
   /** 选择后触发 */
   onSelect: (value: string, payload: object, closePopup: boolean) => void;
 }

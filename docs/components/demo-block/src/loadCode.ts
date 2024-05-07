@@ -4,7 +4,7 @@ import { getHighlighter } from "shiki";
 import { getTagLabel } from "../../util/helper";
 const { resolve } = path;
 
-let codeToHtml: any = null;
+let codeToHtml: any = ()=>{};
 (async () => {
   let res = await getHighlighter({
     theme: "min-light",

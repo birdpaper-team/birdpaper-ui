@@ -6,6 +6,7 @@
     :disabled="disabled"
     :popup-offset="10"
     auto-fit-width
+    update-at-scroll
   >
     <bp-input
       ref="inpRef"

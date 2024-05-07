@@ -31,7 +31,7 @@
           </div>
           <span class="copyright-text"
             >BirdpaperUI author by
-            <bp-link status="normal" href="https://github.com/liluanhui" target="_blank">木亦Sam</bp-link> 2023</span
+            <bp-link status="normal" href="https://github.com/liluanhui" target="_blank">木亦Sam</bp-link> 2023 - 2024</span
           >
         </div>
         <div class="number">

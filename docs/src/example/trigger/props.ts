@@ -16,6 +16,10 @@ const list: PropTableItem[] = [
   { name: "transition", remark: "过渡动画名称", type: "String", default: "fade" },
   { name: "click-outside", remark: "点击其他元素关闭触发器", type: "Boolean", default: "true" },
   { name: "disabled", remark: "是否禁用", type: "Boolean", default: "false" },
+  { name: "hideTrigger", remark: "隐藏触发器", type: "Boolean", default: "false" },
+  { name: "updateAtScroll", remark: "是否跟随滚动元素更新", type: "Boolean", default: "false" },
+  { name: "scrollToClose", remark: "是否在滚动时关闭", type: "Boolean", default: "false" },
+  { name: "scrollToCloseTime", remark: "滚动触发关闭的时间", type: "Number", default: "400" },
 ];
 
 export default list;

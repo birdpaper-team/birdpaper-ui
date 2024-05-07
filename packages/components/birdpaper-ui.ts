@@ -27,6 +27,7 @@ import Drawer from "./drawer";
 import Tooltip from "./tooltip";
 import Trigger from "./trigger";
 import Form from "./form";
+import VerifyCode from "./verifyCode";
 import Message from "./message";
 
 const install = (app: App, option?: unknown) => {
@@ -64,6 +65,7 @@ const components: Record<string, Plugin> = {
   Tooltip,
   Trigger,
   Form,
+  VerifyCode,
   Message,
 };
 export { default as Message } from "./message";

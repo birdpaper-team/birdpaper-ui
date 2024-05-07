@@ -9,7 +9,7 @@ export const sidebar = {
       text: "指南",
       items: [
         { text: "快速上手", link: "/guide/easystart" },
-        { text: "更新日志", link: "/guide/changelog" },
+        { text: "更新日志", link: "/guide/changelog/2-2-x" },
         { text: "颜色", link: "/guide/color" },
         { text: "图标", link: "/guide/icon" },
       ],
@@ -36,6 +36,7 @@ export const sidebar = {
         { text: "复选框 <span>Checkbox</span>", link: "/component/checkbox" },
         { text: "开关 <span>Switch</span>", link: "/component/switch" },
         { text: "选择器 <span>Select</span>", link: "/component/select" },
+        { text: "验证码 <span>VerifyCode</span>", link: "/component/verifyCode" },
         { text: "日期选择 <span>DatePicker</span>", link: "/component/datePicker" },
         { text: "时间选择 <span>TimePicker</span>", link: "/component/timePicker" },
         { text: "数字输入 <span>InputNumber</span>", link: "/component/inputNumber" },

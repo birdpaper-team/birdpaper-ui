@@ -10,6 +10,7 @@
   background: transparent;
   transition: border-color 0.25s;
 }
+
 @media (min-width: 768px) {
   .DocSearch-Button {
     justify-content: flex-start;
@@ -21,16 +22,19 @@
     background-color: var(--vp-c-bg-alt);
   }
 }
+
 @media (max-width: 768px) {
   .DocSearch-Button-Keys {
     display: none;
   }
+
   .VPNavBarHamburger {
     height: 32px !important;
     width: 32px !important;
     border-radius: 4px;
   }
 }
+
 .DocSearch-Button:hover {
   border: 1px solid #f5f5f6;
 }
@@ -41,7 +45,7 @@
 
 .font-quick {
   font-family: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 .code-font {
@@ -85,16 +89,21 @@ pre code {
   background: none;
 }
 
-.VPHomeHero {
+.VPHome {
   .container {
+    max-width: none !important;
+    padding: 0 !important;
+
     .name {
       .clip {
         .font-quick;
       }
     }
+
     .text {
       font-size: 42px;
     }
+
     .tagline {
       font-size: 18px;
     }
@@ -102,7 +111,17 @@ pre code {
 }
 
 .VPHome {
+  margin-bottom: 0 !important;
   padding-bottom: 0 !important;
+}
+
+.VPNav {
+  z-index: 999 !important;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.divider {
+  display: none !important;
 }
 
 // 左侧导航
@@ -120,6 +139,7 @@ pre code {
     }
   }
 }
+
 .VPNavBarTitle {
   .title {
     height: 62px !important;
@@ -184,6 +204,7 @@ pre code {
           .outline-link {
             line-height: 28px !important;
           }
+
           .active {
             color: #1677ff;
           }

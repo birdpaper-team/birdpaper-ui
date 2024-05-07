@@ -11,26 +11,21 @@
 .bp-date-picker-panel {
   width: fit-content;
   border-radius: 6px;
+  border: 1px solid @gary-4;
+  background-color: @gary-1;
   .no-select;
 
   &-wrapper {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
   }
-}
-
-.table-panel {
-  width: 260px;
-  border-radius: 6px;
-  border: 1px solid @gary-4;
-  background-color: @gary-1;
 }
 
 .bp-date-table,
 .bp-month-table,
 .bp-year-table {
-  .table-panel;
+  width: 260px;
 
   &-header {
     display: flex;
@@ -170,7 +165,6 @@
     .active {
       background-color: @primary-6 !important;
       color: @gary-1 !important;
-      pointer-events: none;
     }
   }
 
@@ -301,6 +295,92 @@
       margin-left: -2px;
       border-radius: 4px;
       background-color: @primary-6;
+    }
+  }
+}
+
+.bp-date-time-table {
+  border-left: 1px solid @gary-4;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    height: 46px;
+    border-bottom: 1px dashed @gary-4;
+    border-width: 1px;
+
+    &-inner {
+      color: @gary-10;
+      font-weight: bold;
+    }
+  }
+
+  &-body {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  &-time-col {
+    width: 60px;
+    height: 236px;
+    padding: 4px 0;
+    overflow-y: hidden !important;
+
+    &:hover {
+      overflow-y: auto !important;
+    }
+
+    &:not(:first-child) {
+      border-left: 1px dashed @gary-4;
+    }
+  }
+
+  .time-col-scroller-list {
+    margin-bottom: 164px;
+  }
+
+  &-col-cell {
+    padding-left: 24px;
+    line-height: 28px;
+    background-color: @gary-1;
+    transition: 0.2s ease;
+    cursor: pointer;
+
+    &-inner {
+      display: flex;
+      font-size: 12px;
+      font-weight: 500;
+      color: @gary-9;
+      transform: scale(1);
+      transition: 0.2s ease;
+    }
+
+    &:hover {
+      background-color: @gary-2;
+      transition: 0.2s ease;
+
+      .bp-time-table-col-cell-inner {
+        color: @gary-11;
+        transform: scale(1.05);
+        font-weight: 600;
+        transition: 0.2s ease;
+      }
+    }
+  }
+
+  .active {
+    background-color: @gary-3;
+    transition: 0.2s ease;
+
+    .bp-time-table-col-cell-inner {
+      color: @gary-11;
+      transform: scale(1.05);
+      font-weight: 600;
+      transition: 0.2s ease;
     }
   }
 }

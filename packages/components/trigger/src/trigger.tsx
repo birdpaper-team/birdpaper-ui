@@ -1,19 +1,9 @@
-import {
-  PropType,
-  Teleport,
-  Transition,
-  defineComponent,
-  h,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  watch,
-} from "vue";
+import { PropType, Teleport, Transition, defineComponent, h, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { getPositionData, getWrapperPositionStyle, getWrapperSize } from "./core";
 import { TriggerPosition } from "./types";
-import { off, on } from "../../../utils/util";
+import { off, on, throttle } from "../../../utils/util";
 import { vClickOutside } from "../../../directives/clickOutside";
+import { getScrollElements } from "../../../utils/dom";
 
 export default defineComponent({
   name: "Trigger",
@@ -38,6 +28,12 @@ export default defineComponent({
     disabled: { type: Boolean, default: false },
     /** 隐藏触发器 */
     hideTrigger: { type: Boolean, default: false },
+    /** 是否跟随滚动元素更新 */
+    updateAtScroll: { type: Boolean, default: false },
+    /** 是否在滚动时关闭 */
+    scrollToClose: { type: Boolean, default: false },
+    /** 滚动触发关闭的时间 */
+    scrollToCloseTime: { type: Number, default: 400 },
   },
   emits: ["update:popupVisible"],
   setup(props, { emit, slots }) {
@@ -47,6 +43,7 @@ export default defineComponent({
     const wrapperRef = ref();
     const visible = ref<boolean>(props.popupVisible || false);
     const clickOutsideLock = ref<boolean>(true);
+    const scrollElements = ref<Element[]>([]);
 
     const handleClick = () => {
       if (props.trigger === "hover" || props.disabled) return;
@@ -81,6 +78,12 @@ export default defineComponent({
 
       const styleStr = getWrapperPositionStyle(top, left, visible.value, props.autoFitWidth ? width : null);
       wrapperRef.value.setAttribute("style", styleStr);
+
+      if (props.scrollToClose && visible.value) {
+        setTimeout(() => {
+          updateVisible(false);
+        }, props.scrollToCloseTime);
+      }
     };
 
     const onClickOutside = () => {
@@ -104,12 +107,30 @@ export default defineComponent({
 
     onMounted(() => {
       nextTick(() => {
-        on(window, "resize", handleResize);
+        on(window, "resize", throttle(handleResize));
+        on(window, "scroll", throttle(handleResize));
+
+        if (props.updateAtScroll) {
+          scrollElements.value = getScrollElements(triggerRef.value);
+
+          for (const item of scrollElements.value) {
+            on(item, "scroll", throttle(handleResize));
+          }
+        }
       });
     });
 
     onBeforeUnmount(() => {
-      off(window, "resize", handleResize);
+      off(window, "resize", throttle(handleResize));
+      off(window, "scroll", throttle(handleResize));
+
+      if (props.updateAtScroll) {
+        scrollElements.value = getScrollElements(triggerRef.value);
+
+        for (const item of scrollElements.value) {
+          off(item, "scroll", throttle(handleResize));
+        }
+      }
     });
 
     watch(
@@ -126,7 +147,7 @@ export default defineComponent({
       return props.hideTrigger ? (
         slots.content?.()
       ) : (
-        <div class={name} ref={triggerRef}>
+        <div class={name} ref={triggerRef} id="triggerRef">
           {h(children[0], {
             onClick: handleClick,
             onMouseenter: handleMouseEnter,
@@ -140,8 +161,7 @@ export default defineComponent({
                 class={`${name}-wrapper`}
                 onMouseenter={handleMouseEnter}
                 onMouseleave={handleMouseLeave}
-                v-clickOutside={onClickOutside}
-              >
+                v-clickOutside={onClickOutside}>
                 {slots.content?.()}
               </div>
             </Transition>

@@ -6,7 +6,7 @@
     :disabled="disabled"
     :popup-offset="10"
     position="left-bottom"
-  >
+    update-at-scroll>
     <bp-input
       ref="inputRef"
       v-model="global_value"
@@ -18,14 +18,13 @@
       :clearable="clearable"
       :size="size"
       @input="onInput"
-      @blur="onBlur"
-    >
+      @blur="onBlur">
       <template #perfix>
         <IconCalendarLine style="position: relative; top: 1px" />
       </template>
     </bp-input>
     <template #content>
-      <picker-panel :langs="langs"></picker-panel>
+      <picker-panel></picker-panel>
     </template>
   </bp-trigger>
 </template>
@@ -60,6 +59,8 @@ export default defineComponent({
     valueFormat: { type: String, default: "YYYY-MM-DD" },
     /** 隐藏触发器 */
     hideTrigger: { type: Boolean, default: false },
+    /** 是否显示时间选择器 */
+    showTime: { type: Boolean, default: false },
   },
   components: { pickerPanel, IconCalendarLine },
   emits: ["update:modelValue", "input", "blur"],
@@ -74,6 +75,7 @@ export default defineComponent({
       modelValue: global_value,
       langs: props.langs,
       valueFormat: props.valueFormat,
+      showTime: props.showTime,
       onSelect: (v: string, payload: any, closePopup = true) => {
         global_value.value = v;
 

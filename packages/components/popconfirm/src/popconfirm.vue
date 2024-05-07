@@ -1,5 +1,5 @@
 <template>
-  <bp-trigger v-model:popup-visible="show" :class="name" :popup-offset="10" :position="position">
+  <bp-trigger v-model:popup-visible="show" :class="name" :popup-offset="10" :position="position" update-at-scroll>
     <div :class="`${name}-slot`">
       <slot></slot>
     </div>
