@@ -7,16 +7,15 @@
       :title="title"
       :style="{ ...imgStyle, ...fitStyle }"
       @load="onLoad"
-      @error="onError"
-    />
+      @error="onError" />
     <div :class="`${name}-loading`" v-if="isLoading">
       <slot name="loading">
-        <span>加载中</span>
+        <IconImage2Fill size="24" />
       </slot>
     </div>
     <div :class="`${name}-error`" v-if="!isLoading && isError">
       <slot name="error">
-        <IconImage2Line size="32" />
+        <IconImage2Fill size="24" />
       </slot>
     </div>
   </div>
@@ -25,7 +24,7 @@
 <script lang="ts">
 import { CSSProperties, PropType, computed, defineComponent, ref, watchEffect } from "vue";
 import { ImageFit } from "./types";
-import { IconImage2Line } from "birdpaper-icon";
+import { IconImage2Fill } from "birdpaper-icon";
 import { isString } from "../../../utils/util";
 
 export default defineComponent({
@@ -45,7 +44,7 @@ export default defineComponent({
     height: { type: [String, Number] as PropType<string | number> },
   },
   emits: ["load", "error"],
-  components: { IconImage2Line },
+  components: { IconImage2Fill },
   setup(props, { emit, slots }) {
     const name = "bp-image";
     const imageRef = ref();
