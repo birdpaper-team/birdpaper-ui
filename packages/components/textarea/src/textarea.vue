@@ -15,8 +15,7 @@
       @blur="onBlur"
       @keypress="onKeypress"
       @keyup="onKeyup"
-      @input="onInput"
-    />
+      @input="onInput" />
     <div class="suffix">
       <template v-if="!slots.suffix">
         <!-- 清空按钮 -->
@@ -67,16 +66,14 @@ export default defineComponent({
       return [name, `${name}-status-${status}`];
     });
     function getStatus() {
-      return (
-        (props.disabled && "disabled") || (props.readonly && "readonly") || (props.isDanger && "danger") || "normal"
-      );
+      return (props.disabled && "disabled") || (props.readonly && "readonly") || (props.isDanger && "danger") || "normal";
     }
 
     // 输入字数限制
     const showWordLimit = computed(() => {
       return props.maxlength && props.showLimit;
     });
-    const limitText = computed(() => `${props.modelValue?.length}/${props.maxlength}`);
+    const limitText = computed(() => `${props.modelValue?.length || 0}/${props.maxlength}`);
 
     /** 使输入框聚焦 */
     const handleFocus = () => inpRef.value.focus();
