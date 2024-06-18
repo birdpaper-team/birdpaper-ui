@@ -48,14 +48,14 @@ export default defineComponent({
     const handleClick = () => {
       if (props.trigger === "hover" || props.disabled) return;
 
-      handleResize();
       updateVisible(!visible.value);
+      handleResize();
     };
     const handleMouseEnter = () => {
       if (props.trigger === "click") return;
 
-      handleResize();
       updateVisible(true);
+      handleResize();
     };
     const handleMouseLeave = () => {
       if (props.trigger === "click") return;
@@ -64,7 +64,7 @@ export default defineComponent({
     };
 
     const handleResize = () => {
-      if (!triggerRef.value) return;
+      if (!triggerRef.value || !visible.value) return;
 
       const wrapperSize = getWrapperSize(wrapperRef.value);
       const { top, left, width } = getPositionData(
@@ -75,7 +75,6 @@ export default defineComponent({
         props.popupOffset,
         props.autoFitWidth
       );
-
       const styleStr = getWrapperPositionStyle(top, left, visible.value, props.autoFitWidth ? width : null);
       wrapperRef.value.setAttribute("style", styleStr);
 
@@ -108,7 +107,6 @@ export default defineComponent({
     onMounted(() => {
       nextTick(() => {
         on(window, "resize", throttle(handleResize));
-        on(window, "scroll", throttle(handleResize));
 
         if (props.updateAtScroll) {
           scrollElements.value = getScrollElements(triggerRef.value);
