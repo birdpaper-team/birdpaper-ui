@@ -79,6 +79,8 @@ export default defineComponent({
       onSelect: (v: string, payload: any, closePopup = true) => {
         global_value.value = v;
 
+        if (props.showTime) return;
+
         if (closePopup) showPopup.value = false;
         emit("update:modelValue", global_value.value);
       },

@@ -35,4 +35,6 @@ const defaultValue = "00";
 const hourList = generateArray(24);
 const minuteList = generateArray(60);
 const secondList = generateArray(60);
+
+const globalValue = ref<string[]>(["", "", ""]);
 </script>
