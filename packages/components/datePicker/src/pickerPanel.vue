@@ -4,6 +4,9 @@
       <component :is="tableMap[currentTable]" @change-picker="onChangePicker"></component>
       <time-table v-if="ctx.showTime && currentTable === 'date'"></time-table>
     </div>
+    <div :class="`${name}-footer`" v-if="ctx.showTime && currentTable === 'date'">
+      
+    </div>
   </div>
 </template>
 

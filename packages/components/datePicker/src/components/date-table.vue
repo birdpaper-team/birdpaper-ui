@@ -26,31 +26,23 @@
           :class="[
             `${name}-body-inner`,
             `day-cell-${col.type}`,
-            { active: currentVal === col.value },
-            { 'to-day': currentVal !== col.value && col.value === toDay.format(ctx.valueFormat) },
+            { active: ctx.modelValue.value !== '' && currentVal === col.value },
+            { 'to-day': col.value === toDay.format(ctx.valueFormat) },
           ]"
-          @click="handleSelect(col)"
-        >
+          @click="handleSelect(col)">
           {{ col.label }}
         </span>
       </div>
     </div>
     <div v-if="!ctx.showTime" :class="`${name}-footer`">
-      <bp-button type="text" status="primary" @click="handleSelect({ value: toDay.format(ctx.valueFormat) })">
-        今天
-      </bp-button>
+      <bp-button type="text" status="primary" @click="handleSelect({ value: toDay.format(ctx.valueFormat) })"> 今天 </bp-button>
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, inject } from "vue";
-import {
-  IconArrowLeftSLine,
-  IconArrowRightSLine,
-  IconArrowLeftDoubleFill,
-  IconArrowRightDoubleFill,
-} from "birdpaper-icon";
+import { IconArrowLeftSLine, IconArrowRightSLine, IconArrowLeftDoubleFill, IconArrowRightDoubleFill } from "birdpaper-icon";
 import { DatePickerContext, DayCell, PanelType, dateInjectionKey } from "../types";
 import { useDayJs } from "../core";
 
@@ -64,8 +56,10 @@ export default defineComponent({
     let ctx: DatePickerContext = null;
     ctx = inject(dateInjectionKey);
 
-    const { toDay, current, currentMonth, currentYear, dates, setDates, changeMonth, changeYear, weeks, months } =
-      useDayJs(ctx.langs, ctx.modelValue.value);
+    const { toDay, current, currentMonth, currentYear, dates, setDates, changeMonth, changeYear, weeks, months } = useDayJs(
+      ctx.langs,
+      ctx.modelValue.value
+    );
 
     const currentVal = ref(current.value && current.value.format(ctx.valueFormat));
 
