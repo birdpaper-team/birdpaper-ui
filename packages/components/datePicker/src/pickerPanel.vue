@@ -5,7 +5,8 @@
       <time-table v-if="ctx.showTime && currentTable === 'date'"></time-table>
     </div>
     <div :class="`${name}-footer`" v-if="ctx.showTime && currentTable === 'date'">
-      
+      <bp-button size="mini">此刻</bp-button>
+      <bp-button size="mini" type="primary" status="primary">确定</bp-button>
     </div>
   </div>
 </template>
