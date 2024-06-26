@@ -1,5 +1,6 @@
 <template>
-  <bp-date-picker v-model="val" show-time hide-trigger style="width: 200px" placeholder="Please select"> </bp-date-picker>
+  <bp-date-picker v-model="val" valueFormat="YYYY-MM-DD HH:mm:ss" show-time hide-trigger style="width: 200px" placeholder="Please select">
+  </bp-date-picker>
 </template>
 
 <script setup lang="ts">

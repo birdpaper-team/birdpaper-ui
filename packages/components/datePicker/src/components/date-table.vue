@@ -27,7 +27,7 @@
             `${name}-body-inner`,
             `day-cell-${col.type}`,
             { active: ctx.modelValue.value !== '' && currentVal === col.value },
-            { 'to-day': col.value === toDay.format(ctx.valueFormat) },
+            { 'to-day': col.value === toDay },
           ]"
           @click="handleSelect(col)">
           {{ col.label }}
@@ -35,9 +35,10 @@
       </div>
     </div>
     <div v-if="!ctx.showTime" :class="`${name}-footer`">
-      <bp-button type="text" status="primary" @click="handleSelect({ value: toDay.format(ctx.valueFormat) })"> 今天 </bp-button>
+      <bp-button type="text" status="primary" @click="handleSelect({ value: toDay })"> 今天 </bp-button>
     </div>
   </div>
+  <time-table v-if="ctx.showTime"></time-table>
 </template>
 
 <script lang="ts">
@@ -45,10 +46,11 @@ import { defineComponent, ref, inject } from "vue";
 import { IconArrowLeftSLine, IconArrowRightSLine, IconArrowLeftDoubleFill, IconArrowRightDoubleFill } from "birdpaper-icon";
 import { DatePickerContext, DayCell, PanelType, dateInjectionKey } from "../types";
 import { useDayJs } from "../core";
+import timeTable from "./time-table.vue";
 
 export default defineComponent({
   name: "DateTable",
-  components: { IconArrowLeftSLine, IconArrowRightSLine, IconArrowLeftDoubleFill, IconArrowRightDoubleFill },
+  components: { timeTable, IconArrowLeftSLine, IconArrowRightSLine, IconArrowLeftDoubleFill, IconArrowRightDoubleFill },
   emits: ["change-picker"],
   setup(props, { emit }) {
     const name = "bp-date-table";
@@ -62,7 +64,6 @@ export default defineComponent({
     );
 
     const currentVal = ref(current.value && current.value.format(ctx.valueFormat));
-
     setDates(ctx.valueFormat);
 
     const handleSelect = (date: DayCell) => {
