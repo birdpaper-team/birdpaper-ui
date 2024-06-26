@@ -80,7 +80,7 @@ export default defineComponent({
         global_value.value = v;
 
         if (props.showTime) {
-          console.log(global_value.value);
+          // console.log(global_value.value);
           return;
         }
 
