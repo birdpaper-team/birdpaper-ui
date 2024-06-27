@@ -15,7 +15,7 @@
         :class="[
           `${name}-year-cell`,
           { active: currentVal === col.value },
-          { 'to-year': currentVal !== col.value && col.label === toDay.year() + '' },
+          { 'to-year': currentVal !== col.value && col.label === dayjs(toDay).year() + '' },
         ]"
         @click.stop="handleSelect(col)">
         <span :class="[`${name}-year-cell-inner`]">{{ col.label }}</span>
@@ -27,6 +27,7 @@
 <script lang="ts">
 import { defineComponent, ref, inject } from "vue";
 import { DatePickerContext, YearCell, dateInjectionKey } from "../types";
+import dayjs from "dayjs";
 import { useDayJs } from "../core";
 import { IconArrowLeftDoubleFill, IconArrowRightDoubleFill } from "birdpaper-icon";
 
@@ -66,6 +67,7 @@ export default defineComponent({
       yearCell,
       firstYear,
       handleSelect,
+      dayjs,
     };
   },
 });

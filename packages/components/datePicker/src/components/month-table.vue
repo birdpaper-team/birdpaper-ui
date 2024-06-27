@@ -15,7 +15,7 @@
         :class="[
           `${name}-month-cell`,
           { active: currentVal === col.value },
-          { 'to-month': currentVal !== col.value && colIndex === toDay.month() },
+          { 'to-month': currentVal !== col.value && colIndex === dayjs(toDay).month() },
         ]"
         @click.stop="handleSelect(col)">
         <span :class="[`${name}-month-cell-inner`]">{{ col.label }}</span>
@@ -26,6 +26,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, inject } from "vue";
+import dayjs from "dayjs";
 import { DatePickerContext, MonthCell, PanelType, dateInjectionKey } from "../types";
 import { useDayJs } from "../core";
 import { IconArrowLeftDoubleFill, IconArrowRightDoubleFill } from "birdpaper-icon";
@@ -72,6 +73,7 @@ export default defineComponent({
       handleChange,
       handleChangePicker,
       PanelType,
+      dayjs,
     };
   },
 });

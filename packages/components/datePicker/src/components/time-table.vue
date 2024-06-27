@@ -12,7 +12,7 @@
           :items="items"
           :item-size="28"
           v-slot="{ item }">
-          <div :class="[`${name}-col-cell`, { active: item === globalValue[index] }]">
+          <div :class="[`${name}-col-cell`, { active: item === globalValue[index] }]" @click="handleClick(index, item)">
             <span :class="`${name}-col-cell-inner`">{{ item }}</span>
           </div>
         </RecycleScroller>
@@ -46,12 +46,22 @@ const setNow = () => {
     const item = globalValue.value[i];
     scrollTo(i, item);
   }
-
-  handleSelect();
 };
 
-const handleSelect = () => {
-  // ctx.value.onSelect(globalValue.value.join(":"));
+const handleClick = (index: number, item: string) => {
+  globalValue.value[index] = item;
+  scrollTo(index, item);
+  setDefault();
+};
+const setDefault = () => {
+  for (let i = 0; i < globalValue.value.length; i++) {
+    const element = globalValue.value[i];
+
+    if (!element) {
+      globalValue.value[i] = defaultValue;
+      scrollTo(i);
+    }
+  }
 };
 
 /**
@@ -62,9 +72,9 @@ const handleSelect = () => {
 const scrollTo = (i: number, item: string = defaultValue) => typeRefs.value[i].scrollToItem(item);
 
 const getTime = () => {
-  // if (!globalValue.value) {
-  setNow();
-  // }
+  if (globalValue.value.filter((item: string) => !!item).length === 0) {
+    setNow();
+  }
   return globalValue.value.join(":");
 };
 
