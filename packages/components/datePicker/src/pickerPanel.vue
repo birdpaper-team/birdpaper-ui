@@ -5,7 +5,7 @@
     </div>
     <div :class="`${name}-footer`" v-if="ctx.showTime && currentTable === 'date'">
       <bp-button size="mini">此刻</bp-button>
-      <bp-button size="mini" type="primary" status="primary">确定</bp-button>
+      <bp-button size="mini" type="primary" status="primary" @click="onConfirm">确定</bp-button>
     </div>
   </div>
 </template>
@@ -31,4 +31,8 @@ ctx = inject(dateInjectionKey);
 const onChangePicker = (typeName: PanelType) => {
   currentTable.value = typeName;
 };
+
+const onConfirm = ()=>{
+  
+}
 </script>

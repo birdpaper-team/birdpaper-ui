@@ -71,14 +71,14 @@ export default defineComponent({
       currentVal.value = date.value;
       if (ctx.showTime) {
         const time = timeTableRef.value.getTime();
-        ctx.onSelect(currentVal.value + ` ${time}`, {}, true);
+        // ctx.onSelect(currentVal.value + ` ${time}`, {}, true);
         return;
       }
-      ctx.onSelect(currentVal.value, {}, true);
+      // ctx.onSelect(currentVal.value, {}, true);
     };
 
     const onTimeSelect = (time: string) => {
-      ctx.onSelect(currentVal.value + ` ${time}`, {}, true);
+      // ctx.onSelect(currentVal.value + ` ${time}`, {}, true);
     };
 
     /**
