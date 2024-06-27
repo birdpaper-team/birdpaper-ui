@@ -38,7 +38,7 @@
       <bp-button type="text" status="primary" @click="handleSelect({ value: toDay })"> 今天 </bp-button>
     </div>
   </div>
-  <time-table ref="timeTableRef" v-if="ctx.showTime"></time-table>
+  <time-table ref="timeTableRef" v-if="ctx.showTime" @on-select="onTimeSelect"></time-table>
 </template>
 
 <script lang="ts">
@@ -70,11 +70,15 @@ export default defineComponent({
     const handleSelect = (date: DayCell) => {
       currentVal.value = date.value;
       if (ctx.showTime) {
-        // console.log('currentVal.value: ', );
         const time = timeTableRef.value.getTime();
-        console.log("time: ", `${currentVal.value} ${time}`);
+        ctx.onSelect(currentVal.value + ` ${time}`, {}, true);
+        return;
       }
       ctx.onSelect(currentVal.value, {}, true);
+    };
+
+    const onTimeSelect = (time: string) => {
+      ctx.onSelect(currentVal.value + ` ${time}`, {}, true);
     };
 
     /**
@@ -110,6 +114,7 @@ export default defineComponent({
       handleChangePicker,
       PanelType,
       timeTableRef,
+      onTimeSelect
     };
   },
 });

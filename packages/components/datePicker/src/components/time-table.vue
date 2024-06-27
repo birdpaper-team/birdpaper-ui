@@ -36,6 +36,10 @@ const hourList = generateArray(24);
 const minuteList = generateArray(60);
 const secondList = generateArray(60);
 
+const emits = defineEmits<{
+  (e: "on-select", val: string): void;
+}>();
+
 const globalValue = ref<string[]>(["", "", ""]);
 /** 设置当前时间 */
 const setNow = () => {
@@ -52,6 +56,7 @@ const handleClick = (index: number, item: string) => {
   globalValue.value[index] = item;
   scrollTo(index, item);
   setDefault();
+  handleSelect();
 };
 const setDefault = () => {
   for (let i = 0; i < globalValue.value.length; i++) {
@@ -62,6 +67,10 @@ const setDefault = () => {
       scrollTo(i);
     }
   }
+};
+
+const handleSelect = () => {
+  emits("on-select", globalValue.value.join(":"));
 };
 
 /**
