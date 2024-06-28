@@ -1,7 +1,7 @@
 <template>
   <div :class="name">
     <div :class="`${name}-wrapper`">
-      <component :is="tableMap[currentTable]" @change-picker="onChangePicker"></component>
+      <component ref="tableRef" :is="tableMap[currentTable]" @change-picker="onChangePicker"></component>
     </div>
     <div :class="`${name}-footer`" v-if="ctx.showTime && currentTable === 'date'">
       <bp-button size="mini">此刻</bp-button>
@@ -28,11 +28,12 @@ const tableMap = {
 let ctx: DatePickerContext = null;
 ctx = inject(dateInjectionKey);
 
+const tableRef = ref();
 const onChangePicker = (typeName: PanelType) => {
   currentTable.value = typeName;
 };
 
 const onConfirm = ()=>{
-  
+  console.log(tableRef.value.getValue());
 }
 </script>
