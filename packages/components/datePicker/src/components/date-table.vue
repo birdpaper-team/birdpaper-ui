@@ -64,6 +64,7 @@ export default defineComponent({
     );
 
     const currentVal = ref(current.value && current.value.format(ctx.valueFormat));
+    const currentTimeVal = ref("");
     setDates(ctx.valueFormat);
 
     const timeTableRef = ref();
@@ -71,13 +72,15 @@ export default defineComponent({
       currentVal.value = date.value;
       if (ctx.showTime) {
         const time = timeTableRef.value.getTime();
+        currentTimeVal.value = time;
         // ctx.onSelect(currentVal.value + ` ${time}`, {}, true);
         return;
       }
-      // ctx.onSelect(currentVal.value, {}, true);
+      ctx.onSelect(currentVal.value, {}, true);
     };
 
     const onTimeSelect = (time: string) => {
+      currentTimeVal.value = time;
       // ctx.onSelect(currentVal.value + ` ${time}`, {}, true);
     };
 
@@ -98,6 +101,10 @@ export default defineComponent({
       emit("change-picker", typeName, val);
     };
 
+    const getValue = () => {
+      ctx.onSelect(`${currentVal.value} ${currentTimeVal.value}`, {}, true);
+    };
+
     return {
       ctx,
       toDay,
@@ -114,7 +121,8 @@ export default defineComponent({
       handleChangePicker,
       PanelType,
       timeTableRef,
-      onTimeSelect
+      onTimeSelect,
+      getValue,
     };
   },
 });
