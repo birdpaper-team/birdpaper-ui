@@ -89,5 +89,6 @@ const getTime = () => {
 
 defineExpose({
   getTime,
+  setNow
 });
 </script>

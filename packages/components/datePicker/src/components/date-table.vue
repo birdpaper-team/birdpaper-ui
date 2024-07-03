@@ -26,7 +26,7 @@
           :class="[
             `${name}-body-inner`,
             `day-cell-${col.type}`,
-            { active: ctx.modelValue.value !== '' && currentVal === col.value },
+            { active: (ctx.modelValue.value !== '' || ctx.showTime) && currentVal === col.value },
             { 'to-day': col.value === toDay },
           ]"
           @click="handleSelect(col)">
@@ -63,9 +63,9 @@ export default defineComponent({
       ctx.modelValue.value
     );
 
-    const currentVal = ref(current.value && current.value.format(ctx.valueFormat));
+    const currentVal = ref(current.value && current.value.format("YYYY-MM-DD"));
     const currentTimeVal = ref("");
-    setDates(ctx.valueFormat);
+    setDates("YYYY-MM-DD");
 
     const timeTableRef = ref();
     const handleSelect = (date: DayCell) => {
@@ -73,7 +73,6 @@ export default defineComponent({
       if (ctx.showTime) {
         const time = timeTableRef.value.getTime();
         currentTimeVal.value = time;
-        // ctx.onSelect(currentVal.value + ` ${time}`, {}, true);
         return;
       }
       ctx.onSelect(currentVal.value, {}, true);
@@ -81,7 +80,6 @@ export default defineComponent({
 
     const onTimeSelect = (time: string) => {
       currentTimeVal.value = time;
-      // ctx.onSelect(currentVal.value + ` ${time}`, {}, true);
     };
 
     /**
@@ -102,7 +100,17 @@ export default defineComponent({
     };
 
     const getValue = () => {
-      ctx.onSelect(`${currentVal.value} ${currentTimeVal.value}`, {}, true);
+      const val = `${currentVal.value} ${currentTimeVal.value}`;
+      ctx.onSelect(val, {}, true);
+
+      return val;
+    };
+
+    const setNow = () => {
+      currentVal.value = current.value && current.value.format("YYYY-MM-DD");
+
+      timeTableRef.value.setNow();
+      currentTimeVal.value = timeTableRef.value.getTime();
     };
 
     return {
@@ -110,6 +118,7 @@ export default defineComponent({
       toDay,
       current,
       currentVal,
+      currentTimeVal,
       name,
       weeks,
       months,
@@ -123,6 +132,7 @@ export default defineComponent({
       timeTableRef,
       onTimeSelect,
       getValue,
+      setNow,
     };
   },
 });
