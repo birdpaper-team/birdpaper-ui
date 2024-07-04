@@ -26,37 +26,31 @@
           :class="[
             `${name}-body-inner`,
             `day-cell-${col.type}`,
-            { active: currentVal === col.value },
-            { 'to-day': currentVal !== col.value && col.value === toDay.format(ctx.valueFormat) },
+            { active: (ctx.modelValue.value !== '' || ctx.showTime) && currentVal === col.value },
+            { 'to-day': col.value === toDay },
           ]"
-          @click="handleSelect(col)"
-        >
+          @click="handleSelect(col)">
           {{ col.label }}
         </span>
       </div>
     </div>
     <div v-if="!ctx.showTime" :class="`${name}-footer`">
-      <bp-button type="text" status="primary" @click="handleSelect({ value: toDay.format(ctx.valueFormat) })">
-        今天
-      </bp-button>
+      <bp-button type="text" status="primary" @click="handleSelect({ value: toDay })"> 今天 </bp-button>
     </div>
   </div>
+  <time-table ref="timeTableRef" v-if="ctx.showTime" @on-select="onTimeSelect"></time-table>
 </template>
 
 <script lang="ts">
 import { defineComponent, ref, inject } from "vue";
-import {
-  IconArrowLeftSLine,
-  IconArrowRightSLine,
-  IconArrowLeftDoubleFill,
-  IconArrowRightDoubleFill,
-} from "birdpaper-icon";
+import { IconArrowLeftSLine, IconArrowRightSLine, IconArrowLeftDoubleFill, IconArrowRightDoubleFill } from "birdpaper-icon";
 import { DatePickerContext, DayCell, PanelType, dateInjectionKey } from "../types";
 import { useDayJs } from "../core";
+import timeTable from "./time-table.vue";
 
 export default defineComponent({
   name: "DateTable",
-  components: { IconArrowLeftSLine, IconArrowRightSLine, IconArrowLeftDoubleFill, IconArrowRightDoubleFill },
+  components: { timeTable, IconArrowLeftSLine, IconArrowRightSLine, IconArrowLeftDoubleFill, IconArrowRightDoubleFill },
   emits: ["change-picker"],
   setup(props, { emit }) {
     const name = "bp-date-table";
@@ -64,16 +58,28 @@ export default defineComponent({
     let ctx: DatePickerContext = null;
     ctx = inject(dateInjectionKey);
 
-    const { toDay, current, currentMonth, currentYear, dates, setDates, changeMonth, changeYear, weeks, months } =
-      useDayJs(ctx.langs, ctx.modelValue.value);
+    const { toDay, current, currentMonth, currentYear, dates, setDates, changeMonth, changeYear, weeks, months } = useDayJs(
+      ctx.langs,
+      ctx.modelValue.value
+    );
 
-    const currentVal = ref(current.value && current.value.format(ctx.valueFormat));
+    const currentVal = ref(current.value && current.value.format("YYYY-MM-DD"));
+    const currentTimeVal = ref("");
+    setDates("YYYY-MM-DD");
 
-    setDates(ctx.valueFormat);
-
+    const timeTableRef = ref();
     const handleSelect = (date: DayCell) => {
       currentVal.value = date.value;
+      if (ctx.showTime) {
+        const time = timeTableRef.value.getTime();
+        currentTimeVal.value = time;
+        return;
+      }
       ctx.onSelect(currentVal.value, {}, true);
+    };
+
+    const onTimeSelect = (time: string) => {
+      currentTimeVal.value = time;
     };
 
     /**
@@ -93,11 +99,26 @@ export default defineComponent({
       emit("change-picker", typeName, val);
     };
 
+    const getValue = () => {
+      const val = `${currentVal.value} ${currentTimeVal.value}`;
+      ctx.onSelect(val, {}, true);
+
+      return val;
+    };
+
+    const setNow = () => {
+      currentVal.value = current.value && current.value.format("YYYY-MM-DD");
+
+      timeTableRef.value.setNow();
+      currentTimeVal.value = timeTableRef.value.getTime();
+    };
+
     return {
       ctx,
       toDay,
       current,
       currentVal,
+      currentTimeVal,
       name,
       weeks,
       months,
@@ -108,6 +129,10 @@ export default defineComponent({
       handleSelect,
       handleChangePicker,
       PanelType,
+      timeTableRef,
+      onTimeSelect,
+      getValue,
+      setNow,
     };
   },
 });

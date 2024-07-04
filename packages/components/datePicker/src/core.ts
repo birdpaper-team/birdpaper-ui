@@ -1,5 +1,5 @@
 import { DayCell, DayType, LangsType, MonthCell, YearCell } from "./types";
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import localeData from "dayjs/plugin/localeData";
 import "dayjs/locale/zh-cn";
 import { computed, ref } from "vue";
@@ -8,7 +8,7 @@ export const useDayJs = (lang: LangsType, modelValue: string) => {
   dayjs.locale(lang);
   dayjs.extend(localeData);
 
-  const toDay = dayjs();
+  const toDay = dayjs().format("YYYY-MM-DD");
   const current = ref(!modelValue ? dayjs() : dayjs(modelValue));
   const currentMonth = computed(() => current.value.month());
   const currentYear = computed(() => current.value.year());
@@ -39,7 +39,7 @@ export const useDayJs = (lang: LangsType, modelValue: string) => {
           type = "next";
         }
 
-        dates.value[row][col] = { type, value: value.format(valueFormat), label };
+        dates.value[row][col] = { type, value: value.format("YYYY-MM-DD"), label };
         sum++;
       }
     }

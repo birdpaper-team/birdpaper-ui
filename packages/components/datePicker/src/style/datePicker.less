@@ -20,6 +20,15 @@
     align-items: flex-start;
     justify-content: center;
   }
+
+  &-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 42px;
+    padding: 0 10px;
+    border-top: 1px solid @gary-4;
+  }
 }
 
 .bp-date-table,
@@ -153,7 +162,7 @@
         display: block;
         position: relative;
         left: 50%;
-        bottom: 2px;
+        bottom: 4px;
         width: 4px;
         height: 4px;
         margin-left: -2px;
@@ -312,6 +321,7 @@
     border-width: 1px;
 
     &-inner {
+      font-size: 14px;
       color: @gary-10;
       font-weight: bold;
     }
@@ -326,7 +336,7 @@
 
   &-time-col {
     width: 60px;
-    height: 236px;
+    height: 248px;
     padding: 4px 0;
     overflow-y: hidden !important;
 
