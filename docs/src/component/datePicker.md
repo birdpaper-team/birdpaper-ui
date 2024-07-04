@@ -12,9 +12,9 @@
 配合 `v-mdoel` 实现日期选择
 <demo-block src="example/datePicker/basic" stack-blitz-name="datepicker-basic"></demo-block>
 
-### 日期时间选择器
+### 带时间的选择器
 
-配合 `v-mdoel` 实现日期选择
+通过增加属性 `show-time` 实现日期时间选择
 <demo-block src="example/datePicker/show-time" stack-blitz-name="datepicker-show-time"></demo-block>
 
 ### 仅面板

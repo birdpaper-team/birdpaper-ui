@@ -35,6 +35,7 @@ import { defineComponent, PropType, provide, ref, watch } from "vue";
 import pickerPanel from "./pickerPanel.vue";
 import { IconCalendarLine } from "birdpaper-icon";
 import { dateInjectionKey, LangsType } from "./types";
+import dayjs from "dayjs";
 
 export default defineComponent({
   name: "DatePicker",
@@ -79,13 +80,8 @@ export default defineComponent({
       onSelect: (v: string, payload: any, closePopup = true) => {
         global_value.value = v;
 
-        if (props.showTime) {
-          emit("update:modelValue", global_value.value);
-          return;
-        }
-
         if (closePopup) showPopup.value = false;
-        emit("update:modelValue", global_value.value);
+        emit("update:modelValue", dayjs(global_value.value).format(props.valueFormat));
       },
     });
 
