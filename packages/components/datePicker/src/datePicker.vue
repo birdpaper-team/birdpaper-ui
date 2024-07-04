@@ -31,7 +31,7 @@
 
 <script lang="ts">
 import { InputSize } from "components/input/src/types";
-import { defineComponent, PropType, provide, ref, watch } from "vue";
+import { computed, defineComponent, PropType, provide, ref, watch } from "vue";
 import pickerPanel from "./pickerPanel.vue";
 import { IconCalendarLine } from "birdpaper-icon";
 import { dateInjectionKey, LangsType } from "./types";
@@ -57,7 +57,7 @@ export default defineComponent({
     /** 语言包 */
     langs: { type: String as PropType<LangsType>, default: "zh-cn" },
     /** 值格式 */
-    valueFormat: { type: String, default: "YYYY-MM-DD" },
+    valueFormat: { type: String },
     /** 隐藏触发器 */
     hideTrigger: { type: Boolean, default: false },
     /** 是否显示时间选择器 */
@@ -71,6 +71,9 @@ export default defineComponent({
 
     const showPopup = ref<boolean>(false);
     const global_value = ref<string>(props.modelValue || "");
+    const defaultFormatComputed = computed(() => {
+      return props.valueFormat ? props.valueFormat : props.showTime ? "YYYY-MM-DD HH:mm:ss" : "YYYY-MM-DD";
+    });
 
     provide(dateInjectionKey, {
       modelValue: global_value,
@@ -81,7 +84,7 @@ export default defineComponent({
         global_value.value = v;
 
         if (closePopup) showPopup.value = false;
-        emit("update:modelValue", dayjs(global_value.value).format(props.valueFormat));
+        emit("update:modelValue", dayjs(global_value.value).format(defaultFormatComputed.value));
       },
     });
 
