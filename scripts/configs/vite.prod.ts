@@ -5,6 +5,12 @@ import external from "../plugins/vite-plugin-external";
 import dts from "vite-plugin-dts";
 import vueExportHelper from "../plugins/vite-plugin-vue-export-helper";
 
+// const files = await glob('**/*.{js,ts,vue}', {
+//   cwd: vcElementPlusComponentsRoot,
+//   absolute: true,
+//   onlyFiles: true,
+// })
+
 const config: InlineConfig = {
   mode: "production",
   build: {
@@ -34,6 +40,7 @@ const config: InlineConfig = {
     // 开启lib模式，但不使用下面配置
     lib: {
       entry: "components/index.ts",
+      // entry: "components/index.ts",
       formats: ["es", "cjs"],
     },
   },

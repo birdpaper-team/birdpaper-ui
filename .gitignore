@@ -5,5 +5,3 @@ dist/
 es/
 lib/
 .idea/
-
-!scripts/dist/

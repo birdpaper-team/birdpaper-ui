@@ -8,6 +8,11 @@ const plugin_vue_jsx_1 = __importDefault(require("@vitejs/plugin-vue-jsx"));
 const vite_plugin_external_1 = __importDefault(require("../plugins/vite-plugin-external"));
 const vite_plugin_dts_1 = __importDefault(require("vite-plugin-dts"));
 const vite_plugin_vue_export_helper_1 = __importDefault(require("../plugins/vite-plugin-vue-export-helper"));
+// const files = await glob('**/*.{js,ts,vue}', {
+//   cwd: vcElementPlusComponentsRoot,
+//   absolute: true,
+//   onlyFiles: true,
+// })
 const config = {
     mode: "production",
     build: {
@@ -37,6 +42,7 @@ const config = {
         // 开启lib模式，但不使用下面配置
         lib: {
             entry: "components/index.ts",
+            // entry: "components/index.ts",
             formats: ["es", "cjs"],
         },
     },

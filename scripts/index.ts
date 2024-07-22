@@ -25,7 +25,7 @@ program
   .command("build:style")
   .description("build:style...")
   .action(async () => {
-    await buildStyle();
+    // await buildStyle();
   });
 
 program.parse(process.argv);

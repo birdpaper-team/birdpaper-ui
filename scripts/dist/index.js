@@ -17,7 +17,6 @@ const path_1 = __importDefault(require("path"));
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const commander_1 = require("commander");
 const buildComponent_1 = __importDefault(require("./buildComponent"));
-const buildStyle_1 = __importDefault(require("./buildStyle"));
 const program = new commander_1.Command();
 const packageContent = fs_extra_1.default.readFileSync(path_1.default.resolve(__dirname, "../package.json"), "utf8");
 const packageData = JSON.parse(packageContent);
@@ -33,7 +32,7 @@ program
     .command("build:style")
     .description("build:style...")
     .action(() => __awaiter(void 0, void 0, void 0, function* () {
-    yield (0, buildStyle_1.default)();
+    // await buildStyle();
 }));
 program.parse(process.argv);
 //# sourceMappingURL=index.js.map

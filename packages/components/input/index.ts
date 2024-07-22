@@ -13,3 +13,4 @@ const Input = Object.assign(_input, {
 
 export type InputInstance = InstanceType<typeof _input>;
 export default Input;
+export const BpInput = Input;

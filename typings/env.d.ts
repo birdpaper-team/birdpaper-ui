@@ -1,3 +1,20 @@
+import type { vShow } from "vue";
+
+declare global {
+  const process: {
+    env: {
+      NODE_ENV: string;
+    };
+  };
+
+  namespace JSX {
+    interface IntrinsicAttributes {
+      class?: any;
+      style?: any;
+    }
+  }
+}
+
 declare module '*.vue' {
   import { App, defineComponent } from 'vue'
   const component: ReturnType<typeof defineComponent> & {
@@ -16,15 +33,4 @@ declare module "@vue/runtime-core" {
   }
 }
 
-declare module '*.module.less' {
-  const classes: {
-    readonly [key: string]: string
-  }
-  export default classes
-  declare module '*.less'
-}
-
-declare module 'vue-virtual-scroller' {
-  const vis: any;
-  export default vis;
-}
+export {};

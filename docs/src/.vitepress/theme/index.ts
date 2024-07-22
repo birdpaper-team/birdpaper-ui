@@ -1,3 +1,7 @@
+import BirdpaperUI from "birdpaper-ui";
+// import BirdpaperIcon from "birdpaper-icon";
+// import "birdpaper-ui/components/index.less";
+
 // .vitepress/theme/index.js
 import DefaultTheme from "vitepress/theme";
 import "./var.less";
@@ -12,9 +16,6 @@ import { EnhanceAppContext } from "vitepress";
 import DemoBlock from "../../../components/demo-block";
 import TableBlock from "../../../components/table-block";
 
-import BirdpaperUI from "birdpaper-ui";
-// import BirdpaperIcon from "birdpaper-icon";
-import "birdpaper-ui/components/index.less";
 
 import "remixicon/fonts/remixicon.css";
 

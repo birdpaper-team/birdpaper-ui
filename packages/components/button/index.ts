@@ -14,3 +14,4 @@ const Button = Object.assign(_button, {
 
 export type ButtonInstance = InstanceType<typeof _button>;
 export default Button;
+export const BpButton = Button;

@@ -25,11 +25,14 @@
   "author": "木亦Sam",
   "license": "MIT",
   "dependencies": {
+    "@birdpaper-ui/components": "workspace:*",
+    "@vueuse/components": "^10.11.0",
+    "@vueuse/core": "^10.1.2",
     "async-validator": "^4.2.5",
     "birdpaper-icon": "^0.1.0",
     "dayjs": "^1.11.10",
     "vue-virtual-scroller": "2.0.0-beta.8",
-    "vue": "^3.3.2"
+    "vue": "^3.4.33"
   },
   "devDependencies": {
     "@vitejs/plugin-vue-jsx": "^3.0.1",
