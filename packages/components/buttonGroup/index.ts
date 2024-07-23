@@ -12,3 +12,4 @@ const ButtonGroup = Object.assign(_buttonGroup, {
 
 export type ButtonGroupInstance = InstanceType<typeof _buttonGroup>;
 export default ButtonGroup;
+export const BpButtonGroup = ButtonGroup;

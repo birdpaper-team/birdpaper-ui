@@ -12,3 +12,4 @@ const Checkbox = Object.assign(_checkbox, {
 
 export type CheckboxInstance = InstanceType<typeof _checkbox>;
 export default Checkbox;
+export const BpCheckbox = Checkbox;

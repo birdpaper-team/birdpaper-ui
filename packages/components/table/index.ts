@@ -16,3 +16,4 @@ const Table = Object.assign(_table, {
 export type TableInstance = InstanceType<typeof _table>;
 export type TableColumnsInstance = InstanceType<typeof _tableColumn>;
 export default Table;
+export const BpTable = Table;

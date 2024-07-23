@@ -12,3 +12,4 @@ const Tooltip = Object.assign(tooltip, {
 
 export type TooltipInstance = InstanceType<typeof tooltip>;
 export default Tooltip;
+export const BpTooltip = Tooltip;

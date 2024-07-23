@@ -1,6 +1,6 @@
 import BirdpaperUI from "birdpaper-ui";
 // import BirdpaperIcon from "birdpaper-icon";
-// import "birdpaper-ui/components/index.less";
+import "../../../../packages/components/index.less";
 
 // .vitepress/theme/index.js
 import DefaultTheme from "vitepress/theme";
