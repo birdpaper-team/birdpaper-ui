@@ -15,7 +15,7 @@
       "birdpaper-ui": ["../packages/birdpaper-ui"],
       "~/*": ["./src/.vitepress/*"]
     },
-    "types": ["vite/client"]
+    "types": ["vite/client", "../typings/components"]
   },
   "include": ["**/*", "./src/.vitepress/**/*"],
   "exclude": ["node_modules"]

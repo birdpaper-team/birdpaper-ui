@@ -6,11 +6,6 @@
     "lib": ["ES2018", "DOM", "DOM.Iterable"],
     "skipLibCheck": true
   },
-  "include": ["packages", "typings/env.d.ts"],
-  "exclude": [
-    "node_modules",
-    "**/dist",
-    "**/__tests__/**/*",
-    "**/*.md"
-  ]
+  "include": ["packages", "typings/components.d.ts", "typings/env.d.ts"],
+  "exclude": ["node_modules", "**/dist", "**/__tests__/**/*", "**/*.md"]
 }

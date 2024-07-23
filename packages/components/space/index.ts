@@ -12,3 +12,4 @@ const Space = Object.assign(_space, {
 
 export type SpaceInstance = InstanceType<typeof _space>;
 export default Space;
+export const BpSpace = Space;
