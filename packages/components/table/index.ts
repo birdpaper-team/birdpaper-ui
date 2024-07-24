@@ -8,8 +8,8 @@ _tableColumn.name = getComponentsPrefix() + _tableColumn.name;
 
 const Table = Object.assign(_table, {
   install: (app: App) => {
-    app.component(_table.name, _table);
-    app.component(_tableColumn.name, _tableColumn);
+    app.component(_table.name as string, _table);
+    app.component(_tableColumn.name as string, _tableColumn);
   },
 });
 

@@ -13,6 +13,8 @@ const vite_plugin_vue_export_helper_1 = __importDefault(require("../plugins/vite
 //   absolute: true,
 //   onlyFiles: true,
 // })
+// const entry = "../../packages/birdpaper-ui/index.ts";
+const entry = "../packages/components/index.ts";
 const config = {
     mode: "production",
     build: {
@@ -21,7 +23,7 @@ const config = {
         emptyOutDir: false,
         minify: false,
         rollupOptions: {
-            input: ["components/index.ts"],
+            input: [entry],
             output: [
                 {
                     format: "es",
@@ -41,8 +43,7 @@ const config = {
         },
         // 开启lib模式，但不使用下面配置
         lib: {
-            entry: "components/index.ts",
-            // entry: "components/index.ts",
+            entry: entry,
             formats: ["es", "cjs"],
         },
     },

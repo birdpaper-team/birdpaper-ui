@@ -7,7 +7,7 @@ const plugin_vue_1 = __importDefault(require("@vitejs/plugin-vue"));
 const plugin_vue_jsx_1 = __importDefault(require("@vitejs/plugin-vue-jsx"));
 const vite_plugin_dts_1 = __importDefault(require("vite-plugin-dts"));
 exports.default = (type) => {
-    const entry = "components/index.ts";
+    const entry = "../../packages/birdpaper-ui/index.ts";
     const entryFileName = "birdpaper-ui";
     const name = "BirdpaperUI";
     return {

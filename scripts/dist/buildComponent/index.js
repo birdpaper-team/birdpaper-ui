@@ -15,16 +15,16 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const fs_extra_1 = __importDefault(require("fs-extra"));
 const path_1 = __importDefault(require("path"));
 const vite_1 = require("vite");
-const vite_prod_umd_1 = __importDefault(require("../configs/vite.prod.umd"));
+const vite_prod_1 = __importDefault(require("../configs/vite.prod"));
 function run({ umd = false }) {
     return __awaiter(this, void 0, void 0, function* () {
-        // await fs.emptyDir(path.resolve(process.cwd(), "../es"));
-        // await fs.emptyDir(path.resolve(process.cwd(), "../lib"));
-        // await build(config);
-        if (umd) {
-            yield fs_extra_1.default.emptyDir(path_1.default.resolve(process.cwd(), "../dist"));
-            yield (0, vite_1.build)((0, vite_prod_umd_1.default)("component"));
-        }
+        yield fs_extra_1.default.emptyDir(path_1.default.resolve(process.cwd(), "../es"));
+        yield fs_extra_1.default.emptyDir(path_1.default.resolve(process.cwd(), "../lib"));
+        yield (0, vite_1.build)(vite_prod_1.default);
+        // if (umd) {
+        //   await fs.emptyDir(path.resolve(process.cwd(), "../dist"));
+        //   await build(getUmdConfig("component"));
+        // }
     });
 }
 exports.default = run;

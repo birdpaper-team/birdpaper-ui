@@ -4,7 +4,7 @@ import vueJsx from "@vitejs/plugin-vue-jsx";
 import dts from "vite-plugin-dts";
 
 export default (type: "component"): InlineConfig => {
-  const entry = "components/index.ts";
+  const entry = "../../packages/birdpaper-ui/index.ts";
   const entryFileName = "birdpaper-ui";
   const name = "BirdpaperUI";
 

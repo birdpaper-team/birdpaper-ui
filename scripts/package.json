@@ -5,12 +5,14 @@
   "main": "dist/index.js",
   "bin": "dist/index.js",
   "scripts": {
+    "start": "bp-vue-scripts build:components",
     "dev": "tsc --watch",
     "build": "tsc"
   },
   "author": "Sam",
   "license": "MIT",
   "dependencies": {
+    "bp-vue-scripts": "workspace:bp-vue-scripts@*",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-typescript": "^7.14.5",
     "@vue/babel-plugin-jsx": "^1.0.6",

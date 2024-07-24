@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "docs": "pnpm run -C docs dev",
-    "build": "pnpm run -C packages build",
+    "build": "pnpm run -C scripts start",
     "scripts:dev": "pnpm run -C scripts dev",
     "scripts:build": "pnpm run -C scripts build",
     "build:docs": "pnpm run -C docs build",

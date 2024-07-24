@@ -6,7 +6,7 @@ _checkbox.name = getComponentsPrefix() + _checkbox.name;
 
 const Checkbox = Object.assign(_checkbox, {
   install: (app: App) => {
-    app.component(_checkbox.name, _checkbox);
+    app.component(_checkbox.name as string, _checkbox);
   },
 });
 

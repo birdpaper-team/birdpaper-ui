@@ -1,7 +1,7 @@
-import installer from './defaults'
+// import installer from './defaults'
 export * from '@birdpaper-ui/components'
 
-export const install = installer.install
-export default installer
+// export const install = installer.install
+// export default installer
 
-export { default as dayjs } from 'dayjs'
+// export { default as dayjs } from 'dayjs'
