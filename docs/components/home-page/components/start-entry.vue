@@ -13,7 +13,7 @@
           <p>了解设计指引和规范，获取第一手组件库设计资源，帮助设计师快速输出视觉效果</p>
         </div>
         <div class="option">
-          <bp-button type="dashed" size="large" block disabled>稍晚推出</bp-button>
+          <bp-button type="dashed" size="large" block disabled>在v3推出</bp-button>
         </div>
       </div>
 
