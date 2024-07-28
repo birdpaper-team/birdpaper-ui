@@ -37,7 +37,7 @@ export const quickEntryList = [
     icon: "ri-palette-line",
     intro: "查看或下载相关设计资源，帮助设计师快速输出页面视觉效果，提高团队协作效率。",
     action: {
-      btnName: "稍晚推出",
+      btnName: "在v3推出",
       link: "",
       disabled: true,
     },

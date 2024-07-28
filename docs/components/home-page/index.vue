@@ -1,5 +1,5 @@
 <template>
-  <top-notice />
+  <!-- <top-notice /> -->
   <div class="home-page">
     <banner />
     <quick-entry />
@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import topNotice from "./components/top-notice.vue";
+// import topNotice from "./components/top-notice.vue";
 import banner from "./components/banner.vue";
 import quickEntry from "./components/quick-entry.vue";
 import stackBlock from "./components/stack-block.vue";

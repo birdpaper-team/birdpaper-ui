@@ -44,9 +44,7 @@ There are currently two sites that can access the project documents, and for bet
 
 ### Product planning
 
-About the function of the project plan, version requirements, scheduling and other information, you can access [产品计划](https://birdpaper.feishu.cn/base/XuwfbzYJZaXsQ4shv6rcl1J4nNb) to understand; You can also submit feedback and defects, I will keep an eye on and follow up.
-
-I sincerely hope that you can participate in the construction of the project, Submit by [提交反馈](https://birdpaper.feishu.cn/share/base/form/shrcn5frnnnGQ8srrudH9wV0TMh) or [Github Issues](https://github.com/birdpaper-team/birdpaper-ui/issues)
+I sincerely hope that you can participate in the construction of the project, Submit by [Github Issues](https://github.com/birdpaper-team/birdpaper-ui/issues)
 
 ## License
 
