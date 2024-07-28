@@ -19,6 +19,9 @@
           <bp-button @click="handleClick('git')" status="normal" type="normal">
             {{ _data.btn_text.git }}
           </bp-button>
+          <bp-button @click="handleClick('v3')" status="normal" type="dashed">
+            下一版本：v3.x
+          </bp-button>
         </bp-space>
       </div>
     </div>

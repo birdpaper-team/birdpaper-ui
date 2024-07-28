@@ -7,15 +7,16 @@
       </bp-select>
     </div>
 
-    <code>birdpaper-ui</code> 遵循 Semver 语义化版本规范。如果你想了解该项目的开发计划，可以访问
-    <bp-link @click="handleClick">产品计划</bp-link>
-    。
+    <code>birdpaper-ui</code> 遵循 Semver 语义化版本规范。
+    <br />
+    <br />
+    <br />
+    <code>2.x</code> 的更新将告一段落，请期待后续<code>3.x</code>的到来。
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { eventTrack, goToLink } from "../util/helper";
 import { minorVersionList } from "./minor-version";
 import { useRoute, useRouter } from "vitepress";
 
@@ -34,11 +35,4 @@ const currentMinor = ref<string>(route.path.split('/')[3] || minorVersionList[0]
 const onChange = (v: string) => {
   router.go(`/guide/changelog/${v}`);
 }
-
-const handleClick = () => {
-  const url = "https://birdpaper.feishu.cn/base/XuwfbzYJZaXsQ4shv6rcl1J4nNb";
-
-  eventTrack("feishu_product_plan");
-  return goToLink(url);
-};
 </script>
