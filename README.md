@@ -21,7 +21,7 @@
   </a>
 </p>
 
-birdpaper-ui for v3 (Blud) is developing.
+birdpaper-ui for v3 (Blue) is developing.
 
 ## License
 
