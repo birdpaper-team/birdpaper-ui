@@ -4,8 +4,6 @@ module.exports = {
   alias: { fd: 'docs: fix typos' },
   messages: {
     type: 'Select the type of change that you\'re committing:',
-    scope: 'Denote the SCOPE of this change (optional):',
-    customScope: 'Denote the SCOPE of this change:',
     subject: 'Write a SHORT, IMPERATIVE tense description of the change:\n',
     body: 'Provide a LONGER description of the change (optional). Use "|" to break new line:\n',
     breaking: 'List any BREAKING CHANGES (optional). Use "|" to break new line:\n',
@@ -29,12 +27,14 @@ module.exports = {
     { value: 'chore', name: 'chore:    Other changes that don\'t modify src or test files', emoji: ':hammer:' },
     { value: 'revert', name: 'revert:   Reverts a previous commit', emoji: ':rewind:' }
   ],
-  useEmoji: false,
-  emojiAlign: 'center',
-  useAI: false,
-  aiNumber: 1,
+  useEmoji: true,
+  emojiAlign: 'left',
   themeColorCode: '',
-  scopes: [],
+  scopes: [
+    { name: "docs" },
+    { name: "packages" },
+    { name: "root" },
+  ],
   allowCustomScopes: true,
   allowEmptyScopes: true,
   customScopesAlign: 'bottom',
