@@ -7,7 +7,8 @@
     "docs"
   ],
   "scripts": {
-    "cz": "czg emoji"
+    "cz": "czg emoji",
+    "docs:dev": "pnpm run -C docs dev"
   },
   "peerDependencies": {
     "vue": "^3.4.0"

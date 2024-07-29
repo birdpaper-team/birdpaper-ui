@@ -5,11 +5,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vitepress dev src --port 8081 --host --base /",
+    "build": "vitepress build src --base /birdpaper-ui/",
+    "build:root": "vitepress build src --base /",
+    "preview": "vitepress preview src --port 8080"
   },
   "keywords": [],
   "author": "",
   "devDependencies": {
+    "@nolebase/vitepress-plugin-enhanced-readabilities": "^2.3.0",
+    "vite": "^4.2.1",
     "vitepress": "^1.3.1"
   }
 }
