@@ -1,6 +1,6 @@
 <template>
   <DefaultTheme.Layout>
-    <template #home-features-after> </template>
+    <template #home-features-after> <home-page></home-page> </template>
     <template #nav-bar-content-after>
       <NolebaseEnhancedReadabilitiesMenu />
     </template>
@@ -16,4 +16,5 @@ import {
   NolebaseEnhancedReadabilitiesMenu,
   NolebaseEnhancedReadabilitiesScreenMenu,
 } from "@nolebase/vitepress-plugin-enhanced-readabilities/client";
+import HomePage from "../components/home-page.vue";
 </script>

@@ -2,6 +2,7 @@ import DefaultTheme from "vitepress/theme";
 import Layout from "./layout.vue";
 import theme from "vitepress/theme";
 import type { Theme as ThemeConfig } from "vitepress";
+import "uno.css";
 
 import "@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css";
 
