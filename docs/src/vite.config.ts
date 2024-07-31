@@ -5,9 +5,18 @@ export default async () => {
   const UnoCSS = (await import("unocss/vite")).default;
 
   return defineConfig({
-    plugins: [UnoCSS() as PluginOption, vueJsx()],
+    plugins: [vueJsx(), UnoCSS() as PluginOption],
     optimizeDeps: {
-      exclude: ["@nolebase/vitepress-plugin-enhanced-readabilities/client"],
+      exclude: [
+        "@nolebase/vitepress-plugin-enhanced-readabilities/client",
+        "vitepress",
+      ],
+    },
+    ssr: {
+      noExternal: [
+        "@nolebase/vitepress-plugin-enhanced-readabilities",
+        "@nolebase/vitepress-plugin-highlight-targeted-heading",
+      ],
     },
   });
 };

@@ -11,10 +11,12 @@
 </template>
 
 <script setup lang="ts">
-import DefaultTheme from "vitepress/theme";
 import {
   NolebaseEnhancedReadabilitiesMenu,
   NolebaseEnhancedReadabilitiesScreenMenu,
 } from "@nolebase/vitepress-plugin-enhanced-readabilities/client";
+import DefaultTheme from "vitepress/theme";
 import HomePage from "../components/home-page.vue";
+
+import "@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css";
 </script>

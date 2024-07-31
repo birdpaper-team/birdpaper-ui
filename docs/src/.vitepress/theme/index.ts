@@ -1,18 +1,14 @@
 import DefaultTheme from "vitepress/theme";
-import Layout from "./layout.vue";
-import theme from "vitepress/theme";
-import type { Theme as ThemeConfig } from "vitepress";
+import Layout from "./Layout.vue";
+import Theme from "vitepress/theme";
+import type { EnhanceAppContext } from "vitepress";
 
 import "uno.css";
-import "@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css";
 
-export const Theme: ThemeConfig = {
-  ...theme,
+export default {
+  ...Theme,
   Layout,
   extends: DefaultTheme,
-  enhanceApp({ app }) {
-    // app.use(NolebaseEnhancedReadabilitiesPlugin);
+  enhanceApp({ app }: EnhanceAppContext) {
   },
 };
-
-export default Theme;

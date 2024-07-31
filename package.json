@@ -9,7 +9,9 @@
   "scripts": {
     "cz": "czg emoji",
     "lint": "oxlint -D correctness -W suspicious",
-    "docs:dev": "pnpm run -C docs dev"
+    "docs:dev": "pnpm run -C docs dev",
+    "docs:build": "pnpm run -C docs build",
+    "docs:build:root": "pnpm run -C docs build:root"
   },
   "peerDependencies": {
     "vue": "^3.4.0"
@@ -25,8 +27,8 @@
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.19.25",
     "@unocss/reset": "^0.61.7",
-    "@vitejs/plugin-vue": "^2.3.3",
-    "@vitejs/plugin-vue-jsx": "^1.3.10",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@vitejs/plugin-vue-jsx": "^4.0.0",
     "@vitest/coverage-v8": "^1.6.0",
     "@vitest/ui": "1.6.0",
     "@vue/test-utils": "^2.0.0",
@@ -41,6 +43,7 @@
     "typescript": "^4.7.4",
     "unocss": "^0.61.7",
     "unplugin-vue-macros": "^2.7.11",
+    "vite": "^5.3.5",
     "vitest": "1.6.0",
     "vue": "^3.4.34",
     "vue-router": "^4.0.16",
