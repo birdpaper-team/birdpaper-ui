@@ -11,7 +11,8 @@
     "lint": "oxlint -D correctness -W suspicious",
     "docs:dev": "pnpm run -C docs dev",
     "docs:build": "pnpm run -C docs build",
-    "docs:build:root": "pnpm run -C docs build:root"
+    "docs:build:root": "pnpm run -C docs build:root",
+    "docs:preview": "pnpm run -C docs preview"
   },
   "peerDependencies": {
     "vue": "^3.4.0"
