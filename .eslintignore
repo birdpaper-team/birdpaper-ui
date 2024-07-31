@@ -1,0 +1,7 @@
+node_modules
+dist
+pnpm-lock.yaml
+docs/components.d.ts
+coverage
+docs/.vitepress/i18n/*
+!.*

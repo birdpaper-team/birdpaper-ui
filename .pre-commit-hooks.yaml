@@ -1,0 +1,6 @@
+repos:
+  - repo: https://github.com/oxc-project/mirrors-oxlint
+    rev: v0.0.0 # change to the latest version
+    hooks:
+      - id: oxlint
+        verbose: true
