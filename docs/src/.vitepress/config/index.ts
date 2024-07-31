@@ -4,12 +4,12 @@ import { locales } from "./locales/index";
 const config: import("vitepress").UserConfig = {
   lastUpdated: false,
   cleanUrls: true,
-  appearance: false,
+  appearance: true,
   locales,
   head,
   themeConfig: {
     logo: "https://cos.birdpaper.design/birdpaper-ui/v2/public/birdpaper-ui_logo_text.svg",
-    siteTitle: "",
+    siteTitle: false,
     outline: "deep",
     socialLinks: [
       { icon: "npm", link: "https://www.npmjs.com/package/birdpaper-ui" },
@@ -20,7 +20,7 @@ const config: import("vitepress").UserConfig = {
     ],
     search: {
       provider: "local",
-    },
+    }
   },
   markdown: {
     theme: "material-theme",

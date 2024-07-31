@@ -4,9 +4,9 @@ import { sidebar } from "./sidebar";
 export default {
   label: "English",
   lang: "en",
-  title: "小纸鹤-BirdpaperUI",
-  titleTemplate: "基于Vue3的UI组件库",
-  description: "基于Vue3的UI组件库",
+  title: "Birdpaper UI",
+  titleTemplate: "A Vue UI component library",
+  description: "A UI component library based on Vue",
   themeConfig: {
     nav: nav,
     siteTitle: "",
