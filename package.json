@@ -53,6 +53,6 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,mjs,cjs,jsx,ts,mts,cts,tsx,vue,astro,svelte}": "oxlint"
+    "*.{vue,js,ts,jsx,tsx,md,json}": "oxlint --fix"
   }
 }

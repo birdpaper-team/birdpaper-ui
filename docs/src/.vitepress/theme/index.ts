@@ -3,7 +3,6 @@ import Layout from "./layout.vue";
 import theme from "vitepress/theme";
 import type { Theme as ThemeConfig } from "vitepress";
 
-lat abstract;
 import "uno.css";
 import "@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css";
 
