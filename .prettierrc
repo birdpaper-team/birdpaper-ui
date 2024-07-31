@@ -1,0 +1,12 @@
+{
+  "semi": true,
+  "singleQuote": false,
+  "overrides": [
+    {
+      "files": ".prettierrc",
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
+}

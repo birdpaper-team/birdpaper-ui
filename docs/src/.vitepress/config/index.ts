@@ -13,7 +13,10 @@ const config: import("vitepress").UserConfig = {
     outline: "deep",
     socialLinks: [
       { icon: "npm", link: "https://www.npmjs.com/package/birdpaper-ui" },
-      { icon: "github", link: "https://github.com/birdpaper-team/birdpaper-ui" },
+      {
+        icon: "github",
+        link: "https://github.com/birdpaper-team/birdpaper-ui",
+      },
     ],
     search: {
       provider: "local",
