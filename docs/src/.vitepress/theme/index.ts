@@ -1,5 +1,5 @@
 import DefaultTheme from "vitepress/theme";
-import Layout from "./Layout.vue";
+import Layout from "./layout.vue";
 import Theme from "vitepress/theme";
 import type { EnhanceAppContext } from "vitepress";
 
