@@ -25,7 +25,6 @@
   "devDependencies": {
     "@pnpm/find-workspace-packages": "^4.0.16",
     "@pnpm/types": "^8.4.0",
-    "@types": "link:@types",
     "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.19.25",
     "@unocss/reset": "^0.61.7",

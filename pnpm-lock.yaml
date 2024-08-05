@@ -24,9 +24,6 @@ importers:
       '@pnpm/types':
         specifier: ^8.4.0
         version: 8.10.0
-      '@types':
-        specifier: link:@types
-        version: link:@types
       '@types/fs-extra':
         specifier: ^9.0.13
         version: 9.0.13
