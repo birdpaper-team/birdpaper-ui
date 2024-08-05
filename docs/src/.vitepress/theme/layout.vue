@@ -16,7 +16,7 @@ import {
   NolebaseEnhancedReadabilitiesScreenMenu,
 } from "@nolebase/vitepress-plugin-enhanced-readabilities/client";
 import DefaultTheme from "vitepress/theme";
-import HomePage from "../components/home-page.vue";
+import HomePage from "../../components/home-page.vue";
 
 import "@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css";
 </script>
