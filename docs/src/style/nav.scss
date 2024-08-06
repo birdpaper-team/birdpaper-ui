@@ -1,4 +1,82 @@
+@use "./var";
+
 .VPNav {
+  .text,
+  .VPLink {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--bp-gary-9);
+  }
+
+  .VPMenu {
+    border-radius: 10px 8px;
+    padding: 10px;
+
+    .items {
+      .VPMenuLink {
+        .VPLink {
+          font-weight: 400;
+          padding: 0 10px;
+          color: var(--bp-gary-9);
+
+          &:hover {
+            background-color: var(--bp-gary-2);
+            color: var(--bp-gary-10);
+          }
+        }
+      }
+    }
+  }
+
+  .VPSocialLinks {
+    .VPSocialLink {
+      color: var(--bp-gary-8);
+    }
+  }
+
+  .VPFlyout {
+    .button {
+      color: var(--bp-gary-8);
+    }
+  }
+
+  .VPSwitch {
+    border: 1px solid var(--bp-gary-3);
+    background-color: var(--bp-gary-2);
+
+    .check {
+      background-color: var(--bp-gary-0);
+    }
+
+    &:hover {
+      border-color: var(--bp-gary-3);
+    }
+  }
+
+  .VPNavBarSearch {
+    .DocSearch-Button {
+      border: none;
+      background-color: var(--bp-gary-0);
+      transition: all .2s ease;
+      
+      &:hover {
+        background-color: var(--bp-gary-1);
+        transition: all .2s ease;
+      }
+    }
+    
+    .DocSearch-Button-Container {
+      span {
+        font-weight: 400;
+        color: var(--bp-gary-5);
+      }
+    }
+
+    .DocSearch-Button-Keys{
+      opacity: .8;
+    }
+  }
+
   .divider {
     height: 0.5px;
 

@@ -114,63 +114,64 @@
   --bp-gary-dark-8: #dfdfdf;
   --bp-gary-dark-9: #f6f6f6;
   --bp-gary-dark-10: #ffffff;
+}
 
-  .dark {
-    --bp-primary-1: var(--bp-primary-dark-1);
-    --bp-primary-2: var(--bp-primary-dark-2);
-    --bp-primary-3: var(--bp-primary-dark-3);
-    --bp-primary-4: var(--bp-primary-dark-4);
-    --bp-primary-5: var(--bp-primary-dark-5);
-    --bp-primary-6: var(--bp-primary-dark-6);
-    --bp-primary-7: var(--bp-primary-dark-7);
-    --bp-primary-8: var(--bp-primary-dark-8);
-    --bp-primary-9: var(--bp-primary-dark-9);
-    --bp-primary-10: var(--bp-primary-dark-10);
+.dark {
+  --bp-primary-1: var(--bp-primary-dark-1);
+  --bp-primary-2: var(--bp-primary-dark-2);
+  --bp-primary-3: var(--bp-primary-dark-3);
+  --bp-primary-4: var(--bp-primary-dark-4);
+  --bp-primary-5: var(--bp-primary-dark-5);
+  --bp-primary-6: var(--bp-primary-dark-6);
+  --bp-primary-7: var(--bp-primary-dark-7);
+  --bp-primary-8: var(--bp-primary-dark-8);
+  --bp-primary-9: var(--bp-primary-dark-9);
+  --bp-primary-10: var(--bp-primary-dark-10);
 
-    --bp-warning-1: var(--bp-warning-dark-1);
-    --bp-warning-2: var(--bp-warning-dark-2);
-    --bp-warning-3: var(--bp-warning-dark-3);
-    --bp-warning-4: var(--bp-warning-dark-4);
-    --bp-warning-5: var(--bp-warning-dark-5);
-    --bp-warning-6: var(--bp-warning-dark-6);
-    --bp-warning-7: var(--bp-warning-dark-7);
-    --bp-warning-8: var(--bp-warning-dark-8);
-    --bp-warning-9: var(--bp-warning-dark-9);
-    --bp-warning-10: var(--bp-warning-dark-10);
+  --bp-warning-1: var(--bp-warning-dark-1);
+  --bp-warning-2: var(--bp-warning-dark-2);
+  --bp-warning-3: var(--bp-warning-dark-3);
+  --bp-warning-4: var(--bp-warning-dark-4);
+  --bp-warning-5: var(--bp-warning-dark-5);
+  --bp-warning-6: var(--bp-warning-dark-6);
+  --bp-warning-7: var(--bp-warning-dark-7);
+  --bp-warning-8: var(--bp-warning-dark-8);
+  --bp-warning-9: var(--bp-warning-dark-9);
+  --bp-warning-10: var(--bp-warning-dark-10);
 
-    --bp-success-1: var(--bp-success-dark-1);
-    --bp-success-2: var(--bp-success-dark-2);
-    --bp-success-3: var(--bp-success-dark-3);
-    --bp-success-4: var(--bp-success-dark-4);
-    --bp-success-5: var(--bp-success-dark-5);
-    --bp-success-6: var(--bp-success-dark-6);
-    --bp-success-7: var(--bp-success-dark-7);
-    --bp-success-8: var(--bp-success-dark-8);
-    --bp-success-9: var(--bp-success-dark-9);
-    --bp-success-10: var(--bp-success-dark-10);
+  --bp-success-1: var(--bp-success-dark-1);
+  --bp-success-2: var(--bp-success-dark-2);
+  --bp-success-3: var(--bp-success-dark-3);
+  --bp-success-4: var(--bp-success-dark-4);
+  --bp-success-5: var(--bp-success-dark-5);
+  --bp-success-6: var(--bp-success-dark-6);
+  --bp-success-7: var(--bp-success-dark-7);
+  --bp-success-8: var(--bp-success-dark-8);
+  --bp-success-9: var(--bp-success-dark-9);
+  --bp-success-10: var(--bp-success-dark-10);
 
-    --bp-danger-1: var(--bp-danger-dark-1);
-    --bp-danger-2: var(--bp-danger-dark-2);
-    --bp-danger-3: var(--bp-danger-dark-3);
-    --bp-danger-4: var(--bp-danger-dark-4);
-    --bp-danger-5: var(--bp-danger-dark-5);
-    --bp-danger-6: var(--bp-danger-dark-6);
-    --bp-danger-7: var(--bp-danger-dark-7);
-    --bp-danger-8: var(--bp-danger-dark-8);
-    --bp-danger-9: var(--bp-danger-dark-9);
-    --bp-danger-10: var(--bp-danger-dark-10);
+  --bp-danger-1: var(--bp-danger-dark-1);
+  --bp-danger-2: var(--bp-danger-dark-2);
+  --bp-danger-3: var(--bp-danger-dark-3);
+  --bp-danger-4: var(--bp-danger-dark-4);
+  --bp-danger-5: var(--bp-danger-dark-5);
+  --bp-danger-6: var(--bp-danger-dark-6);
+  --bp-danger-7: var(--bp-danger-dark-7);
+  --bp-danger-8: var(--bp-danger-dark-8);
+  --bp-danger-9: var(--bp-danger-dark-9);
+  --bp-danger-10: var(--bp-danger-dark-10);
 
-    --bp-gary-1: var(--bp-gary-dark-1);
-    --bp-gary-2: var(--bp-gary-dark-2);
-    --bp-gary-3: var(--bp-gary-dark-3);
-    --bp-gary-4: var(--bp-gary-dark-4);
-    --bp-gary-5: var(--bp-gary-dark-5);
-    --bp-gary-6: var(--bp-gary-dark-6);
-    --bp-gary-7: var(--bp-gary-dark-7);
-    --bp-gary-8: var(--bp-gary-dark-8);
-    --bp-gary-9: var(--bp-gary-dark-9);
-    --bp-gary-10: var(--bp-gary-dark-10);
-  }
+  --bp-gary-0: var(--bp-gary-dark-0);
+  --bp-gary-1: var(--bp-gary-dark-1);
+  --bp-gary-2: var(--bp-gary-dark-2);
+  --bp-gary-3: var(--bp-gary-dark-3);
+  --bp-gary-4: var(--bp-gary-dark-4);
+  --bp-gary-5: var(--bp-gary-dark-5);
+  --bp-gary-6: var(--bp-gary-dark-6);
+  --bp-gary-7: var(--bp-gary-dark-7);
+  --bp-gary-8: var(--bp-gary-dark-8);
+  --bp-gary-9: var(--bp-gary-dark-9);
+  --bp-gary-10: var(--bp-gary-dark-10);
 }
 
 :root {
@@ -269,14 +270,14 @@
  * -------------------------------------------------------------------------- */
 :root {
   --vp-font-family-base: "Inter var", "Inter", ui-sans-serif, system-ui,
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
-    Helvetica, Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+  Helvetica, Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+  "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --vp-font-family-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco,
-    Consolas, "Liberation Mono", "Courier New", monospace;
+  Consolas, "Liberation Mono", "Courier New", monospace;
   --font-quick: Quicksand, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+  "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-code: "Lucida Console", Consolas, Monaco, "Andale Mono", "Ubuntu Mono",
-    monospace;
+  monospace;
 }
