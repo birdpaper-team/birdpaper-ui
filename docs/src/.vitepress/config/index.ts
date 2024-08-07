@@ -20,7 +20,7 @@ const config: import("vitepress").UserConfig = {
     ],
     search: {
       provider: "local",
-    }
+    },
   },
   markdown: {
     theme: "material-theme",

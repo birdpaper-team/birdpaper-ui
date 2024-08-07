@@ -5,11 +5,17 @@ export default {
   label: "简体中文",
   lang: "zh-CN",
   title: "Birdpaper UI",
-  titleTemplate: '一个 Vue UI 组件库',
+  titleTemplate: "一个 Vue UI 组件库",
   description: "一个基于 Vue 的 UI 组件库",
   themeConfig: {
     nav: nav,
     outlineTitle: "大纲",
+    lightModeSwitchTitle: "切换浅色模式",
+    darkModeSwitchTitle: "切换深色模式",
+    darkModeSwitchLabel: "深色模式",
+    returnToTopLabel: "返回顶部",
+    langMenuLabel: "切换语言",
+    sidebarMenuLabel: "菜单",
     docFooter: {
       prev: "上一篇",
       next: "下一篇",
