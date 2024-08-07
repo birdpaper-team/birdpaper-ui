@@ -1,6 +1,7 @@
 @use "./var";
 
 .VPSidebar {
+  border-right: 0.5px solid var(--bp-gary-3);
   background: var(--bp-gary-0) !important;
 
   .curtain {
@@ -15,6 +16,7 @@
   .VPSidebarItem.level-1 {
     .text {
       color: var(--bp-gary-7);
+      font-size: 13px;
 
       &:hover {
         color: var(--bp-gary-8) !important;

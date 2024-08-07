@@ -1,22 +1,54 @@
 export const nav = [
   {
-    text: "设计", activeMatch: "/design/",
+    text: "设计",
     items: [
-      { text: "价值观", link: "/design/introduction", activeMatch: "/design/" },
-      { text: "样式指南", link: "/design/introduction", activeMatch: "/design/" },
-      { text: "设计资源", link: "/design/introduction", activeMatch: "/design/" }
-    ]
+      { text: "简介", link: "/design/introduction" },
+      { text: "色彩", link: "/design/color" },
+      { text: "设计原则", link: "/design/principle" },
+      { text: "样式指南", link: "/design/guide" },
+      { text: "深色模式", link: "/design/dark" },
+      {
+        text: "资源",
+        items: [
+          { text: "Icons 图标库", link: "https://icon.birdpaper.design" },
+          { text: "MasterGo web组件库", link: "/" },
+        ],
+      },
+    ],
   },
   {
-    text: "开发", activeMatch: "/guide/", items: [
-      { text: "快速上手", link: "/develop/introduction", activeMatch: "/develop/" },
-      { text: "组件目录", link: "/develop/introduction", activeMatch: "/develop/" },
-      { text: "颜色", link: "/develop/introduction", activeMatch: "/develop/" },
-      { text: "定制主题", link: "/develop/introduction", activeMatch: "/develop/" },
-      { text: "贡献指南", link: "/develop/introduction", activeMatch: "/develop/" },
-      { text: "更新日志", link: "/develop/introduction", activeMatch: "/develop/" },
-    ]
+    text: "开发",
+    items: [
+      {
+        items: [
+          { text: "安装", link: "/develop/install" },
+          { text: "快速上手", link: "/develop/start" },
+          { text: "定制主题", link: "/develop/theme" },
+        ],
+      },
+      {
+        text: "版本",
+        items: [
+          { text: "v2", link: "https://v2.birdpaper.design" },
+          { text: "版本发布", link: "/develop/publish" },
+          { text: "更新日志", link: "/develop/changelog" },
+        ],
+      },
+      {
+        text: "指南",
+        items: [
+          { text: "本地开发", link: "/develop/local-dev" },
+          { text: "参与贡献", link: "/develop/pr" },
+        ],
+      },
+    ],
   },
-  { text: "组件", link: "/component/grid", activeMatch: "/component/" },
-  { text: "图标", link: "https://icon.birdpaper.design" }
+  {
+    text: "组件",
+    items: [
+      { text: "组件目录", link: "/component/catalog" },
+      { text: "全局配置", link: "/component/config" },
+    ],
+  },
+  { text: "赞助", link: "/component/grid" },
 ];

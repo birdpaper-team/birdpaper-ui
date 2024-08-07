@@ -1,20 +1,20 @@
 export const sidebar = {
   "/design/": [
     { text: "简介", link: "/design/introduction" },
-    { text: "价值观", link: "/design/values" },
-    { text: "设计原则", link: "/design/philosophy" },
+    { text: "色彩", link: "/design/color" },
+    { text: "设计原则", link: "/design/principle" },
+    { text: "样式指南", link: "/design/guide" },
+    { text: "深色模式", link: "/design/dark" },
+    { text: "设计资源", link: "/design/resource" },
   ],
-  "/guide/": [
-    {
-      text: "指南",
-      items: [
-        { text: "快速上手", link: "/guide/easystart" },
-        { text: "更新日志", link: "/guide/changelog/2-2-x" },
-        { text: "v3", link: "/guide/v3" },
-        { text: "颜色", link: "/guide/color" },
-        { text: "图标", link: "/guide/icon" },
-      ],
-    },
+  "/develop/": [
+    { text: "安装", link: "/develop/install" },
+    { text: "快速上手", link: "/develop/start" },
+    { text: "定制主题", link: "/develop/theme" },
+    { text: "版本发布", link: "/develop/publish" },
+    { text: "更新日志", link: "/develop/changelog" },
+    { text: "本地开发", link: "/develop/local-dev" },
+    { text: "参与贡献", link: "/develop/pr" },
   ],
 
   "/component/": [
@@ -37,10 +37,22 @@ export const sidebar = {
         { text: "复选框 <span>Checkbox</span>", link: "/component/checkbox" },
         { text: "开关 <span>Switch</span>", link: "/component/switch" },
         { text: "选择器 <span>Select</span>", link: "/component/select" },
-        { text: "验证码 <span>VerifyCode</span>", link: "/component/verifyCode" },
-        { text: "日期选择 <span>DatePicker</span>", link: "/component/datePicker" },
-        { text: "时间选择 <span>TimePicker</span>", link: "/component/timePicker" },
-        { text: "数字输入 <span>InputNumber</span>", link: "/component/inputNumber" },
+        {
+          text: "验证码 <span>VerifyCode</span>",
+          link: "/component/verifyCode",
+        },
+        {
+          text: "日期选择 <span>DatePicker</span>",
+          link: "/component/datePicker",
+        },
+        {
+          text: "时间选择 <span>TimePicker</span>",
+          link: "/component/timePicker",
+        },
+        {
+          text: "数字输入 <span>InputNumber</span>",
+          link: "/component/inputNumber",
+        },
       ],
     },
     {
@@ -62,7 +74,10 @@ export const sidebar = {
       items: [
         { text: "警告提示 <span>Alert</span>", link: "/component/alert" },
         { text: "消息提示 <span>Message</span>", link: "/component/message" },
-        { text: "气泡确认 <span>Popconfirm</span>", link: "/component/popconfirm" },
+        {
+          text: "气泡确认 <span>Popconfirm</span>",
+          link: "/component/popconfirm",
+        },
         { text: "对话框 <span>Modal</span>", link: "/component/modal" },
         { text: "抽屉 <span>Drawer</span>", link: "/component/drawer" },
         { text: "触发器 <span>Trigger</span>", link: "/component/trigger" },
