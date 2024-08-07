@@ -1,0 +1,24 @@
+@use "./var";
+
+.VPSidebar {
+  background: var(--bp-gary-0) !important;
+
+  .curtain {
+    background-color: var(--bp-gary-0);
+  }
+
+  .VPSidebarItem.level-0.has-active > .item > .text {
+    font-size: 12px;
+    color: var(--bp-gary-5);
+  }
+
+  .VPSidebarItem.level-1 {
+    .text {
+      color: var(--bp-gary-7);
+
+      &:hover {
+        color: var(--bp-gary-8) !important;
+      }
+    }
+  }
+}

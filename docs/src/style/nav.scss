@@ -8,9 +8,20 @@
     color: var(--bp-gary-9);
   }
 
+  .VPNavBar {
+    .wrapper {
+      border-bottom: 0.5px solid var(--bp-gary-3);
+    }
+
+    .title {
+      border: none;
+    }
+  }
+
   .VPMenu {
     border-radius: 10px 8px;
     padding: 10px;
+    border: 0.5px solid var(--bp-gary-3);
 
     .items {
       .VPMenuLink {
@@ -23,6 +34,14 @@
             background-color: var(--bp-gary-2);
             color: var(--bp-gary-10);
           }
+        }
+      }
+
+      .VPMenuGroup {
+        .title {
+          font-size: 12px;
+          padding: 0 8px;
+          color: var(--bp-gary-5);
         }
       }
     }
@@ -46,6 +65,10 @@
 
     .check {
       background-color: var(--bp-gary-0);
+
+      .icon [class^="vpi-"] {
+        color: var(--bp-gary-7);
+      }
     }
 
     &:hover {
@@ -57,14 +80,14 @@
     .DocSearch-Button {
       border: none;
       background-color: var(--bp-gary-0);
-      transition: all .2s ease;
-      
+      transition: all 0.2s ease;
+
       &:hover {
         background-color: var(--bp-gary-1);
-        transition: all .2s ease;
+        transition: all 0.2s ease;
       }
     }
-    
+
     .DocSearch-Button-Container {
       span {
         font-weight: 400;
@@ -72,16 +95,12 @@
       }
     }
 
-    .DocSearch-Button-Keys{
-      opacity: .8;
+    .DocSearch-Button-Keys {
+      opacity: 0.8;
     }
   }
 
   .divider {
-    height: 0.5px;
-
-    &-line {
-      height: 0.5px;
-    }
+    display: none;
   }
 }
