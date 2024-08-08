@@ -2,13 +2,15 @@
   "name": "@birdpaper-ui/docs",
   "private": true,
   "version": "1.0.0",
-  "description": "",
   "type": "module",
   "scripts": {
     "dev": "vitepress dev src --port 8081 --host --base /",
     "build": "vitepress build src --base /birdpaper-ui/",
     "build:root": "vitepress build src --base /",
     "preview": "vitepress preview src --port 8080"
+  },
+  "dependencies": {
+    "birdpaper-ui": "workspace:*"
   },
   "devDependencies": {
     "@nolebase/vitepress-plugin-enhanced-readabilities": "^2.3.0",
