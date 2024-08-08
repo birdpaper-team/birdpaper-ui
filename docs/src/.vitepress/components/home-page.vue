@@ -3,6 +3,7 @@
     <div class="ma">
       <div class="text-6xl fw900">
         <span class="font-quick">Vue UI</span> 组件库
+        <bp-button>Text</bp-button>
       </div>
     </div>
     <div></div>

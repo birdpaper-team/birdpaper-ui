@@ -46,9 +46,9 @@ export const nav = [
   {
     text: "组件",
     items: [
-      { text: "组件目录", link: "/component/catalog" },
-      { text: "全局配置", link: "/component/config" },
+      { text: "组件目录", link: "/components/catalog" },
+      { text: "全局配置", link: "/components/config" },
     ],
   },
-  { text: "赞助", link: "/component/grid" },
+  { text: "赞助", link: "/donate" },
 ];
