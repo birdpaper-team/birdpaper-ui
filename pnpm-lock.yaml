@@ -17,6 +17,9 @@ importers:
       async-validator:
         specifier: ^4.2.5
         version: 4.2.5
+      birdpaper-icon:
+        specifier: ^0.1.0
+        version: 0.1.0
       dayjs:
         specifier: ^1.11.3
         version: 1.11.12
@@ -106,8 +109,8 @@ importers:
   docs:
     dependencies:
       birdpaper-ui:
-        specifier: workspace:*
-        version: link:../packages/birdpaper-ui
+        specifier: 2.2.2
+        version: 2.2.2(typescript@4.9.5)
     devDependencies:
       '@nolebase/vitepress-plugin-enhanced-readabilities':
         specifier: ^2.3.0
@@ -4021,6 +4024,22 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /birdpaper-icon@0.1.0:
+    resolution: {integrity: sha512-IamnGbmG6d762t3YKRZg78q1aEu8Att6MmzrdSnT+8Lq6jH7bkXWiyK4sKRaUF5f1UGgADagG45qAgFdFo49kQ==}
+    dev: false
+
+  /birdpaper-ui@2.2.2(typescript@4.9.5):
+    resolution: {integrity: sha512-O2QMdTPQHAbJwruIxLivZGyUotRmYLtkehHmBIKiSQu0ACs+zIrcOdkruyrCXMXvwNkjZIka3b0NWeeSR1vvNA==}
+    dependencies:
+      async-validator: 4.2.5
+      birdpaper-icon: 0.1.0
+      dayjs: 1.11.12
+      vue: 3.4.34(typescript@4.9.5)
+      vue-virtual-scroller: 2.0.0-beta.8(vue@3.4.34)
+    transitivePeerDependencies:
+      - typescript
+    dev: false
+
   /birpc@0.2.17:
     resolution: {integrity: sha512-+hkTxhot+dWsLpp3gia5AkVHIsKlZybNT5gIYiDlNzJrmYPcTM9k5/w2uaj3IPpd7LlEYpmCj4Jj1nC41VhDFg==}
     dev: true
@@ -6865,6 +6884,10 @@ packages:
       yallist: 4.0.0
     dev: true
 
+  /mitt@2.1.0:
+    resolution: {integrity: sha512-ILj2TpLiysu2wkBbWjAmww7TkZb65aiQO+DkVdUTBpBXq+MHYiETENkKFMtsJZX1Lf4pe4QOrTSjIfUwN5lRdg==}
+    dev: false
+
   /mitt@3.0.1:
     resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
     dev: true
@@ -9118,6 +9141,22 @@ packages:
     dependencies:
       vue: 3.4.34(typescript@4.9.5)
 
+  /vue-observe-visibility@2.0.0-alpha.1(vue@3.4.34):
+    resolution: {integrity: sha512-flFbp/gs9pZniXR6fans8smv1kDScJ8RS7rEpMjhVabiKeq7Qz3D9+eGsypncjfIyyU84saU88XZ0zjbD6Gq/g==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      vue: 3.4.34(typescript@4.9.5)
+    dev: false
+
+  /vue-resize@2.0.0-alpha.1(vue@3.4.34):
+    resolution: {integrity: sha512-7+iqOueLU7uc9NrMfrzbG8hwMqchfVfSzpVlCMeJQe4pyibqyoifDNbKTZvwxZKDvGkB+PdFeKvnGZMoEb8esg==}
+    peerDependencies:
+      vue: ^3.0.0
+    dependencies:
+      vue: 3.4.34(typescript@4.9.5)
+    dev: false
+
   /vue-router@4.4.0(vue@3.4.34):
     resolution: {integrity: sha512-HB+t2p611aIZraV2aPSRNXf0Z/oLZFrlygJm+sZbdJaW6lcFqEDQwnzUBXn+DApw+/QzDU/I9TeWx9izEjTmsA==}
     peerDependencies:
@@ -9136,6 +9175,17 @@ packages:
       '@volar/vue-typescript': 0.38.9
       typescript: 4.9.5
     dev: true
+
+  /vue-virtual-scroller@2.0.0-beta.8(vue@3.4.34):
+    resolution: {integrity: sha512-b8/f5NQ5nIEBRTNi6GcPItE4s7kxNHw2AIHLtDp+2QvqdTjVN0FgONwX9cr53jWRgnu+HRLPaWDOR2JPI5MTfQ==}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      mitt: 2.1.0
+      vue: 3.4.34(typescript@4.9.5)
+      vue-observe-visibility: 2.0.0-alpha.1(vue@3.4.34)
+      vue-resize: 2.0.0-alpha.1(vue@3.4.34)
+    dev: false
 
   /vue@3.4.34(typescript@4.9.5):
     resolution: {integrity: sha512-VZze05HWlA3ItreQ/ka7Sx7PoD0/3St8FEiSlSTVgb6l4hL+RjtP2/8g5WQBzZgyf8WG2f+g1bXzC7zggLhAJA==}

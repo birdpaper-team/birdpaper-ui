@@ -21,6 +21,7 @@
     "@birdpaper-ui/components": "workspace:*",
     "@vueuse/core": "^10.11.0",
     "async-validator": "^4.2.5",
+    "birdpaper-icon": "^0.1.0",
     "dayjs": "^1.11.3"
   },
   "devDependencies": {
