@@ -9,6 +9,7 @@ export default {
   description: "一个基于 Vue 的 UI 组件库",
   themeConfig: {
     nav: nav,
+    outline: "deep",
     outlineTitle: "大纲",
     lightModeSwitchTitle: "切换浅色模式",
     darkModeSwitchTitle: "切换深色模式",
