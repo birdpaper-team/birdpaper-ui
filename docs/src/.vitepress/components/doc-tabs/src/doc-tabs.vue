@@ -9,7 +9,7 @@
         <span>{{ v.label }}</span>
       </div>
     </div>
-    
+
     <div :class="`${name}-content`">
       <div v-show="tab === 'demo'">
         <slot name="demo"></slot>
