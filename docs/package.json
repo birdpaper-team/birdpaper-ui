@@ -10,7 +10,8 @@
     "preview": "vitepress preview src --port 8080"
   },
   "dependencies": {
-    "birdpaper-ui": "workspace:*"
+    "birdpaper-ui": "workspace:*",
+    "shiki": "^0.14.1"
   },
   "devDependencies": {
     "@nolebase/vitepress-plugin-enhanced-readabilities": "^2.3.0",

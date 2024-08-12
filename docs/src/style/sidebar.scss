@@ -24,7 +24,7 @@
         font-family: var(--font-quick);
         font-weight: 800;
         margin-left: 8px;
-        color: var(--bp-gary-8);
+        color: var(--bp-gary-7);
       }
 
       &:hover {
@@ -37,4 +37,8 @@
       }
     }
   }
+}
+
+.VPSidebarItem.level-1.is-active > .item .link > .text > span {
+  color: var(--bp-primary-6);
 }

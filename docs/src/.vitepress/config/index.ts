@@ -1,5 +1,6 @@
 import { head } from "./head";
 import { locales } from "./locales/index";
+import loadCode from "../components/demo-block/src/loadCode";
 
 const config: import("vitepress").UserConfig = {
   lastUpdated: false,
@@ -24,7 +25,9 @@ const config: import("vitepress").UserConfig = {
   },
   markdown: {
     theme: "material-theme",
-    config: () => {},
+    config: (md) => {
+      md.use(loadCode);
+    },
   },
 };
 

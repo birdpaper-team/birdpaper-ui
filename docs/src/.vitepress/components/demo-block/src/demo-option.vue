@@ -1,5 +1,11 @@
 <template>
-  <bp-space size="mini" justify="flex-end">
+  <div
+    :class="['icon-item', { active: showCode }]"
+    @click="showCode = !showCode"
+  >
+    <IconCodeLine size="13" />
+  </div>
+  <!-- <bp-space size="mini" justify="flex-end">
     <bp-tooltip content="展示代码">
       <div
         :class="['icon-item', { active: showCode }]"
@@ -18,7 +24,7 @@
         <IconEditLine size="13" />
       </div>
     </bp-tooltip>
-  </bp-space>
+  </bp-space> -->
 </template>
 
 <script setup lang="ts">
