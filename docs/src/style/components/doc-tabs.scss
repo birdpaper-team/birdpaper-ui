@@ -1,0 +1,40 @@
+@use "../var";
+
+.doc-tabs {
+  position: relative;
+  
+  .docs-radio-group {
+    display: inline-flex;
+    padding: 4px;
+    background-color: var(--bp-gary-2);
+    border: 0.5px solid var(--bp-gary-3);
+    border-radius: 6px;
+    z-index: 9;
+
+    .docs-radio {
+      padding: 4px 14px;
+      border-radius: 4px;
+      border: 0.5px solid var(--bp-gary-2);
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      span {
+        font-size: 14px;
+        color: var(--bp-gary-7);
+        font-weight: 500;
+        transition: all 0.2s ease;
+      }
+    }
+
+    .active {
+      border: 0.5px solid var(--bp-gary-3);
+      background-color: var(--bp-gary-0);
+      transition: all 0.2s ease;
+
+      span {
+        color: var(--bp-gary-10);
+        transition: all 0.2s ease;
+      }
+    }
+  }
+}
