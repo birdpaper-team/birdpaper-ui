@@ -1,8 +1,5 @@
 <template>
-  <div
-    :class="['icon-item', { active: showCode }]"
-    @click="showCode = !showCode"
-  >
+  <div :class="['icon-item', { active: model }]" @click="handleShowCode">
     <IconCodeLine size="13" />
   </div>
   <!-- <bp-space size="mini" justify="flex-end">
@@ -28,8 +25,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+const model = defineModel<boolean>({
+  required: true,
+});
 
-/** 是否展示源码 */
-const showCode = ref<boolean>(false);
+const handleShowCode = () => {
+  model.value = !model.value;
+};
 </script>

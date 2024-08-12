@@ -12,6 +12,8 @@
   }
 
   &-footer {
+    display: flex;
+    justify-content: flex-end;
     padding: 16px 20px;
     border-top: 0.5px solid var(--bp-gary-3);
 
@@ -40,5 +42,31 @@
         }
       }
     }
+  }
+
+  &-code {
+    max-height: 0;
+    overflow: auto;
+    padding: 0 20px;
+    background-color: var(--bp-gary-1);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    transition: max-height 0.2s ease;
+
+    &-inner {
+      font-size: 13px;
+      max-height: 600px;
+
+      pre,
+      code {
+        font-size: 13px !important;
+      }
+    }
+  }
+
+  .open {
+    max-height: 1000px;
+    border-top: 0.5px solid var(--bp-gary-3);
+    transition: max-height 0.4s ease;
   }
 }
