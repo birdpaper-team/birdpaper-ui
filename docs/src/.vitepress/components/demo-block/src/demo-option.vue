@@ -1,5 +1,5 @@
 <template>
-  <div :class="['icon-item', { active: model }]" @click="handleShowCode">
+  <div :class="['icon-item', { 'icon-item-active': model }]" @click="handleShowCode">
     <IconCodeLine size="13" />
   </div>
   <!-- <bp-space size="mini" justify="flex-end">

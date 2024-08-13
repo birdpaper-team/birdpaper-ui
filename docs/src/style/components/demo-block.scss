@@ -17,30 +17,41 @@
     padding: 16px 20px;
     border-top: 0.5px solid var(--bp-gary-3);
 
+    @mixin icon-active {
+      border: 0.5px solid var(--bp-gary-9);
+      background-color: var(--bp-gary-9);
+      opacity: 1;
+      transition: all 0.2s ease;
+
+      .bp-icon {
+        fill: var(--bp-gary-0);
+        transition: all 0.2s ease;
+      }
+    }
+
     .icon-item {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 26px;
       height: 26px;
-      border: 1px solid var(--bp-gary-3);
+      border: 0.5px solid var(--bp-gary-4);
       border-radius: 50%;
       cursor: pointer;
 
       .bp-icon {
-        fill: var(--bp-gary-8);
+        fill: var(--bp-gary-9);
         transition: all 0.2s ease;
       }
 
       &:hover {
-        background-color: var(--bp-gary-2);
-        transition: all 0.2s ease;
-
-        .bp-icon {
-          fill: var(--bp-gary-10);
-          transition: all 0.2s ease;
-        }
+        @include icon-active;
+        opacity: 0.8;
       }
+    }
+
+    .icon-item-active {
+      @include icon-active;
     }
   }
 
@@ -56,6 +67,10 @@
     &-inner {
       font-size: 13px;
       max-height: 600px;
+
+      .shiki {
+        background: none !important;
+      }
 
       pre,
       code {
