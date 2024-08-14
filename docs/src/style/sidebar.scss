@@ -39,6 +39,12 @@
   }
 }
 
+.VPSidebarItem.level-1.is-active > .item .link > .text {
+  &:hover {
+    color: var(--bp-primary-6) !important;
+  }
+}
+
 .VPSidebarItem.level-1.is-active > .item .link > .text > span {
   color: var(--bp-primary-6);
 }
