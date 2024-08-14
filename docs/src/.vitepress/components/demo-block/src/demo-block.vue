@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, markRaw, onMounted, ref } from "vue";
+import { defineAsyncComponent, markRaw, ref } from "vue";
 import demoOption from "./demo-option.vue";
 
 const name = "demo-block";
@@ -28,21 +28,26 @@ const props = defineProps({
   codeStr: { type: String, default: "" },
 });
 
-/** 是否展示源码 */
+/** Show code is or not. */
 const showCode = ref<boolean>(false);
 
-const exampleGlob = import.meta.glob(`../../../../example/**/*.vue`);
-/** 示例文件组件 */
+/** The component which this demo. */
 const demoComponent = ref();
 
-const init = async () => {
-  demoComponent.value = markRaw(
-    defineAsyncComponent(
-      exampleGlob[`../../../../example/${props.src}.vue`] as any
-    )
-  );
+/** Glob */
+const exampleGlob = import.meta.glob(`../../../../example/**/*.vue`);
+
+/**
+ * Demo init
+ * Set defineAsyncComponent.
+ */
+const init = async (src?: string) => {
+  const path = `../../../../example/${src || props.src}.vue`;
+  demoComponent.value = markRaw(defineAsyncComponent(exampleGlob[path] as any));
 };
-onMounted(() => {
-  init();
+init();
+
+defineExpose({
+  init,
 });
 </script>

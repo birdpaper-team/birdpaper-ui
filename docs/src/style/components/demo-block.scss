@@ -45,8 +45,8 @@
       }
 
       &:hover {
-        @include icon-active;
         opacity: 0.8;
+        @include icon-active;
       }
     }
 
@@ -81,7 +81,7 @@
 
   .open {
     max-height: 1000px;
-    border-top: 0.5px solid var(--bp-gary-3);
+    border-top: 0.5px solid var(--bp-gary-2);
     transition: max-height 0.4s ease;
   }
 }
