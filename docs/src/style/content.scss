@@ -1,0 +1,25 @@
+@use "./var";
+
+.vp-doc {
+  font-size: 14px;
+  color: var(--bp-gary-8);
+
+  a {
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    color: var(--bp-primary-6);
+  }
+
+  h2 {
+    margin: 0;
+    border: none;
+    font-size: 20px;
+    padding-top: 10px;
+    margin-bottom: 10px;
+  }
+}
+
+.vp-doc :not(pre) > code {
+  color: var(--bp-gary-9);
+}
