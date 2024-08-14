@@ -108,6 +108,9 @@ importers:
 
   docs:
     dependencies:
+      '@birdpaper-ui/theme':
+        specifier: workspace:*
+        version: link:../packages/theme
       birdpaper-ui:
         specifier: workspace:*
         version: link:../packages/birdpaper-ui
@@ -132,7 +135,13 @@ importers:
         specifier: ^3.4.34
         version: 3.4.34(typescript@4.9.5)
 
-  packages/components: {}
+  packages/components:
+    dependencies:
+      '@birdpaper-ui/theme':
+        specifier: workspace:*
+        version: link:../theme
+
+  packages/theme: {}
 
 packages:
 

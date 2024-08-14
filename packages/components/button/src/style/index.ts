@@ -1,0 +1,1 @@
+import "@birdpaper-ui/theme/src/button.scss";
