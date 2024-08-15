@@ -3,6 +3,6 @@
 </template>
 
 <script setup lang="ts">
-defineOptions({ name: "Button" });
+defineOptions({ name: "button" });
 const name = "bp-button";
 </script>
