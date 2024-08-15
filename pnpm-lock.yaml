@@ -143,6 +143,12 @@ importers:
 
   packages/theme: {}
 
+  scripts/build:
+    devDependencies:
+      fast-glob:
+        specifier: ^3.3.2
+        version: 3.3.2
+
 packages:
 
   /@algolia/autocomplete-core@1.9.3(@algolia/client-search@4.24.0)(algoliasearch@4.24.0)(search-insights@2.15.0):

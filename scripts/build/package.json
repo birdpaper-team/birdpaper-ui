@@ -1,0 +1,11 @@
+{
+  "name": "@birdpaper-ui/build",
+  "version": "1.0.0",
+  "scripts": {
+    "build:es": "vite build --config vite.es.ts",
+    "build:umd": "vite build --config vite.umd.ts"
+  },
+  "devDependencies": {
+    "fast-glob": "^3.3.2"
+  }
+}
