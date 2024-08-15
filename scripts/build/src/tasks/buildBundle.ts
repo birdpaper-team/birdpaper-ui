@@ -1,14 +1,14 @@
-import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
-import { distRoot, compRoot } from "./src/paths";
 import { join } from "path";
+import { compRoot, distRoot } from "../paths";
+import { build } from "vite";
 
-export default async () => {
+export async function buildBundle() {
   const name = "BirdpaperUI";
   const entryFileName = "birdpaper-ui";
 
-  return defineConfig({
+  await build({
     plugins: [vue(), vueJsx()],
     build: {
       outDir: join(distRoot, "birdpaper-ui", "dist"),
@@ -23,4 +23,4 @@ export default async () => {
       },
     },
   });
-};
+}

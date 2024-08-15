@@ -1,18 +1,18 @@
-import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import glob from "fast-glob";
-import { distRoot, compRoot } from "./src/paths";
 import { join } from "path";
+import { compRoot, distRoot } from "../paths";
+import { build } from "vite";
 
-export default async () => {
+export async function buildModules() {
   const files = await glob("**/*.{js,ts,vue}", {
     cwd: compRoot,
     absolute: true,
     onlyFiles: true,
   });
 
-  return defineConfig({
+  await build({
     plugins: [vue(), vueJsx()],
     build: {
       target: "modules",
@@ -45,4 +45,4 @@ export default async () => {
       },
     },
   });
-};
+}

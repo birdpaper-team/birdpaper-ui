@@ -2,10 +2,12 @@
   "name": "@birdpaper-ui/build",
   "version": "1.0.0",
   "scripts": {
-    "build:es": "vite build --config vite.es.ts",
-    "build:umd": "vite build --config vite.umd.ts"
+    "start": "gulp --require @esbuild-kit/cjs-loader -f gulpfile.ts"
   },
   "devDependencies": {
-    "fast-glob": "^3.3.2"
+    "fast-glob": "^3.3.2",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0",
+    "@esbuild-kit/cjs-loader": "^2.2.1"
   }
 }

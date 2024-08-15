@@ -13,7 +13,7 @@
     "docs:build": "pnpm run -C docs build",
     "docs:build:root": "pnpm run -C docs build:root",
     "docs:preview": "pnpm run -C docs preview",
-    "build": "pnpm run -C scripts/build build:es && pnpm run -C scripts/build build:umd"
+    "build": "pnpm run -C scripts/build start"
   },
   "peerDependencies": {
     "vue": "^3.4.0"
