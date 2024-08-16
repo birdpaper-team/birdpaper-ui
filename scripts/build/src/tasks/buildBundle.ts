@@ -17,9 +17,9 @@ export async function buildBundle() {
       minify: false,
       lib: {
         entry: compRoot,
-        formats: ["umd", "iife"],
+        formats: ['es', 'cjs', "iife"],
         name,
-        fileName: (format) => `${entryFileName}.${format}.js`,
+        fileName: format => `${entryFileName}.${format === 'es' ? 'mjs' : format === 'cjs' ? 'cjs' : 'js'}`
       },
     },
   });
