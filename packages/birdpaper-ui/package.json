@@ -2,13 +2,65 @@
   "name": "birdpaper-ui",
   "version": "3.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
+  "main": "lib/index.cjs",
+  "module": "es/index.mjs",
+  "types": "types/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.mjs",
+      "require": "./lib/index.cjs"
+    },
+    "./global": {
+      "types": "./global.d.ts"
+    },
+    "./es": {
+      "types": "./types/index.d.ts",
+      "import": "./es/index.mjs"
+    },
+    "./lib": {
+      "types": "./types/index.d.ts",
+      "require": "./lib/index.cjs"
+    },
+    "./es/*.mjs": {
+      "types": "./types/*.d.ts",
+      "import": "./es/*.mjs"
+    },
+    "./es/*": {
+      "types": [
+        "./types/*.d.ts",
+        "./types/*/index.d.ts"
+      ],
+      "import": "./es/*.mjs"
+    },
+    "./lib/*.cjs": {
+      "types": "./types/*.d.ts",
+      "require": "./lib/*.cjs"
+    },
+    "./lib/*": {
+      "types": [
+        "./types/*.d.ts",
+        "./types/*/index.d.ts"
+      ],
+      "require": "./lib/*.cjs"
+    },
+    "./package.json": "./package.json",
+    "./*": "./*"
+  },
+  "files": [
+    "dist",
+    "es",
+    "lib",
+    "themes",
+    "types",
+    "global.d.ts"
+  ],
   "dependencies": {
     "dayjs": "^1.11.3"
   },

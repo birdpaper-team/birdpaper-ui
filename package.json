@@ -13,7 +13,8 @@
     "docs:build": "pnpm run -C docs build",
     "docs:build:root": "pnpm run -C docs build:root",
     "docs:preview": "pnpm run -C docs preview",
-    "build": "pnpm run -C scripts/build start"
+    "build": "pnpm run -C scripts/build start",
+    "yalc": "rm -rf dist/ && pnpm run build && cd dist/birdpaper-ui && yalc publish --push"
   },
   "peerDependencies": {
     "vue": "^3.4.0"
