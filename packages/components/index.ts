@@ -1,3 +1,6 @@
-import BpButton from "./button";
+// export { default as BpButton } from "./button";
+// export type { BpButtonInstance } from "./button";
 
-export { BpButton };
+// export type {} from "./components";
+
+export * from "./button";
