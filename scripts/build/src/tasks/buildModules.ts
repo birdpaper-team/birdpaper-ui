@@ -4,6 +4,7 @@ import glob from "fast-glob";
 import { join } from "path";
 import { compRoot, distRoot } from "../paths";
 import { build } from "vite";
+import dts from "vite-plugin-dts";
 
 export async function buildModules() {
   const files = await glob("**/*.{js,ts,vue}", {
@@ -13,7 +14,6 @@ export async function buildModules() {
   });
 
   await build({
-    plugins: [vue(), vueJsx()],
     build: {
       target: "modules",
       outDir: distRoot,
@@ -44,5 +44,13 @@ export async function buildModules() {
         ],
       },
     },
+    plugins: [
+      dts({
+        entryRoot: compRoot,
+        outDir: join(distRoot, "types"),
+      }),
+      vue(),
+      vueJsx(),
+    ],
   });
 }

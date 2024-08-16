@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "strict": false,
+    "jsx": "preserve",
+    "moduleResolution": "node",
+    "useDefineForClassFields": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "types": ["node"],
+    "noImplicitAny": false,
+    "baseUrl": ".",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true
+  },
+  "include": [
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "types/**/*.d.ts",
+    "types/**/*.ts",
+    "*.d.ts"
+   ],
+  "exclude": ["node_modules"]
+}
