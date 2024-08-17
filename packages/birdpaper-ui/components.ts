@@ -1,7 +1,5 @@
 import type { Plugin } from "vue";
 
-import { BpButton } from "@birdpaper-ui/components";
+import { Button } from "@birdpaper-ui/components";
 
-const components: Plugin[] = [BpButton];
-
-export default components;
+export default [Button] as Plugin[];

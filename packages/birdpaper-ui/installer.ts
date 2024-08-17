@@ -6,6 +6,7 @@ export const installer = (components: Plugin[] = []) => {
   };
 
   return {
+    // TODO: Write first, then update automatically.
     version: "3.0.0",
     install,
   };

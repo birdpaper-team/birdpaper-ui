@@ -49,12 +49,6 @@ export async function buildModules() {
       dts({
         exclude: ["node_modules"],
         outDir: join(distRoot, "birdpaper-ui/types"),
-        // compilerOptions: {
-        //   sourceMap: false,
-        //   paths: {
-        //    "@birdpaper-ui/*": ["packages/*"]
-        //   },
-        // },
         insertTypesEntry: true,
       }),
       vue(),
