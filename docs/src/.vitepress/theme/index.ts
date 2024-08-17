@@ -4,7 +4,7 @@ import Theme from "vitepress/theme";
 import type { EnhanceAppContext } from "vitepress";
 
 // The BirdpaperUI component.
-import BirdpaperUI from "birdpaper-ui";
+import BirdpaperUI from "birdpaper-ui/index.js";
 import "@birdpaper-ui/theme/src/index.scss";
 
 import BirdpaperIcon from "birdpaper-icon";

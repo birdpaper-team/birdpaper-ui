@@ -106,10 +106,11 @@ importers:
         specifier: ^0.38.2
         version: 0.38.9(typescript@4.9.5)
 
-  dist/birdpaper-ui: {}
-
   docs:
     dependencies:
+      '@birdpaper-ui/components':
+        specifier: workspace:*
+        version: link:../packages/components
       '@birdpaper-ui/theme':
         specifier: workspace:*
         version: link:../packages/theme
