@@ -57,7 +57,7 @@
     "dist",
     "es",
     "lib",
-    "themes",
+    "theme",
     "types",
     "global.d.ts"
   ],

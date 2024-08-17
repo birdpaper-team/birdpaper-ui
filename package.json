@@ -13,8 +13,9 @@
     "docs:build": "pnpm run -C docs build",
     "docs:build:root": "pnpm run -C docs build:root",
     "docs:preview": "pnpm run -C docs preview",
-    "build": "pnpm run -C scripts/build start",
-    "yalc": "rm -rf dist/ && pnpm run build && cd dist/birdpaper-ui && yalc publish --push"
+    "clean": "rimraf dist && pnpm run -r --parallel clean",
+    "build": "pnpm run clean && pnpm run -C scripts/build start",
+    "yalc": "pnpm run clean && pnpm run build && cd dist/birdpaper-ui && yalc publish --push"
   },
   "peerDependencies": {
     "vue": "^3.4.0"
@@ -42,6 +43,7 @@
     "cz-git": "^1.3.8",
     "czg": "^1.3.8",
     "jsdom": "16.4.0",
+    "rimraf": "^3.0.2",
     "oxlint": "^0.6.1",
     "prettier": "^2.7.1",
     "sass": "^1.77.8",
