@@ -18,7 +18,7 @@ export async function buildBundle() {
     build: {
       outDir: join(distPkgRoot, "dist"),
       emptyOutDir: true,
-      sourcemap: true,
+      sourcemap: false,
       minify: false,
       lib: {
         entry: compRoot,

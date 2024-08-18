@@ -2,7 +2,7 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import glob from "fast-glob";
 import { join } from "path";
-import { bpUIRoot, distPkgRoot, pkgRoot } from "../paths";
+import { bpUIRoot, distPkgRoot } from "../paths";
 import { build } from "vite";
 import dts from "vite-plugin-dts";
 
@@ -28,7 +28,7 @@ export async function buildModules() {
       target: "modules",
       emptyOutDir: true,
       minify: true,
-      sourcemap: true,
+      sourcemap: false,
       lib: {
         entry: files,
         formats: ["es", "cjs"],

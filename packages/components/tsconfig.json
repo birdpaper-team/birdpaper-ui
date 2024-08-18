@@ -13,15 +13,18 @@
     "noImplicitAny": false,
     "baseUrl": ".",
     "lib": ["es2020", "dom"],
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "include": [
+    "style/**/*.ts",
     "src/**/*.tsx",
+    "src/**/*.ts",
     "src/**/*.vue",
     "types/**/*.d.ts",
     "types/**/*.ts",
     "*.d.ts",
-    "../../env.d.ts"
-, "../birdpaper-ui/global.d.ts"  ],
+    "../../env.d.ts",
+    "../birdpaper-ui/global.d.ts"
+  ],
   "exclude": ["node_modules"]
 }

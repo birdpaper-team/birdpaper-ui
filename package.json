@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@birdpaper-ui/components": "workspace:*",
+    "@birdpaper-ui/theme": "workspace:*",
     "@vueuse/core": "^10.11.0",
     "async-validator": "^4.2.5",
     "birdpaper-icon": "^0.1.0",
