@@ -1,25 +1,30 @@
 import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import { join } from "path";
-import { compRoot, distRoot } from "../paths";
+import { compRoot, distPkgRoot } from "../paths";
 import { build } from "vite";
 
 export async function buildBundle() {
   const name = "BirdpaperUI";
   const entryFileName = "birdpaper-ui";
 
-  await build({
+  const fileName = (format: string) =>
+    `${entryFileName}.${
+      format === "es" ? "mjs" : format === "cjs" ? "cjs" : "js"
+    }`;
+
+  return await build({
     plugins: [vue(), vueJsx()],
     build: {
-      outDir: join(distRoot, "birdpaper-ui", "dist"),
-      emptyOutDir: false,
+      outDir: join(distPkgRoot, "dist"),
+      emptyOutDir: true,
       sourcemap: true,
       minify: false,
       lib: {
         entry: compRoot,
-        formats: ['es', 'cjs', "iife"],
+        formats: ["es", "cjs", "iife"],
         name,
-        fileName: format => `${entryFileName}.${format === 'es' ? 'mjs' : format === 'cjs' ? 'cjs' : 'js'}`
+        fileName,
       },
     },
   });

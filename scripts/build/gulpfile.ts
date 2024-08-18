@@ -1,8 +1,8 @@
 import { series, parallel } from "gulp";
 import path from "path";
-import { copyFile } from "fs/promises";
+import { copyFile, mkdir } from "fs/promises";
 import { buildModules, buildBundle, buildTheme } from "./src/tasks";
-import { bpUIRoot, distRoot, pkgRoot, projRoot } from "./src/paths";
+import { bpUIRoot, distRoot, projRoot } from "./src/paths";
 
 export const copyThemeIndex = async () => {
   await copyFile(

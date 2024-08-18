@@ -2,7 +2,7 @@ import vue from "@vitejs/plugin-vue";
 import vueJsx from "@vitejs/plugin-vue-jsx";
 import glob from "fast-glob";
 import { join } from "path";
-import { bpUIRoot, compRoot, distRoot } from "../paths";
+import { bpUIRoot, distPkgRoot, pkgRoot } from "../paths";
 import { build } from "vite";
 import dts from "vite-plugin-dts";
 
@@ -11,36 +11,44 @@ export async function buildModules() {
     cwd: bpUIRoot,
     absolute: true,
     onlyFiles: true,
-    ignore: ["node_modules/**", "env.d.ts"],
+    ignore: ["node_modules/**/*", "env.d.ts"],
   });
 
-  await build({
+  const preserveConfig = {
+    preserveModules: true,
+    preserveModulesRoot: bpUIRoot,
+  };
+
+  return await build({
+    esbuild: {
+      drop: ["debugger"],
+      pure: ["console.log"],
+    },
     build: {
       target: "modules",
-      outDir: distRoot,
       emptyOutDir: true,
       minify: true,
+      sourcemap: true,
       lib: {
         entry: files,
         formats: ["es", "cjs"],
       },
+      chunkSizeWarningLimit: 10000,
       rollupOptions: {
         external: ["vue"],
         input: files,
         output: [
           {
             format: "es",
-            dir: join(distRoot, "birdpaper-ui", "es"),
+            dir: join(distPkgRoot, "es"),
             entryFileNames: "[name].mjs",
-            preserveModules: true,
-            preserveModulesRoot: bpUIRoot,
+            ...preserveConfig,
           },
           {
             format: "cjs",
-            dir: join(distRoot, "birdpaper-ui", "lib"),
-            entryFileNames: '[name].cjs',
-            preserveModules: true,
-            preserveModulesRoot: bpUIRoot,
+            dir: join(distPkgRoot, "lib"),
+            entryFileNames: "[name].cjs",
+            ...preserveConfig,
           },
         ],
       },
@@ -48,7 +56,7 @@ export async function buildModules() {
     plugins: [
       dts({
         exclude: ["node_modules"],
-        outDir: join(distRoot, "birdpaper-ui/types"),
+        outDir: join(distPkgRoot, "types"),
         insertTypesEntry: true,
       }),
       vue(),
