@@ -2,6 +2,7 @@
   "name": "@birdpaper-ui/components",
   "version": "3.0.0",
   "dependencies": {
-    "@birdpaper-ui/theme": "workspace:*"
+    "@birdpaper-ui/theme": "workspace:*",
+    "@birdpaper-ui/hooks": "workspace:*"
   }
 }
