@@ -1,17 +1,18 @@
 <template>
-  <div :class="name"><slot /></div>
+  <div :class="[clsBlockName, type]"><slot /></div>
 </template>
 
 <script setup lang="ts">
-import { PropType, ref } from "vue";
+import { PropType } from "vue";
 import { buttonType } from "./types";
+import { useNamespace } from "@birdpaper-ui/hooks";
 
-defineOptions({ name: "button" });
-const name = "bp-button";
+defineOptions({ name: "Button" });
+
+const { clsBlockName } = useNamespace("button");
 
 const props = defineProps({
   type: { type: String as PropType<buttonType>, default: "" },
+  disabled: { type: Boolean, default: false },
 });
-
-const testFun = ref<boolean>(false);
 </script>

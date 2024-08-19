@@ -1,7 +1,7 @@
 import { App } from "vue";
 import _button from "./src/button.vue";
 
-_button.name = "bp-" + _button.name;
+_button.name = "bp-" + _button.name?.toLocaleLowerCase();
 
 export const Button = Object.assign(_button, {
   install: (app: App) => {
