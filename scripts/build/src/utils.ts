@@ -27,8 +27,8 @@ export const cpFolder = async (src: string, dest: string) => {
 
     if (entry.isDirectory()) {
       await cpFolder(srcPath, destPath);
-      return;
+    }else{
+      await copyFile(srcPath, destPath);
     }
-    await copyFile(srcPath, destPath);
   }
 };
