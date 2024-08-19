@@ -1,6 +1,6 @@
 import { series, parallel } from "gulp";
 import path from "path";
-import fs, { copyFile, mkdir } from "fs/promises";
+import fs, { copyFile } from "fs/promises";
 import { buildModules, buildBundle, buildTheme } from "./src/tasks";
 import {
   bpUIRoot,
