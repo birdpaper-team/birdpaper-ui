@@ -1,4 +1,6 @@
-.bp-button {
+@use "./common/design.scss" as *;
+
+.#{$namespace}-button {
   font-size: 14px;
-  color: var(--bp-gary-9);
+  color: var(--bp-primary-6);
 }
