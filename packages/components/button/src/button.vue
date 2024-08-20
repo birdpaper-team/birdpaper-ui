@@ -1,5 +1,5 @@
 <template>
-  <div :class="[clsBlockName, type]"><slot /></div>
+  <div :class="[clsBlockName]"><slot /></div>
 </template>
 
 <script setup lang="ts">
@@ -8,7 +8,6 @@ import { buttonType } from "./types";
 import { useNamespace } from "@birdpaper-ui/hooks";
 
 defineOptions({ name: "Button" });
-
 const { clsBlockName } = useNamespace("button");
 
 const props = defineProps({

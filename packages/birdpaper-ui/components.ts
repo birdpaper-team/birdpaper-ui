@@ -1,5 +1,3 @@
-import type { Plugin } from "vue";
+import Button from "@birdpaper-ui/components/button";
 
-import { Button } from "@birdpaper-ui/components/button";
-
-export default [Button] as Plugin[];
+export default [Button];

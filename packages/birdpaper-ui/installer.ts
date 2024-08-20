@@ -4,9 +4,15 @@ import {
 } from "@birdpaper-ui/components/config-provider";
 import type { App, Plugin } from "vue";
 
-export const installer = (components: Plugin[] = []) => {
+export const installer = (components: any[] = []) => {
   const install = (app: App, options?: ConfigProviderContext) => {
-    components.forEach((c) => app.use(c));
+    components.forEach((c: any) => {
+      if (typeof c === "function" || typeof c.install === "function") {
+        app.use(c, options);
+      } else {
+        app.component(`${options?.prefix || "Bp"}${c?.name}`, c);
+      }
+    });
 
     if (options) provideGlobalConfig(options, app);
   };
