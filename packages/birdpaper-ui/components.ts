@@ -1,3 +1,3 @@
-import Button from "@birdpaper-ui/components/button";
+import { Button } from "@birdpaper-ui/components";
 
 export default [Button];

@@ -2,7 +2,7 @@ import {
   ConfigProviderContext,
   provideGlobalConfig,
 } from "@birdpaper-ui/components/config-provider";
-import type { App, Plugin } from "vue";
+import type { App } from "vue";
 
 export const installer = (components: any[] = []) => {
   const install = (app: App, options?: ConfigProviderContext) => {
