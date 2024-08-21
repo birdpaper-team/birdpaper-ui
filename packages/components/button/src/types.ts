@@ -1,18 +1,34 @@
-/** 按钮类型，普通、主要、线框、虚线、文本 */
+/**
+ * @description 按钮类型 Button type，普通-normal、主要-primary、线框-plain、虚线-dashed、文本-text
+ */
 export declare type ButtonType =
   | "normal"
   | "primary"
   | "plain"
   | "dashed"
   | "text";
-/** 按钮形状，矩形、圆滑 */
-export declare type ButtonShape = "square" | "round" | "circle";
-/** 按钮尺寸，迷你、小型、普通、大型 */
-export declare type ButtonSize = "mini" | "small" | "normal" | "large";
-/** 按钮状态，普通、主要、成功、警示、危险 */
+
+/**
+ * @description 按钮状态 Button status，普通-normal、主要-primary、成功-success、警示-warning、危险-danger
+ */
 export declare type ButtonStatus =
   | "normal"
   | "primary"
   | "success"
   | "warning"
   | "danger";
+
+/**
+ * @description 按钮元素 Type 属性，Button Native attribute，按钮-button、提交-submit、重置-reset
+ */
+export declare type ButtonNavtiveType = "button" | "submit" | "reset";
+
+/**
+ * @description 按钮形状 Button shape，矩形-square、椭圆-round、circle-圆形
+ */
+export declare type ButtonShape = "square" | "round" | "circle";
+
+/**
+ * @description 按钮尺寸 Button size，迷你-mini、小型-small、普通-normal、大型-large
+ */
+export declare type ButtonSize = "mini" | "small" | "normal" | "large";
