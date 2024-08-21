@@ -1,1 +1,10 @@
 $namespace: "bp" !default;
+
+$borderSize: 0.5px;
+
+// Sizes
+$sizes: "mini", "small", "normal", "large";
+$largeHeight: 36px;
+$normalHeight: 32px;
+$smallHeight: 28px;
+$miniHeight: 22px;

@@ -1,3 +1,3 @@
 <template>
-  <bp-button>Text</bp-button>
+  <bp-button status="danger">Text</bp-button>
 </template>

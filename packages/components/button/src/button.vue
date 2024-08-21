@@ -1,14 +1,37 @@
 <template>
-  <div :class="[clsBlockName, type]"><slot /></div>
+  <button
+    :class="[cls, 'select-none']"
+    :type="attrType"
+    :disabled="isDisabled"
+    @click="onClick"
+  >
+    <slot />
+  </button>
 </template>
 
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
-import { buttonProps } from "./props";
+import { ButtonProps, buttonProps } from "./props";
+import { computed } from "vue";
 
 defineOptions({ name: "Button" });
 const { clsBlockName } = useNamespace("button");
 
-const props = defineProps(buttonProps);
-// console.log(props.type === '');
+const props: ButtonProps = defineProps(buttonProps);
+
+/** Disabled  */
+const isDisabled = computed<boolean>(() => props.disabled || props.loading);
+
+const cls = computed(() => {
+  let className = [
+    clsBlockName,
+    `${clsBlockName}-${props.shape}-${props.size}`,
+    `${clsBlockName}-type-${props.type}`,
+    `${clsBlockName}-status-${props.status}`,
+    { "is-full": props.full },
+  ];
+  return className;
+});
+
+const onClick = () => {};
 </script>

@@ -1,6 +1,41 @@
 @use "./common/design.scss" as *;
 
-.#{$namespace}-button {
-  font-size: 14px;
-  color: var(--bp-primary-6);
+$button-cls: #{$namespace}-button;
+
+.#{$button-cls} {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  white-space: nowrap;
+  font-weight: 400;
+  line-height: 1;
+  min-height: #{miniHeight};
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  text-align: center;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  opacity: 1;
+  cursor: pointer;
+}
+
+$status: "normal", "primary", "success", "warning", "danger";
+$types: "normal", "primary", "plain", "dashed", "text";
+$shapes: "square", "round", "circle";
+
+$status-normal-color: var(--bp-gary-9);
+$status-primary-color: var(--bp-primary-6);
+$status-success-color: var(--bp-success-6);
+$status-warning-color: var(--bp-warning-6);
+$status-danger-color: var(--bp-danger-6);
+
+@each $item in $status {
+  // .#{$button-cls}-status-#{$item} {
+  // }
 }
