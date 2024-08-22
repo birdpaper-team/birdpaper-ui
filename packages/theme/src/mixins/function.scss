@@ -1,0 +1,22 @@
+@use "../common/design" as *;
+
+// joinVarName(('button', 'text-color')) => '--bp-button-text-color'
+@function joinVarName($list) {
+  $name: "--" + $namespace;
+  @each $item in $list {
+    @if $item != "" {
+      $name: $name + "-" + $item;
+    }
+  }
+  @return $name;
+}
+
+// getCssVar('button', 'text-color') => var(--bp-button-text-color)
+@function getCssVar($args...) {
+  @return var(#{joinVarName($args)});
+}
+
+// getCssVarWithDefault(('button', 'text-color'), blue) => var(--bp-button-text-color, blue)
+@function getCssVarWithDefault($args, $default) {
+  @return var(#{joinVarName($args)}, #{$default});
+}

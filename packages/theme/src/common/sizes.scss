@@ -1,0 +1,18 @@
+// Sizes
+$sizes: "mini", "small", "normal", "large";
+$largeHeight: 36px;
+$normalHeight: 32px;
+$smallHeight: 28px;
+$miniHeight: 22px;
+
+:root {
+  --bp-size-height-mini: #{$miniHeight};
+  --bp-size-height-small: #{$smallHeight};
+  --bp-size-height-normal: #{$normalHeight};
+  --bp-size-height-large: #{$largeHeight};
+
+  --bp-size-border-radius-mini: 2px;
+  --bp-size-border-radius-small: 2px;
+  --bp-size-border-radius-normal: 4px;
+  --bp-size-border-radius-large: 8px;
+}

@@ -1,0 +1,9 @@
+@use "../common/design" as *;
+
+@mixin b($block) {
+  $B: $namespace + "-" + $block !global;
+
+  .#{$B} {
+    @content;
+  }
+}
