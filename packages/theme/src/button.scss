@@ -1,8 +1,10 @@
-@use "./common/design.scss" as *;
+@use "common/design" as *;
+@use "common/sizes" as *;
+@use "mixins/var" as *;
+@use "mixins/function" as *;
+@use "mixins/mixins.scss" as *;
 
-$button-cls: #{$namespace}-button;
-
-.#{$button-cls} {
+@include b(button) {
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -11,7 +13,13 @@ $button-cls: #{$namespace}-button;
   white-space: nowrap;
   font-weight: 400;
   line-height: 1;
-  min-height: #{miniHeight};
+  color: getCssVar("button", "text-color");
+  background-color: getCssVar("button", "bg-color");
+  border-color: getCssVar("button", "border-color");
+  border-style: solid;
+  border-width: 0.5px;
+  min-height: $miniHeight;
+  padding: 4px 16px;
   text-rendering: auto;
   letter-spacing: normal;
   word-spacing: normal;
@@ -25,17 +33,107 @@ $button-cls: #{$namespace}-button;
   cursor: pointer;
 }
 
-$status: "normal", "primary", "success", "warning", "danger";
+$status: "normal";
 $types: "normal", "primary", "plain", "dashed", "text";
 $shapes: "square", "round", "circle";
 
-$status-normal-color: var(--bp-gary-9);
-$status-primary-color: var(--bp-primary-6);
-$status-success-color: var(--bp-success-6);
-$status-warning-color: var(--bp-warning-6);
-$status-danger-color: var(--bp-danger-6);
+// .bp-button-status-normal {
+//   --bp-button-text-color: var(--bp-gary-8);
+//   --bp-button-bg-color: var(--bp-normal-6);
+//   --bp-button-border-color: var(--bp-normal-6);
+// }
+
+@each $size in $sizes {
+  .bp-button-size-#{$size} {
+    height: getCssVar("size-height", $size);
+    border-radius: getCssVar("size-border-radius", $size);
+    font-size: getCssVar("size-font-size", $size);
+  }
+}
 
 @each $item in $status {
-  // .#{$button-cls}-status-#{$item} {
-  // }
+  @each $type in $types {
+    .bp-button-status-#{$item}-type-#{$type} {
+      $button-status-type: (
+        "normal": (
+          "normal": (
+            "text-color": (
+              "gary",
+              "9",
+            ),
+            "bg-color": (
+              "gary",
+              "2",
+            ),
+            "border-color": (
+              "gary",
+              "2",
+            ),
+          ),
+          "primary": (
+            "text-color": (
+              "gary",
+              "1",
+            ),
+            "bg-color": (
+              "gary",
+              "10",
+            ),
+            "border-color": (
+              "gary",
+              "10",
+            ),
+          ),
+          "plain": (
+            "text-color": (
+              "gary",
+              "9",
+            ),
+            "bg-color": (
+              "gary",
+              "0",
+            ),
+            "border-color": (
+              "gary",
+              "4",
+            ),
+          ),
+          "dashed": (
+            "text-color": (
+              "gary",
+              "9",
+            ),
+            "bg-color": (
+              "gary",
+              "0",
+            ),
+            "border-color": (
+              "gary",
+              "3",
+            ),
+          ),
+          "text": (
+            "text-color": (
+              "gary",
+              "9",
+            ),
+            "bg-color": (
+              "gary",
+              "0",
+            ),
+            "border-color": (
+              "gary",
+              "0",
+            ),
+          ),
+        ),
+      );
+
+      @each $key,
+        $value in map-get(map-get($button-status-type, #{$item}), #{$type})
+      {
+        @include css-var-from-global(("button", $key), $value);
+      }
+    }
+  }
 }

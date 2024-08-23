@@ -11,8 +11,13 @@ $miniHeight: 22px;
   --bp-size-height-normal: #{$normalHeight};
   --bp-size-height-large: #{$largeHeight};
 
+  --bp-size-font-size-mini: 12px;
+  --bp-size-font-size-small: 13px;
+  --bp-size-font-size-normal: 14px;
+  --bp-size-font-size-large: 16px;
+
   --bp-size-border-radius-mini: 2px;
-  --bp-size-border-radius-small: 2px;
+  --bp-size-border-radius-small: 4px;
   --bp-size-border-radius-normal: 4px;
   --bp-size-border-radius-large: 8px;
 }
