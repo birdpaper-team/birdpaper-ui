@@ -33,75 +33,78 @@
   opacity: 1;
   cursor: pointer;
 
+  &[class*="type-normal"] {
+    --bp-button-text-color: var(--bp-gary-1);
+  }
+
   &[class*="dashed"] {
     border-style: dashed;
   }
+
   &[class*="text"] {
     border: none;
     background: none;
   }
 }
 
-$status: "primary", "success", "warning", "danger";
+$status: "gary", "primary", "success", "warning", "danger";
 $types: "secondary", "normal", "plain", "dashed", "text";
 $shapes: "square", "round", "circle";
 
 @each $size in $sizes {
-  .bp-button-size-#{$size} {
+  .#{$B}-size-#{$size} {
     height: getCssVar("size-height", $size);
     border-radius: getCssVar("size-border-radius", $size);
     font-size: getCssVar("size-font-size", $size);
   }
 }
 
-.bp-button-status-gary-type-secondary {
-  --bp-button-text-color: var(--bp-gary-9);
-  --bp-button-bg-color: var(--bp-gary-2);
-  --bp-button-border-color: var(--bp-gary-2);
-}
-
-.bp-button-status-gary-type-normal {
-  --bp-button-text-color: var(--bp-gary-1);
-  --bp-button-bg-color: var(--bp-gary-10);
-  --bp-button-border-color: var(--bp-gary-10);
-}
-
-.bp-button-status-gary-type-plain {
-  --bp-button-text-color: var(--bp-gary-9);
-  --bp-button-bg-color: var(--bp-gary-0);
-  --bp-button-border-color: var(--bp-gary-4);
-}
-
-.bp-button-status-gary-type-dashed {
-  --bp-button-text-color: var(--bp-gary-9);
-  --bp-button-bg-color: var(--bp-gary-0);
-  --bp-button-border-color: var(--bp-gary-4);
-}
-
-.bp-button-status-gary-type-text {
-  --bp-button-text-color: var(--bp-gary-9);
-}
-
 @each $item in $status {
   @each $type in $types {
-    .bp-button-status-#{$item}-type-#{$type} {
+    .#{$B}-status-#{$item}-type-#{$type} {
       @if $type == "secondary" {
-        @include css-var-from-global(("button", "text-color"), ($item, "7"));
-        @include css-var-from-global(("button", "bg-color"), ($item, "1"));
-        @include css-var-from-global(("button", "border-color"), ($item, "1"));
+        @include css-var-from-global(
+          ("button", "text-color"),
+          ($item, if($item == "gary", "9", "7"))
+        );
+        @include css-var-from-global(
+          ("button", "bg-color"),
+          ($item, if($item == "gary", "2", "1"))
+        );
+        @include css-var-from-global(
+          ("button", "border-color"),
+          ($item, if($item == "gary", "2", "1"))
+        );
       }
       @if $type == "normal" {
-        @include css-var-from-global(("button", "text-color"), ("gary", "0"));
-        @include css-var-from-global(("button", "bg-color"), ($item, "6"));
-        @include css-var-from-global(("button", "border-color"), ($item, "6"));
+        @include css-var-from-global(
+          ("button", "bg-color"),
+          ($item, if($item == "gary", "9", "6"))
+        );
+        @include css-var-from-global(
+          ("button", "border-color"),
+          ($item, if($item == "gary", "9", "6"))
+        );
       }
       @if $type == "plain" or $type == "dashed" {
-        @include css-var-from-global(("button", "text-color"), ($item, "6"));
-        @include css-var-from-global(("button", "bg-color"), ($item, "1"));
-        @include css-var-from-global(("button", "border-color"), ($item, "6"));
+        @include css-var-from-global(
+          ("button", "text-color"),
+          ($item, if($item == "gary", "9", "6"))
+        );
+        @include css-var-from-global(
+          ("button", "bg-color"),
+          ($item, if($item == "gary", "0", "1"))
+        );
+        @include css-var-from-global(
+          ("button", "border-color"),
+          ($item, if($item == "gary", "4", "6"))
+        );
       }
       @if $type == "text" {
-        @include css-var-from-global(("button", "text-color"), ($item, "6"));
+        @include css-var-from-global(
+          ("button", "text-color"),
+          ($item, if($item == "gary", "9", "6"))
+        );
       }
     }
   }
