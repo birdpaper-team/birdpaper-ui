@@ -2,8 +2,8 @@
  * @description 按钮类型 Button type，普通-normal、主要-primary、线框-plain、虚线-dashed、文本-text
  */
 export declare type ButtonType =
+  | "secondary"
   | "normal"
-  | "primary"
   | "plain"
   | "dashed"
   | "text";
@@ -12,7 +12,7 @@ export declare type ButtonType =
  * @description 按钮状态 Button status，普通-normal、主要-primary、成功-success、警示-warning、危险-danger
  */
 export declare type ButtonStatus =
-  | "normal"
+  | "gary"
   | "primary"
   | "success"
   | "warning"

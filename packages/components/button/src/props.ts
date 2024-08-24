@@ -15,7 +15,7 @@ export const buttonProps = {
    */
   type: {
     type: String as PropType<ButtonType>,
-    default: "normal",
+    default: "secondary",
   },
   /**
    * @typpe {ButtonNavtiveType}
@@ -29,11 +29,11 @@ export const buttonProps = {
   /**
    * @type {ButtonStatus}
    * @description Button status
-   * @default normal
+   * @default gary
    */
   status: {
     type: String as PropType<ButtonStatus>,
-    default: "normal",
+    default: "gary",
   },
   /**
    * @type {ButtonSize}

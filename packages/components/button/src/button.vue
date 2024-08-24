@@ -25,9 +25,10 @@ const isDisabled = computed<boolean>(() => props.disabled || props.loading);
 const cls = computed(() => {
   let className = [
     clsBlockName,
-    `${clsBlockName}-${props.shape}-${props.size}`,
-    `${clsBlockName}-type-${props.type}`,
-    `${clsBlockName}-status-${props.status}`,
+    `${clsBlockName}-size-${props.size}`,
+    `${clsBlockName}-shape-${props.shape}`,
+    `${clsBlockName}-status-${props.status}-type-${props.type}`,
+    // `${clsBlockName}-type-${props.type}`,
     { "is-full": props.full },
   ];
   return className;
