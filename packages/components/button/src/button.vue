@@ -28,7 +28,6 @@ const cls = computed(() => {
     `${clsBlockName}-size-${props.size}`,
     `${clsBlockName}-shape-${props.shape}`,
     `${clsBlockName}-status-${props.status}-type-${props.type}`,
-    // `${clsBlockName}-type-${props.type}`,
     { "is-full": props.full },
   ];
   return className;
