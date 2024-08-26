@@ -38,11 +38,11 @@ export const buttonProps = {
   /**
    * @type {ButtonSize}
    * @description Button size.
-   * @default normal
+   * @default default
    */
   size: {
     type: String as PropType<ButtonSize>,
-    default: "normal",
+    default: "default",
   },
   /**
    * @type {ButtonShape}

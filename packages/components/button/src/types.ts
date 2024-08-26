@@ -29,6 +29,6 @@ export declare type ButtonNavtiveType = "button" | "submit" | "reset";
 export declare type ButtonShape = "square" | "round" | "circle";
 
 /**
- * @description 按钮尺寸 Button size，迷你-mini、小型-small、普通-normal、大型-large
+ * @description 按钮尺寸 Button size，迷你-mini、小型-small、默认-default、大型-large
  */
-export declare type ButtonSize = "mini" | "small" | "normal" | "large";
+export declare type ButtonSize = "mini" | "small" | "default" | "large";
