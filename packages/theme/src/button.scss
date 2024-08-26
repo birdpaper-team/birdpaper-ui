@@ -18,9 +18,7 @@
   border-color: getCssVar("button", "border-color");
   border-style: solid;
   border-width: 0.5px;
-  min-width: 80px;
   min-height: $miniHeight;
-  padding: 4px 16px;
   text-rendering: auto;
   letter-spacing: normal;
   word-spacing: normal;
@@ -30,11 +28,13 @@
   text-align: center;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
+  overflow: hidden;
   opacity: 1;
   cursor: pointer;
   transition: all 0.2s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     color: getCssVar("button", "text-color-hover");
     background-color: getCssVar("button", "bg-color-hover");
     border-color: getCssVar("button", "border-color-hover");
@@ -49,22 +49,23 @@
     transition: all 0.2s ease;
   }
 
-  &[class*="type-normal"] {
+  &[class*="-normal"] {
     --bp-button-text-color: var(--bp-gary-1);
     --bp-button-text-color-hover: var(--bp-gary-1);
     --bp-button-text-color-active: var(--bp-gary-1);
   }
 
-  &[class*="dashed"] {
+  &[class*="-dashed"] {
     border-style: dashed;
   }
 
-  &[class*="text"] {
+  &[class*="-text"] {
     border: none;
     background: none;
     opacity: 1;
 
-    &:hover {
+    &:hover,
+    &:focus-visible {
       opacity: 0.6;
     }
 
@@ -74,10 +75,38 @@
   }
 
   &[disabled] {
-    filter: saturate(0.8) opacity(0.8) contrast(0.9);
+    filter: saturate(0.9) opacity(0.8) contrast(0.9);
     cursor: not-allowed;
-    pointer-events: none;
+
+    &:hover,
+    &:focus-visible {
+      color: getCssVar("button", "text-color");
+      background-color: getCssVar("button", "bg-color");
+      border-color: getCssVar("button", "border-color");
+      opacity: 1;
+    }
   }
+
+  & + & {
+    margin-left: 10px;
+  }
+
+  .button-icon {
+    display: flex;
+    margin-right: 4px;
+
+    .bp-icon {
+      fill: getCssVar("button", "text-color");
+    }
+
+    .bp-icon-loading {
+      @include spin(1s);
+    }
+  }
+}
+
+.is-full {
+  width: 100%;
 }
 
 $status: "gary", "primary", "success", "warning", "danger";
@@ -85,16 +114,34 @@ $types: "secondary", "normal", "plain", "dashed", "text";
 $shapes: "square", "round", "circle";
 
 @each $size in $sizes {
-  .#{$B}-size-#{$size} {
-    height: getCssVar("size-height", $size);
-    border-radius: getCssVar("size-border-radius", $size);
-    font-size: getCssVar("size-font-size", $size);
+  @each $shape in $shapes {
+    .#{$B}-#{$size}-#{$shape} {
+      width: auto;
+      height: getCssVar("size-height", $size);
+      border-radius: getCssVar("size-border-radius", $size);
+      font-size: getCssVar("size-font-size", $size);
+      padding: 0 getCssVar("size-padding", $size);
+
+      @if $shape == "round" {
+        border-radius: getCssVar("size-height", $size);
+      }
+
+      @if $shape == "circle" {
+        width: getCssVar("size-height", $size);
+        padding: 0;
+        border-radius: 50%;
+      }
+    }
   }
+}
+
+.#{$B}-round {
+  border-radius: 40px;
 }
 
 @each $item in $status {
   @each $type in $types {
-    .#{$B}-status-#{$item}-type-#{$type} {
+    .#{$B}-#{$item}-#{$type} {
       @if $type == "secondary" {
         @include css-var-from-global(("button", "text-color"), ($item, if($item == "gary", "9", "7")));
         @include css-var-from-global(("button", "text-color-hover"), ($item, if($item == "gary", "9", "7")));
