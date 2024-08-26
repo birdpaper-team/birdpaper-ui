@@ -1,23 +1,28 @@
 // Sizes
-$sizes: "mini", "small", "normal", "large";
+$sizes: "mini", "small", "default", "large";
 $largeHeight: 36px;
-$normalHeight: 32px;
+$defaultHeight: 32px;
 $smallHeight: 28px;
 $miniHeight: 22px;
 
 :root {
   --bp-size-height-mini: #{$miniHeight};
   --bp-size-height-small: #{$smallHeight};
-  --bp-size-height-normal: #{$normalHeight};
+  --bp-size-height-default: #{$defaultHeight};
   --bp-size-height-large: #{$largeHeight};
 
   --bp-size-font-size-mini: 12px;
   --bp-size-font-size-small: 13px;
-  --bp-size-font-size-normal: 14px;
+  --bp-size-font-size-default: 14px;
   --bp-size-font-size-large: 16px;
+
+  --bp-size-padding-mini: 10px;
+  --bp-size-padding-small: 14px;
+  --bp-size-padding-default: 18px;
+  --bp-size-padding-large: 22px;
 
   --bp-size-border-radius-mini: 2px;
   --bp-size-border-radius-small: 4px;
-  --bp-size-border-radius-normal: 4px;
-  --bp-size-border-radius-large: 8px;
+  --bp-size-border-radius-default: 4px;
+  --bp-size-border-radius-large: 6px;
 }
