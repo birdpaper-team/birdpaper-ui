@@ -28,6 +28,7 @@
   text-align: center;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
+  vertical-align: middle;
   overflow: hidden;
   opacity: 1;
   cursor: pointer;
@@ -93,6 +94,7 @@
 
   .button-icon {
     display: flex;
+    align-items: center;
     margin-right: 4px;
 
     .bp-icon {

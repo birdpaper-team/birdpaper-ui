@@ -1,7 +1,7 @@
 <template>
   <button :class="[cls, 'select-none']" :type="attrType" :disabled="isDisabled" @click="onClick">
-    <div v-if="loading" class="button-icon">
-      <component :class="{ 'bp-icon-loading': loading }" :is="IconLoader4Line" size="14"></component>
+    <div v-if="buttonIcon || loading" class="button-icon">
+      <component :class="{ 'bp-icon-loading': loading }" :is="buttonIcon" size="14"></component>
     </div>
     <slot />
   </button>
@@ -23,6 +23,10 @@ const emits = defineEmits<{
 
 /** Disabled  */
 const isDisabled = computed<boolean>(() => props.disabled || props.loading);
+
+const buttonIcon = computed<object>(() => {
+  return props.loading ? IconLoader4Line : props.icon;
+});
 
 const cls = computed(() => {
   let className = [clsBlockName, `${clsBlockName}-${props.size}-${props.shape}`, `${clsBlockName}-${props.status}-${props.type}`, { "is-full": props.full }];

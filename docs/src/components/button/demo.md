@@ -11,3 +11,6 @@
 
 ## 按钮状态
 <demo-block src="button/status"></demo-block>
+
+## 图标按钮
+<demo-block src="button/icon"></demo-block>
