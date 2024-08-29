@@ -18,7 +18,6 @@
   border-color: getCssVar("button", "border-color");
   border-style: solid;
   border-width: 0.5px;
-  min-height: $miniHeight;
   text-rendering: auto;
   letter-spacing: normal;
   word-spacing: normal;
@@ -76,16 +75,9 @@
   }
 
   &[disabled] {
-    filter: saturate(0.9) opacity(0.8) contrast(0.9);
-    cursor: not-allowed;
-
-    &:hover,
-    &:focus-visible {
-      color: getCssVar("button", "text-color");
-      background-color: getCssVar("button", "bg-color");
-      border-color: getCssVar("button", "border-color");
-      opacity: 1;
-    }
+    filter: saturate(0.98) opacity(0.8) contrast(0.98);
+    pointer-events: none;
+    cursor: default;
   }
 
   & + & {
@@ -95,7 +87,6 @@
   .button-icon {
     display: flex;
     align-items: center;
-    margin-right: 4px;
 
     .bp-icon {
       fill: getCssVar("button", "text-color");
@@ -120,6 +111,8 @@ $shapes: "square", "round", "circle";
     .#{$B}-#{$size}-#{$shape} {
       width: auto;
       height: getCssVar("size-height", $size);
+      min-width: getCssVar("size-height", $size);
+      min-height: getCssVar("size-height", $size);
       border-radius: getCssVar("size-border-radius", $size);
       font-size: getCssVar("size-font-size", $size);
       padding: 0 getCssVar("size-padding", $size);
