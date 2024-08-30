@@ -1,15 +1,9 @@
 import { ExtractPropTypes, PropType } from "vue";
-import {
-  ButtonNavtiveType,
-  ButtonShape,
-  ButtonSize,
-  ButtonStatus,
-  ButtonType,
-} from "./types";
+import { ButtonIcon, ButtonLoadingIcon, ButtonNavtiveType, ButtonShape, ButtonSize, ButtonStatus, ButtonType } from "./types";
 
 export const buttonProps = {
   /**
-   * @type {ButtonType}
+   * @type ButtonType
    * @description Button type.
    * @default normal
    */
@@ -18,7 +12,7 @@ export const buttonProps = {
     default: "secondary",
   },
   /**
-   * @typpe {ButtonNavtiveType}
+   * @typpe ButtonNavtiveType
    * @description Button Native attribute.
    * @default button
    */
@@ -27,7 +21,7 @@ export const buttonProps = {
     default: "button",
   },
   /**
-   * @type {ButtonStatus}
+   * @type ButtonStatus
    * @description Button status
    * @default gary
    */
@@ -36,7 +30,7 @@ export const buttonProps = {
     default: "gary",
   },
   /**
-   * @type {ButtonSize}
+   * @type ButtonSize
    * @description Button size.
    * @default default
    */
@@ -45,7 +39,7 @@ export const buttonProps = {
     default: "default",
   },
   /**
-   * @type {ButtonShape}
+   * @type ButtonShape
    * @description Button shape.
    * @default square
    */
@@ -72,6 +66,21 @@ export const buttonProps = {
     default: false,
   },
   /**
+   * @type ButtonLoadingIcon
+   * @description The default icon number which 1-5 or icon component.
+   * @default 1
+   */
+  loadingIcon: {
+    type: [Number, Object] as PropType<ButtonLoadingIcon>,
+    validator: (val: unknown) => {
+      if (typeof val === "number") {
+        return [1, 2, 3, 4, 5].includes(val);
+      }
+      return typeof val === "object";
+    },
+    default: 1,
+  },
+  /**
    * @type boolean
    * @description Button is full width or not.
    * @default false
@@ -81,12 +90,12 @@ export const buttonProps = {
     default: false,
   },
   /**
-   * @type object
+   * @type ButtonIcon
    * @description Button icon component.
    * @default null
    */
   icon: {
-    type: Object,
+    type: Object as PropType<ButtonIcon>,
     default: () => null,
   },
 } as const;
