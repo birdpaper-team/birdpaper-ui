@@ -33,6 +33,10 @@
   cursor: pointer;
   transition: all 0.2s ease;
 
+  &-inner {
+    transition: padding 0.2s ease;
+  }
+
   &:hover,
   &:focus-visible {
     color: getCssVar("button", "text-color-hover");
@@ -87,13 +91,13 @@
   .button-icon {
     display: flex;
     align-items: center;
-
+    
     .bp-icon {
       fill: getCssVar("button", "text-color");
     }
-
+    
     .bp-icon-loading {
-      @include spin(1s);
+      @include spin(1.2s);
     }
   }
 }
