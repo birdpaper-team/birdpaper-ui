@@ -62,7 +62,8 @@
     "global.d.ts"
   ],
   "dependencies": {
-    "dayjs": "^1.11.3"
+    "dayjs": "^1.11.3",
+    "birdpaper-icon": "^0.1.0"
   },
   "devDependencies": {
     "vue": "^3.4.34"
