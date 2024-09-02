@@ -16,7 +16,8 @@
     "rootDir": ".",
     "paths": {
       "@birdpaper-ui/*": ["packages/*"]
-    }
+    },
+    "types": ["vitest/globals"]
   },
   "include": [
     "packages/birdpaper-ui/**/*.ts",
@@ -27,7 +28,8 @@
     "packages/components/**/*.d.ts",
     "packages/components/**/*.tsx",
     "packages/components/**/*.vue",
-    "global.d.ts"
+    "global.d.ts",
+    "env.d.ts"
   ],
   // 指定不需要被编译的目录
   "exclude": ["node_modules"]
