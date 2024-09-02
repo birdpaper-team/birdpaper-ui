@@ -1,5 +1,6 @@
 @use "common/design" as *;
 @use "common/sizes" as *;
+@use "common/color" as *;
 @use "mixins/var" as *;
 @use "mixins/function" as *;
 @use "mixins/mixins.scss" as *;
@@ -31,6 +32,7 @@
   overflow: hidden;
   opacity: 1;
   cursor: pointer;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.02);
   transition: all 0.2s ease;
 
   &-inner {
@@ -66,6 +68,7 @@
   &[class*="-text"] {
     border: none;
     background: none;
+    box-shadow: none;
     opacity: 1;
 
     &:hover,
@@ -91,11 +94,11 @@
   .button-icon {
     display: flex;
     align-items: center;
-    
+
     .bp-icon {
       fill: getCssVar("button", "text-color");
     }
-    
+
     .bp-icon-loading {
       @include spin(1.2s);
     }
@@ -160,13 +163,13 @@ $shapes: "square", "round", "circle";
       }
       @if $type == "plain" or $type == "dashed" {
         @include css-var-from-global(("button", "text-color"), ($item, if($item == "gary", "9", "6")));
-        @include css-var-from-global(("button", "text-color-hover"), ($item, if($item == "gary", "10", "7")));
+        @include css-var-from-global(("button", "text-color-hover"), ($item, if($item == "gary", "10", "1")));
 
         @include css-var-from-global(("button", "bg-color"), ($item, if($item == "gary", "0", "1")));
-        @include css-var-from-global(("button", "bg-color-hover"), ($item, if($item == "gary", "2", "2")));
+        @include css-var-from-global(("button", "bg-color-hover"), ($item, if($item == "gary", "2", "6")));
 
         @include css-var-from-global(("button", "border-color"), ($item, if($item == "gary", "4", "6")));
-        @include css-var-from-global(("button", "border-color-hover"), ($item, if($item == "gary", "5", "7")));
+        @include css-var-from-global(("button", "border-color-hover"), ($item, if($item == "gary", "5", "6")));
       }
       @if $type == "text" {
         @include css-var-from-global(("button", "text-color"), ($item, if($item == "gary", "9", "6")));
