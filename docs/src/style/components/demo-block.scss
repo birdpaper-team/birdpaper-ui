@@ -63,24 +63,16 @@
   &-code {
     max-height: 0;
     overflow: auto;
-    padding: 0 20px;
-    background-color: #1d2129;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     transition: max-height 0.2s ease;
 
     &-inner {
-      font-size: 13px;
       max-height: 600px;
-      line-height: 1.6;
 
-      .shiki {
-        background: none !important;
-      }
-
-      pre,
-      code {
-        font-size: 13px !important;
+      div[class*="language-"] {
+        margin: 0;
+        border-radius: 0;
       }
     }
   }
@@ -93,9 +85,9 @@
 
   .demo-block-code {
     max-height: 1000px;
-    border-left: 0.5px solid #4e5969;
-    border-right: 0.5px solid #4e5969;
-    border-bottom: 0.5px solid #4e5969;
+    border-left: 0.5px solid var(--bp-gary-2);
+    border-right: 0.5px solid var(--bp-gary-2);
+    border-bottom: 0.5px solid var(--bp-gary-2);
     transition: max-height 0.4s ease;
   }
 }

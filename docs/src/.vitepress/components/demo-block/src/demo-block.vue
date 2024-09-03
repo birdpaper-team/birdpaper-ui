@@ -8,7 +8,9 @@
     </div>
 
     <div :class="[`${name}-code`]">
-      <div :class="`${name}-code-inner`" v-html="decodeURIComponent(codeStr)"></div>
+      <div :class="`${name}-code-inner`">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -21,8 +23,6 @@ const name = "demo-block";
 const props = defineProps({
   // Demo src path
   src: { type: String },
-  // Code text (Auto)
-  codeStr: { type: String, default: "" },
 });
 
 /** Show code is or not. */

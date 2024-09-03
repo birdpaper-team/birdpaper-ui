@@ -30,7 +30,7 @@
   <bp-button status="danger" type="text">Danger</bp-button>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .bp-button {
   margin-bottom: 8px;
 }
