@@ -63,9 +63,9 @@
   }
 
   &[class*="-normal"] {
-    --bp-button-text-color: var(--bp-gary-1-rgb);
-    --bp-button-text-color-hover: var(--bp-gary-1-rgb);
-    --bp-button-text-color-active: var(--bp-gary-1-rgb);
+    --bp-button-text-color: var(--bp-gary-0-rgb);
+    --bp-button-text-color-hover: var(--bp-gary-0-rgb);
+    --bp-button-text-color-active: var(--bp-gary-0-rgb);
   }
 
   &[class*="-dashed"] {
@@ -155,11 +155,11 @@ $shapes: "square", "round", "circle";
         @include css-var-from-global-rgb(("button", "text-color"), ($item, if($item == "gary", "9", "7")));
         @include css-var-from-global-rgb(("button", "text-color-hover"), ($item, if($item == "gary", "9", "7")));
 
-        @include css-var-from-global-rgb(("button", "bg-color"), ($item, if($item == "gary", "2", "1")));
-        @include css-var-from-global-rgb(("button", "bg-color-hover"), ($item, if($item == "gary", "2", "1")));
+        @include css-var-from-global-rgb(("button", "bg-color"), ($item, 1));
+        @include css-var-from-global-rgb(("button", "bg-color-hover"), ($item, 1));
 
-        @include css-var-from-global-rgb(("button", "border-color"), ($item, if($item == "gary", "2", "1")));
-        @include css-var-from-global-rgb(("button", "border-color-hover"), ($item, if($item == "gary", "7", "6")));
+        @include css-var-from-global-rgb(("button", "border-color"), ($item, 1));
+        @include css-var-from-global-rgb(("button", "border-color-hover"), ($item, 6));
       }
       @if $type == "normal" {
         @include css-var-from-global-rgb(("button", "bg-color"), ($item, if($item == "gary", "9", "6")));
@@ -170,10 +170,10 @@ $shapes: "square", "round", "circle";
       }
       @if $type == "plain" or $type == "dashed" {
         @include css-var-from-global-rgb(("button", "text-color"), ($item, if($item == "gary", "9", "6")));
-        @include css-var-from-global-rgb(("button", "text-color-hover"), ($item, if($item == "gary", "10", "1")));
+        @include css-var-from-global-rgb(("button", "text-color-hover"), ($item, if($item == "gary", "9", "1")));
 
         @include css-var-from-global-rgb(("button", "bg-color"), ($item, if($item == "gary", "0", "1")));
-        @include css-var-from-global-rgb(("button", "bg-color-hover"), ($item, if($item == "gary", "2", "6")));
+        @include css-var-from-global-rgb(("button", "bg-color-hover"), ($item, if($item == "gary", "1", "6")));
 
         @include css-var-from-global-rgb(("button", "border-color"), ($item, if($item == "gary", "4", "6")));
         @include css-var-from-global-rgb(("button", "border-color-hover"), ($item, if($item == "gary", "5", "6")));
