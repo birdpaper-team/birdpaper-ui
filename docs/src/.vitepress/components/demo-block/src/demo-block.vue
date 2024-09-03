@@ -1,5 +1,5 @@
 <template>
-  <div :class="name">
+  <div :class="[name, { open: showCode }]">
     <div :class="`${name}-area`" v-if="demoComponent">
       <component :is="demoComponent"></component>
     </div>
@@ -7,11 +7,8 @@
       <demo-option v-model="showCode"></demo-option>
     </div>
 
-    <div :class="[`${name}-code`, { open: showCode }]">
-      <div
-        :class="`${name}-code-inner`"
-        v-html="decodeURIComponent(codeStr)"
-      ></div>
+    <div :class="[`${name}-code`]">
+      <div :class="`${name}-code-inner`" v-html="decodeURIComponent(codeStr)"></div>
     </div>
   </div>
 </template>

@@ -6,7 +6,7 @@ const { resolve } = path;
 let codeToHtml: any = () => {};
 (async () => {
   let res = await getHighlighter({
-    theme: "min-light",
+    theme: "dark-plus",
   });
   codeToHtml = res.codeToHtml;
 })();
@@ -48,7 +48,6 @@ export default (md: any) => {
       const src = getTagLabel(tagText, "demo-block", "src");
       const lang = getTagLabel(tagText, "demo-block", "lang") || "vue";
       let codeString = "";
-
       codeString = codeToHtml(
         fs.readFileSync(resolve(`./src/example/${src}.vue`)).toString(),
         { lang }
