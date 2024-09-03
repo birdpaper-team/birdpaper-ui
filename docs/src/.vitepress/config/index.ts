@@ -24,6 +24,7 @@ const config: import("vitepress").UserConfig = {
     },
   },
   markdown: {
+    theme: "dark-plus",
     config: (md) => {
       md.use(loadCode);
     },
