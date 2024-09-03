@@ -2,20 +2,25 @@
 
 .demo-block {
   width: 100%;
-  border: 0.5px solid var(--bp-gary-3);
-  border-radius: 10px;
   margin-top: 20px;
 
   &-area {
     padding: 16px 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     overflow-x: auto;
+    border: 0.5px solid var(--bp-gary-2);
   }
 
   &-footer {
     display: flex;
     justify-content: flex-end;
     padding: 16px 20px;
-    border-top: 0.5px solid var(--bp-gary-3);
+    border-left: 0.5px solid var(--bp-gary-2);
+    border-right: 0.5px solid var(--bp-gary-2);
+    border-bottom: 0.5px solid var(--bp-gary-2);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 
     @mixin icon-active {
       border: 0.5px solid var(--bp-gary-9);
@@ -35,7 +40,7 @@
       align-items: center;
       width: 26px;
       height: 26px;
-      border: 0.5px solid var(--bp-gary-4);
+      border: 0.5px solid var(--bp-gary-3);
       border-radius: 50%;
       cursor: pointer;
 
@@ -59,7 +64,7 @@
     max-height: 0;
     overflow: auto;
     padding: 0 20px;
-    background-color: var(--bp-gary-1);
+    background-color: #1d2129;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
     transition: max-height 0.2s ease;
@@ -67,6 +72,7 @@
     &-inner {
       font-size: 13px;
       max-height: 600px;
+      line-height: 1.6;
 
       .shiki {
         background: none !important;
@@ -78,10 +84,18 @@
       }
     }
   }
+}
 
-  .open {
+.open {
+  .demo-block-footer {
+    border-radius: 0px;
+  }
+
+  .demo-block-code {
     max-height: 1000px;
-    border-top: 0.5px solid var(--bp-gary-2);
+    border-left: 0.5px solid #4e5969;
+    border-right: 0.5px solid #4e5969;
+    border-bottom: 0.5px solid #4e5969;
     transition: max-height 0.4s ease;
   }
 }
