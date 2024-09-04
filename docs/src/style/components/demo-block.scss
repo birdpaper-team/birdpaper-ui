@@ -53,6 +53,10 @@
         opacity: 0.8;
         @include icon-active;
       }
+
+      &:not(:first-child) {
+        margin-left: 8px;
+      }
     }
 
     .icon-item-active {
