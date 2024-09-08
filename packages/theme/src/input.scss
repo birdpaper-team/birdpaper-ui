@@ -1,0 +1,46 @@
+@use "common/design" as *;
+@use "common/sizes" as *;
+@use "common/color" as *;
+@use "mixins/var" as *;
+@use "mixins/function" as *;
+@use "mixins/mixins.scss" as *;
+
+@include b(input) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  outline: 0;
+  white-space: nowrap;
+  border-style: solid;
+  border-width: 0.5px;
+  border-color: var(--bp-gary-1);
+  background-color: var(--bp-gary-1);
+  padding: 0 10px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  cursor: text;
+  opacity: 1;
+  width: auto;
+  // box-shadow: 0 2px 0px rgba(getCssVar("button", "border-color"), 0.02);
+  transition: all 0.2s ease;
+
+  &-inner{
+    width: 100%;
+    height: 100%;
+    flex: 1 1 auto;
+  }
+
+  &:focus-within {
+    background-color: var(--bp-gary-0);
+    border: 0.5px solid var(--bp-primary-6);
+    transition: all 0.2s ease;
+  }
+}
+
+@each $size in $sizes {
+  .#{$B}-#{$size} {
+    height: getCssVar("size-height", $size);
+    border-radius: getCssVar("size-border-radius", $size);
+    font-size: getCssVar("size-font-size", $size);
+  }
+}
