@@ -1,6 +1,7 @@
 @use "common/design" as *;
 @use "common/sizes" as *;
 @use "common/color" as *;
+@use "common/extend.scss" as *;
 @use "mixins/var" as *;
 @use "mixins/function" as *;
 @use "mixins/mixins.scss" as *;
@@ -12,28 +13,78 @@
   outline: 0;
   white-space: nowrap;
   border-style: solid;
-  border-width: 0.5px;
+  border-width: $borderSize;
   border-color: var(--bp-gary-1);
   background-color: var(--bp-gary-1);
-  padding: 0 10px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   cursor: text;
   opacity: 1;
   width: auto;
-  // box-shadow: 0 2px 0px rgba(getCssVar("button", "border-color"), 0.02);
   transition: all 0.2s ease;
-
-  &-inner{
-    width: 100%;
-    height: 100%;
-    flex: 1 1 auto;
+  
+  &:hover {
+    .action-icon {
+      opacity: 1;
+      transition: all 0.2s ease;
+    }
   }
-
+  
   &:focus-within {
     background-color: var(--bp-gary-0);
     border: 0.5px solid var(--bp-primary-6);
     transition: all 0.2s ease;
+  }
+  
+  &-inner {
+    width: 100%;
+    height: 100%;
+    color: var(--bp-gary-10);
+    letter-spacing: .2px;
+    @extend .font-input;
+
+    &::placeholder {
+      color: var(--bp-gary-5);
+    }
+  }
+
+  &-suffix {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100px;
+    flex: 0 0 auto;
+    margin-left: 2px;
+
+    .bp-icon {
+      fill: var(--bp-gary-6);
+    }
+
+    &-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .action-icon {
+        border-radius: 50%;
+        opacity: 0;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          fill: var(--bp-gary-9);
+          background-color: var(--bp-gary-2);
+          transition: all 0.2s ease;
+        }
+      }
+    }
+
+    .suffix-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--bp-gary-6);
+    }
   }
 }
 
@@ -42,5 +93,27 @@
     height: getCssVar("size-height", $size);
     border-radius: getCssVar("size-border-radius", $size);
     font-size: getCssVar("size-font-size", $size);
+    padding: 0 calc(getCssVar("size-height", $size) / 4);
+
+    .#{$B}-suffix {
+      right: calc(getCssVar("size-height", $size) / 4);
+
+      .bp-icon {
+        width: calc(getCssVar("size-height", $size) / 1.9) !important;
+        height: calc(getCssVar("size-height", $size) / 1.9) !important;
+      }
+
+      &-inner {
+        .action-icon {
+          padding: calc(getCssVar("size-height", $size) / 20);
+        }
+      }
+
+      .suffix-content {
+        height: getCssVar("size-height", $size);
+        padding-left: calc(getCssVar("size-height", $size) / 10);
+        font-size: 12px;
+      }
+    }
   }
 }

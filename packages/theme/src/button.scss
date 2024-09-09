@@ -18,7 +18,7 @@
   background-color: rgba(getCssVar("button", "bg-color"), 1);
   border-color: rgba(getCssVar("button", "border-color"), 1);
   border-style: solid;
-  border-width: 0.5px;
+  border-width: $borderSize;
   text-rendering: auto;
   letter-spacing: normal;
   word-spacing: normal;
