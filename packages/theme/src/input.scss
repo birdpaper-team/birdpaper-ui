@@ -32,7 +32,7 @@
 
   &:focus-within {
     background-color: var(--bp-gary-0);
-    border: 0.5px solid var(--bp-primary-6);
+    border: $borderSize solid var(--bp-primary-6);
     transition: all 0.2s ease;
   }
 
@@ -122,7 +122,7 @@
       width: calc(getCssVar("size-height", $size) / 1.9) !important;
       height: calc(getCssVar("size-height", $size) / 1.9) !important;
     }
-    
+
     .#{$B}-perfix {
       padding-right: calc(getCssVar("size-height", $size) / 10);
     }
