@@ -8,6 +8,7 @@
       :class="`${clsBlockName}-inner`"
       :name
       :disabled
+      :readonly
       :placeholder
       :maxlength
       :type="inpType"
@@ -22,7 +23,7 @@
         <component v-if="innerActionIcon && !!model" :is="innerActionIcon" class="action-icon" @click.stop="handleActionIconClick" />
         <span class="suffix-content">{{ suffixContent }}</span>
       </div>
-      
+
       <span class="suffix-content" v-else> <slot name="suffix" /></span>
     </div>
   </div>
@@ -46,7 +47,7 @@ const model = defineModel<string | number>({
 const props: InputProps = defineProps(inputProps);
 const slots = useSlots();
 
-const cls = computed<string[]>(() => [clsBlockName, `${clsBlockName}-${props.size}`]);
+const cls = computed<string[] | {}[]>(() => [clsBlockName, `${clsBlockName}-${props.size}`, props.disabled && `${clsBlockName}-disabled`]);
 const inpRef = ref<HTMLInputElement>();
 
 const handleClick = () => {

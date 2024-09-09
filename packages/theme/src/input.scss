@@ -22,30 +22,34 @@
   opacity: 1;
   width: auto;
   transition: all 0.2s ease;
-  
+
   &:hover {
     .action-icon {
       opacity: 1;
       transition: all 0.2s ease;
     }
   }
-  
+
   &:focus-within {
     background-color: var(--bp-gary-0);
     border: 0.5px solid var(--bp-primary-6);
     transition: all 0.2s ease;
   }
-  
+
   &-inner {
     width: 100%;
     height: 100%;
     color: var(--bp-gary-10);
-    letter-spacing: .2px;
+    letter-spacing: 0.2px;
     @extend .font-input;
 
     &::placeholder {
       color: var(--bp-gary-5);
     }
+  }
+
+  .bp-icon {
+    fill: var(--bp-gary-6);
   }
 
   &-suffix {
@@ -55,10 +59,6 @@
     max-width: 100px;
     flex: 0 0 auto;
     margin-left: 2px;
-
-    .bp-icon {
-      fill: var(--bp-gary-6);
-    }
 
     &-inner {
       display: flex;
@@ -88,6 +88,29 @@
   }
 }
 
+.#{$B}-disabled {
+  pointer-events: none;
+  cursor: default;
+
+  .#{$B}-inner {
+    color: var(--bp-gary-4);
+
+    &::placeholder {
+      color: var(--bp-gary-3);
+    }
+  }
+
+  .bp-icon {
+    fill: var(--bp-gary-3);
+  }
+
+  .#{$B}-suffix {
+    .suffix-content {
+      color: var(--bp-gary-3);
+    }
+  }
+}
+
 @each $size in $sizes {
   .#{$B}-#{$size} {
     height: getCssVar("size-height", $size);
@@ -95,14 +118,16 @@
     font-size: getCssVar("size-font-size", $size);
     padding: 0 calc(getCssVar("size-height", $size) / 4);
 
+    .bp-icon {
+      width: calc(getCssVar("size-height", $size) / 1.9) !important;
+      height: calc(getCssVar("size-height", $size) / 1.9) !important;
+    }
+    
+    .#{$B}-perfix {
+      padding-right: calc(getCssVar("size-height", $size) / 10);
+    }
+
     .#{$B}-suffix {
-      right: calc(getCssVar("size-height", $size) / 4);
-
-      .bp-icon {
-        width: calc(getCssVar("size-height", $size) / 1.9) !important;
-        height: calc(getCssVar("size-height", $size) / 1.9) !important;
-      }
-
       &-inner {
         .action-icon {
           padding: calc(getCssVar("size-height", $size) / 20);
