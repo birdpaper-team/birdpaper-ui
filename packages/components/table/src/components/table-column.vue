@@ -1,6 +1,6 @@
 <template>
   <td :class="cls">
-    <span class="bp-table-td-content">
+    <span>
       <template v-if="!hasCustomCell">
         <span>
           {{ dataIndex && record[dataIndex] }}

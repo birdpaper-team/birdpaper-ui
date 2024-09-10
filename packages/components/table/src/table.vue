@@ -1,6 +1,6 @@
 <template>
   <div :class="cls" ref="bpTable">
-    <div class="bp-table-body-area">
+    <div :class="`${clsBlockName}-body-area`">
       <div class="scrollbar"></div>
 
       <table :class="`${clsBlockName}-body`">

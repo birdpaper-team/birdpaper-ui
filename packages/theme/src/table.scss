@@ -8,9 +8,62 @@
 
 @include b(table) {
   position: relative;
+  width: 100%;
+  // border-top-left-radius: 6px;
+  // border-top-right-radius: 6px;
+  box-sizing: border-box;
+
   & {
     table {
       margin: 0;
+
+      th,
+      td {
+        border: none;
+      }
+    }
+  }
+
+  &-header {
+    &-thead {
+      display: table-header-group;
+      width: 100%;
+      border-bottom: $borderSize solid var(--bp-gary-2);
+
+      tr {
+        display: table-row;
+        vertical-align: inherit;
+        border-color: inherit;
+        background: none;
+        border: none;
+
+        th {
+          font-weight: normal;
+          color: var(--bp-gary-7);
+          background-color: var(--bp-gary-0);
+          overflow-wrap: break-word;
+          display: table-cell;
+          padding: 10px 12px;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 1;
+        }
+      }
+    }
+  }
+
+  &-body {
+    &-tbody {
+      tr {
+        background-color: var(--bp-gary-0);
+        border-bottom: $borderSize solid var(--bp-gary-2);
+      }
+
+      .#{$B}-column {
+        font-size: 14px;
+        padding: 10px 12px;
+        display: table-cell;
+      }
     }
   }
 }

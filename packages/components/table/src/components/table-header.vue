@@ -1,7 +1,7 @@
 <template>
   <col-group :cols="list"></col-group>
 
-  <thead class="bp-table-header-thead">
+  <thead :class="[clsBlockName, 'select-none']">
     <tr>
       <template v-for="item in list">
         <th :class="thClass(item)">
@@ -19,11 +19,11 @@ import { ColumnsItem } from "../types";
 import { tableHeaderProps, TableHeaderProps } from "../props";
 
 defineOptions({ name: "TableHeader" });
-const { clsBlockName } = useNamespace("table-th");
+const { clsBlockName } = useNamespace("table-header-thead");
 
 const props: TableHeaderProps = defineProps(tableHeaderProps);
 
 const thClass = (item: ColumnsItem) => {
-  return [clsBlockName, `text-${item.align}`];
+  return [`text-${item.align || "left"}`];
 };
 </script>
