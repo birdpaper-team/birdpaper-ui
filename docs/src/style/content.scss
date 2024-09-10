@@ -22,3 +22,11 @@
 .vp-doc :not(pre) > code {
   color: var(--bp-gary-9);
 }
+
+.vp-doc tr {
+  border-top: none;
+}
+
+.vp-doc tr:nth-child(2n) {
+  background: none;
+}
