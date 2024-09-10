@@ -3,7 +3,7 @@
     <span class="bp-table-td-content">
       <template v-if="!hasCustomCell">
         <span>
-          {{ record[dataIndex] }}
+          {{ dataIndex && record[dataIndex] }}
         </span>
       </template>
 

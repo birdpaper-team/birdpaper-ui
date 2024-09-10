@@ -8,4 +8,9 @@
 
 @include b(table) {
   position: relative;
+  & {
+    table {
+      margin: 0;
+    }
+  }
 }

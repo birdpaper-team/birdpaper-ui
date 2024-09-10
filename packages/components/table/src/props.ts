@@ -48,6 +48,11 @@ export const tableProps = {
 
 /** Table header props. */
 export const tableHeaderProps = {
+  /**
+   * @type ColumnsItem[]
+   * @description The table header list.
+   * @default []
+   */
   list: {
     type: Array as PropType<ColumnsItem[]>,
     default: () => [],
@@ -57,11 +62,18 @@ export const tableHeaderProps = {
 /** Table column props. */
 export const tableColumnProps = {
   /**
-   * @description The column title
+   * @type String
+   * @description The column title.
+   * @default null
    */
   title: { type: String },
+  /**
+   * @type Object
+   * @description The data record.
+   * @default {}
+   */
   record: { type: Object, default: () => {} },
-  dataIndex: { type: String, default: "" },
+  dataIndex: { type: String },
   rowIndex: { type: Number },
   width: { type: [Number, String] },
   minWidth: { type: [Number, String] },

@@ -8,7 +8,7 @@
       </bp-table-column>
       <bp-table-column title="姓名" data-index="name">
         <template #cell="{ record }">
-          <bp-button size="small" status="primary">{{ record.name }}</bp-button>
+          <bp-button size="mini" status="primary">{{ record.name }}</bp-button>
         </template>
       </bp-table-column>
       <bp-table-column title="成绩" data-index="results" />

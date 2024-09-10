@@ -1,7 +1,7 @@
 import { Fragment, defineComponent, Comment, mergeProps, h, VNodeProps } from "vue";
-import { getAllElements } from "../../../utils/dom";
 import { TableColumnProps } from "../props";
 import { useNamespace } from "@birdpaper-ui/hooks";
+import { getAllElements } from "@birdpaper-ui/components/utils/dom";
 
 export default defineComponent({
   name: "TableBody",
