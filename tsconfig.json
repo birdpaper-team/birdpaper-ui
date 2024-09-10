@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
+    "jsx": "react",
+    "jsxFactory": "h",
     "outDir": "dist",
     "target": "es2018",
     "module": "esnext",
     "moduleResolution": "node",
     "baseUrl": ".",
     "sourceMap": false,
+    "noImplicitAny": false,
     "allowJs": false,
     "strict": true,
     "resolveJsonModule": true,
