@@ -66,6 +66,6 @@
     "birdpaper-icon": "^0.1.0"
   },
   "devDependencies": {
-    "vue": "^3.4.34"
+    "vue": "^3.5.3"
   }
 }
