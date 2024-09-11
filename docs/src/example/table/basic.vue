@@ -1,5 +1,5 @@
 <template>
-   <bp-table :data="list">
+   <bp-table :data="list" border>
     <template #columns>
       <bp-table-column title="座号" data-index="seat" :width="100">
         <template #cell="{ record }">
@@ -7,9 +7,6 @@
         </template>
       </bp-table-column>
       <bp-table-column title="姓名" data-index="name">
-        <template #cell="{ record }">
-          <bp-button size="mini" status="primary">{{ record.name }}</bp-button>
-        </template>
       </bp-table-column>
       <bp-table-column title="成绩" data-index="results" />
       <bp-table-column title="班级排名" data-index="ranking" />
