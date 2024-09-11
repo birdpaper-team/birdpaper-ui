@@ -38,5 +38,5 @@ onMounted(() => {
   nextTick(() => init());
 });
 
-const cls = computed<string[]>(() => [clsBlockName]);
+const cls = computed<string[] | {}[]>(() => [clsBlockName, props.border && `${clsBlockName}-border`]);
 </script>

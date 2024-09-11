@@ -9,8 +9,6 @@
 @include b(table) {
   position: relative;
   width: 100%;
-  // border-top-left-radius: 6px;
-  // border-top-right-radius: 6px;
   box-sizing: border-box;
 
   & {
@@ -22,6 +20,18 @@
         border: none;
       }
     }
+  }
+
+  &-body-area {
+    position: relative;
+    clear: both;
+    box-sizing: border-box;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    overflow-x: auto;
+    font-feature-settings: "tnum";
+    border: $borderSize solid var(--bp-gary-2);
+    border-bottom: none;
   }
 
   &-header {
@@ -38,15 +48,13 @@
         border: none;
 
         th {
-          font-weight: normal;
-          color: var(--bp-gary-7);
-          background-color: var(--bp-gary-0);
-          overflow-wrap: break-word;
           display: table-cell;
           padding: 10px 12px;
+          color: var(--bp-gary-8);
           font-size: 14px;
           font-weight: 500;
-          line-height: 1;
+          background-color: var(--bp-gary-1);
+          overflow-wrap: break-word;
         }
       }
     }
@@ -55,14 +63,34 @@
   &-body {
     &-tbody {
       tr {
-        background-color: var(--bp-gary-0);
-        border-bottom: $borderSize solid var(--bp-gary-2);
+        &:nth-child(n) {
+          background-color: var(--bp-gary-0);
+          border-bottom: $borderSize solid var(--bp-gary-2);
+          transition: all .2s;
+        }
+
+        &:hover {
+          background-color: rgb(var(--bp-gary-1-rgb), 0.6);
+          transition: all .2s;
+        }
       }
 
       .#{$B}-column {
+        display: table-cell;
+        color: var(--bp-gary-10);
         font-size: 14px;
         padding: 10px 12px;
-        display: table-cell;
+      }
+    }
+  }
+
+  &-border {
+    tr {
+      td,
+      th {
+        &:not(:first-child) {
+          border-left: $borderSize solid var(--bp-gary-2);
+        }
       }
     }
   }

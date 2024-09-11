@@ -75,7 +75,7 @@ export const useTableCore = () => {
       minWidth && _min_width_list.push(Number(minWidth));
     }
 
-    table_width.value = bpTable.value && bpTable.value.offsetWidth - 2;
+    table_width.value = bpTable.value && bpTable.value.offsetWidth;
     _col_width_list = getWidthList() || [];
 
     columns.value = [];
