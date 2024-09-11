@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
-    "target": "esnext",
     "jsx": "preserve",
     "lib": ["DOM", "ESNext"],
     "baseUrl": ".",
-    "customConditions": ["dev"],
+    "target": "es2018",
     "module": "esnext",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["src/*"],
+      "@birdpaper-ui/*": ["packages/*"]
     },
     "resolveJsonModule": true,
-    "types": ["vite/client", "vitepress"],
+    "types": ["vite/client", "vitepress", "../global.d.ts"],
     "strict": true,
     "strictNullChecks": true,
     "noUnusedLocals": true,
@@ -19,7 +19,6 @@
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },
-  "vueCompilerOptions": {},
-  "include": ["**/*", "./.*/**/*", "../../global.d.ts"],
-  "exclude": ["dist", "node_modules"]
+  "include": ["../global.d.ts"],
+  "exclude": ["node_modules"]
 }
