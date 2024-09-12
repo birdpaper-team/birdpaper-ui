@@ -1,7 +1,7 @@
 <template>
   <col-group :cols="list"></col-group>
 
-  <thead :class="[clsBlockName, 'select-none']">
+  <thead :class="[clsBlockName]">
     <tr>
       <template v-for="item in list">
         <th :class="thClass(item)">

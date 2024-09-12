@@ -1,13 +1,12 @@
 <template>
-   <bp-table :data="list" border>
+  <bp-table :data="list" border stripe>
     <template #columns>
       <bp-table-column title="座号" data-index="seat" :width="100">
         <template #cell="{ record }">
           <span style="font-weight: bold">{{ record.seat }}</span>
         </template>
       </bp-table-column>
-      <bp-table-column title="姓名" data-index="name">
-      </bp-table-column>
+      <bp-table-column title="姓名" data-index="name"> </bp-table-column>
       <bp-table-column title="成绩" data-index="results" />
       <bp-table-column title="班级排名" data-index="ranking" />
     </template>
@@ -24,11 +23,5 @@ const list = [
   { seat: "41", name: "吴小可", results: "404", ranking: "33" },
   { seat: "46", name: "木小亦", results: "409", ranking: "40" },
   { seat: "43", name: "邹小辉", results: "293", ranking: "53" },
-];
-const cols = [
-  { title: "座号", dataIndex: "seat", width: 100 },
-  { title: "姓名", dataIndex: "name" },
-  { title: "成绩", dataIndex: "results" },
-  { title: "班级排名", dataIndex: "ranking" },
 ];
 </script>

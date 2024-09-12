@@ -14,6 +14,7 @@
   & {
     table {
       margin: 0;
+      padding: 0;
 
       th,
       td {
@@ -66,12 +67,27 @@
         &:nth-child(n) {
           background-color: var(--bp-gary-0);
           border-bottom: $borderSize solid var(--bp-gary-2);
-          transition: all .2s;
+          transition: all 0.2s;
         }
 
         &:hover {
           background-color: rgb(var(--bp-gary-1-rgb), 0.6);
-          transition: all .2s;
+          transition: all 0.2s;
+        }
+      }
+
+      &-empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 20px 0;
+        font-size: 13px;
+        color: var(--bp-gary-6);
+
+        svg[class*="-icon-"] {
+          fill: var(--bp-gary-3);
+          margin-bottom: 4px;
         }
       }
 
@@ -91,6 +107,14 @@
         &:not(:first-child) {
           border-left: $borderSize solid var(--bp-gary-2);
         }
+      }
+    }
+  }
+
+  &-stripe {
+    tr {
+      &:nth-child(2n) {
+        background-color: var(--bp-gary-1);
       }
     }
   }
