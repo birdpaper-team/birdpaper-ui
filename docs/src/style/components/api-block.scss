@@ -1,10 +1,24 @@
 @use "../var";
 
 .api-block {
+  .copy-column {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-style: dashed;
+      color: var(--bp-primary-6);
+      transition: all 0.2s;
+    }
+  }
+
   .name-inner {
     font-size: 13px;
     font-weight: bold;
     color: var(--bp-gary-9);
+    transition: all 0.2s;
   }
 
   .remark-inner {
@@ -19,13 +33,24 @@
     background-color: var(--bp-gary-1);
     border: 0.5px solid var(--bp-gary-3);
     border-radius: 4px;
-    padding: 2px 6px;
+    padding: 2px 4px;
+
+    &:not(:first-child) {
+      margin-left: 4px;
+    }
   }
 
-  .default-inner {
+  .default-inner,
+  .params-inner {
     font-size: 12px;
     letter-spacing: 0.2px;
     color: var(--bp-gary-9);
     letter-spacing: 0.4px;
+  }
+
+  .version-inner {
+    font-size: 12px;
+    letter-spacing: 0.2px;
+    color: var(--bp-gary-10);
   }
 }

@@ -1,16 +1,12 @@
 <template>
   <td :class="cls">
-    <span>
-      <template v-if="!hasCustomCell">
-        <span>
-          {{ dataIndex && record[dataIndex] }}
-        </span>
-      </template>
+    <template v-if="!hasCustomCell">
+      {{ dataIndex && record[dataIndex] }}
+    </template>
 
-      <template v-else>
-        <slot name="cell" :record="record" :rowIndex="rowIndex" />
-      </template>
-    </span>
+    <template v-else>
+      <slot name="cell" :record="record" :rowIndex="rowIndex" />
+    </template>
   </td>
 </template>
 

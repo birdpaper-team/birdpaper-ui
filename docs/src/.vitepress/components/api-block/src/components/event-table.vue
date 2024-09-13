@@ -13,17 +13,10 @@
           <span class="remark-inner">{{ record.remark }}</span>
         </template>
       </bp-table-column>
-      <bp-table-column title="类型" data-index="type" width="200">
+      <bp-table-column title="参数" data-index="params">
         <template #cell="{ record }">
-          <span class="type-inner" v-for="v in record.type">
-            {{ v }}
-          </span>
-        </template>
-      </bp-table-column>
-      <bp-table-column title="默认值" data-index="default">
-        <template #cell="{ record }">
-          <span class="default-inner">
-            {{ record.default || "-" }}
+          <span class="params-inner">
+            {{ record.params || "-" }}
           </span>
         </template>
       </bp-table-column>
@@ -38,10 +31,10 @@
 
 <script setup lang="ts">
 import { PropType } from "vue";
-import { PropItem } from "../types";
+import { EventItem } from "../types";
 
 const props = defineProps({
-  data: { type: Array as PropType<PropItem[]>, default: () => [] },
+  data: { type: Array as PropType<EventItem[]>, default: () => [] },
 });
 
 const emits = defineEmits<{

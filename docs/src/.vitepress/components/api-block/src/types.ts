@@ -1,4 +1,4 @@
-export type ApiType = "prop" | "event" | "slot" | "function";
+export type ApiType = "prop" | "event" | "slot" | "method";
 
 export type PropType = "String" | "Number" | "Boolean" | "Array" | "Enum" | "Object" | "Function" | string;
 
@@ -9,7 +9,7 @@ export interface PropItem {
   /** 说明 */
   remark: string;
   /** 类型 */
-  type: PropType | PropType[];
+  type: PropType[];
   /** 可选值，type 为 enum 时可用 */
   optional?: string[] | string;
   /** 显示提示框 */
@@ -51,7 +51,7 @@ export interface MethodItem {
 }
 
 /** Slot 插槽 */
-export interface SlotTableItem {
+export interface SlotItem {
   /** 方法名 */
   name: string;
   /** 说明 */

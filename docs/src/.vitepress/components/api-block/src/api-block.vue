@@ -1,6 +1,6 @@
 <template>
   <div :class="name">
-    <component :is="tableComponent[type]" :data></component>
+    <component :is="tableComponent[type]" :data @copy="handleCopy"></component>
   </div>
 </template>
 
@@ -8,6 +8,8 @@
 import { PropType } from "vue";
 import { ApiType, PropItem } from "./types";
 import propsTable from "./components/props-table.vue";
+import eventTable from "./components/event-table.vue";
+import slotTable from "./components/slot-table.vue";
 
 const name = "api-block";
 const props = defineProps({
@@ -17,5 +19,11 @@ const props = defineProps({
 
 const tableComponent = {
   prop: propsTable,
+  event: eventTable,
+  slot: slotTable,
+};
+
+const handleCopy = (text: string) => {
+  // TODO
 };
 </script>
