@@ -89,6 +89,7 @@ const handleActionIconClick = () => {
 const triggerEye = () => {
   if (!props.showPassword) return;
   isEyeOpen.value = !isEyeOpen.value;
+  return isEyeOpen.value;
 };
 
 /**
@@ -118,7 +119,5 @@ defineExpose({
   blur,
   triggerEye,
   clear,
-  model,
-  isEyeOpen,
 });
 </script>
