@@ -21,7 +21,8 @@
     transition: all 0.2s;
   }
 
-  .remark-inner {
+  .remark-inner,
+  .returns-inner {
     font-size: 13px;
     color: var(--bp-gary-9);
   }

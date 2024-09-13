@@ -39,7 +39,7 @@ export const inputProps = {
   },
   /**
    * @type number
-   * @description Maximum input length, 0 indicates no limit.
+   * @description Maximum input length, null indicates no limit.
    * @default 0
    */
   maxlength: {

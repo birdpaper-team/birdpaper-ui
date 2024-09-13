@@ -10,6 +10,7 @@ import { ApiType, PropItem } from "./types";
 import propsTable from "./components/props-table.vue";
 import eventTable from "./components/event-table.vue";
 import slotTable from "./components/slot-table.vue";
+import methodTable from "./components/method-table.vue";
 
 const name = "api-block";
 const props = defineProps({
@@ -21,6 +22,7 @@ const tableComponent = {
   prop: propsTable,
   event: eventTable,
   slot: slotTable,
+  method: methodTable,
 };
 
 const handleCopy = (text: string) => {

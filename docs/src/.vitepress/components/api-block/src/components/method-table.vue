@@ -20,6 +20,13 @@
           </span>
         </template>
       </bp-table-column>
+      <bp-table-column title="返回值" data-index="returns" width="200">
+        <template #cell="{ record }">
+          <span class="returns-inner">
+            {{ record.returns || "-" }}
+          </span>
+        </template>
+      </bp-table-column>
       <bp-table-column title="始于" data-index="version">
         <template #cell="{ record }">
           <span class="version-inner">{{ record.version || "-" }}</span>
@@ -31,10 +38,10 @@
 
 <script setup lang="ts">
 import { PropType } from "vue";
-import { EventItem } from "../types";
+import { SlotItem } from "../types";
 
 const props = defineProps({
-  data: { type: Array as PropType<EventItem[]>, default: () => [] },
+  data: { type: Array as PropType<SlotItem[]>, default: () => [] },
 });
 
 const emits = defineEmits<{

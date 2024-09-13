@@ -8,7 +8,7 @@
           </span>
         </template>
       </bp-table-column>
-      <bp-table-column title="说明" data-index="remark">
+      <bp-table-column title="说明" data-index="remark" width="200">
         <template #cell="{ record }">
           <span class="remark-inner">{{ record.remark }}</span>
         </template>
