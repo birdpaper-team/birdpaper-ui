@@ -37,7 +37,13 @@ export const useTableCore = () => {
   const getColumnsBySlot = (): ColumnsItem[] => {
     if (!slots.columns?.()) return [];
 
-    const children = getAllElements(slots.columns?.(), true).filter((item) => item.type !== Comment);
+    const children = getAllElements(slots.columns?.(), true).filter((item) => {
+      if (typeof item.type === "symbol") {
+        return false;
+      }
+      return item.type !== Comment;
+    });
+    console.log("children: ", children);
     if (children.length === 0) return [];
 
     cols = [];
