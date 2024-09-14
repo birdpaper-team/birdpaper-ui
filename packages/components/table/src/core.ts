@@ -43,7 +43,6 @@ export const useTableCore = () => {
       }
       return item.type !== Comment;
     });
-    console.log("children: ", children);
     if (children.length === 0) return [];
 
     cols = [];

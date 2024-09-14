@@ -11,6 +11,7 @@ import propsTable from "./components/props-table.vue";
 import eventTable from "./components/event-table.vue";
 import slotTable from "./components/slot-table.vue";
 import methodTable from "./components/method-table.vue";
+import { useClipboard } from "@vueuse/core";
 
 const name = "api-block";
 const props = defineProps({
@@ -25,7 +26,9 @@ const tableComponent = {
   method: methodTable,
 };
 
+const { text, copy, copied, isSupported } = useClipboard()
 const handleCopy = (text: string) => {
-  // TODO
+  // TODO: Message tip.
+  copy(text);
 };
 </script>
