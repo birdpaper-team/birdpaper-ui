@@ -1,3 +1,3 @@
-import { Button, Input, Table, TableColumn } from "@birdpaper-ui/components";
+import { Button, Input, Table, TableColumn, Trigger } from "@birdpaper-ui/components";
 
-export default [Button, Input, Table, TableColumn];
+export default [Button, Input, Table, TableColumn, Trigger];
