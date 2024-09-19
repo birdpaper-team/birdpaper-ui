@@ -10,6 +10,16 @@ export interface SizeInfo {
   height: number;
 }
 
+/**
+ * Get the popup position info.
+ * @param el
+ * @param position
+ * @param wrapperSize
+ * @param popupTranslate
+ * @param popupOffset
+ * @param autoFitWidth
+ * @returns: PositionInfo
+ */
 export const getPositionData = (
   el: Element,
   position: TriggerPosition,
@@ -18,14 +28,15 @@ export const getPositionData = (
   popupOffset: number,
   autoFitWidth?: boolean
 ): PositionInfo => {
-  const rect = el && el?.getBoundingClientRect();
-  if (!rect) return new PositionInfo();
+  let positionData: PositionInfo = new PositionInfo();
 
-  const { top, left, width, height } = rect;
+  const clientRect = el && el?.getBoundingClientRect();
+  if (!clientRect) return positionData;
+
+  const { top, left, width, height } = clientRect;
   const scrollTop = document.documentElement.scrollTop || 0;
   const wrapperWidth = autoFitWidth ? width : wrapperSize.width;
 
-  let positionData: PositionInfo = new PositionInfo();
   switch (position) {
     case "top":
       positionData = {
@@ -81,6 +92,11 @@ export const getPositionData = (
   return positionData;
 };
 
+/**
+ * Get wrapper element width and height.
+ * @param el 
+ * @returns: { width, height }
+ */
 export const getWrapperSize = (el: Element): SizeInfo => {
   el.setAttribute("style", `display:block;opacity:0;visibility: hidden;`);
   const { width, height } = el && el?.getBoundingClientRect();
@@ -89,6 +105,14 @@ export const getWrapperSize = (el: Element): SizeInfo => {
   return { width, height };
 };
 
+/**
+ * Get style text.
+ * @param top 
+ * @param left 
+ * @param visible 
+ * @param width 
+ * @returns string
+ */
 export const getWrapperPositionStyle = (top: number, left: number, visible: boolean, width?: number): string => {
   let innerStyleStr = `top:${top}px;left:${left}px;display:${visible ? "block" : "none"};`;
   width && (innerStyleStr += `width:${width}px`);

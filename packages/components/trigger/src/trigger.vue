@@ -1,11 +1,19 @@
 <template>
   <div ref="triggerRef" :class="clsBlockName">
-    <component :is="children[0]" @click="handleClick" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave"></component>
+    <component :is="children[0]" @click="handleClick" @mouseenter="mouseEnter" @mouseleave="mouseLeave"></component>
 
     <Teleport to="body">
-      <div ref="wrapperRef" v-if="model" :class="`${clsBlockName}-wrapper`" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
-        <slot name="content"></slot>
-      </div>
+      <Transition :name="transition" appear>
+        <div
+          ref="wrapperRef"
+          v-if="model"
+          :class="`${clsBlockName}-wrapper`"
+          @mouseenter="mouseEnter"
+          @mouseleave="mouseLeave"
+        >
+          <slot name="content"></slot>
+        </div>
+      </Transition>
     </Teleport>
   </div>
 </template>
@@ -32,55 +40,62 @@ const children = slots.default?.() || [];
 const handleClick = () => {
   if (props.trigger === "hover" || props.disabled) return;
 
-  updateVisible(!model.value);
-  nextTick(() => {
-    handleResize();
-  });
-};
-const handleMouseEnter = () => {
-  if (props.trigger === "click") return;
-
-  updateVisible(true);
-  nextTick(() => {
-    handleResize();
-  });
+  model.value = !model.value;
+  nextTick(() => handleResize());
 };
 
-const handleMouseLeave = () => {
+const mouseEnter = () => {
   if (props.trigger === "click") return;
 
-  updateVisible(false);
+  model.value = true;
+  nextTick(() => handleResize());
+};
+
+const mouseLeave = () => {
+  if (props.trigger === "click") return;
+  model.value = false;
 };
 
 const handleResize = () => {
   if (!triggerRef.value || !model.value) return;
 
   const wrapperSize = getWrapperSize(wrapperRef.value);
-  const { top, left, width } = getPositionData(triggerRef.value.children[0], props.position, { ...wrapperSize }, props.popupTranslate, props.popupOffset, props.autoFitWidth);
+  const { top, left, width } = getPositionData(
+    triggerRef.value?.children[0],
+    props.position,
+    wrapperSize,
+    props.popupTranslate,
+    props.popupOffset,
+    props.autoFitWidth
+  );
 
-  const styleStr = getWrapperPositionStyle(top, left, model.value, props.autoFitWidth ? width : undefined);
-  wrapperRef.value.setAttribute("style", styleStr);
+  wrapperRef.value.setAttribute(
+    "style",
+    getWrapperPositionStyle(top, left, model.value, props.autoFitWidth ? width : undefined)
+  );
 
   if (props.scrollToClose && model.value) {
     setTimeout(() => {
-      updateVisible(false);
+      model.value = false;
     }, props.scrollToCloseTime);
   }
 };
 
-const updateVisible = (val: boolean) => {
-  model.value = val;
-};
+onClickOutside(
+  wrapperRef,
+  () => {
+    if (!props.clickOutside || props.trigger === "hover") return;
+    model.value = false;
+  },
+  { ignore: [triggerRef] }
+);
 
-onClickOutside(wrapperRef, (event) => {
-  model.value = false;
-});
-
+// Listen scroll and window resize.
 const throttleResize = useThrottleFn(handleResize, 20);
-useEventListener(window, "resize", throttleResize);
-
 const scrollElements = ref<Element[]>([]);
-onMounted(() => {
+const init = () => {
+  useEventListener(window, "resize", throttleResize);
+
   nextTick(() => {
     if (props.updateAtScroll) {
       scrollElements.value = getScrollElements(triggerRef.value);
@@ -90,5 +105,7 @@ onMounted(() => {
       }
     }
   });
-});
+};
+
+onMounted(() => init());
 </script>
