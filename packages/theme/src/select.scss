@@ -7,11 +7,23 @@
 @use "mixins/mixins.scss" as *;
 
 @include b(select) {
-  @include b(input) {
+  .#{$namespace + "-input"} {
     cursor: pointer;
-    
+
     input {
       cursor: pointer;
     }
   }
+}
+
+.#{$B}-content {
+  min-height: 32px;
+  max-height: 320px;
+  padding: 6px 0;
+  background-color: var(--bp-gary-0);
+  border: 0.5px solid var(--bp-gary-2);
+  border-radius: 6px;
+  z-index: 99;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
 }

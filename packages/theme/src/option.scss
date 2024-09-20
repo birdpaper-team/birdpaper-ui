@@ -1,0 +1,42 @@
+@use "common/design" as *;
+@use "common/sizes" as *;
+@use "common/color" as *;
+@use "common/extend.scss" as *;
+@use "mixins/var" as *;
+@use "mixins/function" as *;
+@use "mixins/mixins.scss" as *;
+
+@include b(option) {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  font-size: 14px;
+  color: var(--bp-gary-9);
+  line-height: 36px;
+  cursor: pointer;
+
+  &-inner {
+    padding: 0 10px;
+  }
+
+  &:hover {
+    background-color: rgba(var(--bp-gary-1-rgb), 0.8);
+    transition: all 0.2s;
+  }
+}
+
+.#{$B}-disabled {
+  color: var(--bp-gary-5);
+  cursor: not-allowed;
+}
+
+.#{$B}-active {
+  background-color: var(--bp-gary-1);
+  transition: all 0.2s;
+
+  .#{$B}-inner {
+    font-weight: 500;
+    color: var(--bp-gary-10);
+    transition: all 0.2s;
+  }
+}

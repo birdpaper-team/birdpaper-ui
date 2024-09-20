@@ -1,5 +1,6 @@
 import { InputSize } from "@birdpaper-ui/components/input/src/types";
 import { ExtractPropTypes, PropType } from "vue";
+import { SelectValue } from "./types";
 
 export const selectProps = {
   /**
@@ -30,7 +31,7 @@ export const selectProps = {
   },
   /**
    * @type boolean
-   * @description Input is disabled or not.
+   * @description Select is disabled or not.
    * @default false
    */
   disabled: {
@@ -39,7 +40,7 @@ export const selectProps = {
   },
   /**
    * @type boolean
-   * @description Input is clearable or not.
+   * @description Select is clearable or not.
    * @default false
    */
   clearable: {
@@ -48,4 +49,35 @@ export const selectProps = {
   },
 };
 
+export const optionProps = {
+  /**
+   * @type SelectValue
+   * @description The option value.
+   * @default ""
+   * @requires
+   */
+  value: {
+    type: [Number, String] as PropType<SelectValue>,
+    default: "",
+    require: true,
+  },
+  /**
+   * @type string
+   * @description The option label text.
+   */
+  label: {
+    type: String,
+  },
+  /**
+   * @type boolean
+   * @description Select is disabled or not.
+   * @default false
+   */
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+};
+
 export type SelectProps = ExtractPropTypes<typeof selectProps>;
+export type OptionProps = ExtractPropTypes<typeof optionProps>;
