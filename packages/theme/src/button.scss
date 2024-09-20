@@ -80,11 +80,11 @@
 
     &:hover,
     &:focus-visible {
-      opacity: 0.6;
+      background-color: var(--bp-gary-1);
     }
-
+    
     &:active {
-      opacity: 1;
+      opacity: 0.6;
     }
   }
 
