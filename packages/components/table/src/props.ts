@@ -12,31 +12,31 @@ export const tableProps = {
     default: () => [],
   },
   /**
-   * @type String
+   * @type string
    * @description The table fixed height.
    * @default null
    */
   height: { type: String },
   /**
-   * @type Boolean
+   * @type boolean
    * @description Bordered or not.
    * @default false
    */
   border: { type: Boolean, default: false },
   /**
-   * @type Boolean
+   * @type boolean
    * @description Stripe or not.
    * @default false
    */
   stripe: { type: Boolean, default: false },
   /**
-   * @type String
+   * @type string
    * @description Unique key identifier for a table row.
    * @default "id"
    */
   rowKey: { type: String, default: "id" },
   /**
-   * @type String
+   * @type string
    * @description The text when data is empty.
    * @default "Empty."
    */
@@ -62,23 +62,58 @@ export const tableHeaderProps = {
 /** Table column props. */
 export const tableColumnProps = {
   /**
-   * @type String
+   * @type string
    * @description The column title.
-   * @default null
    */
-  title: { type: String },
+  title: {
+    type: String,
+  },
   /**
-   * @type Object
+   * @type object
    * @description The data record.
    * @default {}
    */
-  record: { type: Object, default: () => {} },
+  record: {
+    type: Object,
+    default: () => {},
+  },
+  /**
+   * @type string
+   * @description The data key.
+   */
   dataIndex: { type: String },
+  /**
+   * @type number
+   * @description The record row index.
+   */
   rowIndex: { type: Number },
+  /**
+   * @type number | string
+   * @description The col width.
+   */
   width: { type: [Number, String] },
+  /**
+   * @type number | string
+   * @description The col min width.
+   */
   minWidth: { type: [Number, String] },
+  /**
+   * @type string
+   * @description The col text align type.
+   * @default "left"
+   */
   align: { type: String, default: "left" },
+  /**
+   * @type boolean
+   * @description Text to omit ellipsis or not.
+   * @default false
+   */
   ellipsis: { type: Boolean, default: false },
+  /**
+   * @type boolean
+   * @description Show tooltip or not.
+   * @default false
+   */
   tooltip: { type: Boolean, default: false },
 };
 
