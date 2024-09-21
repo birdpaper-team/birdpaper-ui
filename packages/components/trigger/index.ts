@@ -1,8 +1,7 @@
-import _trigger from "./src/trigger.vue";
+import _trigger from "./src/trigger";
 
 export const Trigger = _trigger;
 
-export * from "./src/props";
 export * from "./src/types";
 
 export type TriggerInstance = InstanceType<typeof Trigger>;
