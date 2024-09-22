@@ -17,7 +17,7 @@
 }
 
 .#{$B}-content {
-  min-height: 32px;
+  min-height: 36px;
   max-height: 320px;
   padding: 6px 0;
   background-color: var(--bp-gary-0);
@@ -26,4 +26,14 @@
   z-index: 99;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
+}
+
+.#{$B}-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  font-size: 14px;
+  color: var(--bp-gary-6);
+  line-height: 36px;
 }
