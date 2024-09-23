@@ -9,7 +9,7 @@ export class SelectOption {
 
 export interface SelectContext {
   modelValue: SelectValue;
-  currentSelect: SelectOption;
+  labelModel: SelectOption.label;
   onSelect: (value: SelectValue, payload: SelectOption) => void;
 }
 

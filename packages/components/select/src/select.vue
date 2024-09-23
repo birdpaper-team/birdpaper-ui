@@ -1,6 +1,6 @@
 <template>
   <bp-trigger
-    v-model="isFocus"
+    v-model="isOpen"
     transition="fade-dropdown"
     :class="clsBlockName"
     :disabled
@@ -9,17 +9,17 @@
     update-at-scroll
   >
     <bp-input
-      :disabled
+      v-model="labelModel"
+      read-only
       :size
-      v-model="currentSelect.label"
+      :disabled
       :placeholder="placeholder"
-      readonly
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
     >
       <template #suffix>
-        <IconCloseLine v-if="!disabled && showClear && currentSelect.label" @click.stop="handleClear" />
-        <component v-else :is="isFocus ? IconArrowUpSLine : IconArrowDownSLine"></component>
+        <IconCloseLine v-if="!disabled && showClear && labelModel" @click.stop="handleClear" />
+        <component v-else :is="isOpen ? IconArrowUpSLine : IconArrowDownSLine"></component>
       </template>
     </bp-input>
 
@@ -40,38 +40,24 @@ import { useNamespace } from "@birdpaper-ui/hooks";
 import { SelectProps, selectProps } from "./props";
 import { selectInjectionKey, SelectOption, SelectValue } from "./types";
 import { IconArrowDownSLine, IconArrowUpSLine } from "birdpaper-icon";
-import { computed, provide, reactive, ref, useSlots, watchEffect } from "vue";
+import { provide, ref, useSlots, watchEffect } from "vue";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
 
 defineOptions({ name: "Select" });
 const { clsBlockName } = useNamespace("select");
 
 const model = defineModel<SelectValue>({ default: "" });
+const labelModel = ref<string>("");
+
 const props: SelectProps = defineProps(selectProps);
 const slots = useSlots();
 
-const isFocus = ref<boolean>(false);
+const isOpen = ref<boolean>(false);
+const hasOptions = ref(false);
 
-const hasOptions = computed(() => {
-  const children = getAllElements(slots.default?.(), true).filter((item) => item.type["name"] === "Option");
-  return children.length !== 0;
-});
+const open = () => (isOpen.value = true);
+const close = () => (isOpen.value = false);
 
-const valueMap = computed(() => {
-  try {
-    let obj = {};
-    const children = getAllElements(slots.default?.(), true).filter((item) => item.type["name"] === "Option");
-
-    for (const item of children) {
-      obj[item.props?.value] = item.props?.label || item?.children?.["default"]?.()[0].children;
-    }
-    return obj;
-  } catch (error) {
-    return {};
-  }
-});
-
-const showClear = ref<boolean>(false);
 const handleMouseEnter = () => {
   if (!props.clearable) return;
   showClear.value = true;
@@ -81,29 +67,43 @@ const handleMouseLeave = () => {
   showClear.value = false;
 };
 
+const showClear = ref<boolean>(false);
 const handleClear = () => {
-  currentSelect.value = "";
-  currentSelect.label = "";
+  labelModel.value = "";
+  model.value = "";
 };
 
-const currentSelect = reactive<SelectOption>(new SelectOption());
 provide(selectInjectionKey, {
   modelValue: model.value,
-  currentSelect: currentSelect,
+  labelModel,
   onSelect: (v: SelectValue, payload: SelectOption) => {
-    currentSelect.value = v;
-    currentSelect.label = payload.label;
     model.value = v;
+    labelModel.value = payload.label;
 
-    isFocus.value = false;
+    isOpen.value = false;
   },
 });
 
 watchEffect(() => {
-  if (!model.value) {
-    return;
+  try {
+    const children = getAllElements(slots.default?.(), true).filter((item) => item.type["name"] === "Option");
+    hasOptions.value = children.length !== 0;
+
+    if (!model.value) return;
+
+    let valueMap = {};
+    for (const item of children) {
+      valueMap[item.props?.value] = item.props?.label || item?.children?.["default"]?.()[0].children;
+    }
+
+    labelModel.value = valueMap[model.value] || model.value;
+  } catch (error) {
+    return {};
   }
-  currentSelect.value = model.value;
-  currentSelect.label = valueMap.value[model.value] || model.value;
+});
+
+defineExpose({
+  open,
+  close,
 });
 </script>
