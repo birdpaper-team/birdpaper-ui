@@ -204,6 +204,7 @@ export default defineComponent({
       () => props.modelValue,
       (v: boolean) => {
         visible.value = v;
+        v && nextTick(() => handleResize());
       }
     );
 
