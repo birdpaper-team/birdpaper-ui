@@ -1,0 +1,32 @@
+@use "common/design" as *;
+@use "common/sizes" as *;
+@use "common/color" as *;
+@use "common/extend.scss" as *;
+@use "mixins/var" as *;
+@use "mixins/function" as *;
+@use "mixins/mixins.scss" as *;
+
+@include b(space) {
+  display: inline-flex;
+  width: 100%;
+
+  &-item {
+    &:first-child {
+      margin-top: 0 !important;
+      margin-left: 0 !important;
+    }
+    
+    &:last-child {
+      margin-right: 0 !important;
+      margin-bottom: 0 !important;
+    }
+  }
+}
+
+.#{$B}-vertical {
+  flex-direction: column;
+}
+
+.#{$B}-horizontal {
+  flex-direction: row;
+}
