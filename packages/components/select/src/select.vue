@@ -3,13 +3,14 @@
     v-model="isFocus"
     transition="fade-dropdown"
     :class="clsBlockName"
-    :disabled="disabled"
+    :disabled
     :popup-offset="10"
     auto-fit-width
     update-at-scroll
   >
     <bp-input
-      :disabled="disabled"
+      :disabled
+      :size
       v-model="currentSelect.label"
       :placeholder="placeholder"
       readonly
@@ -17,11 +18,7 @@
       @mouseleave="handleMouseLeave"
     >
       <template #suffix>
-        <IconCloseLine
-          v-if="!disabled && showClear && currentSelect.label"
-          class="click-icon"
-          @click.stop="handleClear"
-        />
+        <IconCloseLine v-if="!disabled && showClear && currentSelect.label" @click.stop="handleClear" />
         <component v-else :is="isFocus ? IconArrowUpSLine : IconArrowDownSLine"></component>
       </template>
     </bp-input>
