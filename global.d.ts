@@ -6,6 +6,7 @@ declare module "vue" {
     BpTableColumn: typeof import("birdpaper-ui")["TableColumn"];
     BpSelect: typeof import("birdpaper-ui")["Select"];
     BpOption: typeof import("birdpaper-ui")["Option"];
+    BpSpace: typeof import("birdpaper-ui")["Space"];
     BpTrigger: typeof import("birdpaper-ui")["Trigger"];
   }
 }

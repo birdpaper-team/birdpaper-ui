@@ -46,21 +46,16 @@ export default defineComponent({
         >
           {children.map((child, index) => {
             const hasSplit = slots.split && index > 0;
+            const style = props.type === "horizontal" ? `margin: 0 ${size}px` : `margin: ${size}px 0`;
 
             return (
               <Fragment key={child.key ?? `item-${index}`}>
                 {hasSplit && (
-                  <div
-                    class={`${clsBlockName}-item`}
-                    style={props.type === "horizontal" ? `margin: 0 ${size}px` : `margin: ${size}px 0`}
-                  >
+                  <div class={`${clsBlockName}-item`} style={style}>
                     {slots.split?.()}
                   </div>
                 )}
-                <div
-                  class={`${clsBlockName}-item`}
-                  style={props.type === "horizontal" ? `margin: 0 ${size}px` : `margin: ${size}px 0`}
-                >
+                <div class={`${clsBlockName}-item`} style={style}>
                   {child}
                 </div>
               </Fragment>
