@@ -42,6 +42,7 @@ import { selectInjectionKey, SelectOption, SelectValue } from "./types";
 import { IconArrowDownSLine, IconArrowUpSLine } from "birdpaper-icon";
 import { provide, ref, useSlots, watchEffect } from "vue";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
+import { IconCloseLine } from "birdpaper-icon";
 
 defineOptions({ name: "Select" });
 const { clsBlockName } = useNamespace("select");
