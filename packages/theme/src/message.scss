@@ -1,0 +1,128 @@
+@use "common/design" as *;
+@use "common/sizes" as *;
+@use "common/color" as *;
+@use "common/extend.scss" as *;
+@use "mixins/var" as *;
+@use "mixins/function" as *;
+@use "mixins/mixins.scss" as *;
+
+.--bp-message-mask {
+  position: fixed;
+  left: 50%;
+  width: 100%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  pointer-events: none;
+  z-index: 1010;
+}
+
+.--bp-message-top {
+  top: 0;
+
+  ul[class*="message-list"] {
+    top: 40px;
+  }
+}
+
+.--bp-message-bottom {
+  bottom: 0;
+
+  ul[class*="message-list"] {
+    bottom: 40px;
+  }
+}
+
+@include b(message) {
+  &-list {
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+
+    .#{$B} {
+      min-width: 80px;
+      width: max-content;
+      max-width: 80%;
+      min-height: 36px;
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 14px;
+      line-height: 1;
+      text-align: center;
+      list-style: none;
+      overflow: hidden;
+      pointer-events: all;
+      border: 0.5px solid rgba(getCssVar("message", "border-color"), 1);
+      background: rgba(getCssVar("message", "bg-color"), 1);
+      box-shadow: 0 4px 12px rgba(getCssVar("message", "box-shadow"), 0.6);
+
+      &-icon {
+        margin-right: 6px;
+
+        svg[class*="-icon-"] {
+          fill: rgba(getCssVar("message", "icon-color"), 1);
+        }
+      }
+
+      .icon-loading {
+        svg[class*="-icon-"] {
+          fill: rgba(getCssVar("message", "icon-color"), 1);
+          @include spin(1.2s);
+        }
+      }
+
+      &-content {
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1.4;
+        text-align: left;
+        color: rgba(getCssVar("message", "color"), 1);
+      }
+
+      &-close {
+        margin-left: 10px;
+        cursor: pointer;
+
+        svg[class*="-icon-"] {
+          fill: var(--bp-gary-3);
+          border-radius: 10px;
+
+          &:hover {
+            fill: var(--bp-gary-7);
+            background-color: var(--bp-gary-1);
+            transition: all 0.2s ease;
+          }
+        }
+      }
+    }
+  }
+}
+
+$status-list: "gary", "success", "warning", "danger";
+
+@each $status in $status-list {
+  .#{$B}-#{$status} {
+    @include css-var-from-global-rgb(("message", "icon-color"), (if($status == "gary", "primary", $status), "6"));
+    @include css-var-from-global-rgb(("message", "box-shadow"), ("gary", "2"));
+    @include css-var-from-global-rgb(("message", "bg-color"), ("gary", "0"));
+    @include css-var-from-global-rgb(("message", "border-color"), ("gary", "2"));
+    @include css-var-from-global-rgb(("message", "color"), ("gary", "10"));
+  }
+
+  .#{$B}-plain-#{$status} {
+    @include css-var-from-global-rgb(("message", "icon-color"), (if($status == "gary", "primary", $status), "6"));
+    @include css-var-from-global-rgb(("message", "bg-color"), ($status, if($status == "gary", "0", "1")));
+    @include css-var-from-global-rgb(("message", "border-color"), ($status, if($status == "gary", "2", "6")));
+    @include css-var-from-global-rgb(("message", "color"), ($status, if($status == "gary", "10", "6")));
+    @include css-var-from-global-rgb(("message", "box-shadow"), ($status, "1"));
+  }
+}

@@ -43,6 +43,20 @@
   transition: all 0.2s cubic-bezier(0, 0, 1, 1);
 }
 
+.message-move,
+.message-enter-active,
+.message-leave-active {
+  transition: all 0.2s cubic-bezier(0, 0, 1, 1);
+}
+.message-enter-from,
+.message-leave-to {
+  opacity: 0;
+}
+.message-leave-active {
+  position: absolute;
+}
+
+
 @keyframes rotating {
   from {
     transform: rotate(0deg);
