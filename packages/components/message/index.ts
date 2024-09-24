@@ -32,3 +32,4 @@ export const Message = Object.assign({
 });
 
 export * from "./src/message.vue";
+export * from "./src/instance";

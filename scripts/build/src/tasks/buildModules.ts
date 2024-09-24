@@ -35,7 +35,7 @@ export async function buildModules() {
       },
       chunkSizeWarningLimit: 10000,
       rollupOptions: {
-        external: ["vue", "birdpaper-icon"],
+        external: ["vue", "birdpaper-icon", "@vueuse/components", "@vueuse/core", "radash"],
         input: files,
         output: [
           {

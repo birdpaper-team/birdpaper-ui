@@ -145,12 +145,21 @@ importers:
 
   packages/birdpaper-ui:
     dependencies:
+      '@vueuse/components':
+        specifier: ^11.1.0
+        version: 11.1.0(vue@3.5.3)
+      '@vueuse/core':
+        specifier: ^10.11.0
+        version: 10.11.0(vue@3.5.3)
       birdpaper-icon:
         specifier: ^0.1.0
         version: 0.1.0
       dayjs:
         specifier: ^1.11.3
         version: 1.11.12
+      radash:
+        specifier: ^12.1.0
+        version: 12.1.0
     devDependencies:
       vue:
         specifier: ^3.5.3
