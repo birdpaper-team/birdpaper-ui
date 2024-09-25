@@ -131,6 +131,7 @@ export default defineComponent({
     const wrapperRef = ref();
     const visible = ref<boolean>(props.modelValue || false);
     const scrollElements = ref<Element[]>([]);
+    const timer = ref();
 
     const handleClick = () => {
       if (props.trigger === "hover" || props.disabled) return;
@@ -139,12 +140,15 @@ export default defineComponent({
     };
     const handleMouseEnter = () => {
       if (props.trigger === "click") return;
+
+      window.clearTimeout(timer.value);
+      timer.value = 0;
       updateVisible(true);
       nextTick(() => handleResize());
     };
     const handleMouseLeave = () => {
       if (props.trigger === "click") return;
-      updateVisible(false);
+      timer.value = window.setTimeout(() => updateVisible(false), 100);
     };
 
     const handleResize = () => {

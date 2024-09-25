@@ -2,19 +2,45 @@ import { ExtractPropTypes, PropType } from "vue";
 import { MessageType } from "./type";
 
 export const messageProps = {
-  /** 消息ID Message id */
+  /**
+   * @type string
+   * @description Message ID.
+   */
   id: { type: String },
-  /** 消息提示类型 Message prompt type */
+  /**
+   * @type MessageType
+   * @description Message type.
+   * @default "text"
+   */
   type: { type: String as PropType<MessageType>, default: "text" },
-  /** 消息提示内容 Message prompt content */
+  /**
+   * @type string
+   * @description Message content.
+   * @default ""
+   */
   content: { type: String, default: "" },
-  /** 延迟关闭时间 Delayed shutdown time */
+  /**
+   * @type number
+   * @description Delayed shutdown time.
+   * @default 3000
+   */
   duration: { type: Number, default: 3000 },
-  /** 是否允许手动关闭 Closeable or not */
+  /**
+   * @type boolean
+   * @description Closeable or not.
+   * @default false
+   */
   closeable: { type: Boolean, default: false },
-  /** 是否开启无背景展示 */
+  /**
+   * @type boolean
+   * @description Plain mode.
+   * @default false
+   */
   plain: { type: Boolean, default: false },
-  /** 关闭后的回调函数 */
+  /**
+   * @type Function
+   * @description The close callback function.
+   */
   onClose: { type: Function },
 };
 
