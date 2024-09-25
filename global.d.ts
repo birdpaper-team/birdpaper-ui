@@ -8,6 +8,7 @@ declare module "vue" {
     BpOption: typeof import("birdpaper-ui")["Option"];
     BpSpace: typeof import("birdpaper-ui")["Space"];
     BpTrigger: typeof import("birdpaper-ui")["Trigger"];
+    BpTooltip: typeof import("birdpaper-ui")["Tooltip"];
   }
 }
 
