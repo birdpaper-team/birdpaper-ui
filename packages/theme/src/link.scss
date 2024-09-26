@@ -1,0 +1,80 @@
+@use "common/design" as *;
+@use "common/sizes" as *;
+@use "common/color" as *;
+@use "common/extend.scss" as *;
+@use "mixins/var" as *;
+@use "mixins/function" as *;
+@use "mixins/mixins.scss" as *;
+
+@include b(link) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &-icon {
+    vertical-align: middle;
+
+    svg[class*="-icon-"] {
+      display: inline-block;
+      vertical-align: -2px;
+      outline: none;
+      fill: rgba(getCssVar("link", "color"), 1);
+    }
+  }
+
+  &-inner {
+    color: rgba(getCssVar("link", "color"), 1);
+    transition: all 0.2s;
+  }
+
+  &:hover {
+    .#{$B}-inner {
+      color: rgba(getCssVar("link", "hover-color"), 1);
+      transition: all 0.2s;
+    }
+  }
+
+  &:active {
+    .#{$B}-inner {
+      color: rgba(getCssVar("link", "active-color"), 1);
+      transition: all 0.2s;
+    }
+  }
+  &:visited {
+    .#{$B}-inner {
+      color: rgba(getCssVar("link", "visited-color"), 1);
+      transition: all 0.2s;
+    }
+  }
+
+  &[disabled="true"] {
+    pointer-events: none;
+    cursor: default;
+
+    .#{$B}-inner {
+      color: rgba(getCssVar("link", "disabled-color"), 1);
+      transition: all 0.2s;
+    }
+  }
+
+  .bp-icon-loading {
+    @include spin(1.2s);
+  }
+}
+
+$status: "gary", "primary", "success", "warning", "danger";
+
+@each $item in $status {
+  .#{$B}-#{$item} {
+    @include css-var-from-global-rgb(("link", "color"), ($item, 6));
+    @include css-var-from-global-rgb(("link", "hover-color"), ($item, 4));
+    @include css-var-from-global-rgb(("link", "active-color"), ($item, 7));
+    @include css-var-from-global-rgb(("link", "visited-color"), ($item, 7));
+    @include css-var-from-global-rgb(("link", "disabled-color"), ($item, 4));
+  }
+}

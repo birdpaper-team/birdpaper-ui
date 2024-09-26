@@ -9,6 +9,7 @@ declare module "vue" {
     BpSpace: typeof import("birdpaper-ui")["Space"];
     BpTrigger: typeof import("birdpaper-ui")["Trigger"];
     BpTooltip: typeof import("birdpaper-ui")["Tooltip"];
+    BpLink: typeof import("birdpaper-ui")["Link"];
   }
 }
 
