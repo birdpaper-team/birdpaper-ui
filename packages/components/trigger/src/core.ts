@@ -87,20 +87,20 @@ export const getPosition = (
     "low-right": () => allowRight && allowBottom,
   };
 
-  let allowPosition: TriggerPosition[] = [position];
+  let allowPositions: TriggerPosition[] = [position];
   if (!isAllow[position]()) {
-    allowPosition = [];
+    allowPositions = [];
 
     for (let i = 0; i < positionArr.length; i++) {
       if (positionArr[i] === position) continue;
 
       if (isAllow[positionArr[i]]()) {
-        allowPosition.push(positionArr[i]);
+        allowPositions.push(positionArr[i]);
       }
     }
   }
 
-  return allowPosition.length === 0 ? position : allowPosition[0];
+  return allowPositions.length === 0 ? position : allowPositions[0];
 };
 
 /**
@@ -217,7 +217,14 @@ export const getWrapperSize = (el: Element): SizeInfo => {
  * @returns string
  */
 export const getWrapperPositionStyle = (top: number, left: number, visible: boolean, width?: number): string => {
-  let innerStyleStr = `top:${top}px;left:${left}px;display:${visible ? "block" : "none"};`;
+  if (isNaN(top) || isNaN(left)) {
+    throw new Error("Invalid top or left value");
+  }
+
+  const topStr = top.toString();
+  const leftStr = left.toString();
+
+  let innerStyleStr = `top:${topStr}px;left:${leftStr}px;display:${visible ? "block" : "none"};`;
   width && (innerStyleStr += `width:${width}px`);
 
   return innerStyleStr;
