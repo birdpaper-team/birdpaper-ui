@@ -1,7 +1,7 @@
 import { PropType, Teleport, Transition, defineComponent, h, nextTick, ref, watch } from "vue";
-import { getPositionData, getWrapperPositionStyle, getWrapperSize } from "./core";
+import { getPosition, getPositionData, getWrapperPositionStyle, getWrapperSize } from "./core";
 import { TriggerPosition, TriggerType } from "./types";
-import { onClickOutside, useEventListener, useThrottleFn } from "@vueuse/core";
+import { onClickOutside, useElementBounding, useEventListener, useThrottleFn, useWindowSize } from "@vueuse/core";
 import { getScrollElements } from "@birdpaper-ui/components/utils/dom";
 import { useNamespace } from "@birdpaper-ui/hooks";
 
@@ -114,6 +114,15 @@ export default defineComponent({
       default: false,
     },
     /**
+     * @type boolean
+     * @description Auto fix the position with window size.
+     * @default false
+     */
+    autoFitPosition: {
+      type: Boolean,
+      default: true,
+    },
+    /**
      * @type number
      * @description Scroll close time.
      * @default 400
@@ -132,6 +141,7 @@ export default defineComponent({
     const visible = ref<boolean>(props.modelValue || false);
     const scrollElements = ref<Element[]>([]);
     const timer = ref();
+    const windowSize = useWindowSize();
 
     const handleClick = () => {
       if (props.trigger === "hover" || props.disabled) return;
@@ -151,18 +161,31 @@ export default defineComponent({
       timer.value = window.setTimeout(() => updateVisible(false), 100);
     };
 
-    const handleResize = () => {
+    const handleResize = async () => {
       if (!triggerRef.value || !visible.value) return;
+
+      const el = triggerRef.value?.children[0];
       const wrapperSize = getWrapperSize(wrapperRef.value);
+
+      const position = props.autoFitPosition
+        ? getPosition(
+            props.position,
+            windowSize,
+            useElementBounding(el),
+            wrapperSize,
+            props.popupOffset,
+            props.popupTranslate
+          )
+        : props.position;
+
       const { top, left, width } = getPositionData(
-        triggerRef.value?.children[0],
-        props.position,
+        el,
+        position,
         wrapperSize,
         props.popupTranslate,
         props.popupOffset,
         props.autoFitWidth
       );
-
       wrapperRef.value.setAttribute(
         "style",
         getWrapperPositionStyle(top, left, visible.value, props.autoFitWidth ? width : undefined)
@@ -182,6 +205,7 @@ export default defineComponent({
     const throttleResize = useThrottleFn(handleResize, 20);
     const init = () => {
       useEventListener(window, "resize", throttleResize);
+      // useEventListener(window, "scroll", throttleResize);
 
       nextTick(() => {
         if (props.updateAtScroll) {
