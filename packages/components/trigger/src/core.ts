@@ -43,40 +43,58 @@ export const getPosition = (
   popupOffset: number = 0,
   popupTranslate: [number, number] = [0, 0]
 ): TriggerPosition => {
-  const left =
-    triggerBounding.left.value + triggerBounding.width.value + popupOffset + popupTranslate[0] - wrapperSize.width;
-  const right =
-    windowSize.width.value - triggerBounding.right.value - popupOffset - popupTranslate[0] - wrapperSize.width;
-  const top = triggerBounding.y.value - wrapperSize.height - popupOffset - popupTranslate[0];
-  const halfTop = triggerBounding.y.value - wrapperSize.height / 2 - popupOffset - popupTranslate[0];
-  const halfBottom =
-    windowSize.height.value + popupOffset + popupTranslate[1] - triggerBounding.bottom.value - wrapperSize.height / 2;
-  const bottom =
-    windowSize.height.value + popupOffset + popupTranslate[1] - triggerBounding.bottom.value - wrapperSize.height;
+  const triggerLeft = triggerBounding.left.value + popupOffset + popupTranslate[0];
+  const triggerLeftIncludeWidth = triggerLeft + triggerBounding.width.value;
+  const triggerLeftIncludeHalfWidth = triggerLeft + triggerBounding.width.value / 2;
+
+  const triggerRight = windowSize.width.value - triggerBounding.right.value - popupOffset - popupTranslate[0];
+  const triggerRightIncludeWidth = triggerRight + triggerBounding.width.value;
+  const triggerRightIncludeHalfWidth = triggerRight + triggerBounding.width.value / 2;
+
+  const triggerTop = triggerBounding.y.value - popupOffset - popupTranslate[0];
+  const triggerTopIncludeHalfHeight = triggerTop + triggerBounding.height.value / 2;
+
+  const triggerBottom = windowSize.height.value - popupOffset - popupTranslate[1] - triggerBounding.bottom.value;
+  const triggerBottomIncludeHalfHeight = triggerBottom + triggerBounding.height.value / 2;
+
+  // Allow position.
+  const allowLeft = triggerLeft - wrapperSize.width > 0;
+  const allowLeftWithHalf = triggerLeftIncludeHalfWidth - wrapperSize.width / 2 > 0;
+  const allowLeftWithTrigger = triggerLeftIncludeWidth - wrapperSize.width > 0;
+
+  const allowRight = triggerRight - wrapperSize.width > 0;
+  const allowHalfRight = triggerRightIncludeHalfWidth - wrapperSize.width / 2 > 0;
+  const allowRightWithTrigger = triggerRightIncludeWidth - wrapperSize.width > 0;
+
+  const allowTop = triggerTop - wrapperSize.height > 0;
+  const allowHalfTop = triggerTopIncludeHalfHeight - wrapperSize.height / 2 > 0;
+
+  const allowBottom = triggerBottom - wrapperSize.height > 0;
+  const allowHalfBottom = triggerBottomIncludeHalfHeight - wrapperSize.height / 2 > 0;
 
   const isAllow = {
-    top: top > 0 && left > 0 && right > 0,
-    bottom: bottom > 0 && left > 0 && right > 0,
-    left: left > 0 && halfTop > 0 && halfBottom > 0,
-    right: right > 0 && halfTop > 0 && halfBottom / 2 > 0,
-    "bottom-left": bottom > 0 && left > 0,
-    "bottom-right": bottom > 0 && left > 0,
-    "top-left": top > 0 && right > 0,
-    "top-right": top > 0 && left > 0,
-    "upper-left": left > 0 && top > 0,
-    "upper-right": right > 0 && top > 0,
-    "low-left": left > 0 && bottom > 0,
-    "low-right": right > 0 && bottom > 0,
+    top: () => allowTop && allowLeftWithHalf && allowHalfRight,
+    bottom: () => allowBottom && allowLeft && allowRight,
+    left: () => allowLeft && allowHalfTop && allowHalfBottom,
+    right: () => allowRight && allowHalfTop && allowHalfBottom,
+    "bottom-left": () => allowBottom && allowRightWithTrigger,
+    "bottom-right": () => allowBottom && allowLeftWithTrigger,
+    "top-left": () => allowTop && allowRightWithTrigger,
+    "top-right": () => allowTop && allowLeftWithTrigger,
+    "upper-left": () => allowLeft && allowTop,
+    "upper-right": () => allowRight && allowTop,
+    "low-left": () => allowLeft && allowBottom,
+    "low-right": () => allowRight && allowBottom,
   };
 
   let allowPosition: TriggerPosition[] = [position];
-  if (!isAllow[position]) {
+  if (!isAllow[position]()) {
     allowPosition = [];
 
     for (let i = 0; i < positionArr.length; i++) {
       if (positionArr[i] === position) continue;
 
-      if (isAllow[positionArr[i]]) {
+      if (isAllow[positionArr[i]]()) {
         allowPosition.push(positionArr[i]);
       }
     }
