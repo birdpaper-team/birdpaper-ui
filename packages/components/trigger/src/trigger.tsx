@@ -131,6 +131,15 @@ export default defineComponent({
       type: Number,
       default: 400,
     },
+    /**
+     * @type number
+     * @description Scroll close time.
+     * @default 400
+     */
+    throttleTime: {
+      type: Number,
+      default: 20,
+    },
   },
   emits: ["update:modelValue"],
   setup(props, { emit, slots }) {
@@ -202,7 +211,7 @@ export default defineComponent({
       emit("update:modelValue", visible.value);
     };
 
-    const throttleResize = useThrottleFn(handleResize, 20);
+    const throttleResize = useThrottleFn(handleResize, props.throttleTime);
     const init = () => {
       useEventListener(window, "resize", throttleResize);
       // useEventListener(window, "scroll", throttleResize);

@@ -1,21 +1,23 @@
 <template>
-  <bp-trigger>
-    <bp-button>Click me</bp-button>
-    <template #content>
-      <div class="demo">
-        <span v-text="'No content.'"></span>
-      </div>
-    </template>
-  </bp-trigger>
+  <bp-space style="width: 100%;" justify="space-between">
+    <bp-trigger position="top">
+      <bp-button>Click me</bp-button>
+      <template #content>
+        <div class="demo">
+          <span v-text="'No content.'"></span>
+        </div>
+      </template>
+    </bp-trigger>
 
-  <bp-trigger trigger="hover">
-    <bp-button>Hover me</bp-button>
-    <template #content>
-      <div class="demo">
-        <span v-text="'No content.'"></span>
-      </div>
-    </template>
-  </bp-trigger>
+    <bp-trigger position="bottom">
+      <bp-button>Click me</bp-button>
+      <template #content>
+        <div class="demo">
+          <span v-text="'No content.'"></span>
+        </div>
+      </template>
+    </bp-trigger>
+  </bp-space>
 </template>
 
 <style scoped>
@@ -24,7 +26,7 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  width: 180px;
+  width: 120px;
   height: 100px;
   padding: 10px;
   font-size: 13px;
