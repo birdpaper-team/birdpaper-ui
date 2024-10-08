@@ -1,5 +1,11 @@
 <template>
-  <bp-textarea v-model="txt" clearable style="width: 220px;margin-bottom: 16px;" placeholder="请输入内容"></bp-textarea>
+  <bp-textarea
+    v-model="txt"
+    clearable
+    style="width: 220px; margin-bottom: 16px"
+    placeholder="请输入内容"
+    :maxlength="100"
+    ></bp-textarea>
 </template>
 
 <script setup lang="ts">
