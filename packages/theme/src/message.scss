@@ -1,7 +1,4 @@
 @use "common/design" as *;
-@use "common/sizes" as *;
-@use "common/color" as *;
-@use "common/extend.scss" as *;
 @use "mixins/var" as *;
 @use "mixins/function" as *;
 @use "mixins/mixins.scss" as *;
@@ -61,7 +58,7 @@
       list-style: none;
       overflow: hidden;
       pointer-events: all;
-      border: 0.5px solid rgba(getCssVar("message", "border-color"), 1);
+      border: $borderSize solid rgba(getCssVar("message", "border-color"), 1);
       background: rgba(getCssVar("message", "bg-color"), 1);
       box-shadow: 0 4px 12px rgba(getCssVar("message", "box-shadow"), 0.6);
 
