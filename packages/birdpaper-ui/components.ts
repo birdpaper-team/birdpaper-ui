@@ -1,4 +1,6 @@
 import {
+  Row,
+  Col,
   Button,
   Input,
   Table,
@@ -12,4 +14,4 @@ import {
   Textarea,
 } from "@birdpaper-ui/components";
 
-export default [Button, Input, Table, TableColumn, Trigger, Select, Option, Space, Tooltip, Link, Textarea];
+export default [Row, Col, Button, Input, Table, TableColumn, Trigger, Select, Option, Space, Tooltip, Link, Textarea];

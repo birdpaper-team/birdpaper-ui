@@ -14,3 +14,9 @@
   -webkit-animation: rotating $time linear infinite;
   @content;
 }
+
+@mixin responsive($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}

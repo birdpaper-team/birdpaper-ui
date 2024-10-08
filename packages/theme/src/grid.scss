@@ -1,0 +1,8 @@
+@use "mixins/mixins.scss" as *;
+
+@include b(row) {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-flow: row wrap;
+}

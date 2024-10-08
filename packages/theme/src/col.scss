@@ -1,0 +1,50 @@
+@use "mixins/mixins.scss" as *;
+
+@include b(col) {
+  box-sizing: border-box;
+}
+
+@for $col from 1 through 24 {
+  .#{$B}-#{$col} {
+    width: calc((100% / 24) * $col);
+    flex: 0 0 calc((100% / 24) * $col);
+  }
+
+  @if $col < 23 {
+    .#{$B}-offset-#{$col} {
+      margin-left: calc((100% / 24) * $col);
+    }
+  }
+}
+
+@mixin setcols($type) {
+  @for $i from 1 through 24 {
+    .#{$B}-#{$type}-#{$i} {
+      display: block;
+      width: calc(100% / (24 / $i));
+      flex: 0 0 calc((100% / 24) * $i);
+    }
+
+    .#{$B}-#{$type}-offset-#{$i} {
+      margin-left: calc(100% / (24 / $i));
+    }
+  }
+}
+
+$responsives: (
+  "xs": "0px",
+  "sm": "760px",
+  "md": "992px",
+  "lg": "1200px",
+  "xl": "1920px",
+);
+@each $key, $value in $responsives {
+  .#{$B}-#{$key}-0 {
+    display: none;
+    width: 0%;
+  }
+
+  @include responsive($value) {
+    @include setcols($key);
+  }
+}
