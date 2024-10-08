@@ -4,12 +4,11 @@ export declare type SelectValue = string | number;
 
 export class SelectOption {
   label: string = "";
-  value: SelectValue = "";
+  value: SelectValue = '';
 }
 
 export interface SelectContext {
   modelValue: SelectValue;
-  labelModel: SelectOption.label;
   onSelect: (value: SelectValue, payload: SelectOption) => void;
 }
 

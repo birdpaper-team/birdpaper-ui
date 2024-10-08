@@ -75,8 +75,7 @@ const handleClear = () => {
 };
 
 provide(selectInjectionKey, {
-  modelValue: model.value,
-  labelModel,
+  modelValue: model as unknown as SelectValue,
   onSelect: (v: SelectValue, payload: SelectOption) => {
     model.value = v;
     labelModel.value = payload.label;

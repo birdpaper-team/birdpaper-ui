@@ -24,9 +24,9 @@ const option = ref<SelectOption>(new SelectOption());
 
 const cls = computed(() => {
   let cls = [`${clsBlockName}`];
-  if (ctx.value?.labelModel.value === props.value) cls.push(`${clsBlockName}-active`);
+  if (ctx.value?.modelValue === props.value) cls.push(`${clsBlockName}-active`);
   if (props.disabled) cls.push(`${clsBlockName}-disabled`);
-
+  
   return cls;
 });
 
