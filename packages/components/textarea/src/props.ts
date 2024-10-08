@@ -1,4 +1,5 @@
-import { ExtractPropTypes } from "vue";
+import { InputSize } from "@birdpaper-ui/components/input/src/types";
+import { ExtractPropTypes, PropType } from "vue";
 
 export const textareaProps = {
   /**
@@ -17,6 +18,15 @@ export const textareaProps = {
   placeholder: {
     type: String,
     default: "",
+  },
+  /**
+   * @type InputSize
+   * @description Input sizes.
+   * @default default
+   */
+  size: {
+    type: String as PropType<InputSize>,
+    default: "default",
   },
   /**
    * @type boolean
