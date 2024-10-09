@@ -1,6 +1,7 @@
 @use "common/design" as *;
 @use "common/sizes" as *;
 @use "common/extend.scss" as *;
+@use "mixins/function" as *;
 @use "mixins/mixins.scss" as *;
 
 @include b(input) {
