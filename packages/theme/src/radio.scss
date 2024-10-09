@@ -1,7 +1,13 @@
 @use "common/design" as *;
+@use "mixins/var" as *;
+@use "mixins/function" as *;
 @use "mixins/mixins.scss" as *;
 
 @include b(radio) {
+  @include css-var-from-global-rgb(("radio", "border-color"), ("gary", "5"));
+  @include css-var-from-global-rgb(("radio", "label-color"), ("gary", "10"));
+  @include css-var-from-global-rgb(("radio", "check-border-color"), ("primary", "6"));
+
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -24,19 +30,19 @@
     display: inline-block;
     width: 14px;
     height: 14px;
-    border: $borderSize solid var(--bp-gary-5);
+    border: $borderSize solid rgba(getCssVar("radio", "border-color"), 1);
     border-radius: 14px;
     box-sizing: border-box;
     transition: all 0.2s;
   }
 
   &-check {
-    border: 5px solid var(--bp-primary-6);
+    border: 5px solid rgba(getCssVar("radio", "check-border-color"), 1);
     transition: all 0.2s;
   }
 
   &-label {
-    color: var(--bp-gary-10);
+    color: rgba(getCssVar("radio", "label-color"), 1);
     font-size: 14px;
     font-weight: normal;
     margin-left: 8px;
@@ -45,15 +51,33 @@
   }
 
   &-disabled {
+    @include css-var-from-global-rgb(("radio", "border-color"), ("gary", "3"));
+    @include css-var-from-global-rgb(("radio", "label-color"), ("gary", "5"));
+    @include css-var-from-global-rgb(("radio", "check-border-color"), ("primary", "2"));
+
     pointer-events: none;
     cursor: default;
+  }
+}
 
-    .#{$B}-radio {
-      border: $borderSize solid var(--bp-gary-3);
+.#{$B}-group {
+  display: inline-flex;
+
+  &-vertical {
+    flex-direction: column;
+
+    .#{$B} {
+      &:not(:first-child) {
+        margin-top: 16px;
+      }
     }
+  }
 
-    .#{$B}-label {
-      color: var(--bp-gary-5);
+  &-horizontal {
+    .#{$B} {
+      &:not(:first-child) {
+        margin-left: 20px;
+      }
     }
   }
 }

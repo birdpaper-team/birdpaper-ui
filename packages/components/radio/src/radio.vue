@@ -2,9 +2,9 @@
   <label :class="cls" @click="handleInput">
     <input type="radio" :disabled :class="`${clsBlockName}-inner`" />
 
-    <span v-if="type === 'radio'" :class="[`${clsBlockName}-radio`, isCheck ? `${clsBlockName}-check` : '']"></span>
+    <span :class="radioCls"></span>
 
-    <span :class="[`${clsBlockName}-label`, isCheck ? `${clsBlockName}-check-label` : '']">
+    <span :class="labelCls">
       <slot></slot>
     </span>
   </label>
@@ -14,18 +14,17 @@
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { computed } from "vue";
 import { RadioProps, radioProps } from "./props";
+import { RadioValue } from "./types";
 
 defineOptions({ name: "Radio" });
 const { clsBlockName } = useNamespace("radio");
 
-const model = defineModel<string | number | boolean>({
-  default: false,
-});
+const model = defineModel<RadioValue>({ default: false });
 const props: RadioProps = defineProps(radioProps);
 
-const cls = computed(() => {
-  return [clsBlockName, "select-none", props.disabled && `${clsBlockName}-disabled`];
-});
+const cls = computed(() => [clsBlockName, "select-none", props.disabled && `${clsBlockName}-disabled`]);
+const radioCls = computed(() => [`${clsBlockName}-radio`, isCheck.value && `${clsBlockName}-check`]);
+const labelCls = computed(() => [`${clsBlockName}-label`, isCheck.value && `${clsBlockName}-check-label`]);
 
 const handleInput = () => {
   if (props.disabled) return;

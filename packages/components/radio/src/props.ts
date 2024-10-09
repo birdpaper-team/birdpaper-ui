@@ -1,10 +1,25 @@
 import { ExtractPropTypes, PropType } from "vue";
-import { RadioType } from "./types";
+import { RadioValue } from "./types";
 
 export const radioProps = {
-  value: { type: [String, Number, Boolean], default: false },
-  disabled: { type: Boolean, default: false },
-  type: { type: String as PropType<RadioType>, default: "radio" },
+  /**
+   * @type string | number | boolean
+   * @description Value of the radio.
+   * @default false
+   */
+  value: {
+    type: [String, Number, Boolean] as PropType<RadioValue>,
+    default: false,
+  },
+  /**
+   * @type boolean
+   * @description Disabled or not.
+   * @default false
+   */
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 };
 
 export type RadioProps = ExtractPropTypes<typeof radioProps>;
