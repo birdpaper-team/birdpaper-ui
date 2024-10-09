@@ -1,3 +1,3 @@
-# 复选框 Checkbox
+# 单选框 Radio
 
 <!--@include: ./demo.md-->
