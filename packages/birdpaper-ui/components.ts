@@ -13,6 +13,7 @@ import {
   Link,
   Textarea,
   Radio,
+  RadioGroup,
 } from "@birdpaper-ui/components";
 
 export default [
@@ -30,4 +31,5 @@ export default [
   Link,
   Textarea,
   Radio,
+  RadioGroup
 ];

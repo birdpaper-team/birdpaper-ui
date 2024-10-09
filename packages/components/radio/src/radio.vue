@@ -22,9 +22,14 @@ const { clsBlockName } = useNamespace("radio");
 const model = defineModel<RadioValue>({ default: false });
 const props: RadioProps = defineProps(radioProps);
 
-const cls = computed(() => [clsBlockName, "select-none", props.disabled && `${clsBlockName}-disabled`]);
-const radioCls = computed(() => [`${clsBlockName}-radio`, isCheck.value && `${clsBlockName}-check`]);
-const labelCls = computed(() => [`${clsBlockName}-label`, isCheck.value && `${clsBlockName}-check-label`]);
+const cls = computed(() => [
+  clsBlockName,
+  "select-none",
+  isCheck.value && `${clsBlockName}-check`,
+  props.disabled && `${clsBlockName}-disabled`,
+]);
+const radioCls = computed(() => [`${clsBlockName}-radio`]);
+const labelCls = computed(() => [`${clsBlockName}-label`]);
 
 const handleInput = () => {
   if (props.disabled) return;

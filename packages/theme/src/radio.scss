@@ -4,7 +4,7 @@
 @use "mixins/mixins.scss" as *;
 
 @include b(radio) {
-  @include css-var-from-global-rgb(("radio", "border-color"), ("gary", "5"));
+  @include css-var-from-global-rgb(("radio", "border-color"), ("gary", "6"));
   @include css-var-from-global-rgb(("radio", "label-color"), ("gary", "10"));
   @include css-var-from-global-rgb(("radio", "check-border-color"), ("primary", "6"));
 
@@ -14,6 +14,13 @@
   flex-direction: row;
   justify-content: flex-start;
   cursor: pointer;
+
+  &:hover {
+    .#{$B}-radio::before {
+      opacity: 1;
+      transition: all 0.2s;
+    }
+  }
 
   &-inner {
     position: absolute;
@@ -27,18 +34,31 @@
   }
 
   &-radio {
+    position: relative;
     display: inline-block;
-    width: 14px;
-    height: 14px;
+    cursor: pointer;
+    width: 12px;
+    height: 12px;
     border: $borderSize solid rgba(getCssVar("radio", "border-color"), 1);
-    border-radius: 14px;
+    border-radius: 12px;
     box-sizing: border-box;
     transition: all 0.2s;
-  }
 
-  &-check {
-    border: 5px solid rgba(getCssVar("radio", "check-border-color"), 1);
-    transition: all 0.2s;
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: block;
+      box-sizing: border-box;
+      width: 22px;
+      height: 22px;
+      border: 6px solid rgba(getCssVar("radio", "border-color"), 0.1);
+      border-radius: 22px;
+      background-color: transparent;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+    }
   }
 
   &-label {
@@ -49,14 +69,23 @@
     line-height: unset;
     cursor: pointer;
   }
+}
 
-  &-disabled {
-    @include css-var-from-global-rgb(("radio", "border-color"), ("gary", "3"));
-    @include css-var-from-global-rgb(("radio", "label-color"), ("gary", "5"));
-    @include css-var-from-global-rgb(("radio", "check-border-color"), ("primary", "2"));
+.#{$B}-disabled {
+  @include css-var-from-global-rgb(("radio", "border-color"), ("gary", "3"));
+  @include css-var-from-global-rgb(("radio", "label-color"), ("gary", "4"));
+  @include css-var-from-global-rgb(("radio", "check-border-color"), ("primary", "2"));
 
-    pointer-events: none;
-    cursor: default;
+  pointer-events: none;
+  cursor: default;
+}
+
+.#{$B}-check {
+  pointer-events: none;
+
+  .#{$B}-radio {
+    border: 4px solid rgba(getCssVar("radio", "check-border-color"), 1);
+    transition: all 0.2s;
   }
 }
 
