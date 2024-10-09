@@ -12,6 +12,22 @@ import {
   Tooltip,
   Link,
   Textarea,
+  Radio,
 } from "@birdpaper-ui/components";
 
-export default [Row, Col, Button, Input, Table, TableColumn, Trigger, Select, Option, Space, Tooltip, Link, Textarea];
+export default [
+  Row,
+  Col,
+  Button,
+  Input,
+  Table,
+  TableColumn,
+  Trigger,
+  Select,
+  Option,
+  Space,
+  Tooltip,
+  Link,
+  Textarea,
+  Radio,
+];
