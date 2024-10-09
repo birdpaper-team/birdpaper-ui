@@ -1,5 +1,7 @@
 declare module "vue" {
   export interface GlobalComponents {
+    BpRow: typeof import("birdpaper-ui")["Row"];
+    BpCol: typeof import("birdpaper-ui")["Col"];
     BpButton: typeof import("birdpaper-ui")["Button"];
     BpInput: typeof import("birdpaper-ui")["Input"];
     BpTable: typeof import("birdpaper-ui")["Table"];
@@ -11,6 +13,7 @@ declare module "vue" {
     BpTooltip: typeof import("birdpaper-ui")["Tooltip"];
     BpLink: typeof import("birdpaper-ui")["Link"];
     BpTextarea: typeof import("birdpaper-ui")["Textarea"];
+    BpRadio: typeof import("birdpaper-ui")["Radio"];
   }
 }
 
