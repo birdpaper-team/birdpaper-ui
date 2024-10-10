@@ -43,6 +43,7 @@ import { IconArrowDownSLine, IconArrowUpSLine } from "birdpaper-icon";
 import { provide, ref, useSlots, watchEffect } from "vue";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
 import { IconCloseLine } from "birdpaper-icon";
+import { get } from "radash";
 
 defineOptions({ name: "Select" });
 const { clsBlockName } = useNamespace("select");
@@ -86,7 +87,7 @@ provide(selectInjectionKey, {
 
 watchEffect(() => {
   try {
-    const children = getAllElements(slots.default?.(), true).filter((item) => item.type["name"] === "Option");
+    const children = getAllElements(slots.default?.(), true).filter((item) => get(item, "type.name") === "Option");
     hasOptions.value = children.length !== 0;
 
     if (!model.value) return;

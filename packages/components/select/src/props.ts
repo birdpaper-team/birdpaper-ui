@@ -1,5 +1,5 @@
 import { InputSize } from "@birdpaper-ui/components/input/src/types";
-import { ExtractPropTypes, ModelRef, PropType, Ref } from "vue";
+import { ExtractPropTypes, PropType } from "vue";
 import { SelectValue } from "./types";
 
 export const selectProps = {

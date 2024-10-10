@@ -2,6 +2,7 @@ import { Fragment, defineComponent, Comment, mergeProps, h, VNodeProps } from "v
 import { TableColumnProps } from "../props";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
+import { get } from "radash";
 
 export default defineComponent({
   name: "TableBody",
@@ -10,7 +11,7 @@ export default defineComponent({
     rowKey: { type: String },
   },
   setup(props, { slots }) {
-    const children = getAllElements(slots.default?.(), true).filter((item) => item.type !== Comment);
+    const children = getAllElements(slots.default?.(), true).filter((item) => get(item, "type") !== Comment);
     const { clsBlockName } = useNamespace("table-body-tbody");
 
     const bodyRender = () => {

@@ -2,6 +2,7 @@ import { defineComponent, Fragment, h, PropType } from "vue";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { SizeType, SpaceType } from "./types";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
+import { get } from "radash";
 
 export default defineComponent({
   name: "Space",
@@ -37,7 +38,7 @@ export default defineComponent({
     const size = typeof props.size === "string" ? typeMap[props.size] : props.size;
 
     const render = () => {
-      const children = getAllElements(slots.default?.(), true).filter((item) => item.type !== Comment);
+      const children = getAllElements(slots.default?.(), true).filter((item) => get(item, "type") !== Comment);
 
       return (
         <div
