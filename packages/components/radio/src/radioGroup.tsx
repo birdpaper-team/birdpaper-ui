@@ -3,6 +3,8 @@ import { DirectionType, RadioType, RadioValue } from "./types";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { defineComponent } from "vue";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
+import { ButtonSize } from "@birdpaper-ui/components/button/src/types";
+import { get } from "radash";
 
 export default defineComponent({
   name: "RadioGroup",
@@ -22,6 +24,15 @@ export default defineComponent({
     type: {
       type: String as PropType<RadioType>,
       default: "radio",
+    },
+    /**
+     * @type ButtonSize
+     * @description Radio sizes when the type is button.
+     * @default default
+     */
+    size: {
+      type: String as PropType<ButtonSize>,
+      default: "default",
     },
     /**
      * @type boolean
@@ -51,16 +62,18 @@ export default defineComponent({
     };
 
     const cls = computed(() => {
-      let clsName = [clsBlockName, `${clsBlockName}-${props.direction}`];
-      props.type === "button" && clsName.push(`${clsBlockName}-button`);
+      let clsName = [clsBlockName];
+      clsName.push(
+        props.type === "button"
+          ? `${clsBlockName}-button ${clsBlockName}-${props.size}`
+          : `${clsBlockName}-${props.direction}`
+      );
 
       return clsName;
     });
 
     const render = () => {
-      const children = getAllElements(slots.default?.(), true).filter((item) => {
-        return item.type && typeof item.type === "object" && "name" in item.type && item.type.name === "Radio";
-      });
+      const children = getAllElements(slots.default?.(), true).filter((item) => get(item, "type.name") === "Radio");
 
       return (
         <div class={cls.value}>

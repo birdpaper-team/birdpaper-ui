@@ -1,12 +1,15 @@
 @use "common/design" as *;
 @use "mixins/var" as *;
+@use "common/sizes" as *;
 @use "mixins/function" as *;
 @use "mixins/mixins.scss" as *;
 
 @include b(radio) {
-  @include css-var-from-global-rgb(("radio", "border-color"), ("gary", "6"));
-  @include css-var-from-global-rgb(("radio", "label-color"), ("gary", "10"));
-  @include css-var-from-global-rgb(("radio", "check-border-color"), ("primary", "6"));
+  @include css-var-from-global-rgb(("radio", "radio-border"), ("gary", "6"));
+  @include css-var-from-global-rgb(("radio", "radio-border-check"), ("primary", "6"));
+  @include css-var-from-global-rgb(("radio", "radio-bg"), ("gary", "0"));
+  @include css-var-from-global-rgb(("radio", "label-color"), ("gary", "8"));
+  @include css-var-from-global-rgb(("radio", "label-color-hover"), ("gary", "10"));
 
   position: relative;
   display: inline-flex;
@@ -18,6 +21,11 @@
   &:hover {
     .#{$B}-radio::before {
       opacity: 1;
+      transition: all 0.2s;
+    }
+
+    .#{$B}-label {
+      color: rgba(getCssVar("radio", "label-color-hover"), 1);
       transition: all 0.2s;
     }
   }
@@ -39,7 +47,8 @@
     cursor: pointer;
     width: 12px;
     height: 12px;
-    border: $borderSize solid rgba(getCssVar("radio", "border-color"), 1);
+    border: $borderSize solid rgba(getCssVar("radio", "radio-border"), 1);
+    background-color: rgba(getCssVar("radio", "radio-bg"), 1);
     border-radius: 12px;
     box-sizing: border-box;
     transition: all 0.2s;
@@ -53,28 +62,31 @@
       box-sizing: border-box;
       width: 22px;
       height: 22px;
-      border: 6px solid rgba(getCssVar("radio", "border-color"), 0.1);
+      border: 6px solid rgba(getCssVar("radio", "radio-border"), 0.1);
       border-radius: 22px;
       background-color: transparent;
       transform: translate(-50%, -50%);
       opacity: 0;
+      transition: all 0.2s;
     }
   }
 
   &-label {
     color: rgba(getCssVar("radio", "label-color"), 1);
-    font-size: 14px;
+    font-size: getCssVar("size-font-size", 'default');
     font-weight: normal;
     margin-left: 8px;
     line-height: unset;
     cursor: pointer;
+    transition: all 0.2s;
   }
 }
 
 .#{$B}-disabled {
-  @include css-var-from-global-rgb(("radio", "border-color"), ("gary", "3"));
+  @include css-var-from-global-rgb(("radio", "radio-border"), ("gary", "3"));
+  @include css-var-from-global-rgb(("radio", "radio-bg"), ("gary", "1"));
   @include css-var-from-global-rgb(("radio", "label-color"), ("gary", "4"));
-  @include css-var-from-global-rgb(("radio", "check-border-color"), ("primary", "2"));
+  @include css-var-from-global-rgb(("radio", "radio-border-check"), ("primary", "2"));
 
   pointer-events: none;
   cursor: default;
@@ -84,7 +96,7 @@
   pointer-events: none;
 
   .#{$B}-radio {
-    border: 4px solid rgba(getCssVar("radio", "check-border-color"), 1);
+    border: 4px solid rgba(getCssVar("radio", "radio-border-check"), 1);
     transition: all 0.2s;
   }
 }
@@ -107,6 +119,59 @@
       &:not(:first-child) {
         margin-left: 20px;
       }
+    }
+  }
+}
+
+.#{$B}-group-button {
+  @include css-var-from-global-rgb(("radio", "radio-button-bg"), ("gary", "1"));
+  @include css-var-from-global-rgb(("radio", "radio-button-border"), ("gary", "2"));
+  background-color: rgba(getCssVar("radio", "radio-button-bg"), 1);
+
+  .#{$B} {
+    &:not(:first-child) {
+      margin-left: 2px;
+    }
+
+    &:hover {
+      .#{$B}-label {
+        background-color: var(--bp-gary-0);
+        color: rgba(getCssVar("radio", "label-color-hover"), 1);
+        transition: all 0.2s;
+      }
+    }
+
+    &-radio {
+      display: none;
+    }
+
+    &-label {
+      margin-left: 0px;
+    }
+
+    &-check {
+      .#{$B}-label {
+        background-color: var(--bp-gary-0);
+        color: rgba(getCssVar("radio", "radio-border-check"), 1);
+        transition: all 0.2s;
+      }
+    }
+  }
+}
+
+@each $size in $sizes {
+  .#{$B}-group-#{$size} {
+    height: getCssVar("size-height", $size);
+    min-height: getCssVar("size-height", $size);
+    border-radius: getCssVar("size-border-radius", $size);
+    padding: 0 calc(getCssVar("size-padding", $size) / 4);
+    
+    .#{$B}-label {
+      padding: 0 calc(getCssVar("size-padding", $size) / 2);
+      height: calc(getCssVar("size-height", $size) - calc(getCssVar("size-padding", $size) / 2));
+      line-height: calc(getCssVar("size-height", $size) - calc(getCssVar("size-padding", $size) / 2));
+      border-radius: calc(getCssVar("size-border-radius", $size) / 2);
+      font-size: getCssVar("size-font-size", $size);
     }
   }
 }
