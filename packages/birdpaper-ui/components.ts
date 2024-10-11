@@ -14,6 +14,8 @@ import {
   Textarea,
   Radio,
   RadioGroup,
+  Checkbox,
+  CheckboxGroup
 } from "@birdpaper-ui/components";
 
 export default [
@@ -31,5 +33,7 @@ export default [
   Link,
   Textarea,
   Radio,
-  RadioGroup
+  RadioGroup,
+  Checkbox,
+  CheckboxGroup
 ];

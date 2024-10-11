@@ -2,6 +2,7 @@ export * from "./grid";
 export * from "./button";
 export * from "./input";
 export * from "./radio";
+export * from "./checkbox";
 export * from "./table";
 export * from "./trigger";
 export * from "./select";

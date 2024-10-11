@@ -1,0 +1,107 @@
+@use "common/design" as *;
+@use "mixins/var" as *;
+@use "mixins/function" as *;
+@use "mixins/mixins.scss" as *;
+
+@include b(checkbox) {
+  @include css-var-from-global-rgb(("checkbox", "checkbox-border"), ("gary", "6"));
+  @include css-var-from-global-rgb(("checkbox", "checkbox-border-check"), ("primary", "6"));
+  @include css-var-from-global-rgb(("checkbox", "checkbox-bg"), ("gary", "0"));
+  @include css-var-from-global-rgb(("checkbox", "label-color"), ("gary", "8"));
+  @include css-var-from-global-rgb(("checkbox", "label-color-hover"), ("gary", "10"));
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  cursor: pointer;
+
+  &:hover {
+    .#{$B}-checkbox::before {
+      opacity: 1;
+      transition: all 0.2s;
+    }
+
+    .#{$B}-label {
+      color: rgba(getCssVar("checkbox", "label-color-hover"), 1);
+      transition: all 0.2s;
+    }
+  }
+
+  &-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    display: none;
+    visibility: hidden;
+  }
+
+  &-checkbox {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 14px;
+    height: 14px;
+    border: $borderSize solid rgba(getCssVar("checkbox", "checkbox-border"), 1);
+    background-color: rgba(getCssVar("checkbox", "checkbox-bg"), 1);
+    border-radius: 2px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    transition: all 0.2s;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: block;
+      box-sizing: border-box;
+      width: 22px;
+      height: 22px;
+      border: 6px solid rgba(getCssVar("checkbox", "checkbox-border"), 0.1);
+      border-radius: 4px;
+      background-color: transparent;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: all 0.2s;
+    }
+  }
+
+  &-check {
+    background-color: rgba(getCssVar("checkbox", "checkbox-border-check"), 1);
+    border: 1px solid rgba(getCssVar("checkbox", "checkbox-border-check"), 1);
+
+    svg[class*="-icon-"] {
+      position: absolute;
+      fill: var(--bp-gary-1);
+      font-weight: normal;
+      line-height: 1;
+      transform: scale(0.8);
+    }
+  }
+
+  &-label {
+    color: rgba(getCssVar("checkbox", "label-color"), 1);
+    font-size: getCssVar("size-font-size", "default");
+    font-size: 14px;
+    font-weight: normal;
+    margin-left: 8px;
+    line-height: unset;
+    transition: all 0.2s;
+  }
+}
+
+.#{$B}-disabled {
+  @include css-var-from-global-rgb(("checkbox", "checkbox-border"), ("gary", "3"));
+  @include css-var-from-global-rgb(("checkbox", "checkbox-bg"), ("gary", "1"));
+  @include css-var-from-global-rgb(("checkbox", "label-color"), ("gary", "4"));
+  @include css-var-from-global-rgb(("checkbox", "checkbox-border-check"), ("primary", "2"));
+
+  pointer-events: none;
+  cursor: default;
+}
