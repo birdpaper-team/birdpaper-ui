@@ -47,7 +47,7 @@
     transition: all 0.2s;
 
     .button-icon {
-      .bp-icon {
+      svg[class*="-icon-"] {
         fill: rgba(getCssVar("button", "text-color-hover"), 1);
         transition: all 0.2s;
       }
@@ -81,7 +81,7 @@
     &:focus-visible {
       background-color: var(--bp-gary-1);
     }
-    
+
     &:active {
       opacity: 0.6;
     }
@@ -101,7 +101,7 @@
     display: flex;
     align-items: center;
 
-    .bp-icon {
+    svg[class*="-icon-"] {
       fill: rgba(getCssVar("button", "text-color"), 1);
     }
 
