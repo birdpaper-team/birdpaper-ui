@@ -29,6 +29,15 @@ export const checkboxProps = {
     type: Boolean,
     default: false,
   },
+  /**
+   * @type number
+   * @description Max number of checkbox.
+   * @default 0
+   */
+  max: {
+    type: Number,
+    default: 0,
+  },
 };
 
 export type CheckboxProps = ExtractPropTypes<typeof checkboxProps>;

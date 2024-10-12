@@ -105,3 +105,25 @@
   pointer-events: none;
   cursor: default;
 }
+
+.#{$B}-group {
+  display: inline-flex;
+
+  &-vertical {
+    flex-direction: column;
+
+    .#{$B} {
+      &:not(:first-child) {
+        margin-top: 16px;
+      }
+    }
+  }
+
+  &-horizontal {
+    .#{$B} {
+      &:not(:first-child) {
+        margin-left: 20px;
+      }
+    }
+  }
+}
