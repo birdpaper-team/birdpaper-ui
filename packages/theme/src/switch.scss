@@ -1,0 +1,145 @@
+@use "common/design" as *;
+@use "mixins/var" as *;
+@use "common/sizes" as *;
+@use "mixins/function" as *;
+@use "mixins/mixins.scss" as *;
+
+$sizes: "small", "mini";
+
+@include b(switch) {
+  --bp-switch-height-mini: 16px;
+  --bp-switch-height-small: 24px;
+  @include css-var-from-global-rgb(("switch", "border"), ("gary", "2"));
+  @include css-var-from-global-rgb(("switch", "bg"), ("gary", "2"));
+  @include css-var-from-global-rgb(("switch", "inner-color"), ("gary", "6"));
+  @include css-var-from-global-rgb(("switch", "dot-bg"), ("gary", "0"));
+  @include css-var-from-global-rgb(("switch", "icon-color"), ("gary", "6"));
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+  cursor: pointer;
+
+  &-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    display: none;
+  }
+
+  &-slider {
+    width: max-content;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    background-color: rgba(getCssVar("switch", "bg"), 1);
+    border: $borderSize solid rgba(getCssVar("switch", "border"), 1);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &-inner {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      color: rgba(getCssVar("switch", "inner-color"), 1);
+    }
+
+    &-dot {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: rgba(getCssVar("switch", "dot-bg"), 1);
+      border-radius: 20px;
+      transition: all 0.2s ease;
+
+      .bp-icon-loading {
+        fill: rgba(getCssVar("switch", "icon"), 1);
+        @include spin(1.2s);
+      }
+    }
+  }
+
+  &-check {
+    @include css-var-from-global-rgb(("switch", "border"), ("primary", "6"));
+    @include css-var-from-global-rgb(("switch", "bg"), ("primary", "6"));
+    @include css-var-from-global-rgb(("switch", "icon-color"), ("gary", "7"));
+    @include css-var-from-global-rgb(("switch", "inner-color"), ("gary", "0"));
+    transition: all 0.2s ease;
+
+    .#{$B}-slider-dot {
+      transition: all 0.2s ease;
+    }
+  }
+}
+
+.#{$B}-disabled {
+  @include css-var-from-global-rgb(("switch", "border"), ("gary", "1"));
+  @include css-var-from-global-rgb(("switch", "bg"), ("gary", "1"));
+  @include css-var-from-global-rgb(("switch", "inner-color"), ("gary", "8"));
+  @include css-var-from-global-rgb(("switch", "dot-bg"), ("gary", "2"));
+
+  .#{$B}-check {
+    @include css-var-from-global-rgb(("switch", "border"), ("primary", "2"));
+    @include css-var-from-global-rgb(("switch", "bg"), ("primary", "2"));
+    @include css-var-from-global-rgb(("switch", "dot-bg"), ("gary", "0"));
+    @include css-var-from-global-rgb(("switch", "icon-color"), ("gary", "7"));
+  }
+
+  pointer-events: none;
+  cursor: default;
+}
+
+@each $size in $sizes {
+  .#{$B}-#{$size} {
+    $height: getCssVar("switch-height", $size);
+    $minWidth: calc(getCssVar("switch-height", $size) * 1.8);
+    $dotWidth: calc(getCssVar("switch-height", $size) - getCssVar("switch-height", $size) / 3.5);
+
+    height: getCssVar("switch-height", $size);
+    min-width: $minWidth;
+
+    .#{$B}-slider {
+      min-width: $minWidth;
+
+      .#{$B}-slider-inner {
+        width: max-content;
+        padding-left: $height;
+        padding-right: if($size == "mini", 1px, 6px);
+
+        @if $size == "mini" {
+          display: flex;
+          transform: scale(0.8);
+        }
+      }
+
+      .#{$B}-slider-dot {
+        left: calc($height / 6.5);
+        height: $dotWidth;
+        width: $dotWidth;
+        border-radius: 50%;
+      }
+    }
+
+    .#{$B}-check {
+      .#{$B}-slider-inner {
+        padding-left: if($size == "mini", 1px, 6px);
+        padding-right: $height;
+      }
+
+      .#{$B}-slider-dot {
+        left: calc(100% - $height + $height / 8.5);
+      }
+    }
+  }
+}

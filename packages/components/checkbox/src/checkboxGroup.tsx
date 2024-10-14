@@ -3,7 +3,7 @@ import { useNamespace } from "@birdpaper-ui/hooks";
 import { defineComponent } from "vue";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
 import { get } from "radash";
-import { CheckboxValue, DirectionType } from "./types";
+import { CheckboxValue, CheckboxDirectionType } from "./types";
 
 export default defineComponent({
   name: "CheckboxGroup",
@@ -27,12 +27,12 @@ export default defineComponent({
       default: false,
     },
     /**
-     * @type DirectionType
+     * @type CheckboxDirectionType
      * @description Direction of radio group.
      * @default "horizontal"
      */
     direction: {
-      type: String as PropType<DirectionType>,
+      type: String as PropType<CheckboxDirectionType>,
       default: "horizontal",
     },
     /**
@@ -48,10 +48,6 @@ export default defineComponent({
   emits: ["update:modelValue", "change"],
   setup(props, { emit, slots }) {
     const { clsBlockName } = useNamespace("checkbox-group");
-
-    // const updateValue = (v: CheckboxValue) => {
-    //   // emit("update:modelValue", v);
-    // };
 
     const cls = computed(() => {
       let clsName = [clsBlockName, `${clsBlockName}-${props.direction}`];
@@ -74,9 +70,6 @@ export default defineComponent({
                   onChange(e: CheckboxValue) {
                     emit("change", e);
                   },
-                  // "onUpdate:modelValue"(e: CheckboxValue) {
-                  //   updateValue(e);
-                  // },
                 })}
               </Fragment>
             );
