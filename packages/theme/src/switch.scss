@@ -1,10 +1,9 @@
 @use "common/design" as *;
 @use "mixins/var" as *;
-@use "common/sizes" as *;
 @use "mixins/function" as *;
 @use "mixins/mixins.scss" as *;
 
-$sizes: "small", "mini";
+$switchSizes: "small", "mini";
 
 @include b(switch) {
   --bp-switch-height-mini: 16px;
@@ -100,7 +99,7 @@ $sizes: "small", "mini";
   cursor: default;
 }
 
-@each $size in $sizes {
+@each $size in $switchSizes {
   .#{$B}-#{$size} {
     $height: getCssVar("switch-height", $size);
     $minWidth: calc(getCssVar("switch-height", $size) * 1.8);
