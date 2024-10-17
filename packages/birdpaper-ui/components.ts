@@ -16,7 +16,8 @@ import {
   RadioGroup,
   Checkbox,
   CheckboxGroup,
-  Switch
+  Switch,
+  VerifyCode
 } from "@birdpaper-ui/components";
 
 export default [
@@ -37,5 +38,6 @@ export default [
   RadioGroup,
   Checkbox,
   CheckboxGroup,
-  Switch
+  Switch,
+  VerifyCode
 ];

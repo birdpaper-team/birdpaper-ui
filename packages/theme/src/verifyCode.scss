@@ -1,0 +1,61 @@
+@use "common/design" as *;
+@use "common/sizes" as *;
+@use "common/extend.scss" as *;
+@use "mixins/function" as *;
+@use "mixins/mixins.scss" as *;
+
+@include b(verifyCode) {
+  position: relative;
+  display: flex;
+  align-items: center;
+  outline: none;
+  white-space: nowrap;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  opacity: 1;
+  width: auto;
+  cursor: text;
+
+  &-inner {
+    background-color: rgba(var(--bp-gary-1-rgb), 1);
+    text-align: center;
+    @extend .font-input;
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: rgba(var(--bp-gary-2-rgb), 0.5);
+      transition: all 0.2s;
+    }
+
+    &:focus-within {
+      background-color: rgba(var(--bp-gary-0-rgb), 1);
+      border: $borderSize solid var(--bp-primary-6);
+      transition: all 0.2s;
+    }
+  }
+}
+
+.#{$B}-disabled {
+  pointer-events: none;
+  cursor: default;
+
+  .#{$B}-inner {
+    color: var(--bp-gary-4);
+  }
+}
+
+@each $size in $sizes {
+  .#{$B}-#{$size} {
+    .#{$B}-inner {
+      width: getCssVar("size-height", $size);
+      height: getCssVar("size-height", $size);
+      border-radius: getCssVar("size-border-radius", $size);
+      font-size: getCssVar("size-font-size", $size);
+      line-height: 1;
+
+      &:not(:first-child) {
+        margin-left: calc(getCssVar("size-height", $size) / 4);
+      }
+    }
+  }
+}
