@@ -22,6 +22,8 @@
   transition: all 0.2s ease;
 
   &:hover {
+    background-color: rgba(var(--bp-gary-2-rgb), 0.4);
+
     .action-icon {
       opacity: 1;
       transition: all 0.2s ease;
