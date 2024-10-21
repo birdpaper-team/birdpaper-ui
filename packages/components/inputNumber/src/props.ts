@@ -94,10 +94,19 @@ export const inputNumberProps = {
    * @description Replace NaN with zero.
    * @default false
    */
-  nanToZero:{
+  nanToZero: {
     type: Boolean,
     default: false,
-  }
+  },
+  /**
+   * @type string
+   * @description The event that triggers the input change.
+   * @default "input"
+   */
+  modelEvent: {
+    type: String as PropType<"input" | "change">,
+    default: "input",
+  },
 } as const;
 
 export type InputNumberProps = ExtractPropTypes<typeof inputNumberProps>;

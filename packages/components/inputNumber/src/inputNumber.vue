@@ -1,4 +1,5 @@
 <template>
+  <!-- <div>{{ stringValue }} <bp-button @click="handleStep">TEST</bp-button></div> -->
   <bp-input
     ref="inpRef"
     v-model="stringValue"
@@ -31,7 +32,7 @@ import type { Component } from "vue";
 import BpInput from "@birdpaper-ui/components/input/index";
 import { inputNumberProps, InputNumberProps } from "./props";
 import { IconArrowDownSLine, IconArrowUpSLine } from "birdpaper-icon";
-import { useToNumber } from "@vueuse/core";
+import { useCounter, useToNumber } from "@vueuse/core";
 
 defineOptions({ name: "InputNumber" });
 const { clsBlockName } = useNamespace("inputNumber");
@@ -56,31 +57,31 @@ const btnList: { type: "up" | "down"; disabled: boolean; component: Component }[
   { type: "down", disabled: isMin.value, component: IconArrowDownSLine },
 ];
 
+const { count, inc, dec, set } = useCounter(model.value || 0, {
+  min: props.min,
+  max: props.max,
+});
+
 const handleStep = (type: "up" | "down") => {
   if (props.hideButton || !props.step) return;
-
-  let val = (model.value ?? 0) as number;
-  
-  if (type === "up" && !isMax.value) {
-    val += props.step;
-  }
-  if (type === "down" && !isMin.value) {
-    val -= props.step;
-  }
-  
-  stringValue.value = getStringValue(val);
-  updateModelValue();
   inpRef.value?.focus();
+
+  set(model.value ?? 0);
+  const step = props.step;
+  type === "up" ? inc(step) : dec(step);
+
+  stringValue.value = getStringValue(count.value);
+  updateModelValue();
 };
 
-const getStringValue = (val?: number): string => {
-  let _val = val || model.value;
+const getStringValue = (val = model.value): string => {
+  let _val = val;
 
   if (!mergePrecision.value || mergePrecision.value < 0) {
     return _val + "";
   }
 
-  return _val ? _val.toFixed(mergePrecision.value) : "";
+  return Number(_val).toFixed(mergePrecision.value);
 };
 
 const updateModelValue = () => {
@@ -93,19 +94,28 @@ const inpRef = ref();
 const focus = () => inpRef.value?.focus();
 const blur = () => inpRef.value?.blur();
 const onBlur = () => {
-  stringValue.value = getStringValue(parseFloat(stringValue.value + ""));
+  stringValue.value =
+    set(
+      useToNumber(stringValue.value, {
+        nanToZero: props.nanToZero,
+      }).value
+    ) + "";
+
   updateModelValue();
   emits("blur");
 };
 
 const onInput = (e: Event) => {
-  const regex = /^[0-9]*\.?[0-9]*$/;
+  const regex = /^-?[0-9]*\.?[0-9]*$/;
   const value = (e.target as HTMLInputElement).value;
 
   if (!regex.test(value)) {
     (e.target as HTMLInputElement).value = stringValue.value;
-  } else {
-    stringValue.value = value;
+    return;
+  }
+
+  stringValue.value = value;
+  if (props.modelEvent === "input") {
     updateModelValue();
   }
 };
