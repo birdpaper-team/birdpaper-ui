@@ -38,7 +38,7 @@ export default defineComponent({
     const size = typeof props.size === "string" ? typeMap[props.size] : props.size;
 
     const render = () => {
-      const children = getAllElements(slots.default?.(), true).filter((item) => get(item, "type") !== Comment);
+      const children = getAllElements(slots.default?.(), false).filter((item) => get(item, "type") !== Comment);
 
       return (
         <div
