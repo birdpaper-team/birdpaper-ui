@@ -1,5 +1,5 @@
 <template>
-  <div :class="cls" @click="focus">
+  <div :class="cls" @click.stop="focus">
     <div :class="`${clsBlockName}-perfix select-none`" v-if="slots.perfix">
       <slot name="perfix"></slot>
     </div>
@@ -22,7 +22,12 @@
     />
     <div :class="`${clsBlockName}-suffix select-none`" v-if="innerActionIcon || slots.suffix">
       <div :class="`${clsBlockName}-suffix-inner`" v-if="!slots.suffix">
-        <component v-if="innerActionIcon && !!model" :is="innerActionIcon" class="action-icon" @click.stop="handleActionIconClick" />
+        <component
+          v-if="innerActionIcon && !!model"
+          :is="innerActionIcon"
+          class="action-icon"
+          @click.stop="handleActionIconClick"
+        />
         <span class="suffix-content">{{ innerSuffixContent }}</span>
       </div>
 
@@ -49,7 +54,11 @@ const props: InputProps = defineProps(inputProps);
 const emits = defineEmits(["input", "focus", "blur", "keypress", "keyup"]);
 const slots = useSlots();
 
-const cls = computed<string[] | {}[]>(() => [clsBlockName, `${clsBlockName}-${props.size}`, props.disabled && `${clsBlockName}-disabled`]);
+const cls = computed<string[] | {}[]>(() => [
+  clsBlockName,
+  `${clsBlockName}-${props.size}`,
+  props.disabled && `${clsBlockName}-disabled`,
+]);
 const inpType = computed<InputType>(() => (props.type === "text" ? "text" : isEyeOpen.value ? "password" : "text"));
 
 /** The password text is hide or not. */
@@ -110,8 +119,8 @@ const onKeypress = () => emits("keypress");
 const onKeyup = () => emits("keyup");
 
 const onInput = (e: Event) => {
+  emits("input", e);
   model.value = (e.target as HTMLInputElement).value;
-  emits("input");
 };
 
 defineExpose({
