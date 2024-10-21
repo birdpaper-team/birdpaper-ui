@@ -1,0 +1,65 @@
+@use "common/design" as *;
+@use "mixins/function" as *;
+@use "common/sizes" as *;
+@use "mixins/mixins.scss" as *;
+
+@include b(inputNumber) {
+  padding-right: 0;
+
+  &:hover {
+    .#{$B}-step {
+      opacity: 1;
+      transition: all 0.2s;
+    }
+  }
+
+  &-step {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: calc(100% - $borderSize * 2);
+    opacity: 0;
+    transition: all 0.2s;
+
+    &-item {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 50%;
+      box-sizing: border-box;
+      text-align: center;
+      background-color: var(--bp-gary-1);
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: var(--bp-gary-2);
+        transition: all 0.2s;
+      }
+    }
+
+    .disabled {
+      opacity: 0.6;
+    }
+  }
+}
+
+@each $size in $sizes {
+  .#{$B}-#{$size} {
+    .#{$B}-step {
+      width: getCssVar("size-height", $size);
+
+      .#{$B}-step-item {
+        &:first-child {
+          border-top-right-radius: getCssVar("size-border-radius", $size);
+        }
+
+        &:last-child {
+          border-bottom-right-radius: getCssVar("size-border-radius", $size);
+        }
+      }
+    }
+  }
+}

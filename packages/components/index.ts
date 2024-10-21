@@ -1,6 +1,7 @@
 export * from "./grid";
 export * from "./button";
 export * from "./input";
+export * from "./inputNumber";
 export * from "./radio";
 export * from "./checkbox";
 export * from "./switch";
