@@ -4,7 +4,7 @@
       <slot name="prefix"></slot>
     </span>
     <span :class="`${clsBlockName}-int`" :style="`font-size: ${innerFontSize[0]}`">{{ intText }}</span>
-    <span :class="`${clsBlockName}-dev`" :style="`font-size: ${innerFontSize[1]}`">{{ decText }}</span>
+    <span v-if="decText" :class="`${clsBlockName}-dev`" :style="`font-size: ${innerFontSize[1]}`">{{ decText }}</span>
     <span v-if="unit" :class="`${clsBlockName}-unit`">{{ unit }}</span>
   </div>
 </template>
