@@ -2,8 +2,7 @@
   "name": "@birdpaper-ui/build",
   "version": "1.0.0",
   "scripts": {
-    "start": "gulp --require @esbuild-kit/cjs-loader -f gulpfile.ts",
-    "start:preview": "gulp --require @esbuild-kit/cjs-loader -f gulpfile-preview.ts"
+    "start": "gulp --require @esbuild-kit/cjs-loader -f gulpfile.ts"
   },
   "devDependencies": {
     "@esbuild-kit/cjs-loader": "^2.2.1",
