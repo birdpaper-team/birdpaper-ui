@@ -8,12 +8,12 @@
 }
 
 $justifys: (
-  "center": "center",
-  "start": "flex-start",
-  "end": "flex-end",
-  "between": "space-between",
-  "around": "space-around",
-  "evenly": "space-evenly",
+  "center": center,
+  "start": flex-start,
+  "end": flex-end,
+  "between": space-between,
+  "around": space-around,
+  "evenly": space-evenly,
 );
 
 @each $key, $value in $justifys {
@@ -23,11 +23,11 @@ $justifys: (
 }
 
 $aligns: (
-  "start": "flex-start",
-  "center": "center",
-  "end": "flex-end",
-  "baseline": "baseline",
-  "stretch": "stretch",
+  "start": flex-start,
+  "center": center,
+  "end": flex-end,
+  "baseline": baseline,
+  "stretch": stretch,
 );
 @each $key, $value in $aligns {
   .#{$B}-align-#{$key} {
