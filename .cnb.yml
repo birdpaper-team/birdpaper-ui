@@ -2,7 +2,7 @@ $:
   # tag push 时触发
   tag_push:
     - docker:
-        image: node18
+        image: node22
       stages:
         - name: update version
           script: npm version $CNB_BRANCH --no-git-tag-version
