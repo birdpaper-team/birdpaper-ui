@@ -15,6 +15,7 @@
     "docs:preview": "pnpm run -C docs preview",
     "clean": "rimraf dist && pnpm run -r --parallel clean",
     "build": "pnpm run clean && pnpm run -C scripts/build start",
+    "build:preview": "pnpm run clean && pnpm run -C scripts/build start:preview",
     "yalc": "pnpm run clean && pnpm run build && cd dist/birdpaper-ui && yalc publish --push",
     "test": "vitest",
     "vitest:ui": "vitest --ui"

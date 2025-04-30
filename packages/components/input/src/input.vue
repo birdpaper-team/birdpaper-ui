@@ -7,7 +7,7 @@
     </div>
     <input
       ref="inpRef"
-      v-if="!slots.default?.()"
+      v-if="!slots.default?.({})"
       :class="`${clsBlockName}-inner`"
       :name
       :disabled

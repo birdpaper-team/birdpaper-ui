@@ -1,0 +1,17 @@
+$:
+  # tag push 时触发
+  tag_push:
+    - docker:
+        image: node18
+      stages:
+        - name: update version
+          script: npm version $CNB_BRANCH --no-git-tag-version
+        - name: npm publish
+          image: tencentcom/npm
+          settings:
+            username: $CNB_TOKEN_USER_NAME
+            token: $CNB_TOKEN
+            email: $CNB_COMMITTER_EMAIL
+            registry: https://npm.cnb.cool/birdpaper-design/birdpaper-ui-preview/-/packages/
+            folder: ./dist
+            fail_on_version_conflict: true
