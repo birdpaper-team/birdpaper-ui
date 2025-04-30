@@ -9,7 +9,7 @@ $:
         - name: install
           script: npm install -g pnpm && pnpm install
         - name: build
-          script: pnpm run build:preview
+          script: pnpm run build
         - name: update version
           script: npm version $CNB_BRANCH --no-git-tag-version
         - name: npm publish
