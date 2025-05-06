@@ -47,6 +47,24 @@ export const selectProps = {
     type: Boolean,
     default: false,
   },
+  /**
+   * @type boolean
+   * @description Multiple select or not.
+   * @default false
+   */
+  multiple: {
+    type: Boolean,
+    default: false,
+  },
+  /**
+   * @type number
+   * @description The max tag count.
+   * @default 0
+   */
+  maxTagCount: {
+    type: Number,
+    default: 2,
+  },
 };
 
 export const optionProps = {

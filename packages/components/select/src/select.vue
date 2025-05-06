@@ -8,12 +8,25 @@
     auto-fit-width
     update-at-scroll
   >
-    <bp-input
-      v-model="labelModel"
+    <bp-input-tag
+      v-if="multiple"
+      v-model="(labelModel as string[])"
       readonly
       :size
       :disabled
-      :placeholder="placeholder"
+      :placeholder
+      :max-tag-count
+      @mouseenter="handleMouseEnter"
+      @mouseleave="handleMouseLeave"
+    ></bp-input-tag>
+
+    <bp-input
+      v-else
+      v-model="(labelModel as string)"
+      readonly
+      :size
+      :disabled
+      :placeholder
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
     >
@@ -34,6 +47,7 @@
 
 <script setup lang="ts">
 import BpInput from "@birdpaper-ui/components/input/index";
+import BpInputTag from "@birdpaper-ui/components/inputTag/index";
 import BpTrigger from "@birdpaper-ui/components/trigger/index";
 import BpEmpty from "@birdpaper-ui/components/empty/index";
 import { useNamespace } from "@birdpaper-ui/hooks";
@@ -48,8 +62,8 @@ import { get } from "radash";
 defineOptions({ name: "Select" });
 const { clsBlockName } = useNamespace("select");
 
-const model = defineModel<SelectValue>({ default: "" });
-const labelModel = ref<string>("");
+const model = defineModel<SelectValue | SelectValue[]>({ default: "" });
+const labelModel = ref<string | string[]>("");
 
 const props: SelectProps = defineProps(selectProps);
 const emits = defineEmits<{
@@ -81,10 +95,17 @@ const handleClear = () => {
 provide(selectInjectionKey, {
   modelValue: model as unknown as SelectValue,
   onSelect: (v: SelectValue, payload: SelectOption) => {
-    model.value = v;
-    labelModel.value = payload.label;
+    if (props.multiple) {
+      if ((model.value as SelectValue[]).includes(v)) return;
+
+      (model.value as SelectValue[]).push(v);
+      (labelModel.value as string[]).push(payload.label);
+    } else {
+      model.value = v;
+      labelModel.value = payload.label;
+      isOpen.value = false;
+    }
     emits("change", v);
-    isOpen.value = false;
   },
 });
 
@@ -93,8 +114,13 @@ watchEffect(() => {
     const children = getAllElements(slots.default?.({}), true).filter((item) => get(item, "type.name") === "Option");
     hasOptions.value = children.length !== 0;
 
-    if (model.value === null || model.value === undefined || model.value === "") {
-      labelModel.value = "";
+    if (
+      model.value === null ||
+      model.value === undefined ||
+      model.value === "" ||
+      (Array.isArray(model.value) && model.value.length === 0)
+    ) {
+      props.multiple ? (labelModel.value = []) : (labelModel.value = "");
       return;
     }
 
@@ -103,7 +129,13 @@ watchEffect(() => {
       valueMap[item.props?.value] = item.props?.label || item?.children?.["default"]?.()[0].children;
     }
 
-    labelModel.value = valueMap[model.value as string] || model.value;
+    if (!props.multiple) {
+      labelModel.value = valueMap[model.value as string] || model.value;
+      return;
+    }
+
+    if (Array.isArray(model.value)) {
+    }
   } catch (error) {
     return {};
   }
