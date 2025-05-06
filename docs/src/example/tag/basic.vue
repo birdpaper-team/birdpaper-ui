@@ -1,6 +1,6 @@
 <template>
   <bp-space>
-    <bp-tag v-for="(item, index) in status" :key="item" :status="item">Tag {{ index + 1 }}</bp-tag>
+    <bp-tag v-for="(item, index) in status" :key="item" border :status="item">Tag {{ index + 1 }}</bp-tag>
   </bp-space>
 </template>
 

@@ -7,12 +7,12 @@
   @include flex(row, center, center) {
     background-color: rgba(getCssVar("tag", "bg-color"), 1);
     padding: 4px 8px;
-    border-radius: 6px;
+    border-radius: 5px;
     width: fit-content;
     max-width: 180px;
     box-sizing: border-box;
     height: 24px;
-    
+
     &-content {
       @include flex(row, center, center) {
         font-size: 12px;
@@ -22,21 +22,17 @@
       }
     }
 
-    // & + & {
-    //   margin-left: $defaultMargin / 3;
-    // }
-    
     .#{$B}-icon {
       fill: rgba(getCssVar("tag", "text-color"), 1);
       margin-right: 2px;
       padding: 2px;
     }
-    
+
     .#{$B}-close {
       fill: rgba(getCssVar("tag", "icon-color"), 0.8);
       margin-left: 2px;
       border-radius: 50%;
-      padding: 2px;
+      padding: 1px;
       cursor: pointer;
 
       &:hover {
@@ -47,7 +43,12 @@
 }
 
 .#{$B}-border {
-  border: $borderSize solid rgba(getCssVar("tag", "text-color"), 1);
+  border: $borderSize solid rgba(getCssVar("tag", "text-color"), 0.2);
+  transition: all 0.2s;
+}
+
+.#{$B}-closeable {
+  padding: 4px 4px 4px 8px;
 }
 
 $status: "gray", "primary", "success", "warning", "danger";
