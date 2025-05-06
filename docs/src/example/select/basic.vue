@@ -11,5 +11,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const val = ref([]);
+const val = ref(['1', '2']);
 </script>

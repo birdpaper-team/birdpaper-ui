@@ -14,7 +14,7 @@
       readonly
       :size
       :disabled
-      :placeholder
+      :placeholder="labelModel.length === 0 ? placeholder : ''"
       :max-tag-count
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
@@ -96,10 +96,20 @@ provide(selectInjectionKey, {
   modelValue: model as unknown as SelectValue,
   onSelect: (v: SelectValue, payload: SelectOption) => {
     if (props.multiple) {
-      if ((model.value as SelectValue[]).includes(v)) return;
+      const modelArray = model.value as SelectValue[];
+      const labelArray = labelModel.value as string[];
 
-      (model.value as SelectValue[]).push(v);
-      (labelModel.value as string[]).push(payload.label);
+      const valueIndex = modelArray.indexOf(v);
+      if (valueIndex !== -1) {
+        modelArray.splice(valueIndex, 1);
+        labelArray.splice(valueIndex, 1);
+        emits("change", v);
+        return;
+      }
+
+      modelArray.push(v);
+      labelArray.push(payload.label);
+      emits("change", v);
     } else {
       model.value = v;
       labelModel.value = payload.label;
@@ -135,6 +145,11 @@ watchEffect(() => {
     }
 
     if (Array.isArray(model.value)) {
+      labelModel.value = model.value
+        .filter((item): item is string => typeof item === "string")
+        .map((item) => valueMap[item]);
+    } else {
+      labelModel.value = [];
     }
   } catch (error) {
     return {};

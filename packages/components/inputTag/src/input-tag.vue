@@ -51,12 +51,9 @@ const updateWidth = () => {
 
   inpWidth.value = hiddenSpan.value.offsetWidth + 8;
 };
-watch(
-  () => inpVal.value,
-  () => {
-    nextTick(() => updateWidth());
-  }
-);
+watch([() => inpVal.value, () => props.placeholder], () => {
+  nextTick(() => updateWidth());
+});
 
 onMounted(() => {
   nextTick(() => updateWidth());
