@@ -11,7 +11,7 @@ $:
         - name: build
           script: pnpm run build
         - name: update version
-          script: npm version $CNB_BRANCH --no-git-tag-version
+          script: cd ./dist/birdpaper-ui && npm version $CNB_BRANCH --no-git-tag-version
         - name: npm publish
           image: tencentcom/npm
           settings:
