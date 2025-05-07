@@ -1,5 +1,4 @@
-import { InputSize } from "@birdpaper-ui/birdpaper-ui";
-import { ExtractPropTypes, PropType } from "vue";
+import { ExtractPropTypes } from "vue";
 
 export const inputTagProps = {
   /**
@@ -36,15 +35,6 @@ export const inputTagProps = {
   maxTagCount: {
     type: Number,
     default: 0,
-  },
-  /**
-   * @type boolean
-   * @description Input is clearable or not.
-   * @default false
-   */
-  clearable: {
-    type: Boolean,
-    default: false,
   },
 };
 

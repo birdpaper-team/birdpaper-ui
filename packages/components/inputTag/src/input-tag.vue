@@ -39,10 +39,7 @@ const { clsBlockName } = useNamespace("input-tag");
 const model = defineModel<string[]>({ default: [] });
 const props: InputTagProps = defineProps(inputTagProps);
 
-const cls = computed<string[] | {}[]>(() => [
-  clsBlockName,
-  props.disabled && `${clsBlockName}-disabled`,
-]);
+const cls = computed<string[] | {}[]>(() => [clsBlockName, props.disabled && `${clsBlockName}-disabled`]);
 
 const inpVal = ref<string>("");
 const inpRef = ref<HTMLInputElement | null>(null);
