@@ -11,9 +11,8 @@
     <bp-input-tag
       v-if="multiple"
       v-model="(labelModel as string[])"
-      readonly
+      disabled
       :size
-      :disabled
       :placeholder="labelModel.length === 0 ? placeholder : ''"
       :max-tag-count
       @mouseenter="handleMouseEnter"
@@ -71,6 +70,13 @@ const emits = defineEmits<{
 }>();
 const slots = useSlots();
 
+if (props.multiple) {
+  if (!model.value || !Array.isArray(model.value)) {
+    model.value = [];
+    labelModel.value = [];
+  }
+}
+
 const isOpen = ref<boolean>(false);
 const hasOptions = ref(false);
 
@@ -94,6 +100,7 @@ const handleClear = () => {
 
 provide(selectInjectionKey, {
   modelValue: model as unknown as SelectValue,
+  multiple: props.multiple,
   onSelect: (v: SelectValue, payload: SelectOption) => {
     if (props.multiple) {
       const modelArray = model.value as SelectValue[];

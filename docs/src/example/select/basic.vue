@@ -1,5 +1,4 @@
 <template>
-  {{ val }}
   <bp-select v-model="val" multiple placeholder="请选择" style="width: 240px">
     <bp-option value="1">选项 1</bp-option>
     <bp-option value="2">选项 2</bp-option>
@@ -11,5 +10,5 @@
 <script setup lang="ts">
 import { ref } from "vue";
 
-const val = ref(['1', '2']);
+const val = ref([]);
 </script>

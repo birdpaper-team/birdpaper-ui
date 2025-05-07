@@ -63,7 +63,7 @@ export const selectProps = {
    */
   maxTagCount: {
     type: Number,
-    default: 2,
+    default: 0,
   },
 };
 

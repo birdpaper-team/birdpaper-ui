@@ -9,6 +9,7 @@
       <bp-tag v-if="maxTagCount && model.length > maxTagCount">+{{ model.length - maxTagCount }}...</bp-tag>
 
       <input
+        v-if="!disabled || model.length === 0"
         ref="inpRef"
         type="text"
         v-model="inpVal"

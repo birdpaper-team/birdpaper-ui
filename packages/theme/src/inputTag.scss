@@ -3,6 +3,7 @@
 @use "mixins/var" as *;
 @use "mixins/function" as *;
 @use "mixins/mixins" as *;
+@use "common/extend.scss" as *;
 
 @include b(input-tag) {
   height: auto !important;
@@ -31,6 +32,13 @@
       min-width: 12px;
       margin-left: 6px;
       width: fit-content;
+      color: var(--bp-gray-10);
+      letter-spacing: 0.2px;
+      @extend .font-input;
+
+      &::placeholder {
+        color: var(--bp-gray-5);
+      }
     }
 
     .hidden-span {
