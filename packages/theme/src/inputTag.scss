@@ -6,8 +6,9 @@
 @use "common/extend.scss" as *;
 
 @include b(input-tag) {
-  height: auto !important;
-  padding: 4px;
+  min-height: $defaultHeight;
+  height: fit-content !important;
+  padding: 3.5px 4px;
 
   &-content {
     @include flex(row, flex-start, center) {

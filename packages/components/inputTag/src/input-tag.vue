@@ -1,5 +1,5 @@
 <template>
-  <bp-input :class="clsBlockName" @click.stop="inpRef?.focus()">
+  <bp-input :class="cls" @click.stop="inpRef?.focus()" :disabled>
     <div :class="`${clsBlockName}-content`">
       <template v-for="(v, k) in model">
         <bp-tag v-if="maxTagCount === 0 || k < maxTagCount" :closeable="!disabled" @close="handleClose(k)">
@@ -30,7 +30,7 @@
 import bpTag from "@birdpaper-ui/components/tag";
 import bpInput from "@birdpaper-ui/components/input";
 import { useNamespace } from "@birdpaper-ui/hooks";
-import { nextTick, onMounted, ref, watch } from "vue";
+import { computed, nextTick, onMounted, ref, watch } from "vue";
 import { InputTagProps, inputTagProps } from "./props";
 
 defineOptions({ name: "InputTag" });
@@ -38,6 +38,11 @@ const { clsBlockName } = useNamespace("input-tag");
 
 const model = defineModel<string[]>({ default: [] });
 const props: InputTagProps = defineProps(inputTagProps);
+
+const cls = computed<string[] | {}[]>(() => [
+  clsBlockName,
+  props.disabled && `${clsBlockName}-disabled`,
+]);
 
 const inpVal = ref<string>("");
 const inpRef = ref<HTMLInputElement | null>(null);

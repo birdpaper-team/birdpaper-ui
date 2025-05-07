@@ -11,7 +11,6 @@
     <bp-input-tag
       v-if="multiple"
       v-model="(labelModel as string[])"
-      disabled
       :size
       :placeholder="labelModel.length === 0 ? placeholder : ''"
       :max-tag-count
