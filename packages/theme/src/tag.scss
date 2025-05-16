@@ -56,7 +56,7 @@ $status: "gray", "primary", "success", "warning", "danger";
 @each $item in $status {
   .#{$B}-#{$item} {
     @include css-var-from-global-rgb(("tag", "bg-color"), ($item, "1"));
-    @include css-var-from-global-rgb(("tag", "text-color"), ($item, if($item == "gray", "10", "7")));
-    @include css-var-from-global-rgb(("tag", "icon-color"), ($item, if($item == "gray", "10", "7")));
+    @include css-var-from-global-rgb(("tag", "text-color"), ($item, "7"));
+    @include css-var-from-global-rgb(("tag", "icon-color"), ($item, "7"));
   }
 }
