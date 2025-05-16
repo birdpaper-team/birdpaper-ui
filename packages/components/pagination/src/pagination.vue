@@ -53,6 +53,12 @@ const setSizes = (pageSizes: number) => {
 };
 
 watchEffect(() => {
+  if (props.current) {
+    currentPage.value = props.current;
+  }
+});
+
+watchEffect(() => {
   totalPages.value = Math.ceil(props.total / currentPageSize.value);
 
   if (currentPage.value > totalPages.value) {
