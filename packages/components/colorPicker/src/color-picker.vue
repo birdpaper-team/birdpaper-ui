@@ -165,4 +165,13 @@ watch(
   },
   { deep: true }
 );
+
+watch(
+  () => model.value,
+  (v) => {
+    if (v) {
+      initHsla(props.valueType, v);
+    }
+  }
+);
 </script>
