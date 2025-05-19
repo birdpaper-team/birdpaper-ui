@@ -1,4 +1,4 @@
-export const sidebar = {
+export default {
   "/design/": [
     { text: "简介", link: "/design/introduction" },
     { text: "价值观", link: "/design/values" },

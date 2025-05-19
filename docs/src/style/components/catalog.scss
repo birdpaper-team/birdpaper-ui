@@ -1,0 +1,59 @@
+@use "../var";
+
+.catalog-index {
+  margin-top: 20px;
+
+  &-group {
+    border-bottom: 0.5px solid var(--bp-gray-2);
+    margin-bottom: 36px;
+    padding-bottom: 36px;
+
+    &-title {
+      font-size: 15px;
+      color: var(--bp-gray-9);
+      font-weight: 500;
+      line-height: 20px;
+      margin-bottom: 10px;
+      padding-left: 2px;
+      letter-spacing: 1px;
+    }
+
+    &-child {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 16px;
+    }
+
+    &-item {
+      width: 180px;
+      height: 150px;
+      border-radius: 8px;
+      background-color: var(--bp-gray-1);
+      border: 0.5px solid var(--bp-gray-2);
+      cursor: pointer;
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        box-shadow: 1px 6px 43px 0px rgba(131, 131, 131, 0.22);
+        transition: all 0.2s ease-in-out;
+      }
+
+      &-header {
+        background-color: var(--bp-gray-0);
+        border-bottom: 0.5px solid var(--bp-gray-2);
+        padding: 9px 13px;
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        font-size: 13px;
+        color: var(--bp-gray-9);
+
+        span {
+          color: var(--bp-gray-6);
+          font-weight: 500;
+          margin-left: 4px;
+          letter-spacing: 0.5px;
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import { nav } from "./nav";
-import { sidebar } from "./sidebar";
+import sidebar from "./sidebar";
 
 export default {
   label: "简体中文",
