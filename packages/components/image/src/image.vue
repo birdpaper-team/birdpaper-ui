@@ -1,6 +1,6 @@
 <template>
   <div :class="cls" ref="imageRef" :style="containerStyle">
-    <img v-show="!isError" :src="imgSrc" :alt :title :style="imageStyle" @load="handleLoad" @error="handleError" />
+    <img v-show="!isError && !loading" :src="imgSrc" :alt :title :style="imageStyle" @load="handleLoad" @error="handleError" />
 
     <div v-if="loading" :class="[`${clsBlockName}-loading`]">
       <slot name="loading">
