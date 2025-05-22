@@ -5,7 +5,7 @@
 @use "mixins/mixins" as *;
 @use "common/sizes" as *;
 
-@include b(range-picker) {
+@include b(date-range-picker) {
   @include flex(row, space-between, center);
 
   position: relative;

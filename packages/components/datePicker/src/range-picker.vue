@@ -33,8 +33,8 @@ import { ref, provide, computed } from "vue";
 import { rangeInjectionKey } from "./types";
 import { RangePickerProps, rangePickerProps } from "./props";
 
-defineOptions({ name: "RangePicker" });
-const { clsBlockName } = useNamespace("range-picker");
+defineOptions({ name: "DateRangePicker" });
+const { clsBlockName } = useNamespace("date-range-picker");
 
 const model = defineModel<string[]>({ default: [] });
 const props: RangePickerProps = defineProps({ ...rangePickerProps });

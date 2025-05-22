@@ -86,6 +86,12 @@
       cursor: pointer;
     }
 
+    .cell-disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
     .day-cell-prev,
     .day-cell-next {
       color: rgba(getCssVar("date-table", "placeholder-text-color"), 0.6);

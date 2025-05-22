@@ -38,6 +38,8 @@ export interface DatePickerContext {
   valueFormat: string;
   /** 是否显示时间选择器 */
   showTime?: boolean;
+  /** 是否禁用日期 */
+  disableDate?: Function;
   /** 选择后触发 */
   onSelect: (value: string, payload: object, closePopup: boolean) => void;
 }

@@ -44,6 +44,7 @@ provide(dateInjectionKey, {
   langs: props.langs,
   valueFormat: props.valueFormat,
   showTime: props.showTime,
+  disableDate: props.disabledDate,
   onSelect: (v: string, payload: any, closePopup = true) => {
     model.value = v;
 

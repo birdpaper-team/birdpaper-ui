@@ -68,6 +68,7 @@ const cellCls = (cell: DayCell) => [
   `day-cell-${cell.type}`,
   { active: (!!ctx.value!.model || ctx.value!.showTime) && currentVal.value === cell.value },
   { "to-day": toDay.value === cell.value },
+  { "cell-disabled": ctx.value?.disableDate && ctx.value.disableDate(cell.value) },
 ];
 
 const { toDay, current, currentMonth, currentYear, dates, setDates, changeMonth, changeYear, weeks, months } = useDayJs(

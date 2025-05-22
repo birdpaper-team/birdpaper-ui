@@ -38,6 +38,9 @@ export const commonPickerProps = {
     type: Boolean,
     default: false,
   },
+  disabledDate: {
+    type: Function,
+  },
   /**
    * @type boolean
    * @description Clearable or not.
