@@ -16,7 +16,7 @@
         </div>
 
         <div :class="`${clsBlockName}-footer`">
-          <bp-button @click="handleCancle" size="mini" status="gray" type="plain">{{ cancleText }}</bp-button>
+          <bp-button @click="handleCancle" size="mini" status="gray" type="plain">{{ cancelText }}</bp-button>
           <bp-button @click="handleOk" :loading="okLoading" size="mini" type="normal" :status="btnStatus[type]">
             {{ okText }}
           </bp-button>

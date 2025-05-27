@@ -44,7 +44,7 @@ export const popconfirmProps = {
    * @description The text of the cancel button.
    * @default "取消"
    */
-  cancleText: {
+  cancelText: {
     type: String,
     default: "取消",
   },
