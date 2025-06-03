@@ -32,7 +32,6 @@ const init = () => {
     decText.value = "";
     return;
   }
-
   updateValue(model.value);
   props.animation && startAnimation();
 };
@@ -83,6 +82,7 @@ const innerFontSize = computed(() => {
 const isAnimating = ref(false);
 
 const startAnimation = () => {
+  isAnimating.value = false;
   if (isAnimating.value || !props.animation) return;
 
   isAnimating.value = true;
