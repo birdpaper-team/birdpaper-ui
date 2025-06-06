@@ -28,7 +28,10 @@
                   {{ title }}
                 </span>
               </slot>
-              <IconCloseFill v-if="!hideClose" :class="`${clsBlockName}-header-close`" size="20" @click="handleClose" />
+
+              <div v-if="!hideClose" :class="`${clsBlockName}-header-close`" @click="handleClose">
+                <IconCloseFill size="20" />
+              </div>
             </div>
 
             <div :class="`${clsBlockName}-body`">
@@ -105,6 +108,7 @@ const modalStyle = computed(() => ({
   width: typeof props.width === "number" ? `${props.width}px` : props.width,
   marginTop: props.fullscreen ? 0 : props.top,
   marginBottom: props.fullscreen ? 0 : props.bottom,
+  borderRadius: props.borderRadius,
 }));
 
 const handleClose = () => {

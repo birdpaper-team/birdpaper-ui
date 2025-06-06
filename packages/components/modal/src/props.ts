@@ -47,6 +47,15 @@ export const modalProps = {
     default: "50%",
   },
   /**
+   * @type string
+   * @description Modal border radius.
+   * @default "8px"
+   */
+  borderRadius: {
+    type: String,
+    default: "8px",
+  },
+  /**
    * @type boolean
    * @description Whether to center the modal.
    * @default false

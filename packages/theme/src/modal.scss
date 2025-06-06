@@ -8,7 +8,7 @@
   width: 100%;
   max-width: 100%;
   pointer-events: auto;
-  border-radius: var(--bp-size-border-radius-default);
+  border-radius: 8px;
   background-color: var(--bp-gray-0);
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 
@@ -44,6 +44,7 @@
   }
 
   &-header {
+    @include flex(row, space-between, center);
     position: relative;
     height: 48px;
     line-height: 48px;
@@ -51,9 +52,11 @@
 
     &-title {
       @include flex(row, flex-start, center);
+      flex: 1;
       font-size: 14px;
       font-weight: 600;
       color: var(--bp-gray-9);
+      @extend .text-ellipsis;
 
       svg[class*="-icon-"] {
         margin-right: 4px;
@@ -78,22 +81,26 @@
     }
 
     &-close {
-      position: absolute;
-      top: 24px;
-      right: 20px;
-      fill: var(--bp-gray-6);
+      @include flex(row, center, center);
+      height: 48px;
       color: var(--bp-gray-6);
-      padding: 3px;
-      border-radius: 4px;
-      font-size: 12px;
-      transform: translateY(-50%);
       cursor: pointer;
       transition: all 0.2s;
 
+      svg[class*="-icon-"] {
+        fill: var(--bp-gray-6);
+        padding: 3px;
+        border-radius: 4px;
+        font-size: 12px;
+      }
+
       &:hover {
-        background-color: var(--bp-gray-1);
         color: var(--bp-gray-8);
-        fill: var(--bp-gray-8);
+
+        svg[class*="-icon-"] {
+          background-color: var(--bp-gray-1);
+          fill: var(--bp-gray-8);
+        }
         transition: all 0.2s;
       }
     }
