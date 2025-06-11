@@ -43,6 +43,7 @@
     height: 100%;
     color: var(--bp-gray-10);
     letter-spacing: 0.2px;
+    padding: 0 4px;
     @extend .font-input;
 
     &::placeholder {
@@ -108,7 +109,7 @@
   .#{$B}-#{$size} {
     height: getCssVar("size-height", $size);
     border-radius: getCssVar("size-border-radius", $size);
-    padding: 0 calc(getCssVar("size-height", $size) / 4);
+    padding: 0 calc(getCssVar("size-height", $size) / 6);
 
     svg[class*="-icon-"] {
       width: calc(getCssVar("size-height", $size) / 1.9) !important;
@@ -140,4 +141,8 @@
       }
     }
   }
+}
+
+.#{$B}-round {
+  border-radius: 32px;
 }

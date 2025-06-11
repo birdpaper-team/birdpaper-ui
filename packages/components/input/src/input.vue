@@ -62,6 +62,7 @@ const cls = computed<string[] | {}[]>(() => [
   clsBlockName,
   `${clsBlockName}-${props.size}`,
   props.disabled && `${clsBlockName}-disabled`,
+  props.isRound && `${clsBlockName}-round`,
 ]);
 const inpType = computed<InputType>(() => (props.type === "text" ? "text" : isEyeOpen.value ? "password" : "text"));
 

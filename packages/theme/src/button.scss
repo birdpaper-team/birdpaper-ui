@@ -198,10 +198,10 @@ $shapes: "square", "round", "circle";
       }
       @if $type == "plain" or $type == "dashed" {
         @include css-var-from-global-rgb(("button", "text-color"), ($item, if($item == "gray", "9", "6")));
-        @include css-var-from-global-rgb(("button", "text-color-hover"), ($item, if($item == "gray", "9", "1")));
+        @include css-var-from-global-rgb(("button", "text-color-hover"), ($item, if($item == "gray", "9", "6")));
 
         @include css-var-from-global-rgb(("button", "bg-color"), ($item, if($item == "gray", "0", "1")));
-        @include css-var-from-global-rgb(("button", "bg-color-hover"), ($item, if($item == "gray", "1", "6")));
+        @include css-var-from-global-rgb(("button", "bg-color-hover"), ($item, if($item == "gray", "1", "0")));
 
         @include css-var-from-global-rgb(("button", "border-color"), ($item, if($item == "gray", "4", "6")));
         @include css-var-from-global-rgb(("button", "border-color-hover"), ($item, if($item == "gray", "5", "6")));

@@ -91,6 +91,15 @@ export const inputProps = {
     type: Boolean,
     default: false,
   },
+  /**
+   * @type boolean
+   * @description Input is round shape.
+   * @default false
+   */
+  isRound: {
+    type: Boolean,
+    default: false,
+  },
 } as const;
 
 export type InputProps = ExtractPropTypes<typeof inputProps>;
