@@ -3,6 +3,7 @@
     v-model="isOpen"
     transition="fade-dropdown"
     :trigger
+    :position
     :class="clsBlockName"
     :popup-offset="10"
     auto-fit-width
