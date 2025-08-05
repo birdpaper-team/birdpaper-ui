@@ -10,7 +10,7 @@
         :disabled
         :readonly
         :maxlength="1"
-        @focus="onFocus"
+        @focus="focus"
         @keydown="onKeydown"
         @keydown.space.prevent=""
         @paste="onPaste"
@@ -22,7 +22,7 @@
 
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
-import { computed, ref, VNodeRef, watch } from "vue";
+import { ComponentPublicInstance, computed, ref, watch } from "vue";
 import { VerifyCodeProps, verifyCodeProps } from "./props";
 import { getChildrenIndex } from "@birdpaper-ui/components/utils/dom";
 
@@ -33,10 +33,12 @@ const model = defineModel<string>({ default: "" });
 const props: VerifyCodeProps = defineProps(verifyCodeProps);
 const emits = defineEmits(["finish"]);
 
-let inpRefs: HTMLInputElement[] = [];
-const setItemRef = (el: HTMLInputElement | null): VNodeRef => {
-  if (el) inpRefs.push(el);
-  return ref(el);
+let inpRefs: Array<HTMLInputElement | null> = [];
+const setItemRef = (el: Element | ComponentPublicInstance | null) => {
+  // Only keep HTMLInputElement references
+  if (el instanceof HTMLInputElement) {
+    inpRefs.push(el);
+  }
 };
 
 const cls = computed(() => {
@@ -59,7 +61,7 @@ const onInput = (e: Event, index: number) => {
   if (props.disabled || props.readonly) return;
 
   const targetValue = (e.target as HTMLInputElement).value.replace(/\s+/g, "");
-  !!targetValue && index + 1 < props.length && inpRefs[index + 1].focus();
+  !!targetValue && index + 1 < props.length && inpRefs[index + 1]?.focus();
 
   updateValue();
 };
@@ -72,7 +74,7 @@ const onPaste = (e: ClipboardEvent) => {
   globalValue.value = [...pastedData].slice(0, props.length);
 };
 
-const onFocus = () => {
+const focus = () => {
   if (props.disabled || props.readonly) return;
 
   const len = globalValue.value.length;
@@ -90,7 +92,7 @@ const onKeydown = (e: KeyboardEvent) => {
     case "Backspace":
       globalValue.value.splice(isLastEl && val ? index : index - 1, 1);
 
-      onFocus();
+      focus();
       updateValue();
       break;
 
@@ -106,4 +108,8 @@ watch(
   },
   { immediate: true }
 );
+
+defineExpose({
+  focus,
+});
 </script>
