@@ -4,6 +4,13 @@ import { InputSize, InputType } from "./types";
 export const inputProps = {
   /**
    * @type string
+   * @description The input id.
+   */
+  id: {
+    type: String,
+  },
+   /**
+   * @type string
    * @description The input name.
    * @default ""
    */

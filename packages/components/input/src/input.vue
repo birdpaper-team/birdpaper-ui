@@ -9,6 +9,7 @@
       ref="inpRef"
       v-if="!slots.default?.({})"
       :class="`${clsBlockName}-inner`"
+      :id
       :name
       :disabled
       :readonly

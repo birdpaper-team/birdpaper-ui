@@ -3,6 +3,13 @@ import { SwitchSize, SwitchValue } from "./types";
 
 export const switchProps = {
   /**
+   * @type string
+   * @description The input id.
+   */
+  id: {
+    type: String,
+  },
+  /**
    * @type boolean
    * @description Disabled or not.
    * @default false

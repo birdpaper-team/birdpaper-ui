@@ -1,7 +1,7 @@
 <template>
   <bp-form ref="formRef" :model="form" label-position="right" :rules="rules" label-width="100px">
     <bp-form-item label="ID" field="id">
-      <bp-input v-model="form.id" placeholder="请输入" style="width: 320px" />
+      <bp-input id="id" v-model="form.id" placeholder="请输入" style="width: 320px" />
     </bp-form-item>
     <bp-form-item label="Name" field="name">
       <bp-input v-model="form.name" style="width: 320px" />

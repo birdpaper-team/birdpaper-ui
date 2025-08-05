@@ -4,6 +4,13 @@ import { ExtractPropTypes, PropType } from "vue";
 export const inputNumberProps = {
   /**
    * @type string
+   * @description The input id.
+   */
+  id: {
+    type: String,
+  },
+  /**
+   * @type string
    * @description The input name.
    * @default ""
    */

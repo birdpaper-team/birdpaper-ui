@@ -2,6 +2,7 @@
   <div :class="cls">
     <textarea
       ref="inpRef"
+      :id
       :class="`${clsBlockName}-inner`"
       :rows
       :name

@@ -2,6 +2,7 @@
   <bp-input
     ref="inpRef"
     v-model="stringValue"
+    :id
     :class="cls"
     :placeholder
     :disabled

@@ -1,5 +1,5 @@
 <template>
-  <bp-input :class="cls" @click.stop="inpRef?.focus()" :disabled>
+  <bp-input :id :class="cls" @click.stop="inpRef?.focus()" :disabled>
     <div :class="`${clsBlockName}-content`">
       <template v-for="(v, k) in model">
         <bp-tag v-if="maxTagCount === 0 || k < maxTagCount" :closeable="!disabled" @close="handleClose(k)">

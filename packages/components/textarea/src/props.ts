@@ -4,6 +4,13 @@ import { ExtractPropTypes, PropType } from "vue";
 export const textareaProps = {
   /**
    * @type string
+   * @description The input id.
+   */
+  id: {
+    type: String,
+  },
+  /**
+   * @type string
    * @description The textarea name.
    * @default ""
    */

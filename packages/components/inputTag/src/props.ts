@@ -3,6 +3,13 @@ import { ExtractPropTypes } from "vue";
 export const inputTagProps = {
   /**
    * @type string
+   * @description The input id.
+   */
+  id: {
+    type: String,
+  },
+  /**
+   * @type string
    * @description The input name.
    * @default ""
    */

@@ -1,6 +1,6 @@
 <template>
   <div :class="cls" @click="handleClick">
-    <input type="checkbox" :class="`${clsBlockName}-inner`" />
+    <input :id type="checkbox" :class="`${clsBlockName}-inner`" />
 
     <div :class="[`${clsBlockName}-slider`, isCheck ? `${clsBlockName}-check` : '']">
       <span v-if="checkText || uncheckText" :class="`${clsBlockName}-slider-inner`">
