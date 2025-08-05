@@ -42,8 +42,8 @@
 
             <div v-if="!hideFooter" :class="`${clsBlockName}-footer`">
               <slot name="footer">
-                <bp-button v-if="!hideCancle" v-bind="cancleBtnProps" @click="handleCancel">
-                  {{ cancleText }}
+                <bp-button v-if="!hideCancel" v-bind="cancelBtnProps" @click="handleCancel">
+                  {{ cancelText }}
                 </bp-button>
                 <bp-button v-bind="okBtnProps" :loading="okLoading" @click="handleConfirm">
                   {{ okText }}

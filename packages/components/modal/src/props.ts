@@ -1,7 +1,6 @@
 import type { ExtractPropTypes, PropType } from "vue";
 import { ModalType } from "./types";
 import { ButtonProps } from "@birdpaper-ui/birdpaper-ui";
-import { stat } from "fs";
 
 export const modalProps = {
   /**
@@ -161,7 +160,7 @@ export const modalProps = {
    * @description Cancel button content.
    * @default "取消"
    */
-  cancleText: {
+  cancelText: {
     type: String,
     default: "取消",
   },
@@ -169,7 +168,7 @@ export const modalProps = {
    * @type Object
    * @description Cancel button props
    */
-  cancleBtnProps: {
+  cancelBtnProps: {
     type: Object as PropType<ButtonProps>,
     default: () => ({
       type: "secondary",
@@ -181,7 +180,7 @@ export const modalProps = {
    * @description Whether to hide the cancel button.
    * @default false
    */
-  hideCancle: {
+  hideCancel: {
     type: Boolean,
     default: false,
   },
