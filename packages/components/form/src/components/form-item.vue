@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
-import { computed, inject, onMounted, onBeforeUnmount, ref, watch, PropType } from "vue";
+import { computed, inject, onMounted, onBeforeUnmount, ref, watch } from "vue";
 import { FormItemProps, formItemProps } from "../props";
 import type { FormContext, FormItemContext } from "../types";
 

@@ -18,7 +18,7 @@ const _modalInstance = types.reduce((pre, value) => {
       showBorder: false,
       width: "400px",
       hideClose: true,
-      hideCancle: value !== "confirm",
+      hideCancel: value !== "confirm",
       maskClosable: value !== "confirm",
       isMethod: true,
     } as ModalItem;
