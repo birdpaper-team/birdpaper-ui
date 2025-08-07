@@ -10,7 +10,7 @@
 
   .VPNavBar {
     .wrapper {
-      border-bottom: 0.5px solid var(--bp-gray-2);
+      border-bottom: 1px solid var(--bp-gray-2);
     }
 
     .title {
@@ -21,7 +21,7 @@
   .VPMenu {
     border-radius: 10px 8px;
     padding: 10px;
-    border: 0.5px solid var(--bp-gray-2);
+    border: 1px solid var(--bp-gray-2);
 
     .items {
       .VPMenuLink {

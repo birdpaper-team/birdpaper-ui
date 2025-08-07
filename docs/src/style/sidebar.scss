@@ -1,7 +1,7 @@
 @use "./var";
 
 .VPSidebar {
-  border-right: 0.5px solid var(--bp-gray-2);
+  border-right: 1px solid var(--bp-gray-2);
   background: var(--bp-gray-0) !important;
 
   .curtain {
