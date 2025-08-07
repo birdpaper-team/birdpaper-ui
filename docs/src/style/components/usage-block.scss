@@ -1,9 +1,11 @@
+@use "@birdpaper-ui/theme/src/common/design.scss" as *;
+
 .usage-block {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   background-color: var(--bp-gray-0);
-  border: 1px solid var(--bp-gray-2);
+  border: 1px solid $borderColor-3;
   border-radius: 10px;
 
   .title {
@@ -14,7 +16,7 @@
     height: 42px;
     line-height: 42px;
     padding: 0 16px;
-    border-bottom: 1px solid var(--bp-gray-2);
+    border-bottom: 1px solid $borderColor-3;
   }
 
   .demo-area {
@@ -24,7 +26,7 @@
     justify-content: flex-start;
     flex-direction: column;
     height: 100%;
-    border-right: 1px solid var(--bp-gray-2);
+    border-right: 1px solid $borderColor-3;
 
     .content {
       display: flex;

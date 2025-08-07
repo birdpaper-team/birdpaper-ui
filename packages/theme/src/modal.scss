@@ -151,11 +151,11 @@
 
   &.modal-show-border {
     .#{$B}-header {
-      border-bottom: $borderSize solid var(--bp-gray-2);
+      border-bottom: $borderSize solid $borderColor-3;
     }
 
     .#{$B}-footer {
-      border-top: $borderSize solid var(--bp-gray-2);
+      border-top: $borderSize solid $borderColor-3;
     }
   }
 }

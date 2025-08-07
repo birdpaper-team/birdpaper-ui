@@ -5,7 +5,7 @@
   width: fit-content;
   border-radius: 6px;
   height: 100%;
-  border: $borderSize solid var(--bp-gray-3);
+  border: $borderSize solid $borderColor-3;
   background-color: var(--bp-gray-0);
   overflow: auto;
 
@@ -31,7 +31,7 @@
     }
 
     &:not(:first-child) {
-      border-left: $borderSize dashed var(--bp-gray-3);
+      border-left: $borderSize dashed $borderColor-3;
     }
   }
 
@@ -88,6 +88,6 @@
     justify-content: space-between;
     height: 40px;
     padding: 0 12px;
-    border-top: $borderSize dashed var(--bp-gray-4);
+    border-top: $borderSize dashed $borderColor-3;
   }
 }

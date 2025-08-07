@@ -1,6 +1,7 @@
 $namespace: "bp" !default;
 
 $borderSize: 1px;
+$borderColor-3: rgba(var(--bp-gray-3-rgb), 0.6);
 
 /** Components design variables **/
 // Button
@@ -14,6 +15,6 @@ $avatarDefaultColor: var(--bp-gray-10);
 // DatePicker
 $date-picker-bg: var(--bp-gray-0);
 $date-picker-border-radius: 8px;
-$date-picker-border-color: var(--bp-gray-3);
+$date-picker-border-color: $borderColor-3;
 $date-picker-header-height: 48px;
 $date-picker-header-padding: 0 14px;

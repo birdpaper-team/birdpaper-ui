@@ -1,4 +1,5 @@
 @use "./var";
+@use "@birdpaper-ui/theme/src/common/design.scss" as *;
 
 .VPNav {
   .text,
@@ -10,7 +11,7 @@
 
   .VPNavBar {
     .wrapper {
-      border-bottom: 1px solid var(--bp-gray-2);
+      border-bottom: 1px solid $borderColor-3;
     }
 
     .title {
@@ -21,7 +22,7 @@
   .VPMenu {
     border-radius: 10px 8px;
     padding: 10px;
-    border: 1px solid var(--bp-gray-2);
+    border: 1px solid $borderColor-3;
 
     .items {
       .VPMenuLink {
@@ -60,7 +61,7 @@
   }
 
   .VPSwitch {
-    border: 1px solid var(--bp-gray-2);
+    border: 1px solid $borderColor-3;
     background-color: var(--bp-gray-1);
 
     .check {
@@ -72,7 +73,7 @@
     }
 
     &:hover {
-      border-color: var(--bp-gray-2);
+      border-color: $borderColor-3;
     }
   }
 

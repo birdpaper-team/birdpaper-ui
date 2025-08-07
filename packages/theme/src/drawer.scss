@@ -28,7 +28,7 @@
     flex-shrink: 0;
     height: 48px;
     line-height: 48px;
-    border-bottom: $borderSize solid var(--bp-gray-2);
+    border-bottom: $borderSize solid $borderColor-3;
     padding: 0 16px;
 
     &-title {
@@ -71,7 +71,7 @@
     flex-shrink: 0;
     width: 100%;
     padding: 16px;
-    border-top: $borderSize solid var(--bp-gray-2);
+    border-top: $borderSize solid $borderColor-3;
     text-align: right;
     margin-top: auto;
     flex-shrink: 0;

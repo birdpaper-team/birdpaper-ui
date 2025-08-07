@@ -1,7 +1,8 @@
 @use "./var";
+@use "@birdpaper-ui/theme/src/common/design.scss" as *;
 
 .VPSidebar {
-  border-right: 1px solid var(--bp-gray-2);
+  border-right: 1px solid $borderColor-3;
   background: var(--bp-gray-0) !important;
 
   .curtain {

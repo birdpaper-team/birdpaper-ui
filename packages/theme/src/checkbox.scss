@@ -4,7 +4,7 @@
 @use "mixins/mixins.scss" as *;
 
 @include b(checkbox) {
-  @include css-var-from-global-rgb(("checkbox", "checkbox-border"), ("gray", "6"));
+  @include css-var-from-global-rgb(("checkbox", "checkbox-border"), ("gray", "4"));
   @include css-var-from-global-rgb(("checkbox", "checkbox-border-check"), ("primary", "6"));
   @include css-var-from-global-rgb(("checkbox", "checkbox-bg"), ("gray", "0"));
   @include css-var-from-global-rgb(("checkbox", "label-color"), ("gray", "8"));
@@ -12,10 +12,6 @@
 
   @include flex(row, center, center);
   position: relative;
-  // display: flex;
-  // align-items: center;
-  // flex-direction: row;
-  // justify-content: flex-start;
   cursor: pointer;
 
   &:hover {

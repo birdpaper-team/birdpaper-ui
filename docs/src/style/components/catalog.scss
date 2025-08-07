@@ -1,10 +1,11 @@
 @use "../var";
+@use "@birdpaper-ui/theme/src/common/design.scss" as *;
 
 .catalog-index {
   margin-top: 20px;
 
   &-group {
-    border-bottom: 1px solid var(--bp-gray-2);
+    border-bottom: 1px solid $borderColor-3;
     margin-bottom: 36px;
     padding-bottom: 36px;
 
@@ -29,7 +30,7 @@
       height: 150px;
       border-radius: 8px;
       background-color: var(--bp-gray-1);
-      border: 1px solid var(--bp-gray-2);
+      border: 1px solid $borderColor-3;
       cursor: pointer;
       transition: all 0.2s ease-in-out;
 

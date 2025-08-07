@@ -5,7 +5,7 @@
 @use "mixins/mixins.scss" as *;
 
 @include b(radio) {
-  @include css-var-from-global-rgb(("radio", "radio-border"), ("gray", "6"));
+  @include css-var-from-global-rgb(("radio", "radio-border"), ("gray", "4"));
   @include css-var-from-global-rgb(("radio", "radio-border-check"), ("primary", "6"));
   @include css-var-from-global-rgb(("radio", "radio-bg"), ("gray", "0"));
   @include css-var-from-global-rgb(("radio", "label-color"), ("gray", "8"));
