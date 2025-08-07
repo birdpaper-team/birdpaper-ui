@@ -16,6 +16,22 @@
   }
 
   .VPSidebarItem.level-1 {
+    padding: 4px 12px;
+
+    &:hover {
+      background-color: rgba(var(--bp-gray-2-rgb), 0.6);
+      border-radius: 10px;
+
+      .text {
+        color: var(--bp-gray-9) !important;
+
+        span {
+          color: var(--bp-gray-9);
+          transition: all 0.4s ease;
+        }
+      }
+    }
+
     .text {
       color: var(--bp-gray-7);
       font-size: 13px;
@@ -25,15 +41,6 @@
         font-weight: 800;
         margin-left: 8px;
         color: var(--bp-gray-6);
-      }
-
-      &:hover {
-        color: var(--bp-gray-9) !important;
-
-        span {
-          color: var(--bp-gray-9);
-          transition: all 0.4s ease;
-        }
       }
     }
   }

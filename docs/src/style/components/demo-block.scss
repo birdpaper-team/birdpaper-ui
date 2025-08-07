@@ -9,22 +9,22 @@
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     overflow-x: auto;
-    border: 0.5px solid var(--bp-gray-2);
+    border: 1px solid var(--bp-gray-2);
   }
 
   &-footer {
     display: flex;
     justify-content: flex-end;
     padding: 16px 20px;
-    border-left: 0.5px solid var(--bp-gray-2);
-    border-right: 0.5px solid var(--bp-gray-2);
-    border-bottom: 0.5px solid var(--bp-gray-2);
+    border-left: 1px solid var(--bp-gray-2);
+    border-right: 1px solid var(--bp-gray-2);
+    border-bottom: 1px solid var(--bp-gray-2);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 
     @mixin icon-active {
-      border: 0.5px solid var(--bp-gray-9);
-      background-color: var(--bp-gray-9);
+      border: 1px solid var(--bp-gray-8);
+      background-color: var(--bp-gray-8);
       opacity: 1;
       transition: all 0.2s ease;
 
@@ -40,7 +40,7 @@
       align-items: center;
       width: 26px;
       height: 26px;
-      border: 0.5px solid var(--bp-gray-3);
+      border: 1px solid var(--bp-gray-3);
       border-radius: 50%;
       cursor: pointer;
 
@@ -89,9 +89,9 @@
 
   .demo-block-code {
     max-height: 1000px;
-    border-left: 0.5px solid var(--bp-gray-2);
-    border-right: 0.5px solid var(--bp-gray-2);
-    border-bottom: 0.5px solid var(--bp-gray-2);
+    border-left: 1px solid var(--bp-gray-2);
+    border-right: 1px solid var(--bp-gray-2);
+    border-bottom: 1px solid var(--bp-gray-2);
     transition: max-height 0.4s ease;
   }
 }
