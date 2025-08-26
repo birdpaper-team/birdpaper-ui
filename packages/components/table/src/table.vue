@@ -23,7 +23,7 @@
               <template #cell="{ record }">
                 <bp-checkbox
                   v-if="rowSelection?.type === 'checkbox'"
-                  v-model="selectedKeys"
+                  v-model="selectedKeys as CheckboxValueForArray[]"
                   :value="record[rowKey]"
                   @change="onCkbChange(record[rowKey], record)"
                 ></bp-checkbox>
@@ -42,8 +42,8 @@
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { TableProps, tableProps } from "./props";
 import BpEmpty from "@birdpaper-ui/components/empty/index";
-import BpCheckbox from "@birdpaper-ui/components/checkbox/index";
-import BpRadio from "@birdpaper-ui/components/radio/index";
+import BpCheckbox, { CheckboxValueForArray } from "@birdpaper-ui/components/checkbox/index";
+import BpRadio, { RadioValue } from "@birdpaper-ui/components/radio/index";
 import BpSpin from "@birdpaper-ui/components/spin/index";
 import tableHeader from "./components/table-header.vue";
 import tableColumn from "./components/table-column.vue";
@@ -54,13 +54,13 @@ import { computed, nextTick, onMounted, useSlots } from "vue";
 defineOptions({ name: "Table" });
 const { clsBlockName } = useNamespace("table");
 
-const selectedKey = defineModel<string | number>("selectedKey", { default: "" });
-const selectedKeys = defineModel<string[] | number[]>("selectedKeys", { default: [] });
+const selectedKey = defineModel<RadioValue>("selectedKey", { default: "" });
+const selectedKeys = defineModel<CheckboxValueForArray[]>("selectedKeys", { default: [] });
 const props: TableProps = defineProps(tableProps);
 const emits = defineEmits<{
   (e: "select-all", val: boolean): void;
-  (e: "select", val: string[] | number[], rowKey: string | number, record: any): void;
-  (e: "selection-change", val: string[] | number[]): void;
+  (e: "select", val: CheckboxValueForArray[], rowKey: RadioValue, record: any): void;
+  (e: "selection-change", val: CheckboxValueForArray[]): void;
 }>();
 const slots = useSlots();
 const { bpTable, columns, getColumnsBySlot, resetColumns, initColumnsWidth } = useTableCore();

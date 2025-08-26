@@ -3,18 +3,18 @@ import { useNamespace } from "@birdpaper-ui/hooks";
 import { defineComponent } from "vue";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
 import { get } from "radash";
-import { CheckboxValue, CheckboxDirectionType } from "./types";
+import { CheckboxDirectionType, CheckboxValueForArray } from "./types";
 
 export default defineComponent({
   name: "CheckboxGroup",
   props: {
     /**
-     * @type CheckboxValue[]
+     * @type CheckboxValueForArray[]
      * @description Model value.
      * @default: []
      */
     modelValue: {
-      type: Array as PropType<CheckboxValue[]>,
+      type: Array as PropType<CheckboxValueForArray[]>,
       default: () => [],
     },
     /**
