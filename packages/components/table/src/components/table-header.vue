@@ -1,12 +1,10 @@
 <template>
-  <col-group :cols="list"></col-group>
-
   <thead :class="[clsBlockName]">
     <tr>
       <template v-for="item in list">
         <th :class="thClass(item)">
           <template v-if="item.type === 'checkbox'">
-            <bp-checkbox v-model="isSelectAll" @change="handleSelectAll"></bp-checkbox>
+            <bp-checkbox v-model:check="isSelectAll" @change="handleSelectAll"></bp-checkbox>
           </template>
           <template v-else>
             {{ item.title }}
@@ -20,7 +18,6 @@
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
 import BpCheckbox from "@birdpaper-ui/components/checkbox/index";
-import ColGroup from "./col-group.vue";
 import { ColumnsItem } from "../types";
 import { tableHeaderProps, TableHeaderProps } from "../props";
 import { ref } from "vue";
@@ -41,7 +38,7 @@ const thClass = (item: ColumnsItem) => {
   }[item.align || "left"];
 };
 
-const isSelectAll = ref(false);
+const isSelectAll = ref<boolean>(false);
 const handleSelectAll = (value: boolean) => {
   emits("select-all", value);
 };

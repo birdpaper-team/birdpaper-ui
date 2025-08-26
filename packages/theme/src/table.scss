@@ -140,3 +140,12 @@
     }
   }
 }
+
+.#{$B}-header-wrap {
+  overflow: hidden;
+}
+
+.#{$B}-body-wrap {
+  overflow: auto;
+  max-height: var(--bp-table-max-height, auto);
+}

@@ -147,3 +147,110 @@ export const useTableCore = () => {
     initColumnsWidth,
   };
 };
+
+// 统一获取滚动条宽度（缓存）
+let __bp_cachedScrollbarWidth: number | null = null;
+export function getScrollBarWidth(): number {
+  if (__bp_cachedScrollbarWidth !== null) return __bp_cachedScrollbarWidth;
+  if (typeof window === "undefined") return 0;
+  const outer = document.createElement("div");
+  outer.style.visibility = "hidden";
+  outer.style.width = "100px";
+  outer.style.position = "absolute";
+  outer.style.top = "-9999px";
+  outer.style.overflow = "scroll";
+  document.body.appendChild(outer);
+
+  const inner = document.createElement("div");
+  inner.style.width = "100%";
+  outer.appendChild(inner);
+
+  const widthWithScroll = inner.offsetWidth;
+  const widthNoScroll = outer.clientWidth;
+  outer.parentNode?.removeChild(outer);
+
+  __bp_cachedScrollbarWidth = widthNoScroll - widthWithScroll;
+  return __bp_cachedScrollbarWidth || 0;
+}
+
+// 规范化列定义（不改变你现有类型导出，新增一个供内部布局使用）
+export interface NormalizedColumn {
+  key: string;
+  width?: number;
+  minWidth?: number;
+  maxWidth?: number;
+  realWidth: number;
+  align?: "left" | "center" | "right";
+  // ...existing fields...
+}
+
+// 根据容器宽度计算列宽（固定列 + 弹性列分配）
+export function computeColumnWidths(
+  columns: Array<Partial<NormalizedColumn>>,
+  tableBodyWidth: number
+): NormalizedColumn[] {
+  const MIN_COL_WIDTH = 60;
+  const normalized: NormalizedColumn[] = columns.map((c, i) => {
+    const min = Math.max(c.minWidth ?? 0, MIN_COL_WIDTH);
+    const w = c.width && c.width > 0 ? c.width : undefined;
+    return {
+      key: (c as any).key ?? (c as any).prop ?? String(i),
+      width: w,
+      minWidth: min,
+      maxWidth: c.maxWidth,
+      realWidth: w ?? min,
+      align: c.align as any,
+    };
+  });
+
+  const fixed = normalized.filter((c) => c.width && c.width > 0);
+  const flex = normalized.filter((c) => !c.width);
+
+  const fixedSum = fixed.reduce((s, c) => s + (c.width as number), 0);
+  const minFlexSum = flex.reduce((s, c) => s + (c.minWidth as number), 0);
+  let remain = tableBodyWidth - fixedSum;
+
+  if (remain <= 0) {
+    // 宽度不足：按最小宽度等比收缩（保底 minWidth）
+    const totalCurrent = fixedSum + minFlexSum;
+    const scale = tableBodyWidth > 0 ? tableBodyWidth / totalCurrent : 1;
+    normalized.forEach((c) => {
+      const base = c.width ?? c.minWidth!;
+      c.realWidth = Math.max(Math.floor(base * scale), c.minWidth!);
+    });
+    return normalized;
+  }
+
+  // 足够宽：弹性列均分剩余空间，尊重 min/max
+  const unit = flex.length > 0 ? Math.floor(remain / flex.length) : 0;
+  flex.forEach((c) => {
+    const target = Math.max(c.minWidth!, unit);
+    c.realWidth = typeof c.maxWidth === "number" ? Math.min(target, c.maxWidth) : target;
+  });
+
+  // 分配整除误差
+  const used = fixedSum + flex.reduce((s, c) => s + c.realWidth, 0);
+  let leftover = tableBodyWidth - used;
+  let i = 0;
+  while (leftover > 0 && flex.length > 0) {
+    const col = flex[i % flex.length];
+    if (typeof col.maxWidth !== "number" || col.realWidth < col.maxWidth) {
+      col.realWidth += 1;
+      leftover -= 1;
+    } else {
+      i++;
+      if (i > 10000) break;
+      continue;
+    }
+    i++;
+  }
+
+  return normalized;
+}
+
+// 计算纵向滚动及 gutter 宽度
+export function computeScrollYAndGutter(bodyWrap: HTMLElement | null) {
+  if (!bodyWrap) return { scrollY: false, gutter: 0 };
+  const scrollY = bodyWrap.scrollHeight > bodyWrap.clientHeight + 1; // 容忍 1px
+  return { scrollY, gutter: scrollY ? getScrollBarWidth() : 0 };
+}

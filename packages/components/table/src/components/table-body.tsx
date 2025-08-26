@@ -24,7 +24,7 @@ export default defineComponent({
           {props.data.map((record: any, rowIndex: number) => {
             return (
               <tr key={rowIndex}>
-                <col-group cols={props.cols}></col-group>
+                <col-group columns={props.cols}></col-group>
 
                 {children.map((child, childIndex) => {
                   const props = child?.props as TableColumnProps;
