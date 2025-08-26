@@ -1,4 +1,4 @@
-export type CheckboxValue = string | number | boolean;
-export type CheckboxValueForArray = string | number;
+export type CheckboxValue = boolean;
+export type CheckboxValueForArray = string | number | boolean;
 
 export type CheckboxDirectionType = "vertical" | "horizontal";

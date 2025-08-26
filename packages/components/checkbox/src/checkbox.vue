@@ -25,7 +25,8 @@ import { IconCheckLine, IconSubtractLine } from "birdpaper-icon";
 defineOptions({ name: "Checkbox" });
 const { clsBlockName } = useNamespace("checkbox");
 
-const model = defineModel<CheckboxValue | CheckboxValueForArray[]>({ default: false });
+const model = defineModel<CheckboxValueForArray[]>({ default: [] });
+const modelBool = defineModel<CheckboxValue>("check", { default: false });
 const props: CheckboxProps = defineProps(checkboxProps);
 const slots = defineSlots();
 const emits = defineEmits(["change"]);
@@ -34,19 +35,19 @@ const cls = computed(() => [clsBlockName, "select-none", props.disabled && `${cl
 
 const isCheck = ref(false);
 const upadteCheck = () => {
-  if (Array.isArray(model.value)) {
+  if (props.value) {
     isCheck.value = model.value.includes(props.value as CheckboxValueForArray);
     return;
   }
 
-  isCheck.value = model.value === props.value;
+  isCheck.value = modelBool.value;
 };
 
 const handleClick = () => {
   if (props.disabled) return;
 
-  if (Array.isArray(model.value)) {
-    const index = model.value.indexOf(props.value as CheckboxValueForArray);
+  if (props.value) {
+    const index = model.value.indexOf(props.value);
     if (index !== -1) {
       model.value.splice(index, 1);
       upadteCheck();
@@ -55,12 +56,12 @@ const handleClick = () => {
 
     if (props.max !== 0 && props.max <= model.value.length) return;
 
-    model.value.push(props.value as CheckboxValueForArray);
+    model.value.push(props.value);
     upadteCheck();
     return emits("change", model.value);
   }
 
-  model.value = isCheck.value ? false : true;
+  modelBool.value = isCheck.value ? false : true;
   nextTick(() => upadteCheck());
   nextTick(() => emits("change", model.value));
 };
