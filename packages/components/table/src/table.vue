@@ -1,18 +1,18 @@
 <template>
   <div :class="cls">
     <bp-spin :spinning="props.loading" :spin-icon="props.spinIcon" :description="props.description">
-      <div :class="`${clsBlockName}-body-area`">
+      <div :class="`${clsBlockName}-body-area`" :style="tableAreaStyle">
         <!-- 头部（不滚动） -->
         <div :class="`${clsBlockName}-header-wrap`" ref="headerWrapRef">
-          <table :class="`${clsBlockName}-header bp-table-fixed`">
+          <table :class="`${clsBlockName}-header bp-table-fixed`" :style="tableStyle">
             <colGroup :columns="layoutColumns" :gutter-width="gutterWidth" />
             <tableHeader ref="tableHeaderRef" :list="columns" :gutter-width="gutterWidth" @select-all="onSelectAll" />
           </table>
         </div>
 
         <!-- 内容（滚动） -->
-        <div :class="`${clsBlockName}-body-wrap`" ref="bodyWrapRef" @scroll="onBodyScroll">
-          <table :class="`${clsBlockName}-body bp-table-fixed`">
+        <div :class="`${clsBlockName}-body-wrap`" ref="bodyWrapRef" @scroll="onBodyScroll" :style="bodyWrapStyle">
+          <table :class="`${clsBlockName}-body bp-table-fixed`" :style="tableStyle">
             <colGroup :columns="layoutColumns" :gutter-width="gutterWidth" />
 
             <tbody :class="`${clsBlockName}-body-tbody`" v-if="isEmpty">
@@ -113,6 +113,50 @@ const recalcLayout = () => {
 
 const isEmpty = computed<boolean>(() => props.data.length === 0);
 
+// 计算表格区域样式
+const tableAreaStyle = computed(() => {
+  const style: Record<string, string> = {};
+  // 不在这里设置 overflow，让子元素控制
+  return style;
+});
+
+// 计算表格样式 - 确保表头和内容使用相同的宽度
+const tableStyle = computed(() => {
+  const style: Record<string, string> = {};
+  
+  // 计算总的列宽（包括gutter）
+  const totalColWidth = layoutColumns.value.reduce((sum, col) => sum + (col.realWidth || 0), 0);
+  const totalWidth = totalColWidth + gutterWidth.value;
+  
+  if (props.scroll?.x) {
+    // 如果设置了横向滚动宽度，使用设置的值和计算值的较大者
+    const scrollX = typeof props.scroll.x === 'number' ? props.scroll.x : parseInt(props.scroll.x);
+    const finalWidth = Math.max(scrollX, totalWidth);
+    style.width = `${finalWidth}px`;
+    style.minWidth = `${finalWidth}px`;
+  } else if (totalWidth > 0) {
+    // 否则使用计算的列宽总和，确保表头和内容一致
+    style.width = `${totalWidth}px`;
+    style.minWidth = `${totalWidth}px`;
+  }
+  
+  // 确保表格布局固定
+  style.tableLayout = 'fixed';
+  
+  return style;
+});
+
+// 计算表格主体包装器样式
+const bodyWrapStyle = computed(() => {
+  const style: Record<string, string> = {};
+  if (props.scroll?.y) {
+    const scrollY = typeof props.scroll.y === 'number' ? `${props.scroll.y}px` : props.scroll.y;
+    style.maxHeight = scrollY;
+    style.overflowY = 'auto';
+  }
+  return style;
+});
+
 const onSelectAll = (val: boolean) => {
   selectedKeys.value = [];
   if (val) {
@@ -130,7 +174,10 @@ const init = () => {
   getColumnsBySlot(props.rowSelection);
   resetColumns();
   initColumnsWidth();
-  nextTick(recalcLayout);
+  nextTick(() => {
+    recalcLayout();
+    ensureTableWidthSync(); // 确保表头和内容宽度同步
+  });
 };
 
 onMounted(() => {
@@ -138,29 +185,92 @@ onMounted(() => {
 
   // 容器尺寸变化重算布局
   if (typeof window !== "undefined" && "ResizeObserver" in window) {
-    const ro = new ResizeObserver(() => nextTick(recalcLayout));
+    const ro = new ResizeObserver(() => {
+      nextTick(() => {
+        recalcLayout();
+        ensureTableWidthSync(); // 重新计算时也要同步宽度
+      });
+    });
     bodyWrapRef.value && ro.observe(bodyWrapRef.value);
   }
 
   // 数据渲染后，修正滚动条出现带来的头体错位
-  watchPostEffect(() => nextTick(recalcLayout));
+  watchPostEffect(() => {
+    nextTick(() => {
+      recalcLayout();
+      ensureTableWidthSync(); // 数据变化时也要同步宽度
+    });
+  });
 });
 
-// 同步横向滚动
+// 同步横向滚动 - 增强版
 const onBodyScroll = () => {
   const headerWrap = headerWrapRef.value;
   const bodyWrap = bodyWrapRef.value;
   if (!headerWrap || !bodyWrap) return;
-  headerWrap.scrollLeft = bodyWrap.scrollLeft;
+  
+  // 同步横向滚动位置
+  if (headerWrap.scrollLeft !== bodyWrap.scrollLeft) {
+    headerWrap.scrollLeft = bodyWrap.scrollLeft;
+  }
+};
+
+// 确保初始化时表头和内容宽度一致
+const ensureTableWidthSync = () => {
+  nextTick(() => {
+    const headerWrap = headerWrapRef.value;
+    const bodyWrap = bodyWrapRef.value;
+    
+    if (headerWrap && bodyWrap) {
+      const headerTable = headerWrap.querySelector('table');
+      const bodyTable = bodyWrap.querySelector('table');
+      
+      if (headerTable && bodyTable) {
+        // 确保两个表格有相同的宽度
+        const tableWidth = tableStyle.value.width || tableStyle.value.minWidth;
+        if (tableWidth) {
+          headerTable.style.width = tableWidth;
+          bodyTable.style.width = tableWidth;
+        }
+      }
+    }
+  });
 };
 
 // 数据或列变化时重算
 watch(
   () => props.data,
-  () => nextTick(recalcLayout),
+  () => {
+    nextTick(() => {
+      recalcLayout();
+      ensureTableWidthSync();
+    });
+  },
   { deep: true }
 );
-watch(columns, () => nextTick(recalcLayout), { deep: true });
+
+watch(
+  columns, 
+  () => {
+    nextTick(() => {
+      recalcLayout();
+      ensureTableWidthSync();
+    });
+  }, 
+  { deep: true }
+);
+
+// 监听scroll配置变化
+watch(
+  () => props.scroll,
+  () => {
+    nextTick(() => {
+      recalcLayout();
+      ensureTableWidthSync();
+    });
+  },
+  { deep: true }
+);
 
 const cls = computed(() => [
   clsBlockName,
@@ -173,11 +283,23 @@ const cls = computed(() => [
 .bp-table-fixed {
   table-layout: fixed;
   width: 100%;
-  /* border-collapse: separate; */
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
-:deep(.bp-table__thead th.bp-table__gutter) {
+/* 确保表头和内容列宽一致 */
+:deep(.bp-table__thead th),
+:deep(.bp-table__tbody td) {
+  box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+:deep(.bp-table__thead th.bp-table__gutter),
+:deep(.bp-table__tbody td.bp-table__gutter) {
   padding: 0;
   border: none;
+  width: var(--gutter-width, 0px);
 }
 </style>

@@ -26,10 +26,22 @@
     box-sizing: border-box;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
-    overflow-x: auto;
+    overflow: hidden; // 改为 hidden，避免重复滚动条
     font-feature-settings: "tnum";
     border: $borderSize solid var(--bp-gray-2);
     border-bottom: none;
+  }
+
+  &-header-wrap {
+    overflow: hidden; // 头部不独立滚动，通过JS同步
+    position: relative;
+    border-bottom: $borderSize solid var(--bp-gray-2);
+  }
+
+  &-body-wrap {
+    overflow: auto; // 允许横向和纵向滚动
+    max-height: var(--bp-table-max-height, auto);
+    position: relative;
   }
 
   &-header {
@@ -58,7 +70,8 @@
   }
 
   &-body {
-    width: max-content;
+    width: max-content; // 允许表格超出容器宽度
+    min-width: 100%; // 最小宽度为容器宽度
 
     &-tbody {
       display: block;
@@ -67,6 +80,7 @@
       tr {
         display: table;
         width: 100%;
+        table-layout: fixed; // 确保列宽稳定
 
         &:nth-child(n) {
           background-color: var(--bp-gray-0);
@@ -139,13 +153,4 @@
       }
     }
   }
-}
-
-.#{$B}-header-wrap {
-  overflow: hidden;
-}
-
-.#{$B}-body-wrap {
-  overflow: auto;
-  max-height: var(--bp-table-max-height, auto);
 }

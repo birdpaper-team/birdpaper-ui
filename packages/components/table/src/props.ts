@@ -1,5 +1,5 @@
 import { Component, ExtractPropTypes, PropType } from "vue";
-import { ColumnsItem, TableRowSelection } from "./types";
+import { ColumnsItem, TableRowSelection, TableScroll } from "./types";
 
 export const tableProps = {
   /**
@@ -82,6 +82,15 @@ export const tableProps = {
   rowSelection: {
     type: Object as PropType<TableRowSelection>,
     default: () => null,
+  },
+  /**
+   * @type TableScroll
+   * @description The table scroll config.
+   * @default {}
+   */
+  scroll: {
+    type: Object as PropType<TableScroll>,
+    default: () => ({}),
   },
 } as const;
 

@@ -10,3 +10,9 @@ export interface ColumnsItem {
 export interface TableRowSelection {
   type: "checkbox" | "radio";
 }
+
+export interface TableScroll {
+  x?: number | string; // 横向滚动宽度
+  y?: number | string; // 纵向滚动高度
+  scrollToFirstRowOnChange?: boolean; // 分页、排序、筛选变化后是否滚动到表格顶部
+}

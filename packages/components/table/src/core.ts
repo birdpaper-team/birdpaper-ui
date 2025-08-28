@@ -189,7 +189,7 @@ export function computeColumnWidths(
   columns: Array<Partial<NormalizedColumn>>,
   tableBodyWidth: number
 ): NormalizedColumn[] {
-  const MIN_COL_WIDTH = 60;
+  const MIN_COL_WIDTH = 120; // 增加最小列宽，确保内容可读性
   const normalized: NormalizedColumn[] = columns.map((c, i) => {
     const min = Math.max(c.minWidth ?? 0, MIN_COL_WIDTH);
     const w = c.width && c.width > 0 ? c.width : undefined;
@@ -208,15 +208,23 @@ export function computeColumnWidths(
 
   const fixedSum = fixed.reduce((s, c) => s + (c.width as number), 0);
   const minFlexSum = flex.reduce((s, c) => s + (c.minWidth as number), 0);
+  const totalMinWidth = fixedSum + minFlexSum;
+
+  // 如果内容宽度超过容器宽度，优先保证内容完整显示（启用横向滚动）
+  if (totalMinWidth > tableBodyWidth) {
+    // 为每列分配至少最小宽度，启用横向滚动
+    normalized.forEach((c) => {
+      c.realWidth = c.width ?? c.minWidth!;
+    });
+    return normalized;
+  }
+
   let remain = tableBodyWidth - fixedSum;
 
   if (remain <= 0) {
-    // 宽度不足：按最小宽度等比收缩（保底 minWidth）
-    const totalCurrent = fixedSum + minFlexSum;
-    const scale = tableBodyWidth > 0 ? tableBodyWidth / totalCurrent : 1;
+    // 宽度不足：但至少保证最小宽度
     normalized.forEach((c) => {
-      const base = c.width ?? c.minWidth!;
-      c.realWidth = Math.max(Math.floor(base * scale), c.minWidth!);
+      c.realWidth = c.width ?? c.minWidth!;
     });
     return normalized;
   }
