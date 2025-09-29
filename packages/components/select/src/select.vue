@@ -20,7 +20,7 @@
 
     <bp-input
       v-else
-      v-model="(labelModel as string)"
+      v-model="(labelModel as any)"
       readonly
       :size
       :disabled
@@ -104,7 +104,7 @@ provide(selectInjectionKey, {
     if (props.multiple) {
       const modelArray = model.value as SelectValue[];
       const labelArray = labelModel.value as string[];
-
+      
       const valueIndex = modelArray.indexOf(v);
       if (valueIndex !== -1) {
         modelArray.splice(valueIndex, 1);
@@ -139,21 +139,20 @@ watchEffect(() => {
       props.multiple ? (labelModel.value = []) : (labelModel.value = "");
       return;
     }
-
+    
     let valueMap = {};
     for (const item of children) {
       valueMap[item.props?.value] = item.props?.label || item?.children?.["default"]?.()[0].children;
     }
-
     if (!props.multiple) {
       labelModel.value = valueMap[model.value as string] || model.value;
       return;
     }
-
+    
     if (Array.isArray(model.value)) {
       labelModel.value = model.value
-        .filter((item): item is string => typeof item === "string")
-        .map((item) => valueMap[item]);
+      .filter((item): item is string | number => typeof item === "string" || typeof item === "number")
+      .map((item) => valueMap[item]);
     } else {
       labelModel.value = [];
     }

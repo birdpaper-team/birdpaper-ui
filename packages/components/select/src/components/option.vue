@@ -1,6 +1,6 @@
 <template>
   <li :class="cls" @click="handleClick">
-    <bp-checkbox v-if="ctx?.multiple" v-model="isChecked" />
+    <bp-checkbox v-if="ctx?.multiple" v-model:check="isChecked" />
     <span :class="`${clsBlockName}-inner`">
       <slot v-if="slots.default?.({})" />
       <template v-else>{{ label }}</template>

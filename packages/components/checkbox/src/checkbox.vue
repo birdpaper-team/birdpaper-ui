@@ -76,4 +76,14 @@ watch(
     deep: true,
   }
 );
+watch(
+  () => modelBool.value,
+  () => {
+    upadteCheck();
+  },
+  {
+    immediate: true,
+    deep: true,
+  }
+);
 </script>
