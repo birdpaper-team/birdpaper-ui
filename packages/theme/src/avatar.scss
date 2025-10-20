@@ -11,6 +11,8 @@
   white-space: nowrap;
   vertical-align: middle;
   font-size: 14px;
+  box-sizing: border-box;
+  overflow: hidden;
   background-color: $avatarDefaultBg;
   color: $avatarDefaultColor;
   fill: $avatarDefaultColor;
