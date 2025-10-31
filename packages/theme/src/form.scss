@@ -33,8 +33,14 @@
       align-items: flex-start;
       padding-right: 12px;
       line-height: 32px;
-      font-size: 14px;
-      color: var(--bp-gray-8);
+      font-size: 13px;
+      color: var(--bp-gray-6);
+
+      &-required-symbol {
+        color: var(--bp-danger-6);
+        font-size: 12px;
+        margin-right: 2px;
+      }
     }
 
     &-content {

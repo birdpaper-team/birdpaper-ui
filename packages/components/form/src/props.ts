@@ -67,6 +67,15 @@ export const formItemProps = {
     default: "",
   },
   /**
+   * @type Boolean
+   * @description Whether the form item is required.
+   * @default false
+   */
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  /**
    * @type [String, Number]
    * @description Label width.
    */

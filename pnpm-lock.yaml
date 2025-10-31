@@ -24,8 +24,8 @@ importers:
         specifier: ^4.2.5
         version: 4.2.5
       birdpaper-icon:
-        specifier: 0.9.0
-        version: 0.9.0(vue@3.5.22(typescript@4.9.5))
+        specifier: 0.9.2
+        version: 0.9.2(vue@3.5.22(typescript@4.9.5))
       dayjs:
         specifier: ^1.11.3
         version: 1.11.13
@@ -3317,6 +3317,9 @@ packages:
 
   birdpaper-icon@0.9.0:
     resolution: {integrity: sha512-rpwqBYUUU5dklzQG02ATCZgmjBZgzV7jPQFkCP1HEpYAoYSSQH/aUEEiVrJz/o4NIs81R90Q7dgLcqgYNVtg6g==}
+
+  birdpaper-icon@0.9.2:
+    resolution: {integrity: sha512-AELa7XEnSvg/Di1vwREeNRJDoqTY82YUL5uuS9VFl6wwsjfEvAUq6abf8nBw5eJOKJrmwKnocgiVl5H72Kb50g==}
 
   birpc@0.2.19:
     resolution: {integrity: sha512-5WeXXAvTmitV1RqJFppT5QtUiz2p1mRSYU000Jkft5ZUCLJIk4uQriYNO50HknxKwM6jd8utNc66K1qGIwwWBQ==}
@@ -11337,18 +11340,18 @@ snapshots:
       file-uri-to-path: 1.0.0
     optional: true
 
-  birdpaper-icon@0.9.0(vue@3.5.22(typescript@4.9.5)):
-    dependencies:
-      '@vueuse/components': 11.3.0(vue@3.5.22(typescript@4.9.5))
-      '@vueuse/core': 10.11.1(vue@3.5.22(typescript@4.9.5))
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - vue
-
   birdpaper-icon@0.9.0(vue@3.5.22(typescript@5.8.2)):
     dependencies:
       '@vueuse/components': 11.3.0(vue@3.5.22(typescript@5.8.2))
       '@vueuse/core': 10.11.1(vue@3.5.22(typescript@5.8.2))
+    transitivePeerDependencies:
+      - '@vue/composition-api'
+      - vue
+
+  birdpaper-icon@0.9.2(vue@3.5.22(typescript@4.9.5)):
+    dependencies:
+      '@vueuse/components': 11.3.0(vue@3.5.22(typescript@4.9.5))
+      '@vueuse/core': 10.11.1(vue@3.5.22(typescript@4.9.5))
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue

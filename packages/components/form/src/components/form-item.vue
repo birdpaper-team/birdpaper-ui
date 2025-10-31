@@ -1,6 +1,7 @@
 <template>
   <div :class="[clsBlockName, labelPositionClass]">
-    <label v-if="label" :for="field" :class="`${clsBlockName}-label`" :style="labelStyle">
+    <label :for="field" :class="`${clsBlockName}-label`" :style="labelStyle">
+      <strong v-if="required" :class="`${clsBlockName}-label-required-symbol`">*</strong>
       {{ label }}
       {{ showColon ? ":" : "" }}
     </label>

@@ -1,6 +1,6 @@
 <template>
-  <bp-form ref="formRef" :model="form" label-position="right" :rules="rules" label-width="100px">
-    <bp-form-item label="ID" field="id">
+  <bp-form ref="formRef" :model="form" label-position="right" :rules label-width="100px">
+    <bp-form-item label="ID" field="id" required>
       <bp-input id="id" v-model="form.id" placeholder="请输入" style="width: 320px" />
     </bp-form-item>
     <bp-form-item label="Name" field="name">
@@ -32,7 +32,7 @@
       <bp-date-picker v-model="form.createTime" style="width: 320px" />
     </bp-form-item>
     <bp-form-item>
-      <bp-button type="normal" status="primary" @click="validate">Submit</bp-button>
+      <bp-button type="plain" status="primary" @click="validate">Submit</bp-button>
     </bp-form-item>
   </bp-form>
 </template>
