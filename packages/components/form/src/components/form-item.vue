@@ -20,76 +20,88 @@
 
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
-import { computed, inject, onMounted, onBeforeUnmount, ref, watch } from "vue";
-import { FormItemProps, formItemProps } from "../props";
+import { computed, inject, onMounted, onBeforeUnmount, ref, watch, toRefs, type ExtractPropTypes } from "vue";
+import { formItemProps } from "../props";
+import type { FormItemProps } from "../props";
 import type { FormContext, FormItemContext } from "../types";
 
 defineOptions({ name: "FormItem" });
+
 const { clsBlockName } = useNamespace("form-item");
 
-const props: FormItemProps = defineProps(formItemProps);
+// typed props
+type Props = Readonly<ExtractPropTypes<typeof formItemProps>> & FormItemProps;
+const props = defineProps(formItemProps) as Props;
+const { field } = toRefs(props as any);
 
-const formContext = inject<FormContext>("formContext");
-const errorMessage = ref("");
+// form context may be undefined
+const formContext = inject<FormContext | null>("formContext", null);
 
+// local state for error message
+const errorMessage = ref<string>("");
+
+// Clear error when the related model value changes
 watch(
-  () => props.field && formContext?.model[props.field],
+  () => (field.value ? formContext?.model?.[field.value] : undefined),
   () => {
-    if (errorMessage.value) {
-      errorMessage.value = "";
-    }
+    if (errorMessage.value) errorMessage.value = "";
   }
 );
 
+// Helpers used by form context
+async function validate(): Promise<Record<string, any>> {
+  if (!formContext || !field.value) return {};
+  return {};
+}
+
+function clearValidate() {
+  errorMessage.value = "";
+}
+
+function updateError(error: string) {
+  errorMessage.value = error;
+}
+
+function getRules() {
+  if (props.rules) return props.rules;
+  if (formContext?.rules && field.value) return formContext.rules[field.value];
+  return undefined;
+}
+
 const formItemContext: FormItemContext = {
   field: props.field,
-  validate: async () => {
-    if (!formContext || !props.field) return {};
-    return {};
-  },
-  clearValidate: () => {
-    errorMessage.value = "";
-  },
-  updateError: (error: string) => {
-    errorMessage.value = error;
-  },
-  getRules: () => {
-    if (props.rules) {
-      return props.rules;
-    }
-    if (formContext?.rules && props.field) {
-      return formContext.rules[props.field];
-    }
-    return undefined;
-  },
+  validate,
+  clearValidate,
+  updateError,
+  getRules,
 };
 
 onMounted(() => {
-  if (formContext && props.field) {
+  if (formContext && field.value) {
     formContext.addField(formItemContext);
   }
 });
 
 onBeforeUnmount(() => {
-  if (formContext && props.field) {
+  if (formContext && field.value) {
     formContext.removeField(formItemContext);
   }
 });
 
+// label style
 const labelStyle = computed(() => {
-  if (!formContext) return {};
   if (props.width) {
     return {
       width: typeof props.width === "number" ? `${props.width}px` : props.width,
     };
   }
-  return {
-    width: typeof formContext.labelWidth === "number" ? `${formContext.labelWidth}px` : formContext.labelWidth,
-  };
+
+  const width = formContext?.labelWidth;
+  return width !== undefined
+    ? { width: typeof width === "number" ? `${width}px` : width }
+    : {};
 });
 
-const labelPositionClass = computed(() => {
-  if (!formContext) return "";
-  return `${clsBlockName}-label-${formContext.labelPosition}`;
-});
+// label position class
+const labelPositionClass = computed(() => `${clsBlockName}-label-${formContext?.labelPosition ?? "left"}`);
 </script>
