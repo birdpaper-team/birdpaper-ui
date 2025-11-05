@@ -35,7 +35,7 @@
     </bp-input>
 
     <template #content>
-      <ul :class="`${clsBlockName}-content select-none`">
+      <ul :class="optionListCls">
         <slot v-if="hasOptions"></slot>
         <bp-empty v-else />
       </ul>
@@ -52,7 +52,7 @@ import { useNamespace } from "@birdpaper-ui/hooks";
 import { SelectProps, selectProps } from "./props";
 import { selectInjectionKey, SelectOption, SelectValue } from "./types";
 import { IconArrowDownSLine, IconArrowUpSLine } from "birdpaper-icon";
-import { provide, ref, useSlots, watchEffect } from "vue";
+import { computed, provide, ref, useSlots, watchEffect } from "vue";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
 import { IconCloseLine } from "birdpaper-icon";
 import { get } from "radash";
@@ -62,6 +62,11 @@ const { clsBlockName } = useNamespace("select");
 
 const model = defineModel<SelectValue | SelectValue[]>({ default: "" });
 const labelModel = ref<string | string[]>("");
+const optionListCls = computed(() => [
+  `${clsBlockName}-content`,
+  `${clsBlockName}-content-${props.size}`,
+  "select-none",
+]);
 
 const props: SelectProps = defineProps(selectProps);
 const emits = defineEmits<{
@@ -104,7 +109,7 @@ provide(selectInjectionKey, {
     if (props.multiple) {
       const modelArray = model.value as SelectValue[];
       const labelArray = labelModel.value as string[];
-      
+
       const valueIndex = modelArray.indexOf(v);
       if (valueIndex !== -1) {
         modelArray.splice(valueIndex, 1);
@@ -139,7 +144,7 @@ watchEffect(() => {
       props.multiple ? (labelModel.value = []) : (labelModel.value = "");
       return;
     }
-    
+
     let valueMap = {};
     for (const item of children) {
       valueMap[item.props?.value] = item.props?.label || item?.children?.["default"]?.()[0].children;
@@ -148,11 +153,11 @@ watchEffect(() => {
       labelModel.value = valueMap[model.value as string] || model.value;
       return;
     }
-    
+
     if (Array.isArray(model.value)) {
       labelModel.value = model.value
-      .filter((item): item is string | number => typeof item === "string" || typeof item === "number")
-      .map((item) => valueMap[item]);
+        .filter((item): item is string | number => typeof item === "string" || typeof item === "number")
+        .map((item) => valueMap[item]);
     } else {
       labelModel.value = [];
     }

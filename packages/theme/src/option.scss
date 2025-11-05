@@ -15,9 +15,10 @@
   }
 
   &-inner {
-    font-size: 14px;
     color: var(--bp-gray-9);
-    line-height: 36px;
+    line-height: 2.6;
+    width: max-content;
+    @extend .text-ellipsis;
   }
 
   &:hover {

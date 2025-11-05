@@ -1,5 +1,6 @@
 @use "common/design" as *;
 @use "common/extend.scss" as *;
+@use "common/sizes" as *;
 @use "mixins/var" as *;
 @use "mixins/function" as *;
 @use "mixins/mixins.scss" as *;
@@ -34,4 +35,12 @@
   font-size: 14px;
   color: var(--bp-gray-6);
   line-height: 36px;
+}
+
+@each $size in $sizes {
+  .#{$B}-content-#{$size} {
+    .#{$namespace}-option-inner {
+      font-size: getCssVar("size-font-size", $size);
+    }
+  }
 }

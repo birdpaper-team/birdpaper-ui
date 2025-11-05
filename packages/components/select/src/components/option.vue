@@ -1,10 +1,10 @@
 <template>
   <li :class="cls" @click="handleClick">
     <bp-checkbox v-if="ctx?.multiple" v-model:check="isChecked" />
-    <span :class="`${clsBlockName}-inner`">
+    <div :class="`${clsBlockName}-inner`">
       <slot v-if="slots.default?.({})" />
       <template v-else>{{ label }}</template>
-    </span>
+    </div>
   </li>
 </template>
 
