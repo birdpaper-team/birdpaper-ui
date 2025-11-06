@@ -1,6 +1,6 @@
 <template>
   <div :class="clsBlockName">
-    <component :is="icon" class="spin-icon" size="14"></component>
+    <component :is="icon" class="spin-icon" size="18"></component>
     <span v-if="description" :class="`${clsBlockName}-text`">{{ description }}</span>
   </div>
 </template>

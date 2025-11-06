@@ -9,6 +9,7 @@
 
   &-spinner {
     @include flex(column, center, center);
+    gap: 12px;
     z-index: 12;
 
     .spin-icon {
@@ -17,7 +18,6 @@
     }
 
     &-text {
-      margin-top: 8px;
       color: var(--bp-primary-6);
       font-size: 13px;
       font-weight: 400;
@@ -32,6 +32,8 @@
     left: 0;
     z-index: 11;
     background-color: rgba(var(--bp-gray-0-rgb), 0.6);
+    backdrop-filter: blur(1px) saturate(120%);
+    -webkit-backdrop-filter: blur(1px) saturate(120%);
 
     .#{$B}-spinner {
       position: absolute;
