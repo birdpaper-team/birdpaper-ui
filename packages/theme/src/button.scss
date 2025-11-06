@@ -14,8 +14,11 @@
   font-weight: $fontWeight;
   line-height: 1;
   color: rgba(getCssVar("button", "text-color"), 1);
-  background-color: rgba(getCssVar("button", "bg-color"), 1);
-  border-color: rgba(getCssVar("button", "border-color"), 1);
+  background-color: rgba(getCssVar("button", "bg-color"), 0.9);
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-color: rgba(getCssVar("button", "border-color"), 0.6);
   border-style: solid;
   border-width: $borderSize;
   text-rendering: auto;
@@ -31,8 +34,9 @@
   overflow: hidden;
   opacity: 1;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(getCssVar("button", "border-color"), 0.04);
-  transition: all 0.2s;
+  box-shadow: 0 6px 24px rgba(getCssVar("button", "border-color"), 0.1),
+    0 1px 0 rgba(getCssVar("button", "border-color"), 0.01);
+  transition: background-color 0.18s ease, box-shadow 0.18s ease, transform 0.12s ease, backdrop-filter 0.18s ease;
 
   &-inner {
     transition: padding 0.2s;
@@ -41,10 +45,12 @@
   &:hover,
   &:focus-visible {
     color: rgba(getCssVar("button", "text-color-hover"), 1);
-    background-color: rgba(getCssVar("button", "bg-color-hover"), 1);
-    border-color: rgba(getCssVar("button", "border-color-hover"), 1);
+    background-color: rgba(getCssVar("button", "bg-color-hover"), 0.92);
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+    border-color: rgba(getCssVar("button", "border-color-hover"), 0.48);
     outline: 0;
-    transition: all 0.2s;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 
     .button-icon {
       svg[class*="-icon-"] {
@@ -56,15 +62,23 @@
 
   &:active {
     color: rgba(getCssVar("button", "text-color"), 1);
-    background-color: rgba(getCssVar("button", "bg-color"), 1);
-    border-color: rgba(getCssVar("button", "border-color"), 1);
-    transition: all 0.2s;
+    background-color: rgba(getCssVar("button", "bg-color"), 0.82);
+    border-color: rgba(getCssVar("button", "border-color"), 0.34);
+    transform: translateY(0);
+    box-shadow: 0 4px 10px rgba(getCssVar("button", "bg-color"), 0.1),
+      0 1px 0 rgba(getCssVar("button", "border-color"), 0.05);
+    transition: background-color 0.12s ease, transform 0.08s ease;
   }
 
   &[class*="-normal"] {
     --bp-button-text-color: var(--bp-gray-0-rgb);
     --bp-button-text-color-hover: var(--bp-gray-0-rgb);
     --bp-button-text-color-active: var(--bp-gray-0-rgb);
+  }
+
+  &[class*="-secondary"] {
+    box-shadow: 0 6px 24px rgba(getCssVar("button", "text-color"), 0.06),
+      0 1px 0 rgba(getCssVar("button", "bg-color"), 0.06);
   }
 
   &[class*="-dashed"] {
@@ -183,7 +197,7 @@ $shapes: "square", "round", "circle";
         @include css-var-from-global-rgb(("button", "text-color"), ($item, if($item == "gray", "9", "6")));
         @include css-var-from-global-rgb(("button", "text-color-hover"), ($item, if($item == "gray", "9", "6")));
 
-        @include css-var-from-global-rgb(("button", "bg-color"), ($item, 1));
+        @include css-var-from-global-rgb(("button", "bg-color"), ($item, if($item == "gray", "2", "1")));
         @include css-var-from-global-rgb(("button", "bg-color-hover"), ($item, 1));
 
         @include css-var-from-global-rgb(("button", "border-color"), ($item, 1));

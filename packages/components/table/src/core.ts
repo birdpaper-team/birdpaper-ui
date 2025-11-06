@@ -88,6 +88,7 @@ export const useTableCore = () => {
         _remainder_col--;
       }
 
+      // oxlint-disable-next-line no-unused-expressions
       minWidth && _min_width_list.push(Number(minWidth));
     }
 
