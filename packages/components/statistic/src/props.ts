@@ -41,7 +41,6 @@ export const statisticProps = {
    */
   color: {
     type: String,
-    default: "#2e2e30",
   },
   /**
    * @type {string}

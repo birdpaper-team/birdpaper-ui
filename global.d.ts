@@ -46,6 +46,7 @@ declare module "vue" {
     BpStep: typeof import("birdpaper-ui")["Step"];
     BpRate: typeof import("birdpaper-ui")["Rate"];
     BpStatistic: typeof import("birdpaper-ui")["Statistic"];
+    BpBadge: typeof import("birdpaper-ui")["Badge"];
   }
 }
 

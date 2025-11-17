@@ -34,3 +34,4 @@ export * from "./colorPicker";
 export * from "./steps";
 export * from "./rate";
 export * from "./statistic";
+export * from "./badge";

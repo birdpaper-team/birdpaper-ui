@@ -1,7 +1,4 @@
-import {
-  ConfigProviderContext,
-  provideGlobalConfig,
-} from "@birdpaper-ui/components/config-provider";
+import { ConfigProviderContext, provideGlobalConfig } from "@birdpaper-ui/components/config-provider";
 import type { App } from "vue";
 
 export const installer = (components: any[] = []) => {
@@ -14,7 +11,7 @@ export const installer = (components: any[] = []) => {
       }
     });
 
-    if (options) provideGlobalConfig(options, app);
+    if (options) provideGlobalConfig(options, app as any);
   };
 
   return {

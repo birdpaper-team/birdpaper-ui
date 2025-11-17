@@ -86,6 +86,7 @@ export default {
         { text: "头像 <span>Avatar</span>", link: "/components/avatar/" },
         { text: "表格 <span>Table</span>", link: "/components/table/" },
         { text: "标签 <span>Tag</span>", link: "/components/tag/" },
+        { text: "徽章 <span>Badge</span>", link: "/components/badge/" },
         { text: "图片 <span>Image</span>", link: "/components/image/" },
         { text: "数值 <span>Statistic</span>", link: "/components/statistic/" },
         { text: "空状态 <span>Empty</span>", link: "/components/empty/" },

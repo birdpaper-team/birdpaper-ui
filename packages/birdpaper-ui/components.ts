@@ -45,7 +45,8 @@ import {
   Steps,
   Step,
   Rate,
-  Statistic
+  Statistic,
+  Badge
 } from "@birdpaper-ui/components";
 
 export default [
@@ -95,5 +96,6 @@ export default [
   Steps,
   Step,
   Rate,
-  Statistic
+  Statistic,
+  Badge
 ];
