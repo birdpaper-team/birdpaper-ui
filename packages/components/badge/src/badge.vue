@@ -1,6 +1,6 @@
 <template>
   <div :class="[clsBlockName, `${clsBlockName}-${status}`]">
-    <span v-if="dot" :class="`${clsBlockName}-dot`"></span>
+    <span v-if="dot && count > 0" :class="`${clsBlockName}-dot`"></span>
     <span
       v-else-if="_innerText"
       :class="`${clsBlockName}-inner`"
