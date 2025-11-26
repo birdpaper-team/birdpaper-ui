@@ -59,6 +59,7 @@ async function validateField(ctx: FormItemContext): Promise<boolean> {
     return true;
   } catch (errors: any) {
     ctx.updateError(errors.errors?.[0]?.message || String(errors));
+    console.warn('Form validate error: ', errors.errors?.[0]?.message || String(errors));
     return false;
   }
 }
