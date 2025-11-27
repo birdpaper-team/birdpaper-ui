@@ -147,6 +147,7 @@ watchEffect(() => {
       model.value === "" ||
       (Array.isArray(model.value) && model.value.length === 0)
     ) {
+      // oxlint-disable-next-line no-unused-expressions
       props.multiple ? (labelModel.value = []) : (labelModel.value = "");
       return;
     }

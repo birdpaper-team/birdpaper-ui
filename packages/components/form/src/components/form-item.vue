@@ -6,7 +6,7 @@
       {{ showColon ? ":" : "" }}
     </label>
     <div :class="`${clsBlockName}-content`">
-      <div :class="`${clsBlockName}-content-inner`">
+      <div :class="`${clsBlockName}-content-inner`" @focusout="handleFocusOut">
         <slot />
       </div>
       <transition name="fade-dropdown" mode="out-in">
@@ -49,9 +49,29 @@ watch(
 );
 
 // Helpers used by form context
-async function validate(): Promise<Record<string, any>> {
-  if (!formContext || !field.value) return {};
-  return {};
+async function validate(): Promise<boolean> {
+  if (!formContext || !field.value) return true;
+  
+  // Get validation rules
+  const rules = getRules();
+  if (!rules) return true;
+  
+  try {
+    // Create schema and validate
+    const Schema = (await import('async-validator')).default;
+    const schema = new Schema({ [field.value]: rules });
+    await schema.validate({ [field.value]: formContext.model[field.value] });
+    
+    // Validation passed
+    updateError('');
+    return true;
+  } catch (errors: any) {
+    // Validation failed
+    const errorMsg = errors.errors?.[0]?.message || String(errors);
+    updateError(errorMsg);
+    console.warn('FormItem validate error: ', errorMsg);
+    return false;
+  }
 }
 
 function clearValidate() {
@@ -104,4 +124,11 @@ const labelStyle = computed(() => {
 
 // label position class
 const labelPositionClass = computed(() => `${clsBlockName}-label-${formContext?.labelPosition ?? "left"}`);
+
+// Handle focusout event for auto validation
+const handleFocusOut = () => {
+  if (props.autoValidate) {
+    validate();
+  }
+};
 </script>

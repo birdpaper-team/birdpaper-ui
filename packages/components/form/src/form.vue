@@ -1,5 +1,5 @@
 <template>
-  <form :class="cls" @submit.prevent>
+  <form :class="cls" @submit.prevent="onSubmit">
     <slot />
   </form>
 </template>
@@ -12,6 +12,8 @@ import type { FormContext, FormItemContext } from "./types";
 import Schema from "async-validator";
 
 defineOptions({ name: "Form" });
+
+const emits = defineEmits(["submit"]);
 const { clsBlockName } = useNamespace("form");
 const cls = computed(() => [clsBlockName, `${clsBlockName}-${layout.value}`]);
 
@@ -21,6 +23,14 @@ const { layout } = toRefs(props as any);
 
 // registered form item contexts
 const fields = ref<FormItemContext[]>([]);
+
+// record initial model values for resetFields
+const initialValues = ref<Record<string, any>>({});
+
+// save initial values when component mounts
+if (props.model) {
+  initialValues.value = { ...props.model };
+}
 
 // helpers to manage fields
 function addField(field: FormItemContext) {
@@ -46,15 +56,27 @@ const formContext: FormContext = reactive({
 provide("formContext", formContext);
 
 // validate a single field with async-validator
-async function validateField(ctx: FormItemContext): Promise<boolean> {
-  if (!ctx.field) return true;
+async function validateField(fieldOrCtx: FormItemContext | string): Promise<boolean> {
+  let ctx: FormItemContext | undefined;
+  let fieldName: string;
 
-  const rules = ctx.getRules?.() || (props.rules && props.rules[ctx.field]);
+  // Determine if we received a field name string or a context object
+  if (typeof fieldOrCtx === 'string') {
+    fieldName = fieldOrCtx;
+    ctx = fields.value.find(item => item.field === fieldName);
+    if (!ctx) return true; // Field not found, consider validation passed
+  } else {
+    ctx = fieldOrCtx;
+    fieldName = ctx.field || '';
+    if (!fieldName) return true;
+  }
+
+  const rules = ctx.getRules?.() || (props.rules && props.rules[fieldName]);
   if (!rules) return true;
 
-  const schema = new Schema({ [ctx.field]: rules });
+  const schema = new Schema({ [fieldName]: rules });
   try {
-    await schema.validate({ [ctx.field]: props.model[ctx.field] });
+    await schema.validate({ [fieldName]: props.model[fieldName] });
     ctx.updateError("");
     return true;
   } catch (errors: any) {
@@ -84,10 +106,16 @@ function resetFields() {
   if (!props.model) return;
   fields.value.forEach((item) => {
     if (item.field) {
-      props.model[item.field] = "";
+      props.model[item.field] = initialValues.value[item.field] || "";
       item.clearValidate();
     }
   });
+}
+
+// handle form submit
+async function onSubmit() {
+  const isValid = await validate();
+  emits("submit", { isValid, model: props.model });
 }
 
 defineExpose({ validate, clearValidate, resetFields });

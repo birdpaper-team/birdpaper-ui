@@ -11,7 +11,7 @@ export interface FormContext {
 
 export interface FormItemContext {
   field?: string;
-  validate: () => Promise<Values>;
+  validate: () => Promise<Values | boolean>;
   clearValidate: () => void;
   updateError: (error: string) => void;
   getRules?: () => Rules | undefined;

@@ -99,6 +99,15 @@ export const formItemProps = {
     type: [Array, Object] as PropType<Rules>,
     default: undefined,
   },
+  /**
+   * @type Boolean
+   * @description Whether to validate automatically when blur.
+   * @default false
+   */
+  autoValidate: {
+    type: Boolean,
+    default: false,
+  },
 } as const;
 
 export type FormProps = ExtractPropTypes<typeof formProps>;
