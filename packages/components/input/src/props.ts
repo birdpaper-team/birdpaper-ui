@@ -107,6 +107,15 @@ export const inputProps = {
     type: Boolean,
     default: false,
   },
+  /**
+   * @type boolean
+   * @description Whether to focus the input automatically.
+   * @default false
+   */
+  autoFocus: {
+    type: Boolean,
+    default: false,
+  },
 } as const;
 
 export type InputProps = ExtractPropTypes<typeof inputProps>;

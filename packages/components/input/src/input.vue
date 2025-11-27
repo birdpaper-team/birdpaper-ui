@@ -23,6 +23,7 @@
       @input="onInput"
       @keypress="onKeypress"
       @keyup="onKeyup"
+      @keyup.enter="onEnter"
     />
     <slot v-else />
     <div :class="`${clsBlockName}-suffix select-none`" v-if="innerActionIcon || innerSuffixContent || slots.suffix">
@@ -44,7 +45,7 @@
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { InputProps, inputProps } from "./props";
-import { computed, useSlots, ref, nextTick } from "vue";
+import { computed, useSlots, ref, nextTick, onMounted } from "vue";
 import type { Component } from "vue";
 import { IconCloseLine, IconEyeFill, IconEyeCloseFill } from "birdpaper-icon";
 import { InputType } from "./types";
@@ -56,7 +57,7 @@ const model = defineModel<string | number>({
   default: "",
 });
 const props: InputProps = defineProps(inputProps);
-const emits = defineEmits(["input", "focus", "blur", "keypress", "keyup"]);
+const emits = defineEmits(["input", "focus", "blur", "keypress", "keyup", "enter"]);
 const slots = useSlots();
 
 const cls = computed<string[] | {}[]>(() => [
@@ -65,7 +66,12 @@ const cls = computed<string[] | {}[]>(() => [
   props.disabled && `${clsBlockName}-disabled`,
   props.isRound && `${clsBlockName}-round`,
 ]);
-const inpType = computed<InputType>(() => (props.type === "text" ? "text" : isEyeOpen.value ? "password" : "text"));
+const inpType = computed<InputType>(() => {
+  if (props.type === "password") {
+    return isEyeOpen.value ? "password" : "text";
+  }
+  return props.type;
+});
 
 /** The password text is hide or not. */
 const isEyeOpen = ref<boolean>(true);
@@ -113,6 +119,7 @@ const triggerEye = () => {
  */
 const clear = (autoFocus: boolean = false) => {
   model.value = "";
+  // oxlint-disable-next-line no-unused-expressions
   autoFocus && nextTick(() => focus());
 };
 
@@ -124,10 +131,24 @@ const onBlur = (e: Event) => emits("blur", e);
 const onKeypress = (e: Event) => emits("keypress", e);
 const onKeyup = (e: Event) => emits("keyup", e);
 
+const onEnter = (e: Event) => {
+  if (props.disabled || props.readonly) return;
+  emits("enter", { e, value: model.value });
+};
+
 const onInput = (e: Event) => {
   model.value = (e.target as HTMLInputElement).value;
   emits("input", { e, value: model.value });
 };
+
+// Auto focus when component mounted
+onMounted(() => {
+  if (props.autoFocus) {
+    nextTick(() => {
+      focus();
+    });
+  }
+});
 
 defineExpose({
   focus,

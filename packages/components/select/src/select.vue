@@ -14,6 +14,7 @@
       :size
       :placeholder="labelModel.length === 0 ? placeholder : ''"
       :max-tag-count
+      :disabled
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
     ></bp-input-tag>
@@ -29,7 +30,7 @@
       @mouseleave="handleMouseLeave"
     >
       <template #suffix>
-        <IconCloseLine v-if="!disabled && showClear && labelModel" @click.stop="handleClear" />
+        <IconCloseLine v-if="!props.disabled && showClear && labelModel" @click.stop="handleClear" />
         <component v-else :is="isOpen ? IconArrowUpSLine : IconArrowDownSLine"></component>
       </template>
     </bp-input>
@@ -98,8 +99,13 @@ const handleMouseLeave = () => {
 
 const showClear = ref<boolean>(false);
 const handleClear = () => {
-  labelModel.value = "";
-  model.value = "";
+  if (props.multiple) {
+    labelModel.value = [];
+    model.value = [];
+  } else {
+    labelModel.value = "";
+    model.value = "";
+  }
 };
 
 provide(selectInjectionKey, {
