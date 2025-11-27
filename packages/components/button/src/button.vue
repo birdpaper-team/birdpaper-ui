@@ -1,5 +1,5 @@
 <template>
-  <button :class="cls" :type="attrType" :disabled="isDisabled" @click="onClick">
+  <button :class="cls" :type="attrType" :disabled="isDisabled" @click="onClick" @keydown="onKeydown">
     <div v-if="btnIcon || loading" :class="iconCls">
       <component :is="btnIcon" :class="iconInnerCls" size="14"></component>
     </div>
@@ -51,14 +51,43 @@ const cls = computed(() => [
   { "is-full": props.full, "p-0": !hasDefaultSlot.value, "no-padding": !hasDefaultSlot.value },
   "select-none",
 ]);
-const innerCls = computed(() => [`${clsBlockName}-inner`, { "pl-4": props.loading }]);
-const iconCls = computed(() => ["button-icon", hasDefaultSlot.value ? "mr-1" : "m-0"]);
+const innerCls = computed(() => [
+  `${clsBlockName}-inner`,
+  { "pl-4": props.loading && hasDefaultSlot.value }
+]);
+const iconCls = computed(() => {
+  const classes = [
+    "button-icon",
+    { "mr-0": props.loading && hasDefaultSlot.value }
+  ];
+  
+  if (hasDefaultSlot.value) {
+    if (props.iconGap) {
+      classes.push(`mr-${props.iconGap}`);
+    } else {
+      classes.push("mr-1");
+    }
+  } else {
+    classes.push("m-0");
+  }
+  
+  return classes;
+});
 const iconInnerCls = computed(() => [
-  { "bp-icon-loading": props.loading, absolute: hasDefaultSlot.value && props.loading },
+  { "bp-icon-loading": props.loading, "absolute": hasDefaultSlot.value && props.loading },
 ]);
 
 const onClick = () => {
   if (isDisabled.value) return;
   emits("click");
+};
+
+const onKeydown = (e: KeyboardEvent) => {
+  if (isDisabled.value) return;
+  
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    onClick();
+  }
 };
 </script>

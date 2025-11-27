@@ -98,6 +98,15 @@ export const buttonProps = {
     type: Object as PropType<ButtonIcon>,
     default: () => null,
   },
+  /**
+   * @type [Number, String]
+   * @description Button icon gap.
+   * @default undefined
+   */
+  iconGap: {
+    type: [Number, String] as PropType<number | string>,
+    default: undefined,
+  },
 } as const;
 
 export type ButtonProps = ExtractPropTypes<typeof buttonProps>;
