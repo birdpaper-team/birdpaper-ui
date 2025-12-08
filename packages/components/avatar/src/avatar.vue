@@ -4,7 +4,7 @@
       <slot />
     </div>
 
-    <bp-image v-if="props.imageUrl" :src="props.imageUrl" :class="`${clsBlockName}-image`">
+    <bp-image v-if="props.imageUrl" :fit="objectFit" :src="props.imageUrl" :class="`${clsBlockName}-image`">
       <template #loading>
         <slot name="loading" />
       </template>
