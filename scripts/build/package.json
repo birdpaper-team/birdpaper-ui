@@ -2,14 +2,14 @@
   "name": "@birdpaper-ui/build",
   "version": "1.0.0",
   "scripts": {
-    "start": "gulp --require @esbuild-kit/cjs-loader -f gulpfile.ts"
+    "start": "tsx build.ts"
   },
   "devDependencies": {
-    "@esbuild-kit/cjs-loader": "^2.2.1",
-    "@types/gulp": "^4.0.17",
+    "@types/fs-extra": "^9.0.13",
+    "@types/node": "^18.19.25",
     "fast-glob": "^3.3.2",
-    "gulp": "^4.0.2",
-    "gulp-sass": "^5.1.0",
+    "tsx": "^4.7.1",
+    "vite": "^5.4.1",
     "vite-plugin-dts": "^4.4.0"
   }
 }
