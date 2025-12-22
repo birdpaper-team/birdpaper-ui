@@ -132,6 +132,19 @@ export const bundleConfig = defineConfig({
         "dayjs",
         "vue-virtual-scroller",
       ],
+      output: {
+        globals: {
+          "vue": "Vue",
+          "birdpaper-icon": "BirdpaperIcon",
+          "@vueuse/components": "VueUseComponents",
+          "@vueuse/core": "VueUse",
+          "radash": "Radash",
+          "unocss": "UnoCSS",
+          "async-validator": "AsyncValidator",
+          "dayjs": "dayjs",
+          "vue-virtual-scroller": "VueVirtualScroller",
+        },
+      },
     },
   },
 });
