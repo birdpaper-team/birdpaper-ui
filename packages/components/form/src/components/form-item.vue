@@ -9,18 +9,18 @@
       <div :class="`${clsBlockName}-content-inner`" @focusout="handleFocusOut">
         <slot />
       </div>
-      <transition name="fade-dropdown" mode="out-in">
+      <Transition name="fade-dropdown" mode="out-in">
         <div v-if="errorMessage" :class="`${clsBlockName}-content-error`">
           {{ errorMessage }}
         </div>
-      </transition>
+      </Transition>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
-import { computed, inject, onMounted, onBeforeUnmount, ref, watch, toRefs, type ExtractPropTypes } from "vue";
+import { computed, inject, onMounted, onBeforeUnmount, ref, watch, toRefs, type ExtractPropTypes, Transition } from "vue";
 import { formItemProps } from "../props";
 import type { FormItemProps } from "../props";
 import type { FormContext, FormItemContext } from "../types";

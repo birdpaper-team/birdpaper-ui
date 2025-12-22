@@ -72,7 +72,7 @@ export const getPosition = (
   const allowBottom = triggerBottom - wrapperSize.height > 0;
   const allowHalfBottom = triggerBottomIncludeHalfHeight - wrapperSize.height / 2 > 0;
 
-  const isAllow = {
+  const isAllow: Record<TriggerPosition, () => boolean> = {
     top: () => allowTop && allowLeftWithHalf && allowHalfRight,
     bottom: () => allowBottom && allowLeft && allowRight,
     left: () => allowLeft && allowHalfTop && allowHalfBottom,
@@ -87,20 +87,26 @@ export const getPosition = (
     "low-right": () => allowRight && allowBottom,
   };
 
-  let allowPositions: TriggerPosition[] = [position];
-  if (!isAllow[position]()) {
-    allowPositions = [];
+  // Check if the initial position is allowed
+  const isInitialPositionAllowed = isAllow[position]();
+  if (isInitialPositionAllowed) {
+    return position;
+  }
 
-    for (let i = 0; i < positionArr.length; i++) {
-      if (positionArr[i] === position) continue;
+  // Find alternative positions
+  const allowPositions: TriggerPosition[] = [];
+  for (let i = 0; i < positionArr.length; i++) {
+    const pos = positionArr[i];
+    if (pos === position) continue;
 
-      if (isAllow[positionArr[i]]()) {
-        allowPositions.push(positionArr[i]);
-      }
+    // Use type assertion to ensure pos is not undefined
+    const positionKey = pos as TriggerPosition;
+    if (isAllow[positionKey]()) {
+      allowPositions.push(positionKey);
     }
   }
 
-  return allowPositions.length === 0 ? position : allowPositions[0];
+  return allowPositions.length === 0 ? position : allowPositions[0]!;
 };
 
 /**
@@ -140,13 +146,13 @@ export const getPositionData = (
 };
 
 const getLeftPosition = (
-  position,
+  position: TriggerPosition,
   left: number,
   width: number,
   wrapperWidth: number,
   popupOffset: number,
   translate: number = 0
-) => {
+): number => {
   const containerRect = document.documentElement.getBoundingClientRect();
 
   const baseLeft = left + translate - containerRect.left;
@@ -178,7 +184,7 @@ const getTopPosition = (
   height: number,
   wrapperSize: SizeInfo,
   translate: number = 0
-) => {
+): number => {
   const topPosition = {
     down: top + scrollTop + popupOffset + height + translate,
     middle: top + scrollTop + height / 2 - wrapperSize.height / 2 + translate,

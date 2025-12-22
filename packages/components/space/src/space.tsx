@@ -1,4 +1,4 @@
-import { defineComponent, Fragment, h, PropType, Comment } from "vue";
+import { defineComponent, Fragment, h, PropType, Comment, VNode } from "vue";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { SizeType, SpaceType } from "./types";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
@@ -45,22 +45,20 @@ export default defineComponent({
           class={[clsBlockName, `${clsBlockName}-${props.type}`]}
           style={`justify-content:${props.justify};align-items:${props.align}`}
         >
-          {children.map((child, index) => {
+          {children.map((child: VNode, index: number) => {
             const hasSplit = slots.split && index > 0;
             const style = props.type === "horizontal" ? `margin: 0 ${size}px` : `margin: ${size}px 0`;
 
-            return (
-              <Fragment key={child.key ?? `item-${index}`}>
-                {hasSplit && (
-                  <div class={`${clsBlockName}-item`} style={style}>
-                    {slots.split?.()}
-                  </div>
-                )}
+            return h(Fragment, { key: child.key ?? `item-${index}` }, [
+              hasSplit && (
                 <div class={`${clsBlockName}-item`} style={style}>
-                  {child}
+                  {slots.split?.()}
                 </div>
-              </Fragment>
-            );
+              ),
+              <div class={`${clsBlockName}-item`} style={style}>
+                {child}
+              </div>
+            ]);
           })}
         </div>
       );

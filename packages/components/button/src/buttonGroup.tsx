@@ -1,5 +1,5 @@
 import { useNamespace } from "@birdpaper-ui/hooks";
-import { computed, defineComponent, Fragment, h, mergeProps, PropType } from "vue";
+import { computed, defineComponent, Fragment, h, mergeProps, PropType, VNode } from "vue";
 import { ButtonShape, ButtonSize, ButtonStatus, ButtonType } from "./types";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
 import { get } from "radash";
@@ -9,19 +9,19 @@ export default defineComponent({
   props: {
     type: {
       type: String as PropType<ButtonType>,
-      default: "normal",
+      default: ButtonType.NORMAL,
     },
     size: {
       type: String as PropType<ButtonSize>,
-      default: "default",
+      default: ButtonSize.DEFAULT,
     },
     shape: {
       type: String as PropType<ButtonShape>,
-      default: "square",
+      default: ButtonShape.SQUARE,
     },
     status: {
       type: String as PropType<ButtonStatus>,
-      default: "gray",
+      default: ButtonStatus.GRAY,
     },
     disabled: {
       type: Boolean,
@@ -42,10 +42,10 @@ export default defineComponent({
 
       return (
         <div class={cls.value}>
-          {children.map((child, index) => {
+          {children.map((child: VNode, index: number) => {
             const button = Object.assign({}, child);
             button.props = child.props ? mergeProps(child.props, { ...props }) : { ...props };
-            return <Fragment key={child.key ?? `item-${index}`}>{h(button, {})}</Fragment>;
+            return h(Fragment, { key: child.key ?? `item-${index}` }, [h(button, {})]);
           })}
         </div>
       );

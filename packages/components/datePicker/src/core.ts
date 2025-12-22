@@ -57,8 +57,10 @@ export const useDayJs = (lang: LangsType, model: string) => {
     return dates.value;
   };
 
-  const setRangeDates = (begin: Dayjs, end: Dayjs) => {
-    return [setDates(begin), setDates(end)];
+  const setRangeDates = (begin: Dayjs, end: Dayjs): DayCell[][] => {
+    const beginDates = setDates(begin);
+    const endDates = setDates(end);
+    return [...beginDates, ...endDates];
   };
 
   const changeMonth = (m: number) => (current.value = current.value.month(m));
@@ -72,7 +74,7 @@ export const useDayJs = (lang: LangsType, model: string) => {
 
       monthCell.value[i] = {
         value: value.format("YYYY-MM"),
-        label,
+        label: label || "",
       };
     }
   };
@@ -85,7 +87,7 @@ export const useDayJs = (lang: LangsType, model: string) => {
 
       yearCell.value[i - 1] = {
         value,
-        label: value.toString(),
+        label: value.toString() || "",
       };
     }
   };

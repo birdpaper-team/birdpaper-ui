@@ -1,36 +1,57 @@
 import { Component } from "vue";
 
-/**
- * @description 按钮类型 Button type，常规-normal、次要-secondary、线框-plain、虚线-dashed、文本-text
- */
-export declare type ButtonType = "secondary" | "normal" | "plain" | "dashed" | "text";
+// 使用const断言创建更严格的类型
+export const ButtonType = {
+  SECONDARY: "secondary",
+  NORMAL: "normal",
+  PLAIN: "plain",
+  DASHED: "dashed",
+  TEXT: "text"
+} as const;
 
-/**
- * @description 按钮状态 Button status，灰度-gray、主色-primary、成功-success、警示-warning、危险-danger
- */
-export declare type ButtonStatus = "gray" | "primary" | "success" | "warning" | "danger";
+export type ButtonType = typeof ButtonType[keyof typeof ButtonType];
 
-/**
- * @description 按钮元素 Type 属性，Button Native attribute，按钮-button、提交-submit、重置-reset
- */
-export declare type ButtonNavtiveType = "button" | "submit" | "reset";
+export const ButtonStatus = {
+  GRAY: "gray",
+  PRIMARY: "primary",
+  SUCCESS: "success",
+  WARNING: "warning",
+  DANGER: "danger"
+} as const;
 
-/**
- * @description 按钮形状 Button shape，矩形-square、椭圆-round、circle-圆形
- */
-export declare type ButtonShape = "square" | "round" | "circle";
+export type ButtonStatus = typeof ButtonStatus[keyof typeof ButtonStatus];
 
-/**
- * @description 按钮尺寸 Button size，迷你-mini、小型-small、默认-default、大型-large
- */
-export declare type ButtonSize = "mini" | "small" | "default" | "large";
+export const ButtonNavtiveType = {
+  BUTTON: "button",
+  SUBMIT: "submit",
+  RESET: "reset"
+} as const;
+
+export type ButtonNavtiveType = typeof ButtonNavtiveType[keyof typeof ButtonNavtiveType];
+
+export const ButtonShape = {
+  SQUARE: "square",
+  ROUND: "round",
+  CIRCLE: "circle"
+} as const;
+
+export type ButtonShape = typeof ButtonShape[keyof typeof ButtonShape];
+
+export const ButtonSize = {
+  MINI: "mini",
+  SMALL: "small",
+  DEFAULT: "default",
+  LARGE: "large"
+} as const;
+
+export type ButtonSize = typeof ButtonSize[keyof typeof ButtonSize];
 
 /**
  * @description 按钮图标 Button icon.
  */
-export declare type ButtonIcon = Component;
+export type ButtonIcon = Component;
 
 /**
  * @description 按钮加载图标 Button loading icon, Number type which 1 to 5. Or the icon component.
  */
-export declare type ButtonLoadingIcon = number | ButtonIcon;
+export type ButtonLoadingIcon = number | ButtonIcon;

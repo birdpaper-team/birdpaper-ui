@@ -2,17 +2,17 @@
   <div :class="[cls, { 'spin-has-content': slots.default?.({}) }]">
     <Spinner v-if="!slots.default?.({})" :icon="spinIcon" :description="description" />
 
-    <transition name="fade">
+    <Transition name="fade">
       <div :class="`${clsBlockName}-mask`" v-if="spinning">
         <Spinner :icon="spinIcon" :description="description" />
       </div>
-    </transition>
+    </Transition>
     <slot />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed, useSlots } from "vue";
+import { computed, useSlots, Transition } from "vue";
 import type { Component } from "vue";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { IconLoaderLine, IconLoader2Line, IconLoader3Line, IconLoader4Line, IconLoader5Line } from "birdpaper-icon";

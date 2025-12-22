@@ -1,4 +1,4 @@
-import { PropType, Fragment, mergeProps, h, computed } from "vue";
+import { PropType, Fragment, mergeProps, h, computed, VNode } from "vue";
 import { DirectionType, RadioType, RadioValue } from "./types";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { defineComponent } from "vue";
@@ -77,23 +77,21 @@ export default defineComponent({
 
       return (
         <div class={cls.value}>
-          {children.map((child, index) => {
+          {children.map((child: VNode, index: number) => {
             const radio = Object.assign({}, child);
             radio.props = child.props ? mergeProps(child.props, { ...props }) : { ...props };
 
-            return (
-              <Fragment key={child.key ?? `item-${index}`}>
-                {h(radio, {
-                  modelValue: props.modelValue,
-                  onChange(e: RadioValue) {
-                    emit("change", e);
-                  },
-                  "onUpdate:modelValue"(e: RadioValue) {
-                    updateValue(e);
-                  },
-                })}
-              </Fragment>
-            );
+            return h(Fragment, { key: child.key ?? `item-${index}` }, [
+              h(radio, {
+                modelValue: props.modelValue,
+                onChange(e: RadioValue) {
+                  emit("change", e);
+                },
+                "onUpdate:modelValue"(e: RadioValue) {
+                  updateValue(e);
+                },
+              })
+            ]);
           })}
         </div>
       );

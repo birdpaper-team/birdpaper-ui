@@ -9,16 +9,18 @@ export const buttonProps = {
    */
   type: {
     type: String as PropType<ButtonType>,
-    default: "normal",
+    default: ButtonType.NORMAL,
+    validator: (value: ButtonType): boolean => Object.values(ButtonType).includes(value),
   },
   /**
-   * @typpe ButtonNavtiveType
+   * @type ButtonNavtiveType
    * @description Button Native attribute.
    * @default button
    */
   attrType: {
     type: String as PropType<ButtonNavtiveType>,
-    default: "button",
+    default: ButtonNavtiveType.BUTTON,
+    validator: (value: ButtonNavtiveType): boolean => Object.values(ButtonNavtiveType).includes(value),
   },
   /**
    * @type ButtonStatus
@@ -27,7 +29,8 @@ export const buttonProps = {
    */
   status: {
     type: String as PropType<ButtonStatus>,
-    default: "primary",
+    default: ButtonStatus.PRIMARY,
+    validator: (value: ButtonStatus): boolean => Object.values(ButtonStatus).includes(value),
   },
   /**
    * @type ButtonSize
@@ -36,7 +39,8 @@ export const buttonProps = {
    */
   size: {
     type: String as PropType<ButtonSize>,
-    default: "default",
+    default: ButtonSize.DEFAULT,
+    validator: (value: ButtonSize): boolean => Object.values(ButtonSize).includes(value),
   },
   /**
    * @type ButtonShape
@@ -45,7 +49,8 @@ export const buttonProps = {
    */
   shape: {
     type: String as PropType<ButtonShape>,
-    default: "square",
+    default: ButtonShape.SQUARE,
+    validator: (value: ButtonShape): boolean => Object.values(ButtonShape).includes(value),
   },
   /**
    * @type boolean
@@ -72,11 +77,11 @@ export const buttonProps = {
    */
   loadingIcon: {
     type: [Number, Object] as PropType<ButtonLoadingIcon>,
-    validator: (val: unknown) => {
+    validator: (val: unknown): boolean => {
       if (typeof val === "number") {
         return [1, 2, 3, 4, 5].includes(val);
       }
-      return typeof val === "object";
+      return typeof val === "object" && val !== null;
     },
     default: 1,
   },
@@ -95,8 +100,8 @@ export const buttonProps = {
    * @default null
    */
   icon: {
-    type: Object as PropType<ButtonIcon>,
-    default: () => null,
+    type: Object as PropType<ButtonIcon | null>,
+    default: null,
   },
   /**
    * @type [Number, String]

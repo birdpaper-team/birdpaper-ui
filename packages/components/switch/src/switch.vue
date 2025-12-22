@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
-import { computed, ref } from "vue";
+import { computed, ref, Transition } from "vue";
 import { switchProps, SwitchProps } from "./props";
 import { SwitchValue } from "./types";
 import { IconLoaderLine } from "birdpaper-icon";

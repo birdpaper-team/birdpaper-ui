@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "jsxFactory": "h",
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "paths": {
+      "@birdpaper-ui/*": ["packages/*"]
+    }
+  },
+  "include": ["packages/**/*", "docs/**/*"],
+  "exclude": ["node_modules", "dist"]
+}

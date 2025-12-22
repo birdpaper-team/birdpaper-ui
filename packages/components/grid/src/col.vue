@@ -8,6 +8,7 @@
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { computed } from "vue";
 import { ColProps, colProps } from "./props";
+import { ColResponsive } from "./types";
 
 defineOptions({ name: "Col" });
 const { clsBlockName } = useNamespace("col");
@@ -23,16 +24,18 @@ const cls = computed(() => {
 
   for (let i = 0; i < responsive.length; i++) {
     const item = responsive[i];
-    if (!props[item]) continue;
+    const responsiveProp = props[item as keyof ColProps];
+    if (!responsiveProp) continue;
 
-    if (typeof props[item] === "number") {
-      className.push(`${clsBlockName}-${item}-${props[item]}`);
+    if (typeof responsiveProp === "number") {
+      className.push(`${clsBlockName}-${item}-${responsiveProp}`);
       continue;
     }
 
-    if (typeof props[item] === "object") {
-      props[item]?.span && className.push(`${clsBlockName}-${item}-${props[item]?.span}`);
-      props[item]?.offset && className.push(`${clsBlockName}-${item}-offset-${props[item]?.offset}`);
+    if (typeof responsiveProp === "object") {
+      const responsiveObj = responsiveProp as ColResponsive & { span?: number; offset?: number };
+      responsiveObj?.span && className.push(`${clsBlockName}-${item}-${responsiveObj.span}`);
+      responsiveObj?.offset && className.push(`${clsBlockName}-${item}-offset-${responsiveObj.offset}`);
     }
   }
 

@@ -11,10 +11,10 @@
     <bp-input-tag
       v-if="multiple"
       v-model="(labelModel as string[])"
-      :size
+      :size="size"
       :placeholder="labelModel.length === 0 ? placeholder : ''"
-      :max-tag-count
-      :disabled
+      :max-tag-count="maxTagCount"
+      :disabled="disabled"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
     ></bp-input-tag>
@@ -23,9 +23,9 @@
       v-else
       v-model="(labelModel as any)"
       readonly
-      :size
-      :disabled
-      :placeholder
+      :size="size"
+      :disabled="disabled"
+      :placeholder="placeholder"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
     >
@@ -152,19 +152,20 @@ watchEffect(() => {
       return;
     }
 
-    let valueMap = {};
+    const valueMap: Record<string, string> = {};
     for (const item of children) {
-      valueMap[item.props?.value] = item.props?.label || item?.children?.["default"]?.()[0].children;
+      valueMap[item.props?.value as string] =
+        (item.props?.label as string) || item?.children?.["default"]?.()[0].children;
     }
     if (!props.multiple) {
-      labelModel.value = valueMap[model.value as string] || model.value;
+      labelModel.value = valueMap[model.value as string] || String(model.value);
       return;
     }
 
     if (Array.isArray(model.value)) {
       labelModel.value = model.value
         .filter((item): item is string | number => typeof item === "string" || typeof item === "number")
-        .map((item) => valueMap[item]);
+        .map((item) => valueMap[item as string]);
     } else {
       labelModel.value = [];
     }

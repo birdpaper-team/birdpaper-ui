@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "jsx": "react",
-    "jsxFactory": "h",
+    "jsx": "preserve",
     "outDir": "dist",
     "target": "es2018",
     "module": "esnext",
@@ -10,7 +9,15 @@
     "sourceMap": false,
     "noImplicitAny": false,
     "allowJs": false,
-    "strict": true,
+    "strict": false,
+    "strictNullChecks": false,
+    "strictFunctionTypes": false,
+    "strictBindCallApply": false,
+    "strictPropertyInitialization": false,
+    "noImplicitReturns": false,
+    "noFallthroughCasesInSwitch": false,
+    "noUncheckedIndexedAccess": false,
+    "exactOptionalPropertyTypes": false,
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -20,9 +27,11 @@
     "paths": {
       "@birdpaper-ui/*": ["packages/*"]
     },
+    "typeRoots": ["./node_modules/@types", "./jsx-types.d.ts"]
   },
   "include": [
     "packages/**/*",
+    "jsx-types.d.ts"
   ],
   "exclude": ["node_modules", "dist", "**/*.js"]
 }

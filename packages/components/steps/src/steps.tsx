@@ -1,6 +1,6 @@
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
 import { useNamespace } from "@birdpaper-ui/hooks/src/use-namespace";
-import { defineComponent, Fragment, h, Comment, mergeProps, PropType } from "vue";
+import { defineComponent, Fragment, h, Comment, mergeProps, PropType, VNode } from "vue";
 import { get } from "radash";
 
 export default defineComponent({
@@ -33,7 +33,7 @@ export default defineComponent({
 
       return (
         <div class={[clsBlockName, { [`${clsBlockName}-${props.type}`]: props.type }]}>
-          {children.map((child, index) => {
+          {children.map((child: VNode, index: number) => {
             const step = Object.assign({}, child);
 
             const isFinished = props.modelValue > index;
@@ -43,13 +43,11 @@ export default defineComponent({
             const childProps = { index, status, ...props };
             step.props = child.props ? mergeProps(child.props, childProps) : childProps;
 
-            return (
-              <Fragment key={child.key ?? `item-${index}`}>
-                <div class={[`${clsBlockName}-item`, `${itemClsBlockName}-${status}`, { "hide-line": props.hideLine }]}>
-                  {h(step, {})}
-                </div>
-              </Fragment>
-            );
+            return h(Fragment, { key: child.key ?? `item-${index}` }, [
+              <div class={[`${clsBlockName}-item`, `${itemClsBlockName}-${status}`, { "hide-line": props.hideLine }]}>
+                {h(step, {})}
+              </div>
+            ]);
           })}
         </div>
       );

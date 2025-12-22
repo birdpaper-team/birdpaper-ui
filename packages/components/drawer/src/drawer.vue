@@ -1,10 +1,10 @@
 <template>
   <teleport to="body">
-    <transition name="modal-fade">
+    <Transition name="modal-fade">
       <div v-show="model" :class="`${clsBlockName}-wrapper`" @click="handleMaskClick"></div>
-    </transition>
+    </Transition>
 
-    <transition :name="`slide-${placement}`">
+    <Transition :name="`slide-${placement}`">
       <div
         ref="drawerRef"
         v-show="model"
@@ -31,7 +31,7 @@
           </slot>
         </div>
       </div>
-    </transition>
+    </Transition>
   </teleport>
 </template>
 
@@ -39,7 +39,7 @@
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { DrawerProps, drawerProps } from "./props";
 import { useScrollLock } from "@vueuse/core";
-import { computed, onMounted, reactive, ref, watch } from "vue";
+import { computed, onMounted, reactive, ref, watch, Transition } from "vue";
 
 defineOptions({ name: "Drawer" });
 const { clsBlockName } = useNamespace("drawer");

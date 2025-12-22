@@ -1,31 +1,21 @@
-import { resolve } from "node:path";
-import { defineConfig } from "vitest/config";
-import vue from "@vitejs/plugin-vue";
-import vueJsx from "@vitejs/plugin-vue-jsx";
+import { defineConfig } from 'vitest/config';
+import vue from '@vitejs/plugin-vue';
+import { resolve } from 'path';
 
 export default defineConfig({
-  plugins: [vue(), vueJsx()],
+  plugins: [vue()],
   resolve: {
-    alias: [
-      {
-        find: /^@birdpaper-ui\/(hooks|themes)/,
-        replacement: resolve(__dirname, "packages/$1"),
-      },
-    ],
-  },
-  optimizeDeps: {
-    include: ["@birdpaper-ui/hooks", "@birdpaper-ui/theme"],
+    alias: {
+      '@': resolve(__dirname, 'packages'),
+      '@birdpaper-ui/components': resolve(__dirname, 'packages/components'),
+      '@birdpaper-ui/hooks': resolve(__dirname, 'packages/hooks'),
+      '@birdpaper-ui/theme': resolve(__dirname, 'packages/theme'),
+      'birdpaper-icon': resolve(__dirname, 'node_modules/birdpaper-icon'),
+    },
   },
   test: {
     globals: true,
-    include: ["**/__tests__/*.test.{ts,tsx}"],
-    coverage: {
-      provider: "v8",
-      include: ["**/__tests__/*.test.{ts,tsx}"],
-      reporter: ["text", "html", "clover", "json"],
-    },
-    environment: "happy-dom",
-    clearMocks: true,
-    testTimeout: 10000,
+    environment: 'happy-dom',
+    setupFiles: [],
   },
 });

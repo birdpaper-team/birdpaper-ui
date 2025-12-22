@@ -3,16 +3,16 @@ import { getPercentNumber } from "@birdpaper-ui/components/utils/helper";
 /**
  * 将 HSLA 颜色值字符串转换为 HEX 颜色字符串
  * @param hsla - HSLA 颜色值字符串，例如 "hsla(360, 100%, 50%, 1)"
- * @returns 如果是有效的 HSLA 字符串，返回 HEX 颜色字符串；否则返回 null
+ * @returns 如果是有效的 HSLA 字符串，返回 HEX 颜色字符串；否则返回默认值
  */
 export const hslaToHex = (hsla: string): string => {
   const match = hsla.match(/hsla?\((\d+(\.\d+)?),\s*(\d+(\.\d+)?)%,\s*(\d+(\.\d+)?)%,?\s*(\d+(\.\d+)?)?\)/);
   if (!match) return "FF0000";
 
-  const h = parseFloat(match[1]) / 360;
-  const s = parseFloat(match[3]) / 100;
-  const l = parseFloat(match[5]) / 100;
-  const a = match[7] !== undefined ? parseFloat(match[7]) : 1; // 如果没有透明度值，默认为 1
+  const h = parseFloat(match[1] || "0") / 360;
+  const s = parseFloat(match[3] || "0") / 100;
+  const l = parseFloat(match[5] || "0") / 100;
+  const a = match[7] !== undefined ? parseFloat(match[7] || "0") : 1; // 如果没有透明度值，默认为 1
   let r, g, b;
 
   if (s === 0) {
@@ -50,7 +50,7 @@ export const hslaToHex = (hsla: string): string => {
 /**
  * 将 HEX 颜色字符串转换为 HSLA 颜色值
  * @param hex - HEX 颜色字符串，例如 "#RRGGBB" 或 "#RRGGBBAA"
- * @returns 如果是有效的 HEX 字符串，返回 HSLA 值的对象；否则返回 null
+ * @returns 如果是有效的 HEX 字符串，返回 HSLA 值的对象；否则返回默认值
  */
 export const hexToHsla = (hex: string): { h: number; s: number; l: number; a: number } => {
   // 验证 HEX 格式
@@ -178,7 +178,7 @@ export const hslaToHsv = (h: number, s: number, l: number): { h: number; s: numb
  */
 export const getSliderPosition = (ev: MouseEvent, sliderBar: HTMLElement, pointOffset: number = 0) => {
   const rect = sliderBar.getBoundingClientRect();
-  const percent = getPercentNumber(ev.clientX - rect.x - pointOffset, rect.width, pointOffset);
+  const percent = getPercentNumber(ev.clientX - rect.left - pointOffset, rect.width, pointOffset);
   const x = percent * rect.width;
   const v = (x + pointOffset) / rect.width;
 
@@ -194,8 +194,8 @@ export const getSliderPosition = (ev: MouseEvent, sliderBar: HTMLElement, pointO
  */
 export const getPickerPosition = (ev: MouseEvent, pickerPanel: HTMLElement, pointOffset: number = 0) => {
   const rect = pickerPanel.getBoundingClientRect();
-  const x = getPercentNumber(ev.clientX - rect.x - 6, rect.width, pointOffset) * rect.width;
-  const y = getPercentNumber(ev.clientY - rect.y - 6, rect.height, pointOffset) * rect.height;
+  const x = getPercentNumber(ev.clientX - rect.left - 6, rect.width, pointOffset) * rect.width;
+  const y = getPercentNumber(ev.clientY - rect.top - 6, rect.height, pointOffset) * rect.height;
   const s = ((x + pointOffset) / rect.width) * 100; // 计算饱和度，范围为 0 到 100
   const v = 1 - (y + pointOffset) / rect.height; // 计算亮度，范围为 0 到 1
 
@@ -206,7 +206,7 @@ export const getPickerPosition = (ev: MouseEvent, pickerPanel: HTMLElement, poin
 export function hexToRgb(hex: string): [number, number, number] {
   hex = hex.replace(/^#/, "");
   if (hex.length === 3) {
-    hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+    hex = (hex[0] || "0") + (hex[0] || "0") + (hex[1] || "0") + (hex[1] || "0") + (hex[2] || "0") + (hex[2] || "0");
   }
   const r = parseInt(hex.slice(0, 2), 16);
   const g = parseInt(hex.slice(2, 4), 16);
@@ -218,12 +218,12 @@ export function hexToRgb(hex: string): [number, number, number] {
 export function rgbToHsla(rgb: string): { h: number; s: number; l: number; a: number } {
   const match = rgb.match(/^rgba?\((\d+),\s*(\d+),\s*(\d+)(?:,\s*(\d+(\.\d+)?))?\)$/);
   if (!match) {
-    throw new Error("Invalid RGB(A) format");
+    return { h: 0, s: 100, l: 50, a: 1 };
   }
 
-  const r = parseInt(match[1], 10) / 255;
-  const g = parseInt(match[2], 10) / 255;
-  const b = parseInt(match[3], 10) / 255;
+  const r = parseInt(match[1] || "0", 10) / 255;
+  const g = parseInt(match[2] || "0", 10) / 255;
+  const b = parseInt(match[3] || "0", 10) / 255;
   const a = match[4] !== undefined ? parseFloat(match[4]) : 1;
 
   const max = Math.max(r, g, b);
@@ -288,12 +288,12 @@ export function hslToRgb(h: number, s: number, l: number): [number, number, numb
   return [r, g, b];
 }
 
-// // RGB 转十六进制
-export function rgbToHex(r: number, g: number, b: number) {
-  const toHex = (x) => {
+// RGB 转十六进制
+export function rgbToHex(r: number, g: number, b: number): string {
+  const toHex = (x: number): string => {
     x = Math.round(x);
-    const hex = x.toString(16).padStart(2, "0");
-    return hex.length === 1 ? "0" + hex : hex;
+    const hex = x.toString(16).padStart(2, "0").toLocaleUpperCase();
+    return hex;
   };
   return `${toHex(r)}${toHex(g)}${toHex(b)}`;
 }

@@ -1,4 +1,4 @@
-import { Fragment, defineComponent, Comment, mergeProps, h, VNodeProps } from "vue";
+import { Fragment, defineComponent, Comment, mergeProps, h, VNodeProps, VNode } from "vue";
 import { TableColumnProps } from "../props";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
@@ -26,14 +26,12 @@ export default defineComponent({
               <tr key={rowIndex}>
                 <col-group columns={props.cols}></col-group>
 
-                {children.map((child, childIndex) => {
-                  const props = child?.props as TableColumnProps;
+                {children.map((child: VNode, childIndex: number) => {
+                  const columnProps = child?.props as TableColumnProps;
                   const column = Object.assign({}, child);
                   column.props = mergeProps(child.props as VNodeProps, { record, rowIndex });
 
-                  return (
-                    <Fragment key={`table-column-${rowIndex}-${props?.dataIndex || childIndex}`}>{column}</Fragment>
-                  );
+                  return h(Fragment, { key: `table-column-${rowIndex}-${columnProps?.dataIndex || childIndex}` }, [column]);
                 })}
               </tr>
             );

@@ -67,7 +67,7 @@ export const useTableCore = () => {
   /**
    * @description Reset data.
    */
-  const resetColumns = () => {
+  const resetColumns = (): void => {
     _fixed_width = 0;
     _remainder_col = cols.length;
     _min_width_list = [];
@@ -77,10 +77,13 @@ export const useTableCore = () => {
    * @description Init table columns width.
    * @returns columns
    */
-  const initColumnsWidth = () => {
+  const initColumnsWidth = (): ColumnsItem[] => {
     for (let i = 0; i < cols.length; i++) {
-      const { width } = cols[i];
-      const minWidth = cols[i]["minWidth"] || cols[i]["min-width"];
+      const col = cols[i];
+      if (!col) continue;
+      
+      const { width } = col;
+      const minWidth = col.minWidth;
 
       // 如果含有自定义的宽和最小宽，则需要单独处理这些列，使其不参与剩余宽度自适应当中
       if (width) {
@@ -97,7 +100,10 @@ export const useTableCore = () => {
 
     columns.value = [];
     for (let i = 0; i < cols.length; i++) {
-      columns.value.push({ ...cols[i], width: _col_width_list[i] });
+      const col = cols[i];
+      if (!col) continue;
+      
+      columns.value.push({ ...col, width: _col_width_list[i] || 0 });
     }
     return columns.value;
   };
@@ -106,12 +112,16 @@ export const useTableCore = () => {
    * @description 获取各列宽度，并组成一个数组
    * @returns number[]
    */
-  function getWidthList() {
+  function getWidthList(): number[] {
     let width_list: number[] = [];
     let adapt_width: number = getAdaptWidth();
 
     for (let i = 0; i < cols.length; i++) {
-      const { width, minWidth } = cols[i];
+      const col = cols[i];
+      if (!col) continue;
+      
+      const { width } = col;
+      const minWidth = col.minWidth;
 
       if (width) {
         width_list.push(width);
@@ -132,12 +142,15 @@ export const useTableCore = () => {
   }
 
   /**
-   * @description 根据表格实际宽度、已固定的列宽、以及剩余自适应列数，计算得出剩余的自适应列宽
+   * @description 获取自适应列宽
    * @returns number
    */
   function getAdaptWidth(): number {
-    let width = (table_width.value - _fixed_width) / _remainder_col;
-    return Number(Number(width).toFixed(2));
+    let width: number = 0;
+    if (_remainder_col > 0) {
+      width = Math.floor((table_width.value - _fixed_width) / _remainder_col);
+    }
+    return width;
   }
 
   return {
@@ -177,9 +190,9 @@ export function getScrollBarWidth(): number {
 // 规范化列定义（不改变你现有类型导出，新增一个供内部布局使用）
 export interface NormalizedColumn {
   key: string;
-  width?: number;
-  minWidth?: number;
-  maxWidth?: number;
+  width: number | undefined;
+  minWidth: number;
+  maxWidth: number | undefined;
   realWidth: number;
   align?: "left" | "center" | "right";
   // ...existing fields...
@@ -243,7 +256,7 @@ export function computeColumnWidths(
   let i = 0;
   while (leftover > 0 && flex.length > 0) {
     const col = flex[i % flex.length];
-    if (typeof col.maxWidth !== "number" || col.realWidth < col.maxWidth) {
+    if (col && (typeof col.maxWidth !== "number" || col.realWidth < col.maxWidth)) {
       col.realWidth += 1;
       leftover -= 1;
     } else {

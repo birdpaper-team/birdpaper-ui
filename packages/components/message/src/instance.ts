@@ -28,18 +28,19 @@ class MessageManager {
    * @param {MessageItem} config
    * @returns
    */
-  add = (config: MessageItem) => {
+  add = (config: MessageItem): { remove: () => void } => {
     const id = config.id ?? `_bp_message_${uid(10)}`;
     this.mask.setAttribute("class", `${this.clsName}-mask ${this.clsName}-${config.position || "top"}`);
 
     const message: MessageItem = reactive({ ...config, id });
 
     // Check whether the message instance already exists. If has, update the message config, or push new one.
-    const isExist = this.list.value.find((item, index) => {
+    const isExist = this.list.value.some((item, index) => {
       if (item.id === id) {
         this.list.value[index] = config;
         return true;
       }
+      return false;
     });
 
     if (!isExist) {
@@ -61,17 +62,15 @@ class MessageManager {
    * 移除消息提示
    * @param {string} id 消息id
    */
-  remove = (id: string) => {
-    this.list.value.find((item, index) => {
-      if (item.id === id) {
-        this.list.value.splice(index, 1);
-        return true;
-      }
-    });
+  remove = (id: string): void => {
+    const index = this.list.value.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      this.list.value.splice(index, 1);
+    }
   };
 
   /** 清除消息列表 */
-  clear = () => {
+  clear = (): void => {
     this.list.value.map((item) => {
       this.remove(item.id);
     });

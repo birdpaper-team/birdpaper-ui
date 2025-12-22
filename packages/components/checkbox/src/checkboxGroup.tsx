@@ -1,4 +1,4 @@
-import { PropType, Fragment, mergeProps, h, computed } from "vue";
+import { PropType, Fragment, mergeProps, h, computed, VNode } from "vue";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { defineComponent } from "vue";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
@@ -59,20 +59,18 @@ export default defineComponent({
 
       return (
         <div class={cls.value}>
-          {children.map((child, index) => {
+          {children.map((child: VNode, index: number) => {
             const checkbox = Object.assign({}, child);
             checkbox.props = child.props && mergeProps(child.props, { ...props });
 
-            return (
-              <Fragment key={child.key ?? `item-${index}`}>
-                {h(checkbox, {
-                  modelValue: props.modelValue,
-                  onChange() {
-                    emit("change", props.modelValue);
-                  },
-                })}
-              </Fragment>
-            );
+            return h(Fragment, { key: child.key ?? `item-${index}` }, [
+              h(checkbox, {
+                modelValue: props.modelValue,
+                onChange() {
+                  emit("change", props.modelValue);
+                },
+              })
+            ]);
           })}
         </div>
       );
