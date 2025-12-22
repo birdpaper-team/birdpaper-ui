@@ -120,8 +120,7 @@
 }
 
 .#{$B}-group-button {
-  @include css-var-from-global-rgb(("radio", "radio-button-bg"), ("gray", "1"));
-  @include css-var-from-global-rgb(("radio", "radio-button-border"), ("gray", "2"));
+  @include css-var-from-global-rgb(("radio", "radio-button-bg"), ("gray", "2"));
   background-color: rgba(getCssVar("radio", "radio-button-bg"), 1);
 
   .#{$B} {
@@ -143,6 +142,7 @@
 
     &-label {
       margin-left: 0px;
+      font-weight: 500;
     }
 
     &-check {
@@ -166,7 +166,7 @@
       padding: 0 calc(getCssVar("size-padding", $size) / 2);
       height: calc(getCssVar("size-height", $size) - calc(getCssVar("size-padding", $size) / 2));
       line-height: calc(getCssVar("size-height", $size) - calc(getCssVar("size-padding", $size) / 2));
-      border-radius: calc(getCssVar("size-border-radius", $size) / 2);
+      border-radius: calc(getCssVar("size-border-radius", $size) / 1.6);
       font-size: getCssVar("size-font-size", $size);
     }
   }

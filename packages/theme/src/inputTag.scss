@@ -8,7 +8,7 @@
 @include b(input-tag) {
   min-height: $defaultHeight;
   height: fit-content !important;
-  padding: 3.5px 4px;
+  padding: 3px 4px;
 
   &-content {
     @include flex(row, flex-start, center) {
