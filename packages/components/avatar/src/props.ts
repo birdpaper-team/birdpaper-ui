@@ -1,5 +1,6 @@
 import { ExtractPropTypes, PropType } from "vue";
 import { AvatarShape, AvatarSize } from "./types";
+import { ImageFit } from "@birdpaper-ui/birdpaper-ui";
 
 export const avatarProps = {
   /**
@@ -24,7 +25,7 @@ export const avatarProps = {
    * @default "cover"
    */
   objectFit: {
-    type: String,
+    type: String as PropType<ImageFit>,
     default: "cover",
   },
   /**
