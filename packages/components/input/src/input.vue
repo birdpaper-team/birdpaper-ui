@@ -45,7 +45,7 @@
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { InputProps, inputProps } from "./props";
-import { computed, useSlots, ref, nextTick, onMounted } from "vue";
+import { computed, useSlots, ref, nextTick, onMounted, shallowRef, triggerRef, watch } from "vue";
 import type { Component } from "vue";
 import { IconCloseLine, IconEyeFill, IconEyeCloseFill } from "birdpaper-icon";
 import { InputType } from "./types";
@@ -53,9 +53,15 @@ import { InputType } from "./types";
 defineOptions({ name: "Input" });
 const { clsBlockName } = useNamespace("input");
 
-const model = defineModel<string | number>({
-  default: "",
+const modelValue = defineModel<string | number>({ default: "" });
+const model = shallowRef(modelValue.value);
+
+// 监听外部modelValue变化，同步到内部model
+watch(modelValue, (newValue) => {
+  model.value = newValue;
+  triggerRef(model);
 });
+
 const props: InputProps = defineProps(inputProps);
 const emits = defineEmits(["input", "focus", "blur", "keypress", "keyup", "enter"]);
 const slots = useSlots();
@@ -119,6 +125,8 @@ const triggerEye = () => {
  */
 const clear = (autoFocus: boolean = false) => {
   model.value = "";
+  modelValue.value = "";
+  triggerRef(model);
   // oxlint-disable-next-line no-unused-expressions
   autoFocus && nextTick(() => focus());
 };
@@ -137,8 +145,11 @@ const onEnter = (e: Event) => {
 };
 
 const onInput = (e: Event) => {
-  model.value = (e.target as HTMLInputElement).value;
-  emits("input", { e, value: model.value });
+  const value = (e.target as HTMLInputElement).value;
+  model.value = value;
+  modelValue.value = value;
+  triggerRef(model);
+  emits("input", { e, value });
 };
 
 // Auto focus when component mounted
