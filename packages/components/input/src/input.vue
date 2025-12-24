@@ -14,7 +14,6 @@
       :disabled
       :readonly
       :placeholder
-      :maxlength
       :type="inpType"
       :value="model"
       :spellcheck="false"
@@ -48,7 +47,7 @@ import { InputProps, inputProps } from "./props";
 import { computed, useSlots, ref, nextTick, onMounted, shallowRef, triggerRef, watch } from "vue";
 import type { Component } from "vue";
 import { IconCloseLine, IconEyeFill, IconEyeCloseFill } from "birdpaper-icon";
-import { InputType } from "./types";
+import { InputType, WordCountMode } from "./types";
 
 defineOptions({ name: "Input" });
 const { clsBlockName } = useNamespace("input");
@@ -94,10 +93,78 @@ const innerActionIcon = computed<Component | null>(() => {
 
   return null;
 });
+
+/**
+ * 计算中英文字符数量
+ * @param value 输入值
+ * @returns { chinese: number, english: number } 中英文字符数量
+ */
+const countChineseEnglish = (value: string) => {
+  const chineseRegex = /[\u4e00-\u9fa5]/g;
+  const englishRegex = /[a-zA-Z]/g;
+  
+  const chineseMatches = value.match(chineseRegex) || [];
+  const englishMatches = value.match(englishRegex) || [];
+  
+  return {
+    chinese: chineseMatches.length,
+    english: englishMatches.length
+  };
+};
+
+/**
+ * 根据模式计算字数
+ * @param value 输入值
+ * @returns 字数
+ */
+const calculateWordCount = (value: string): number => {
+  const stringValue = String(value || "");
+  
+  switch (props.wordCountMode) {
+    case "chinese-english": {
+      const { chinese, english } = countChineseEnglish(stringValue);
+      return chinese + english;
+    }
+    case "custom": {
+      if (props.customWordCount && typeof props.customWordCount === 'function') {
+        return props.customWordCount(stringValue);
+      }
+      // 如果自定义函数无效，回退到默认模式
+      return stringValue.length;
+    }
+    case "default":
+    default:
+      return stringValue.length;
+  }
+};
+
+/**
+ * 格式化字数统计显示内容
+ * @returns 格式化后的字数统计字符串
+ */
+const formatWordCountDisplay = (): string => {
+  const stringValue = String(model.value || "");
+  
+  if (props.wordCountMode === "chinese-english") {
+    const { chinese, english } = countChineseEnglish(stringValue);
+    const total = chinese + english;
+    if (props.maxlength) {
+      return `中${chinese}英${english}/${props.maxlength}`;
+    }
+    return `中${chinese}英${english}`;
+  }
+  
+  const count = calculateWordCount(stringValue);
+  if (props.maxlength) {
+    return `${count}/${props.maxlength}`;
+  }
+  return `${count}`;
+};
+
 /** Inner suffix content. */
 const innerSuffixContent = computed<string | Component>(() => {
-  if (props.maxlength && props.showLimit) {
-    return `${String(model.value).length}/${props.maxlength}`;
+  if (props.showLimit) {
+    return formatWordCountDisplay();
   }
   return "";
 });

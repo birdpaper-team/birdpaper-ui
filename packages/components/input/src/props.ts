@@ -1,5 +1,5 @@
 import { ExtractPropTypes, PropType } from "vue";
-import { InputSize, InputType } from "./types";
+import { InputSize, InputType, WordCountMode, CustomWordCountFunction } from "./types";
 
 export const inputProps = {
   /**
@@ -61,6 +61,22 @@ export const inputProps = {
   showLimit: {
     type: Boolean,
     default: false,
+  },
+  /**
+   * @type WordCountMode
+   * @description Word count mode.
+   * @default default
+   */
+  wordCountMode: {
+    type: String as PropType<WordCountMode>,
+    default: "default",
+  },
+  /**
+   * @type CustomWordCountFunction
+   * @description Custom word count function, only used when wordCountMode is 'custom'.
+   */
+  customWordCount: {
+    type: Function as PropType<CustomWordCountFunction>,
   },
   /**
    * @type boolean
