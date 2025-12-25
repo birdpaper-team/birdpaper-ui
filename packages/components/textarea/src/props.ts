@@ -1,4 +1,4 @@
-import { InputSize } from "@birdpaper-ui/components/input/src/types";
+import { TextareaSize, WordCountMode, CustomWordCountFunction } from "./types";
 import { ExtractPropTypes, PropType } from "vue";
 
 export const textareaProps = {
@@ -27,12 +27,12 @@ export const textareaProps = {
     default: "",
   },
   /**
-   * @type InputSize
+   * @type TextareaSize
    * @description Input sizes.
    * @default default
    */
   size: {
-    type: String as PropType<InputSize>,
+    type: String as PropType<TextareaSize>,
     default: "default",
   },
   /**
@@ -88,6 +88,24 @@ export const textareaProps = {
   rows: {
     type: Number,
     default: 3,
+  },
+  /**
+   * @type WordCountMode
+   * @description Word count mode.
+   * @default default
+   */
+  wordCountMode: {
+    type: String as PropType<WordCountMode>,
+    default: "default",
+  },
+  /**
+   * @type CustomWordCountFunction
+   * @description Custom word count function.
+   * @default null
+   */
+  customWordCount: {
+    type: Function as PropType<CustomWordCountFunction>,
+    default: null,
   },
 };
 

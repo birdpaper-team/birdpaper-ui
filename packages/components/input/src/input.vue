@@ -213,6 +213,77 @@ const onEnter = (e: Event) => {
 
 const onInput = (e: Event) => {
   const value = (e.target as HTMLInputElement).value;
+  
+  // 如果设置了最大长度限制，检查输入是否超出限制
+  if (props.maxlength) {
+    const currentCount = calculateWordCount(value);
+    
+    // 如果当前字数超过最大限制，截断输入
+    if (currentCount > props.maxlength) {
+      let truncatedValue = value;
+      
+      // 根据不同的计数模式进行截断处理
+      if (props.wordCountMode === "chinese-english") {
+        // 中英文分别计数模式，需要精确截断
+        let chineseCount = 0;
+        let englishCount = 0;
+        let result = "";
+        
+        for (let i = 0; i < value.length; i++) {
+          const char = value[i];
+          const isChinese = /[\u4e00-\u9fa5]/.test(char);
+          const isEnglish = /[a-zA-Z]/.test(char);
+          
+          if (isChinese) {
+            chineseCount++;
+          } else if (isEnglish) {
+            englishCount++;
+          }
+          
+          const total = chineseCount + englishCount;
+          
+          if (total > props.maxlength) {
+            break;
+          }
+          
+          result += char;
+        }
+        
+        truncatedValue = result;
+      } else if (props.wordCountMode === "custom" && props.customWordCount) {
+        let left = 0;
+        let right = value.length;
+        let bestLength = 0;
+        
+        while (left <= right) {
+          const mid = Math.floor((left + right) / 2);
+          const substring = value.substring(0, mid);
+          const count = props.customWordCount(substring);
+          
+          if (count <= props.maxlength) {
+            bestLength = mid;
+            left = mid + 1;
+          } else {
+            right = mid - 1;
+          }
+        }
+        
+        truncatedValue = value.substring(0, bestLength);
+      } else {
+        // 默认模式，按字符长度截断
+        truncatedValue = value.substring(0, props.maxlength);
+      }
+      
+      // 更新输入框的值，防止用户看到超出限制的字符
+      (e.target as HTMLInputElement).value = truncatedValue;
+      model.value = truncatedValue;
+      modelValue.value = truncatedValue;
+      triggerRef(model);
+      emits("input", { e, value: truncatedValue });
+      return;
+    }
+  }
+  
   model.value = value;
   modelValue.value = value;
   triggerRef(model);
