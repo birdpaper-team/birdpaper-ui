@@ -47,6 +47,13 @@ export const modalProps = {
   },
   /**
    * @type string
+   * @description Modal body class.
+   */
+  bodyClass: {
+    type: String,
+  },
+  /**
+   * @type string
    * @description Modal border radius.
    * @default "8px"
    */

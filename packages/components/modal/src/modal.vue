@@ -34,7 +34,7 @@
               </div>
             </div>
 
-            <div :class="`${clsBlockName}-body`">
+            <div :class="[`${clsBlockName}-body`, bodyClass]">
               <slot>
                 {{ content }}
               </slot>
