@@ -46,6 +46,13 @@ export const ButtonSize = {
 
 export type ButtonSize = typeof ButtonSize[keyof typeof ButtonSize];
 
+export const ButtonIconPosition = {
+  LEFT: "left",
+  RIGHT: "right"
+} as const;
+
+export type ButtonIconPosition = typeof ButtonIconPosition[keyof typeof ButtonIconPosition];
+
 /**
  * @description 按钮图标 Button icon.
  */

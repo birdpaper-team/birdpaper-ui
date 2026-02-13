@@ -1,5 +1,14 @@
 import { ExtractPropTypes, PropType } from "vue";
-import { ButtonIcon, ButtonLoadingIcon, ButtonNavtiveType, ButtonShape, ButtonSize, ButtonStatus, ButtonType } from "./types";
+import {
+  ButtonIcon,
+  ButtonLoadingIcon,
+  ButtonNavtiveType,
+  ButtonShape,
+  ButtonSize,
+  ButtonStatus,
+  ButtonType,
+  ButtonIconPosition,
+} from "./types";
 
 export const buttonProps = {
   /**
@@ -111,6 +120,16 @@ export const buttonProps = {
   iconGap: {
     type: [Number, String] as PropType<number | string>,
     default: undefined,
+  },
+  /**
+   * @type ButtonIconPosition
+   * @description Button icon position.
+   * @default left
+   */
+  iconPosition: {
+    type: String as PropType<ButtonIconPosition>,
+    default: ButtonIconPosition.LEFT,
+    validator: (value: ButtonIconPosition): boolean => Object.values(ButtonIconPosition).includes(value),
   },
 } as const;
 

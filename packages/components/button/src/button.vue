@@ -1,11 +1,14 @@
 <template>
   <button :class="cls" :type="attrType" :disabled="isDisabled" @click="onClick" @keydown="onKeydown">
-    <div v-if="btnIcon || loading" :class="iconCls">
+    <div v-if="showIcon && isIconLeft" :class="iconCls">
       <component :is="btnIcon" :class="iconInnerCls" size="14"></component>
     </div>
     <span v-if="hasDefaultSlot" :class="innerCls">
       <slot />
     </span>
+    <div v-if="showIcon && !isIconLeft" :class="iconCls">
+      <component :is="btnIcon" :class="iconInnerCls" size="14"></component>
+    </div>
   </button>
 </template>
 
@@ -15,7 +18,7 @@ import { ButtonProps, buttonProps } from "./props";
 import { IconLoaderLine, IconLoader2Line, IconLoader3Line, IconLoader4Line, IconLoader5Line } from "birdpaper-icon";
 import { computed, useSlots } from "vue";
 import type { Component } from "vue";
-import { ButtonShape } from "./types";
+import { ButtonShape, ButtonIconPosition } from "./types";
 
 defineOptions({ name: "Button" });
 const { clsBlockName } = useNamespace("button");
@@ -45,6 +48,9 @@ const btnIcon = computed<Component | null>(() => {
   return props.loadingIcon;
 });
 
+const showIcon = computed<boolean>(() => !!btnIcon.value || props.loading);
+const isIconLeft = computed<boolean>(() => props.iconPosition === ButtonIconPosition.LEFT);
+
 const cls = computed(() => [
   clsBlockName,
   `${clsBlockName}-${props.size}-${props.shape}`,
@@ -54,19 +60,25 @@ const cls = computed(() => [
 ]);
 const innerCls = computed(() => [
   `${clsBlockName}-inner`,
-  { "pl-4": props.loading && hasDefaultSlot.value }
+  {
+    "pl-4": props.loading && hasDefaultSlot.value && isIconLeft.value,
+    "pr-4": props.loading && hasDefaultSlot.value && !isIconLeft.value,
+  }
 ]);
 const iconCls = computed(() => {
   const classes = [
     "button-icon",
-    { "mr-0": props.loading && hasDefaultSlot.value }
+    {
+      "mr-0": props.loading && hasDefaultSlot.value && isIconLeft.value,
+      "ml-0": props.loading && hasDefaultSlot.value && !isIconLeft.value,
+    }
   ];
   
   if (hasDefaultSlot.value) {
     if (props.iconGap) {
-      classes.push(`mr-${props.iconGap}`);
+      classes.push(isIconLeft.value ? `mr-${props.iconGap}` : `ml-${props.iconGap}`);
     } else {
-      classes.push("mr-1");
+      classes.push(isIconLeft.value ? "mr-1" : "ml-1");
     }
   } else {
     classes.push("m-0");
