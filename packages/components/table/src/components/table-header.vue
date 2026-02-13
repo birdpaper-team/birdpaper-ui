@@ -1,8 +1,8 @@
 <template>
   <thead :class="[clsBlockName]">
     <tr>
-      <template v-for="item in list">
-        <th :class="thClass(item)">
+      <template v-for="(item, index) in list" :key="item.dataIndex || item.title || index">
+        <th :class="thClass(item, index)" :style="thStyle(index)">
           <template v-if="item.type === 'checkbox'">
             <bp-checkbox v-model:check="selectAllProxy" :indeterminate="props.indeterminate"></bp-checkbox>
           </template>
@@ -30,12 +30,35 @@ const emits = defineEmits<{
   (e: "select-all", value: boolean): void;
 }>();
 
-const thClass = (item: ColumnsItem) => {
-  return {
+const thClass = (item: ColumnsItem, index: number) => {
+  const alignClass = {
     left: "text-align-left!",
     center: "text-align-center!",
     right: "text-align-right!",
   }[item.align || "left"];
+
+  const fixed = props.cols[index]?.fixed;
+  return [
+    alignClass,
+    fixed === "left" && `${clsBlockName}-fixed-left`,
+    fixed === "right" && `${clsBlockName}-fixed-right`,
+  ];
+};
+
+const thStyle = (index: number) => {
+  const column = props.cols[index] as any;
+  if (!column?.fixed) return undefined;
+
+  const style: Record<string, string | number> = {
+    position: "sticky",
+    zIndex: 4,
+    background: "var(--bp-gray-1)",
+  };
+
+  if (column.fixed === "left") style.left = `${column.fixedOffset || 0}px`;
+  if (column.fixed === "right") style.right = `${column.fixedOffset || 0}px`;
+
+  return style;
 };
 
 const selectAllProxy = computed<boolean>({

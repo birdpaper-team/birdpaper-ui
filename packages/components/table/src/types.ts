@@ -2,8 +2,11 @@ export interface ColumnsItem {
   title?: string;
   type: "inner" | "radio" | "checkbox";
   dataIndex?: string;
-  width?: number;
-  minWidth?: number;
+  width?: number | string;
+  minWidth?: number | string;
+  maxWidth?: number | string;
+  fixed?: "left" | "right";
+  fixedOffset?: number;
   align: "left" | "center" | "right";
 }
 

@@ -1,5 +1,6 @@
 import { Component, ExtractPropTypes, PropType } from "vue";
 import { ColumnsItem, TableRowSelection, TableScroll } from "./types";
+import type { NormalizedColumn } from "./core";
 
 export const tableProps = {
   /**
@@ -106,6 +107,15 @@ export const tableHeaderProps = {
     default: () => [],
   },
   /**
+   * @type ColumnsItem[]
+   * @description Normalized columns for width/fixed rendering.
+   * @default []
+   */
+  cols: {
+    type: Array as PropType<NormalizedColumn[]>,
+    default: () => [],
+  },
+  /**
    * @type boolean
    * @description Header select-all checkbox state.
    * @default false
@@ -163,6 +173,18 @@ export const tableColumnProps = {
    * @description The col min width.
    */
   minWidth: { type: [Number, String] },
+  /**
+   * @type "left" | "right"
+   * @description Fixed column position.
+   */
+  fixed: {
+    type: String as PropType<"left" | "right">,
+  },
+  /**
+   * @type number
+   * @description Sticky offset for fixed column.
+   */
+  fixedOffset: { type: Number, default: 0 },
   /**
    * @type string
    * @description The col text align type.

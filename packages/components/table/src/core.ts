@@ -194,6 +194,8 @@ export interface NormalizedColumn {
   minWidth: number;
   maxWidth: number | undefined;
   realWidth: number;
+  fixed?: "left" | "right";
+  fixedOffset?: number;
   align?: "left" | "center" | "right";
   // ...existing fields...
 }
@@ -213,6 +215,8 @@ export function computeColumnWidths(
       minWidth: min,
       maxWidth: c.maxWidth,
       realWidth: w ?? min,
+      fixed: c.fixed,
+      fixedOffset: c.fixedOffset,
       align: c.align as any,
     };
   });

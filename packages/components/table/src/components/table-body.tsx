@@ -24,12 +24,16 @@ export default defineComponent({
           {props.data.map((record: any, rowIndex: number) => {
             return (
               <tr key={rowIndex}>
-                <col-group columns={props.cols}></col-group>
-
                 {children.map((child: VNode, childIndex: number) => {
                   const columnProps = child?.props as TableColumnProps;
+                  const colMeta = props.cols[childIndex] as any;
                   const column = Object.assign({}, child);
-                  column.props = mergeProps(child.props as VNodeProps, { record, rowIndex });
+                  column.props = mergeProps(child.props as VNodeProps, {
+                    record,
+                    rowIndex,
+                    fixed: colMeta?.fixed,
+                    fixedOffset: colMeta?.fixedOffset,
+                  });
 
                   return h(Fragment, { key: `table-column-${rowIndex}-${columnProps?.dataIndex || childIndex}` }, [column]);
                 })}

@@ -3,12 +3,13 @@
     <bp-spin :spinning="props.loading" :spin-icon="props.spinIcon" :description="props.description">
       <div :class="`${clsBlockName}-body-area`" :style="tableAreaStyle">
         <!-- 头部（不滚动） -->
-        <div :class="`${clsBlockName}-header-wrap`" ref="headerWrapRef">
+        <div :class="`${clsBlockName}-header-wrap`" ref="headerWrapRef" :style="headerWrapStyle">
           <table :class="`${clsBlockName}-header bp-table-fixed`" :style="tableStyle">
-            <colGroup :columns="layoutColumns" :gutter-width="gutterWidth" />
+            <colGroup :columns="displayColumns" :gutter-width="gutterWidth" />
             <tableHeader
               ref="tableHeaderRef"
               :list="columns"
+              :cols="displayColumns"
               :select-all="isAllSelected"
               :indeterminate="isIndeterminate"
               @select-all="onSelectAll"
@@ -19,11 +20,11 @@
         <!-- 内容（滚动） -->
         <div :class="`${clsBlockName}-body-wrap`" ref="bodyWrapRef" @scroll="onBodyScroll" :style="bodyWrapStyle">
           <table :class="`${clsBlockName}-body bp-table-fixed`" :style="tableStyle">
-            <colGroup :columns="layoutColumns" :gutter-width="gutterWidth" />
+            <colGroup :columns="displayColumns" :gutter-width="gutterWidth" />
 
             <tbody :class="`${clsBlockName}-body-tbody`" v-if="isEmpty">
               <tr>
-                <td :colspan="layoutColumns.length + (gutterWidth > 0 ? 1 : 0)">
+                <td :colspan="displayColumns.length + (gutterWidth > 0 ? 1 : 0)">
                   <slot name="empty"></slot>
                   <div :class="`${clsBlockName}-body-tbody-empty`" v-if="!slots.empty?.({})">
                     <bp-empty :content="props.emptyText"></bp-empty>
@@ -32,7 +33,7 @@
               </tr>
             </tbody>
 
-            <tableBody v-else :data="props.data" :row-key="props.rowKey" :cols="layoutColumns" :height="props.height">
+            <tableBody v-else :data="props.data" :row-key="props.rowKey" :cols="displayColumns" :height="props.height">
               <tableColumn align="center" v-if="!!props.rowSelection">
                 <template #cell="{ record }">
                   <bp-checkbox
@@ -97,6 +98,15 @@ const bodyWrapRef = ref<HTMLElement | null>(null);
 const layoutColumns = ref<NormalizedColumn[]>([]);
 const gutterWidth = ref(0);
 
+const parseNumber = (value: unknown): number | undefined => {
+  if (typeof value === "number" && isFinite(value)) return Number(value);
+  if (typeof value === "string") {
+    const parsed = Number(value);
+    if (isFinite(parsed)) return parsed;
+  }
+  return undefined;
+};
+
 function isFiniteNumber(v: any): v is number {
   return typeof v === "number" && isFinite(v);
 }
@@ -106,12 +116,64 @@ const buildRawColumns = () => {
   return (columns.value || []).map((c: any, i: number) => ({
     key: c.key ?? c.prop ?? String(i),
     prop: c.prop,
-    width: isFiniteNumber(c.width) ? Number(c.width) : undefined,
-    minWidth: isFiniteNumber(c.minWidth) ? Number(c.minWidth) : undefined,
-    maxWidth: isFiniteNumber(c.maxWidth) ? Number(c.maxWidth) : undefined,
+    width: parseNumber(c.width),
+    minWidth: parseNumber(c.minWidth),
+    maxWidth: parseNumber(c.maxWidth),
+    fixed: c.fixed,
     align: c.align,
   }));
 };
+
+const normalizedColumns = computed<NormalizedColumn[]>(() => {
+  return (layoutColumns.value || []).map((col: any) => {
+    if (col.fixed && col.width === undefined) {
+      if (typeof window !== "undefined") {
+        console.warn("[bp-table] fixed column requires width, fixed has been ignored:", col);
+      }
+      return { ...col, fixed: undefined };
+    }
+    return col;
+  });
+});
+
+const displayColumns = computed<NormalizedColumn[]>(() => {
+  const list = normalizedColumns.value.map((item) => ({ ...item, fixedOffset: 0 }));
+
+  let leftOffset = 0;
+  for (const col of list) {
+    if (col.fixed === "left") {
+      col.fixedOffset = leftOffset;
+      leftOffset += col.realWidth || 0;
+    }
+  }
+
+  let rightOffset = 0;
+  for (let i = list.length - 1; i >= 0; i--) {
+    const col = list[i];
+    if (col?.fixed === "right") {
+      col.fixedOffset = rightOffset;
+      rightOffset += col.realWidth || 0;
+    }
+  }
+
+  return list;
+});
+
+const fixedShadowVars = computed<Record<string, string>>(() => {
+  const leftWidth = displayColumns.value
+    .filter((col) => col.fixed === "left")
+    .reduce((sum, col) => sum + (col.realWidth || 0), 0);
+  const rightWidth = displayColumns.value
+    .filter((col) => col.fixed === "right")
+    .reduce((sum, col) => sum + (col.realWidth || 0), 0);
+
+  return {
+    "--bp-table-fixed-left": `${leftWidth}px`,
+    "--bp-table-fixed-right": `${rightWidth}px`,
+    "--bp-table-fixed-left-shadow": leftWidth > 0 ? "1" : "0",
+    "--bp-table-fixed-right-shadow": rightWidth > 0 ? "1" : "0",
+  };
+});
 
 const recalcLayout = () => {
   const bodyEl = bodyWrapRef.value;
@@ -152,6 +214,10 @@ const tableAreaStyle = computed(() => {
   return style;
 });
 
+const headerWrapStyle = computed(() => ({
+  ...fixedShadowVars.value,
+}));
+
 // 计算表格样式 - 确保表头和内容使用相同的宽度
 const tableStyle = computed(() => {
   const style: Record<string, string> = {};
@@ -180,7 +246,7 @@ const tableStyle = computed(() => {
 
 // 计算表格主体包装器样式
 const bodyWrapStyle = computed(() => {
-  const style: Record<string, string> = {};
+  const style: Record<string, string> = { ...fixedShadowVars.value };
   if (props.scroll?.y) {
     const scrollY = typeof props.scroll.y === "number" ? `${props.scroll.y}px` : props.scroll.y;
     style.maxHeight = scrollY;
