@@ -64,4 +64,26 @@ describe("Table Selection", () => {
     expect(selectionChangeEvents[0]?.[0]).toEqual([1, 2]);
     expect(selectionChangeEvents[1]?.[0]).toEqual([]);
   });
+
+  it("header checkbox shows indeterminate when partially selected", async () => {
+    const wrapper = mount(Table, {
+      props: {
+        data,
+        rowKey: "id",
+        rowSelection: { type: "checkbox" },
+        selectedKeys: [1],
+      },
+      slots: {
+        columns: columnsSlot,
+      },
+    });
+
+    await nextTick();
+
+    const minusIcon = wrapper.find(".bp-table-header-wrap .bp-icon-subtract-line");
+    const checkIcon = wrapper.find(".bp-table-header-wrap .bp-icon-check-line");
+
+    expect(minusIcon.exists()).toBe(true);
+    expect(checkIcon.exists()).toBe(false);
+  });
 });

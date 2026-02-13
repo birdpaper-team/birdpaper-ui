@@ -6,7 +6,13 @@
         <div :class="`${clsBlockName}-header-wrap`" ref="headerWrapRef">
           <table :class="`${clsBlockName}-header bp-table-fixed`" :style="tableStyle">
             <colGroup :columns="layoutColumns" :gutter-width="gutterWidth" />
-            <tableHeader ref="tableHeaderRef" :list="columns" :select-all="isAllSelected" @select-all="onSelectAll" />
+            <tableHeader
+              ref="tableHeaderRef"
+              :list="columns"
+              :select-all="isAllSelected"
+              :indeterminate="isIndeterminate"
+              @select-all="onSelectAll"
+            />
           </table>
         </div>
 
@@ -31,11 +37,16 @@
                 <template #cell="{ record }">
                   <bp-checkbox
                     v-if="props.rowSelection?.type === 'checkbox'"
-                    v-model="selectedKeys as CheckboxValueForArray[]"
+                    v-model="selectedKeys"
                     :value="record[props.rowKey]"
                     @change="onCkbChange(record[props.rowKey], record)"
                   />
-                  <bp-radio v-else v-model="selectedKey" :value="record[props.rowKey]" @change="onRadioChange(record[props.rowKey], record)" />
+                  <bp-radio
+                    v-else
+                    v-model="selectedKey"
+                    :value="record[props.rowKey]"
+                    @change="onRadioChange(record[props.rowKey], record)"
+                  />
                 </template>
               </tableColumn>
               <slot name="columns" />
@@ -112,12 +123,26 @@ const recalcLayout = () => {
 };
 
 const isEmpty = computed<boolean>(() => props.data.length === 0);
+const selectedDataCount = computed<number>(() => {
+  if (props.rowSelection?.type !== "checkbox") return 0;
+  if (props.data.length === 0) return 0;
+
+  const keySet = new Set(selectedKeys.value as CheckboxValueForArray[]);
+  let count = 0;
+  for (const item of props.data as any[]) {
+    if (keySet.has(item[props.rowKey])) count += 1;
+  }
+  return count;
+});
+
 const isAllSelected = computed<boolean>(() => {
   if (props.rowSelection?.type !== "checkbox") return false;
-  if (props.data.length === 0) return false;
+  return props.data.length > 0 && selectedDataCount.value === props.data.length;
+});
 
-  const keySet = new Set(selectedKeys.value as Array<string | number>);
-  return props.data.every((item: any) => keySet.has(item[props.rowKey]));
+const isIndeterminate = computed<boolean>(() => {
+  if (props.rowSelection?.type !== "checkbox") return false;
+  return selectedDataCount.value > 0 && selectedDataCount.value < props.data.length;
 });
 
 // 计算表格区域样式
@@ -130,14 +155,14 @@ const tableAreaStyle = computed(() => {
 // 计算表格样式 - 确保表头和内容使用相同的宽度
 const tableStyle = computed(() => {
   const style: Record<string, string> = {};
-  
+
   // 计算总的列宽（包括gutter）
   const totalColWidth = layoutColumns.value.reduce((sum, col) => sum + (col.realWidth || 0), 0);
   const totalWidth = totalColWidth + gutterWidth.value;
-  
+
   if (props.scroll?.x) {
     // 如果设置了横向滚动宽度，使用设置的值和计算值的较大者
-    const scrollX = typeof props.scroll.x === 'number' ? props.scroll.x : parseInt(props.scroll.x);
+    const scrollX = typeof props.scroll.x === "number" ? props.scroll.x : parseInt(props.scroll.x);
     const finalWidth = Math.max(scrollX, totalWidth);
     style.width = `${finalWidth}px`;
     style.minWidth = `${finalWidth}px`;
@@ -146,10 +171,10 @@ const tableStyle = computed(() => {
     style.width = `${totalWidth}px`;
     style.minWidth = `${totalWidth}px`;
   }
-  
+
   // 确保表格布局固定
-  style.tableLayout = 'fixed';
-  
+  style.tableLayout = "fixed";
+
   return style;
 });
 
@@ -157,9 +182,9 @@ const tableStyle = computed(() => {
 const bodyWrapStyle = computed(() => {
   const style: Record<string, string> = {};
   if (props.scroll?.y) {
-    const scrollY = typeof props.scroll.y === 'number' ? `${props.scroll.y}px` : props.scroll.y;
+    const scrollY = typeof props.scroll.y === "number" ? `${props.scroll.y}px` : props.scroll.y;
     style.maxHeight = scrollY;
-    style.overflowY = 'auto';
+    style.overflowY = "auto";
   }
   return style;
 });
@@ -222,7 +247,7 @@ const onBodyScroll = () => {
   const headerWrap = headerWrapRef.value;
   const bodyWrap = bodyWrapRef.value;
   if (!headerWrap || !bodyWrap) return;
-  
+
   // 同步横向滚动位置
   if (headerWrap.scrollLeft !== bodyWrap.scrollLeft) {
     headerWrap.scrollLeft = bodyWrap.scrollLeft;
@@ -234,11 +259,11 @@ const ensureTableWidthSync = () => {
   nextTick(() => {
     const headerWrap = headerWrapRef.value;
     const bodyWrap = bodyWrapRef.value;
-    
+
     if (headerWrap && bodyWrap) {
-      const headerTable = headerWrap.querySelector('table');
-      const bodyTable = bodyWrap.querySelector('table');
-      
+      const headerTable = headerWrap.querySelector("table");
+      const bodyTable = bodyWrap.querySelector("table");
+
       if (headerTable && bodyTable) {
         // 确保两个表格有相同的宽度
         const tableWidth = tableStyle.value.width || tableStyle.value.minWidth;
@@ -264,13 +289,13 @@ watch(
 );
 
 watch(
-  columns, 
+  columns,
   () => {
     nextTick(() => {
       recalcLayout();
       ensureTableWidthSync();
     });
-  }, 
+  },
   { deep: true }
 );
 

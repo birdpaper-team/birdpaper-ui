@@ -114,6 +114,15 @@ export const tableHeaderProps = {
     type: Boolean,
     default: false,
   },
+  /**
+   * @type boolean
+   * @description Header select-all checkbox indeterminate state.
+   * @default false
+   */
+  indeterminate: {
+    type: Boolean,
+    default: false,
+  },
 };
 
 /** Table column props. */

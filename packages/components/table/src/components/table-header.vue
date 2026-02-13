@@ -4,7 +4,7 @@
       <template v-for="item in list">
         <th :class="thClass(item)">
           <template v-if="item.type === 'checkbox'">
-            <bp-checkbox v-model:check="isSelectAll" @change="handleSelectAll"></bp-checkbox>
+            <bp-checkbox v-model:check="selectAllProxy" :indeterminate="props.indeterminate"></bp-checkbox>
           </template>
           <template v-else>
             {{ item.title }}
@@ -20,7 +20,7 @@ import { useNamespace } from "@birdpaper-ui/hooks";
 import BpCheckbox from "@birdpaper-ui/components/checkbox/index";
 import { ColumnsItem } from "../types";
 import { tableHeaderProps, TableHeaderProps } from "../props";
-import { ref, watch } from "vue";
+import { computed } from "vue";
 
 defineOptions({ name: "TableHeader" });
 const { clsBlockName } = useNamespace("table-header-thead");
@@ -38,21 +38,12 @@ const thClass = (item: ColumnsItem) => {
   }[item.align || "left"];
 };
 
-const isSelectAll = ref<boolean>(false);
-
-watch(
-  () => props.selectAll,
-  (val) => {
-    isSelectAll.value = val;
-  },
-  { immediate: true }
-);
-
-const handleSelectAll = (value: boolean) => {
-  emits("select-all", value);
-};
+const selectAllProxy = computed<boolean>({
+  get: () => props.selectAll,
+  set: (value) => emits("select-all", value),
+});
 
 defineExpose({
-  isSelectAll,
+  selectAllProxy,
 });
 </script>
