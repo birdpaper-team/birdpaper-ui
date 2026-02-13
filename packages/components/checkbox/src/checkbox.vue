@@ -34,8 +34,9 @@ const emits = defineEmits(["change"]);
 const cls = computed(() => [clsBlockName, "select-none", props.disabled && `${clsBlockName}-disabled`]);
 
 const isCheck = ref(false);
+const hasValue = computed(() => props.value !== undefined && props.value !== null);
 const upadteCheck = () => {
-  if (props.value) {
+  if (hasValue.value) {
     isCheck.value = model.value.includes(props.value as CheckboxValueForArray);
     return;
   }
@@ -46,7 +47,7 @@ const upadteCheck = () => {
 const handleClick = () => {
   if (props.disabled) return;
 
-  if (props.value) {
+  if (hasValue.value) {
     const index = model.value.indexOf(props.value);
     if (index !== -1) {
       model.value.splice(index, 1);
@@ -63,7 +64,7 @@ const handleClick = () => {
 
   modelBool.value = isCheck.value ? false : true;
   nextTick(() => upadteCheck());
-  nextTick(() => emits("change", model.value));
+  nextTick(() => emits("change", modelBool.value));
 };
 
 watch(

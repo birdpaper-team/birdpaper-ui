@@ -20,7 +20,7 @@ import { useNamespace } from "@birdpaper-ui/hooks";
 import BpCheckbox from "@birdpaper-ui/components/checkbox/index";
 import { ColumnsItem } from "../types";
 import { tableHeaderProps, TableHeaderProps } from "../props";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 defineOptions({ name: "TableHeader" });
 const { clsBlockName } = useNamespace("table-header-thead");
@@ -39,6 +39,15 @@ const thClass = (item: ColumnsItem) => {
 };
 
 const isSelectAll = ref<boolean>(false);
+
+watch(
+  () => props.selectAll,
+  (val) => {
+    isSelectAll.value = val;
+  },
+  { immediate: true }
+);
+
 const handleSelectAll = (value: boolean) => {
   emits("select-all", value);
 };

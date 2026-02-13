@@ -105,6 +105,15 @@ export const tableHeaderProps = {
     type: Array as PropType<ColumnsItem[]>,
     default: () => [],
   },
+  /**
+   * @type boolean
+   * @description Header select-all checkbox state.
+   * @default false
+   */
+  selectAll: {
+    type: Boolean,
+    default: false,
+  },
 };
 
 /** Table column props. */

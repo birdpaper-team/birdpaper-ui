@@ -6,7 +6,7 @@
         <div :class="`${clsBlockName}-header-wrap`" ref="headerWrapRef">
           <table :class="`${clsBlockName}-header bp-table-fixed`" :style="tableStyle">
             <colGroup :columns="layoutColumns" :gutter-width="gutterWidth" />
-            <tableHeader ref="tableHeaderRef" :list="columns" :gutter-width="gutterWidth" @select-all="onSelectAll" />
+            <tableHeader ref="tableHeaderRef" :list="columns" :select-all="isAllSelected" @select-all="onSelectAll" />
           </table>
         </div>
 
@@ -35,7 +35,7 @@
                     :value="record[props.rowKey]"
                     @change="onCkbChange(record[props.rowKey], record)"
                   />
-                  <bp-radio v-else v-model="selectedKey" :value="record[props.rowKey]" />
+                  <bp-radio v-else v-model="selectedKey" :value="record[props.rowKey]" @change="onRadioChange(record[props.rowKey], record)" />
                 </template>
               </tableColumn>
               <slot name="columns" />
@@ -112,6 +112,13 @@ const recalcLayout = () => {
 };
 
 const isEmpty = computed<boolean>(() => props.data.length === 0);
+const isAllSelected = computed<boolean>(() => {
+  if (props.rowSelection?.type !== "checkbox") return false;
+  if (props.data.length === 0) return false;
+
+  const keySet = new Set(selectedKeys.value as Array<string | number>);
+  return props.data.every((item: any) => keySet.has(item[props.rowKey]));
+});
 
 // 计算表格区域样式
 const tableAreaStyle = computed(() => {
@@ -163,11 +170,18 @@ const onSelectAll = (val: boolean) => {
     selectedKeys.value = props.data.map((item: any) => item[props.rowKey]);
   }
   emits("select-all", val);
+  emits("selection-change", selectedKeys.value);
 };
 
 const onCkbChange = (rowKey: string | number, record: any) => {
   emits("select", selectedKeys.value, rowKey, record);
   emits("selection-change", selectedKeys.value);
+};
+
+const onRadioChange = (rowKey: RadioValue, record: any) => {
+  const value = [selectedKey.value as CheckboxValueForArray];
+  emits("select", value, rowKey, record);
+  emits("selection-change", value);
 };
 
 const init = () => {
