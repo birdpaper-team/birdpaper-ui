@@ -49,6 +49,8 @@ const emits = defineEmits<{
   (e: "on-select"): void;
 }>();
 
+const isInRange = (start: string, end: string, value: string) => start <= value && value <= end;
+
 const { current, setDates, dates, weeks, currentYear, currentMonth, months, changeMonth, changeYear } = useDayJs(
   props.langs,
   endModel.value
@@ -67,8 +69,6 @@ setDates(endModel.value ? (isSameMonth ? dayjs(endModel.value).add(1, "month") :
 
 const cellCls = (cell: DayCell) => {
   const rangeDate = endModel.value || hoverDate.value?.value;
-  const isInRange = (start: string, end: string, value: string) => start <= value && value <= end;
-
   const isRange =
     cell.type === "normal" && beginModel.value && rangeDate && isInRange(beginModel.value, rangeDate, cell.value);
   const isRangeStart = beginModel.value === cell.value && rangeDate && cell.type === "normal";

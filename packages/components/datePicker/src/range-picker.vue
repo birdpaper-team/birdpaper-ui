@@ -67,11 +67,10 @@ const inputEnd = computed({
 });
 
 watch(
-  () => model.value,
+  () => [model.value?.[0], model.value?.[1]] as const,
   (val) => {
     inputValues.value = [val?.[0] || "", val?.[1] || ""];
-  },
-  { deep: true }
+  }
 );
 
 const cls = computed<string[] | {}[]>(() => [
