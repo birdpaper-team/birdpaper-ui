@@ -41,7 +41,8 @@ export const getPosition = (
   },
   wrapperSize: SizeInfo,
   popupOffset: number = 0,
-  popupTranslate: [number, number] = [0, 0]
+  popupTranslate: [number, number] = [0, 0],
+  boundaryPadding: number = 0
 ): TriggerPosition => {
   const triggerLeft = triggerBounding.left.value + popupOffset + popupTranslate[0];
   const triggerLeftIncludeWidth = triggerLeft + triggerBounding.width.value;
@@ -58,19 +59,19 @@ export const getPosition = (
   const triggerBottomIncludeHalfHeight = triggerBottom + triggerBounding.height.value / 2;
 
   // Allow position.
-  const allowLeft = triggerLeft - wrapperSize.width > 0;
-  const allowLeftWithHalf = triggerLeftIncludeHalfWidth - wrapperSize.width / 2 > 0;
-  const allowLeftWithTrigger = triggerLeftIncludeWidth - wrapperSize.width > 0;
+  const allowLeft = triggerLeft - wrapperSize.width > boundaryPadding;
+  const allowLeftWithHalf = triggerLeftIncludeHalfWidth - wrapperSize.width / 2 > boundaryPadding;
+  const allowLeftWithTrigger = triggerLeftIncludeWidth - wrapperSize.width > boundaryPadding;
 
-  const allowRight = triggerRight - wrapperSize.width > 0;
-  const allowHalfRight = triggerRightIncludeHalfWidth - wrapperSize.width / 2 > 0;
-  const allowRightWithTrigger = triggerRightIncludeWidth - wrapperSize.width > 0;
+  const allowRight = triggerRight - wrapperSize.width > boundaryPadding;
+  const allowHalfRight = triggerRightIncludeHalfWidth - wrapperSize.width / 2 > boundaryPadding;
+  const allowRightWithTrigger = triggerRightIncludeWidth - wrapperSize.width > boundaryPadding;
 
-  const allowTop = triggerTop - wrapperSize.height > 0;
-  const allowHalfTop = triggerTopIncludeHalfHeight - wrapperSize.height / 2 > 0;
+  const allowTop = triggerTop - wrapperSize.height > boundaryPadding;
+  const allowHalfTop = triggerTopIncludeHalfHeight - wrapperSize.height / 2 > boundaryPadding;
 
-  const allowBottom = triggerBottom - wrapperSize.height > 0;
-  const allowHalfBottom = triggerBottomIncludeHalfHeight - wrapperSize.height / 2 > 0;
+  const allowBottom = triggerBottom - wrapperSize.height > boundaryPadding;
+  const allowHalfBottom = triggerBottomIncludeHalfHeight - wrapperSize.height / 2 > boundaryPadding;
 
   const isAllow: Record<TriggerPosition, () => boolean> = {
     top: () => allowTop && allowLeftWithHalf && allowHalfRight,
@@ -167,12 +168,12 @@ const getLeftPosition = (
     right: rightWithPopup,
     "top-left": baseLeft,
     "bottom-left": baseLeft,
-    "top-right": left + width - wrapperWidth + translate,
-    "bottom-right": left + width - wrapperWidth + translate,
+    "top-right": left + width - wrapperWidth + translate - containerRect.left,
+    "bottom-right": left + width - wrapperWidth + translate - containerRect.left,
     "upper-left": left - wrapperWidth + translate,
     "low-left": left - wrapperWidth + translate,
-    "upper-right": left + width + translate,
-    "low-right": left + width + translate,
+    "upper-right": left + width + translate - containerRect.left,
+    "low-right": left + width + translate - containerRect.left,
   }[position];
 };
 

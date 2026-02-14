@@ -1,182 +1,42 @@
-import { PropType, Teleport, Transition, defineComponent, h, nextTick, onMounted, ref, watch, VNode } from "vue";
+import { Teleport, Transition, defineComponent, h, nextTick, onMounted, ref, watch, VNode, computed } from "vue";
 import { getPosition, getPositionData, getWrapperPositionStyle, getWrapperSize } from "./core";
-import { TriggerPosition, TriggerType } from "./types";
+import { TriggerPosition } from "./types";
+import { triggerProps } from "./props";
 import { onClickOutside, useElementBounding, useEventListener, useThrottleFn, useWindowSize } from "@vueuse/core";
 import { getScrollElements } from "@birdpaper-ui/components/utils/dom";
 import { useNamespace } from "@birdpaper-ui/hooks";
 
 export default defineComponent({
   name: "Trigger",
-  props: {
-    /**
-     * @type boolean
-     * @description Visible model.
-     * @default false
-     */
-    modelValue: { type: Boolean, default: false },
-    /**
-     * @type TriggerType
-     * @description Trigger type.
-     * @default "click"
-     */
-    trigger: {
-      type: String as PropType<TriggerType>,
-      default: "click",
-    },
-    /**
-     * @type TriggerPosition
-     * @description Trigger position.
-     * @default "bottom"
-     */
-    position: {
-      type: String as PropType<TriggerPosition>,
-      default: "bottom",
-    },
-    /**
-     * @type number
-     * @description Offset of the popup box.
-     * @default 0
-     */
-    popupOffset: {
-      type: Number,
-      default: 0,
-    },
-    /**
-     * @type [number, number]
-     * @description Distance from the trigger.
-     * @default: [0, 0]
-     */
-    popupTranslate: {
-      type: Array as unknown as PropType<[number, number]>,
-      default: [0, 0],
-    },
-    /**
-     * @type boolean
-     * @description Fill the trigger width or not.
-     * @default false
-     */
-    autoFitWidth: {
-      type: Boolean,
-      default: false,
-    },
-    /**
-     * @type string
-     * @description Transition name.
-     * @default "fade"
-     */
-    transition: {
-      type: String,
-      default: "fade",
-    },
-    /**
-     * @type boolean
-     * @description Click on the external element to close the trigger.
-     * @default true
-     */
-    clickOutside: {
-      type: Boolean,
-      default: true,
-    },
-    /**
-     * @type boolean
-     * @description  Disabled or not.
-     * @default false
-     */
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    /**
-     * @type boolean
-     * @description Hide the trigger element or not.
-     * @default false
-     */
-    hideTrigger: {
-      type: Boolean,
-      default: false,
-    },
-    /**
-     * @type boolean
-     * @description Update position when scroll or not.
-     * @default false
-     */
-    updateAtScroll: {
-      type: Boolean,
-      default: false,
-    },
-    /**
-     * @type boolean
-     * @description Close when scroll or not.
-     * @default false
-     */
-    scrollToClose: {
-      type: Boolean,
-      default: false,
-    },
-    /**
-     * @type boolean
-     * @description Auto fix the position with window size.
-     * @default false
-     */
-    autoFixPosition: {
-      type: Boolean,
-      default: true,
-    },
-    /**
-     * @type number
-     * @description Scroll close time.
-     * @default 400
-     */
-    scrollToCloseTime: {
-      type: Number,
-      default: 400,
-    },
-    /**
-     * @type number
-     * @description Scroll close time.
-     * @default 400
-     */
-    throttleTime: {
-      type: Number,
-      default: 20,
-    },
-    /**
-     * @type Function
-     * @description Get popup container element.
-     * @default () => document.body
-     */
-    getPopupContainer: {
-      type: Function as PropType<() => HTMLElement>,
-      default: () => () => document.body,
-    },
-  },
-  emits: ["update:modelValue", "popupVisible"],
+  props: triggerProps,
+  emits: ["update:modelValue", "popupVisible", "positionChange"],
   setup(props, { emit, slots }) {
     const { clsBlockName } = useNamespace("trigger");
 
     const triggerRef = ref();
+    const triggerInnerRef = ref<HTMLElement | null>(null);
     const wrapperRef = ref();
     const visible = ref<boolean>(props.modelValue || false);
     const scrollElements = ref<Element[]>([]);
-    const timer = ref();
+    const hoverTimer = ref();
+    const scrollCloseTimer = ref();
     const windowSize = useWindowSize();
     const popupContainer = ref<HTMLElement>();
+    const currentPosition = ref<TriggerPosition>(props.position);
+    const triggerBounding = useElementBounding(triggerInnerRef as any);
 
     // Update popup container
     const updatePopupContainer = () => {
       try {
-        const container = props.getPopupContainer();
-        // 确保容器是一个有效的DOM元素
+        const container = props.getPopupContainer?.();
         if (container && container.nodeType === Node.ELEMENT_NODE) {
           popupContainer.value = container;
-        } else {
-          // 如果返回的容器无效，使用document.body作为默认值
-          popupContainer.value = document.body;
+          return;
         }
       } catch (error) {
-        console.error('Error in getPopupContainer:', error);
-        popupContainer.value = document.body;
+        console.error("Error in getPopupContainer:", error);
       }
+      popupContainer.value = document.body;
     };
 
     const handleClick = () => {
@@ -187,30 +47,40 @@ export default defineComponent({
     const handleMouseEnter = () => {
       if (props.trigger === "click") return;
 
-      window.clearTimeout(timer.value);
-      timer.value = 0;
+      window.clearTimeout(hoverTimer.value);
+      hoverTimer.value = 0;
+      if (props.openDelay > 0) {
+        hoverTimer.value = window.setTimeout(() => {
+          updateVisible(true);
+          nextTick(() => handleResize());
+        }, props.openDelay);
+        return;
+      }
       updateVisible(true);
       nextTick(() => handleResize());
     };
     const handleMouseLeave = () => {
       if (props.trigger === "click") return;
-      timer.value = window.setTimeout(() => updateVisible(false), 100);
+      window.clearTimeout(hoverTimer.value);
+      hoverTimer.value = window.setTimeout(() => updateVisible(false), props.closeDelay);
     };
 
     const handleResize = async () => {
       if (!triggerRef.value || !visible.value || !wrapperRef.value) return;
 
-      const el = triggerRef.value?.children[0];
+      const el = triggerInnerRef.value;
+      if (!el) return;
       const wrapperSize = getWrapperSize(wrapperRef.value);
 
       const position = props.autoFixPosition
         ? getPosition(
             props.position,
             windowSize,
-            useElementBounding(el),
+            triggerBounding,
             wrapperSize,
             props.popupOffset,
-            props.popupTranslate
+            props.popupTranslate,
+            props.boundaryPadding
           )
         : props.position;
 
@@ -222,13 +92,16 @@ export default defineComponent({
         props.popupOffset,
         props.autoFitWidth
       );
+      currentPosition.value = position;
+      emit("positionChange", { position, top, left, width });
       wrapperRef.value.setAttribute(
         "style",
         getWrapperPositionStyle(top, left, visible.value, props.autoFitWidth ? width : undefined)
       );
 
       if (props.scrollToClose && visible.value) {
-        setTimeout(() => {
+        window.clearTimeout(scrollCloseTimer.value);
+        scrollCloseTimer.value = window.setTimeout(() => {
           visible.value = false;
         }, props.scrollToCloseTime);
       }
@@ -282,74 +155,140 @@ export default defineComponent({
 
     const render = () => {
       const children = slots.default?.() || [];
+      const triggerNode =
+        children.length === 1 ? children[0] : h("div", { class: `${clsBlockName}-trigger` }, children);
 
       if (props.hideTrigger) {
-        return h('div', { class: clsBlockName, ref: triggerRef }, slots.content?.());
+        return h("div", { class: clsBlockName, ref: triggerRef }, slots.content?.());
       }
 
       // 检查是否在测试环境中
-      const isTestEnv = typeof process !== 'undefined' && process.env.NODE_ENV === 'test';
-      
+      const isTestEnv = typeof process !== "undefined" && process.env.NODE_ENV === "test";
+
       // 在测试环境中不使用Teleport，直接渲染内容
       if (isTestEnv) {
-        return h('div', { class: clsBlockName, ref: triggerRef }, [
-          h(children[0] as VNode, {
-            onClick: handleClick,
-            onMouseenter: handleMouseEnter,
-            onMouseleave: handleMouseLeave,
-          }),
-          h(Transition, { name: props.transition, appear: true }, () => 
-            visible.value ? h('div', {
-              ref: wrapperRef,
-              class: `${clsBlockName}-wrapper`,
+        return h("div", { class: clsBlockName, ref: triggerRef }, [
+          h(
+            "div",
+            {
+              class: `${clsBlockName}-inner`,
+              ref: triggerInnerRef,
+              onClickCapture: handleClick,
               onMouseenter: handleMouseEnter,
               onMouseleave: handleMouseLeave,
-            }, slots.content?.()) : null
-          )
+            },
+            [triggerNode]
+          ),
+          h(Transition, { name: props.transition, appear: true }, () =>
+            visible.value
+              ? h(
+                  "div",
+                  {
+                    ref: wrapperRef,
+                    class: [
+                      `${clsBlockName}-wrapper`,
+                      props.showShadow && `${clsBlockName}-wrapper-shadow`,
+                      props.showArrow && `${clsBlockName}-wrapper-arrow`,
+                    ],
+                    onMouseenter: handleMouseEnter,
+                    onMouseleave: handleMouseLeave,
+                  },
+                  [
+                    props.showArrow
+                      ? h("div", { class: `${clsBlockName}-arrow ${clsBlockName}-arrow-${currentPosition.value}` })
+                      : null,
+                    slots.content?.(),
+                  ]
+                )
+              : null
+          ),
         ]);
       }
-      
+
       // 检查popupContainer是否有效
-      const isValidContainer = popupContainer.value && 
-        typeof popupContainer.value === 'object' && 
+      const isValidContainer =
+        popupContainer.value &&
+        typeof popupContainer.value === "object" &&
         popupContainer.value.nodeType === Node.ELEMENT_NODE;
-      
+
       // 如果容器无效，直接渲染内容而不使用Teleport
       if (!isValidContainer) {
-        return h('div', { class: clsBlockName, ref: triggerRef }, [
-          h(children[0] as VNode, {
-            onClick: handleClick,
-            onMouseenter: handleMouseEnter,
-            onMouseleave: handleMouseLeave,
-          }),
-          h(Transition, { name: props.transition, appear: true }, () => 
-            visible.value ? h('div', {
-              ref: wrapperRef,
-              class: `${clsBlockName}-wrapper`,
+        return h("div", { class: clsBlockName, ref: triggerRef }, [
+          h(
+            "div",
+            {
+              class: `${clsBlockName}-inner`,
+              ref: triggerInnerRef,
+              onClickCapture: handleClick,
               onMouseenter: handleMouseEnter,
               onMouseleave: handleMouseLeave,
-            }, slots.content?.()) : null
-          )
+            },
+            [triggerNode]
+          ),
+          h(Transition, { name: props.transition, appear: true }, () =>
+            visible.value
+              ? h(
+                  "div",
+                  {
+                    ref: wrapperRef,
+                    class: [
+                      `${clsBlockName}-wrapper`,
+                      props.showShadow && `${clsBlockName}-wrapper-shadow`,
+                      props.showArrow && `${clsBlockName}-wrapper-arrow`,
+                    ],
+                    onMouseenter: handleMouseEnter,
+                    onMouseleave: handleMouseLeave,
+                  },
+                  [
+                    props.showArrow
+                      ? h("div", { class: `${clsBlockName}-arrow ${clsBlockName}-arrow-${currentPosition.value}` })
+                      : null,
+                    slots.content?.(),
+                  ]
+                )
+              : null
+          ),
         ]);
       }
-      
+
       // 正式环境使用Teleport
-      return h('div', { class: clsBlockName, ref: triggerRef }, [
-        h(children[0] as VNode, {
-          onClick: handleClick,
-          onMouseenter: handleMouseEnter,
-          onMouseleave: handleMouseLeave,
-        }),
+      return h("div", { class: clsBlockName, ref: triggerRef }, [
+        h(
+          "div",
+          {
+            class: `${clsBlockName}-inner`,
+            ref: triggerInnerRef,
+            onClickCapture: handleClick,
+            onMouseenter: handleMouseEnter,
+            onMouseleave: handleMouseLeave,
+          },
+          [triggerNode]
+        ),
         h(Teleport, { to: popupContainer.value }, [
-          h(Transition, { name: props.transition, appear: true }, () => 
-            visible.value ? h('div', {
-              ref: wrapperRef,
-              class: `${clsBlockName}-wrapper`,
-              onMouseenter: handleMouseEnter,
-              onMouseleave: handleMouseLeave,
-            }, slots.content?.()) : null
-          )
-        ])
+          h(Transition, { name: props.transition, appear: true }, () =>
+            visible.value
+              ? h(
+                  "div",
+                  {
+                    ref: wrapperRef,
+                    class: [
+                      `${clsBlockName}-wrapper`,
+                      props.showShadow && `${clsBlockName}-wrapper-shadow`,
+                      props.showArrow && `${clsBlockName}-wrapper-arrow`,
+                    ],
+                    onMouseenter: handleMouseEnter,
+                    onMouseleave: handleMouseLeave,
+                  },
+                  [
+                    props.showArrow
+                      ? h("div", { class: `${clsBlockName}-arrow ${clsBlockName}-arrow-${currentPosition.value}` })
+                      : null,
+                    slots.content?.(),
+                  ]
+                )
+              : null
+          ),
+        ]),
       ]);
     };
 

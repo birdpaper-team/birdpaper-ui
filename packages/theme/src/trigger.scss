@@ -3,8 +3,61 @@
 @include b(trigger) {
   position: relative;
 
+  &-inner {
+    display: inline-flex;
+    align-items: center;
+  }
+
   &-wrapper {
     position: absolute;
     z-index: var(--z-index-base);
+  }
+
+  &-wrapper-shadow {
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  &-wrapper-arrow {
+    position: relative;
+  }
+
+  &-arrow {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: inherit;
+    transform: rotate(45deg);
+  }
+
+  &-arrow-top,
+  &-arrow-top-left,
+  &-arrow-top-right {
+    bottom: -4px;
+    left: 50%;
+    margin-left: -4px;
+  }
+
+  &-arrow-bottom,
+  &-arrow-bottom-left,
+  &-arrow-bottom-right {
+    top: -4px;
+    left: 50%;
+    margin-left: -4px;
+  }
+
+  &-arrow-left,
+  &-arrow-upper-left,
+  &-arrow-low-left {
+    right: -4px;
+    top: 50%;
+    margin-top: -4px;
+  }
+
+  &-arrow-right,
+  &-arrow-upper-right,
+  &-arrow-low-right {
+    left: -4px;
+    top: 50%;
+    margin-top: -4px;
   }
 }
