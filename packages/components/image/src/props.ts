@@ -1,5 +1,5 @@
 import { ExtractPropTypes, PropType } from "vue";
-import { ImageFit } from "./types";
+import { ImageFit, ImageLoadEffect } from "./types";
 
 export const imageProps = {
   /**
@@ -55,14 +55,6 @@ export const imageProps = {
   },
   /**
    * @type boolean
-   * @description Image preview.
-   */
-  preview: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   * @type boolean
    * @description Whether to enable lazy loading.
    * @default false
    */
@@ -78,6 +70,15 @@ export const imageProps = {
   placeholder: {
     type: String,
     default: '',
+  },
+  /**
+   * @type ImageLoadEffect
+   * @description Image load animation effect.
+   * @default "fade"
+   */
+  loadEffect: {
+    type: String as PropType<ImageLoadEffect>,
+    default: 'fade',
   },
 } as const;
 
