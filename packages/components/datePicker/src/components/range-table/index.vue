@@ -8,6 +8,7 @@
         :clsBlockName
         :option-slice="beginOptionSlice"
         :langs="ctx!.langs"
+        :disabled-date="ctx?.disableDate"
         @on-step="onStep"
         @on-select="onSelect"
       />
@@ -21,6 +22,7 @@
         :clsBlockName
         :option-slice="endOptionSlice"
         :langs="ctx!.langs"
+        :disabled-date="ctx?.disableDate"
         @on-step="onStep"
         @on-hover="onEndHover"
         @on-select="onSelect"

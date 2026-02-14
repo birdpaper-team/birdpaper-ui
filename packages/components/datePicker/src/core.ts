@@ -5,17 +5,17 @@ import "dayjs/locale/zh-cn";
 import { computed, ref } from "vue";
 import { arrayTo2DArray } from "@birdpaper-ui/components/utils/array";
 
-export const useDayJs = (lang: LangsType, model: string) => {
-  dayjs.locale(lang);
-  dayjs.extend(localeData);
+dayjs.extend(localeData);
 
-  const toDay: DayCell = { value: dayjs().format("YYYY-MM-DD"), label: "今天", type: "normal" };
-  const current = ref(!model ? dayjs() : dayjs(model));
+export const useDayJs = (lang: LangsType, model: string) => {
+  const localeDataApi = dayjs().locale(lang).localeData();
+  const toDay: DayCell = { value: dayjs().locale(lang).format("YYYY-MM-DD"), label: "今天", type: "normal" };
+  const current = ref(!model ? dayjs().locale(lang) : dayjs(model).locale(lang));
   const currentMonth = computed(() => current.value.month());
   const currentYear = computed(() => current.value.year());
 
-  const weeks = dayjs.weekdaysMin();
-  const months = dayjs.monthsShort();
+  const weeks = localeDataApi.weekdaysMin();
+  const months = localeDataApi.monthsShort();
 
   const dates = ref<DayCell[][]>([[], [], [], [], [], []]);
 
@@ -26,7 +26,7 @@ export const useDayJs = (lang: LangsType, model: string) => {
    * @returns 更新 dates 并返回。
    */
   const setDates = (val?: Dayjs) => {
-    const time = val ?? current.value;
+    const time = (val ?? current.value).locale(lang);
 
     const start: Dayjs = time.startOf("month");
     const end: Dayjs = time.endOf("month");
@@ -58,8 +58,8 @@ export const useDayJs = (lang: LangsType, model: string) => {
   };
 
   const setRangeDates = (begin: Dayjs, end: Dayjs): DayCell[][] => {
-    const beginDates = setDates(begin);
-    const endDates = setDates(end);
+    const beginDates = setDates(begin.locale(lang));
+    const endDates = setDates(end.locale(lang));
     return [...beginDates, ...endDates];
   };
 

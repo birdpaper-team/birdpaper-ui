@@ -39,7 +39,7 @@ export const commonPickerProps = {
     default: false,
   },
   disabledDate: {
-    type: Function,
+    type: Function as PropType<(value: string) => boolean>,
   },
   /**
    * @type boolean
@@ -143,6 +143,9 @@ export const rangePickerProps = {
     type: Boolean,
     default: false,
   },
+  disabledDate: {
+    type: Function as PropType<(value: string) => boolean>,
+  },
   /**
    * @type string
    * @description Hide trigger or not.
@@ -160,6 +163,15 @@ export const rangePickerProps = {
   langs: {
     type: String as PropType<LangsType>,
     default: "zh-cn",
+  },
+  /**
+   * @type string
+   * @description Value format.
+   * @default "YYYY-MM-DD"
+   */
+  valueFormat: {
+    type: String,
+    default: "YYYY-MM-DD",
   },
 };
 

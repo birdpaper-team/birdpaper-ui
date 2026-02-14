@@ -52,7 +52,7 @@ import { InputType, WordCountMode } from "./types";
 defineOptions({ name: "Input" });
 const { clsBlockName } = useNamespace("input");
 
-const modelValue = defineModel<string | number>({ default: "" });
+const modelValue = defineModel<string>({ default: "" });
 const model = shallowRef(modelValue.value);
 
 // 监听外部modelValue变化，同步到内部model

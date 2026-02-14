@@ -210,10 +210,17 @@ const getTopPosition = (
  * @returns: { width, height }
  */
 export const getWrapperSize = (el: Element): SizeInfo => {
-  el.setAttribute("style", `display:block;opacity:0;visibility: hidden;`);
+  const originalStyle = el.getAttribute("style");
+  const baseStyle = originalStyle ? `${originalStyle};` : "";
+
+  el.setAttribute("style", `${baseStyle}display:block;opacity:0;visibility:hidden;`);
   const { width, height } = el && el.getBoundingClientRect();
 
-  el.setAttribute("style", `display:none`);
+  if (originalStyle === null) {
+    el.removeAttribute("style");
+  } else {
+    el.setAttribute("style", originalStyle);
+  }
   return { width, height };
 };
 

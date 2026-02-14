@@ -41,6 +41,7 @@ const props = defineProps({
   clsBlockName: { type: String, required: true },
   optionSlice: { type: Number, default: 2 },
   langs: { type: String as PropType<LangsType>, required: true },
+  disabledDate: { type: Function as PropType<(value: string) => boolean> },
 });
 const emits = defineEmits<{
   (e: "on-step"): void;
@@ -62,6 +63,7 @@ const cellCls = (cell: DayCell) => {
     cell.type === "normal" && beginModel.value && rangeDate && isInRange(beginModel.value, rangeDate, cell.value);
   const isRangeStart = beginModel.value === cell.value && rangeDate && cell.type === "normal";
   const isRangeEnd = rangeDate === cell.value && rangeDate > beginModel.value && cell.type === "normal";
+  const isDisabled = props.disabledDate && props.disabledDate(cell.value);
 
   return [
     `${props.clsBlockName}-body-cell`,
@@ -70,6 +72,7 @@ const cellCls = (cell: DayCell) => {
     { "range-start": isRangeStart },
     { "range-end": isRangeEnd },
     { range: isRange && !isRangeStart && !isRangeEnd },
+    { "cell-disabled": isDisabled },
   ];
 };
 
@@ -88,6 +91,7 @@ const handleStep = (mode: "month" | "year", type: "prev" | "next", step: number 
 };
 
 const handleSelect = (date: DayCell) => {
+  if (props.disabledDate && props.disabledDate(date.value)) return;
   if (beginModel.value && endModel.value) {
     beginModel.value = date.value;
     endModel.value = "";
@@ -107,6 +111,7 @@ const handleHover = (date?: DayCell) => {
     hoverDate.value = null;
     return;
   }
+  if (props.disabledDate && props.disabledDate(date.value)) return;
   hoverDate.value = date;
 };
 
