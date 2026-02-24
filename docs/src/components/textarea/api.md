@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { textareaProps, textareaEvents, textareaMethods} from "../../example/textarea/api.ts"
+import { textareaProps, textareaEvents, textareaSlots, textareaMethods} from "../../example/textarea/api.ts"
 </script>
 
 ## Textarea 属性
@@ -9,6 +9,10 @@ import { textareaProps, textareaEvents, textareaMethods} from "../../example/tex
 ## Textarea 事件
 
 <api-block type="event" :data="textareaEvents" />
+
+## Textarea 插槽
+
+<api-block type="slot" :data="textareaSlots" />
 
 ## Textarea 方法
 
