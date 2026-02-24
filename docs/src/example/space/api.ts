@@ -1,4 +1,4 @@
-import { PropItem } from "../../.vitepress/components/api-block/src/types";
+import { PropItem, SlotItem } from "../../.vitepress/components/api-block/src/types";
 
 export const spaceProps: PropItem[] = [
   {
@@ -18,13 +18,18 @@ export const spaceProps: PropItem[] = [
   {
     name: "justify",
     remark: "水平对齐方式",
-    type: ["Stirng"],
+    type: ["String"],
     default: "flex-start",
   },
   {
     name: "align",
     remark: "纵向对齐方式",
-    type: ["Stirng"],
+    type: ["String"],
     default: "flex-start",
   },
+];
+
+export const spaceSlots: SlotItem[] = [
+  { name: "default", remark: "内容" },
+  { name: "split", remark: "分隔符内容" },
 ];

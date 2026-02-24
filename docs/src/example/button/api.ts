@@ -6,7 +6,7 @@ export const buttonProps: PropItem[] = [
     remark: "按钮类型",
     type: ["ButtonType"],
     optional: ["secondary", "normal", "plain", "dashed", "text"],
-    default: "secondary",
+    default: "normal",
   },
   {
     name: "attr-type",
@@ -20,7 +20,7 @@ export const buttonProps: PropItem[] = [
     remark: "按钮状态",
     type: ["ButtonStatus"],
     optional: ["gray", "primary", "success", "warning", "danger"],
-    default: "gray",
+    default: "primary",
   },
   {
     name: "size",
@@ -47,6 +47,14 @@ export const buttonProps: PropItem[] = [
   },
   { name: "full", remark: "宽度是否撑满父级", type: ["Boolean"], default: false },
   { name: "icon", remark: "按钮图标", type: ["Icon"] },
+  { name: "icon-gap", remark: "图标与文字间距", type: ["String", "Number"] },
+  {
+    name: "icon-position",
+    remark: "图标位置",
+    type: ["ButtonIconPosition"],
+    optional: ["left", "right"],
+    default: "left",
+  },
 ];
 
 export const buttonGroupProps: PropItem[] = [
@@ -55,7 +63,7 @@ export const buttonGroupProps: PropItem[] = [
     remark: "按钮类型",
     type: ["ButtonType"],
     optional: ["secondary", "normal", "plain", "dashed", "text"],
-    default: "secondary",
+    default: "normal",
   },
   {
     name: "status",
@@ -84,3 +92,5 @@ export const buttonGroupProps: PropItem[] = [
 export const buttonEvents: EventItem[] = [{ name: "click", remark: "点击触发", params: "--" }];
 
 export const buttonSlots: SlotItem[] = [{ name: "default", remark: "默认插槽" }];
+
+export const buttonGroupSlots: SlotItem[] = [{ name: "default", remark: "按钮组内容" }];

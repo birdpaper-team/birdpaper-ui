@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { buttonProps,buttonGroupProps, buttonEvents, buttonSlots } from "../../example/button/api.ts"
+import { buttonProps, buttonGroupProps, buttonEvents, buttonSlots, buttonGroupSlots } from "../../example/button/api.ts"
 </script>
 
 ## Button 属性
@@ -17,3 +17,7 @@ import { buttonProps,buttonGroupProps, buttonEvents, buttonSlots } from "../../e
 ## Button 插槽
 
 <api-block type="slot" :data="buttonSlots" />
+
+## ButtonGroup 插槽
+
+<api-block type="slot" :data="buttonGroupSlots" />

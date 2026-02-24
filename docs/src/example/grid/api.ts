@@ -1,4 +1,4 @@
-import { PropItem } from "../../.vitepress/components/api-block/src/types";
+import { PropItem, SlotItem } from "../../.vitepress/components/api-block/src/types";
 
 export const rowProps: PropItem[] = [
   {
@@ -65,4 +65,12 @@ export const colProps: PropItem[] = [
     type: ["ColResponsive"],
     optional: ["Number", "{ span: ColSpan; offset: ColOffset }"],
   },
+];
+
+export const rowSlots: SlotItem[] = [
+  { name: "default", remark: "Row 内容" },
+];
+
+export const colSlots: SlotItem[] = [
+  { name: "default", remark: "Col 内容" },
 ];
