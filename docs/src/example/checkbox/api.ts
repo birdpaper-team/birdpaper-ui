@@ -1,4 +1,4 @@
-import { EventItem, PropItem } from "../../.vitepress/components/api-block/src/types";
+import { EventItem, PropItem, SlotItem } from "../../.vitepress/components/api-block/src/types";
 
 export const checkboxProps: PropItem[] = [
   {
@@ -40,3 +40,7 @@ export const checkboxEvents: EventItem[] = [{ name: "change", remark: "勾选触
 export const checkboxGroupEvents: EventItem[] = [
   { name: "change", remark: "勾选触发", params: "{model:CheckboxValue[]}" },
 ];
+
+export const checkboxSlots: SlotItem[] = [{ name: "default", remark: "标签内容" }];
+
+export const checkboxGroupSlots: SlotItem[] = [{ name: "default", remark: "Checkbox 列表" }];

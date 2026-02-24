@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { commonPickerProps, datePickerProps, monthPickerProps, yearPickerProps } from "../../example/datePicker/api.ts"
+import { commonPickerProps, datePickerProps, monthPickerProps, yearPickerProps, rangePickerProps } from "../../example/datePicker/api.ts"
 </script>
 
 ## 公共属性
@@ -17,3 +17,7 @@ import { commonPickerProps, datePickerProps, monthPickerProps, yearPickerProps }
 ## YearPicker 属性
 
 <api-block type="prop" :data="yearPickerProps" />
+
+## RangePicker 属性
+
+<api-block type="prop" :data="rangePickerProps" />

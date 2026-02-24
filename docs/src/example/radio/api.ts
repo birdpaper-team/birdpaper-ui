@@ -1,4 +1,4 @@
-import { EventItem, PropItem } from "../../.vitepress/components/api-block/src/types";
+import { EventItem, PropItem, SlotItem } from "../../.vitepress/components/api-block/src/types";
 
 export const radioProps: PropItem[] = [
   { name: "v-model", remark: "绑定值", type: ["RadioValue"], optional: ["String", "Number", "Boolean"] },
@@ -21,3 +21,7 @@ export const radioGroupProps: PropItem[] = [
 ];
 
 export const radioEvents: EventItem[] = [{ name: "change", remark: "单选值改变触发", params: "value:RadioValue" }];
+
+export const radioSlots: SlotItem[] = [{ name: "default", remark: "内容" }];
+
+export const radioGroupSlots: SlotItem[] = [{ name: "default", remark: "Radio 列表" }];

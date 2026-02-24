@@ -1,10 +1,8 @@
-import { EventItem, PropItem } from "../../.vitepress/components/api-block/src/types";
+import { EventItem, MethodItem, PropItem } from "../../.vitepress/components/api-block/src/types";
 
 export const verifyCodeProps: PropItem[] = [
   { name: "v-model", remark: "绑定值", type: ["String"] },
-  { name: "name", remark: "输入框名称", type: ["String"] },
   { name: "type", remark: "输入框类型", type: ["InputType"], optional: ["text", "password"], default: "text" },
-  { name: "placeholder", remark: "占位文本", type: ["String"] },
   {
     name: "size",
     remark: "输入框尺寸",
@@ -18,3 +16,5 @@ export const verifyCodeProps: PropItem[] = [
 ];
 
 export const verifyCodeEvents: EventItem[] = [{ name: "finish", remark: "输入完成触发" }];
+
+export const verifyCodeMethods: MethodItem[] = [{ name: "focus", remark: "聚焦" }];

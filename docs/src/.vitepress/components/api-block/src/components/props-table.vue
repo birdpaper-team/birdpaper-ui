@@ -1,7 +1,7 @@
 <template>
   <bp-table :data>
     <template #columns>
-      <bp-table-column :title="locales[lang].PROPS_TABLE.NAME" data-index="name" width="140">
+      <bp-table-column :title="locales[lang].PROPS_TABLE.NAME" data-index="name" minWidth="180">
         <template #cell="{ record }">
           <span class="name-inner font-quick copy-column" @click="doCopy(record.name)">
             {{ record.name }}

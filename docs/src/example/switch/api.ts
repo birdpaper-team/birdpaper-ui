@@ -7,7 +7,15 @@ export const switchProps: PropItem[] = [
     type: ["SwitchValue"],
     optional: ["String", "Number", "Boolean"],
   },
+  { name: "id", remark: "输入框 ID", type: ["String"] },
   { name: "disabled", remark: "是否禁用", type: ["Boolean"], default: false },
+  {
+    name: "size",
+    remark: "尺寸",
+    type: ["SwitchSize"],
+    optional: ["mini", "small"],
+    default: "small",
+  },
   {
     name: "check-value",
     remark: "开启时的值",
