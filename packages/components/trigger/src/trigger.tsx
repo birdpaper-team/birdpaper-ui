@@ -187,7 +187,6 @@ export default defineComponent({
                     ref: wrapperRef,
                     class: [
                       `${clsBlockName}-wrapper`,
-                      props.showShadow && `${clsBlockName}-wrapper-shadow`,
                       props.showArrow && `${clsBlockName}-wrapper-arrow`,
                     ],
                     onMouseenter: handleMouseEnter,
@@ -233,7 +232,6 @@ export default defineComponent({
                     ref: wrapperRef,
                     class: [
                       `${clsBlockName}-wrapper`,
-                      props.showShadow && `${clsBlockName}-wrapper-shadow`,
                       props.showArrow && `${clsBlockName}-wrapper-arrow`,
                     ],
                     onMouseenter: handleMouseEnter,
@@ -273,7 +271,6 @@ export default defineComponent({
                     ref: wrapperRef,
                     class: [
                       `${clsBlockName}-wrapper`,
-                      props.showShadow && `${clsBlockName}-wrapper-shadow`,
                       props.showArrow && `${clsBlockName}-wrapper-arrow`,
                     ],
                     onMouseenter: handleMouseEnter,

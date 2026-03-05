@@ -171,15 +171,6 @@ export const triggerProps = {
     default: false,
   },
   /**
-   * @type boolean
-   * @description Show popup shadow.
-   * @default true
-   */
-  showShadow: {
-    type: Boolean,
-    default: true,
-  },
-  /**
    * @type Function
    * @description Get popup container element.
    * @default () => document.body

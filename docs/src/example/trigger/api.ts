@@ -26,7 +26,6 @@ export const triggerProps: PropItem[] = [
   { name: "close-delay", remark: "延迟关闭(ms)", type: ["Number"], default: 100 },
   { name: "boundary-padding", remark: "边界留白", type: ["Number"], default: 8 },
   { name: "show-arrow", remark: "是否显示箭头", type: ["Boolean"], default: false },
-  { name: "show-shadow", remark: "是否显示阴影", type: ["Boolean"], default: true },
   { name: "get-popup-container", remark: "自定义挂载容器", type: ["Function"] },
 ];
 
