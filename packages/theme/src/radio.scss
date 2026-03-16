@@ -70,7 +70,7 @@
 
   &-label {
     color: rgba(getCssVar("radio", "label-color"), 1);
-    font-size: getCssVar("size-font-size", 'default');
+    font-size: getCssVar("size-font-size", "default");
     font-weight: normal;
     margin-left: 8px;
     line-height: unset;
@@ -121,7 +121,7 @@
 
 .#{$B}-group-button {
   @include css-var-from-global-rgb(("radio", "radio-button-bg"), ("gray", "2"));
-  background-color: rgba(getCssVar("radio", "radio-button-bg"), 1);
+  background-color: rgba(var(--bp-gray-2-rgb), 0.68);
 
   .#{$B} {
     &:not(:first-child) {
@@ -141,7 +141,13 @@
     }
 
     &-label {
+      @include flex(row, center, center);
       margin-left: 0px;
+      color: rgba(getCssVar("radio", "label-color"), 1);
+
+      svg[class*="-icon-"] {
+        fill: rgba(getCssVar("radio", "radio-color"), 1);
+      }
     }
 
     &-check {
@@ -149,6 +155,10 @@
         background-color: var(--bp-gray-0);
         color: rgba(getCssVar("radio", "radio-border-check"), 1);
         transition: all 0.2s;
+
+        svg[class*="-icon-"] {
+          fill: rgba(getCssVar("radio", "radio-border-check"), 1);
+        }
       }
     }
   }
@@ -160,7 +170,7 @@
     min-height: getCssVar("size-height", $size);
     border-radius: getCssVar("size-border-radius", $size);
     padding: 0 calc(getCssVar("size-padding", $size) / 4);
-    
+
     .#{$B}-label {
       padding: 0 calc(getCssVar("size-padding", $size) / 2);
       height: calc(getCssVar("size-height", $size) - calc(getCssVar("size-padding", $size) / 2));
