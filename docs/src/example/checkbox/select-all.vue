@@ -3,6 +3,7 @@
     <bp-checkbox v-model:check="isSelectAll" :indeterminate @change="onSelectAllChange">全选</bp-checkbox>
   </bp-space>
 
+  {{ val }}
   <bp-checkbox-group v-model="val" style="margin-top: 20px" @change="onChange">
     <bp-checkbox v-for="v in options" :value="v">{{ v }}</bp-checkbox>
   </bp-checkbox-group>
@@ -27,7 +28,10 @@ const onChange = (e: string[]) => {
   if (!e.length) return (isSelectAll.value = false);
 
   isSelectAll.value = true;
-  if (e.length === options.length) return (indeterminate.value = false);
+  if (e.length === options.length) {
+    indeterminate.value = false;
+    return
+  }
 
   indeterminate.value = true;
 };
