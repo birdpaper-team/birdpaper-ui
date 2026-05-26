@@ -27,11 +27,21 @@
   width: 100%;
   transition: all 0.2s ease;
 
+  .dark & {
+    background-color: var(--bp-gray-2);
+    background-image: none;
+  }
+
   &:hover {
     background-color: rgba(var(--bp-gray-2-rgb), 0.48);
     -webkit-backdrop-filter: blur(7px);
     backdrop-filter: blur(7px);
     box-shadow: 0 8px 22px rgba(var(--bp-gray-1-rgb), 0.08), 0 1px 0 rgba(var(--bp-gray-1-rgb), 0.05);
+
+    .dark & {
+      background-color: var(--bp-gray-1);
+      background-image: none;
+    }
 
     .action-icon {
       opacity: 1;
@@ -46,6 +56,11 @@
     backdrop-filter: blur(8px);
     box-shadow: 0 8px 22px rgba(var(--bp-primary-6-rgb), 0.08), 0 1px 0 rgba(var(--bp-primary-6-rgb), 0.06);
     transition: all 0.18s ease;
+
+    .dark & {
+      background-color: var(--bp-gray-1);
+      background-image: none;
+    }
   }
 
   &-inner {

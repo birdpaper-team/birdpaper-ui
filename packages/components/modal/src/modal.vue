@@ -108,7 +108,7 @@ const modalStyle = computed(() => ({
   width: typeof props.width === "number" ? `${props.width}px` : props.width,
   marginTop: props.fullscreen ? 0 : props.top,
   marginBottom: props.fullscreen ? 0 : props.bottom,
-  borderRadius: props.borderRadius,
+  borderRadius: props.fullscreen ? 0 : props.borderRadius,
 }));
 
 const handleClose = () => {
