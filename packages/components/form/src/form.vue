@@ -20,7 +20,7 @@ const cls = computed(() => [clsBlockName.value, `${clsBlockName.value}-${layout.
 
 // props and refs
 const props: FormProps = defineProps(formProps);
-const { layout } = toRefs(props as any);
+const { layout, labelWidth, labelPosition, rules: formRules } = toRefs(props as any);
 
 // registered form item contexts
 const fields = ref<FormItemContext[]>([]);
@@ -50,9 +50,9 @@ function removeField(ctx: FormItemContext) {
 // provide context to child FormItem components
 const formContext: FormContext = reactive({
   model: props.model,
-  rules: props.rules,
-  labelWidth: props.labelWidth,
-  labelPosition: props.labelPosition,
+  rules: formRules,
+  labelWidth,
+  labelPosition,
   addField,
   removeField,
 });
