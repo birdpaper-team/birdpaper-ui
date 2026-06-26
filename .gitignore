@@ -6,3 +6,4 @@ lib/
 .idea/
 .npmrc
 .trae/
+coverage/
