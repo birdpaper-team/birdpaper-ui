@@ -3,6 +3,7 @@ import { locales } from "./locales/index";
 
 const config: import("vitepress").UserConfig = {
   lastUpdated: false,
+  ignoreDeadLinks: true,
   cleanUrls: true,
   appearance: true,
   locales,
