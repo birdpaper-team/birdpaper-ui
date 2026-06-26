@@ -20,3 +20,33 @@
 @function getCssVarWithDefault($args, $default) {
   @return var(#{joinVarName($args)}, #{$default});
 }
+
+// Helper: return different color levels based on status name.
+// status-level("gray", "9", "6") => "9"  (gray uses lighter shades)
+// status-level("primary", "9", "6") => "6"
+@function status-level($status, $gray-val, $other-val) {
+  @if $status == "gray" {
+    @return $gray-val;
+  }
+  @return $other-val;
+}
+
+// Helper: map "gray" status to "primary" for icon colors, pass through others.
+// status-icon("gray") => "primary"
+// status-icon("success") => "success"
+@function status-icon($status) {
+  @if $status == "gray" {
+    @return "primary";
+  }
+  @return $status;
+}
+
+// Helper: return different values for mini vs non-mini sizes.
+// size-val("mini", 1px, 6px) => 1px
+// size-val("small", 1px, 6px) => 6px
+@function size-val($size, $mini-val, $other-val) {
+  @if $size == "mini" {
+    @return $mini-val;
+  }
+  @return $other-val;
+}

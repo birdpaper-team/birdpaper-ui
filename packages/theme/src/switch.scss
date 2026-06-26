@@ -114,7 +114,7 @@ $switchSizes: "small", "mini";
       .#{$B}-slider-inner {
         width: max-content;
         padding-left: $height;
-        padding-right: if($size == "mini", 1px, 6px);
+        padding-right: size-val($size, 1px, 6px);
 
         @if $size == "mini" {
           display: flex;
@@ -132,7 +132,7 @@ $switchSizes: "small", "mini";
 
     .#{$B}-check {
       .#{$B}-slider-inner {
-        padding-left: if($size == "mini", 1px, 6px);
+        padding-left: size-val($size, 1px, 6px);
         padding-right: $height;
       }
 

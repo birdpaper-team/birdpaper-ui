@@ -109,7 +109,7 @@ $status-list: "gray", "success", "warning", "danger";
 
 @each $status in $status-list {
   .#{$B}-#{$status} {
-    @include css-var-from-global-rgb(("message", "icon-color"), (if($status == "gray", "primary", $status), "6"));
+    @include css-var-from-global-rgb(("message", "icon-color"), (status-icon($status), "6"));
     @include css-var-from-global-rgb(("message", "box-shadow"), ("gray", "2"));
     @include css-var-from-global-rgb(("message", "bg-color"), ("gray", "0"));
     @include css-var-from-global-rgb(("message", "border-color"), ("gray", "2"));
@@ -117,10 +117,10 @@ $status-list: "gray", "success", "warning", "danger";
   }
 
   .#{$B}-plain-#{$status} {
-    @include css-var-from-global-rgb(("message", "icon-color"), (if($status == "gray", "primary", $status), "6"));
-    @include css-var-from-global-rgb(("message", "bg-color"), ($status, if($status == "gray", "0", "1")));
-    @include css-var-from-global-rgb(("message", "border-color"), ($status, if($status == "gray", "2", "6")));
-    @include css-var-from-global-rgb(("message", "color"), ($status, if($status == "gray", "10", "6")));
+    @include css-var-from-global-rgb(("message", "icon-color"), (status-icon($status), "6"));
+    @include css-var-from-global-rgb(("message", "bg-color"), ($status, status-level($status, "0", "1")));
+    @include css-var-from-global-rgb(("message", "border-color"), ($status, status-level($status, "2", "6")));
+    @include css-var-from-global-rgb(("message", "color"), ($status, status-level($status, "10", "6")));
     @include css-var-from-global-rgb(("message", "box-shadow"), ($status, "1"));
   }
 }
