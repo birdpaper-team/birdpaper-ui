@@ -118,14 +118,14 @@ provide(selectInjectionKey, {
 
       const valueIndex = modelArray.indexOf(v);
       if (valueIndex !== -1) {
-        modelArray.splice(valueIndex, 1);
-        labelArray.splice(valueIndex, 1);
+        model.value = modelArray.filter((_, i) => i !== valueIndex);
+        labelModel.value = labelArray.filter((_, i) => i !== valueIndex);
         emits("change", v);
         return;
       }
 
-      modelArray.push(v);
-      labelArray.push(payload.label);
+      model.value = [...modelArray, v];
+      labelModel.value = [...labelArray, payload.label];
       emits("change", v);
     } else {
       model.value = v;
