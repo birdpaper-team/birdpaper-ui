@@ -35,6 +35,10 @@ class ModalManager {
 
   close() {
     render(null, this.mask);
+    // 移除 mask DOM 元素，防止内存泄漏
+    if (this.mask.parentNode) {
+      this.mask.parentNode.removeChild(this.mask);
+    }
   }
 }
 

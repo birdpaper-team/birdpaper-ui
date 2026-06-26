@@ -6,5 +6,6 @@
  *          or an empty string if the input is `undefined` or `null`.
  */
 export function formatNumberWithCommas(num: number, separator: string): string {
+  if (num == null || isNaN(num)) return "";
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, separator);
 }

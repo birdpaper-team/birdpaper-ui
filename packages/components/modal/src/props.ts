@@ -1,6 +1,6 @@
 import type { ExtractPropTypes, PropType } from "vue";
 import { ModalType } from "./types";
-import { ButtonProps } from "@birdpaper-ui/birdpaper-ui";
+import type { ButtonProps } from "@birdpaper-ui/components/button";
 
 export const modalProps = {
   /**
