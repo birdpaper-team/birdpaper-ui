@@ -1,4 +1,4 @@
-import { Component, Slots, VNode, VNodeTypes } from "vue";
+import { Component, Slots, VNode, VNodeTypes, ShapeFlags } from "vue";
 
 // 返回是否是 HTML 元素
 export const isHtmlEl = (e: any) => e && e.nodeType === 1;
@@ -35,7 +35,11 @@ export const getScrollContainer = (el: HTMLElement, isVertical: boolean) => {
 export const isScroll = (el: HTMLElement, isVertical: boolean) => {
   const determinedDirection = isVertical === null || isVertical === undefined;
 
-  const overflow = determinedDirection ? getStyle(el, "overflow") : isVertical ? getStyle(el, "overflow-y") : getStyle(el, "overflow-x");
+  const overflow = determinedDirection
+    ? getStyle(el, "overflow")
+    : isVertical
+    ? getStyle(el, "overflow-y")
+    : getStyle(el, "overflow-x");
 
   return overflow && overflow.match(/(scroll|auto)/);
 };
@@ -64,20 +68,6 @@ export const getStyle = function (element: HTMLElement, styleName: any) {
   }
 };
 
-enum ShapeFlags {
-  ELEMENT = 1,
-  FUNCTIONAL_COMPONENT = 1 << 1,
-  STATEFUL_COMPONENT = 1 << 2,
-  COMPONENT = ShapeFlags.STATEFUL_COMPONENT | ShapeFlags.FUNCTIONAL_COMPONENT,
-  TEXT_CHILDREN = 1 << 3,
-  ARRAY_CHILDREN = 1 << 4,
-  SLOTS_CHILDREN = 1 << 5,
-  TELEPORT = 1 << 6,
-  SUSPENSE = 1 << 7,
-  COMPONENT_SHOULD_KEEP_ALIVE = 1 << 8,
-  COMPONENT_KEPT_ALIVE = 1 << 9,
-}
-
 export const isElement = (vn: VNode) => {
   return Boolean(vn && vn.shapeFlag & ShapeFlags.ELEMENT);
 };
@@ -87,7 +77,7 @@ export const isComponent = (vn: VNode, type?: VNodeTypes): type is Component => 
 };
 
 export const isTextChildren = (child: VNode, children: VNode["children"]): children is string => {
-  return Boolean(child && child.shapeFlag & 8);
+  return Boolean(child && child.shapeFlag & ShapeFlags.TEXT_CHILDREN);
 };
 
 export const isArrayChildren = (vn: VNode, children: VNode["children"]): children is VNode[] => {

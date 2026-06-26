@@ -80,10 +80,10 @@ export const useDayJs = (lang: LangsType, model: string) => {
   };
 
   const yearCell = ref<YearCell[]>([]);
-  const firstYear = ref<number>(current.value.subtract(5, "year").year());
+  const firstYear = computed(() => current.value.subtract(5, "year").year());
   const setYearCell = () => {
     for (let i = 1; i < 13; i++) {
-      const value = current.value.year(firstYear.value + i).year();
+      const value = firstYear.value + i;
 
       yearCell.value[i - 1] = {
         value,

@@ -20,10 +20,21 @@
 
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
-import { computed, inject, onMounted, onBeforeUnmount, ref, watch, toRefs, type ExtractPropTypes, Transition } from "vue";
+import {
+  computed,
+  inject,
+  onMounted,
+  onBeforeUnmount,
+  ref,
+  watch,
+  toRefs,
+  type ExtractPropTypes,
+  Transition,
+} from "vue";
+import Schema from "async-validator";
 import { formItemProps } from "../props";
 import type { FormItemProps } from "../props";
-import type { FormContext, FormItemContext } from "../types";
+import { formContextKey, type FormContext, type FormItemContext } from "../types";
 
 defineOptions({ name: "FormItem" });
 
@@ -35,7 +46,7 @@ const props = defineProps(formItemProps) as Props;
 const { field } = toRefs(props as any);
 
 // form context may be undefined
-const formContext = inject<FormContext | null>("formContext", null);
+const formContext = inject<FormContext | null>(formContextKey, null);
 
 // local state for error message
 const errorMessage = ref<string>("");
@@ -51,25 +62,24 @@ watch(
 // Helpers used by form context
 async function validate(): Promise<boolean> {
   if (!formContext || !field.value) return true;
-  
+
   // Get validation rules
   const rules = getRules();
   if (!rules) return true;
-  
+
   try {
     // Create schema and validate
-    const Schema = (await import('async-validator')).default;
     const schema = new Schema({ [field.value]: rules });
     await schema.validate({ [field.value]: formContext.model[field.value] });
-    
+
     // Validation passed
-    updateError('');
+    updateError("");
     return true;
   } catch (errors: any) {
     // Validation failed
     const errorMsg = errors.errors?.[0]?.message || String(errors);
     updateError(errorMsg);
-    console.warn('FormItem validate error: ', errorMsg);
+    console.warn("FormItem validate error: ", errorMsg);
     return false;
   }
 }
@@ -117,9 +127,7 @@ const labelStyle = computed(() => {
   }
 
   const width = formContext?.labelWidth;
-  return width !== undefined
-    ? { width: typeof width === "number" ? `${width}px` : width }
-    : {};
+  return width !== undefined ? { width: typeof width === "number" ? `${width}px` : width } : {};
 });
 
 // label position class

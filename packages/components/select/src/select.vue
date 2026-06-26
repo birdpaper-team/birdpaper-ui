@@ -170,7 +170,7 @@ watchEffect(() => {
       labelModel.value = [];
     }
   } catch (error) {
-    return {};
+    console.warn("[bp-select] watchEffect error:", error);
   }
 });
 

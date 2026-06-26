@@ -15,8 +15,8 @@ export const installer = (components: any[] = []) => {
   };
 
   return {
-    // TODO: Write first, then update automatically.
-    version: "3.0.0",
+    // NOTE: Keep in sync with packages/birdpaper-ui/package.json version.
+    version: "3.0.0-alpha.47",
     install,
   };
 };

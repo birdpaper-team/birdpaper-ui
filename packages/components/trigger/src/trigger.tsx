@@ -65,7 +65,7 @@ export default defineComponent({
       hoverTimer.value = window.setTimeout(() => updateVisible(false), props.closeDelay);
     };
 
-    const handleResize = async () => {
+    const handleResize = () => {
       if (!triggerRef.value || !visible.value || !wrapperRef.value) return;
 
       const el = triggerInnerRef.value;
@@ -185,10 +185,7 @@ export default defineComponent({
                   "div",
                   {
                     ref: wrapperRef,
-                    class: [
-                      `${clsBlockName}-wrapper`,
-                      props.showArrow && `${clsBlockName}-wrapper-arrow`,
-                    ],
+                    class: [`${clsBlockName}-wrapper`, props.showArrow && `${clsBlockName}-wrapper-arrow`],
                     onMouseenter: handleMouseEnter,
                     onMouseleave: handleMouseLeave,
                   },
@@ -230,10 +227,7 @@ export default defineComponent({
                   "div",
                   {
                     ref: wrapperRef,
-                    class: [
-                      `${clsBlockName}-wrapper`,
-                      props.showArrow && `${clsBlockName}-wrapper-arrow`,
-                    ],
+                    class: [`${clsBlockName}-wrapper`, props.showArrow && `${clsBlockName}-wrapper-arrow`],
                     onMouseenter: handleMouseEnter,
                     onMouseleave: handleMouseLeave,
                   },
@@ -269,10 +263,7 @@ export default defineComponent({
                   "div",
                   {
                     ref: wrapperRef,
-                    class: [
-                      `${clsBlockName}-wrapper`,
-                      props.showArrow && `${clsBlockName}-wrapper-arrow`,
-                    ],
+                    class: [`${clsBlockName}-wrapper`, props.showArrow && `${clsBlockName}-wrapper-arrow`],
                     onMouseenter: handleMouseEnter,
                     onMouseleave: handleMouseLeave,
                   },

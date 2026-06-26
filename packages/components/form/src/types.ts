@@ -1,10 +1,13 @@
-import type { Rule, Rules, Values } from 'async-validator';
+import type { InjectionKey } from "vue";
+import type { Rule, Rules, Values } from "async-validator";
+
+export const formContextKey: InjectionKey<FormContext> = Symbol("formContext");
 
 export interface FormContext {
   model: Record<string, any>;
   rules?: Rules | Rule;
   labelWidth?: string | number;
-  labelPosition?: 'right' | 'left' | 'top';
+  labelPosition?: "right" | "left" | "top";
   addField: (field: FormItemContext) => void;
   removeField: (field: FormItemContext) => void;
 }

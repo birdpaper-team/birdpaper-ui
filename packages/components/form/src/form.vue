@@ -8,7 +8,8 @@
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { computed, provide, reactive, ref, toRefs } from "vue";
 import { FormProps, formProps } from "./props";
-import type { FormContext, FormItemContext } from "./types";
+import type { FormItemContext } from "./types";
+import { formContextKey, type FormContext } from "./types";
 import Schema from "async-validator";
 
 defineOptions({ name: "Form" });
@@ -52,8 +53,7 @@ const formContext: FormContext = reactive({
   removeField,
 });
 
-
-provide("formContext", formContext);
+provide(formContextKey, formContext);
 
 // validate a single field with async-validator
 async function validateField(fieldOrCtx: FormItemContext | string): Promise<boolean> {
@@ -61,13 +61,13 @@ async function validateField(fieldOrCtx: FormItemContext | string): Promise<bool
   let fieldName: string;
 
   // Determine if we received a field name string or a context object
-  if (typeof fieldOrCtx === 'string') {
+  if (typeof fieldOrCtx === "string") {
     fieldName = fieldOrCtx;
-    ctx = fields.value.find(item => item.field === fieldName);
+    ctx = fields.value.find((item) => item.field === fieldName);
     if (!ctx) return true; // Field not found, consider validation passed
   } else {
     ctx = fieldOrCtx;
-    fieldName = ctx.field || '';
+    fieldName = ctx.field || "";
     if (!fieldName) return true;
   }
 
@@ -81,7 +81,7 @@ async function validateField(fieldOrCtx: FormItemContext | string): Promise<bool
     return true;
   } catch (errors: any) {
     ctx.updateError(errors.errors?.[0]?.message || String(errors));
-    console.warn('Form validate error: ', errors.errors?.[0]?.message || String(errors));
+    console.warn("Form validate error: ", errors.errors?.[0]?.message || String(errors));
     return false;
   }
 }
@@ -106,7 +106,8 @@ function resetFields() {
   if (!props.model) return;
   fields.value.forEach((item) => {
     if (item.field) {
-      props.model[item.field] = initialValues.value[item.field] || "";
+      const initial = initialValues.value[item.field];
+      props.model[item.field] = initial !== undefined ? initial : "";
       item.clearValidate();
     }
   });
