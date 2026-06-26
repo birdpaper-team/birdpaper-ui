@@ -51,6 +51,10 @@ describe("Table Selection", () => {
       },
     });
 
+    // 等待 onMounted → nextTick → init() 完成，列数据填充后 checkbox 才会渲染
+    await nextTick();
+    await nextTick();
+
     const headerCheckbox = wrapper.find(".bp-table-header-wrap .bp-checkbox");
     await headerCheckbox.trigger("click");
     await nextTick();
@@ -78,10 +82,12 @@ describe("Table Selection", () => {
       },
     });
 
+    // 等待 onMounted → nextTick → init() 完成
+    await nextTick();
     await nextTick();
 
-    const minusIcon = wrapper.find(".bp-table-header-wrap .bp-icon-subtract-line");
-    const checkIcon = wrapper.find(".bp-table-header-wrap .bp-icon-check-line");
+    const minusIcon = wrapper.find(".bp-table-header-wrap .bp-icon-icon-subtract-line");
+    const checkIcon = wrapper.find(".bp-table-header-wrap .bp-icon-icon-check-line");
 
     expect(minusIcon.exists()).toBe(true);
     expect(checkIcon.exists()).toBe(false);
