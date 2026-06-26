@@ -7,10 +7,10 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "sourceMap": false,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "allowJs": false,
     "strict": false,
-    "strictNullChecks": false,
+    "strictNullChecks": true,
     "strictFunctionTypes": false,
     "strictBindCallApply": false,
     "strictPropertyInitialization": false,
@@ -29,9 +29,6 @@
     },
     "typeRoots": ["./node_modules/@types", "./jsx-types.d.ts"]
   },
-  "include": [
-    "packages/**/*",
-    "jsx-types.d.ts"
-  ],
+  "include": ["packages/**/*", "jsx-types.d.ts"],
   "exclude": ["node_modules", "dist", "**/*.js"]
 }

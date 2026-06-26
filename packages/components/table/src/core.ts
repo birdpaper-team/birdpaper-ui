@@ -124,14 +124,14 @@ export const useTableCore = () => {
       const minWidth = col.minWidth;
 
       if (width) {
-        width_list.push(width);
+        width_list.push(Number(width));
         continue;
       }
 
       // 是否设置成最小宽度：当含有最小宽度属性并且最小宽度大于计算得出的最大列宽
-      const hasMinWidth = minWidth && minWidth > adapt_width;
+      const hasMinWidth = minWidth && Number(minWidth) > adapt_width;
       if (hasMinWidth) {
-        width_list.push(minWidth);
+        width_list.push(Number(minWidth));
         continue;
       }
 
