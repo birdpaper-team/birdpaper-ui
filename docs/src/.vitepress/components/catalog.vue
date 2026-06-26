@@ -1,11 +1,19 @@
 <template>
   <div :class="clsBlockName">
     <div :class="`${clsBlockName}-group`" v-for="(item, index) in list" :key="`group-${index}`">
-      <div :class="`${clsBlockName}-group-title`">{{ item.text }}</div>
-      <div :class="`${clsBlockName}-group-child`">
-        <div :class="`${clsBlockName}-group-item`" v-for="v in item.items" :key="`item-${v.link}`">
-          <div :class="`${clsBlockName}-group-item-header font-quick`" v-html="v.text"></div>
-        </div>
+      <div :class="`${clsBlockName}-group-head`">
+        <div :class="`${clsBlockName}-group-dot`"></div>
+        <div :class="`${clsBlockName}-group-title`">{{ item.text }}</div>
+        <div :class="`${clsBlockName}-group-count`">{{ item.items.length }}</div>
+      </div>
+      <div :class="`${clsBlockName}-group-list`">
+        <a
+          :class="`${clsBlockName}-group-item font-quick`"
+          v-for="v in item.items"
+          :key="`item-${v.link}`"
+          :href="v.link"
+          v-html="v.text"
+        ></a>
       </div>
     </div>
   </div>
