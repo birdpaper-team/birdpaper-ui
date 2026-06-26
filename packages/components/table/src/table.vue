@@ -378,9 +378,9 @@ watch(
 );
 
 const cls = computed(() => [
-  clsBlockName,
-  props.border && `${clsBlockName}-border`,
-  props.stripe && `${clsBlockName}-stripe`,
+  clsBlockName.value,
+  props.border && `${clsBlockName.value}-border`,
+  props.stripe && `${clsBlockName.value}-stripe`,
 ]);
 </script>
 

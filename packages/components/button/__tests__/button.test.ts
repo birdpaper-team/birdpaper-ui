@@ -32,4 +32,30 @@ describe("Button", () => {
 
     expect(wrapper.find(".bp-icon-loading").exists()).toBe(true);
   });
+
+  it("Enter key does not double-fire click", async () => {
+    const wrapper = mount(Button, {
+      slots: { default: "Click me" },
+    });
+    await wrapper.find("button").trigger("keydown", { key: "Enter" });
+    // Enter should NOT trigger click via onKeydown (native button handles it)
+    expect(wrapper.emitted("click")).toBeFalsy();
+  });
+
+  it("Space key triggers click", async () => {
+    const wrapper = mount(Button, {
+      slots: { default: "Click me" },
+    });
+    await wrapper.find("button").trigger("keydown", { key: " " });
+    expect(wrapper.emitted("click")).toBeTruthy();
+  });
+
+  it("disabled button does not emit click", async () => {
+    const wrapper = mount(Button, {
+      props: { disabled: true },
+      slots: { default: "Disabled" },
+    });
+    await wrapper.find("button").trigger("click");
+    expect(wrapper.emitted("click")).toBeFalsy();
+  });
 });

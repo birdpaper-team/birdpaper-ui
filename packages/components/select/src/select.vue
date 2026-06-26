@@ -64,8 +64,8 @@ const { clsBlockName } = useNamespace("select");
 const model = defineModel<SelectValue | SelectValue[]>({ default: "" });
 const labelModel = ref<string | string[]>("");
 const optionListCls = computed(() => [
-  `${clsBlockName}-content`,
-  `${clsBlockName}-content-${props.size}`,
+  `${clsBlockName.value}-content`,
+  `${clsBlockName.value}-content-${props.size}`,
   "select-none",
 ]);
 

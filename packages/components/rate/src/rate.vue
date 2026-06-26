@@ -24,7 +24,11 @@ const model = defineModel({ default: 0 });
 const props: RateProps = defineProps(rateProps);
 
 const cls = computed(() => {
-  return [clsBlockName, props.disabled && `${clsBlockName}-disabled`, props.readonly && `${clsBlockName}-readonly`];
+  return [
+    clsBlockName.value,
+    props.disabled && `${clsBlockName.value}-disabled`,
+    props.readonly && `${clsBlockName.value}-readonly`,
+  ];
 });
 
 const current = ref(props.half ? model.value : Math.round(model.value) || 0);

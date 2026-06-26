@@ -29,10 +29,10 @@ const model = defineModel<SwitchValue>({ default: false });
 const props: SwitchProps = defineProps(switchProps);
 
 const cls = computed(() => [
-  clsBlockName,
+  clsBlockName.value,
   "select-none",
-  `${clsBlockName}-${props.size}`,
-  (props.disabled || loading.value) && `${clsBlockName}-disabled`,
+  `${clsBlockName.value}-${props.size}`,
+  (props.disabled || loading.value) && `${clsBlockName.value}-disabled`,
 ]);
 
 const isCheck = computed(() => model.value === props.checkValue);

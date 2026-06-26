@@ -23,9 +23,13 @@ const props: LinkProps = defineProps(linkProps);
 
 const disabled = computed<boolean>(() => props.disabled || !!props.loading);
 
-const cls = computed(() => [clsBlockName, `${clsBlockName}-${props.status}`, `${clsBlockName}-${props.size}`]);
-const innerCls = computed(() => [`${clsBlockName}-inner`, { "pl-1": props.loading }]);
-const iconCls = computed(() => [`${clsBlockName}-icon`, props.loading ? "mr-0" : "mr-1"]);
+const cls = computed(() => [
+  clsBlockName.value,
+  `${clsBlockName.value}-${props.status}`,
+  `${clsBlockName.value}-${props.size}`,
+]);
+const innerCls = computed(() => [`${clsBlockName.value}-inner`, { "pl-1": props.loading }]);
+const iconCls = computed(() => [`${clsBlockName.value}-icon`, props.loading ? "mr-0" : "mr-1"]);
 const iconInnerCls = computed(() => [{ "bp-icon-loading": props.loading }]);
 
 // Icons.

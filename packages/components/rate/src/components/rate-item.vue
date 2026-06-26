@@ -29,7 +29,7 @@ const { clsBlockName } = useNamespace("rate-item");
 const _itemWdith = 22;
 
 const cls = computed(() => {
-  return [clsBlockName, val.value > 0 ? (val.value === 1 ? "full-active" : "half-active") : ""];
+  return [clsBlockName.value, val.value > 0 ? (val.value === 1 ? "full-active" : "half-active") : ""];
 });
 
 const isHalf = ref(false);

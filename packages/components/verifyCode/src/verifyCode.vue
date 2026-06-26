@@ -33,16 +33,23 @@ const model = defineModel<string>({ default: "" });
 const props: VerifyCodeProps = defineProps(verifyCodeProps);
 const emits = defineEmits(["finish"]);
 
-let inpRefs: Array<HTMLInputElement | null> = [];
+let inpRefs: HTMLInputElement[] = [];
 const setItemRef = (el: Element | ComponentPublicInstance | null) => {
-  // Only keep HTMLInputElement references
+  if (inpRefs.length >= props.length) {
+    inpRefs = [];
+  }
   if (el instanceof HTMLInputElement) {
     inpRefs.push(el);
   }
 };
 
 const cls = computed(() => {
-  return [clsBlockName, "select-none", `${clsBlockName}-${props.size}`, props.disabled && `${clsBlockName}-disabled`];
+  return [
+    clsBlockName.value,
+    "select-none",
+    `${clsBlockName.value}-${props.size}`,
+    props.disabled && `${clsBlockName.value}-disabled`,
+  ];
 });
 
 const globalValue = ref<string[]>([]);
@@ -69,9 +76,14 @@ const onInput = (e: Event, index: number) => {
 const onPaste = (e: ClipboardEvent) => {
   if (props.disabled || props.readonly) return;
 
-  var clipboardData = e.clipboardData || window["clipboardData"];
-  var pastedData = clipboardData.getData("Text");
+  e.preventDefault();
+  const clipboardData = e.clipboardData || (window as any)["clipboardData"];
+  const pastedData = clipboardData.getData("Text");
   globalValue.value = [...pastedData].slice(0, props.length);
+  updateValue();
+  // Focus the last filled input or the next empty one
+  const focusIndex = Math.min(globalValue.value.length, props.length - 1);
+  inpRefs[focusIndex]?.focus();
 };
 
 const focus = () => {

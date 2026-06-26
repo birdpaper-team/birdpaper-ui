@@ -37,9 +37,20 @@ const init = () => {
 };
 
 const updateValue = (value: number) => {
-  intText.value = getIntText(value);
-  if (props.precision) {
-    decText.value = getDecimalText(value);
+  const precision = props.precision || 0;
+  const rounded = Number(value).toFixed(precision);
+  const parts = rounded.split(".");
+
+  let intVal = parts[0] || "0";
+  if (props.showSeparator) {
+    intVal = formatNumberWithCommas(Number(intVal), props.separator);
+  }
+  intText.value = intVal;
+
+  if (precision > 0) {
+    decText.value = `.${parts[1] || "0".repeat(precision)}`;
+  } else {
+    decText.value = "";
   }
 };
 
@@ -57,19 +68,9 @@ const getIntText = (value: number): string => {
 };
 
 const getDecimalText = (value: number): string => {
-  let val: string = "";
-  if (!isFloat(value)) {
-    val = "0".repeat(props.precision);
-  }
-
-  val = value.toString().split(".")[1] || "";
-  if (val.length < props.precision) {
-    val = val.padEnd(props.precision, "0");
-  } else if (val.length > props.precision) {
-    val = val.slice(0, props.precision);
-  }
-
-  return `.${val}`;
+  const fixed = Number(value).toFixed(props.precision);
+  const parts = fixed.split(".");
+  return parts[1] ? `.${parts[1]}` : `.${"0".repeat(props.precision)}`;
 };
 
 const innerFontSize = computed(() => {

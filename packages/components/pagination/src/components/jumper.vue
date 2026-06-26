@@ -1,8 +1,15 @@
 <template>
   <li :class="cls">
     <span v-if="text.prefix" class="page-text">{{ text.prefix }}</span>
-    <bp-input-number :min="1" :precision="0" :disabled :size hide-button v-model="val"
-      @blur="handleBlur"></bp-input-number>
+    <bp-input-number
+      :min="1"
+      :precision="0"
+      :disabled
+      :size
+      hide-button
+      v-model="val"
+      @blur="handleBlur"
+    ></bp-input-number>
     <span v-if="text.suffix" class="page-text">{{ text.suffix }}</span>
   </li>
 </template>
@@ -27,10 +34,10 @@ const props = defineProps({
    */
   size: { type: String as PropType<InputSize>, default: "default" },
   /**
-  * @type Boolean
-  * @description: Whether the button is disabled.
-  * @default false
-  */
+   * @type Boolean
+   * @description: Whether the button is disabled.
+   * @default false
+   */
   disabled: { type: Boolean, default: false },
   /**
    * @type Number
@@ -52,20 +59,20 @@ const props = defineProps({
   extraClass: { type: String, default: "" },
 });
 const emits = defineEmits<{
-  (e: "change", pageNum: number | ''): void;
+  (e: "change", pageNum: number | ""): void;
 }>();
 
 const { clsBlockName } = useNamespace("pagination-jumper");
-const cls = computed(() => [clsBlockName, props.extraClass]);
+const cls = computed(() => [clsBlockName.value, props.extraClass]);
 
 const paramsStr = "{jumper}";
-const val = ref<number | ''>('');
+const val = ref<number | "">("");
 const text = reactive({ prefix: "", suffix: "" });
 
 const handleBlur = () => {
   let num = Number(val.value) || NaN;
   if (isNaN(num)) {
-    val.value = '';
+    val.value = "";
     return;
   }
 

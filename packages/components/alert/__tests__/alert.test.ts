@@ -39,4 +39,11 @@ describe("Alert", () => {
     await wrapper.find(".bp-alert-inner-close").trigger("click");
     expect(wrapper.find(".bp-alert").exists()).toBe(false);
   });
+
+  it("emits close event when closed", async () => {
+    const wrapper = mount(Alert, { props: { title: "Test", showClose: true } });
+    await wrapper.find(".bp-alert-inner-close").trigger("click");
+    expect(wrapper.emitted("close")).toBeTruthy();
+    expect(wrapper.emitted("close")!.length).toBe(1);
+  });
 });

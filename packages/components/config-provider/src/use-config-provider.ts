@@ -17,30 +17,30 @@ export const provideGlobalConfig = (config: MaybeRef<ConfigProviderContext>, app
 
   if (!provideFunction) return;
 
-  const cfg = { ...defaultConfig, ...unref(config) };
+  const getConfig = () => ({ ...defaultConfig, ...unref(config) });
 
   provideFunction(
     namespaceKey,
-    computed(() => cfg.namespace)
+    computed(() => getConfig().namespace)
   );
   provideFunction(
     prefixKey,
-    computed(() => cfg.prefix)
+    computed(() => getConfig().prefix)
   );
   provideFunction(
     localeKey,
-    computed(() => cfg.locale)
+    computed(() => getConfig().locale)
   );
   provideFunction(
     sizeKey,
-    computed(() => cfg.size)
+    computed(() => getConfig().size)
   );
   provideFunction(
     zIndexKey,
-    computed(() => cfg.zIndex)
+    computed(() => getConfig().zIndex)
   );
   provideFunction(
     emptyTextKey,
-    computed(() => cfg.emptyText)
+    computed(() => getConfig().emptyText)
   );
 };

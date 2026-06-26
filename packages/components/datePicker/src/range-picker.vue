@@ -74,9 +74,9 @@ watch(
 );
 
 const cls = computed<string[] | {}[]>(() => [
-  clsBlockName,
-  `${clsBlockName}-${props.size}`,
-  props.disabled ? `${clsBlockName}-disabled` : "",
+  clsBlockName.value,
+  `${clsBlockName.value}-${props.size}`,
+  props.disabled ? `${clsBlockName.value}-disabled` : "",
 ]);
 
 const showPopup = ref<boolean>(false);

@@ -42,7 +42,7 @@ export default defineComponent({
 
       return (
         <div
-          class={[clsBlockName, `${clsBlockName}-${props.type}`]}
+          class={[clsBlockName.value, `${clsBlockName.value}-${props.type}`]}
           style={`justify-content:${props.justify};align-items:${props.align}`}
         >
           {children.map((child: VNode, index: number) => {
@@ -51,13 +51,13 @@ export default defineComponent({
 
             return h(Fragment, { key: child.key ?? `item-${index}` }, [
               hasSplit && (
-                <div class={`${clsBlockName}-item`} style={style}>
+                <div class={`${clsBlockName.value}-item`} style={style}>
                   {slots.split?.()}
                 </div>
               ),
-              <div class={`${clsBlockName}-item`} style={style}>
+              <div class={`${clsBlockName.value}-item`} style={style}>
                 {child}
-              </div>
+              </div>,
             ]);
           })}
         </div>

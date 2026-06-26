@@ -131,7 +131,7 @@ const labelStyle = computed(() => {
 });
 
 // label position class
-const labelPositionClass = computed(() => `${clsBlockName}-label-${formContext?.labelPosition ?? "left"}`);
+const labelPositionClass = computed(() => `${clsBlockName.value}-label-${formContext?.labelPosition ?? "left"}`);
 
 // Handle focusout event for auto validation
 const handleFocusOut = () => {

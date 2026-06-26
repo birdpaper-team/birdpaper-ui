@@ -59,20 +59,20 @@ const emits = defineEmits(["input", "focus", "blur", "keypress", "keyup", "enter
 const slots = useSlots();
 
 const cls = computed<string[] | {}[]>(() => [
-  clsBlockName,
-  `${clsBlockName}-${props.size}`,
-  props.disabled && `${clsBlockName}-disabled`,
-  props.isRound && `${clsBlockName}-round`,
+  clsBlockName.value,
+  `${clsBlockName.value}-${props.size}`,
+  props.disabled && `${clsBlockName.value}-disabled`,
+  props.isRound && `${clsBlockName.value}-round`,
 ]);
 const inpType = computed<InputType>(() => {
   if (props.type === "password") {
-    return isEyeOpen.value ? "password" : "text";
+    return isEyeOpen.value ? "text" : "password";
   }
   return props.type;
 });
 
 /** The password text is hide or not. */
-const isEyeOpen = ref<boolean>(true);
+const isEyeOpen = ref<boolean>(false);
 
 /** Inner action icon. */
 const innerActionIcon = computed<Component | null>(() => {

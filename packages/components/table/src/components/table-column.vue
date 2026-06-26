@@ -22,10 +22,10 @@ const props: TableColumnProps = defineProps(tableColumnProps);
 const slots = useSlots();
 
 const cls = computed<Array<string | false>>(() => [
-  clsBlockName,
-  `${clsBlockName}-${props.align}`,
-  props.fixed === "left" && `${clsBlockName}-fixed-left`,
-  props.fixed === "right" && `${clsBlockName}-fixed-right`,
+  clsBlockName.value,
+  `${clsBlockName.value}-${props.align}`,
+  props.fixed === "left" && `${clsBlockName.value}-fixed-left`,
+  props.fixed === "right" && `${clsBlockName.value}-fixed-right`,
 ]);
 
 const tdStyle = computed(() => {

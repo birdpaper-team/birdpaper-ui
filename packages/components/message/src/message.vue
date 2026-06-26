@@ -40,8 +40,12 @@ const iconType = {
 
 const statusMap = { text: "gray", loading: "gray", success: "success", warning: "warning", error: "danger" };
 const clsName = computed(() => {
-  let cls = [clsBlockName];
-  cls.push(props.plain ? `${clsBlockName}-plain-${statusMap[props.type]}` : `${clsBlockName}-${statusMap[props.type]}`);
+  let cls = [clsBlockName.value];
+  cls.push(
+    props.plain
+      ? `${clsBlockName.value}-plain-${statusMap[props.type]}`
+      : `${clsBlockName.value}-${statusMap[props.type]}`
+  );
 
   return cls;
 });

@@ -28,6 +28,6 @@ const { clsBlockName } = useNamespace("step");
 const props: StepProps = defineProps(stepProps);
 
 const cls = computed(() => {
-  return [clsBlockName, `${clsBlockName}-${props.status}`];
+  return [clsBlockName.value, `${clsBlockName.value}-${props.status}`];
 });
 </script>

@@ -21,7 +21,7 @@ import Spinner from "./components/spinner.vue";
 
 defineOptions({ name: "Spin" });
 const { clsBlockName } = useNamespace("spin");
-const cls = computed(() => [clsBlockName, props.spinning && `${clsBlockName}-spinning`]);
+const cls = computed(() => [clsBlockName.value, props.spinning && `${clsBlockName.value}-spinning`]);
 
 const props: SpinProps = defineProps(spinProps);
 const slots = useSlots();

@@ -52,18 +52,18 @@ const showIcon = computed<boolean>(() => !!btnIcon.value || props.loading);
 const isIconLeft = computed<boolean>(() => props.iconPosition === ButtonIconPosition.LEFT);
 
 const cls = computed(() => [
-  clsBlockName,
-  `${clsBlockName}-${props.size}-${props.shape}`,
-  `${clsBlockName}-${props.status}-${props.type}`,
+  clsBlockName.value,
+  `${clsBlockName.value}-${props.size}-${props.shape}`,
+  `${clsBlockName.value}-${props.status}-${props.type}`,
   { "is-full": props.full, "p-0": !hasDefaultSlot.value, "no-padding": !hasDefaultSlot.value },
   "select-none",
 ]);
 const innerCls = computed(() => [
-  `${clsBlockName}-inner`,
+  `${clsBlockName.value}-inner`,
   {
     "pl-4": props.loading && hasDefaultSlot.value && isIconLeft.value,
     "pr-4": props.loading && hasDefaultSlot.value && !isIconLeft.value,
-  }
+  },
 ]);
 const iconCls = computed(() => {
   const classes = [
@@ -71,9 +71,9 @@ const iconCls = computed(() => {
     {
       "mr-0": props.loading && hasDefaultSlot.value && isIconLeft.value,
       "ml-0": props.loading && hasDefaultSlot.value && !isIconLeft.value,
-    }
+    },
   ];
-  
+
   if (hasDefaultSlot.value) {
     if (props.iconGap) {
       classes.push(isIconLeft.value ? `mr-${props.iconGap}` : `ml-${props.iconGap}`);
@@ -83,11 +83,11 @@ const iconCls = computed(() => {
   } else {
     classes.push("m-0");
   }
-  
+
   return classes;
 });
 const iconInnerCls = computed(() => [
-  { "bp-icon-loading": props.loading, "absolute": hasDefaultSlot.value && props.loading },
+  { "bp-icon-loading": props.loading, absolute: hasDefaultSlot.value && props.loading },
 ]);
 
 const onClick = (): void => {
@@ -97,8 +97,8 @@ const onClick = (): void => {
 
 const onKeydown = (e: KeyboardEvent): void => {
   if (isDisabled.value) return;
-  
-  if (e.key === "Enter" || e.key === " ") {
+
+  if (e.key === " ") {
     e.preventDefault();
     onClick();
   }

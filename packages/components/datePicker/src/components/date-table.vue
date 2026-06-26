@@ -64,7 +64,7 @@ const emits = defineEmits(["change-picker"]);
 const ctx = ref<DatePickerContext>();
 ctx.value = inject(dateInjectionKey, undefined);
 const cellCls = (cell: DayCell) => [
-  `${clsBlockName}-body-inner`,
+  `${clsBlockName.value}-body-inner`,
   `day-cell-${cell.type}`,
   { active: (!!ctx.value!.model || ctx.value!.showTime) && currentVal.value === cell.value },
   { "to-day": toDay.value === cell.value },

@@ -44,19 +44,25 @@ const stringValue = ref<string>("");
 const props: InputNumberProps = defineProps(inputNumberProps);
 const emits = defineEmits(["input", "focus", "blur", "step"]);
 
-const cls = computed<string[] | {}[]>(() => [clsBlockName, `${clsBlockName}-${props.size}`]);
+const cls = computed<string[] | {}[]>(() => [clsBlockName.value, `${clsBlockName.value}-${props.size}`]);
 
-const isMin = computed(() => Number(stringValue.value) <= props.min);
-const isMax = computed(() => Number(stringValue.value) >= props.max);
+const isMin = computed(() => {
+  const val = Number(stringValue.value);
+  return !isNaN(val) && val <= props.min;
+});
+const isMax = computed(() => {
+  const val = Number(stringValue.value);
+  return !isNaN(val) && val >= props.max;
+});
 const mergePrecision = computed<number>(() => {
   const stepPrecision = (props.step?.toString() || "").split(".")[1]?.length || 0;
   return props.precision ? Math.max(props.precision, stepPrecision) : stepPrecision;
 });
 
-const btnList: { type: "up" | "down"; disabled: boolean; component: Component }[] = [
+const btnList = computed<{ type: "up" | "down"; disabled: boolean; component: Component }[]>(() => [
   { type: "up", disabled: isMax.value, component: IconArrowUpSLine },
   { type: "down", disabled: isMin.value, component: IconArrowDownSLine },
-];
+]);
 
 const { count, inc, dec, set } = useCounter(model.value || 0, {
   min: props.min,

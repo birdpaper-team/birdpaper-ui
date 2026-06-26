@@ -47,7 +47,7 @@ const model = defineModel<string>({ default: "" });
 const props: YearPickerProps = defineProps({ ...commonPickerProps, ...yearPickerProps });
 const emits = defineEmits(["input", "blur"]);
 
-const cls = computed<string[] | {}[]>(() => [clsBlockName, `${clsBlockName}-${props.size}`]);
+const cls = computed<string[] | {}[]>(() => [clsBlockName.value, `${clsBlockName.value}-${props.size}`]);
 
 const showPopup = ref<boolean>(false);
 provide(dateInjectionKey, {

@@ -1,7 +1,10 @@
 <template>
-  <li v-for="(item, index) in pageList" :key="`page-item-${index}`"
+  <li
+    v-for="(item, index) in pageList"
+    :key="`page-item-${index}`"
     :class="[...cls, item.index === currentPage ? `${clsBlockName}-active` : '', extraClass]"
-    @click="onClick(item.index)">
+    @click="onClick(item.index)"
+  >
     <span v-if="item.type === 'number'">{{ item.index }}</span>
     <IconMoreFill v-else />
   </li>
@@ -50,7 +53,7 @@ const emits = defineEmits<{
   (e: "click", pageNum: number): void;
 }>();
 
-const cls = computed(() => [clsBlockName, props.extraClass]);
+const cls = computed(() => [clsBlockName.value, props.extraClass]);
 
 const pageList = ref<any[]>([]);
 
@@ -84,9 +87,10 @@ watchEffect(() => {
   }
 
   // Calculate the start index of middle pages
-  let startIndex = isFrontOmit && isEndOmit
-    ? currentPage - Math.floor(middlePageCount / 2)
-    : !isFrontOmit
+  let startIndex =
+    isFrontOmit && isEndOmit
+      ? currentPage - Math.floor(middlePageCount / 2)
+      : !isFrontOmit
       ? 2
       : pages - middlePageCount;
 

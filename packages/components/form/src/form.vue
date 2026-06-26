@@ -16,7 +16,7 @@ defineOptions({ name: "Form" });
 
 const emits = defineEmits(["submit"]);
 const { clsBlockName } = useNamespace("form");
-const cls = computed(() => [clsBlockName, `${clsBlockName}-${layout.value}`]);
+const cls = computed(() => [clsBlockName.value, `${clsBlockName.value}-${layout.value}`]);
 
 // props and refs
 const props: FormProps = defineProps(formProps);
@@ -28,9 +28,13 @@ const fields = ref<FormItemContext[]>([]);
 // record initial model values for resetFields
 const initialValues = ref<Record<string, any>>({});
 
-// save initial values when component mounts
+// deep clone initial values when component mounts
 if (props.model) {
-  initialValues.value = { ...props.model };
+  try {
+    initialValues.value = structuredClone(props.model);
+  } catch {
+    initialValues.value = JSON.parse(JSON.stringify(props.model));
+  }
 }
 
 // helpers to manage fields

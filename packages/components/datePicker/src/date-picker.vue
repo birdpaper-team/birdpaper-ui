@@ -35,7 +35,7 @@ const { clsBlockName } = useNamespace("date-picker");
 const model = defineModel<string>({ default: "" });
 const props: DatePickerProps = defineProps({ ...commonPickerProps, ...datePickerProps });
 
-const cls = computed<string[] | {}[]>(() => [clsBlockName, `${clsBlockName}-${props.size}`]);
+const cls = computed<string[] | {}[]>(() => [clsBlockName.value, `${clsBlockName.value}-${props.size}`]);
 
 const showPopup = ref<boolean>(false);
 provide(dateInjectionKey, {

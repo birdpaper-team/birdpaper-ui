@@ -58,9 +58,9 @@ const emits = defineEmits(["input", "focus", "blur", "keypress", "keyup"]);
 const slots = useSlots();
 
 const cls = computed<string[] | {}[]>(() => [
-  clsBlockName,
-  `${clsBlockName}-${props.size}`,
-  props?.disabled && `${clsBlockName}-disabled`,
+  clsBlockName.value,
+  `${clsBlockName.value}-${props.size}`,
+  props?.disabled && `${clsBlockName.value}-disabled`,
 ]);
 
 /** Inner action icon. */

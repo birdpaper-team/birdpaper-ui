@@ -27,7 +27,11 @@ const { clsBlockName } = useNamespace("avatar");
 
 const props: AvatarProps = defineProps(avatarProps);
 const cls = computed(() => {
-  return [clsBlockName, isString(props.size) && `${clsBlockName}-${props.size}`, `${clsBlockName}-${props.shape}`];
+  return [
+    clsBlockName.value,
+    isString(props.size) && `${clsBlockName.value}-${props.size}`,
+    `${clsBlockName.value}-${props.shape}`,
+  ];
 });
 
 const wrapperRef = ref<HTMLElement>();

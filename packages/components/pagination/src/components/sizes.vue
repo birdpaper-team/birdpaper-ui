@@ -58,7 +58,7 @@ const emits = defineEmits<{
   (e: "change", size: number): void;
 }>();
 
-const cls = computed(() => [clsBlockName, props.extraClass]);
+const cls = computed(() => [clsBlockName.value, props.extraClass]);
 
 const val = ref(props.currentSize || props.sizesList[0] || 10);
 const paramsStr = "{value}";

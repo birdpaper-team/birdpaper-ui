@@ -19,19 +19,19 @@ import { RadioValue } from "./types";
 defineOptions({ name: "Radio" });
 const { clsBlockName } = useNamespace("radio");
 
-const model = defineModel<RadioValue>({ default: '' });
+const model = defineModel<RadioValue>({ default: "" });
 const props: RadioProps = defineProps(radioProps);
 const slots = defineSlots();
 const emits = defineEmits(["change"]);
 
 const cls = computed(() => [
-  clsBlockName,
+  clsBlockName.value,
   "select-none",
-  isCheck.value && `${clsBlockName}-check`,
-  props.disabled && `${clsBlockName}-disabled`,
+  isCheck.value && `${clsBlockName.value}-check`,
+  props.disabled && `${clsBlockName.value}-disabled`,
 ]);
-const radioCls = computed(() => [`${clsBlockName}-radio`]);
-const labelCls = computed(() => [`${clsBlockName}-label`]);
+const radioCls = computed(() => [`${clsBlockName.value}-radio`]);
+const labelCls = computed(() => [`${clsBlockName.value}-label`]);
 
 const handleInput = () => {
   if (props.disabled) return;

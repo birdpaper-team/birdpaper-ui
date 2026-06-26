@@ -1,4 +1,4 @@
-import { PropType, Fragment, mergeProps, h, computed, VNode, ref } from "vue";
+import { PropType, Fragment, cloneVNode, h, computed, VNode, ref } from "vue";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { defineComponent } from "vue";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
@@ -51,7 +51,7 @@ export default defineComponent({
     const { clsBlockName } = useNamespace("checkbox-group");
 
     const cls = computed(() => {
-      let clsName = [clsBlockName, `${clsBlockName}-${props.direction}`];
+      let clsName = [clsBlockName.value, `${clsBlockName.value}-${props.direction}`];
       return clsName;
     });
 
@@ -61,19 +61,17 @@ export default defineComponent({
       return (
         <div class={cls.value}>
           {children.map((child: VNode, index: number) => {
-            const checkbox = Object.assign({}, child);
-            checkbox.props = child.props && mergeProps(child.props, { ...props });
+            const checkbox = cloneVNode(child, {
+              disabled: props.disabled,
+              modelValue: props.modelValue,
+              onChange(val: CheckboxValueForArray[]) {
+                _vals.value = val;
+                emit("update:modelValue", _vals.value);
+                emit("change", _vals.value);
+              },
+            });
 
-            return h(Fragment, { key: child.key ?? `item-${index}` }, [
-              h(checkbox, {
-                modelValue: props.modelValue,
-                onChange(val: CheckboxValueForArray[]) {
-                  _vals.value = val;
-                  emit("update:modelValue", _vals.value);
-                  emit("change", _vals.value);
-                },
-              }),
-            ]);
+            return h(Fragment, { key: child.key ?? `item-${index}` }, [checkbox]);
           })}
         </div>
       );

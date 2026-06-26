@@ -37,7 +37,11 @@ const emits = defineEmits<{
   (e: "click"): void;
 }>();
 
-const cls = computed(() => [clsBlockName, props.disabled ? `${clsBlockName}-disabled` : "", props.extraClass]);
+const cls = computed(() => [
+  clsBlockName.value,
+  props.disabled ? `${clsBlockName.value}-disabled` : "",
+  props.extraClass,
+]);
 
 const handleClick = () => {
   if (props.disabled) return;

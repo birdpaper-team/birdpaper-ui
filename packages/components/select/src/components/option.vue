@@ -31,9 +31,9 @@ const getCheckboxState = () => {
 const isChecked = ref(getCheckboxState());
 
 const cls = computed(() => {
-  let cls = [`${clsBlockName}`];
-  if (ctx.value?.modelValue === props.value) cls.push(`${clsBlockName}-active`);
-  if (props.disabled) cls.push(`${clsBlockName}-disabled`);
+  let cls = [`${clsBlockName.value}`];
+  if (ctx.value?.modelValue === props.value) cls.push(`${clsBlockName.value}-active`);
+  if (props.disabled) cls.push(`${clsBlockName.value}-disabled`);
 
   return cls;
 });
@@ -41,7 +41,19 @@ const cls = computed(() => {
 const init = () => {
   ctx.value = inject(selectInjectionKey, undefined);
 
-  option.value.label = props.label || (slots.default?.({})[0].children as string);
+  let label = props.label;
+  if (!label) {
+    try {
+      const nodes = slots.default?.({});
+      if (nodes?.length) {
+        const text = nodes[0]?.children;
+        label = typeof text === "string" ? text : String(text ?? "");
+      }
+    } catch {
+      label = "";
+    }
+  }
+  option.value.label = label || "";
   option.value.value = props.value;
 };
 

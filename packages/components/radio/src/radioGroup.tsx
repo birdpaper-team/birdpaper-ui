@@ -1,4 +1,4 @@
-import { PropType, Fragment, mergeProps, h, computed, VNode } from "vue";
+import { PropType, Fragment, cloneVNode, h, computed, VNode } from "vue";
 import { DirectionType, RadioType, RadioValue } from "./types";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { defineComponent } from "vue";
@@ -62,11 +62,11 @@ export default defineComponent({
     };
 
     const cls = computed(() => {
-      let clsName = [clsBlockName];
+      let clsName = [clsBlockName.value];
       clsName.push(
         props.type === "button"
-          ? `${clsBlockName}-button ${clsBlockName}-${props.size}`
-          : `${clsBlockName}-${props.direction}`
+          ? `${clsBlockName.value}-button ${clsBlockName.value}-${props.size}`
+          : `${clsBlockName.value}-${props.direction}`
       );
 
       return clsName;
@@ -78,20 +78,20 @@ export default defineComponent({
       return (
         <div class={cls.value}>
           {children.map((child: VNode, index: number) => {
-            const radio = Object.assign({}, child);
-            radio.props = child.props ? mergeProps(child.props, { ...props }) : { ...props };
+            const radio = cloneVNode(child, {
+              disabled: props.disabled,
+              size: props.size,
+              type: props.type,
+              modelValue: props.modelValue,
+              onChange(e: RadioValue) {
+                emit("change", e);
+              },
+              "onUpdate:modelValue"(e: RadioValue) {
+                updateValue(e);
+              },
+            });
 
-            return h(Fragment, { key: child.key ?? `item-${index}` }, [
-              h(radio, {
-                modelValue: props.modelValue,
-                onChange(e: RadioValue) {
-                  emit("change", e);
-                },
-                "onUpdate:modelValue"(e: RadioValue) {
-                  updateValue(e);
-                },
-              })
-            ]);
+            return h(Fragment, { key: child.key ?? `item-${index}` }, [radio]);
           })}
         </div>
       );

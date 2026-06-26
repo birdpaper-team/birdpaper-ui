@@ -40,8 +40,8 @@ const thClass = (item: ColumnsItem, index: number) => {
   const fixed = props.cols[index]?.fixed;
   return [
     alignClass,
-    fixed === "left" && `${clsBlockName}-fixed-left`,
-    fixed === "right" && `${clsBlockName}-fixed-right`,
+    fixed === "left" && `${clsBlockName.value}-fixed-left`,
+    fixed === "right" && `${clsBlockName.value}-fixed-right`,
   ];
 };
 

@@ -86,9 +86,9 @@ const _previewStyle = computed(() => `background: ${_color.value}; opacity:${alp
 
 const cls = computed(() => {
   return {
-    [`${clsBlockName}-input`]: true,
-    [`${clsBlockName}-input-${props.size}`]: true,
-    [`${clsBlockName}-input-disabled`]: props.disabled,
+    [`${clsBlockName.value}-input`]: true,
+    [`${clsBlockName.value}-input-${props.size}`]: true,
+    [`${clsBlockName.value}-input-disabled`]: props.disabled,
   };
 });
 
@@ -134,7 +134,7 @@ const updateByHex = (val: string) => {
 
 const updateByRgb = (rgb: { r: number; g: number; b: number }) => {
   const rgbStr = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha.value})`;
-  
+
   initHsla("rgb", rgbStr);
   model.value = rgbStr;
 };
@@ -159,11 +159,16 @@ watch(
 );
 
 watch(
-  () => [sv.value, hue.value, alpha.value],
-  () => {
-    calculateColor();
-  },
-  { deep: true }
+  () => sv.value.s + sv.value.v,
+  () => calculateColor()
+);
+watch(
+  () => hue.value,
+  () => calculateColor()
+);
+watch(
+  () => alpha.value,
+  () => calculateColor()
 );
 
 watch(

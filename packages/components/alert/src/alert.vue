@@ -41,9 +41,9 @@ const props: AlertProps = defineProps(alertProps);
 const slots = useSlots();
 
 const cls = computed(() => [
-  clsBlockName,
-  `${clsBlockName}-${props.status}`,
-  { [`${clsBlockName}-hide-border`]: props.hideBorder },
+  clsBlockName.value,
+  `${clsBlockName.value}-${props.status}`,
+  { [`${clsBlockName.value}-hide-border`]: props.hideBorder },
 ]);
 
 const statusIcon = {
@@ -57,6 +57,10 @@ const icon = computed(() => {
   return statusIcon[props.status];
 });
 
+const emits = defineEmits(["close"]);
 const visible = ref(true);
-const handleClose = () => (visible.value = false);
+const handleClose = () => {
+  visible.value = false;
+  emits("close");
+};
 </script>

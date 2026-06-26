@@ -15,7 +15,7 @@ export const useGetNamespace = (namespaceOverrides?: Ref<string | undefined>) =>
 
 export const useNamespace = (componentName: string, namespaceOverrides?: Ref<string | undefined>) => {
   const namespace = useGetNamespace(namespaceOverrides);
-  const clsBlockName = `${namespace.value}-${componentName}`;
+  const clsBlockName = computed(() => `${namespace.value}-${componentName}`);
   return { namespace, clsBlockName };
 };
 

@@ -23,11 +23,11 @@ const emits = defineEmits(["close"]);
 
 const cls = computed(() => {
   return [
-    clsBlockName,
+    clsBlockName.value,
     "select-none",
-    `${clsBlockName}-${props.status}`,
-    props.border && `${clsBlockName}-border`,
-    props.closeable && `${clsBlockName}-closeable`,
+    `${clsBlockName.value}-${props.status}`,
+    props.border && `${clsBlockName.value}-border`,
+    props.closeable && `${clsBlockName.value}-closeable`,
   ];
 });
 

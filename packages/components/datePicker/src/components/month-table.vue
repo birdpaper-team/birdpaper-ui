@@ -35,7 +35,7 @@ const emits = defineEmits(["change-picker"]);
 const ctx = ref<DatePickerContext>();
 ctx.value = inject(dateInjectionKey, undefined);
 const cellCls = (cell: MonthCell) => [
-  `${clsBlockName}-month-cell`,
+  `${clsBlockName.value}-month-cell`,
   { active: !!ctx.value!.model && currentVal.value === cell.value },
   { "to-month": cell.value === `${dayjs(toDay.value).year()}-${dayjs(toDay.value).month() + 1}` },
 ];

@@ -1,6 +1,6 @@
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
 import { useNamespace } from "@birdpaper-ui/hooks/src/use-namespace";
-import { defineComponent, Fragment, h, Comment, mergeProps, PropType, VNode } from "vue";
+import { defineComponent, Fragment, h, Comment, cloneVNode, PropType, VNode } from "vue";
 import { get } from "radash";
 
 export default defineComponent({
@@ -32,21 +32,24 @@ export default defineComponent({
       const children = getAllElements(slots.default?.(), false).filter((item) => get(item, "type") !== Comment);
 
       return (
-        <div class={[clsBlockName, { [`${clsBlockName}-${props.type}`]: props.type }]}>
+        <div class={[clsBlockName.value, { [`${clsBlockName.value}-${props.type}`]: props.type }]}>
           {children.map((child: VNode, index: number) => {
-            const step = Object.assign({}, child);
-
             const isFinished = props.modelValue > index;
             const isActive = props.modelValue === index;
             const status = isFinished ? "finish" : isActive ? "process" : "wait";
 
-            const childProps = { index, status, ...props };
-            step.props = child.props ? mergeProps(child.props, childProps) : childProps;
+            const step = cloneVNode(child, { index, status, ...props });
 
             return h(Fragment, { key: child.key ?? `item-${index}` }, [
-              <div class={[`${clsBlockName}-item`, `${itemClsBlockName}-${status}`, { "hide-line": props.hideLine }]}>
+              <div
+                class={[
+                  `${clsBlockName.value}-item`,
+                  `${itemClsBlockName.value}-${status}`,
+                  { "hide-line": props.hideLine },
+                ]}
+              >
                 {h(step, {})}
-              </div>
+              </div>,
             ]);
           })}
         </div>

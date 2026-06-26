@@ -2,8 +2,12 @@
   <div :class="cls">
     <ul :class="`${clsBlockName}-container`">
       <template v-for="item in componentsList">
-        <component :extraClass="`${clsBlockName}-item ${clsBlockName}-${size}`" v-bind="item.bind" :is="item.component"
-          @[item.eventName]="item.event"></component>
+        <component
+          :extraClass="`${clsBlockName}-item ${clsBlockName}-${size}`"
+          v-bind="item.bind"
+          :is="item.component"
+          @[item.eventName]="item.event"
+        ></component>
       </template>
     </ul>
   </div>
@@ -32,7 +36,7 @@ const emits = defineEmits<{
 const layoutMap = { prev, next, pager, sizes, jumper, total };
 
 const cls = computed(() => {
-  return [clsBlockName, `${clsBlockName}-${props.size}`, 'select-none'];
+  return [clsBlockName.value, `${clsBlockName.value}-${props.size}`, "select-none"];
 });
 
 const currentPage = ref<number>(props.current || 1);

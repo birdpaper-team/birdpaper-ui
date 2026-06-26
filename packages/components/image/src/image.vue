@@ -83,7 +83,7 @@ const imgAttrs = computed(() => ({
 
 const imgSrc = computed(() => {
   if (props.lazy && !isInView.value) {
-    return props.placeholder;
+    return props.placeholder || "";
   }
   return props.src;
 });
@@ -100,12 +100,12 @@ const showLoading = computed(() => {
 });
 
 const cls = computed(() => {
-  return [clsBlockName];
+  return [clsBlockName.value];
 });
 
 const isLoaded = computed(() => hasLoaded.value && !isError.value);
 const imgCls = computed(() => [
-  `${clsBlockName}-img`,
+  `${clsBlockName.value}-img`,
   `is-effect-${props.loadEffect as ImageLoadEffect}`,
   { "is-loaded": isLoaded.value },
 ]);

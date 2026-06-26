@@ -17,7 +17,11 @@ const props: RowProps = defineProps(rowProps);
 const slots = useSlots();
 
 const cls = computed(() => {
-  return [`${clsBlockName}`, `${clsBlockName}-justify-${props.justify}`, `${clsBlockName}-align-${props.align}`];
+  return [
+    `${clsBlockName.value}`,
+    `${clsBlockName.value}-justify-${props.justify}`,
+    `${clsBlockName.value}-align-${props.align}`,
+  ];
 });
 
 const rowRef = ref();

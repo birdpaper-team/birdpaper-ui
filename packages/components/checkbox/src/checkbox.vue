@@ -31,7 +31,7 @@ const props: CheckboxProps = defineProps(checkboxProps);
 const slots = defineSlots();
 const emits = defineEmits(["change"]);
 
-const cls = computed(() => [clsBlockName, "select-none", props.disabled && `${clsBlockName}-disabled`]);
+const cls = computed(() => [clsBlockName.value, "select-none", props.disabled && `${clsBlockName.value}-disabled`]);
 
 const isCheck = ref(false);
 const isVisualChecked = computed(() => isCheck.value || props.indeterminate);

@@ -16,9 +16,9 @@ const { clsBlockName } = useNamespace("col");
 const props: ColProps = defineProps(colProps);
 
 const cls = computed(() => {
-  let className = [clsBlockName];
-  Number(props.span) !== 0 ? className.push(`${clsBlockName}-${props.span}`) : "";
-  Number(props.offset) !== 0 ? className.push(`${clsBlockName}-offset-${props.offset}`) : "";
+  let className = [clsBlockName.value];
+  Number(props.span) !== 0 ? className.push(`${clsBlockName.value}-${props.span}`) : "";
+  Number(props.offset) !== 0 ? className.push(`${clsBlockName.value}-offset-${props.offset}`) : "";
 
   const responsive: string[] = ["xs", "sm", "md", "lg", "xl"];
 
@@ -28,14 +28,14 @@ const cls = computed(() => {
     if (!responsiveProp) continue;
 
     if (typeof responsiveProp === "number") {
-      className.push(`${clsBlockName}-${item}-${responsiveProp}`);
+      className.push(`${clsBlockName.value}-${item}-${responsiveProp}`);
       continue;
     }
 
     if (typeof responsiveProp === "object") {
       const responsiveObj = responsiveProp as ColResponsive & { span?: number; offset?: number };
-      responsiveObj?.span && className.push(`${clsBlockName}-${item}-${responsiveObj.span}`);
-      responsiveObj?.offset && className.push(`${clsBlockName}-${item}-offset-${responsiveObj.offset}`);
+      responsiveObj?.span && className.push(`${clsBlockName.value}-${item}-${responsiveObj.span}`);
+      responsiveObj?.offset && className.push(`${clsBlockName.value}-${item}-offset-${responsiveObj.offset}`);
     }
   }
 

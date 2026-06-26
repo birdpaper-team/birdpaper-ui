@@ -156,22 +156,22 @@ export default defineComponent({
     const render = () => {
       const children = slots.default?.() || [];
       const triggerNode =
-        children.length === 1 ? children[0] : h("div", { class: `${clsBlockName}-trigger` }, children);
+        children.length === 1 ? children[0] : h("div", { class: `${clsBlockName.value}-trigger` }, children);
 
       if (props.hideTrigger) {
-        return h("div", { class: clsBlockName, ref: triggerRef }, slots.content?.());
+        return h("div", { class: clsBlockName.value, ref: triggerRef }, slots.content?.());
       }
 
       // 检查是否在测试环境中
-      const isTestEnv = typeof process !== "undefined" && process.env.NODE_ENV === "test";
+      const isTestEnv = import.meta.env?.MODE === "test";
 
       // 在测试环境中不使用Teleport，直接渲染内容
       if (isTestEnv) {
-        return h("div", { class: clsBlockName, ref: triggerRef }, [
+        return h("div", { class: clsBlockName.value, ref: triggerRef }, [
           h(
             "div",
             {
-              class: `${clsBlockName}-inner`,
+              class: `${clsBlockName.value}-inner`,
               ref: triggerInnerRef,
               onClickCapture: handleClick,
               onMouseenter: handleMouseEnter,
@@ -185,13 +185,15 @@ export default defineComponent({
                   "div",
                   {
                     ref: wrapperRef,
-                    class: [`${clsBlockName}-wrapper`, props.showArrow && `${clsBlockName}-wrapper-arrow`],
+                    class: [`${clsBlockName.value}-wrapper`, props.showArrow && `${clsBlockName.value}-wrapper-arrow`],
                     onMouseenter: handleMouseEnter,
                     onMouseleave: handleMouseLeave,
                   },
                   [
                     props.showArrow
-                      ? h("div", { class: `${clsBlockName}-arrow ${clsBlockName}-arrow-${currentPosition.value}` })
+                      ? h("div", {
+                          class: `${clsBlockName.value}-arrow ${clsBlockName.value}-arrow-${currentPosition.value}`,
+                        })
                       : null,
                     slots.content?.(),
                   ]
@@ -209,11 +211,11 @@ export default defineComponent({
 
       // 如果容器无效，直接渲染内容而不使用Teleport
       if (!isValidContainer) {
-        return h("div", { class: clsBlockName, ref: triggerRef }, [
+        return h("div", { class: clsBlockName.value, ref: triggerRef }, [
           h(
             "div",
             {
-              class: `${clsBlockName}-inner`,
+              class: `${clsBlockName.value}-inner`,
               ref: triggerInnerRef,
               onClickCapture: handleClick,
               onMouseenter: handleMouseEnter,
@@ -227,13 +229,15 @@ export default defineComponent({
                   "div",
                   {
                     ref: wrapperRef,
-                    class: [`${clsBlockName}-wrapper`, props.showArrow && `${clsBlockName}-wrapper-arrow`],
+                    class: [`${clsBlockName.value}-wrapper`, props.showArrow && `${clsBlockName.value}-wrapper-arrow`],
                     onMouseenter: handleMouseEnter,
                     onMouseleave: handleMouseLeave,
                   },
                   [
                     props.showArrow
-                      ? h("div", { class: `${clsBlockName}-arrow ${clsBlockName}-arrow-${currentPosition.value}` })
+                      ? h("div", {
+                          class: `${clsBlockName.value}-arrow ${clsBlockName.value}-arrow-${currentPosition.value}`,
+                        })
                       : null,
                     slots.content?.(),
                   ]
@@ -244,11 +248,11 @@ export default defineComponent({
       }
 
       // 正式环境使用Teleport
-      return h("div", { class: clsBlockName, ref: triggerRef }, [
+      return h("div", { class: clsBlockName.value, ref: triggerRef }, [
         h(
           "div",
           {
-            class: `${clsBlockName}-inner`,
+            class: `${clsBlockName.value}-inner`,
             ref: triggerInnerRef,
             onClickCapture: handleClick,
             onMouseenter: handleMouseEnter,
@@ -263,13 +267,15 @@ export default defineComponent({
                   "div",
                   {
                     ref: wrapperRef,
-                    class: [`${clsBlockName}-wrapper`, props.showArrow && `${clsBlockName}-wrapper-arrow`],
+                    class: [`${clsBlockName.value}-wrapper`, props.showArrow && `${clsBlockName.value}-wrapper-arrow`],
                     onMouseenter: handleMouseEnter,
                     onMouseleave: handleMouseLeave,
                   },
                   [
                     props.showArrow
-                      ? h("div", { class: `${clsBlockName}-arrow ${clsBlockName}-arrow-${currentPosition.value}` })
+                      ? h("div", {
+                          class: `${clsBlockName.value}-arrow ${clsBlockName.value}-arrow-${currentPosition.value}`,
+                        })
                       : null,
                     slots.content?.(),
                   ]
