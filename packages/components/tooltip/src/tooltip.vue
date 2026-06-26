@@ -5,7 +5,7 @@
     :class="clsBlockName"
     :trigger
     :popup-offset="10"
-    position="top"
+    :position
     update-at-scroll
   >
     <div :class="`${clsBlockName}-inner`">
@@ -20,8 +20,13 @@
         <slot name="content"></slot>
       </div>
 
-      <div :class="`${clsBlockName}-triangle ${clsBlockName}-triangle-${props.theme}`"></div>
-      <div v-if="theme === 'light'" :class="`${clsBlockName}-triangle ${clsBlockName}-triangle-second`"></div>
+      <div
+        :class="`${clsBlockName}-triangle ${clsBlockName}-triangle-${props.theme} ${clsBlockName}-triangle-${props.position}`"
+      ></div>
+      <div
+        v-if="theme === 'light'"
+        :class="`${clsBlockName}-triangle ${clsBlockName}-triangle-second ${clsBlockName}-triangle-second-${props.position}`"
+      ></div>
     </template>
   </bp-trigger>
 </template>

@@ -20,6 +20,12 @@ export const tooltipProps = {
    * @default "dark"
    */
   theme: { type: String, default: "dark" },
+  /**
+   * @type "top" | "bottom"
+   * @description The position of the tooltip.
+   * @default "top"
+   */
+  position: { type: String as PropType<"top" | "bottom">, default: "top" },
 };
 
 export type TooltipProps = ExtractPropTypes<typeof tooltipProps>;

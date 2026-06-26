@@ -39,7 +39,6 @@
 
   &-triangle {
     position: absolute;
-    bottom: -5px;
     left: 50%;
     width: 0;
     height: 0;
@@ -47,17 +46,44 @@
     border-left: 5px solid transparent;
     transform: translateX(-50%);
 
-    &.#{$B}-triangle-dark {
-      border-top: 5px solid var(--bp-gray-10);
+    // Top position: arrow points down
+    &.#{$B}-triangle-top {
+      bottom: -5px;
+
+      &.#{$B}-triangle-dark {
+        border-top: 5px solid var(--bp-gray-10);
+      }
+
+      &.#{$B}-triangle-light {
+        border-top: 5px solid var(--bp-gray-3);
+      }
     }
 
-    &.#{$B}-triangle-light {
-      border-top: 5px solid var(--bp-gray-3);
+    // Bottom position: arrow points up
+    &.#{$B}-triangle-bottom {
+      top: -5px;
+
+      &.#{$B}-triangle-dark {
+        border-bottom: 5px solid var(--bp-gray-10);
+      }
+
+      &.#{$B}-triangle-light {
+        border-bottom: 5px solid var(--bp-gray-3);
+      }
     }
 
-    &.#{$B}-triangle-second {
-      bottom: -4.5px;
-      border-top: 5px solid var(--bp-gray-0);
+    &-second {
+      z-index: 1;
+
+      &-top {
+        bottom: -4.5px;
+        border-top: 5px solid var(--bp-gray-0);
+      }
+
+      &-bottom {
+        top: -4.5px;
+        border-bottom: 5px solid var(--bp-gray-0);
+      }
     }
   }
 }
