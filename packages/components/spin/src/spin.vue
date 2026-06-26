@@ -1,6 +1,6 @@
 <template>
-  <div :class="[cls, { 'spin-has-content': slots.default?.({}) }]">
-    <Spinner v-if="!slots.default?.({})" :icon="spinIcon" :description="description" />
+  <div :class="[cls, { 'spin-has-content': hasDefault }]">
+    <Spinner v-if="!hasDefault" :icon="spinIcon" :description="description" />
 
     <Transition name="fade">
       <div :class="`${clsBlockName}-mask`" v-if="spinning">
@@ -25,6 +25,7 @@ const cls = computed(() => [clsBlockName.value, props.spinning && `${clsBlockNam
 
 const props: SpinProps = defineProps(spinProps);
 const slots = useSlots();
+const hasDefault = computed(() => !!slots.default);
 
 const spinIcons = [IconLoaderLine, IconLoader2Line, IconLoader3Line, IconLoader4Line, IconLoader5Line];
 const spinIcon = computed<Component>(() => {

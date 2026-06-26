@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { useNamespace } from "@birdpaper-ui/hooks";
+import { useNamespace, useWordCount } from "@birdpaper-ui/hooks";
 import { computed, nextTick, ref, useSlots, shallowRef, triggerRef, watch } from "vue";
 import type { Component } from "vue";
 import { TextareaProps, textareaProps } from "./props";
@@ -72,72 +72,13 @@ const innerActionIcon = computed<Component>(() => {
   return null;
 });
 
-/**
- * 计算中英文字符数量
- * @param value 输入值
- * @returns { chinese: number, english: number } 中英文字符数量
- */
-const countChineseEnglish = (value: string) => {
-  const chineseRegex = /[\u4e00-\u9fa5]/g;
-  const englishRegex = /[a-zA-Z]/g;
-
-  const chineseMatches = value.match(chineseRegex) || [];
-  const englishMatches = value.match(englishRegex) || [];
-
-  return {
-    chinese: chineseMatches.length,
-    english: englishMatches.length,
-  };
-};
-
-/**
- * 根据模式计算字数
- * @param value 输入值
- * @returns 字数
- */
-const calculateWordCount = (value: string): number => {
-  const stringValue = String(value || "");
-
-  switch (props.wordCountMode) {
-    case "chinese-english": {
-      const { chinese, english } = countChineseEnglish(stringValue);
-      return chinese + english;
-    }
-    case "custom": {
-      if (props.customWordCount && typeof props.customWordCount === "function") {
-        return props.customWordCount(stringValue);
-      }
-      // 如果自定义函数无效，回退到默认模式
-      return stringValue.length;
-    }
-    case "default":
-    default:
-      return stringValue.length;
-  }
-};
-
-/**
- * 格式化字数统计显示内容
- * @returns 格式化后的字数统计字符串
- */
-const formatWordCountDisplay = (): string => {
-  const stringValue = String(model.value || "");
-
-  if (props.wordCountMode === "chinese-english") {
-    const { chinese, english } = countChineseEnglish(stringValue);
-    const total = chinese + english;
-    if (props.maxlength) {
-      return `中${chinese}英${english}/${props.maxlength}`;
-    }
-    return `中${chinese}英${english}`;
-  }
-
-  const count = calculateWordCount(stringValue);
-  if (props.maxlength) {
-    return `${count}/${props.maxlength}`;
-  }
-  return `${count}`;
-};
+// Word count logic via shared hook
+const { formatWordCountDisplay, truncateToMax } = useWordCount({
+  value: model,
+  mode: computed(() => props.wordCountMode),
+  maxlength: computed(() => props.maxlength),
+  customWordCount: computed(() => props.customWordCount),
+});
 
 /** Inner suffix content. */
 const innerSuffixContent = computed<string | Component>(() => {
@@ -175,72 +116,14 @@ const onKeyup = (e: Event) => emits("keyup", e);
 const onInput = (e: Event) => {
   const value = (e.target as HTMLInputElement).value;
 
-  // 如果设置了最大长度限制，检查输入是否超出限制
   if (props.maxlength) {
-    const currentCount = calculateWordCount(value);
-
-    // 如果当前字数超过最大限制，截断输入
-    if (currentCount > props.maxlength) {
-      let truncatedValue = value;
-
-      // 根据不同的计数模式进行截断处理
-      if (props.wordCountMode === "chinese-english") {
-        // 中英文分别计数模式，需要精确截断
-        let chineseCount = 0;
-        let englishCount = 0;
-        let result = "";
-
-        for (let i = 0; i < value.length; i++) {
-          const char = value[i];
-          const isChinese = /[\u4e00-\u9fa5]/.test(char);
-          const isEnglish = /[a-zA-Z]/.test(char);
-
-          if (isChinese) {
-            chineseCount++;
-          } else if (isEnglish) {
-            englishCount++;
-          }
-
-          const total = chineseCount + englishCount;
-
-          if (total > props.maxlength) {
-            break;
-          }
-
-          result += char;
-        }
-
-        truncatedValue = result;
-      } else if (props.wordCountMode === "custom" && props.customWordCount) {
-        let left = 0;
-        let right = value.length;
-        let bestLength = 0;
-
-        while (left <= right) {
-          const mid = Math.floor((left + right) / 2);
-          const substring = value.substring(0, mid);
-          const count = props.customWordCount(substring);
-
-          if (count <= props.maxlength) {
-            bestLength = mid;
-            left = mid + 1;
-          } else {
-            right = mid - 1;
-          }
-        }
-
-        truncatedValue = value.substring(0, bestLength);
-      } else {
-        // 默认模式，按字符长度截断
-        truncatedValue = value.substring(0, props.maxlength);
-      }
-
-      // 更新输入框的值，防止用户看到超出限制的字符
-      (e.target as HTMLInputElement).value = truncatedValue;
-      model.value = truncatedValue;
-      modelValue.value = truncatedValue;
+    const truncated = truncateToMax(value);
+    if (truncated !== value) {
+      (e.target as HTMLInputElement).value = truncated;
+      model.value = truncated;
+      modelValue.value = truncated;
       triggerRef(model);
-      emits("input", { e, value: truncatedValue });
+      emits("input", { e, value: truncated });
       return;
     }
   }

@@ -33,12 +33,12 @@ const isDisabled = computed<boolean>(() => props.disabled || !!props.loading);
 /** Default Slots. */
 const hasDefaultSlot = computed<boolean>(() => {
   if (props.shape === ButtonShape.CIRCLE && props.loading) return false;
-  return !!slots?.default?.({})[0];
+  return !!slots.default;
 });
 
 // Icons.
 /** Default loading icon map. */
-const loadingIcons = [IconLoaderLine, IconLoader2Line, IconLoader3Line, IconLoader4Line, IconLoader5Line];
+const loadingIcons: Component[] = [IconLoaderLine, IconLoader2Line, IconLoader3Line, IconLoader4Line, IconLoader5Line];
 
 /** Icon for button. */
 const btnIcon = computed<Component | null>(() => {

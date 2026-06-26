@@ -16,6 +16,13 @@ export const tooltipProps: PropItem[] = [
     optional: ["dark", "light"],
     default: "dark",
   },
+  {
+    name: "position",
+    remark: "弹出位置",
+    type: ["String"],
+    optional: ["top", "bottom"],
+    default: "top",
+  },
 ];
 
 export const tooltipSlots: SlotItem[] = [

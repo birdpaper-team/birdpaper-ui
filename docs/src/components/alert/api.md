@@ -1,10 +1,14 @@
 <script setup lang="ts">
-import { alertProps, alertSlots } from "../../example/alert/api.ts"
+import { alertProps, alertEvents, alertSlots } from "../../example/alert/api.ts"
 </script>
 
 ## Alert 属性
 
 <api-block type="prop" :data="alertProps" />
+
+## Alert 事件
+
+<api-block type="event" :data="alertEvents" />
 
 ## Alert 插槽
 

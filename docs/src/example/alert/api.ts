@@ -1,4 +1,4 @@
-import { PropItem, SlotItem } from "../../.vitepress/components/api-block/src/types";
+import { EventItem, PropItem, SlotItem } from "../../.vitepress/components/api-block/src/types";
 
 export const alertProps: PropItem[] = [
   { name: "title", remark: "标题", type: ["String"], default: "" },
@@ -15,6 +15,8 @@ export const alertProps: PropItem[] = [
   { name: "hide-icon", remark: "是否隐藏图标", type: ["Boolean"], default: false },
   { name: "show-close", remark: "是否显示关闭按钮", type: ["Boolean"], default: false },
 ];
+
+export const alertEvents: EventItem[] = [{ name: "close", remark: "关闭时触发", params: "" }];
 
 export const alertSlots: SlotItem[] = [
   { name: "content", remark: "内容区域" },
