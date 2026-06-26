@@ -40,9 +40,12 @@ export const useDayJs = (lang: LangsType, model: string) => {
     /** 计算并获取当前月份的第一天，并根据 firstDateOfWeek 或默认值 7 天进行偏移。 */
     const startDateValue: Dayjs = start.subtract(firstDateOfWeek || 7, "day");
 
+    // 动态计算所需行数（5 或 6 行），仅在月份首日为周六且天数 ≤ 30 时只需 5 行
+    const totalCells = Math.ceil((firstDateOfWeek + lastDate) / 7) * 7;
+
     let cells: DayCell[] = [],
       sum = 0;
-    for (let row = 0; row < 42; row++) {
+    for (let row = 0; row < totalCells; row++) {
       const day = startDateValue.add(sum, "day");
 
       cells.push({
@@ -53,7 +56,7 @@ export const useDayJs = (lang: LangsType, model: string) => {
       sum++;
     }
 
-    dates.value = arrayTo2DArray(cells, 6, 7);
+    dates.value = arrayTo2DArray(cells, totalCells / 7, 7);
     return dates.value;
   };
 

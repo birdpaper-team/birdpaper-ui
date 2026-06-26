@@ -7,10 +7,7 @@ import { projRoot, bpUIRoot, compRoot, themeRoot, distPkgRoot } from "../paths";
 
 // 基础配置
 const baseConfig = {
-  plugins: [
-    vue(),
-    vueJsx(),
-  ],
+  plugins: [vue(), vueJsx()],
   css: {
     preprocessorOptions: {
       scss: {
@@ -49,7 +46,6 @@ export const esConfig = defineConfig({
         "unocss",
         "async-validator",
         "dayjs",
-        "vue-virtual-scroller",
       ],
       output: {
         preserveModules: true,
@@ -94,7 +90,6 @@ export const cjsConfig = defineConfig({
         "unocss",
         "async-validator",
         "dayjs",
-        "vue-virtual-scroller",
       ],
       output: {
         preserveModules: true,
@@ -130,19 +125,17 @@ export const bundleConfig = defineConfig({
         "unocss",
         "async-validator",
         "dayjs",
-        "vue-virtual-scroller",
       ],
       output: {
         globals: {
-          "vue": "Vue",
+          vue: "Vue",
           "birdpaper-icon": "BirdpaperIcon",
           "@vueuse/components": "VueUseComponents",
           "@vueuse/core": "VueUse",
-          "radash": "Radash",
-          "unocss": "UnoCSS",
+          radash: "Radash",
+          unocss: "UnoCSS",
           "async-validator": "AsyncValidator",
-          "dayjs": "dayjs",
-          "vue-virtual-scroller": "VueVirtualScroller",
+          dayjs: "dayjs",
         },
       },
     },

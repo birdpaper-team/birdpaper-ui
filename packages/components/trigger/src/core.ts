@@ -133,15 +133,18 @@ export const getPositionData = (
   }
 
   let positionData: PositionInfo = new PositionInfo();
-  const clientRect = el && el?.getBoundingClientRect();
+  const clientRect = el?.getBoundingClientRect();
   if (!clientRect) return positionData;
 
   const { top, left, width, height } = clientRect;
-  const scrollTop = document.documentElement.scrollTop || 0;
   const wrapperWidth = autoFitWidth ? width : wrapperSize.width;
 
-  positionData.top = getTopPosition(position, top, scrollTop, popupOffset, height, wrapperSize, popupTranslate[1]);
-  positionData.left = getLeftPosition(position, left, width, wrapperWidth, popupOffset, popupTranslate[0]);
+  // getBoundingClientRect 返回视口坐标，需加上页面滚动偏移转为文档坐标
+  const scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+  const scrollLeft = window.scrollX || document.documentElement.scrollLeft || 0;
+
+  positionData.top = getTopPosition(position, top + scrollTop, height, popupOffset, wrapperSize, popupTranslate[1]);
+  positionData.left = getLeftPosition(position, left + scrollLeft, width, wrapperWidth, popupOffset, popupTranslate[0]);
   positionData.width = width;
   return positionData;
 };
@@ -154,42 +157,40 @@ const getLeftPosition = (
   popupOffset: number,
   translate: number = 0
 ): number => {
-  const containerRect = document.documentElement.getBoundingClientRect();
-
-  const baseLeft = left + translate - containerRect.left;
-  const centerLeft = left + width / 2 - wrapperWidth / 2 + translate - containerRect.left;
-  const leftWithPopup = left - wrapperWidth - popupOffset + translate - containerRect.left;
-  const rightWithPopup = left + width + popupOffset + translate - containerRect.left;
+  // left 已是文档坐标（视口 left + scrollLeft），直接计算弹层位置
+  const centerLeft = left + width / 2 - wrapperWidth / 2 + translate;
+  const leftWithPopup = left - wrapperWidth - popupOffset + translate;
+  const rightWithPopup = left + width + popupOffset + translate;
 
   return {
     top: centerLeft,
     bottom: centerLeft,
     left: leftWithPopup,
     right: rightWithPopup,
-    "top-left": baseLeft,
-    "bottom-left": baseLeft,
-    "top-right": left + width - wrapperWidth + translate - containerRect.left,
-    "bottom-right": left + width - wrapperWidth + translate - containerRect.left,
-    "upper-left": left - wrapperWidth + translate,
-    "low-left": left - wrapperWidth + translate,
-    "upper-right": left + width + translate - containerRect.left,
-    "low-right": left + width + translate - containerRect.left,
+    "top-left": left + translate,
+    "bottom-left": left + translate,
+    "top-right": left + width - wrapperWidth + translate,
+    "bottom-right": left + width - wrapperWidth + translate,
+    "upper-left": left - wrapperWidth + popupOffset + translate,
+    "low-left": left - wrapperWidth + popupOffset + translate,
+    "upper-right": left + width + popupOffset + translate,
+    "low-right": left + width + popupOffset + translate,
   }[position];
 };
 
 const getTopPosition = (
   position: string,
   top: number,
-  scrollTop: number,
-  popupOffset: number,
   height: number,
+  popupOffset: number,
   wrapperSize: SizeInfo,
   translate: number = 0
 ): number => {
+  // top 已是文档坐标（视口 top + scrollTop），直接计算弹层位置
   const topPosition = {
-    down: top + scrollTop + popupOffset + height + translate,
-    middle: top + scrollTop + height / 2 - wrapperSize.height / 2 + translate,
-    up: top + scrollTop - popupOffset - wrapperSize.height + translate,
+    down: top + popupOffset + height + translate,
+    middle: top + height / 2 - wrapperSize.height / 2 + translate,
+    up: top - popupOffset - wrapperSize.height + translate,
   };
 
   const positions = position.split("-");

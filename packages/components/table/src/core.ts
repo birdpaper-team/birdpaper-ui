@@ -81,7 +81,7 @@ export const useTableCore = () => {
     for (let i = 0; i < cols.length; i++) {
       const col = cols[i];
       if (!col) continue;
-      
+
       const { width } = col;
       const minWidth = col.minWidth;
 
@@ -102,7 +102,7 @@ export const useTableCore = () => {
     for (let i = 0; i < cols.length; i++) {
       const col = cols[i];
       if (!col) continue;
-      
+
       columns.value.push({ ...col, width: _col_width_list[i] || 0 });
     }
     return columns.value;
@@ -119,7 +119,7 @@ export const useTableCore = () => {
     for (let i = 0; i < cols.length; i++) {
       const col = cols[i];
       if (!col) continue;
-      
+
       const { width } = col;
       const minWidth = col.minWidth;
 
@@ -254,21 +254,25 @@ export function computeColumnWidths(
     c.realWidth = typeof c.maxWidth === "number" ? Math.min(target, c.maxWidth) : target;
   });
 
-  // 分配整除误差
+  // 分配整除误差（O(n) 数学分配，替代逐像素循环）
   const used = fixedSum + flex.reduce((s, c) => s + c.realWidth, 0);
   let leftover = tableBodyWidth - used;
-  let i = 0;
-  while (leftover > 0 && flex.length > 0) {
-    const col = flex[i % flex.length];
-    if (col && (typeof col.maxWidth !== "number" || col.realWidth < col.maxWidth)) {
-      col.realWidth += 1;
-      leftover -= 1;
-    } else {
-      i++;
-      if (i > 10000) break;
-      continue;
+  if (leftover > 0 && flex.length > 0) {
+    // 计算每列可吸收的额外像素
+    const capacity: number[] = flex.map((c) =>
+      typeof c.maxWidth === "number" ? Math.max(0, c.maxWidth - c.realWidth) : leftover
+    );
+    const totalCapacity = capacity.reduce((s, v) => s + v, 0);
+    const toDistribute = Math.min(leftover, totalCapacity);
+
+    // 均分 + 余数分配
+    const base = Math.floor(toDistribute / flex.length);
+    let remainder = toDistribute - base * flex.length;
+    for (let j = 0; j < flex.length; j++) {
+      const extra = Math.min(base + (remainder > 0 ? 1 : 0), capacity[j]);
+      flex[j].realWidth += extra;
+      if (remainder > 0) remainder--;
     }
-    i++;
   }
 
   return normalized;

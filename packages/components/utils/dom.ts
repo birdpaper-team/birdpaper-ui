@@ -1,4 +1,19 @@
-import { Component, Slots, VNode, VNodeTypes, ShapeFlags } from "vue";
+import { Component, Slots, VNode, VNodeTypes } from "vue";
+
+// Vue 内部 ShapeFlags 副本（Vue 未公开导出此 enum）
+enum ShapeFlags {
+  ELEMENT = 1,
+  FUNCTIONAL_COMPONENT = 1 << 1,
+  STATEFUL_COMPONENT = 1 << 2,
+  COMPONENT = STATEFUL_COMPONENT | FUNCTIONAL_COMPONENT,
+  TEXT_CHILDREN = 1 << 3,
+  ARRAY_CHILDREN = 1 << 4,
+  SLOTS_CHILDREN = 1 << 5,
+  TELEPORT = 1 << 6,
+  SUSPENSE = 1 << 7,
+  COMPONENT_SHOULD_KEEP_ALIVE = 1 << 8,
+  COMPONENT_KEPT_ALIVE = 1 << 9,
+}
 
 // 返回是否是 HTML 元素
 export const isHtmlEl = (e: any) => e && e.nodeType === 1;

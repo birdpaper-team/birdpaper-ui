@@ -2,14 +2,14 @@
   <div :class="[clsBlockName, { 'border-none': onlySelector }]">
     <div :class="`${clsBlockName}-body`">
       <template v-for="(items, index) in [hourList, minuteList, secondList]">
-        <RecycleScroller
+        <VirtualScroller
           list-class="time-col-scroller-list"
-          listTag="ul"
+          list-tag="ul"
           :ref="(el) => (columnRefs[index] = el)"
           :class="`${clsBlockName}-time-col`"
           :items
           :item-size="32"
-          @visible="onVisible(index)"
+          key-field="value"
           v-slot="{ item }"
         >
           <li
@@ -18,7 +18,7 @@
           >
             <span :class="`${clsBlockName}-col-cell-inner`">{{ item }}</span>
           </li>
-        </RecycleScroller>
+        </VirtualScroller>
       </template>
     </div>
 
@@ -40,9 +40,7 @@ import dayjs from "dayjs";
 import { timeInjectionKey, TimePickerContext } from "../types";
 import { timeTableProps, TimeTableProps } from "../props";
 
-// https://github.com/Akryum/vue-virtual-scroller/blob/master/packages/vue-virtual-scroller/README.md#vue-virtual-scroller
-import { RecycleScroller } from "vue-virtual-scroller";
-import "vue-virtual-scroller/dist/vue-virtual-scroller.css";
+import VirtualScroller from "@birdpaper-ui/components/utils/virtual-scroller.vue";
 
 defineOptions({ name: "TimeTable" });
 const { clsBlockName } = useNamespace("time-table");
@@ -64,7 +62,7 @@ const hourList = generateArray(24);
 const minuteList = generateArray(60);
 const secondList = generateArray(60);
 
-const columnRefs = ref([]) as Ref<RecycleScroller>;
+const columnRefs = ref([]) as Ref<any>;
 ctx.value = inject(timeInjectionKey, undefined);
 
 const globalValue = ref<string[]>(["", "", ""]);
@@ -108,12 +106,6 @@ const handleSelect = () => {
 
   const val = globalValue.value.join(":");
   ctx.value?.onSelect(val);
-};
-
-const onVisible = (index: number) => {
-  if (globalValue.value[index]) {
-    scrollTo(index, globalValue.value[index]);
-  }
 };
 
 const getTime = (defaultNow: boolean = false) => {
