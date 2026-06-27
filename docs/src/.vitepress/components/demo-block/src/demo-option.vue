@@ -2,9 +2,9 @@
   <div :class="['icon-item', { 'icon-item-active': model }]" @click="handleShowCode">
     <IconCodeLine size="13" />
   </div>
-  <div class="icon-item">
+  <!-- <div class="icon-item">
     <IconFlashlightLine size="13" />
-  </div>
+  </div> -->
   <div class="icon-item" @click="toEdit">
     <IconEditLine size="13" />
   </div>

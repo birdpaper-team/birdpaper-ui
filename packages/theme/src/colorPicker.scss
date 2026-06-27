@@ -5,7 +5,7 @@
 @use "mixins/mixins" as *;
 
 @include b(color-picker) {
-  width: 264px;
+  width: 300px;
   border-radius: 8px;
   border: $borderSize solid $borderColor-3;
   background-color: var(--bp-gray-0);
@@ -59,7 +59,7 @@
       .hue-slider,
       .alpha-slider {
         position: relative;
-        width: 172px;
+        width: 200px;
         height: 13px;
         border-radius: 10px;
         border: 1px solid $borderColor-3;

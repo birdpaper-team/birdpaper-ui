@@ -1,7 +1,7 @@
 <template>
   <div class="input-area">
     <bp-space size="mini" class="input-area-value">
-      <bp-select v-model="valueType" size="mini" style="width: 52px">
+      <bp-select v-model="valueType" size="mini" style="width: 60px">
         <bp-option v-for="v in valueTypeList" :value="v">{{ v.toLocaleUpperCase() }}</bp-option>
       </bp-select>
       <bp-input v-model="hexValue" size="mini" style="width: 108px" v-if="valueType === 'hex'" @blur="updateByHex">
@@ -11,9 +11,9 @@
       </bp-input>
       <template v-else>
         <div class="flex">
-          <bp-input v-model="rgbValue.r" @blur="updateByRgb" style="width: 36px" size="mini"></bp-input>
-          <bp-input v-model="rgbValue.g" @blur="updateByRgb" style="width: 36px" size="mini"></bp-input>
-          <bp-input v-model="rgbValue.b" @blur="updateByRgb" style="width: 36px" size="mini"></bp-input>
+          <bp-input v-model="rgbR" @blur="updateByRgb" style="width: 44px" size="mini"></bp-input>
+          <bp-input v-model="rgbG" @blur="updateByRgb" style="width: 44px" size="mini"></bp-input>
+          <bp-input v-model="rgbB" @blur="updateByRgb" style="width: 44px" size="mini"></bp-input>
         </div>
       </template>
       <bp-input-number
@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { PropType, ref, watch } from "vue";
+import { PropType, computed, ref, watch } from "vue";
 import BpSpace from "@birdpaper-ui/components/space/index";
 import BpSelect from "@birdpaper-ui/components/select/index";
 import BpInput from "@birdpaper-ui/components/input/index";
@@ -79,6 +79,25 @@ const valueType = ref<ColorPickerValueType>(props.type || "hex");
 
 const hexValue = ref<string>("");
 const rgbValue = ref({ r: 0, g: 0, b: 0 });
+
+const rgbR = computed({
+  get: () => String(rgbValue.value.r),
+  set: (v: string) => {
+    rgbValue.value.r = Number(v) || 0;
+  },
+});
+const rgbG = computed({
+  get: () => String(rgbValue.value.g),
+  set: (v: string) => {
+    rgbValue.value.g = Number(v) || 0;
+  },
+});
+const rgbB = computed({
+  get: () => String(rgbValue.value.b),
+  set: (v: string) => {
+    rgbValue.value.b = Number(v) || 0;
+  },
+});
 
 const updateByHex = () => {
   if (!hexValue.value) {
