@@ -6,7 +6,6 @@
     :position
     :class="clsBlockName"
     :popup-offset="10"
-    auto-fit-width
     update-at-scroll
   >
     <div :class="`${clsBlockName}-inner`">
