@@ -80,7 +80,7 @@ const innerActionIcon = computed<Component | null>(() => {
     return !isEyeOpen.value ? IconEyeCloseFill : IconEyeFill;
   }
 
-  if (props.clearable && !props.readonly) {
+  if (props.clearable) {
     return IconCloseLine;
   }
 
@@ -107,7 +107,7 @@ const innerSuffixContent = computed<string | Component>(() => {
 const handleActionIconClick = () => {
   if (props.disabled) return;
 
-  if (props.type === "text" && props.clearable && !props.readonly) return clear(true);
+  if (props.clearable && model.value) return clear(true);
   if (props.type === "password" && props.showPassword) return triggerEye();
 };
 

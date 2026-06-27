@@ -58,11 +58,11 @@
     }
 
     &:hover {
-      background-color: var(--bp-gray-1);
+      background-color: var(--bp-gray-0);
       transition: 0.2s;
 
       .#{$B}-col-cell-inner {
-        color: var(--bp-gray-10);
+        color: var(--bp-primary-6);
         transform: scale(1.05);
         font-weight: 600;
         transition: 0.2s;
@@ -71,11 +71,11 @@
   }
 
   .active {
-    background-color: var(--bp-gray-1);
+    background-color: var(--bp-primary-6);
     transition: 0.2s;
 
     .bp-time-table-col-cell-inner {
-      color: var(--bp-gray-10);
+      color: var(--bp-gray-0);
       transform: scale(1.05);
       font-weight: 600;
       transition: 0.2s;

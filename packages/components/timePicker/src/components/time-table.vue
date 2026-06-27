@@ -96,7 +96,7 @@ const setNow = () => {
     scrollTo(i, item);
   }
 
-  return now;
+  ctx.value?.onSelect(now);
 };
 
 const scrollTo = (i: number, item: string = defaultValue) => columnRefs.value[i]?.scrollToItem(item);

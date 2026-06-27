@@ -17,7 +17,11 @@ describe("Input", () => {
   });
 
   it("placeholder", () => {
-    expect(mount(Input, { props: { placeholder: "Enter" } }).find("input").attributes("placeholder")).toBe("Enter");
+    expect(
+      mount(Input, { props: { placeholder: "Enter" } })
+        .find("input")
+        .attributes("placeholder")
+    ).toBe("Enter");
   });
 
   it("size classes", () => {
@@ -33,11 +37,19 @@ describe("Input", () => {
   });
 
   it("readonly", () => {
-    expect(mount(Input, { props: { readonly: true } }).find("input").attributes("readonly")).toBe("");
+    expect(
+      mount(Input, { props: { readonly: true } })
+        .find("input")
+        .attributes("readonly")
+    ).toBe("");
   });
 
   it("type password", () => {
-    expect(mount(Input, { props: { type: "password" } }).find("input").attributes("type")).toBe("password");
+    expect(
+      mount(Input, { props: { type: "password" } })
+        .find("input")
+        .attributes("type")
+    ).toBe("password");
   });
 
   it("password eye icon visible", () => {
@@ -46,11 +58,19 @@ describe("Input", () => {
   });
 
   it("clearable shows icon", () => {
-    expect(mount(Input, { props: { clearable: true, modelValue: "x" } }).find(".action-icon").exists()).toBe(true);
+    expect(
+      mount(Input, { props: { clearable: true, modelValue: "x" } })
+        .find(".action-icon")
+        .exists()
+    ).toBe(true);
   });
 
   it("clearable hidden when empty", () => {
-    expect(mount(Input, { props: { clearable: true, modelValue: "" } }).find(".action-icon").exists()).toBe(false);
+    expect(
+      mount(Input, { props: { clearable: true, modelValue: "" } })
+        .find(".action-icon")
+        .exists()
+    ).toBe(false);
   });
 
   it("round", () => {
@@ -59,10 +79,14 @@ describe("Input", () => {
 
   it("emits focus/blur/keypress/keyup", async () => {
     const wrapper = mount(Input);
-    await wrapper.find("input").trigger("focus"); expect(wrapper.emitted("focus")).toBeTruthy();
-    await wrapper.find("input").trigger("blur"); expect(wrapper.emitted("blur")).toBeTruthy();
-    await wrapper.find("input").trigger("keypress"); expect(wrapper.emitted("keypress")).toBeTruthy();
-    await wrapper.find("input").trigger("keyup"); expect(wrapper.emitted("keyup")).toBeTruthy();
+    await wrapper.find("input").trigger("focus");
+    expect(wrapper.emitted("focus")).toBeTruthy();
+    await wrapper.find("input").trigger("blur");
+    expect(wrapper.emitted("blur")).toBeTruthy();
+    await wrapper.find("input").trigger("keypress");
+    expect(wrapper.emitted("keypress")).toBeTruthy();
+    await wrapper.find("input").trigger("keyup");
+    expect(wrapper.emitted("keyup")).toBeTruthy();
   });
 
   it("maxlength truncates", async () => {
@@ -90,17 +114,25 @@ describe("Input", () => {
   });
 
   it("wordCountMode chinese-english display", () => {
-    const wrapper = mount(Input, { props: { showLimit: true, wordCountMode: "chinese-english", modelValue: "你好ab" } });
+    const wrapper = mount(Input, {
+      props: { showLimit: true, wordCountMode: "chinese-english", modelValue: "你好ab" },
+    });
     expect(wrapper.text()).toContain("中2英2");
   });
 
   it("wordCountMode chinese-english display with maxlength", () => {
-    const wrapper = mount(Input, { props: { showLimit: true, wordCountMode: "chinese-english", maxlength: 10, modelValue: "你好" } });
+    const wrapper = mount(Input, {
+      props: { showLimit: true, wordCountMode: "chinese-english", maxlength: 10, modelValue: "你好" },
+    });
     expect(wrapper.text()).toContain("中2英0/10");
   });
 
-  it("prefix slot", () => { expect(mount(Input, { slots: { prefix: "<span>PFX</span>" } }).text()).toContain("PFX"); });
-  it("suffix slot", () => { expect(mount(Input, { slots: { suffix: "<span>SFX</span>" } }).text()).toContain("SFX"); });
+  it("prefix slot", () => {
+    expect(mount(Input, { slots: { prefix: "<span>PFX</span>" } }).text()).toContain("PFX");
+  });
+  it("suffix slot", () => {
+    expect(mount(Input, { slots: { suffix: "<span>SFX</span>" } }).text()).toContain("SFX");
+  });
   it("id/name", () => {
     const wrapper = mount(Input, { props: { id: "my-input", name: "username" } });
     expect(wrapper.find("input").attributes("id")).toBe("my-input");
@@ -115,7 +147,11 @@ describe("Input", () => {
     expect(typeof w.vm.clear).toBe("function");
   });
 
-  it("readonly hides clear icon", () => {
-    expect(mount(Input, { props: { clearable: true, readonly: true, modelValue: "x" } }).find(".action-icon").exists()).toBe(false);
+  it("clearable shows icon even when readonly", () => {
+    expect(
+      mount(Input, { props: { clearable: true, readonly: true, modelValue: "x" } })
+        .find(".action-icon")
+        .exists()
+    ).toBe(true);
   });
 });
