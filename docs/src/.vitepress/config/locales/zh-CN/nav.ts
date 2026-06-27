@@ -9,10 +9,7 @@ export const nav = [
       { text: "深色模式", link: "/design/dark" },
       {
         text: "资源",
-        items: [
-          { text: "Icons 图标库", link: "https://icon.birdpaper.design" },
-          { text: "MasterGo web组件库", link: "/" },
-        ],
+        items: [{ text: "Icons 图标库", link: "https://icon.birdpaper.design" }],
       },
     ],
   },
