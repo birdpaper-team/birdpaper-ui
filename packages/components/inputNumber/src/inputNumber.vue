@@ -11,7 +11,7 @@
     @input="onInput"
     @blur="onBlur"
   >
-    <template #suffix v-if="!hideButton && !disabled">
+    <template #suffix v-if="!hideButton && !disabled && !readonly">
       <div :class="`${clsBlockName}-step`">
         <div
           v-for="v in btnList"
@@ -118,7 +118,7 @@ const onBlur = () => {
   emits("blur");
 };
 
-const onInput = ({ e }) => {
+const onInput = ({ e }: { e: Event }) => {
   const regex = /^-?[0-9]*\.?[0-9]*$/;
   const value = (e.target as HTMLInputElement).value;
 

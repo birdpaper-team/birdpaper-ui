@@ -38,6 +38,10 @@ const { clsBlockName } = useNamespace("input-tag");
 
 const model = defineModel<string[]>({ default: [] });
 const props: InputTagProps = defineProps(inputTagProps);
+const emits = defineEmits<{
+  (e: "add", value: string): void;
+  (e: "remove", value: string, index: number): void;
+}>();
 
 const cls = computed<string[] | {}[]>(() => [clsBlockName.value, props.disabled && `${clsBlockName.value}-disabled`]);
 
@@ -65,16 +69,23 @@ onMounted(() => {
 const handleEnter = () => {
   if (!inpVal.value) return;
 
-  model.value.push(inpVal.value);
+  const val = inpVal.value;
+  model.value.push(val);
   inpVal.value = "";
+  emits("add", val);
 };
 const handleBackspace = () => {
   if (inpVal.value) return;
 
+  const index = model.value.length - 1;
+  const val = model.value[index];
   model.value.pop();
+  if (val !== undefined) emits("remove", val, index);
 };
 
 const handleClose = (index: number) => {
+  const val = model.value[index];
   model.value.splice(index, 1);
+  emits("remove", val, index);
 };
 </script>
