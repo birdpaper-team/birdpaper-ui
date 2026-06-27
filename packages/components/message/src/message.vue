@@ -59,7 +59,7 @@ const init = () => {
   }
 };
 const clearTimer = () => {
-  if (timer) {
+  if (timer.value) {
     window.clearTimeout(timer.value);
     timer.value = 0;
   }

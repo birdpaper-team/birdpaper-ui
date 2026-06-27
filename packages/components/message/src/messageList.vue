@@ -1,6 +1,6 @@
 <template>
   <TransitionGroup :class="clsBlockName" name="message" tag="ul">
-    <template v-for="v in list" :key="`${v.id}`">
+    <template v-for="v in filteredList" :key="`${v.id}`">
       <message
         :id="v.id"
         :type="v.type"
@@ -17,8 +17,8 @@
 
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
-import { PropType } from "vue";
-import { MessageItem } from "./type";
+import { computed, PropType } from "vue";
+import { MessageItem, MessagePosition } from "./type";
 import message from "./message.vue";
 
 defineOptions({ name: "MessageList" });
@@ -26,10 +26,15 @@ const { clsBlockName } = useNamespace("message-list");
 
 const props = defineProps({
   list: { type: Array as PropType<MessageItem[]>, default: () => [] },
+  position: { type: String as PropType<MessagePosition>, default: "top" },
 });
 const emits = defineEmits<{
   (e: "remove", id?: string): void;
 }>();
+
+const filteredList = computed(() => {
+  return props.list.filter((item) => (item.position || "top") === props.position);
+});
 
 const onRemove = (id?: string) => emits("remove", id);
 </script>

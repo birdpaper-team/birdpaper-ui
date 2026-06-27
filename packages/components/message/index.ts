@@ -12,11 +12,21 @@ const message = types.reduce((pre, value) => {
       config = { content: config as string } as MessageItem;
     }
 
-    const _config: MessageItem = { type: value as MessageType, ...(config as MessageItem) };
+    const _config: MessageItem = {
+      type: value as MessageType,
+      plain: false,
+      position: "top",
+      content: "",
+      duration: 3000,
+      closeable: false,
+      ...(config as MessageItem),
+      id: (config as MessageItem).id,
+    };
+
     if (!msg) {
       msg = new MessageManager(appContext);
     }
-    return msg!.add(_config as MessageItem);
+    return msg!.add(_config);
   };
   return pre;
 }, {} as any);
@@ -26,10 +36,16 @@ export const Message = Object.assign({
   removeAll: () => {
     msg && msg.clear();
   },
+  destroy: () => {
+    if (msg) {
+      msg.destroy();
+      msg = undefined as any;
+    }
+  },
   install: () => {
     return {};
   },
 });
 
-export * from "./src/message.vue";
-export * from "./src/instance";
+export { default as MessageComponent } from "./src/message.vue";
+export { default as MessageManager } from "./src/instance";

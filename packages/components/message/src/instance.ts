@@ -6,21 +6,43 @@ import { uid } from "radash";
 class MessageManager {
   private clsName: string = "--bp-message";
   private list: Ref<MessageItem[]>;
-  private mask: HTMLElement = document.createElement("div");
+  private masks: Map<string, HTMLElement> = new Map();
+  private appContext?: AppContext;
 
   constructor(appContext?: AppContext) {
+    this.appContext = appContext;
     this.list = ref<MessageItem[]>([]);
 
-    const vm = createVNode(MessageList, {
+    // 为 top / bottom 各创建一个 mask 容器
+    const topMask = document.createElement("div");
+    const bottomMask = document.createElement("div");
+    topMask.setAttribute("class", `${this.clsName}-mask ${this.clsName}-top`);
+    bottomMask.setAttribute("class", `${this.clsName}-mask ${this.clsName}-bottom`);
+
+    // 各自维护独立的 list 视图
+    const topVm = createVNode(MessageList, {
       list: this.list.value,
+      position: "top",
+      onRemove: this.remove,
+    });
+    const bottomVm = createVNode(MessageList, {
+      list: this.list.value,
+      position: "bottom",
       onRemove: this.remove,
     });
 
     if (appContext) {
-      vm.appContext = appContext;
+      topVm.appContext = appContext;
+      bottomVm.appContext = appContext;
     }
-    render(vm, this.mask);
-    document.body.appendChild(this.mask);
+
+    render(topVm, topMask);
+    render(bottomVm, bottomMask);
+    document.body.appendChild(topMask);
+    document.body.appendChild(bottomMask);
+
+    this.masks.set("top", topMask);
+    this.masks.set("bottom", bottomMask);
   }
 
   /**
@@ -30,14 +52,23 @@ class MessageManager {
    */
   add = (config: MessageItem): { remove: () => void } => {
     const id = config.id ?? `_bp_message_${uid(10)}`;
-    this.mask.setAttribute("class", `${this.clsName}-mask ${this.clsName}-${config.position || "top"}`);
+    const position = config.position || "top";
 
-    const message: MessageItem = reactive({ ...config, id });
+    const defaults: Partial<MessageItem> = {
+      type: "text",
+      content: "",
+      duration: 3000,
+      closeable: false,
+      plain: false,
+      position: "top",
+    };
 
-    // Check whether the message instance already exists. If has, update the message config, or push new one.
+    const message: MessageItem = reactive({ ...defaults, ...config, id });
+
+    // Check whether the message instance already exists. If has, merge the config.
     const isExist = this.list.value.some((item, index) => {
       if (item.id === id) {
-        this.list.value[index] = config;
+        Object.assign(this.list.value[index], config, { id });
         return true;
       }
       return false;
@@ -48,9 +79,13 @@ class MessageManager {
     }
 
     // Handle possible simultaneous removal cases, step up 200ms to make the removal visual experience better.
-    const len = this.list.value.length;
-    if (len > 1 && this.list.value[len - 1]?.duration === message.duration) {
-      message.duration = message.duration ?? 3000 + 200 * len;
+    const samePositionItems = this.list.value.filter((item) => item.position === position);
+    const len = samePositionItems.length;
+    if (len > 1) {
+      const lastItem = samePositionItems[len - 2];
+      if (lastItem && lastItem.duration === message.duration && message.duration > 0) {
+        message.duration = message.duration + 200 * len;
+      }
     }
 
     return {
@@ -71,9 +106,17 @@ class MessageManager {
 
   /** 清除消息列表 */
   clear = (): void => {
-    this.list.value.map((item) => {
-      this.remove(item.id);
+    this.list.value.splice(0, this.list.value.length);
+  };
+
+  /** 销毁容器 DOM，防止内存泄漏 */
+  destroy = (): void => {
+    this.masks.forEach((mask) => {
+      render(null, mask);
+      mask.remove();
     });
+    this.masks.clear();
+    this.list.value.splice(0, this.list.value.length);
   };
 }
 

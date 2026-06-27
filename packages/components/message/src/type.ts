@@ -8,12 +8,12 @@ export type MessageType = "text" | "success" | "warning" | "error" | "loading";
 export type MessageInstance = string | MessageItem;
 
 export interface MessageItem {
-  id: string;
+  id?: string;
   type?: MessageType;
   content: string;
   duration?: number;
   closeable?: boolean;
-  plain: boolean;
-  position: MessagePosition;
+  plain?: boolean;
+  position?: MessagePosition;
   onClose?: Function;
 }
