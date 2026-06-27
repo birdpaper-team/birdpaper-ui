@@ -1,3 +1,6 @@
 <template>
-  <bp-spin :spinning="false" description="Loading..." ></bp-spin>
+  <bp-space :size="32">
+    <bp-spin />
+    <bp-spin description="加载中..." />
+  </bp-space>
 </template>

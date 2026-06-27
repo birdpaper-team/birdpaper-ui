@@ -3,7 +3,7 @@
     <Spinner v-if="!hasDefault" :icon="spinIcon" :description="description" />
 
     <Transition name="fade">
-      <div :class="`${clsBlockName}-mask`" v-if="spinning">
+      <div :class="`${clsBlockName}-mask`" v-if="hasDefault && spinning">
         <Spinner :icon="spinIcon" :description="description" />
       </div>
     </Transition>

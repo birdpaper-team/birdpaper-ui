@@ -29,13 +29,11 @@
     overflow: hidden; // 改为 hidden，避免重复滚动条
     font-feature-settings: "tnum";
     border: $borderSize solid var(--bp-gray-2);
-    border-bottom: none;
   }
 
   &-header-wrap {
     overflow: hidden; // 头部不独立滚动，通过JS同步
     position: relative;
-    border-bottom: $borderSize solid var(--bp-gray-2);
   }
 
   &-header-wrap::before,
