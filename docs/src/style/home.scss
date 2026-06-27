@@ -1,0 +1,77 @@
+/* Hero Section Customization */
+.VPHero {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -40%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(22, 93, 255, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: hero-glow 6s ease-in-out infinite alternate;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -30%;
+    left: -10%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(0, 150, 34, 0.05) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: hero-glow 8s ease-in-out infinite alternate-reverse;
+  }
+
+  .name {
+    font-family: var(--font-quick) !important;
+  }
+}
+
+@keyframes hero-glow {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: translate(20px, -20px) scale(1.1);
+    opacity: 1;
+  }
+}
+
+.VPHero .VPImage {
+  animation: hero-float 4s ease-in-out infinite;
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+/* Hero glassmorphism tagline */
+.VPHero .tagline {
+  position: relative;
+}
+
+/* Feature cards glassmorphism */
+.VPFeature {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(22, 93, 255, 0.08);
+  }
+}
