@@ -1,7 +1,7 @@
 import { MethodItem, PropItem } from "../../.vitepress/components/api-block/src/types";
 
 export const messageOptions: PropItem[] = [
-  { name: "id", remark: "消息 ID", type: ["String"] },
+  { name: "id", remark: "消息唯一标识，相同 id 会更新而非新建", type: ["String"] },
   {
     name: "type",
     remark: "消息类型",
@@ -9,27 +9,25 @@ export const messageOptions: PropItem[] = [
     optional: ["text", "success", "warning", "error", "loading"],
     default: "text",
   },
-  { name: "content", remark: "内容", type: ["String"] },
-  { name: "duration", remark: "持续时间(ms)", type: ["Number"], default: 3000 },
-  { name: "closeable", remark: "是否可关闭", type: ["Boolean"], default: false },
-  { name: "plain", remark: "是否简洁模式", type: ["Boolean"], default: false },
+  { name: "content", remark: "消息内容", type: ["String"] },
+  { name: "duration", remark: "自动关闭的延迟时间（毫秒），0 表示不自动关闭", type: ["Number"], default: 3000 },
+  { name: "closeable", remark: "是否显示关闭按钮", type: ["Boolean"], default: false },
+  { name: "plain", remark: "是否使用简洁模式", type: ["Boolean"], default: false },
   {
     name: "position",
-    remark: "显示位置",
+    remark: "消息弹出位置",
     type: ["String"],
     optional: ["top", "bottom"],
     default: "top",
   },
-  { name: "onClose",
-    remark: "关闭回调",
-    type: ["Function"] },
+  { name: "onClose", remark: "消息关闭时的回调函数", type: ["Function"] },
 ];
 
 export const messageMethods: MethodItem[] = [
-  { name: "Message.text", remark: "文本消息", params: "config: MessageInstance" },
-  { name: "Message.success", remark: "成功消息", params: "config: MessageInstance" },
-  { name: "Message.warning", remark: "警告消息", params: "config: MessageInstance" },
-  { name: "Message.error", remark: "错误消息", params: "config: MessageInstance" },
-  { name: "Message.loading", remark: "加载消息", params: "config: MessageInstance" },
+  { name: "Message.text", remark: "弹出文本消息", params: "config: MessageInstance" },
+  { name: "Message.success", remark: "弹出成功消息", params: "config: MessageInstance" },
+  { name: "Message.warning", remark: "弹出警告消息", params: "config: MessageInstance" },
+  { name: "Message.error", remark: "弹出错误消息", params: "config: MessageInstance" },
+  { name: "Message.loading", remark: "弹出加载消息", params: "config: MessageInstance" },
   { name: "Message.removeAll", remark: "清除所有消息" },
 ];
