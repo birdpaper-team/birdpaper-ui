@@ -10,7 +10,7 @@ describe("Spin", () => {
   });
 
   it("spinning", () => {
-    const wrapper = mount(Spin, { props: { spinning: true } });
+    const wrapper = mount(Spin, { props: { spinning: true }, slots: { default: "<div>Content</div>" } });
     expect(wrapper.find(".bp-spin-mask").exists()).toBe(true);
   });
 

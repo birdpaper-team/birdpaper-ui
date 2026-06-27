@@ -16,6 +16,8 @@ import DocTabs from "../components/doc-tabs";
 import ApiBlock from "../components/api-block";
 import UsageBlock from "../components/usage-block";
 import Catalog from "../components/catalog.vue";
+import ColorPalette from "../components/color-palette/index.vue";
+import ColorGray from "../components/color-palette/gray.vue";
 
 import "uno.css";
 import "../../style/index.scss";
@@ -33,5 +35,7 @@ export default {
     ctx.app.component("api-block", ApiBlock);
     ctx.app.component("usage-block", UsageBlock);
     ctx.app.component("catalog", Catalog);
+    ctx.app.component("color-palette", ColorPalette);
+    ctx.app.component("color-gray", ColorGray);
   },
 };
