@@ -154,8 +154,11 @@ watchEffect(() => {
 
     const valueMap: Record<string, string> = {};
     for (const item of children) {
-      valueMap[item.props?.value as string] =
-        (item.props?.label as string) || item?.children?.["default"]?.()[0].children;
+      const slotContent =
+        item.children && typeof item.children === "object" && !Array.isArray(item.children)
+          ? (item.children as Record<string, any>)["default"]?.()[0]?.children
+          : undefined;
+      valueMap[item.props?.value as string] = (item.props?.label as string) || slotContent || "";
     }
     if (!props.multiple) {
       labelModel.value = valueMap[model.value as string] || String(model.value);

@@ -64,7 +64,7 @@
   &-body {
     @include flex(column, center, center) {
       padding: 0 14px 8px 14px;
-      min-height: 250px; // 6行 * (32px + 6px margin) + padding，防止 5 行月份布局抖动
+      min-height: 210px; // 6行 * (32px + 6px margin) + padding，防止 5 行月份布局抖动
     }
 
     &-row {
