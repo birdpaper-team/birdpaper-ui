@@ -16,7 +16,7 @@
         </div>
 
         <div :class="`${clsBlockName}-footer`">
-          <bp-button @click="handleCancle" size="mini" status="gray" type="plain">{{ cancelText }}</bp-button>
+          <bp-button @click="handleCancel" size="mini" status="gray" type="plain">{{ cancelText }}</bp-button>
           <bp-button @click="handleOk" :loading="okLoading" size="mini" type="normal" :status="btnStatus[type]">
             {{ okText }}
           </bp-button>
@@ -38,7 +38,7 @@ const { clsBlockName } = useNamespace("popconfirm");
 
 const model = ref<boolean>(false);
 const props: PopconfirmProps = defineProps(popconfirmProps);
-const emit = defineEmits(["cancle", "ok"]);
+const emit = defineEmits(["cancel", "ok"]);
 
 const iconType = {
   info: IconInformationFill,
@@ -53,9 +53,9 @@ const btnStatus = {
   warning: "warning",
 };
 
-const handleCancle = () => {
+const handleCancel = () => {
   model.value = false;
-  emit("cancle");
+  emit("cancel");
 };
 
 const okLoading = ref<boolean>(false);

@@ -72,13 +72,17 @@ export default defineComponent({
       if (!el) return;
       const wrapperSize = getWrapperSize(wrapperRef.value);
 
+      // showArrow 时自动增加偏移，为箭头留出空间
+      const arrowOffset = props.showArrow ? 6 : 0;
+      const totalOffset = props.popupOffset + arrowOffset;
+
       const position = props.autoFixPosition
         ? getPosition(
             props.position,
             windowSize,
             triggerBounding,
             wrapperSize,
-            props.popupOffset,
+            totalOffset,
             props.popupTranslate,
             props.boundaryPadding
           )
@@ -89,7 +93,7 @@ export default defineComponent({
         position,
         wrapperSize,
         props.popupTranslate,
-        props.popupOffset,
+        totalOffset,
         props.autoFitWidth
       );
       currentPosition.value = position;
@@ -162,10 +166,9 @@ export default defineComponent({
         return h("div", { class: clsBlockName.value, ref: triggerRef }, slots.content?.());
       }
 
-      // 检查是否在测试环境中
-      const isTestEnv = import.meta.env?.MODE === "test";
-
-      // 在测试环境中不使用Teleport，直接渲染内容
+      // 在测试环境中不使用Teleport（jsdom不完整支持），直接渲染内容
+      // @ts-ignore
+      const isTestEnv = (import.meta.env?.MODE || "").toLowerCase() === "test";
       if (isTestEnv) {
         return h("div", { class: clsBlockName.value, ref: triggerRef }, [
           h(

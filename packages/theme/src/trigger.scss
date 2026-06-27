@@ -1,3 +1,4 @@
+@use "common/design" as *;
 @use "mixins/mixins.scss" as *;
 
 @include b(trigger) {
@@ -12,48 +13,91 @@
     position: absolute;
     z-index: var(--z-index-base);
   }
-  
+
   &-wrapper-arrow {
-    position: relative;
+    padding: 5px;
   }
 
   &-arrow {
     position: absolute;
-    width: 8px;
-    height: 8px;
-    background: inherit;
-    transform: rotate(45deg);
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
   }
 
+  // 弹层在上方 → 箭头朝下
   &-arrow-top,
   &-arrow-top-left,
   &-arrow-top-right {
-    bottom: -4px;
+    bottom: 0;
+    border-top-color: var(--bp-gray-0);
+    border-bottom: 0;
+  }
+  &-arrow-top {
     left: 50%;
-    margin-left: -4px;
+    margin-left: -5px;
+  }
+  &-arrow-top-left {
+    left: 12px;
+  }
+  &-arrow-top-right {
+    right: 12px;
   }
 
+  // 弹层在下方 → 箭头朝上
   &-arrow-bottom,
   &-arrow-bottom-left,
   &-arrow-bottom-right {
-    top: -4px;
+    top: 0;
+    border-bottom-color: var(--bp-gray-0);
+    border-top: 0;
+  }
+  &-arrow-bottom {
     left: 50%;
-    margin-left: -4px;
+    margin-left: -5px;
+  }
+  &-arrow-bottom-left {
+    left: 12px;
+  }
+  &-arrow-bottom-right {
+    right: 12px;
   }
 
+  // 弹层在左侧 → 箭头朝右
   &-arrow-left,
   &-arrow-upper-left,
   &-arrow-low-left {
-    right: -4px;
+    right: 0;
+    border-right-color: var(--bp-gray-0);
+    border-left: 0;
+  }
+  &-arrow-left {
     top: 50%;
-    margin-top: -4px;
+    margin-top: -5px;
+  }
+  &-arrow-upper-left {
+    top: 12px;
+  }
+  &-arrow-low-left {
+    bottom: 12px;
   }
 
+  // 弹层在右侧 → 箭头朝左
   &-arrow-right,
   &-arrow-upper-right,
   &-arrow-low-right {
-    left: -4px;
+    left: 0;
+    border-left-color: var(--bp-gray-0);
+    border-right: 0;
+  }
+  &-arrow-right {
     top: 50%;
-    margin-top: -4px;
+    margin-top: -5px;
+  }
+  &-arrow-upper-right {
+    top: 12px;
+  }
+  &-arrow-low-right {
+    bottom: 12px;
   }
 }

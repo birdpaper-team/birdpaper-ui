@@ -2,10 +2,10 @@
   <div :style="{ width: '100%', height: '140px', overflowY: 'scroll' }">
     <div :style="{ height: '300px', background: '#fafafa' }">
       <bp-trigger update-at-scroll>
-        <bp-button type="plain">Click me</bp-button>
+        <bp-button type="plain">滚动容器内弹出</bp-button>
         <template #content>
           <div class="demo">
-            <span v-text="'No content.'"></span>
+            <span>滚动时跟随更新位置</span>
           </div>
         </template>
       </bp-trigger>

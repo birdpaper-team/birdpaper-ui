@@ -1,19 +1,19 @@
 <template>
-  <bp-space style="width: 100%;" justify="space-between">
+  <bp-space style="width: 100%" justify="space-between">
     <bp-trigger position="top">
-      <bp-button>Click me</bp-button>
+      <bp-button>上方弹出</bp-button>
       <template #content>
         <div class="demo">
-          <span v-text="'No content.'"></span>
+          <span>上方弹出内容</span>
         </div>
       </template>
     </bp-trigger>
 
     <bp-trigger position="bottom">
-      <bp-button>Click me</bp-button>
+      <bp-button>下方弹出</bp-button>
       <template #content>
         <div class="demo">
-          <span v-text="'No content.'"></span>
+          <span>下方弹出内容</span>
         </div>
       </template>
     </bp-trigger>
@@ -27,7 +27,7 @@
   justify-content: center;
   flex-direction: column;
   width: 120px;
-  height: 100px;
+  height: 60px;
   padding: 10px;
   font-size: 13px;
   border-radius: 6px;
