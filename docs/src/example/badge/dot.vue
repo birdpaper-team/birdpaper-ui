@@ -1,12 +1,15 @@
 <template>
   <bp-space :size="32">
-    <bp-badge :count="5">
+    <bp-badge dot status="danger">
       <IconNotification4Line fill="#595959" />
     </bp-badge>
-    <bp-badge :count="100" :max-count="99">
+    <bp-badge dot status="success">
       <IconNotification4Line fill="#595959" />
     </bp-badge>
-    <bp-badge :count="0">
+    <bp-badge dot status="warning">
+      <IconNotification4Line fill="#595959" />
+    </bp-badge>
+    <bp-badge dot status="primary">
       <IconNotification4Line fill="#595959" />
     </bp-badge>
   </bp-space>
