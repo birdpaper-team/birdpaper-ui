@@ -23,8 +23,26 @@
   color: var(--bp-gray-9);
 }
 
-.vp-doc tr {
+// Reset VitePress table styles to avoid overriding component library styles
+.vp-doc table,
+.vp-doc tbody,
+.vp-doc thead,
+.vp-doc tr,
+.vp-doc th,
+.vp-doc td {
+  display: revert;
+  margin: 0;
+  padding: 0;
+  border: none;
   border-top: none;
+  background-color: transparent;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  text-align: inherit;
+  transition: none;
+  vertical-align: inherit;
 }
 
 .vp-doc blockquote p {

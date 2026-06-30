@@ -20,7 +20,7 @@ export default defineComponent({
 
     const bodyRender = () => {
       return (
-        <tbody class={clsBlockName} style={{ height: props.height }}>
+        <tbody class={clsBlockName.value} style={{ height: props.height }}>
           {props.data.map((record: any, rowIndex: number) => {
             return (
               <tr key={rowIndex}>
