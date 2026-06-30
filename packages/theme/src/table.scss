@@ -122,6 +122,10 @@
 
       tr {
         display: table-row;
+        vertical-align: inherit;
+        border-color: inherit;
+        background: none;
+        border: none;
         --bp-table-row-bg: var(--bp-gray-0);
         --bp-table-fixed-bg: var(--bp-gray-0);
 
@@ -200,13 +204,23 @@
 
   &-border {
     tr {
+      display: table-row;
+      vertical-align: inherit;
+      border-color: inherit;
+      background: none;
+      border: none;
+
       td {
+        display: table-cell;
+
         &:not(:first-child) {
           border-left: $borderSize solid var(--bp-gray-2);
         }
       }
 
       th {
+        display: table-cell;
+
         &:not(:first-child) {
           border-left: $borderSize solid var(--bp-gray-2);
         }
@@ -216,6 +230,12 @@
 
   &-stripe {
     tr {
+      display: table-row;
+      vertical-align: inherit;
+      border-color: inherit;
+      background: none;
+      border: none;
+
       &:nth-child(2n) {
         background-color: var(--bp-gray-1);
         --bp-table-row-bg: var(--bp-gray-1);
