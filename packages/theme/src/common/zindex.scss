@@ -1,7 +1,7 @@
 // z-index
 
 :root {
-  --z-index-base: 2000;
+  --z-index-base: 3000;
   --z-index-message: calc(var(--z-index-base) + 3);
   --z-index-modal: calc(var(--z-index-base));
   --z-index-drawer: calc(var(--z-index-base) + 1);

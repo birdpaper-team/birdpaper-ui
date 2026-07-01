@@ -1,6 +1,7 @@
 import { mount } from "@vue/test-utils";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, beforeEach } from "vitest";
 import Modal from "../src/modal.vue";
+import { useModalZIndex } from "@birdpaper-ui/hooks";
 
 describe("Modal", () => {
   it("props modelValue true", () => { expect(mount(Modal, { props: { modelValue: true, title: "T" } }).props("modelValue")).toBe(true); });
@@ -35,5 +36,29 @@ describe("Modal", () => {
     ["info", "success", "warning", "error", "confirm"].forEach(t => {
       expect(mount(Modal, { props: { modelValue: true, type: t } }).props("type")).toBe(t);
     });
+  });
+
+  it("useModalZIndex should manage incremental z-index", () => {
+    const { currentZIndex: z1, increase: inc1, decrease: dec1 } = useModalZIndex();
+    const { currentZIndex: z2, increase: inc2, decrease: dec2 } = useModalZIndex();
+    
+    expect(z1.value).toBe(3000);
+    expect(z2.value).toBe(3000);
+    
+    inc1();
+    expect(z1.value).toBe(3001);
+    expect(z2.value).toBe(3001);
+    
+    inc2();
+    expect(z1.value).toBe(3002);
+    expect(z2.value).toBe(3002);
+    
+    dec1();
+    expect(z1.value).toBe(3001);
+    expect(z2.value).toBe(3001);
+    
+    dec2();
+    expect(z1.value).toBe(3000);
+    expect(z2.value).toBe(3000);
   });
 });

@@ -27,7 +27,7 @@ export const useNamespace = (componentName: string, namespaceOverrides?: Ref<str
 export const useGlobalConfig = () => {
   const locale = inject(localeKey, ref("zh-CN"));
   const size = inject(sizeKey, ref(defaultSize));
-  const zIndex = inject(zIndexKey, ref(2000));
+  const zIndex = inject(zIndexKey, ref(3000));
   const emptyText = inject(emptyTextKey, ref("暂无数据"));
   return { locale, size, zIndex, emptyText };
 };

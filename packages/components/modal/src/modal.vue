@@ -1,11 +1,11 @@
 <template>
   <teleport to="body">
     <transition name="modal-fade">
-      <div v-show="model" :class="`${clsBlockName}-wrapper`" @click="handleMaskClick"></div>
+      <div v-show="model" :class="`${clsBlockName}-wrapper`" :style="{ zIndex: currentZIndex }" @click="handleMaskClick"></div>
     </transition>
 
     <transition name="modal-zoom">
-      <div ref="modalRef" v-show="model" :class="`${clsBlockName}-container`">
+      <div ref="modalRef" v-show="model" :class="`${clsBlockName}-container`" :style="{ zIndex: currentZIndex }">
         <div
           :class="[
             `${clsBlockName}`,
@@ -58,7 +58,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useNamespace } from "@birdpaper-ui/hooks";
+import { useNamespace, useModalZIndex } from "@birdpaper-ui/hooks";
 import BpButton from "@birdpaper-ui/components/button";
 import { computed, ref, watch, onMounted, reactive } from "vue";
 import { ModalProps, modalProps } from "./props";
@@ -73,6 +73,7 @@ import {
 
 defineOptions({ name: "Modal" });
 const { clsBlockName } = useNamespace("modal");
+const { currentZIndex, increase, decrease } = useModalZIndex();
 
 const model = defineModel({ default: false });
 const props: ModalProps = defineProps(modalProps);
@@ -109,6 +110,7 @@ const modalStyle = computed(() => ({
   marginTop: props.fullscreen ? 0 : props.top,
   marginBottom: props.fullscreen ? 0 : props.bottom,
   borderRadius: props.fullscreen ? 0 : props.borderRadius,
+  zIndex: currentZIndex.value + 1,
 }));
 
 const handleClose = () => {
@@ -143,5 +145,10 @@ const handleConfirm = async () => {
 
 watch(model, (value) => {
   modalInstance.isScrollLocked = value;
+  if (value) {
+    increase();
+  } else {
+    decrease();
+  }
 });
 </script>

@@ -7,7 +7,7 @@ const defaultConfig: Required<ConfigProviderContext> = {
   namespace: "bp",
   locale: "zh-CN",
   size: "default",
-  zIndex: 2000,
+  zIndex: 3000,
   emptyText: "暂无数据",
 };
 
