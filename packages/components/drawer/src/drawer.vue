@@ -1,7 +1,7 @@
 <template>
   <teleport to="body">
     <Transition name="modal-fade">
-      <div v-show="model" :class="`${clsBlockName}-wrapper`" @click="handleMaskClick"></div>
+      <div v-show="model" :class="`${clsBlockName}-wrapper`" :style="{ zIndex: currentZIndex }" @click="handleMaskClick"></div>
     </Transition>
 
     <Transition :name="`slide-${placement}`">
@@ -36,13 +36,14 @@
 </template>
 
 <script setup lang="ts">
-import { useNamespace } from "@birdpaper-ui/hooks";
+import { useNamespace, useModalZIndex } from "@birdpaper-ui/hooks";
 import { DrawerProps, drawerProps } from "./props";
 import { useScrollLock } from "@vueuse/core";
 import { computed, onMounted, reactive, ref, watch, Transition } from "vue";
 
 defineOptions({ name: "Drawer" });
 const { clsBlockName } = useNamespace("drawer");
+const { currentZIndex, increase, decrease } = useModalZIndex();
 
 const model = defineModel<boolean>({ type: Boolean, required: true });
 const props: DrawerProps = defineProps(drawerProps);
@@ -63,13 +64,12 @@ const handleMaskClick = () => {
 };
 
 const drawerStyle = computed(() => {
-  if (props.placement === "up" || props.placement === "down") {
-    return {
-      height: typeof props.height === "number" ? `${props.height}px` : props.height,
-    };
-  }
+  const baseStyle = props.placement === "up" || props.placement === "down"
+    ? { height: typeof props.height === "number" ? `${props.height}px` : props.height }
+    : { width: typeof props.width === "number" ? `${props.width}px` : props.width };
   return {
-    width: typeof props.width === "number" ? `${props.width}px` : props.width,
+    ...baseStyle,
+    zIndex: currentZIndex.value + 1,
   };
 });
 
@@ -105,5 +105,10 @@ const handleConfirm = async () => {
 
 watch(model, (value) => {
   drawerInstance.isScrollLocked = value;
+  if (value) {
+    increase();
+  } else {
+    decrease();
+  }
 });
 </script>

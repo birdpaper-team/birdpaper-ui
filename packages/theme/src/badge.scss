@@ -19,7 +19,7 @@
       border-radius: 50%;
       transform: translate(50%, -50%);
       box-sizing: border-box;
-      z-index: 999;
+      z-index: var(--z-index-badge);
     }
   }
 
@@ -39,7 +39,7 @@
     border-radius: 20px;
     transform: translate(50%, -50%);
     transform-origin: 100% 0%;
-    z-index: 999;
+    z-index: var(--z-index-badge);
   }
 }
 

@@ -18,7 +18,7 @@
   background-color: var(--bp-gray-0);
   border: 1px solid var(--bp-gray-2);
   border-radius: 6px;
-  z-index: 99;
+  z-index: var(--z-index-dropdown);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   overflow-y: auto;
 

@@ -2,8 +2,12 @@
 
 :root {
   --z-index-base: 3000;
-  --z-index-message: calc(var(--z-index-base) + 3);
-  --z-index-modal: calc(var(--z-index-base));
-  --z-index-drawer: calc(var(--z-index-base) + 1);
+  --z-index-dropdown: var(--z-index-base);
+  --z-index-select: var(--z-index-base);
   --z-index-tooltip: var(--z-index-base);
+  --z-index-trigger: var(--z-index-base);
+  --z-index-modal: var(--z-index-base);
+  --z-index-drawer: calc(var(--z-index-base) + 1);
+  --z-index-message: calc(var(--z-index-base) + 3);
+  --z-index-badge: calc(var(--z-index-base) + 2);
 }
