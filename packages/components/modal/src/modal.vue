@@ -5,7 +5,7 @@
     </transition>
 
     <transition name="modal-zoom">
-      <div ref="modalRef" v-show="model" :class="`${clsBlockName}-container`" :style="{ zIndex: currentZIndex }">
+      <div ref="modalRef" v-show="model" :class="`${clsBlockName}-container`" :style="{ zIndex: currentZIndex + 1 }">
         <div
           :class="[
             `${clsBlockName}`,
@@ -110,7 +110,6 @@ const modalStyle = computed(() => ({
   marginTop: props.fullscreen ? 0 : props.top,
   marginBottom: props.fullscreen ? 0 : props.bottom,
   borderRadius: props.fullscreen ? 0 : props.borderRadius,
-  zIndex: currentZIndex.value + 1,
 }));
 
 const handleClose = () => {
