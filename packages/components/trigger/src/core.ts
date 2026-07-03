@@ -233,7 +233,7 @@ export const getWrapperSize = (el: Element): SizeInfo => {
  * @param width
  * @returns string
  */
-export const getWrapperPositionStyle = (top: number, left: number, visible: boolean, width?: number): string => {
+export const getWrapperPositionStyle = (top: number, left: number, visible: boolean, width?: number, zIndex?: number): string => {
   if (isNaN(top) || isNaN(left)) {
     throw new Error("Invalid top or left value");
   }
@@ -241,8 +241,9 @@ export const getWrapperPositionStyle = (top: number, left: number, visible: bool
   const topStr = top.toString();
   const leftStr = left.toString();
 
-  let innerStyleStr = `top:${topStr}px;left:${leftStr}px;display:${visible ? "block" : "none"};`;
-  width && (innerStyleStr += `width:${width}px`);
+  let innerStyleStr = `position:absolute;top:${topStr}px;left:${leftStr}px;display:${visible ? "block" : "none"};`;
+  width && (innerStyleStr += `width:${width}px;`);
+  zIndex && (innerStyleStr += `z-index:${zIndex};`);
 
   return innerStyleStr;
 };

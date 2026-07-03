@@ -58,9 +58,9 @@
 </template>
 
 <script lang="ts" setup>
-import { useNamespace, useModalZIndex } from "@birdpaper-ui/hooks";
+import { useNamespace, useModalZIndex, popupZIndexKey } from "@birdpaper-ui/hooks";
 import BpButton from "@birdpaper-ui/components/button";
-import { computed, ref, watch, onMounted, reactive } from "vue";
+import { computed, ref, watch, onMounted, reactive, provide } from "vue";
 import { ModalProps, modalProps } from "./props";
 import { useScrollLock } from "@vueuse/core";
 import {
@@ -80,6 +80,7 @@ const props: ModalProps = defineProps(modalProps);
 const emit = defineEmits(["cancel", "confirm"]);
 
 const modalRef = ref(null);
+provide(popupZIndexKey, computed(() => currentZIndex.value + 2));
 const modalInstance = reactive({
   isScrollLocked: ref(),
 });

@@ -2,11 +2,13 @@
 @use "mixins/mixins.scss" as *;
 
 @include b(trigger) {
+  display: inline-flex;
   position: relative;
 
   &-inner {
     display: inline-flex;
     align-items: center;
+    width: 100%;
   }
 
   &-wrapper {

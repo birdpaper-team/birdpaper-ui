@@ -1,10 +1,10 @@
-import { Teleport, Transition, defineComponent, h, nextTick, onMounted, ref, watch, VNode, computed } from "vue";
+import { Teleport, Transition, defineComponent, h, inject, nextTick, onMounted, ref, watch, VNode, computed } from "vue";
 import { getPosition, getPositionData, getWrapperPositionStyle, getWrapperSize } from "./core";
 import { TriggerPosition } from "./types";
 import { triggerProps } from "./props";
 import { onClickOutside, useElementBounding, useEventListener, useThrottleFn, useWindowSize } from "@vueuse/core";
 import { getScrollElements } from "@birdpaper-ui/components/utils/dom";
-import { useNamespace } from "@birdpaper-ui/hooks";
+import { useNamespace, popupZIndexKey } from "@birdpaper-ui/hooks";
 
 export default defineComponent({
   name: "Trigger",
@@ -24,6 +24,7 @@ export default defineComponent({
     const popupContainer = ref<HTMLElement>();
     const currentPosition = ref<TriggerPosition>(props.position);
     const triggerBounding = useElementBounding(triggerInnerRef as any);
+    const injectedZIndex = inject(popupZIndexKey, ref(0));
 
     // Update popup container
     const updatePopupContainer = () => {
@@ -98,10 +99,8 @@ export default defineComponent({
       );
       currentPosition.value = position;
       emit("positionChange", { position, top, left, width });
-      wrapperRef.value.setAttribute(
-        "style",
-        getWrapperPositionStyle(top, left, visible.value, props.autoFitWidth ? width : undefined)
-      );
+      const styleStr = getWrapperPositionStyle(top, left, visible.value, props.autoFitWidth ? width : undefined, injectedZIndex.value || undefined);
+      wrapperRef.value.setAttribute("style", styleStr);
 
       if (props.scrollToClose && visible.value) {
         window.clearTimeout(scrollCloseTimer.value);
@@ -157,6 +156,22 @@ export default defineComponent({
       }
     );
 
+    const wrapperInitStyle = computed(() => {
+      const style: Record<string, string | number> = { position: "absolute" };
+      if (injectedZIndex.value > 0) {
+        style.zIndex = injectedZIndex.value;
+      }
+      return style;
+    });
+
+    const wrapperProps = (baseClass: string) => ({
+      ref: wrapperRef,
+      class: [baseClass, props.showArrow && `${baseClass}-arrow`],
+      style: wrapperInitStyle.value,
+      onMouseenter: handleMouseEnter,
+      onMouseleave: handleMouseLeave,
+    });
+
     const render = () => {
       const children = slots.default?.() || [];
       const triggerNode =
@@ -169,89 +184,17 @@ export default defineComponent({
       // 在测试环境中不使用Teleport（jsdom不完整支持），直接渲染内容
       // @ts-ignore
       const isTestEnv = (import.meta.env?.MODE || "").toLowerCase() === "test";
-      if (isTestEnv) {
-        return h("div", { class: clsBlockName.value, ref: triggerRef }, [
-          h(
-            "div",
-            {
-              class: `${clsBlockName.value}-inner`,
-              ref: triggerInnerRef,
-              onClickCapture: handleClick,
-              onMouseenter: handleMouseEnter,
-              onMouseleave: handleMouseLeave,
-            },
-            [triggerNode]
-          ),
-          h(Transition, { name: props.transition, appear: true }, () =>
-            visible.value
-              ? h(
-                  "div",
-                  {
-                    ref: wrapperRef,
-                    class: [`${clsBlockName.value}-wrapper`, props.showArrow && `${clsBlockName.value}-wrapper-arrow`],
-                    onMouseenter: handleMouseEnter,
-                    onMouseleave: handleMouseLeave,
-                  },
-                  [
-                    props.showArrow
-                      ? h("div", {
-                          class: `${clsBlockName.value}-arrow ${clsBlockName.value}-arrow-${currentPosition.value}`,
-                        })
-                      : null,
-                    slots.content?.(),
-                  ]
-                )
-              : null
-          ),
-        ]);
-      }
-
-      // 检查popupContainer是否有效
-      const isValidContainer =
-        popupContainer.value &&
-        typeof popupContainer.value === "object" &&
-        popupContainer.value.nodeType === Node.ELEMENT_NODE;
-
-      // 如果容器无效，直接渲染内容而不使用Teleport
-      if (!isValidContainer) {
-        return h("div", { class: clsBlockName.value, ref: triggerRef }, [
-          h(
-            "div",
-            {
-              class: `${clsBlockName.value}-inner`,
-              ref: triggerInnerRef,
-              onClickCapture: handleClick,
-              onMouseenter: handleMouseEnter,
-              onMouseleave: handleMouseLeave,
-            },
-            [triggerNode]
-          ),
-          h(Transition, { name: props.transition, appear: true }, () =>
-            visible.value
-              ? h(
-                  "div",
-                  {
-                    ref: wrapperRef,
-                    class: [`${clsBlockName.value}-wrapper`, props.showArrow && `${clsBlockName.value}-wrapper-arrow`],
-                    onMouseenter: handleMouseEnter,
-                    onMouseleave: handleMouseLeave,
-                  },
-                  [
-                    props.showArrow
-                      ? h("div", {
-                          class: `${clsBlockName.value}-arrow ${clsBlockName.value}-arrow-${currentPosition.value}`,
-                        })
-                      : null,
-                    slots.content?.(),
-                  ]
-                )
-              : null
-          ),
-        ]);
-      }
-
-      // 正式环境使用Teleport
-      return h("div", { class: clsBlockName.value, ref: triggerRef }, [
+      const wrapperCls = `${clsBlockName.value}-wrapper`;
+      const renderArrow = () =>
+        props.showArrow
+          ? h("div", { class: `${clsBlockName.value}-arrow ${clsBlockName.value}-arrow-${currentPosition.value}` })
+          : null;
+      const renderContent = () => [
+        h(Transition, { name: props.transition, appear: true }, () =>
+          visible.value ? h("div", wrapperProps(wrapperCls), [renderArrow(), slots.content?.()]) : null
+        ),
+      ];
+      const triggerInner = () =>
         h(
           "div",
           {
@@ -262,30 +205,27 @@ export default defineComponent({
             onMouseleave: handleMouseLeave,
           },
           [triggerNode]
-        ),
-        h(Teleport, { to: popupContainer.value }, [
-          h(Transition, { name: props.transition, appear: true }, () =>
-            visible.value
-              ? h(
-                  "div",
-                  {
-                    ref: wrapperRef,
-                    class: [`${clsBlockName.value}-wrapper`, props.showArrow && `${clsBlockName.value}-wrapper-arrow`],
-                    onMouseenter: handleMouseEnter,
-                    onMouseleave: handleMouseLeave,
-                  },
-                  [
-                    props.showArrow
-                      ? h("div", {
-                          class: `${clsBlockName.value}-arrow ${clsBlockName.value}-arrow-${currentPosition.value}`,
-                        })
-                      : null,
-                    slots.content?.(),
-                  ]
-                )
-              : null
-          ),
-        ]),
+        );
+
+      if (isTestEnv) {
+        return h("div", { class: clsBlockName.value, ref: triggerRef }, [triggerInner(), ...renderContent()]);
+      }
+
+      // 检查popupContainer是否有效
+      const isValidContainer =
+        popupContainer.value &&
+        typeof popupContainer.value === "object" &&
+        popupContainer.value.nodeType === Node.ELEMENT_NODE;
+
+      // 如果容器无效，直接渲染内容而不使用Teleport
+      if (!isValidContainer) {
+        return h("div", { class: clsBlockName.value, ref: triggerRef }, [triggerInner(), ...renderContent()]);
+      }
+
+      // 正式环境使用Teleport
+      return h("div", { class: clsBlockName.value, ref: triggerRef }, [
+        triggerInner(),
+        h(Teleport, { to: popupContainer.value }, renderContent()),
       ]);
     };
 

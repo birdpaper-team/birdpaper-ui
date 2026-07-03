@@ -11,7 +11,7 @@
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { optionProps, OptionProps } from "../props";
-import { computed, inject, ref, toRef, useSlots, watch } from "vue";
+import { computed, inject, ref, toRef, useSlots, watch, nextTick } from "vue";
 import BpCheckbox from "@birdpaper-ui/components/checkbox/index";
 import { SelectContext, selectInjectionKey, SelectOption } from "../types";
 
@@ -61,7 +61,9 @@ const handleClick = () => {
   if (props.disabled) return;
 
   ctx.value?.onSelect(option.value.value, { ...option.value });
-  isChecked.value = getCheckboxState();
+  nextTick(() => {
+    isChecked.value = getCheckboxState();
+  });
 };
 
 watch(

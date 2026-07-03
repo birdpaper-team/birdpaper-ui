@@ -51,12 +51,10 @@ const hiddenSpan = ref<HTMLElement | null>(null);
 
 const inpWidth = ref<number>(0);
 const updateWidth = () => {
-  if (!hiddenSpan.value) {
-    inpWidth.value = 0;
-    return;
-  }
+  if (!hiddenSpan.value) return;
 
-  inpWidth.value = hiddenSpan.value.offsetWidth + 8;
+  const spanWidth = hiddenSpan.value.offsetWidth;
+  inpWidth.value = Math.max(spanWidth + 8, inpWidth.value || 0);
 };
 watch([() => inpVal.value, () => props.placeholder], () => {
   nextTick(() => updateWidth());

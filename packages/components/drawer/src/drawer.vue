@@ -36,10 +36,10 @@
 </template>
 
 <script setup lang="ts">
-import { useNamespace, useModalZIndex } from "@birdpaper-ui/hooks";
+import { useNamespace, useModalZIndex, popupZIndexKey } from "@birdpaper-ui/hooks";
 import { DrawerProps, drawerProps } from "./props";
 import { useScrollLock } from "@vueuse/core";
-import { computed, onMounted, reactive, ref, watch, Transition } from "vue";
+import { computed, onMounted, provide, reactive, ref, watch, Transition } from "vue";
 
 defineOptions({ name: "Drawer" });
 const { clsBlockName } = useNamespace("drawer");
@@ -50,6 +50,7 @@ const props: DrawerProps = defineProps(drawerProps);
 const emit = defineEmits(["cancel", "confirm"]);
 
 const drawerRef = ref(null);
+provide(popupZIndexKey, computed(() => currentZIndex.value + 2));
 const drawerInstance = reactive({
   isScrollLocked: ref(),
 });

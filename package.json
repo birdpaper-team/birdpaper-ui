@@ -28,7 +28,7 @@
     "@vueuse/components": "^11.1.0",
     "@vueuse/core": "^11.1.0",
     "async-validator": "^4.2.5",
-    "birdpaper-icon": "^0.9.2",
+    "birdpaper-icon": "^0.9.8",
     "dayjs": "^1.11.3",
     "radash": "^12.1.0"
   },
