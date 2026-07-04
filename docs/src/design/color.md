@@ -95,14 +95,24 @@ Birdpaper UI 的色彩体系由 **功能色** 和 **中性色** 两部分组成�
 
 每个功能色提供 10 个色阶，按用途可分为以下层级：
 
-| 层级     | 色阶   | 使用场景                 |
-| -------- | ------ | ------------------------ |
-| 浅底     | 1 - 2  | 背景色、标签底色         |
-| 边框     | 3 - 4  | 边框、分割线             |
-| 辅助     | 5      | hover 态、辅助元素       |
-| **主色** | **6**  | **主要图标、文本、按钮** |
-| 交互     | 7 - 8  | hover / active 态        |
-| 深色     | 9 - 10 | 深色文本、深色背景       |
+<script setup>
+const tableData = [
+  { level: '浅底', step: '1 - 2', usage: '背景色、标签底色' },
+  { level: '边框', step: '3 - 4', usage: '边框、分割线' },
+  { level: '辅助', step: '5', usage: 'hover 态、辅助元素' },
+  { level: '主色', step: '6', usage: '主要图标、文本、按钮' },
+  { level: '交互', step: '7 - 8', usage: 'hover / active 态' },
+  { level: '深色', step: '9 - 10', usage: '深色文本、深色背景' },
+]
+</script>
+
+<bp-table :data="tableData" row-key="level">
+  <template #columns>
+    <bp-table-column title="层级" data-index="level" />
+    <bp-table-column title="色阶" data-index="step" />
+    <bp-table-column title="使用场景" data-index="usage" />
+  </template>
+</bp-table>
 
 ## RGB 变量
 
