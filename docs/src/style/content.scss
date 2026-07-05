@@ -48,3 +48,32 @@
 .vp-doc blockquote p {
   font-size: 14px;
 }
+
+/* ── 右侧大纲 (Outline) ── */
+.VPDocAsideOutline .content {
+  border-left-color: var(--bp-gray-2);
+}
+
+.VPDocAsideOutline .outline-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bp-gray-8);
+}
+
+.VPDocAsideOutline .outline-link {
+  font-size: 13px;
+  line-height: 28px;
+  color: var(--bp-gray-5);
+
+  &:hover {
+    color: var(--bp-gray-9);
+  }
+
+  &.active {
+    color: var(--bp-primary-6);
+  }
+}
+
+.VPDocAsideOutline .outline-marker {
+  background-color: var(--bp-primary-6);
+}
