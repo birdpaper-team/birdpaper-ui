@@ -21,12 +21,12 @@
         <div class="bp-home__actions">
           <a class="btn btn--primary" :href="localePath('/develop/install')">
             <span>{{ t.ctaStart }}</span>
-            <IconArrowRightFill size="16" fill="#fff" />
+            <IconArrowRightLongLine size="16" fill="#fff" />
           </a>
           <a class="btn btn--ghost" :href="localePath('/components/catalog')">{{ t.ctaBrowse }}</a>
         </div>
         <ul class="bp-home__meta">
-          <li>v3 Alpha</li>
+          <li>v{{ version }}</li>
           <li>MIT License</li>
         </ul>
       </div>
@@ -155,13 +155,13 @@
       </div>
       <div class="cap-rail">
         <a
-          v-for="cap in t.capabilities"
+          v-for="(cap, i) in t.capabilities"
           :key="cap.key"
           class="cap-item glass"
           :href="localePath(cap.link)"
         >
-          <div class="cap-item__icon">
-            <component :is="capabilityIcons[cap.key]" size="22" />
+          <div class="cap-item__icon" :class="`cap-item__icon--${i}`">
+            <component :is="capabilityIcons[cap.key]" size="22" fill="#ffffff" />
           </div>
           <div>
             <h3>{{ cap.title }}</h3>
@@ -178,29 +178,13 @@
         <div class="code-copy">
           <h2>{{ t.codeTitle }}</h2>
           <p>{{ t.codeLead }}</p>
-          <div class="code-install">
-            <code>
-              <span class="tok-cmd">npm</span>
-              <span class="tok-flag">i</span>
-              <span class="tok-pkg">birdpaper-ui</span>
-            </code>
-            <button
-              type="button"
-              class="code-install__copy"
-              :aria-label="copied ? t.codeCopied : t.codeCopy"
-              @click="copyInstall"
-            >
-              <IconCheckLine v-if="copied" size="16" />
-              <IconFileCopyLine v-else size="16" />
-            </button>
-          </div>
           <ol class="code-steps">
             <li>{{ t.codeStepStyle }}</li>
             <li>{{ t.codeStepBuild }}</li>
           </ol>
           <a class="btn btn--primary" :href="localePath('/develop/start')">
             <span>{{ t.codeCta }}</span>
-            <IconArrowRightLine size="16" />
+            <IconArrowRightLine size="16" fill="#fff" />
           </a>
         </div>
         <div class="code-window glass">
@@ -244,7 +228,7 @@
           <span class="explore-card__label">{{ item.label }}</span>
           <h3>{{ item.title }}</h3>
           <p>{{ item.desc }}</p>
-          <span class="explore-card__cta">{{ t.exploreEnter }} {{ item.label }}</span>
+          <IconArrowRightLine class="explore-card__cta" size="18" />
         </a>
       </div>
     </section>
@@ -289,7 +273,7 @@ import {
   IconArrowLeftDoubleFill,
   IconArrowLeftSLine,
   IconArrowRightDoubleFill,
-  IconArrowRightFill,
+  IconArrowRightLongLine,
   IconArrowRightLine,
   IconArrowRightSLine,
   IconBrushLine,
@@ -297,8 +281,6 @@ import {
   IconCheckboxCircleFill,
   IconCodeSSlashLine,
   IconErrorWarningFill,
-  IconFileCopyLine,
-  IconCheckLine,
   IconLeafLine,
   IconMoonLine,
   IconPaletteLine,
@@ -307,11 +289,9 @@ import {
   IconStarFill,
   IconSubtractLine,
 } from "birdpaper-icon";
-import { useClipboard } from "@vueuse/core";
 import { useData } from "vitepress";
-import { computed, markRaw, ref, type Component } from "vue";
-import { Message } from "@birdpaper-ui/components/message";
-import { locales } from "./locales";
+import { computed, markRaw, type Component } from "vue";
+import BirdpaperUI from "birdpaper-ui/index.ts";
 import { homeLocales, type HomeLocale } from "./home-locales";
 
 const principleIcons: Component[] = [
@@ -329,6 +309,7 @@ const capabilityIcons: Record<string, Component> = {
 };
 
 const { lang } = useData();
+const version = BirdpaperUI.version;
 
 const t = computed<HomeLocale>(() =>
   lang.value === "en" ? homeLocales.en : homeLocales["zh-CN"],
@@ -337,26 +318,6 @@ const t = computed<HomeLocale>(() =>
 const localePath = (path: string) => {
   const prefix = lang.value === "en" ? "/en" : "";
   return `${prefix}${path}`;
-};
-
-const installCmd = "npm i birdpaper-ui";
-const copied = ref(false);
-const { copy, isSupported } = useClipboard();
-let copyTimer = 0;
-
-const copyInstall = () => {
-  const copyLocale = lang.value === "en" ? locales.en : locales["zh-CN"];
-  if (!isSupported.value) {
-    Message.error(copyLocale.COPY_ERROR);
-    return;
-  }
-  copy(installCmd);
-  copied.value = true;
-  Message.success(copyLocale.COPY_SUCCESS);
-  window.clearTimeout(copyTimer);
-  copyTimer = window.setTimeout(() => {
-    copied.value = false;
-  }, 1600);
 };
 
 /** Static August 2026 calendar (Sun-first), 19 selected */

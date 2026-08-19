@@ -20,14 +20,11 @@ export type HomeLocale = {
   codeStepStyle: string;
   codeStepBuild: string;
   codeCta: string;
-  codeCopy: string;
-  codeCopied: string;
   codeOpenDialog: string;
   codeConfirmTitle: string;
   codeContent: string;
   exploreTitle: string;
   exploreLead: string;
-  exploreEnter: string;
   footerTagline: string;
   footerResources: string;
   footerCommunity: string;
@@ -80,15 +77,12 @@ export const homeLocales: Record<"zh-CN" | "en", HomeLocale> = {
     codeLead: "统一的 API 与完整类型提示，降低学习与协作成本。",
     codeStepStyle: "引入样式与组件",
     codeStepBuild: "开始构建界面",
-    codeCta: "查看快速上手",
-    codeCopy: "复制安装命令",
-    codeCopied: "已复制",
+    codeCta: "查看文档",
     codeOpenDialog: "打开对话框",
     codeConfirmTitle: "确认操作",
     codeContent: "内容区域",
     exploreTitle: "从这里继续",
     exploreLead: "按角色进入对应文档，目标明确、路径清晰",
-    exploreEnter: "进入",
     footerTagline: "简洁、一致、高效的企业级 Vue 3 组件库",
     footerResources: "资源",
     footerCommunity: "社区",
@@ -193,15 +187,12 @@ export const homeLocales: Record<"zh-CN" | "en", HomeLocale> = {
     codeLead: "Unified APIs and full type hints reduce learning and collaboration cost.",
     codeStepStyle: "Import styles and components",
     codeStepBuild: "Start building your UI",
-    codeCta: "View quick start",
-    codeCopy: "Copy install command",
-    codeCopied: "Copied",
+    codeCta: "View docs",
     codeOpenDialog: "Open dialog",
     codeConfirmTitle: "Confirm action",
     codeContent: "Content area",
     exploreTitle: "Continue from here",
     exploreLead: "Jump into the docs that match your role — clear goals, clear paths",
-    exploreEnter: "Enter",
     footerTagline: "A simple, consistent, efficient Vue 3 component library for enterprise",
     footerResources: "Resources",
     footerCommunity: "Community",

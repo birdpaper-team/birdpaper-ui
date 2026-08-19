@@ -102,7 +102,6 @@ html.dark .VPNavBar.home {
 
   code,
   pre,
-  .code-install code,
   .code-window {
     font-family: var(--vp-font-family-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
   }
@@ -239,12 +238,13 @@ html.dark .VPNavBar.home {
   z-index: 1;
   max-width: var(--home-content-max);
   margin: 0 auto;
-  padding: clamp(72px, 12vh, 120px) var(--home-content-pad) 64px;
+  padding: 24px var(--home-content-pad) 32px;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
   gap: clamp(32px, 5vw, 64px);
   align-items: center;
-  min-height: calc(100vh - 64px);
+  height: 560px;
+  box-sizing: border-box;
   user-select: none;
 }
 
@@ -294,7 +294,7 @@ html.dark .VPNavBar.home {
   font-family: var(--font-quick), Quicksand, sans-serif;
   font-size: clamp(48px, 7vw, 84px);
   font-weight: 700;
-  line-height: 0.98;
+  line-height: 1.2;
   letter-spacing: -0.035em;
   color: var(--home-ink);
   background: linear-gradient(120deg, var(--home-ink) 20%, var(--home-brand) 140%);
@@ -972,8 +972,27 @@ html.dark .VPNavBar.home {
   border-radius: 12px;
   display: grid;
   place-items: center;
-  color: var(--home-brand);
-  background: var(--home-brand-soft);
+  flex-shrink: 0;
+}
+
+.cap-item__icon--0 {
+  background: linear-gradient(135deg, var(--bp-primary-6), var(--bp-primary-5));
+  box-shadow: 0 4px 16px rgba(var(--bp-primary-6-rgb), 0.3);
+}
+
+.cap-item__icon--1 {
+  background: linear-gradient(135deg, var(--bp-danger-6), var(--bp-danger-5));
+  box-shadow: 0 4px 16px rgba(var(--bp-danger-6-rgb), 0.3);
+}
+
+.cap-item__icon--2 {
+  background: linear-gradient(135deg, var(--bp-warning-6), var(--bp-warning-5));
+  box-shadow: 0 4px 16px rgba(var(--bp-warning-6-rgb), 0.3);
+}
+
+.cap-item__icon--3 {
+  background: linear-gradient(135deg, var(--bp-success-6), var(--bp-success-4));
+  box-shadow: 0 4px 16px rgba(var(--bp-success-6-rgb), 0.3);
 }
 
 .cap-item h3 {
@@ -1013,6 +1032,9 @@ html.dark .VPNavBar.home {
 
 .code-copy {
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .code-copy h2 {
@@ -1025,60 +1047,11 @@ html.dark .VPNavBar.home {
   margin: 12px 0 0;
   color: var(--home-muted);
   line-height: 1.7;
-}
-
-.code-install {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin: 24px 0 16px;
-  padding: 10px 10px 10px 16px;
-  border-radius: 12px;
-  background: color-mix(in srgb, var(--home-code-bg) 92%, transparent);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 8px 24px rgba(18, 32, 72, 0.08);
-}
-
-.code-install code {
-  font-family: var(--vp-font-family-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 18px;
-  line-height: 1.4;
-  font-weight: 500;
-  letter-spacing: 0.01em;
-}
-
-.code-install .tok-cmd {
-  color: #c4b5fd;
-}
-
-.code-install .tok-flag {
-  color: #7dd3fc;
-}
-
-.code-install .tok-pkg {
-  color: #86efac;
-}
-
-.code-install__copy {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border: none;
-  border-radius: 8px;
-  background: transparent;
-  color: rgba(255, 255, 245, 0.55);
-  cursor: pointer;
-  transition: color 0.2s ease, background 0.2s ease;
-}
-
-.code-install__copy:hover {
-  color: #fff;
-  background: rgba(255, 255, 255, 0.08);
+  max-width: 36em;
 }
 
 .code-steps {
-  margin: 0 0 28px;
+  margin: 24px 0 28px;
   padding-left: 18px;
   color: var(--home-muted);
   line-height: 1.9;
@@ -1157,19 +1130,19 @@ html.dark .VPNavBar.home {
 }
 
 .explore-card {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  padding: 28px 24px;
-  border-radius: 18px;
+  gap: 6px;
+  padding: 18px 18px 40px;
+  border-radius: 16px;
   text-decoration: none;
   color: inherit;
-  min-height: 200px;
   transition: transform 0.35s var(--home-ease), border-color 0.3s ease;
 }
 
 .explore-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-4px);
   border-color: color-mix(in srgb, var(--home-brand) 35%, var(--home-glass-border));
 }
 
@@ -1183,28 +1156,28 @@ html.dark .VPNavBar.home {
 
 .explore-card h3 {
   margin: 0;
-  font-size: 22px;
+  font-size: 18px;
   letter-spacing: -0.02em;
 }
 
 .explore-card p {
   margin: 0;
   color: var(--home-muted);
-  line-height: 1.6;
-  flex: 1;
+  font-size: 13px;
+  line-height: 1.55;
 }
 
 .explore-card__cta {
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--home-text);
-  opacity: 0.75;
-  transition: opacity 0.25s ease, color 0.25s ease;
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
+  color: var(--home-faint);
+  transition: transform 0.25s var(--home-ease), color 0.25s ease;
 }
 
 .explore-card:hover .explore-card__cta {
-  opacity: 1;
   color: var(--home-brand);
+  transform: translateX(3px);
 }
 
 /* Footer */
@@ -1287,8 +1260,9 @@ html.dark .VPNavBar.home {
 @media (max-width: 980px) {
   .bp-home__hero {
     grid-template-columns: 1fr;
-    min-height: auto;
-    padding-top: 64px;
+    height: auto;
+    min-height: 0;
+    padding-top: 48px;
   }
 
   .bp-home__stage {
