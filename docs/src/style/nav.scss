@@ -9,11 +9,13 @@
     color: var(--bp-gray-8);
   }
 
-  .VPNavBar {
+  .VPNavBar:not(.home) {
     .wrapper {
       border-bottom: 1px solid $borderColor-3;
     }
+  }
 
+  .VPNavBar {
     .title {
       border: none;
     }

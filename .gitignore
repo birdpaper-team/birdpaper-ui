@@ -6,3 +6,4 @@ lib/
 .idea/
 .trae/
 coverage/
+cache-local/

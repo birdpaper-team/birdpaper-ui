@@ -6,6 +6,7 @@ const config: import("vitepress").UserConfig = {
   ignoreDeadLinks: true,
   cleanUrls: true,
   appearance: true,
+  cacheDir: ".vitepress/cache-local",
   locales,
   head,
   themeConfig: {

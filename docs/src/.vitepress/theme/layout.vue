@@ -1,6 +1,8 @@
 <template>
   <DefaultTheme.Layout>
-    <template #home-features-after> <home-page></home-page> </template>
+    <template #home-features-after>
+      <home-page />
+    </template>
     <template #nav-bar-content-after>
       <NolebaseEnhancedReadabilitiesMenu />
     </template>
