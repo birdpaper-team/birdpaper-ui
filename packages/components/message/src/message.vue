@@ -5,7 +5,7 @@
     </span>
     <span :class="`${clsBlockName}-content`">{{ content }}</span>
 
-    <span v-if="closeable" :class="`${clsBlockName}-close`" @click="handleClose">
+    <span v-if="isCloseable" :class="`${clsBlockName}-close`" @click="handleClose">
       <IconCloseLine size="14" />
     </span>
   </li>
@@ -50,6 +50,8 @@ const clsName = computed(() => {
   return cls;
 });
 
+const isCloseable = computed(() => !!(props.closeable || props.closable));
+
 const timer = ref(0);
 const init = () => {
   clearTimer();
@@ -80,6 +82,11 @@ onUnmounted(() => {
 
 watch(
   () => props.content,
+  () => init()
+);
+
+watch(
+  () => props.duration,
   () => init()
 );
 </script>

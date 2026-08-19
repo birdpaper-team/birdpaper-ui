@@ -47,7 +47,9 @@ const setPage = (type: "prev" | "next" | "page", pageNum?: number) => {
   let num = currentPage.value;
   type === "prev" ? num-- : type === "next" ? num++ : (num = pageNum ?? 1);
 
-  currentPage.value = num < 1 ? 1 : num > totalPages.value ? totalPages.value : num;
+  if (num < 1) num = 1;
+  if (totalPages.value > 0 && num > totalPages.value) num = totalPages.value;
+  currentPage.value = num;
   return currentPage.value;
 };
 
@@ -63,7 +65,18 @@ watchEffect(() => {
 });
 
 watchEffect(() => {
-  totalPages.value = Math.ceil(props.total / currentPageSize.value);
+  if (props.pageSize) {
+    currentPageSize.value = props.pageSize;
+  }
+});
+
+watchEffect(() => {
+  totalPages.value = Math.ceil(props.total / currentPageSize.value) || 0;
+
+  if (totalPages.value === 0) {
+    currentPage.value = Math.max(currentPage.value, 1);
+    return;
+  }
 
   if (currentPage.value > totalPages.value) {
     setPage("page", totalPages.value);

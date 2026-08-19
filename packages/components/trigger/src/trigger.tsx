@@ -1,4 +1,4 @@
-import { Teleport, Transition, defineComponent, h, inject, nextTick, onMounted, ref, watch, VNode, computed } from "vue";
+import { Teleport, Transition, defineComponent, h, inject, nextTick, onMounted, onBeforeUnmount, ref, watch, VNode, computed } from "vue";
 import { getPosition, getPositionData, getWrapperPositionStyle, getWrapperSize } from "./core";
 import { TriggerPosition } from "./types";
 import { triggerProps } from "./props";
@@ -18,8 +18,8 @@ export default defineComponent({
     const wrapperRef = ref();
     const visible = ref<boolean>(props.modelValue || false);
     const scrollElements = ref<Element[]>([]);
-    const hoverTimer = ref();
-    const scrollCloseTimer = ref();
+    const hoverTimer = ref(0);
+    const scrollCloseTimer = ref(0);
     const windowSize = useWindowSize();
     const popupContainer = ref<HTMLElement>();
     const currentPosition = ref<TriggerPosition>(props.position);
@@ -40,13 +40,20 @@ export default defineComponent({
       popupContainer.value = document.body;
     };
 
+    const clearTimers = () => {
+      window.clearTimeout(hoverTimer.value);
+      hoverTimer.value = 0;
+      window.clearTimeout(scrollCloseTimer.value);
+      scrollCloseTimer.value = 0;
+    };
+
     const handleClick = () => {
       if (props.trigger === "hover" || props.disabled) return;
       updateVisible(!visible.value);
       nextTick(() => handleResize());
     };
     const handleMouseEnter = () => {
-      if (props.trigger === "click") return;
+      if (props.trigger === "click" || props.disabled) return;
 
       window.clearTimeout(hoverTimer.value);
       hoverTimer.value = 0;
@@ -61,7 +68,7 @@ export default defineComponent({
       nextTick(() => handleResize());
     };
     const handleMouseLeave = () => {
-      if (props.trigger === "click") return;
+      if (props.trigger === "click" || props.disabled) return;
       window.clearTimeout(hoverTimer.value);
       hoverTimer.value = window.setTimeout(() => updateVisible(false), props.closeDelay);
     };
@@ -105,7 +112,7 @@ export default defineComponent({
       if (props.scrollToClose && visible.value) {
         window.clearTimeout(scrollCloseTimer.value);
         scrollCloseTimer.value = window.setTimeout(() => {
-          visible.value = false;
+          updateVisible(false);
         }, props.scrollToCloseTime);
       }
     };
@@ -116,9 +123,16 @@ export default defineComponent({
       emit("popupVisible", visible.value);
     };
 
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && visible.value && !props.disabled) {
+        updateVisible(false);
+      }
+    };
+
     const throttleResize = useThrottleFn(handleResize, props.throttleTime);
     const init = () => {
       useEventListener(window, "resize", throttleResize);
+      useEventListener(window, "keydown", handleKeydown);
 
       nextTick(() => {
         if (props.updateAtScroll) {
@@ -138,12 +152,15 @@ export default defineComponent({
       });
     });
 
+    onBeforeUnmount(() => {
+      clearTimers();
+    });
+
     onClickOutside(
       wrapperRef,
       () => {
-        if (!props.clickOutside || props.trigger === "hover") return;
-        visible.value = false;
-        emit("update:modelValue", visible.value);
+        if (!props.clickOutside || props.trigger === "hover" || props.disabled) return;
+        updateVisible(false);
       },
       { ignore: [triggerRef] }
     );

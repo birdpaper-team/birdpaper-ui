@@ -1,4 +1,4 @@
-import { defineComponent, Fragment, h, PropType, Comment, VNode } from "vue";
+import { computed, defineComponent, Fragment, h, PropType, Comment, VNode } from "vue";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { SizeType, SpaceType } from "./types";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
@@ -35,7 +35,7 @@ export default defineComponent({
   setup(props, { slots }) {
     const { clsBlockName } = useNamespace("space");
     const typeMap = { mini: 4, small: 8, normal: 10, large: 24 };
-    const size = typeof props.size === "string" ? typeMap[props.size] : props.size;
+    const gap = computed(() => (typeof props.size === "string" ? typeMap[props.size] : props.size));
 
     const render = () => {
       const children = getAllElements(slots.default?.(), false).filter((item) => get(item, "type") !== Comment);
@@ -43,21 +43,18 @@ export default defineComponent({
       return (
         <div
           class={[clsBlockName.value, `${clsBlockName.value}-${props.type}`]}
-          style={`justify-content:${props.justify};align-items:${props.align}`}
+          style={{
+            justifyContent: props.justify,
+            alignItems: props.align,
+            gap: `${gap.value}px`,
+          }}
         >
           {children.map((child: VNode, index: number) => {
             const hasSplit = slots.split && index > 0;
-            const style = props.type === "horizontal" ? `margin: 0 ${size}px` : `margin: ${size}px 0`;
 
             return h(Fragment, { key: child.key ?? `item-${index}` }, [
-              hasSplit && (
-                <div class={`${clsBlockName.value}-item`} style={style}>
-                  {slots.split?.()}
-                </div>
-              ),
-              <div class={`${clsBlockName.value}-item`} style={style}>
-                {child}
-              </div>,
+              hasSplit && <div class={`${clsBlockName.value}-item`}>{slots.split?.()}</div>,
+              <div class={`${clsBlockName.value}-item`}>{child}</div>,
             ]);
           })}
         </div>

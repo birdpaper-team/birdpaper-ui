@@ -34,17 +34,21 @@ const emits = defineEmits(["change-picker"]);
 
 const ctx = ref<DatePickerContext>();
 ctx.value = inject(dateInjectionKey, undefined);
+
+const displayModel = ctx.value!.panelValue || ctx.value!.model;
+const { toDay, currentYear, monthCell, setMonthCell, changeYear } = useDayJs(
+  ctx.value!.langs,
+  displayModel
+);
+
+const todayMonthValue = `${dayjs(toDay.value).year()}-${String(dayjs(toDay.value).month() + 1).padStart(2, "0")}`;
 const cellCls = (cell: MonthCell) => [
   `${clsBlockName.value}-month-cell`,
   { active: !!ctx.value!.model && currentVal.value === cell.value },
-  { "to-month": cell.value === `${dayjs(toDay.value).year()}-${dayjs(toDay.value).month() + 1}` },
+  { "to-month": cell.value === todayMonthValue },
 ];
 
-const { toDay, current, currentYear, monthCell, setMonthCell, changeYear } = useDayJs(
-  ctx.value!.langs,
-  ctx.value!.model
-);
-const currentVal = ref(current.value && current.value.format(ctx.value!.valueFormat));
+const currentVal = ref(ctx.value!.model ? dayjs(ctx.value!.model).format("YYYY-MM") : "");
 setMonthCell();
 
 const options: { icon: Component; type: "prev" | "next" }[] = [
@@ -60,7 +64,14 @@ const handleChange = (type: "prev" | "next", step: number = 1) => {
 
 const handleSelect = (date: MonthCell) => {
   currentVal.value = date.value;
-  ctx.value?.onSelect(currentVal.value, {}, false);
+
+  if (ctx.value!.type === "month") {
+    const formatted = dayjs(date.value).format(ctx.value!.valueFormat);
+    ctx.value!.onSelect(formatted, {}, true);
+    return;
+  }
+
+  ctx.value!.setPanelValue?.(date.value);
   emits("change-picker", "date");
 };
 

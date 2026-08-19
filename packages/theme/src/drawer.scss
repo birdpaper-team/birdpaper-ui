@@ -98,4 +98,14 @@
     left: 0;
     width: 100%;
   }
+
+  &.drawer-show-border {
+    border: $borderSize solid $borderColor-3;
+  }
+
+  &-header-close {
+    appearance: none;
+    background: transparent;
+    border: none;
+  }
 }

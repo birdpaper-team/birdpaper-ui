@@ -16,7 +16,8 @@
     }
   }
 
-  &-vertical {
+  &-vertical,
+  &-horizontal {
     .#{$B}-item {
       margin-bottom: 20px;
     }

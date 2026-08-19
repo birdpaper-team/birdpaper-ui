@@ -33,4 +33,20 @@ describe("InputNumber", () => {
     const wrapper = mount(InputNumber, { props: { size: "large" } });
     expect(wrapper.props("size")).toBe("large");
   });
+
+  it("step buttons should increment and decrement without NaN", async () => {
+    const wrapper = mount(InputNumber, {
+      props: { modelValue: 100, step: 1, "onUpdate:modelValue": (v: number | "") => wrapper.setProps({ modelValue: v }) },
+    });
+
+    const buttons = wrapper.findAll("button.bp-input-number-step-item");
+    expect(buttons.length).toBe(2);
+
+    await buttons[0].trigger("click"); // up
+    expect(wrapper.props("modelValue")).toBe(101);
+    expect(Number.isNaN(wrapper.props("modelValue") as number)).toBe(false);
+
+    await buttons[1].trigger("click"); // down
+    expect(wrapper.props("modelValue")).toBe(100);
+  });
 });

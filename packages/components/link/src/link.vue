@@ -1,5 +1,12 @@
 <template>
-  <a :class="[cls, disabled && `${clsBlockName}-disabled`]" :href :target>
+  <a
+    :class="[cls, disabled && `${clsBlockName}-disabled`]"
+    :href="disabled ? undefined : href"
+    :target="disabled ? undefined : target"
+    :aria-disabled="disabled || undefined"
+    :tabindex="disabled ? -1 : undefined"
+    @click="onClick"
+  >
     <span v-if="linkIcon || loading" :class="iconCls">
       <component :is="linkIcon" :class="iconInnerCls" size="14"></component>
     </span>
@@ -31,6 +38,12 @@ const cls = computed(() => [
 const innerCls = computed(() => [`${clsBlockName.value}-inner`, { "pl-1": props.loading }]);
 const iconCls = computed(() => [`${clsBlockName.value}-icon`, props.loading ? "mr-0" : "mr-1"]);
 const iconInnerCls = computed(() => [{ "bp-icon-loading": props.loading }]);
+
+const onClick = (e: MouseEvent) => {
+  if (!disabled.value) return;
+  e.preventDefault();
+  e.stopPropagation();
+};
 
 // Icons.
 /** Default loading icon map. */

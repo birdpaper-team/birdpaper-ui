@@ -5,7 +5,15 @@
     </transition>
 
     <transition name="modal-zoom">
-      <div ref="modalRef" v-show="model" :class="`${clsBlockName}-container`" :style="{ zIndex: currentZIndex + 1 }">
+      <div
+        ref="modalRef"
+        v-show="model"
+        :class="`${clsBlockName}-container`"
+        :style="{ zIndex: currentZIndex + 1 }"
+        role="dialog"
+        aria-modal="true"
+        :aria-label="title || undefined"
+      >
         <div
           :class="[
             `${clsBlockName}`,
@@ -29,9 +37,15 @@
                 </span>
               </slot>
 
-              <div v-if="!hideClose" :class="`${clsBlockName}-header-close`" @click="handleClose">
+              <button
+                v-if="!hideClose"
+                type="button"
+                :class="`${clsBlockName}-header-close`"
+                aria-label="Close"
+                @click="handleClose"
+              >
                 <IconCloseFill size="20" />
-              </div>
+              </button>
             </div>
 
             <div :class="[`${clsBlockName}-body`, bodyClass]">
@@ -60,9 +74,9 @@
 <script lang="ts" setup>
 import { useNamespace, useModalZIndex, popupZIndexKey } from "@birdpaper-ui/hooks";
 import BpButton from "@birdpaper-ui/components/button";
-import { computed, ref, watch, onMounted, reactive, provide } from "vue";
+import { computed, ref, watch, onMounted, onUnmounted, provide } from "vue";
 import { ModalProps, modalProps } from "./props";
-import { useScrollLock } from "@vueuse/core";
+import { useScrollLock, onKeyStroke } from "@vueuse/core";
 import {
   IconCloseFill,
   IconCheckboxCircleFill,
@@ -73,7 +87,7 @@ import {
 
 defineOptions({ name: "Modal" });
 const { clsBlockName } = useNamespace("modal");
-const { currentZIndex, increase, decrease } = useModalZIndex();
+const { currentZIndex, increase, decrease, isTopLayer } = useModalZIndex();
 
 const model = defineModel({ default: false });
 const props: ModalProps = defineProps(modalProps);
@@ -81,16 +95,39 @@ const emit = defineEmits(["cancel", "confirm"]);
 
 const modalRef = ref(null);
 provide(popupZIndexKey, computed(() => currentZIndex.value + 2));
-const modalInstance = reactive({
-  isScrollLocked: ref(),
-});
+const isScrollLocked = typeof document !== "undefined" ? useScrollLock(document.body) : ref(false);
+let layerActive = false;
+
+const applyOpenState = (value: boolean) => {
+  isScrollLocked.value = value;
+  if (value && !layerActive) {
+    increase();
+    layerActive = true;
+  } else if (!value && layerActive) {
+    decrease();
+    layerActive = false;
+  }
+};
 
 onMounted(() => {
-  modalInstance.isScrollLocked = useScrollLock(() => window.document.body);
-
   if (props.isMethod) {
     model.value = true;
   }
+  applyOpenState(!!model.value);
+});
+
+onUnmounted(() => {
+  if (layerActive) {
+    isScrollLocked.value = false;
+    decrease();
+    layerActive = false;
+  }
+});
+
+onKeyStroke("Escape", (e) => {
+  if (!model.value || !layerActive || !isTopLayer()) return;
+  e.preventDefault();
+  handleCancel();
 });
 
 const iconType = {
@@ -137,18 +174,11 @@ const handleConfirm = async () => {
       emit("confirm");
     }
   } catch (error) {
-    console.log("[ Modal - onBeforeOk error]", error);
+    console.warn("[ Modal - onBeforeOk error]", error);
   } finally {
     okLoading.value = false;
   }
 };
 
-watch(model, (value) => {
-  modalInstance.isScrollLocked = value;
-  if (value) {
-    increase();
-  } else {
-    decrease();
-  }
-});
+watch(model, (value) => applyOpenState(!!value));
 </script>

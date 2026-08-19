@@ -1,5 +1,5 @@
 <template>
-  <div :class="cls" @mouseenter="onMouse" @mousemove="onMouse" @click="handleSelect">
+  <div ref="itemRef" :class="cls" @mouseenter="onMouse" @mousemove="onMouse" @click="handleSelect">
     <div class="rate-left"><slot /></div>
     <div class="rate-right"><slot /></div>
   </div>
@@ -26,7 +26,7 @@ const emits = defineEmits<{
 const slots = defineSlots();
 
 const { clsBlockName } = useNamespace("rate-item");
-const _itemWdith = 22;
+const itemRef = ref<HTMLElement>();
 
 const cls = computed(() => {
   return [clsBlockName.value, val.value > 0 ? (val.value === 1 ? "full-active" : "half-active") : ""];
@@ -43,13 +43,18 @@ const val = computed(() => {
   return 0.5;
 });
 
+const getIsHalf = (e: MouseEvent) => {
+  const width = itemRef.value?.offsetWidth || 22;
+  return e.offsetX < width / 2;
+};
+
 const onMouse = (e: MouseEvent) => {
-  isHalf.value = e.offsetX < _itemWdith / 2;
+  isHalf.value = getIsHalf(e);
   emits("mousemove", props.index, isHalf.value);
 };
 
 const handleSelect = (e: MouseEvent) => {
-  isHalf.value = e.offsetX < _itemWdith / 2;
+  isHalf.value = getIsHalf(e);
   emits("select", props.index, isHalf.value);
 };
 </script>

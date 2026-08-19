@@ -32,6 +32,10 @@ export interface DatePickerContext {
   type: PanelType;
   /** 绑定值 */
   model: string;
+  /** 面板展示用值（中间态导航，不写入 v-model） */
+  panelValue?: string;
+  /** 更新面板展示值 */
+  setPanelValue?: (value: string) => void;
   /** 语言类型 */
   langs: LangsType;
   /** 值格式 */

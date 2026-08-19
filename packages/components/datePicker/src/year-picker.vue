@@ -12,16 +12,17 @@
       ref="inpRef"
       readonly
       v-model="model"
+      :name
       :class="cls"
       :placeholder
       :disabled
-      :clearable
       :size
       @input="onInput"
       @blur="onBlur"
     >
       <template #suffix>
-        <IconCalendarLine />
+        <IconCloseLine v-if="clearable && model" class="action-icon" @click.stop="handleClear" />
+        <IconCalendarLine v-else />
       </template>
     </bp-input>
     <template #content>
@@ -34,9 +35,9 @@
 import { useNamespace } from "@birdpaper-ui/hooks";
 import BpInput from "@birdpaper-ui/components/input/index";
 import BpTrigger from "@birdpaper-ui/components/trigger/index";
-import { computed, provide, ref } from "vue";
+import { computed, provide, reactive, ref, toRefs, watch } from "vue";
 import { commonPickerProps, YearPickerProps, yearPickerProps } from "./props";
-import { IconCalendarLine } from "birdpaper-icon";
+import { IconCalendarLine, IconCloseLine } from "birdpaper-icon";
 import pickerPanel from "./components/picker-panel.vue";
 import { dateInjectionKey } from "./types";
 
@@ -50,16 +51,35 @@ const emits = defineEmits(["input", "blur"]);
 const cls = computed<string[] | {}[]>(() => [clsBlockName.value, `${clsBlockName.value}-${props.size}`]);
 
 const showPopup = ref<boolean>(false);
-provide(dateInjectionKey, {
-  type: "date",
-  model: model as unknown as string,
-  langs: props.langs,
-  valueFormat: props.valueFormat,
-  onSelect: (v: string) => {
-    model.value = v;
-    showPopup.value = false;
-  },
+const panelValue = ref(model.value || "");
+watch(model, (v) => {
+  panelValue.value = v || "";
 });
+
+const { langs, valueFormat } = toRefs(props);
+provide(
+  dateInjectionKey,
+  reactive({
+    type: "year" as const,
+    model,
+    panelValue,
+    setPanelValue: (v: string) => {
+      panelValue.value = v;
+    },
+    langs,
+    valueFormat,
+    onSelect: (v: string) => {
+      model.value = v;
+      panelValue.value = v;
+      showPopup.value = false;
+    },
+  })
+);
+
+const handleClear = () => {
+  model.value = "";
+  panelValue.value = "";
+};
 
 const onInput = () => emits("input");
 const onBlur = () => emits("blur");

@@ -8,20 +8,23 @@
     </div>
     
     <div :class="`${clsBlockName}-content`">
-      {{ content }}
+      {{ displayContent }}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useNamespace } from "@birdpaper-ui/hooks";
+import { useNamespace, useGlobalConfig } from "@birdpaper-ui/hooks";
 import { emptyProps, EmptyProps } from "./props";
-import { useSlots } from "vue";
+import { computed, useSlots } from "vue";
 import { IconInbox2Line } from "birdpaper-icon";
 
 defineOptions({ name: "Empty" });
 const { clsBlockName } = useNamespace("empty");
+const { emptyText } = useGlobalConfig();
 
 const props: EmptyProps = defineProps(emptyProps);
 const slots = useSlots();
+
+const displayContent = computed(() => props.content ?? emptyText.value);
 </script>

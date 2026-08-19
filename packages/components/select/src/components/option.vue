@@ -1,5 +1,5 @@
 <template>
-  <li :class="cls" @click="handleClick">
+  <li :class="cls" role="option" :aria-selected="isActive" @click="handleClick">
     <bp-checkbox v-if="ctx?.multiple" v-model:check="isChecked" />
     <div :class="`${clsBlockName}-inner`">
       <slot v-if="slots.default?.({})" />
@@ -11,9 +11,9 @@
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { optionProps, OptionProps } from "../props";
-import { computed, inject, ref, toRef, useSlots, watch, nextTick } from "vue";
+import { computed, inject, ref, useSlots, watch, nextTick } from "vue";
 import BpCheckbox from "@birdpaper-ui/components/checkbox/index";
-import { SelectContext, selectInjectionKey, SelectOption } from "../types";
+import { SelectContext, selectInjectionKey, SelectOption, SelectValue } from "../types";
 
 defineOptions({ name: "Option" });
 const { clsBlockName } = useNamespace("option");
@@ -21,26 +21,33 @@ const { clsBlockName } = useNamespace("option");
 const props: OptionProps = defineProps(optionProps);
 const slots = useSlots();
 
-const ctx = ref<SelectContext>();
+const ctx = inject<SelectContext | undefined>(selectInjectionKey, undefined);
 const option = ref<SelectOption>(new SelectOption());
 
+const currentModel = computed(() => ctx?.modelValue as SelectValue | SelectValue[] | undefined);
+
 const getCheckboxState = () => {
-  return Array.isArray(ctx.value?.modelValue) && ctx.value.modelValue.includes(option.value.value);
+  return Array.isArray(currentModel.value) && currentModel.value.includes(option.value.value);
 };
 
 const isChecked = ref(getCheckboxState());
 
+const isActive = computed(() => {
+  if (Array.isArray(currentModel.value)) {
+    return currentModel.value.includes(props.value);
+  }
+  return currentModel.value === props.value;
+});
+
 const cls = computed(() => {
   let cls = [`${clsBlockName.value}`];
-  if (ctx.value?.modelValue === props.value) cls.push(`${clsBlockName.value}-active`);
+  if (isActive.value) cls.push(`${clsBlockName.value}-active`);
   if (props.disabled) cls.push(`${clsBlockName.value}-disabled`);
 
   return cls;
 });
 
 const init = () => {
-  ctx.value = inject(selectInjectionKey, undefined);
-
   let label = props.label;
   if (!label) {
     try {
@@ -60,14 +67,14 @@ const init = () => {
 const handleClick = () => {
   if (props.disabled) return;
 
-  ctx.value?.onSelect(option.value.value, { ...option.value });
+  ctx?.onSelect(option.value.value, { ...option.value });
   nextTick(() => {
     isChecked.value = getCheckboxState();
   });
 };
 
 watch(
-  () => props,
+  () => [props.label, props.value, props.disabled, currentModel.value] as const,
   () => {
     init();
     isChecked.value = getCheckboxState();

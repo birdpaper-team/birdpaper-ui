@@ -1,16 +1,16 @@
 <template>
-  <div v-if="visible" :class="cls">
+  <div v-if="visible" :class="cls" role="alert">
     <div :class="`${clsBlockName}-inner`">
       <div :class="`${clsBlockName}-inner-title`">
         <component v-if="!hideIcon" :is="icon" size="16"></component>
         {{ props.title }}
       </div>
-      <div v-if="showClose" :class="`${clsBlockName}-inner-close`" @click="handleClose">
+      <button v-if="showClose" type="button" :class="`${clsBlockName}-inner-close`" aria-label="Close" @click="handleClose">
         <slot name="close" />
         <template v-if="!slots.close">
           <IconCloseFill size="16" />
         </template>
-      </div>
+      </button>
     </div>
 
     <div v-if="slots.content || props.content" :class="`${clsBlockName}-content`">

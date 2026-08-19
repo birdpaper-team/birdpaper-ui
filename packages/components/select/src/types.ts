@@ -8,7 +8,7 @@ export class SelectOption {
 }
 
 export interface SelectContext {
-  modelValue: SelectValue;
+  modelValue: SelectValue | SelectValue[];
   multiple: boolean;
   onSelect: (value: SelectValue, payload: SelectOption) => void;
 }

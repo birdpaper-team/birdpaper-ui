@@ -8,19 +8,16 @@
   width: fit-content;
 
   &-dot {
-    &::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 10px;
-      height: 10px;
-      border: 2px solid var(--bp-primary-1);
-      border-radius: 50%;
-      transform: translate(50%, -50%);
-      box-sizing: border-box;
-      z-index: var(--z-index-badge);
-    }
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border: 2px solid var(--bp-primary-1);
+    border-radius: 50%;
+    transform: translate(50%, -50%);
+    box-sizing: border-box;
+    z-index: var(--z-index-badge);
   }
 
   &-inner {
@@ -47,10 +44,8 @@ $status: "gray", "primary", "success", "warning", "danger";
 @each $status in $status {
   .#{$B}-#{$status} {
     .#{$B}-dot {
-      &::after {
-        border-color: getCssVar($status, "1");
-        background-color: getCssVar($status, "6");
-      }
+      border-color: getCssVar($status, "1");
+      background-color: getCssVar($status, "6");
     }
 
     .#{$B}-inner {

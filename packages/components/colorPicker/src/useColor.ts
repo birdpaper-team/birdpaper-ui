@@ -53,15 +53,21 @@ export const hslaToHex = (hsla: string): string => {
  * @returns 如果是有效的 HEX 字符串，返回 HSLA 值的对象；否则返回默认值
  */
 export const hexToHsla = (hex: string): { h: number; s: number; l: number; a: number } => {
-  // 验证 HEX 格式
-  const isValidHex = /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/.test(hex);
+  // 验证 HEX 格式（支持 3 / 6 / 8 位）
+  let normalized = hex.startsWith("#") ? hex : `#${hex}`;
+  const isValidHex = /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$/.test(normalized);
   if (!isValidHex) return { h: 0, s: 100, l: 50, a: 1 };
 
+  // Expand 3-digit hex to 6-digit
+  if (normalized.length === 4) {
+    normalized = `#${normalized[1]}${normalized[1]}${normalized[2]}${normalized[2]}${normalized[3]}${normalized[3]}`;
+  }
+
   // 提取 RGB 和 Alpha 值
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  const a = hex.length === 9 ? parseInt(hex.slice(7, 9), 16) / 255 : 1;
+  const r = parseInt(normalized.slice(1, 3), 16);
+  const g = parseInt(normalized.slice(3, 5), 16);
+  const b = parseInt(normalized.slice(5, 7), 16);
+  const a = normalized.length === 9 ? parseInt(normalized.slice(7, 9), 16) / 255 : 1;
 
   // 转换为 HSL
   const rNorm = r / 255;

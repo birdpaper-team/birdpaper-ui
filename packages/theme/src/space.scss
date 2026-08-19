@@ -3,18 +3,6 @@
 @include b(space) {
   display: inline-flex;
   width: 100%;
-
-  &-item {
-    &:first-child {
-      margin-top: 0 !important;
-      margin-left: 0 !important;
-    }
-
-    &:last-child {
-      margin-right: 0 !important;
-      margin-bottom: 0 !important;
-    }
-  }
 }
 
 .#{$B}-vertical {

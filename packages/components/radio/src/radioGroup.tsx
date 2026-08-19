@@ -79,7 +79,8 @@ export default defineComponent({
         <div class={cls.value}>
           {children.map((child: VNode, index: number) => {
             const radio = cloneVNode(child, {
-              disabled: props.disabled,
+              // Merge disabled: group or child disabled=true wins
+              disabled: !!(props.disabled || child.props?.disabled),
               size: props.size,
               type: props.type,
               modelValue: props.modelValue,

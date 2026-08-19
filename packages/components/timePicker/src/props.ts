@@ -49,11 +49,11 @@ export const timePickerProps = {
   /**
    * @type string
    * @description Value format.
-   * @default "YYYY-MM-DD"
+   * @default "HH:mm:ss"
    */
   valueFormat: {
     type: String,
-    default: "YYYY-MM-DD",
+    default: "HH:mm:ss",
   },
   /**
    * @type boolean

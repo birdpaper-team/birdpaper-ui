@@ -8,9 +8,10 @@
     position="bottom-left"
     update-at-scroll
   >
-    <bp-input ref="inpRef" readonly v-model="model" :name :class="cls" :placeholder :disabled :clearable :size>
+    <bp-input ref="inpRef" readonly v-model="model" :name :class="cls" :placeholder :disabled :size>
       <template #suffix>
-        <IconCalendarLine />
+        <IconCloseLine v-if="clearable && model" class="action-icon" @click.stop="handleClear" />
+        <IconCalendarLine v-else />
       </template>
     </bp-input>
     <template #content>
@@ -23,9 +24,9 @@
 import { useNamespace } from "@birdpaper-ui/hooks";
 import BpInput from "@birdpaper-ui/components/input/index";
 import BpTrigger from "@birdpaper-ui/components/trigger/index";
-import { computed, provide, ref } from "vue";
+import { computed, provide, reactive, ref, toRefs, watch } from "vue";
 import { commonPickerProps, datePickerProps, DatePickerProps } from "./props";
-import { IconCalendarLine } from "birdpaper-icon";
+import { IconCalendarLine, IconCloseLine } from "birdpaper-icon";
 import pickerPanel from "./components/picker-panel.vue";
 import { dateInjectionKey } from "./types";
 
@@ -38,17 +39,35 @@ const props: DatePickerProps = defineProps({ ...commonPickerProps, ...datePicker
 const cls = computed<string[] | {}[]>(() => [clsBlockName.value, `${clsBlockName.value}-${props.size}`]);
 
 const showPopup = ref<boolean>(false);
-provide(dateInjectionKey, {
-  type: "date",
-  model: model as unknown as string,
-  langs: props.langs,
-  valueFormat: props.valueFormat,
-  showTime: props.showTime,
-  disableDate: props.disabledDate,
-  onSelect: (v: string, payload: any, closePopup = true) => {
-    model.value = v;
-
-    if (closePopup) showPopup.value = false;
-  },
+const panelValue = ref(model.value || "");
+watch(model, (v) => {
+  panelValue.value = v || "";
 });
+
+const { langs, valueFormat, showTime, disabledDate } = toRefs(props);
+provide(
+  dateInjectionKey,
+  reactive({
+    type: "date" as const,
+    model,
+    panelValue,
+    setPanelValue: (v: string) => {
+      panelValue.value = v;
+    },
+    langs,
+    valueFormat,
+    showTime,
+    disableDate: disabledDate,
+    onSelect: (v: string, _payload: any, closePopup = true) => {
+      model.value = v;
+      panelValue.value = v;
+      if (closePopup) showPopup.value = false;
+    },
+  })
+);
+
+const handleClear = () => {
+  model.value = "";
+  panelValue.value = "";
+};
 </script>

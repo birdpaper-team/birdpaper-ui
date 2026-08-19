@@ -10,18 +10,19 @@
   >
     <bp-input-tag
       v-if="multiple"
-      v-model="(labelModel as string[])"
-      :size="size"
-      :placeholder="labelModel.length === 0 ? placeholder : ''"
+      v-model="tagLabels"
+      :placeholder="tagLabels.length === 0 ? placeholder : ''"
       :max-tag-count="maxTagCount"
       :disabled="disabled"
+      :allow-create="false"
+      @remove="handleTagRemove"
       @mouseenter="handleMouseEnter"
       @mouseleave="handleMouseLeave"
     ></bp-input-tag>
 
     <bp-input
       v-else
-      v-model="(labelModel as any)"
+      v-model="singleLabel"
       readonly
       :size="size"
       :disabled="disabled"
@@ -30,13 +31,13 @@
       @mouseleave="handleMouseLeave"
     >
       <template #suffix>
-        <IconCloseLine v-if="!props.disabled && showClear && labelModel" @click.stop="handleClear" />
+        <IconCloseLine v-if="!props.disabled && showClear && singleLabel" @click.stop="handleClear" />
         <component v-else :is="isOpen ? IconArrowUpSLine : IconArrowDownSLine"></component>
       </template>
     </bp-input>
 
     <template #content>
-      <ul :class="optionListCls">
+      <ul :class="optionListCls" role="listbox">
         <slot v-if="hasOptions"></slot>
         <bp-empty v-else />
       </ul>
@@ -52,10 +53,9 @@ import BpEmpty from "@birdpaper-ui/components/empty/index";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { SelectProps, selectProps } from "./props";
 import { selectInjectionKey, SelectOption, SelectValue } from "./types";
-import { IconArrowDownSLine, IconArrowUpSLine } from "birdpaper-icon";
-import { computed, provide, ref, useSlots, watchEffect } from "vue";
+import { IconArrowDownSLine, IconArrowUpSLine, IconCloseLine } from "birdpaper-icon";
+import { computed, provide, reactive, ref, toRef, useSlots, watchEffect } from "vue";
 import { getAllElements } from "@birdpaper-ui/components/utils/dom";
-import { IconCloseLine } from "birdpaper-icon";
 import { get } from "radash";
 
 defineOptions({ name: "Select" });
@@ -82,6 +82,20 @@ if (props.multiple) {
   }
 }
 
+const tagLabels = computed({
+  get: () => (Array.isArray(labelModel.value) ? labelModel.value : []),
+  set: (val: string[]) => {
+    labelModel.value = val;
+  },
+});
+
+const singleLabel = computed({
+  get: () => (typeof labelModel.value === "string" ? labelModel.value : ""),
+  set: (val: string) => {
+    labelModel.value = val;
+  },
+});
+
 const isOpen = ref<boolean>(false);
 const hasOptions = ref(false);
 
@@ -106,35 +120,47 @@ const handleClear = () => {
     labelModel.value = "";
     model.value = "";
   }
+  emits("change", model.value as SelectValue);
 };
 
-provide(selectInjectionKey, {
-  modelValue: model as unknown as SelectValue,
-  multiple: props.multiple,
-  onSelect: (v: SelectValue, payload: SelectOption) => {
-    if (props.multiple) {
-      const modelArray = model.value as SelectValue[];
-      const labelArray = labelModel.value as string[];
+const handleTagRemove = (value: string, index: number) => {
+  if (!Array.isArray(model.value)) return;
+  const removed = model.value[index];
+  model.value = model.value.filter((_, i) => i !== index);
+  emits("change", (removed ?? value) as SelectValue);
+};
 
-      const valueIndex = modelArray.indexOf(v);
-      if (valueIndex !== -1) {
-        model.value = modelArray.filter((_, i) => i !== valueIndex);
-        labelModel.value = labelArray.filter((_, i) => i !== valueIndex);
+provide(
+  selectInjectionKey,
+  reactive({
+    modelValue: model,
+    multiple: toRef(props, "multiple"),
+    onSelect: (v: SelectValue, payload: SelectOption) => {
+      if (props.multiple) {
+        const modelArray = model.value as SelectValue[];
+        const labelArray = (labelModel.value as string[]) || [];
+
+        const valueIndex = modelArray.indexOf(v);
+        if (valueIndex !== -1) {
+          model.value = modelArray.filter((_, i) => i !== valueIndex);
+          labelModel.value = labelArray.filter((_, i) => i !== valueIndex);
+          emits("change", v);
+          return;
+        }
+
+        model.value = [...modelArray, v];
+        labelModel.value = [...labelArray, payload.label];
         emits("change", v);
         return;
       }
 
-      model.value = [...modelArray, v];
-      labelModel.value = [...labelArray, payload.label];
-      emits("change", v);
-    } else {
       model.value = v;
       labelModel.value = payload.label;
       isOpen.value = false;
-    }
-    emits("change", v);
-  },
-});
+      emits("change", v);
+    },
+  })
+);
 
 watchEffect(() => {
   try {
@@ -147,7 +173,6 @@ watchEffect(() => {
       model.value === "" ||
       (Array.isArray(model.value) && model.value.length === 0)
     ) {
-      // oxlint-disable-next-line no-unused-expressions
       props.multiple ? (labelModel.value = []) : (labelModel.value = "");
       return;
     }
@@ -158,17 +183,15 @@ watchEffect(() => {
         item.children && typeof item.children === "object" && !Array.isArray(item.children)
           ? (item.children as Record<string, any>)["default"]?.()[0]?.children
           : undefined;
-      valueMap[item.props?.value as string] = (item.props?.label as string) || slotContent || "";
+      valueMap[String(item.props?.value)] = (item.props?.label as string) || slotContent || "";
     }
     if (!props.multiple) {
-      labelModel.value = valueMap[model.value as string] || String(model.value);
+      labelModel.value = valueMap[String(model.value)] || String(model.value);
       return;
     }
 
     if (Array.isArray(model.value)) {
-      labelModel.value = model.value
-        .filter((item): item is string | number => typeof item === "string" || typeof item === "number")
-        .map((item) => valueMap[item as string]);
+      labelModel.value = model.value.map((item) => valueMap[String(item)] || String(item));
     } else {
       labelModel.value = [];
     }

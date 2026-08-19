@@ -43,5 +43,14 @@
       background-color: rgba(var(--bp-gray-1-rgb), 0.8);
       transition: all 0.2s;
     }
+
+    &-disabled {
+      color: var(--bp-gray-4);
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
   }
 }

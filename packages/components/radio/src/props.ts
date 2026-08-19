@@ -5,11 +5,10 @@ export const radioProps = {
   /**
    * @type string | number | boolean
    * @description Value of the radio.
-   * @default false
    */
   value: {
     type: [String, Number, Boolean] as PropType<RadioValue>,
-    default: false,
+    default: undefined,
   },
   /**
    * @type boolean

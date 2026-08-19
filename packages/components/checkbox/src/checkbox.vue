@@ -1,6 +1,22 @@
 <template>
-  <div :class="cls" @click="handleClick">
-    <input type="checkbox" :class="`${clsBlockName}-inner`" />
+  <div
+    :class="cls"
+    role="checkbox"
+    :aria-checked="isVisualChecked"
+    :aria-disabled="disabled || undefined"
+    :tabindex="disabled ? -1 : 0"
+    @click="handleClick"
+    @keydown.space.prevent="handleClick"
+  >
+    <input
+      type="checkbox"
+      :class="`${clsBlockName}-inner`"
+      :checked="isCheck"
+      :disabled
+      :indeterminate="indeterminate"
+      tabindex="-1"
+      @click.stop.prevent
+    />
 
     <span :class="[`${clsBlockName}-checkbox`, isVisualChecked ? `${clsBlockName}-check` : '']">
       <template v-if="isVisualChecked">
@@ -36,7 +52,8 @@ const cls = computed(() => [clsBlockName.value, "select-none", props.disabled &&
 const isCheck = ref(false);
 const isVisualChecked = computed(() => isCheck.value || props.indeterminate);
 const hasValue = computed(() => props.value !== undefined && props.value !== null);
-const upadteCheck = () => {
+
+const updateCheck = () => {
   if (hasValue.value) {
     isCheck.value = model.value.includes(props.value as CheckboxValueForArray);
     return;
@@ -44,6 +61,9 @@ const upadteCheck = () => {
 
   isCheck.value = modelBool.value;
 };
+
+/** @deprecated typo alias — use updateCheck */
+const upadteCheck = updateCheck;
 
 const handleClick = () => {
   if (props.disabled) return;
@@ -54,7 +74,7 @@ const handleClick = () => {
       const nextValue = [...model.value];
       nextValue.splice(index, 1);
       model.value = nextValue;
-      upadteCheck();
+      updateCheck();
       return emits("change", nextValue);
     }
 
@@ -62,19 +82,19 @@ const handleClick = () => {
 
     const nextValue = [...model.value, props.value as CheckboxValueForArray];
     model.value = nextValue;
-    upadteCheck();
+    updateCheck();
     return emits("change", nextValue);
   }
 
   modelBool.value = isCheck.value ? false : true;
-  nextTick(() => upadteCheck());
+  nextTick(() => updateCheck());
   nextTick(() => emits("change", modelBool.value));
 };
 
 watch(
   () => model.value,
   () => {
-    upadteCheck();
+    updateCheck();
   },
   {
     immediate: true,
@@ -84,7 +104,7 @@ watch(
 watch(
   () => modelBool.value,
   () => {
-    upadteCheck();
+    updateCheck();
   },
   {
     immediate: true,

@@ -1,6 +1,14 @@
 <template>
-  <label :class="cls" @click="handleInput">
-    <input type="radio" :disabled :class="`${clsBlockName}-inner`" />
+  <label
+    :class="cls"
+    role="radio"
+    :aria-checked="isCheck"
+    :aria-disabled="disabled || undefined"
+    :tabindex="disabled ? -1 : 0"
+    @click="handleInput"
+    @keydown.space.prevent="handleInput"
+  >
+    <input type="radio" :checked="isCheck" :disabled :value="value" :class="`${clsBlockName}-inner`" tabindex="-1" />
 
     <span :class="radioCls"></span>
 

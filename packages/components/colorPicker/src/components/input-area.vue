@@ -22,7 +22,7 @@
         style="width: 52px"
         v-model="alphaValue"
         :max="100"
-        :min="1"
+        :min="0"
         @step="onAlphaInput"
       ></bp-input-number>
     </bp-space>

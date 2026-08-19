@@ -28,6 +28,7 @@
 
 <script setup lang="ts">
 import BpTrigger from "@birdpaper-ui/components/trigger/index";
+import BpButton from "@birdpaper-ui/components/button";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { PopconfirmProps, popconfirmProps } from "./props";
 import { IconCheckboxCircleFill, IconCloseCircleFill, IconErrorWarningFill, IconInformationFill } from "birdpaper-icon";
@@ -36,7 +37,7 @@ import { ref } from "vue";
 defineOptions({ name: "Popconfirm" });
 const { clsBlockName } = useNamespace("popconfirm");
 
-const model = ref<boolean>(false);
+const model = defineModel<boolean>({ default: false });
 const props: PopconfirmProps = defineProps(popconfirmProps);
 const emit = defineEmits(["cancel", "ok"]);
 
@@ -73,7 +74,7 @@ const handleOk = async () => {
       emit("ok");
     }
   } catch (error) {
-    console.log("[ Popconfirm - onBeforeOk error]", error);
+    console.warn("[ Popconfirm - onBeforeOk error]", error);
   } finally {
     okLoading.value = false;
   }

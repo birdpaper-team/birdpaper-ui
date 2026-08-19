@@ -1,11 +1,7 @@
 <template>
   <div :class="[clsBlockName, `${clsBlockName}-${status}`]">
-    <span v-if="dot && count > 0" :class="`${clsBlockName}-dot`"></span>
-    <span
-      v-else-if="_innerText"
-      :class="`${clsBlockName}-inner`"
-      :style="{ top: `${offset[0]}px`, right: `${offset[1]}px` }"
-    >
+    <span v-if="dot" :class="`${clsBlockName}-dot`" :style="offsetStyle"></span>
+    <span v-else-if="showBadge" :class="`${clsBlockName}-inner`" :style="offsetStyle">
       {{ _innerText }}
     </span>
     <slot></slot>
@@ -22,10 +18,21 @@ const { clsBlockName } = useNamespace("badge");
 
 const props: BadgeProps = defineProps(badgeProps);
 
+const showBadge = computed(() => {
+  if (props.text) return true;
+  return props.count > 0;
+});
+
 const _innerText = computed(() => {
   if (props.text) {
     return props.text;
   }
   return props.count > props.maxCount ? `${props.maxCount}+` : props.count;
 });
+
+/** offset is [top, right] — matches docs and previous behavior */
+const offsetStyle = computed(() => ({
+  top: `${props.offset[0]}px`,
+  right: `${props.offset[1]}px`,
+}));
 </script>

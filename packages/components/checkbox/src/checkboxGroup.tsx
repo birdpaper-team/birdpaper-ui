@@ -62,7 +62,9 @@ export default defineComponent({
         <div class={cls.value}>
           {children.map((child: VNode, index: number) => {
             const checkbox = cloneVNode(child, {
-              disabled: props.disabled,
+              // Merge disabled: group or child disabled=true wins
+              disabled: !!(props.disabled || child.props?.disabled),
+              max: props.max,
               modelValue: props.modelValue,
               onChange(val: CheckboxValueForArray[]) {
                 _vals.value = val;

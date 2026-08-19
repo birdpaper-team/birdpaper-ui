@@ -2,8 +2,12 @@
   <li
     v-for="(item, index) in pageList"
     :key="`page-item-${index}`"
-    :class="[...cls, item.index === currentPage ? `${clsBlockName}-active` : '', extraClass]"
-    @click="onClick(item.index)"
+    :class="[
+      ...cls,
+      item.index === currentPage ? `${clsBlockName}-active` : '',
+      item.type === 'ellipsis' ? `${clsBlockName}-ellipsis` : '',
+    ]"
+    @click="onClick(item)"
   >
     <span v-if="item.type === 'number'">{{ item.index }}</span>
     <IconMoreFill v-else />
@@ -55,11 +59,11 @@ const emits = defineEmits<{
 
 const cls = computed(() => [clsBlockName.value, props.extraClass]);
 
-const pageList = ref<any[]>([]);
+const pageList = ref<{ index: number; type: "number" | "ellipsis" }[]>([]);
 
-const onClick = (pageNum: number) => {
-  if (props.disabled) return;
-  emits("click", pageNum);
+const onClick = (item: { index: number; type: "number" | "ellipsis" }) => {
+  if (props.disabled || item.type === "ellipsis") return;
+  emits("click", item.index);
 };
 
 watchEffect(() => {
@@ -96,7 +100,7 @@ watchEffect(() => {
 
   // Add middle page numbers
   pageList.value.push(
-    ...Array.from({ length: middlePageCount }, (_, i) => ({ index: startIndex + i, type: "number" }))
+    ...Array.from({ length: middlePageCount }, (_, i) => ({ index: startIndex + i, type: "number" as const }))
   );
 
   // If end ellipsis is needed, add it

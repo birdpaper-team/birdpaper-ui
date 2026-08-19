@@ -36,9 +36,15 @@ export default defineComponent({
           {children.map((child: VNode, index: number) => {
             const isFinished = props.modelValue > index;
             const isActive = props.modelValue === index;
-            const status = isFinished ? "finish" : isActive ? "process" : "wait";
+            const autoStatus = isFinished ? "finish" : isActive ? "process" : "wait";
+            const status = child.props?.status ?? autoStatus;
 
-            const step = cloneVNode(child, { index, status, ...props });
+            const step = cloneVNode(child, {
+              index,
+              status,
+              type: props.type,
+              hideLine: props.hideLine,
+            });
 
             return h(Fragment, { key: child.key ?? `item-${index}` }, [
               <div

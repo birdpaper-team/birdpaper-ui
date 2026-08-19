@@ -5,7 +5,15 @@
       <slot />
     </div>
 
-    <IconCloseLine v-if="closeable" :class="`${clsBlockName}-close`" size="14" @click="handleClose" />
+    <button
+      v-if="closeable"
+      type="button"
+      :class="`${clsBlockName}-close`"
+      aria-label="Close"
+      @click="handleClose"
+    >
+      <IconCloseLine size="14" />
+    </button>
   </div>
 </template>
 

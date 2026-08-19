@@ -6,7 +6,7 @@
 
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
-import { computed, provide, reactive, ref, toRefs } from "vue";
+import { computed, onMounted, provide, reactive, ref, toRefs, watch } from "vue";
 import { FormProps, formProps } from "./props";
 import type { FormItemContext } from "./types";
 import { formContextKey, type FormContext } from "./types";
@@ -28,13 +28,21 @@ const fields = ref<FormItemContext[]>([]);
 // record initial model values for resetFields
 const initialValues = ref<Record<string, any>>({});
 
-// deep clone initial values when component mounts
-if (props.model) {
+function deepClone<T>(val: T): T {
+  if (val === undefined || val === null) return val;
   try {
-    initialValues.value = structuredClone(props.model);
+    return structuredClone(val);
   } catch {
-    initialValues.value = JSON.parse(JSON.stringify(props.model));
+    return JSON.parse(JSON.stringify(val));
   }
+}
+
+function snapshotInitialValues(model?: Record<string, any>) {
+  if (!model) {
+    initialValues.value = {};
+    return;
+  }
+  initialValues.value = deepClone(model);
 }
 
 // helpers to manage fields
@@ -59,6 +67,22 @@ const formContext: FormContext = reactive({
 
 provide(formContextKey, formContext);
 
+// Keep formContext.model in sync when props.model is replaced
+watch(
+  () => props.model,
+  (model, prev) => {
+    formContext.model = model;
+    // Snapshot when model identity changes
+    if (model !== prev) {
+      snapshotInitialValues(model);
+    }
+  }
+);
+
+onMounted(() => {
+  snapshotInitialValues(props.model);
+});
+
 // validate a single field with async-validator
 async function validateField(fieldOrCtx: FormItemContext | string): Promise<boolean> {
   let ctx: FormItemContext | undefined;
@@ -68,11 +92,11 @@ async function validateField(fieldOrCtx: FormItemContext | string): Promise<bool
   if (typeof fieldOrCtx === "string") {
     fieldName = fieldOrCtx;
     ctx = fields.value.find((item) => item.field === fieldName);
-    if (!ctx) return true; // Field not found, consider validation passed
+    if (!ctx) return false; // Field not found
   } else {
     ctx = fieldOrCtx;
     fieldName = ctx.field || "";
-    if (!fieldName) return true;
+    if (!fieldName) return false;
   }
 
   const rules = ctx.getRules?.() || (props.rules && props.rules[fieldName]);
@@ -110,8 +134,11 @@ function resetFields() {
   if (!props.model) return;
   fields.value.forEach((item) => {
     if (item.field) {
-      const initial = initialValues.value[item.field];
-      props.model[item.field] = initial !== undefined ? initial : "";
+      if (Object.prototype.hasOwnProperty.call(initialValues.value, item.field)) {
+        props.model[item.field] = deepClone(initialValues.value[item.field]);
+      } else {
+        props.model[item.field] = undefined;
+      }
       item.clearValidate();
     }
   });
@@ -123,5 +150,5 @@ async function onSubmit() {
   emits("submit", { isValid, model: props.model });
 }
 
-defineExpose({ validate, clearValidate, resetFields });
+defineExpose({ validate, clearValidate, resetFields, validateField });
 </script>

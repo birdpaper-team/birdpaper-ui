@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { RateProps, rateProps } from "./props";
 import rateItem from "./components/rate-item.vue";
@@ -32,6 +32,14 @@ const cls = computed(() => {
 });
 
 const current = ref(props.half ? model.value : Math.round(model.value) || 0);
+
+watch(
+  () => model.value,
+  (val) => {
+    current.value = props.half ? val : Math.round(val) || 0;
+  }
+);
+
 const onMousemove = (index: number, isHalf: boolean) => {
   if (props.disabled || props.readonly) return;
   current.value = index + (props.half ? (isHalf ? 0.5 : 1) : 1);
@@ -39,7 +47,9 @@ const onMousemove = (index: number, isHalf: boolean) => {
 
 const onSelect = (index: number, isHalf: boolean) => {
   if (props.disabled || props.readonly) return;
-  model.value = index + (props.half ? (isHalf ? 0.5 : 1) : 1);
+  const next = index + (props.half ? (isHalf ? 0.5 : 1) : 1);
+  model.value = next;
+  current.value = next;
 };
 
 const onMouseleave = () => {

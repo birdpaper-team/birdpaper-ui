@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import BpSelect, { SelectValue } from "@birdpaper-ui/components/select/index";
 import BpOption from "@birdpaper-ui/components/select/src/components/option.vue";
-import { computed, PropType, ref, watchEffect } from "vue";
+import { computed, PropType, ref, watch, watchEffect } from "vue";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { InputSize } from "@birdpaper-ui/components/input/src/types";
 
@@ -68,7 +68,15 @@ const onChange = (v: SelectValue) => {
   emits("change", Number(v));
 };
 
+watch(
+  () => props.currentSize,
+  (size) => {
+    if (size) val.value = size;
+  }
+);
+
 watchEffect(() => {
+  list.value = [];
   for (let i = 0; i < props.sizesList.length; i++) {
     const value = props.sizesList[i];
     const label = `${props.tmpString.replace(paramsStr, value.toString())}`;

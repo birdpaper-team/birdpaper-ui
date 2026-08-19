@@ -1,64 +1,64 @@
-import { onMounted, onUnmounted, type Ref, watch } from "vue";
+import { onMounted, onUnmounted, watch, isRef, type Ref } from "vue";
 
 /**
  * Register an event listener that auto-cleans on unmount.
- * @param target - Event target (window, document, element, or ref)
- * @param event - Event name
- * @param handler - Event handler
- * @param options - AddEventListener options
+ * Safe to call after mount — attaches immediately if already available.
  */
 export function useEventListener<K extends keyof WindowEventMap>(
   target: Window,
   event: K,
   handler: (e: WindowEventMap[K]) => void,
   options?: boolean | AddEventListenerOptions
-): void;
+): () => void;
 export function useEventListener<K extends keyof DocumentEventMap>(
   target: Document,
   event: K,
   handler: (e: DocumentEventMap[K]) => void,
   options?: boolean | AddEventListenerOptions
-): void;
+): () => void;
 export function useEventListener<K extends keyof HTMLElementEventMap>(
   target: HTMLElement | Ref<HTMLElement | null | undefined>,
   event: K,
   handler: (e: HTMLElementEventMap[K]) => void,
   options?: boolean | AddEventListenerOptions
-): void;
+): () => void;
 export function useEventListener(
   target: Window | Document | HTMLElement | Ref<HTMLElement | null | undefined>,
   event: string,
   handler: (e: Event) => void,
   options?: boolean | AddEventListenerOptions
-) {
-  const getTarget = () => {
+): () => void {
+  let attached: EventTarget | null = null;
+
+  const getTarget = (): EventTarget | null => {
     if (typeof window === "undefined") return null;
-    if ("value" in target) return target.value;
-    return target;
+    if (isRef(target)) return target.value ?? null;
+    return target as EventTarget;
   };
 
   const addListener = () => {
     const el = getTarget();
-    if (el) {
-      el.addEventListener(event, handler, options);
-    }
+    if (!el || typeof (el as any).addEventListener !== "function" || attached === el) return;
+    removeListener();
+    el.addEventListener(event, handler, options);
+    attached = el;
   };
 
   const removeListener = () => {
-    const el = getTarget();
-    if (el) {
-      el.removeEventListener(event, handler, options);
-    }
+    if (!attached) return;
+    attached.removeEventListener(event, handler, options);
+    attached = null;
   };
 
+  addListener();
   onMounted(addListener);
   onUnmounted(removeListener);
 
-  // If target is a ref, watch for changes
-  if ("value" in target) {
-    watch(target, (newVal, oldVal) => {
-      if (oldVal) oldVal.removeEventListener(event, handler, options);
-      if (newVal) newVal.addEventListener(event, handler, options);
+  if (isRef(target)) {
+    watch(target, () => {
+      addListener();
     });
   }
+
+  return removeListener;
 }

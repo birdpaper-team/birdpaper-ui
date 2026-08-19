@@ -10,6 +10,8 @@
         :disabled
         :readonly
         :maxlength="1"
+        autocomplete="one-time-code"
+        inputmode="numeric"
         @focus="focus"
         @keydown="onKeydown"
         @keydown.space.prevent=""
@@ -22,7 +24,7 @@
 
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
-import { ComponentPublicInstance, computed, ref, watch } from "vue";
+import { ComponentPublicInstance, computed, nextTick, ref, watch } from "vue";
 import { VerifyCodeProps, verifyCodeProps } from "./props";
 import { getChildrenIndex } from "@birdpaper-ui/components/utils/dom";
 
@@ -59,7 +61,7 @@ const updateValue = () => {
 
   model.value = globalValue.value.join("").substring(0, props.length);
 
-  if (globalValue.value.length === props.length) {
+  if (globalValue.value.filter(Boolean).length === props.length) {
     emits("finish");
   }
 };
@@ -89,7 +91,7 @@ const onPaste = (e: ClipboardEvent) => {
 const focus = () => {
   if (props.disabled || props.readonly) return;
 
-  const len = globalValue.value.length;
+  const len = globalValue.value.filter(Boolean).length;
   return inpRefs[len >= props.length ? len - 1 : len]?.focus();
 };
 
@@ -97,14 +99,21 @@ const onKeydown = (e: KeyboardEvent) => {
   if (props.disabled || props.readonly) return;
 
   const index = getChildrenIndex(e.target);
+  if (index < 0) return;
+
   const val = globalValue.value[index];
-  const isLastEl = index === props.length - 1;
 
   switch (e.key) {
     case "Backspace":
-      globalValue.value.splice(isLastEl && val ? index : index - 1, 1);
-
-      focus();
+      e.preventDefault();
+      if (val) {
+        // Clear current box first
+        globalValue.value[index] = "";
+      } else if (index > 0) {
+        // Move focus back and clear previous box
+        globalValue.value[index - 1] = "";
+        nextTick(() => inpRefs[index - 1]?.focus());
+      }
       updateValue();
       break;
 

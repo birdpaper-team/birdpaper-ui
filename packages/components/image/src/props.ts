@@ -30,12 +30,12 @@ export const imageProps = {
    * @type string
    * @description Image width.
    */
-  width: { type: String },
+  width: { type: [String, Number] },
   /**
    * @type string
    * @description Image height.
    */
-  height: { type: String },
+  height: { type: [String, Number] },
   /**
    * @type string
    * @description Image fit.

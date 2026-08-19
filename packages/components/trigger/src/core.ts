@@ -52,7 +52,7 @@ export const getPosition = (
   const triggerRightIncludeWidth = triggerRight + triggerBounding.width.value;
   const triggerRightIncludeHalfWidth = triggerRight + triggerBounding.width.value / 2;
 
-  const triggerTop = triggerBounding.y.value - popupOffset - popupTranslate[0];
+  const triggerTop = triggerBounding.y.value - popupOffset - popupTranslate[1];
   const triggerTopIncludeHalfHeight = triggerTop + triggerBounding.height.value / 2;
 
   const triggerBottom = windowSize.height.value - popupOffset - popupTranslate[1] - triggerBounding.bottom.value;
@@ -75,7 +75,7 @@ export const getPosition = (
 
   const isAllow: Record<TriggerPosition, () => boolean> = {
     top: () => allowTop && allowLeftWithHalf && allowHalfRight,
-    bottom: () => allowBottom && allowLeft && allowRight,
+    bottom: () => allowBottom && allowLeftWithHalf && allowHalfRight,
     left: () => allowLeft && allowHalfTop && allowHalfBottom,
     right: () => allowRight && allowHalfTop && allowHalfBottom,
     "bottom-left": () => allowBottom && allowRightWithTrigger,

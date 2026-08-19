@@ -70,7 +70,7 @@ import tableHeader from "./components/table-header.vue";
 import tableColumn from "./components/table-column.vue";
 import tableBody from "./components/table-body.jsx";
 import { useTableCore } from "./core";
-import { computed, nextTick, onMounted, useSlots, ref, watch, watchPostEffect } from "vue";
+import { computed, nextTick, onMounted, onBeforeUnmount, useSlots, ref, watch, watchPostEffect } from "vue";
 import colGroup from "./components/col-group.vue";
 import { computeColumnWidths, computeScrollYAndGutter, type NormalizedColumn } from "./core";
 
@@ -93,6 +93,7 @@ const { columns, getColumnsBySlot, resetColumns, initColumnsWidth } = useTableCo
 // DOM 引用
 const headerWrapRef = ref<HTMLElement | null>(null);
 const bodyWrapRef = ref<HTMLElement | null>(null);
+let resizeObserver: ResizeObserver | null = null;
 
 // 计算列宽（header/body 共享）
 const layoutColumns = ref<NormalizedColumn[]>([]);
@@ -290,13 +291,13 @@ onMounted(() => {
 
   // 容器尺寸变化重算布局
   if (typeof window !== "undefined" && "ResizeObserver" in window) {
-    const ro = new ResizeObserver(() => {
+    resizeObserver = new ResizeObserver(() => {
       nextTick(() => {
         recalcLayout();
         ensureTableWidthSync(); // 重新计算时也要同步宽度
       });
     });
-    bodyWrapRef.value && ro.observe(bodyWrapRef.value);
+    bodyWrapRef.value && resizeObserver.observe(bodyWrapRef.value);
   }
 
   // 数据渲染后，修正滚动条出现带来的头体错位
@@ -306,6 +307,11 @@ onMounted(() => {
       ensureTableWidthSync(); // 数据变化时也要同步宽度
     });
   });
+});
+
+onBeforeUnmount(() => {
+  resizeObserver?.disconnect();
+  resizeObserver = null;
 });
 
 // 同步横向滚动 - 增强版

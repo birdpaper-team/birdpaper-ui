@@ -7,14 +7,12 @@
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { RowProps, rowProps } from "./props";
-import col from "./col.vue";
-import { computed, nextTick, onMounted, ref, useSlots, VNode, VueElement } from "vue";
+import { computed, nextTick, onMounted, onUpdated, ref, watch } from "vue";
 
 defineOptions({ name: "Row" });
 const { clsBlockName } = useNamespace("row");
 
 const props: RowProps = defineProps(rowProps);
-const slots = useSlots();
 
 const cls = computed(() => {
   return [
@@ -24,27 +22,30 @@ const cls = computed(() => {
   ];
 });
 
-const rowRef = ref();
-const setGutter = (els?: VNode[]) => {
-  const childrenEls = rowRef.value.children;
+const rowRef = ref<HTMLElement>();
 
-  els?.forEach((item, index) => {
-    const isCol = item.type === col;
+const formatGutter = (gutter: string | number | undefined) => {
+  if (gutter === undefined || gutter === null || gutter === "") return "";
+  if (typeof gutter === "number") return `${gutter}px`;
+  if (/^\d+(\.\d+)?$/.test(gutter)) return `${gutter}px`;
+  return gutter;
+};
 
-    if (isCol) {
-      const el: VueElement = childrenEls[index];
-      index !== 0 && (el.style.paddingLeft = `${props.gutter}px`);
-      index !== childrenEls.length - 1 && (el.style.paddingRight = `${props.gutter}px`);
-      return;
-    }
+const setGutter = () => {
+  const els = rowRef.value?.children;
+  if (!els?.length) return;
 
-    if (item.type.toString() === "Symbol(Fragment)") {
-      setGutter(item.children as VNode[]);
-    }
+  const gutter = formatGutter(props.gutter);
+  Array.from(els).forEach((node, index) => {
+    const el = node as HTMLElement;
+    el.style.paddingLeft = index !== 0 && gutter ? gutter : "";
+    el.style.paddingRight = index !== els.length - 1 && gutter ? gutter : "";
   });
 };
 
-onMounted(() => {
-  nextTick(() => setGutter(slots?.default?.({})));
-});
+const applyGutter = () => nextTick(setGutter);
+
+onMounted(applyGutter);
+onUpdated(applyGutter);
+watch(() => props.gutter, applyGutter);
 </script>

@@ -46,13 +46,12 @@ export const badgeProps = {
   },
   /**
    * @type Array<number>
-   * @description The offset position [x, y].
-   * @default [0, 0]
+   * @description The offset position [top, right].
+   * @default [-2, -6]
    */
   offset: {
     type: Array as PropType<number[]>,
     default: () => [-2, -6],
   },
 };
-
 export type BadgeProps = ExtractPropTypes<typeof badgeProps>;

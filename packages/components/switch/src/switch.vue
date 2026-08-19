@@ -1,6 +1,15 @@
 <template>
-  <div :class="cls" @click="handleClick">
-    <input :id type="checkbox" :class="`${clsBlockName}-inner`" />
+  <div
+    :class="cls"
+    role="switch"
+    :aria-checked="isCheck"
+    :aria-disabled="disabled || loading || undefined"
+    :tabindex="disabled || loading ? -1 : 0"
+    @click="handleClick"
+    @keydown.space.prevent="handleClick"
+    @keydown.enter.prevent="handleClick"
+  >
+    <input :id type="checkbox" :checked="isCheck" :disabled="disabled || loading" :class="`${clsBlockName}-inner`" tabindex="-1" />
 
     <div :class="[`${clsBlockName}-slider`, isCheck ? `${clsBlockName}-check` : '']">
       <span v-if="checkText || uncheckText" :class="`${clsBlockName}-slider-inner`">
@@ -42,13 +51,19 @@ const handleClick = async () => {
   if (props.disabled || loading.value) return;
 
   try {
-    loading.value = true;
-    const res = await props.onBeforeOk();
-    if (!res) return;
+    const result = props.onBeforeOk();
+    // Only show loading while awaiting an async result
+    if (result && typeof (result as PromiseLike<boolean>).then === "function") {
+      loading.value = true;
+      const res = await result;
+      if (!res) return;
+    } else if (!result) {
+      return;
+    }
 
     model.value = isCheck.value ? props.uncheckValue : props.checkValue;
   } catch (error) {
-    console.log("[ Switch -onBeforeOk error]", error);
+    console.warn("[ Switch -onBeforeOk error]", error);
   } finally {
     loading.value = false;
   }

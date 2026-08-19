@@ -1,17 +1,19 @@
 <template>
-  <div v-if="type === 'vertical' && !hideLine" :class="`${clsBlockName}-tail`"></div>
+  <div :class="cls">
+    <div v-if="type === 'vertical' && !hideLine" :class="`${clsBlockName}-tail`"></div>
 
-  <div :class="`${clsBlockName}-node`">
-    <IconCheckFill v-if="status === 'finish'" size="16" />
-    <template v-else> {{ index + 1 }} </template>
-  </div>
-
-  <div :class="`${clsBlockName}-content`">
-    <div :class="`${clsBlockName}-title`">
-      <slot />
+    <div :class="`${clsBlockName}-node`">
+      <IconCheckFill v-if="status === 'finish'" size="16" />
+      <template v-else> {{ index + 1 }} </template>
     </div>
-    <div v-if="description" :class="`${clsBlockName}-desc`">
-      {{ description }}
+
+    <div :class="`${clsBlockName}-content`">
+      <div :class="`${clsBlockName}-title`">
+        <slot />
+      </div>
+      <div v-if="description" :class="`${clsBlockName}-desc`">
+        {{ description }}
+      </div>
     </div>
   </div>
 </template>

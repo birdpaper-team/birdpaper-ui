@@ -15,15 +15,18 @@ export default defineComponent({
   },
   components: { ColGroup },
   setup(props, { slots }) {
-    const children = getAllElements(slots.default?.(), true).filter((item) => get(item, "type") !== Comment);
     const { clsBlockName } = useNamespace("table-body-tbody");
 
     const bodyRender = () => {
+      // Resolve slots on each render so body children stay reactive
+      const children = getAllElements(slots.default?.(), true).filter((item) => get(item, "type") !== Comment);
+
       return (
         <tbody class={clsBlockName.value} style={{ height: props.height }}>
           {props.data.map((record: any, rowIndex: number) => {
+            const rowKeyValue = props.rowKey != null ? record[props.rowKey] : rowIndex;
             return (
-              <tr key={rowIndex}>
+              <tr key={rowKeyValue ?? rowIndex}>
                 {children.map((child: VNode, childIndex: number) => {
                   const columnProps = child?.props as TableColumnProps;
                   const colMeta = props.cols[childIndex] as any;

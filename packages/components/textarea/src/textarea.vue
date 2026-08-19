@@ -9,8 +9,8 @@
       :disabled
       :readonly
       :placeholder
-      :cursor="model?.length"
       :value="model"
+      :maxlength="nativeMaxlength"
       :spellcheck="false"
       @focus="onFocus"
       @blur="onBlur"
@@ -22,7 +22,7 @@
     <div :class="`${clsBlockName}-suffix select-none`" v-if="innerActionIcon || innerSuffixContent || slots.suffix">
       <div :class="`${clsBlockName}-suffix-inner`" v-if="!slots.suffix">
         <component
-          v-if="innerActionIcon && !!model"
+          v-if="showClear"
           :is="innerActionIcon"
           class="action-icon"
           @click.stop="handleActionIconClick"
@@ -63,8 +63,15 @@ const cls = computed<string[] | {}[]>(() => [
   props?.disabled && `${clsBlockName.value}-disabled`,
 ]);
 
+/** Prefer native maxlength when counting by character length. */
+const nativeMaxlength = computed(() =>
+  props.maxlength && props.wordCountMode === "default" ? props.maxlength : undefined
+);
+
+const showClear = computed(() => props.clearable && !!model.value);
+
 /** Inner action icon. */
-const innerActionIcon = computed<Component>(() => {
+const innerActionIcon = computed<Component | null>(() => {
   if (props.clearable) {
     return IconCloseLine;
   }
@@ -99,6 +106,7 @@ const handleActionIconClick = () => {
  * @param autoFocus false
  */
 const clear = (autoFocus: boolean = false) => {
+  if (props.readonly || props.disabled) return;
   model.value = "";
   modelValue.value = "";
   triggerRef(model);
@@ -106,7 +114,10 @@ const clear = (autoFocus: boolean = false) => {
 };
 
 const inpRef = ref<HTMLInputElement>();
-const focus = () => inpRef.value?.focus();
+const focus = () => {
+  if (props.disabled) return;
+  inpRef.value?.focus();
+};
 const blur = () => inpRef.value?.blur();
 const onFocus = (e: Event) => emits("focus", e);
 const onBlur = (e: Event) => emits("blur", e);

@@ -40,8 +40,9 @@ const cellCls = (cell: YearCell) => [
   { "to-year": dayjs(toDay.value).year() === cell.value },
 ];
 
-const { toDay, current, firstYear, yearCell, setYearCell } = useDayJs(ctx.value!.langs, ctx.value!.model);
-const currentVal = ref(current.value && current.value.format(ctx.value!.valueFormat));
+const displayModel = ctx.value!.panelValue || ctx.value!.model;
+const { toDay, firstYear, yearCell, setYearCell } = useDayJs(ctx.value!.langs, displayModel);
+const currentVal = ref(ctx.value!.model ? dayjs(ctx.value!.model).format("YYYY") : "");
 
 setYearCell();
 
@@ -56,8 +57,16 @@ const handleChange = (type: "prev" | "next", step: number = 12) => {
 };
 
 const handleSelect = (date: YearCell) => {
-  currentVal.value = date.value.toString();
-  ctx.value!.onSelect(currentVal.value, {}, false);
+  const val = date.value.toString();
+  currentVal.value = val;
+
+  if (ctx.value!.type === "year") {
+    const formatted = dayjs(val).format(ctx.value!.valueFormat);
+    ctx.value!.onSelect(formatted, {}, true);
+    return;
+  }
+
+  ctx.value!.setPanelValue?.(val);
   emits("change-picker", "month");
 };
 </script>

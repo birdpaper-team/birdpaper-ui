@@ -43,6 +43,15 @@ export const inputTagProps = {
     type: Number,
     default: 0,
   },
+  /**
+   * @type boolean
+   * @description Whether enter can create a new tag.
+   * @default true
+   */
+  allowCreate: {
+    type: Boolean,
+    default: true,
+  },
 };
 
 export type InputTagProps = ExtractPropTypes<typeof inputTagProps>;

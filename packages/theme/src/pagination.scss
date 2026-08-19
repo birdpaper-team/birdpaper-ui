@@ -46,10 +46,20 @@
   color: var(--bp-gray-8);
   font-weight: normal;
   transition: all 0.2s ease;
+  cursor: pointer;
 
   &:hover {
     background-color: var(--bp-gray-1);
     transition: all 0.2s ease;
+  }
+}
+
+.#{$B}-pager-ellipsis {
+  cursor: default;
+  pointer-events: none;
+
+  &:hover {
+    background-color: transparent;
   }
 }
 

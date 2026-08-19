@@ -71,39 +71,58 @@ const cellCls = (cell: DayCell) => [
   { "cell-disabled": ctx.value?.disableDate && ctx.value.disableDate(cell.value) },
 ];
 
+const displayModel = ctx.value!.panelValue || ctx.value!.model;
 const { toDay, current, currentMonth, currentYear, dates, setDates, changeMonth, changeYear, weeks, months } = useDayJs(
   ctx.value!.langs,
-  ctx.value!.model
+  displayModel
 );
 
-const currentVal = ref(ctx.value!.model ? current.value.format("YYYY-MM-DD") : "");
-const currentTimeVal = ref(ctx.value!.model && ctx.value?.showTime ? current.value.format("HH:mm:ss") : "");
+const currentVal = ref(ctx.value!.model ? dayjs(ctx.value!.model).format("YYYY-MM-DD") : "");
+const currentTimeVal = ref(ctx.value!.model && ctx.value?.showTime ? dayjs(ctx.value!.model).format("HH:mm:ss") : "");
 setDates();
 
 const timeTableRef = ref();
 const handleSelect = (date: DayCell) => {
+  if (ctx.value?.disableDate?.(date.value)) return;
+
   currentVal.value = date.value;
   current.value = dayjs(currentVal.value);
   setDates();
 
   if (ctx.value!.showTime) {
-    !currentTimeVal.value && (currentTimeVal.value = timeTableRef.value.getTime(true));
+    if (!currentTimeVal.value) {
+      const existing = timeTableRef.value?.getTime?.(false);
+      if (existing && !existing.split(":").some((part: string) => part === "")) {
+        currentTimeVal.value = existing;
+      } else {
+        const now = dayjs().format("HH:mm:ss");
+        timeTableRef.value?.setTime?.(now);
+        currentTimeVal.value = now;
+      }
+    }
     return;
   }
 
-  ctx.value!.onSelect(currentVal.value, {}, true);
+  const val = dayjs(currentVal.value).format(ctx.value!.valueFormat);
+  ctx.value!.onSelect(val, {}, true);
 };
 
 const onTimeSelect = (time: string) => {
   if (!currentVal.value) {
-    handleSelect(toDay);
+    if (ctx.value?.disableDate?.(toDay.value)) return;
+    currentVal.value = toDay.value;
+    current.value = dayjs(currentVal.value);
+    setDates();
   }
   currentTimeVal.value = time;
 };
 
 /** Set current time (in `show-time` mode) */
 const setNow = () => {
+  if (ctx.value?.disableDate?.(toDay.value)) return;
   currentVal.value = toDay.value;
+  current.value = dayjs(currentVal.value);
+  setDates();
   currentTimeVal.value = timeTableRef.value.setNow();
 };
 
@@ -134,7 +153,11 @@ const changePicker = (typeName: PanelType) => {
 };
 
 const confirmValue = () => {
-  const val = dayjs(`${currentVal.value} ${currentTimeVal.value}`).format(ctx.value!.valueFormat);
+  if (!currentVal.value) return;
+  if (ctx.value?.disableDate?.(currentVal.value)) return;
+
+  const time = currentTimeVal.value || dayjs().format("HH:mm:ss");
+  const val = dayjs(`${currentVal.value} ${time}`).format(ctx.value!.valueFormat);
   ctx.value!.onSelect(val, {}, true);
   return val;
 };

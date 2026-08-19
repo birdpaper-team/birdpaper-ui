@@ -29,6 +29,12 @@ describe("Badge", () => {
     expect(wrapper.find(".bp-badge-dot").exists()).toBe(true);
   });
 
+  it("dot without count", () => {
+    const wrapper = mount(Badge, { props: { dot: true } });
+    expect(wrapper.find(".bp-badge-dot").exists()).toBe(true);
+    expect(wrapper.find(".bp-badge-inner").exists()).toBe(false);
+  });
+
   it("status", () => {
     const wrapper = mount(Badge, { props: { status: "danger" } });
     expect(wrapper.classes()).toContain("bp-badge-danger");

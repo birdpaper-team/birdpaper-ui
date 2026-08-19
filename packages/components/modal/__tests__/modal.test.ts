@@ -1,62 +1,103 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it, beforeEach } from "vitest";
 import Modal from "../src/modal.vue";
-import { useModalZIndex } from "@birdpaper-ui/hooks";
+import { useModalZIndex, resetModalZIndex } from "@birdpaper-ui/hooks";
 
 describe("Modal", () => {
-  it("props modelValue true", () => { expect(mount(Modal, { props: { modelValue: true, title: "T" } }).props("modelValue")).toBe(true); });
-  it("props modelValue false", () => { expect(mount(Modal, { props: { modelValue: false } }).props("modelValue")).toBe(false); });
-  it("title", () => { expect(mount(Modal, { props: { modelValue: true, title: "My Modal" } }).props("title")).toBe("My Modal"); });
-  it("content", () => { expect(mount(Modal, { props: { modelValue: true, content: "Body" } }).props("content")).toBe("Body"); });
-  it("width string", () => { expect(mount(Modal, { props: { modelValue: true, width: "600px" } }).props("width")).toBe("600px"); });
-  it("width number", () => { expect(mount(Modal, { props: { modelValue: true, width: 800 } }).props("width")).toBe(800); });
-  it("fullscreen", () => { expect(mount(Modal, { props: { modelValue: true, fullscreen: true } }).props("fullscreen")).toBe(true); });
-  it("center", () => { expect(mount(Modal, { props: { modelValue: true, center: true } }).props("center")).toBe(true); });
-  it("showBorder", () => { expect(mount(Modal, { props: { modelValue: true, showBorder: false } }).props("showBorder")).toBe(false); });
+  beforeEach(() => {
+    resetModalZIndex();
+  });
+
+  it("props modelValue true", () => {
+    expect(mount(Modal, { props: { modelValue: true, title: "T" } }).props("modelValue")).toBe(true);
+  });
+  it("props modelValue false", () => {
+    expect(mount(Modal, { props: { modelValue: false } }).props("modelValue")).toBe(false);
+  });
+  it("title", () => {
+    expect(mount(Modal, { props: { modelValue: true, title: "My Modal" } }).props("title")).toBe("My Modal");
+  });
+  it("content", () => {
+    expect(mount(Modal, { props: { modelValue: true, content: "Body" } }).props("content")).toBe("Body");
+  });
+  it("width string", () => {
+    expect(mount(Modal, { props: { modelValue: true, width: "600px" } }).props("width")).toBe("600px");
+  });
+  it("width number", () => {
+    expect(mount(Modal, { props: { modelValue: true, width: 800 } }).props("width")).toBe(800);
+  });
+  it("fullscreen", () => {
+    expect(mount(Modal, { props: { modelValue: true, fullscreen: true } }).props("fullscreen")).toBe(true);
+  });
+  it("center", () => {
+    expect(mount(Modal, { props: { modelValue: true, center: true } }).props("center")).toBe(true);
+  });
+  it("showBorder", () => {
+    expect(mount(Modal, { props: { modelValue: true, showBorder: false } }).props("showBorder")).toBe(false);
+  });
   it("okText/cancelText", () => {
     const w = mount(Modal, { props: { modelValue: true, okText: "Yes", cancelText: "No" } });
     expect(w.props("okText")).toBe("Yes");
     expect(w.props("cancelText")).toBe("No");
   });
-  it("hideHeader", () => { expect(mount(Modal, { props: { modelValue: true, hideHeader: true } }).props("hideHeader")).toBe(true); });
-  it("hideFooter", () => { expect(mount(Modal, { props: { modelValue: true, hideFooter: true } }).props("hideFooter")).toBe(true); });
-  it("hideClose", () => { expect(mount(Modal, { props: { modelValue: true, hideClose: true } }).props("hideClose")).toBe(true); });
-  it("hideCancel", () => { expect(mount(Modal, { props: { modelValue: true, hideCancel: true } }).props("hideCancel")).toBe(true); });
-  it("hideTitleIcon", () => { expect(mount(Modal, { props: { modelValue: true, hideTitleIcon: true } }).props("hideTitleIcon")).toBe(true); });
-  it("maskClosable", () => { expect(mount(Modal, { props: { modelValue: true, maskClosable: false } }).props("maskClosable")).toBe(false); });
+  it("hideHeader", () => {
+    expect(mount(Modal, { props: { modelValue: true, hideHeader: true } }).props("hideHeader")).toBe(true);
+  });
+  it("hideFooter", () => {
+    expect(mount(Modal, { props: { modelValue: true, hideFooter: true } }).props("hideFooter")).toBe(true);
+  });
+  it("hideClose", () => {
+    expect(mount(Modal, { props: { modelValue: true, hideClose: true } }).props("hideClose")).toBe(true);
+  });
+  it("hideCancel", () => {
+    expect(mount(Modal, { props: { modelValue: true, hideCancel: true } }).props("hideCancel")).toBe(true);
+  });
+  it("hideTitleIcon", () => {
+    expect(mount(Modal, { props: { modelValue: true, hideTitleIcon: true } }).props("hideTitleIcon")).toBe(true);
+  });
+  it("maskClosable", () => {
+    expect(mount(Modal, { props: { modelValue: true, maskClosable: false } }).props("maskClosable")).toBe(false);
+  });
   it("top/bottom", () => {
     const w = mount(Modal, { props: { modelValue: true, top: "100px", bottom: "50px" } });
     expect(w.props("top")).toBe("100px");
     expect(w.props("bottom")).toBe("50px");
   });
-  it("borderRadius", () => { expect(mount(Modal, { props: { modelValue: true, borderRadius: "12px" } }).props("borderRadius")).toBe("12px"); });
-  it("bodyClass", () => { expect(mount(Modal, { props: { modelValue: true, bodyClass: "custom-body" } }).props("bodyClass")).toBe("custom-body"); });
-  it("isMethod", () => { expect(mount(Modal, { props: { modelValue: true, isMethod: true } }).props("isMethod")).toBe(true); });
+  it("borderRadius", () => {
+    expect(mount(Modal, { props: { modelValue: true, borderRadius: "12px" } }).props("borderRadius")).toBe("12px");
+  });
+  it("bodyClass", () => {
+    expect(mount(Modal, { props: { modelValue: true, bodyClass: "custom-body" } }).props("bodyClass")).toBe("custom-body");
+  });
+  it("isMethod", () => {
+    expect(mount(Modal, { props: { modelValue: true, isMethod: true } }).props("isMethod")).toBe(true);
+  });
   it("type", () => {
-    ["info", "success", "warning", "error", "confirm"].forEach(t => {
+    ["info", "success", "warning", "error", "confirm"].forEach((t) => {
       expect(mount(Modal, { props: { modelValue: true, type: t } }).props("type")).toBe(t);
     });
   });
 
   it("useModalZIndex should manage incremental z-index", () => {
+    resetModalZIndex();
     const { currentZIndex: z1, increase: inc1, decrease: dec1 } = useModalZIndex();
     const { currentZIndex: z2, increase: inc2, decrease: dec2 } = useModalZIndex();
-    
+
     expect(z1.value).toBe(3000);
     expect(z2.value).toBe(3000);
-    
+
     inc1();
     expect(z1.value).toBe(3001);
     expect(z2.value).toBe(3001);
-    
+
     inc2();
     expect(z1.value).toBe(3002);
     expect(z2.value).toBe(3002);
-    
+
     dec1();
     expect(z1.value).toBe(3001);
     expect(z2.value).toBe(3001);
-    
+
     dec2();
     expect(z1.value).toBe(3000);
     expect(z2.value).toBe(3000);

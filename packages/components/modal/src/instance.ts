@@ -11,7 +11,8 @@ class ModalManager {
     this.vm = ref(
       createVNode(modal, {
         ...config,
-        onCancel: this.handleCancel.bind(this),
+        onCancel: this.handleClose.bind(this),
+        onConfirm: this.handleClose.bind(this),
       })
     );
 
@@ -20,7 +21,7 @@ class ModalManager {
     }
   }
 
-  private handleCancel() {
+  private handleClose() {
     nextTick(() => {
       setTimeout(() => {
         this.close();

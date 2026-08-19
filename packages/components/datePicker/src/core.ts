@@ -31,14 +31,14 @@ export const useDayJs = (lang: LangsType, model: string) => {
     const start: Dayjs = time.startOf("month");
     const end: Dayjs = time.endOf("month");
 
-    /** 获取当前月份的第一天是星期几，如果第一天是星期日，则返回1，否则返回对应的星期数 */
-    const firstDateOfWeek: number = start.day() || 1;
+    /** 本月 1 号对应的星期索引，与 weekdaysMin 表头对齐（0 = 周日） */
+    const firstDateOfWeek: number = start.day();
 
     /** 当前日期所在月份的最后一天 */
     const lastDate: number = end.date();
 
-    /** 计算并获取当前月份的第一天，并根据 firstDateOfWeek 或默认值 7 天进行偏移。 */
-    const startDateValue: Dayjs = start.subtract(firstDateOfWeek || 7, "day");
+    /** 日历网格起始日：从本月 1 号回退 firstDateOfWeek 天 */
+    const startDateValue: Dayjs = start.subtract(firstDateOfWeek, "day");
 
     // 动态计算所需行数（5 或 6 行），仅在月份首日为周六且天数 ≤ 30 时只需 5 行
     const totalCells = Math.ceil((firstDateOfWeek + lastDate) / 7) * 7;
@@ -83,7 +83,7 @@ export const useDayJs = (lang: LangsType, model: string) => {
   };
 
   const yearCell = ref<YearCell[]>([]);
-  const firstYear = computed(() => current.value.subtract(5, "year").year());
+  const firstYear = ref(current.value.subtract(5, "year").year());
   const setYearCell = () => {
     for (let i = 1; i < 13; i++) {
       const value = firstYear.value + i;

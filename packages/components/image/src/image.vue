@@ -36,7 +36,7 @@ import { imageProps, ImageProps } from "./props";
 import { IconImage2Line, IconErrorWarningLine } from "birdpaper-icon";
 import type { ImageLoadEffect } from "./types";
 
-defineOptions({ name: "Image" });
+defineOptions({ name: "Image", inheritAttrs: false });
 const { clsBlockName } = useNamespace("image");
 
 const props: ImageProps = defineProps(imageProps);

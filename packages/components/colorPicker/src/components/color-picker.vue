@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onBeforeUnmount, ref } from "vue";
 import { useEventListener } from "@vueuse/core";
 import { getPickerPosition } from "../useColor";
 
@@ -22,6 +22,7 @@ const props = defineProps({
 const pickBlock = ref();
 const pointerX = ref(0);
 const pointerY = ref(0);
+let stopMouseMove: (() => void) | null = null;
 
 const updatePosition = (ev: MouseEvent) => {
   const { x, y, s, v } = getPickerPosition(ev, pickBlock.value, 7);
@@ -32,13 +33,9 @@ const updatePosition = (ev: MouseEvent) => {
   value.value = v * 100;
 };
 
-const startPicking = (e: MouseEvent) => {
-  updatePosition(e);
-  useEventListener(window, "mousemove", onMouseMove);
-};
-
 const removeListener = () => {
-  window.removeEventListener("mousemove", onMouseMove);
+  stopMouseMove?.();
+  stopMouseMove = null;
 };
 
 const onMouseMove = (ev: MouseEvent) => {
@@ -46,14 +43,22 @@ const onMouseMove = (ev: MouseEvent) => {
   ev.buttons > 0 ? updatePosition(ev) : removeListener();
 };
 
+const startPicking = (e: MouseEvent) => {
+  updatePosition(e);
+  removeListener();
+  stopMouseMove = useEventListener(window, "mousemove", onMouseMove);
+};
+
+onBeforeUnmount(() => {
+  removeListener();
+});
+
 const setPosition = (s: number, v: number) => {
   if (!pickBlock.value) return;
 
   const rect = pickBlock.value.getBoundingClientRect();
   const left = (s / 100) * rect.width - 6;
-  // console.log("left: ", left);
   const top = (1 - v / 100) * rect.height - 6;
-  // console.log("top: ", top);
   pointerX.value = left;
   pointerY.value = top;
 };

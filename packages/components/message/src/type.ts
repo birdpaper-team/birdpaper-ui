@@ -13,6 +13,8 @@ export interface MessageItem {
   content: string;
   duration?: number;
   closeable?: boolean;
+  /** Alias of closeable */
+  closable?: boolean;
   plain?: boolean;
   position?: MessagePosition;
   onClose?: Function;

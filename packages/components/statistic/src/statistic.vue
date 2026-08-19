@@ -10,10 +10,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, watch } from "vue";
+import { computed, onBeforeUnmount, ref, watch } from "vue";
 import { statisticProps, StatisticProps } from "./props";
 import { useNamespace } from "@birdpaper-ui/hooks";
-import { isArray, isFloat, isNumber, toInt } from "radash";
+import { isArray, isNumber } from "radash";
 import { formatNumberWithCommas } from "@birdpaper-ui/components/utils/number";
 
 defineOptions({ name: "Statistic" });
@@ -25,15 +25,26 @@ const slots = defineSlots();
 
 const intText = ref<string>("");
 const decText = ref<string>("");
+const isAnimating = ref(false);
+let rafId: number | null = null;
+
+const currentValue = computed(() => {
+  if (model.value !== undefined && model.value !== null) return model.value;
+  return props.value;
+});
 
 const init = () => {
-  if (model.value === undefined || model.value === null || !isNumber(model.value)) {
+  const value = currentValue.value;
+  if (value === undefined || value === null || !isNumber(value)) {
     intText.value = props.placeholder;
     decText.value = "";
     return;
   }
-  updateValue(model.value);
-  props.animation && startAnimation();
+  if (props.animation && typeof requestAnimationFrame === "function") {
+    startAnimation();
+  } else {
+    updateValue(value);
+  }
 };
 
 const updateValue = (value: number) => {
@@ -54,25 +65,6 @@ const updateValue = (value: number) => {
   }
 };
 
-const getIntText = (value: number): string => {
-  let val: string = "";
-  if (isNumber(value)) {
-    val = toInt(value).toString();
-  }
-
-  if (props.showSeparator) {
-    val = formatNumberWithCommas(Number(val), props.separator);
-  }
-
-  return val;
-};
-
-const getDecimalText = (value: number): string => {
-  const fixed = Number(value).toFixed(props.precision);
-  const parts = fixed.split(".");
-  return parts[1] ? `.${parts[1]}` : `.${"0".repeat(props.precision)}`;
-};
-
 const innerFontSize = computed(() => {
   if (isArray(props.fontSize)) {
     return props.fontSize;
@@ -80,35 +72,52 @@ const innerFontSize = computed(() => {
   return [props.fontSize, props.fontSize];
 });
 
-const isAnimating = ref(false);
+const cancelAnimation = () => {
+  if (rafId !== null && typeof cancelAnimationFrame === "function") {
+    cancelAnimationFrame(rafId);
+    rafId = null;
+  }
+  isAnimating.value = false;
+};
 
 const startAnimation = () => {
-  isAnimating.value = false;
-  if (isAnimating.value || !props.animation) return;
+  if (!props.animation || typeof requestAnimationFrame !== "function") {
+    const value = currentValue.value;
+    if (value !== undefined && value !== null && isNumber(value)) updateValue(value);
+    return;
+  }
 
+  const endValue = currentValue.value;
+  if (endValue === undefined || endValue === null || !isNumber(endValue)) return;
+
+  cancelAnimation();
   isAnimating.value = true;
   const startValue = props.valueFrom || 0;
-  const endValue = model.value as number;
   const duration = props.duration;
 
   const step = (timestamp: number, startTime: number) => {
     const progress = Math.min((timestamp - startTime) / duration, 1);
     updateValue(startValue + (endValue - startValue) * progress);
     if (progress < 1) {
-      requestAnimationFrame((t) => step(t, startTime));
+      rafId = requestAnimationFrame((t) => step(t, startTime));
     } else {
+      rafId = null;
       isAnimating.value = false;
     }
   };
 
-  requestAnimationFrame((t) => step(t, performance.now()));
+  rafId = requestAnimationFrame((t) => step(t, performance.now()));
 };
 
 watch(
-  () => model.value,
+  currentValue,
   () => {
     init();
   },
   { immediate: true }
 );
+
+onBeforeUnmount(() => {
+  cancelAnimation();
+});
 </script>

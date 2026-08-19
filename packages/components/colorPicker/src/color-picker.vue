@@ -133,7 +133,7 @@ const updateByHex = (val: string) => {
 };
 
 const updateByRgb = (rgb: { r: number; g: number; b: number }) => {
-  const rgbStr = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha.value})`;
+  const rgbStr = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${alpha.value})`;
 
   initHsla("rgb", rgbStr);
   model.value = rgbStr;

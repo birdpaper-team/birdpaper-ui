@@ -42,7 +42,7 @@ export const formProps = {
    * @default "vertical"
    */
   layout: {
-    type: String as PropType<"vertical" | "inline">,
+    type: String as PropType<"vertical" | "inline" | "horizontal">,
     default: "vertical",
   },
 } as const;

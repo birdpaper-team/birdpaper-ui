@@ -32,7 +32,7 @@ export default defineComponent({
     const { clsBlockName } = useNamespace("button-group");
 
     const cls = computed(() => {
-      let clsName = [clsBlockName];
+      let clsName = [clsBlockName.value];
 
       return clsName;
     });

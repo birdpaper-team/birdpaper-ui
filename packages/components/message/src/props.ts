@@ -33,6 +33,12 @@ export const messageProps = {
   closeable: { type: Boolean, default: false },
   /**
    * @type boolean
+   * @description Alias of closeable.
+   * @default false
+   */
+  closable: { type: Boolean, default: false },
+  /**
+   * @type boolean
    * @description Plain mode.
    * @default false
    */

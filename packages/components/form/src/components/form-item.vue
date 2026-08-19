@@ -10,7 +10,7 @@
         <slot />
       </div>
       <Transition name="fade-dropdown" mode="out-in">
-        <div v-if="errorMessage" :class="`${clsBlockName}-content-error`">
+        <div v-if="errorMessage" :class="`${clsBlockName}-content-error`" role="alert">
           {{ errorMessage }}
         </div>
       </Transition>
@@ -94,7 +94,14 @@ function updateError(error: string) {
 
 function getRules() {
   if (props.rules) return props.rules;
-  if (formContext?.rules && field.value) return formContext.rules[field.value];
+  if (formContext?.rules && field.value) {
+    const fieldRules = formContext.rules[field.value];
+    if (fieldRules) return fieldRules;
+  }
+  // Add required rule when required prop is set and no explicit rules
+  if (props.required) {
+    return [{ required: true, message: `${props.label || field.value || "Field"} is required` }];
+  }
   return undefined;
 }
 
@@ -105,6 +112,21 @@ const formItemContext: FormItemContext = {
   updateError,
   getRules,
 };
+
+// Keep field in context updated when field prop changes
+watch(
+  field,
+  (val, oldVal) => {
+    formItemContext.field = val;
+    if (!formContext) return;
+    if (oldVal) {
+      formContext.removeField(formItemContext);
+    }
+    if (val) {
+      formContext.addField(formItemContext);
+    }
+  }
+);
 
 onMounted(() => {
   if (formContext && field.value) {
@@ -139,4 +161,6 @@ const handleFocusOut = () => {
     validate();
   }
 };
+
+defineExpose({ validate, clearValidate });
 </script>

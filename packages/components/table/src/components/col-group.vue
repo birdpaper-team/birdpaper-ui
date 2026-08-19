@@ -5,17 +5,18 @@
       :key="col.key"
       :style="{ width: col.realWidth + 'px' }"
     />
-    <col v-if="gutterWidth > 0" :style="{ width: gutterWidth + 'px' }" />
+    <col v-if="resolvedGutterWidth > 0" :style="{ width: resolvedGutterWidth + 'px' }" />
   </colgroup>
 </template>
 
 <script lang="ts" setup>
-import type { NormalizedColumn } from '../core';
+import { computed } from "vue";
+import type { NormalizedColumn } from "../core";
 
 const props = defineProps<{
   columns: NormalizedColumn[];
   gutterWidth?: number;
 }>();
 
-const gutterWidth = props.gutterWidth ?? 0;
+const resolvedGutterWidth = computed(() => props.gutterWidth ?? 0);
 </script>

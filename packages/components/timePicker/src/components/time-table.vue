@@ -87,16 +87,24 @@ const setDefault = () => {
   }
 };
 
-const setNow = () => {
-  const now = dayjs().format("HH:mm:ss");
-  globalValue.value = now.split(":");
+const setTime = (val: string) => {
+  globalValue.value = val.split(":");
 
   for (let i = 0; i < globalValue.value.length; i++) {
     const item = globalValue.value[i];
     scrollTo(i, item);
   }
+};
 
-  ctx.value?.onSelect(now);
+const setNow = () => {
+  const now = dayjs().format("HH:mm:ss");
+  setTime(now);
+
+  if (!props.onlySelector) {
+    ctx.value?.onSelect(now);
+  }
+
+  return now;
 };
 
 const scrollTo = (i: number, item: string = defaultValue) => columnRefs.value[i]?.scrollToItem(item);
@@ -110,19 +118,12 @@ const handleSelect = () => {
 
 const getTime = (defaultNow: boolean = false) => {
   if (defaultNow && !globalValue.value[0]) {
-    return setNow();
+    const now = dayjs().format("HH:mm:ss");
+    setTime(now);
+    return now;
   }
 
   return globalValue.value.join(":");
-};
-
-const setTime = (val: string) => {
-  globalValue.value = val.split(":");
-
-  for (let i = 0; i < globalValue.value.length; i++) {
-    const item = globalValue.value[i];
-    scrollTo(i, item);
-  }
 };
 
 watch(

@@ -12,7 +12,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { onBeforeUnmount, ref } from "vue";
 import { getSliderPosition } from "../useColor";
 import { useEventListener } from "@vueuse/core";
 
@@ -26,11 +26,7 @@ const props = defineProps({
 
 const sliderRef = ref();
 const pointerX = ref(163);
-
-const startDrag = (e: MouseEvent) => {
-  updatePosition(e);
-  useEventListener(window, "mousemove", onMouseMove1);
-};
+let stopMouseMove: (() => void) | null = null;
 
 const updatePosition = (ev: MouseEvent) => {
   const { x, v } = getSliderPosition(ev, sliderRef.value, 9);
@@ -39,13 +35,24 @@ const updatePosition = (ev: MouseEvent) => {
 };
 
 const removeListener = () => {
-  window.removeEventListener("mousemove", onMouseMove1);
+  stopMouseMove?.();
+  stopMouseMove = null;
 };
 
-const onMouseMove1 = (ev: MouseEvent) => {
+const onMouseMove = (ev: MouseEvent) => {
   ev.preventDefault();
   ev.buttons > 0 ? updatePosition(ev) : removeListener();
 };
+
+const startDrag = (e: MouseEvent) => {
+  updatePosition(e);
+  removeListener();
+  stopMouseMove = useEventListener(window, "mousemove", onMouseMove);
+};
+
+onBeforeUnmount(() => {
+  removeListener();
+});
 
 const setPosition = (a: number) => {
   if (!sliderRef.value) return;

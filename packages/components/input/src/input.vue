@@ -1,5 +1,5 @@
 <template>
-  <div :class="cls" @click.stop="focus">
+  <div :class="cls" @click.stop="onWrapperClick">
     <div :class="`${clsBlockName}-prefix select-none`" v-if="slots.prefix">
       <span class="prefix-content">
         <slot name="prefix" />
@@ -16,6 +16,7 @@
       :placeholder
       :type="inpType"
       :value="model"
+      :maxlength="nativeMaxlength"
       :spellcheck="false"
       @focus="onFocus"
       @blur="onBlur"
@@ -25,13 +26,19 @@
       @keyup.enter="onEnter"
     />
     <slot v-else />
-    <div :class="`${clsBlockName}-suffix select-none`" v-if="innerActionIcon || innerSuffixContent || slots.suffix">
+    <div :class="`${clsBlockName}-suffix select-none`" v-if="hasSuffix">
       <div :class="`${clsBlockName}-suffix-inner`" v-if="!slots.suffix">
         <component
-          v-if="innerActionIcon && !!model"
-          :is="innerActionIcon"
+          v-if="showClear"
+          :is="IconCloseLine"
           class="action-icon"
-          @click.stop="handleActionIconClick"
+          @click.stop="handleClearClick"
+        />
+        <component
+          v-if="showPasswordIcon"
+          :is="isEyeOpen ? IconEyeFill : IconEyeCloseFill"
+          class="action-icon"
+          @click.stop="handlePasswordClick"
         />
         <span class="suffix-content">{{ innerSuffixContent }}</span>
       </div>
@@ -47,7 +54,7 @@ import { InputProps, inputProps } from "./props";
 import { computed, useSlots, ref, nextTick, onMounted } from "vue";
 import type { Component } from "vue";
 import { IconCloseLine, IconEyeFill, IconEyeCloseFill } from "birdpaper-icon";
-import { InputType, WordCountMode } from "./types";
+import { InputType } from "./types";
 
 defineOptions({ name: "Input" });
 const { clsBlockName } = useNamespace("input");
@@ -74,18 +81,16 @@ const inpType = computed<InputType>(() => {
 /** The password text is hide or not. */
 const isEyeOpen = ref<boolean>(false);
 
-/** Inner action icon. */
-const innerActionIcon = computed<Component | null>(() => {
-  if (props.type === "password" && props.showPassword) {
-    return !isEyeOpen.value ? IconEyeCloseFill : IconEyeFill;
-  }
+/** Prefer native maxlength when counting by character length. */
+const nativeMaxlength = computed(() =>
+  props.maxlength && props.wordCountMode === "default" ? props.maxlength : undefined
+);
 
-  if (props.clearable) {
-    return IconCloseLine;
-  }
-
-  return null;
-});
+const showClear = computed(() => props.clearable && !!model.value);
+const showPasswordIcon = computed(() => props.type === "password" && props.showPassword);
+const hasSuffix = computed(
+  () => showClear.value || showPasswordIcon.value || !!innerSuffixContent.value || !!slots.suffix
+);
 
 // Word count logic via shared hook
 const { formatWordCountDisplay, truncateToMax } = useWordCount({
@@ -103,12 +108,14 @@ const innerSuffixContent = computed<string | Component>(() => {
   return "";
 });
 
-/** Handle action icon click */
-const handleActionIconClick = () => {
-  if (props.disabled) return;
+const handleClearClick = () => {
+  if (props.disabled || props.readonly) return;
+  clear(true);
+};
 
-  if (props.clearable && model.value) return clear(true);
-  if (props.type === "password" && props.showPassword) return triggerEye();
+const handlePasswordClick = () => {
+  if (props.disabled) return;
+  triggerEye();
 };
 
 /**
@@ -125,13 +132,21 @@ const triggerEye = () => {
  * @param autoFocus false
  */
 const clear = (autoFocus: boolean = false) => {
+  if (props.readonly || props.disabled) return;
   model.value = "";
   // oxlint-disable-next-line no-unused-expressions
   autoFocus && nextTick(() => focus());
 };
 
 const inpRef = ref<HTMLInputElement>();
-const focus = () => inpRef.value?.focus();
+const focus = () => {
+  if (props.disabled) return;
+  inpRef.value?.focus();
+};
+const onWrapperClick = () => {
+  if (props.disabled) return;
+  focus();
+};
 const blur = () => inpRef.value?.blur();
 const onFocus = (e: Event) => emits("focus", e);
 const onBlur = (e: Event) => emits("blur", e);

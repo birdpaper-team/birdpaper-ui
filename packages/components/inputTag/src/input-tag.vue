@@ -1,7 +1,7 @@
 <template>
   <bp-input :id :class="cls" @click.stop="inpRef?.focus()" :disabled>
     <div :class="`${clsBlockName}-content`">
-      <template v-for="(v, k) in model">
+      <template v-for="(v, k) in model" :key="`${v}-${k}`">
         <bp-tag v-if="maxTagCount === 0 || k < maxTagCount" :closeable="!disabled" @close="handleClose(k)">
           {{ v.toString() }}
         </bp-tag>
@@ -9,7 +9,7 @@
       <bp-tag v-if="maxTagCount && model.length > maxTagCount">+{{ model.length - maxTagCount }}...</bp-tag>
 
       <input
-        v-if="!disabled || model.length === 0"
+        v-if="!disabled"
         ref="inpRef"
         type="text"
         v-model="inpVal"
@@ -18,6 +18,7 @@
         :name
         :placeholder
         :disabled
+        :readonly="!allowCreate"
         @keyup.enter="handleEnter"
         @keyup.backspace="handleBackspace"
       />
@@ -36,7 +37,7 @@ import { InputTagProps, inputTagProps } from "./props";
 defineOptions({ name: "InputTag" });
 const { clsBlockName } = useNamespace("input-tag");
 
-const model = defineModel<string[]>({ default: [] });
+const model = defineModel<string[]>({ default: () => [] });
 const props: InputTagProps = defineProps(inputTagProps);
 const emits = defineEmits<{
   (e: "add", value: string): void;
@@ -49,12 +50,11 @@ const inpVal = ref<string>("");
 const inpRef = ref<HTMLInputElement | null>(null);
 const hiddenSpan = ref<HTMLElement | null>(null);
 
-const inpWidth = ref<number>(0);
+const inpWidth = ref<number>(12);
 const updateWidth = () => {
   if (!hiddenSpan.value) return;
-
   const spanWidth = hiddenSpan.value.offsetWidth;
-  inpWidth.value = Math.max(spanWidth + 8, inpWidth.value || 0);
+  inpWidth.value = Math.max(spanWidth + 8, 12);
 };
 watch([() => inpVal.value, () => props.placeholder], () => {
   nextTick(() => updateWidth());
@@ -65,10 +65,15 @@ onMounted(() => {
 });
 
 const handleEnter = () => {
-  if (!inpVal.value) return;
+  if (!props.allowCreate || !inpVal.value) return;
+  const val = inpVal.value.trim();
+  if (!val) return;
+  if (model.value.includes(val)) {
+    inpVal.value = "";
+    return;
+  }
 
-  const val = inpVal.value;
-  model.value.push(val);
+  model.value = [...model.value, val];
   inpVal.value = "";
   emits("add", val);
 };
@@ -76,14 +81,15 @@ const handleBackspace = () => {
   if (inpVal.value) return;
 
   const index = model.value.length - 1;
+  if (index < 0) return;
   const val = model.value[index];
-  model.value.pop();
-  if (val !== undefined) emits("remove", val, index);
+  model.value = model.value.slice(0, -1);
+  emits("remove", val, index);
 };
 
 const handleClose = (index: number) => {
   const val = model.value[index];
-  model.value.splice(index, 1);
+  model.value = model.value.filter((_, i) => i !== index);
   emits("remove", val, index);
 };
 </script>

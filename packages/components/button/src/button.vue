@@ -13,7 +13,7 @@
 </template>
 
 <script setup lang="ts">
-import { useNamespace } from "@birdpaper-ui/hooks";
+import { useNamespace, useGlobalConfig } from "@birdpaper-ui/hooks";
 import { ButtonProps, buttonProps } from "./props";
 import { IconLoaderLine, IconLoader2Line, IconLoader3Line, IconLoader4Line, IconLoader5Line } from "birdpaper-icon";
 import { computed, useSlots } from "vue";
@@ -22,10 +22,13 @@ import { ButtonShape, ButtonIconPosition } from "./types";
 
 defineOptions({ name: "Button" });
 const { clsBlockName } = useNamespace("button");
+const { size: globalSize } = useGlobalConfig();
 
 const props: ButtonProps = defineProps(buttonProps);
 const emits = defineEmits<{ (e: "click"): void }>();
 const slots = useSlots();
+
+const mergedSize = computed(() => props.size || globalSize.value);
 
 /** Disabled.  */
 const isDisabled = computed<boolean>(() => props.disabled || !!props.loading);
@@ -53,7 +56,7 @@ const isIconLeft = computed<boolean>(() => props.iconPosition === ButtonIconPosi
 
 const cls = computed(() => [
   clsBlockName.value,
-  `${clsBlockName.value}-${props.size}-${props.shape}`,
+  `${clsBlockName.value}-${mergedSize.value}-${props.shape}`,
   `${clsBlockName.value}-${props.status}-${props.type}`,
   { "is-full": props.full, "p-0": !hasDefaultSlot.value, "no-padding": !hasDefaultSlot.value },
   "select-none",

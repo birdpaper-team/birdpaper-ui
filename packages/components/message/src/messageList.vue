@@ -1,12 +1,19 @@
 <template>
-  <TransitionGroup :class="clsBlockName" name="message" tag="ul">
+  <TransitionGroup
+    :class="clsBlockName"
+    name="message"
+    tag="ul"
+    role="status"
+    aria-live="polite"
+    aria-atomic="false"
+  >
     <template v-for="v in filteredList" :key="`${v.id}`">
       <message
         :id="v.id"
         :type="v.type"
         :content="v.content"
         :duration="v.duration"
-        :closeable="v.closeable"
+        :closeable="v.closeable || v.closable"
         :plain="v.plain"
         :on-close="v.onClose"
         @remove="onRemove"

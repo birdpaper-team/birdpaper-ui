@@ -62,6 +62,9 @@ const init = () => {
   if (sizeValue.value) {
     wrapperRef.value!.style.width = `${sizeValue.value}px`;
     wrapperRef.value!.style.height = `${sizeValue.value}px`;
+  } else if (wrapperRef.value) {
+    wrapperRef.value.style.width = "";
+    wrapperRef.value.style.height = "";
   }
 
   autoSetFontSizeScale();
@@ -69,7 +72,10 @@ const init = () => {
 
 watch(
   () => props.size,
-  () => init()
+  (size) => {
+    sizeValue.value = isNumber(size) ? size : null;
+    init();
+  }
 );
 
 onMounted(() => init());
