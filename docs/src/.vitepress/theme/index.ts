@@ -18,6 +18,7 @@ import UsageBlock from "../components/usage-block";
 import Catalog from "../components/catalog.vue";
 import ColorBlock from "../components/color-palette/color-block.vue";
 import PrincipleBlock from "../components/principle-block/index.vue";
+import DonatePage from "../components/donate-page.vue";
 
 import "uno.css";
 import "../../style/index.scss";
@@ -37,5 +38,6 @@ export default {
     ctx.app.component("catalog", Catalog);
     ctx.app.component("color-block", ColorBlock);
     ctx.app.component("principle-block", PrincipleBlock);
+    ctx.app.component("donate-page", DonatePage);
   },
 };
