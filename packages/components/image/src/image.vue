@@ -51,12 +51,18 @@ const fallbackApplied = ref(false);
 const hasLoaded = ref(false);
 let observer: IntersectionObserver | null = null;
 
+const toCssSize = (value: string | number | undefined, fallback?: string) => {
+  if (value === undefined || value === null || value === "") return fallback;
+  return typeof value === "number" ? `${value}px` : String(value);
+};
+
 const containerStyle = computed(() => {
   const style: Record<string, string> = {};
-  style.width = props.width || "100%";
+  style.width = toCssSize(props.width, "100%")!;
 
-  if (props.height) {
-    style.height = props.height;
+  const height = toCssSize(props.height);
+  if (height) {
+    style.height = height;
   }
 
   return style;

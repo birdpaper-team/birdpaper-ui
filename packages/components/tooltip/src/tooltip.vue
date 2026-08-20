@@ -44,7 +44,7 @@ defineOptions({ name: "Tooltip" });
 const { clsBlockName } = useNamespace("tooltip");
 
 const props: TooltipProps = defineProps(tooltipProps);
-const slots = useSlots();
+const slots: ReturnType<typeof useSlots> = useSlots();
 
 const isOpen = ref<boolean>(false);
 const currentPosition = ref<TriggerPosition>(props.position);

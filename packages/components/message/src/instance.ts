@@ -83,8 +83,9 @@ class MessageManager {
     const len = samePositionItems.length;
     if (len > 1) {
       const lastItem = samePositionItems[len - 2];
-      if (lastItem && lastItem.duration === message.duration && message.duration > 0) {
-        message.duration = message.duration + 200 * len;
+      const duration = message.duration ?? 0;
+      if (lastItem && lastItem.duration === duration && duration > 0) {
+        message.duration = duration + 200 * len;
       }
     }
 

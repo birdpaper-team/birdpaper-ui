@@ -85,7 +85,7 @@ const emits = defineEmits<{
   (e: "select", val: CheckboxValueForArray[], rowKey: RadioValue, record: any): void;
   (e: "selection-change", val: CheckboxValueForArray[]): void;
 }>();
-const slots = useSlots();
+const slots: ReturnType<typeof useSlots> = useSlots();
 
 // 从核心逻辑中获取列
 const { columns, getColumnsBySlot, resetColumns, initColumnsWidth } = useTableCore();

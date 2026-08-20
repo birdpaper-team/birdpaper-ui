@@ -28,7 +28,7 @@ import { computed, provide, reactive, ref, toRefs, watch } from "vue";
 import { commonPickerProps, datePickerProps, DatePickerProps } from "./props";
 import { IconCalendarLine, IconCloseLine } from "birdpaper-icon";
 import pickerPanel from "./components/picker-panel.vue";
-import { dateInjectionKey } from "./types";
+import { dateInjectionKey, type DatePickerContext } from "./types";
 
 defineOptions({ name: "DatePicker" });
 const { clsBlockName } = useNamespace("date-picker");
@@ -45,26 +45,24 @@ watch(model, (v) => {
 });
 
 const { langs, valueFormat, showTime, disabledDate } = toRefs(props);
-provide(
-  dateInjectionKey,
-  reactive({
-    type: "date" as const,
-    model,
-    panelValue,
-    setPanelValue: (v: string) => {
-      panelValue.value = v;
-    },
-    langs,
-    valueFormat,
-    showTime,
-    disableDate: disabledDate,
-    onSelect: (v: string, _payload: any, closePopup = true) => {
-      model.value = v;
-      panelValue.value = v;
-      if (closePopup) showPopup.value = false;
-    },
-  })
-);
+const pickerContext = reactive({
+  type: "date" as const,
+  model,
+  panelValue,
+  setPanelValue: (v: string) => {
+    panelValue.value = v;
+  },
+  langs,
+  valueFormat,
+  showTime,
+  disableDate: disabledDate,
+  onSelect: (v: string, _payload: any, closePopup = true) => {
+    model.value = v;
+    panelValue.value = v;
+    if (closePopup) showPopup.value = false;
+  },
+});
+provide(dateInjectionKey, pickerContext as unknown as DatePickerContext);
 
 const handleClear = () => {
   model.value = "";

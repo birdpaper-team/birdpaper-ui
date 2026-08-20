@@ -8,6 +8,7 @@
   "main": "lib/index.cjs",
   "module": "es/index.mjs",
   "types": "types/index.d.ts",
+  "web-types": "web-types.json",
   "exports": {
     ".": {
       "types": "./types/index.d.ts",
@@ -15,7 +16,8 @@
       "require": "./lib/index.cjs"
     },
     "./global": {
-      "types": "./global.d.ts"
+      "types": "./global.d.ts",
+      "default": "./global.d.ts"
     },
     "./es": {
       "types": "./types/index.d.ts",
@@ -57,6 +59,7 @@
     "theme",
     "types",
     "global.d.ts",
+    "web-types.json",
     "README.md",
     "package.json"
   ],

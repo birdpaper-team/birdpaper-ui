@@ -32,6 +32,7 @@ import {
   Transition,
 } from "vue";
 import Schema from "async-validator";
+import type { Rule, Rules } from "async-validator";
 import { formItemProps } from "../props";
 import type { FormItemProps } from "../props";
 import { formContextKey, type FormContext, type FormItemContext } from "../types";
@@ -92,11 +93,14 @@ function updateError(error: string) {
   errorMessage.value = error;
 }
 
-function getRules() {
+function getRules(): Rule | Rules | undefined {
   if (props.rules) return props.rules;
   if (formContext?.rules && field.value) {
-    const fieldRules = formContext.rules[field.value];
-    if (fieldRules) return fieldRules;
+    const formRules = formContext.rules;
+    if (formRules && typeof formRules === "object" && !Array.isArray(formRules)) {
+      const fieldRules = (formRules as Rules)[field.value];
+      if (fieldRules) return fieldRules;
+    }
   }
   // Add required rule when required prop is set and no explicit rules
   if (props.required) {

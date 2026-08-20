@@ -121,28 +121,85 @@ export default defineConfig({
 });
 ```
 
-## TypeScript 支持
+## TypeScript 与 IDE
 
-Birdpaper UI 完整导出 TypeScript 类型声明。`exports` 配置已包含 `types` 条件，现代构建工具（Vite、Nuxt 等）会自动识别。
+全量 `app.use(BirdpaperUI)` 后，模板里的 `bp-*` 标签要获得类型提示、高亮和跳转到组件定义，需要让 Vue 语言服务加载全局组件类型。
 
-如需手动声明全局组件类型：
+### 1. 引用全局类型（必做）
+
+在项目已有的 `env.d.ts` / `src/vite-env.d.ts` 中加入：
 
 ```ts
-// env.d.ts
 /// <reference types="birdpaper-ui/global" />
 ```
 
-这样在模板中使用组件时可获得完整的类型提示。
+并确认该文件被 `tsconfig.json` 的 `include` 覆盖，例如：
+
+```json
+{
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "strict": true,
+    "jsx": "preserve"
+  },
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"]
+}
+```
+
+不要把 `compilerOptions.types` 只写成 `["vite/client"]` 却漏掉全局声明文件——一旦设置了 `types`，只有列表内的包会生效。若你已经在用 `types`，请改成：
+
+```json
+{
+  "compilerOptions": {
+    "types": ["vite/client", "birdpaper-ui/global"]
+  }
+}
+```
+
+### 2. 使用 Vue 官方语言服务
+
+VS Code / Cursor 请安装并启用 **Vue - Official**（Volar），禁用 Vetur。重启编辑器或执行 “Vue: Restart Vue Server”。
+
+JetBrains IDE 会读取包内的 `web-types.json`，组件可跳转到对应文档页。
+
+### 3. 按需引入时的跳转
+
+在 `<script setup>` 中显式导入后，标签会绑定到该组件的类型，`Go to Definition` 会进入 `birdpaper-ui` 的 `.d.ts`：
+
+```vue
+<script setup lang="ts">
+import { Button } from "birdpaper-ui";
+</script>
+
+<template>
+  <Button type="primary">按钮</Button>
+</template>
+```
+
+全局注册的 `<bp-button>` 依赖第 1 步的 `global` 引用；未引用时会被当成未知自定义标签，因此无高亮、无完整 props 提示、也无法跳转。
+
+### 4. 自定义前缀
+
+`global.d.ts` 按默认前缀 `Bp` / `bp-` 声明。若 `app.use` 改了 `prefix`，需要自行补充 `GlobalComponents`，或继续用默认前缀。
 
 ## 兼容性
 
-| 环境 | 支持 |
-|------|------|
-| 现代浏览器（Chrome 87+, Firefox 78+, Safari 14+, Edge 88+） | ✅ |
-| Node.js >= 18 | ✅ |
-| Vue 3.5+ | ✅ |
-| TypeScript 4.7+ | ✅ |
-| SSR (Nuxt 3) | ✅ |
+<script setup>
+const compatData = [
+  { env: '现代浏览器（Chrome 87+, Firefox 78+, Safari 14+, Edge 88+）', support: '✅' },
+  { env: 'Node.js >= 18', support: '✅' },
+  { env: 'Vue 3.5+', support: '✅' },
+  { env: 'TypeScript 4.7+', support: '✅' },
+  { env: 'SSR (Nuxt 3)', support: '✅' },
+]
+</script>
+
+<bp-table :data="compatData" row-key="env">
+  <template #columns>
+    <bp-table-column title="环境" data-index="env" />
+    <bp-table-column title="支持" data-index="support" />
+  </template>
+</bp-table>
 
 ## 下一步
 

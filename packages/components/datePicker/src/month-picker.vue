@@ -39,7 +39,7 @@ import { computed, provide, reactive, ref, toRefs, watch } from "vue";
 import { commonPickerProps, MonthPickerProps, monthPickerProps } from "./props";
 import { IconCalendarLine, IconCloseLine } from "birdpaper-icon";
 import pickerPanel from "./components/picker-panel.vue";
-import { dateInjectionKey } from "./types";
+import { dateInjectionKey, type DatePickerContext } from "./types";
 
 defineOptions({ name: "MonthPicker" });
 const { clsBlockName } = useNamespace("month-picker");
@@ -57,24 +57,22 @@ watch(model, (v) => {
 });
 
 const { langs, valueFormat } = toRefs(props);
-provide(
-  dateInjectionKey,
-  reactive({
-    type: "month" as const,
-    model,
-    panelValue,
-    setPanelValue: (v: string) => {
-      panelValue.value = v;
-    },
-    langs,
-    valueFormat,
-    onSelect: (v: string) => {
-      model.value = v;
-      panelValue.value = v;
-      showPopup.value = false;
-    },
-  })
-);
+const pickerContext = reactive({
+  type: "month" as const,
+  model,
+  panelValue,
+  setPanelValue: (v: string) => {
+    panelValue.value = v;
+  },
+  langs,
+  valueFormat,
+  onSelect: (v: string) => {
+    model.value = v;
+    panelValue.value = v;
+    showPopup.value = false;
+  },
+});
+provide(dateInjectionKey, pickerContext as unknown as DatePickerContext);
 
 const handleClear = () => {
   model.value = "";

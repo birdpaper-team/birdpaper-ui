@@ -98,8 +98,10 @@ const componentsList = computed<PageinationComponent[]>(() => {
       sizes: sizesComponents.value,
     };
 
-    list.map((name) => {
-      components.push({ name, component: layoutMap[name], ...componentMap[name] });
+    list.forEach((name) => {
+      const key = name as keyof typeof layoutMap;
+      if (!(key in layoutMap)) return;
+      components.push({ name, component: layoutMap[key], ...componentMap[key] });
     });
     return components;
   } catch (error) {
@@ -192,6 +194,8 @@ const totalComponents = computed(() => {
       value: props.total,
       tmpString: props.totalTmpString,
     },
+    eventName: "",
+    event: () => undefined,
   };
 });
 </script>

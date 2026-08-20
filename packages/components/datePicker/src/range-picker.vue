@@ -42,7 +42,7 @@ import { useNamespace } from "@birdpaper-ui/hooks";
 import BpTrigger from "@birdpaper-ui/components/trigger/index";
 import pickerPanel from "./components/picker-panel.vue";
 import { ref, provide, computed, watch, reactive, toRefs } from "vue";
-import { rangeInjectionKey } from "./types";
+import { rangeInjectionKey, type RangePickerContext } from "./types";
 import { RangePickerProps, rangePickerProps } from "./props";
 import dayjs from "dayjs";
 
@@ -81,20 +81,18 @@ const cls = computed<string[] | {}[]>(() => [
 
 const showPopup = ref<boolean>(false);
 const { langs, valueFormat, disabledDate } = toRefs(props);
-provide(
-  rangeInjectionKey,
-  reactive({
-    type: "range" as const,
-    model,
-    langs,
-    valueFormat,
-    disableDate: disabledDate,
-    onSelect: (v: string[], _payload: any, closePopup = true) => {
-      model.value = [v?.[0] || "", v?.[1] || ""];
-      if (closePopup) showPopup.value = false;
-    },
-  })
-);
+const pickerContext = reactive({
+  type: "range" as const,
+  model,
+  langs,
+  valueFormat,
+  disableDate: disabledDate,
+  onSelect: (v: string[], _payload: any, closePopup = true) => {
+    model.value = [v?.[0] || "", v?.[1] || ""];
+    if (closePopup) showPopup.value = false;
+  },
+});
+provide(rangeInjectionKey, pickerContext as unknown as RangePickerContext);
 
 const normalizeInput = (value: string) => {
   const trimmed = value.trim();

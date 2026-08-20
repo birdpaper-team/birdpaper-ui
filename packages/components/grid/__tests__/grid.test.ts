@@ -21,8 +21,8 @@ describe("Grid", () => {
   });
 
   it("Row align", () => {
-    const wrapper = mount(Row, { props: { align: "middle" } });
-    expect(wrapper.props("align")).toBe("middle");
+    const wrapper = mount(Row, { props: { align: "center" } });
+    expect(wrapper.props("align")).toBe("center");
   });
 
   it("Col create", () => {

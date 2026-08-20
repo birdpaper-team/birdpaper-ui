@@ -66,7 +66,7 @@ export async function buildModules() {
     plugins: [
       dts({
         root: bpUIRoot,
-        exclude: ["node_modules"],
+        exclude: ["node_modules", "**/__tests__/**", "**/*.test.ts"],
         outDir: join(distPkgRoot, "types"),
         insertTypesEntry: true,
       }),

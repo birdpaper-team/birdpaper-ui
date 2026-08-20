@@ -14,7 +14,7 @@ describe("Popconfirm", () => {
     expect(w.props("cancelText")).toBe("No");
   });
   it("type", () => {
-    ["info", "success", "warning", "error"].forEach(t => {
+    (["info", "success", "warning", "error"] as const).forEach(t => {
       expect(mount(Popconfirm, { props: { content: "?", type: t }, slots: { default: "<span>X</span>" } }).props("type")).toBe(t);
     });
   });

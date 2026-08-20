@@ -17,7 +17,7 @@ describe("Switch", () => {
   });
   it("size", () => {
     expect(mount(Switch, { props: { size: "mini" } }).classes()).toContain("bp-switch-mini");
-    expect(mount(Switch, { props: { size: "large" } }).classes()).toContain("bp-switch-large");
+    expect(mount(Switch, { props: { size: "small" } }).classes()).toContain("bp-switch-small");
   });
   it("checkText", () => {
     const w = mount(Switch, { props: { modelValue: true, checkText: "ON" } });

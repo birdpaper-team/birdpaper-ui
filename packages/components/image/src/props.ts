@@ -80,6 +80,6 @@ export const imageProps = {
     type: String as PropType<ImageLoadEffect>,
     default: 'fade',
   },
-} as const;
+};
 
 export type ImageProps = ExtractPropTypes<typeof imageProps>;

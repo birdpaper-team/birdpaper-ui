@@ -57,6 +57,7 @@ export function copyAndConcatFilesPlugin(): Plugin {
         [resolve(distPkgRoot, "theme/index.css"), resolve(distPkgRoot, "dist/index.css")],
         [resolve(projRoot, "packages/birdpaper-ui/package.json"), resolve(distPkgRoot, "package.json")],
         [resolve(projRoot, "global.d.ts"), resolve(distPkgRoot, "global.d.ts")],
+        [resolve(projRoot, "packages/birdpaper-ui/web-types.json"), resolve(distPkgRoot, "web-types.json")],
         [resolve(projRoot, "README.md"), resolve(distPkgRoot, "README.md")],
       ];
 

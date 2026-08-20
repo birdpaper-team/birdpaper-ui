@@ -89,7 +89,7 @@ function scrollToItem(itemOrValue: any, smooth = false) {
   const centerOffset = Math.max(0, (containerHeight.value - props.itemSize) / 2);
   containerRef.value.scrollTo({
     top: targetTop - centerOffset,
-    behavior: smooth ? "smooth" : "instant",
+    behavior: (smooth ? "smooth" : "auto") as ScrollBehavior,
   });
 }
 </script>

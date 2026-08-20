@@ -197,6 +197,7 @@ export async function copyAndConcatFiles() {
     [resolve(distPkgRoot, "theme/index.css"), resolve(distPkgRoot, "dist/index.css")],
     [resolve(projRoot, "packages/birdpaper-ui/package.json"), resolve(distPkgRoot, "package.json")],
     [resolve(projRoot, "global.d.ts"), resolve(distPkgRoot, "global.d.ts")],
+    [resolve(projRoot, "packages/birdpaper-ui/web-types.json"), resolve(distPkgRoot, "web-types.json")],
     [resolve(projRoot, "README.md"), resolve(distPkgRoot, "README.md")],
   ];
 
@@ -226,6 +227,20 @@ export async function copyAndConcatFiles() {
   } catch (error) {
     console.error("文件复制失败:", error);
   }
+
+  await patchTypesEntry();
+}
+
+async function patchTypesEntry() {
+  const typesIndex = resolve(distPkgRoot, "types/index.d.ts");
+  if (!existsSync(typesIndex)) return;
+
+  const ref = '/// <reference path="../global.d.ts" />\n';
+  const content = await readFile(typesIndex, "utf-8");
+  if (content.includes("global.d.ts")) return;
+
+  await writeFile(typesIndex, ref + content);
+  console.log("已将全局组件类型引用写入 types/index.d.ts");
 }
 
 // 递归复制文件夹

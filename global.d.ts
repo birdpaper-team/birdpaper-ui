@@ -7,6 +7,8 @@ declare module "vue" {
     BpCheckbox: typeof import("birdpaper-ui")["Checkbox"];
     BpCheckboxGroup: typeof import("birdpaper-ui")["CheckboxGroup"];
     BpCol: typeof import("birdpaper-ui")["Col"];
+    BpColorPicker: typeof import("birdpaper-ui")["ColorPicker"];
+    BpConfigProvider: typeof import("birdpaper-ui")["ConfigProvider"];
     BpDatePicker: typeof import("birdpaper-ui")["DatePicker"];
     BpDoption: typeof import("birdpaper-ui")["Doption"];
     BpDrawer: typeof import("birdpaper-ui")["Drawer"];
@@ -17,6 +19,7 @@ declare module "vue" {
     BpImage: typeof import("birdpaper-ui")["Image"];
     BpInput: typeof import("birdpaper-ui")["Input"];
     BpInputNumber: typeof import("birdpaper-ui")["InputNumber"];
+    BpInputTag: typeof import("birdpaper-ui")["InputTag"];
     BpLink: typeof import("birdpaper-ui")["Link"];
     BpMessage: typeof import("birdpaper-ui")["Message"];
     BpModal: typeof import("birdpaper-ui")["Modal"];
@@ -41,7 +44,6 @@ declare module "vue" {
     BpVerifyCode: typeof import("birdpaper-ui")["VerifyCode"];
     BpYearPicker: typeof import("birdpaper-ui")["YearPicker"];
     BpDateRangePicker: typeof import("birdpaper-ui")["DateRangePicker"];
-    BpColorPicker: typeof import("birdpaper-ui")["ColorPicker"];
     BpSteps: typeof import("birdpaper-ui")["Steps"];
     BpStep: typeof import("birdpaper-ui")["Step"];
     BpRate: typeof import("birdpaper-ui")["Rate"];

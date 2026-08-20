@@ -8,6 +8,7 @@ export const copyFiles = async () => {
     [join(distPkgRoot, "theme/index.css"), join(distPkgRoot, "/dist/index.css")],
     [join(bpUIRoot, "package.json"), join(distPkgRoot, "package.json")],
     [join(projRoot, "global.d.ts"), join(distPkgRoot, "global.d.ts")],
+    [join(bpUIRoot, "web-types.json"), join(distPkgRoot, "web-types.json")],
     [join(projRoot, "README.md"), join(distPkgRoot, "README.md")],
   ];
 

@@ -73,7 +73,7 @@ describe("Modal", () => {
     expect(mount(Modal, { props: { modelValue: true, isMethod: true } }).props("isMethod")).toBe(true);
   });
   it("type", () => {
-    ["info", "success", "warning", "error", "confirm"].forEach((t) => {
+    (["info", "success", "warning", "error", "confirm"] as const).forEach((t) => {
       expect(mount(Modal, { props: { modelValue: true, type: t } }).props("type")).toBe(t);
     });
   });

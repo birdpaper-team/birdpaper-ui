@@ -44,7 +44,7 @@ const labelCls = computed(() => [`${clsBlockName.value}-label`]);
 const handleInput = () => {
   if (props.disabled) return;
 
-  if (model.value !== props.value) {
+  if (props.value !== undefined && model.value !== props.value) {
     model.value = props.value;
     emits("change", model.value);
   }

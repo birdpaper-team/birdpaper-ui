@@ -17,7 +17,7 @@ export interface FormItemContext {
   validate: () => Promise<Values | boolean>;
   clearValidate: () => void;
   updateError: (error: string) => void;
-  getRules?: () => Rules | undefined;
+  getRules?: () => Rule | Rules | undefined;
 }
 
 export interface FormInstance {

@@ -80,8 +80,8 @@ const btnList = computed<{ type: "up" | "down"; disabled: boolean; component: Co
   { type: "down", disabled: isMin.value, component: IconArrowDownSLine },
 ]);
 
-const getStringValue = (val: number | "" = model.value): string => {
-  if (val === "" || Number.isNaN(Number(val))) return "";
+const getStringValue = (val: number | "" | undefined = model.value): string => {
+  if (val === "" || val === undefined || Number.isNaN(Number(val))) return "";
 
   const precision = mergePrecision.value;
   if (props.precision === 0 || precision > 0) {
@@ -112,7 +112,7 @@ const handleStep = (type: "up" | "down") => {
   if (props.hideButton || !props.step || props.disabled || props.readonly) return;
   inpRef.value?.focus();
 
-  const current = toNumber(model.value === "" ? stringValue.value : model.value, true);
+  const current = toNumber(model.value === "" || model.value === undefined ? stringValue.value : model.value, true);
   const delta = type === "up" ? props.step : -props.step;
   const next = commitNumber(current + delta);
 

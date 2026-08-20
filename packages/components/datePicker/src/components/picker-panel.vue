@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import { useNamespace } from "@birdpaper-ui/hooks";
-import { inject, PropType, ref } from "vue";
+import { inject, PropType, ref, type Component } from "vue";
 import dateTable from "./date-table.vue";
 import monthTable from "./month-table.vue";
 import yearTable from "./year-table.vue";
@@ -25,8 +25,8 @@ const props = defineProps({
   },
 });
 
-const currentTable = ref<string>(props.type);
-const tableMap = {
+const currentTable = ref<PanelType>(props.type);
+const tableMap: Record<PanelType, Component> = {
   date: dateTable,
   month: monthTable,
   year: yearTable,

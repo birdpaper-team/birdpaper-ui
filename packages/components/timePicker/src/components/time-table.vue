@@ -5,7 +5,7 @@
         <VirtualScroller
           list-class="time-col-scroller-list"
           list-tag="ul"
-          :ref="(el) => (columnRefs[index] = el)"
+          :ref="(el: unknown) => (columnRefs[index] = el)"
           :class="`${clsBlockName}-time-col`"
           :items
           :item-size="32"

@@ -12,15 +12,16 @@ const message = types.reduce((pre, value) => {
       config = { content: config as string } as MessageItem;
     }
 
+    const item = config as MessageItem;
     const _config: MessageItem = {
       type: value as MessageType,
       plain: false,
       position: "top",
-      content: "",
       duration: 3000,
       closeable: false,
-      ...(config as MessageItem),
-      id: (config as MessageItem).id,
+      ...item,
+      id: item.id,
+      content: item.content ?? "",
     };
 
     if (!msg) {

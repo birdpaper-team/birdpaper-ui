@@ -31,6 +31,8 @@ import BpTrigger from "@birdpaper-ui/components/trigger/index";
 import BpButton from "@birdpaper-ui/components/button";
 import { useNamespace } from "@birdpaper-ui/hooks";
 import { PopconfirmProps, popconfirmProps } from "./props";
+import type { PopconfirmType } from "./types";
+import type { ButtonStatus } from "@birdpaper-ui/components/button/src/types";
 import { IconCheckboxCircleFill, IconCloseCircleFill, IconErrorWarningFill, IconInformationFill } from "birdpaper-icon";
 import { ref } from "vue";
 
@@ -47,7 +49,7 @@ const iconType = {
   error: IconCloseCircleFill,
   warning: IconErrorWarningFill,
 };
-const btnStatus = {
+const btnStatus: Record<PopconfirmType, ButtonStatus> = {
   info: "primary",
   success: "success",
   error: "danger",
