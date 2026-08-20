@@ -14,15 +14,24 @@ Birdpaper UI 遵循 **简洁、一致、高效** 的设计哲学：
 
 Birdpaper UI 的设计体系包含以下核心部分：
 
-| 模块 | 说明                                           |
-| ---- | ---------------------------------------------- |
-| 色彩 | 功能色 + 中性色，支持浅色/深色双模式           |
-| 字体 | 统一的字体族、字号和字重规范                   |
-| 尺寸 | 4 级尺寸体系（mini / small / default / large） |
-| 圆角 | 与尺寸联动的圆角规范                           |
-| 阴影 | 分层级的阴影体系                               |
-| 动效 | 统一的过渡时间和缓动函数                       |
-| 层级 | 规范的 z-index 管理                            |
+<script setup>
+const systemData = [
+  { area: '色彩', desc: '功能色 + 中性色，支持浅色/深色双模式' },
+  { area: '字体', desc: '统一的字体族、字号和字重规范' },
+  { area: '尺寸', desc: '4 级尺寸体系（mini / small / default / large）' },
+  { area: '圆角', desc: '与尺寸联动的圆角规范' },
+  { area: '阴影', desc: '分层级的阴影体系' },
+  { area: '动效', desc: '统一的过渡时间和缓动函数' },
+  { area: '层级', desc: '规范的 z-index 管理' },
+]
+</script>
+
+<bp-table :data="systemData" row-key="area">
+  <template #columns>
+    <bp-table-column title="模块" data-index="area" />
+    <bp-table-column title="说明" data-index="desc" />
+  </template>
+</bp-table>
 
 ## 技术特性
 

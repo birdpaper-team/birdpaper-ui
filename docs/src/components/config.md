@@ -42,14 +42,39 @@ provideGlobalConfig({
 
 ## 配置项
 
-| 属性        | 类型            | 默认值       | 说明                                                                                                          |
-| ----------- | --------------- | ------------ | ------------------------------------------------------------------------------------------------------------- |
-| `prefix`    | `string`        | `"Bp"`       | 组件全局注册名称前缀。设为 `"My"` 后，`Button` 注册为 `<MyButton>`                                            |
-| `namespace` | `string`        | `"bp"`       | CSS 类名命名空间，影响所有组件的 BEM 类名前缀（如 `bp-button`）                                               |
-| `locale`    | `string`        | `"zh-CN"`    | 全局语言代码，影响 DatePicker、TimePicker、Pagination 等组件的内部文案                                        |
-| `size`      | `ComponentSize` | `"default"`  | 全局默认尺寸，影响 Input、Select、Button 等表单类组件。可选值：`"mini"` / `"small"` / `"default"` / `"large"` |
-| `zIndex`    | `number`        | `3000`       | 弹出层组件（Modal、Drawer、Tooltip、Message）的 z-index 基准值                                                |
-| `emptyText` | `string`        | `"暂无数据"` | Table、Select 等组件的空状态默认文案                                                                          |
+<script setup>
+const optionData = [
+  { prop: 'prefix', type: 'string', default: '"Bp"', desc: '组件全局注册名称前缀。设为 "My" 后，Button 注册为 <MyButton>' },
+  { prop: 'namespace', type: 'string', default: '"bp"', desc: 'CSS 类名命名空间，影响所有组件的 BEM 类名前缀（如 bp-button）' },
+  { prop: 'locale', type: 'string', default: '"zh-CN"', desc: '全局语言代码，影响 DatePicker、TimePicker、Pagination 等组件的内部文案' },
+  { prop: 'size', type: 'ComponentSize', default: '"default"', desc: '全局默认尺寸，影响 Input、Select、Button 等表单类组件。可选值：mini / small / default / large' },
+  { prop: 'zIndex', type: 'number', default: '3000', desc: '弹出层组件（Modal、Drawer、Tooltip、Message）的 z-index 基准值' },
+  { prop: 'emptyText', type: 'string', default: '"暂无数据"', desc: 'Table、Select 等组件的空状态默认文案' },
+]
+
+const sizeData = [
+  { value: 'mini', height: '22px', fontSize: '12px', use: '紧凑型表格内嵌、标签栏' },
+  { value: 'small', height: '28px', fontSize: '13px', use: '密度较高的表单、弹窗内' },
+  { value: 'default', height: '32px', fontSize: '14px', use: '通用场景（默认）' },
+  { value: 'large', height: '36px', fontSize: '14px', use: '突出展示、独立表单页' },
+]
+
+const zIndexData = [
+  { component: 'Modal', zIndex: 'zIndex' },
+  { component: 'Drawer', zIndex: 'zIndex + 1' },
+  { component: 'Tooltip', zIndex: 'zIndex' },
+  { component: 'Message', zIndex: 'zIndex + 3' },
+]
+</script>
+
+<bp-table :data="optionData" row-key="prop">
+  <template #columns>
+    <bp-table-column title="属性" data-index="prop" />
+    <bp-table-column title="类型" data-index="type" />
+    <bp-table-column title="默认值" data-index="default" />
+    <bp-table-column title="说明" data-index="desc" />
+  </template>
+</bp-table>
 
 ### ComponentSize 类型
 
@@ -57,12 +82,14 @@ provideGlobalConfig({
 type ComponentSize = "mini" | "small" | "default" | "large";
 ```
 
-| 值        | 高度 | 字号 | 适用场景               |
-| --------- | ---- | ---- | ---------------------- |
-| `mini`    | 22px | 12px | 紧凑型表格内嵌、标签栏 |
-| `small`   | 28px | 13px | 密度较高的表单、弹窗内 |
-| `default` | 32px | 14px | 通用场景（默认）       |
-| `large`   | 36px | 14px | 突出展示、独立表单页   |
+<bp-table :data="sizeData" row-key="value">
+  <template #columns>
+    <bp-table-column title="值" data-index="value" />
+    <bp-table-column title="高度" data-index="height" />
+    <bp-table-column title="字号" data-index="fontSize" />
+    <bp-table-column title="适用场景" data-index="use" />
+  </template>
+</bp-table>
 
 ## 配置优先级
 
@@ -127,12 +154,12 @@ app.use(BirdpaperUI, { zIndex: 3000 });
 
 各组件基于基准值的偏移：
 
-| 组件    | z-index 计算 |
-| ------- | ------------ |
-| Modal   | `zIndex`     |
-| Drawer  | `zIndex + 1` |
-| Tooltip | `zIndex`     |
-| Message | `zIndex + 3` |
+<bp-table :data="zIndexData" row-key="component">
+  <template #columns>
+    <bp-table-column title="组件" data-index="component" />
+    <bp-table-column title="z-index 计算" data-index="zIndex" />
+  </template>
+</bp-table>
 
 ## 在组件中消费全局配置
 

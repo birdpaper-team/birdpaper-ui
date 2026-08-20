@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="config-area">
-      <div class="title">配置项</div>
+      <div class="title">{{ configTitle }}</div>
       <div class="content">
         <slot name="config" />
       </div>
@@ -16,7 +16,13 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from "vue";
+import { useData } from "vitepress";
+
 const props = defineProps({
   title: { type: String },
 });
+
+const { lang } = useData();
+const configTitle = computed(() => (lang.value === "en" ? "Options" : "配置项"));
 </script>

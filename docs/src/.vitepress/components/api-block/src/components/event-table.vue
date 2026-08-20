@@ -10,7 +10,7 @@
       </bp-table-column>
       <bp-table-column :title="locales[lang].EVENT_TABLE.REMARK" data-index="remark" width="200">
         <template #cell="{ record }">
-          <span class="remark-inner">{{ record.remark }}</span>
+          <span class="remark-inner">{{ lang === "en" ? record.remarkEn || record.remark : record.remark }}</span>
         </template>
       </bp-table-column>
       <bp-table-column :title="locales[lang].EVENT_TABLE.PARAMS" data-index="params" width="200">

@@ -4,6 +4,7 @@
       <div
         :class="['docs-radio', 'select-none', { active: v.value === tab }]"
         v-for="v in tabList"
+        :key="v.value"
         @click="onSelect(v)"
       >
         <span>{{ v.label }}</span>
@@ -25,14 +26,26 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
+import { useData } from "vitepress";
 
 const name = "doc-tabs";
-const tabList = [
-  { label: "示例", value: "demo" },
-  { label: "API", value: "api" },
-  { label: "指南", value: "guide" },
-];
+const { lang } = useData();
+
+const tabList = computed(() =>
+  lang.value === "en"
+    ? [
+        { label: "Examples", value: "demo" },
+        { label: "API", value: "api" },
+        { label: "Guide", value: "guide" },
+      ]
+    : [
+        { label: "示例", value: "demo" },
+        { label: "API", value: "api" },
+        { label: "指南", value: "guide" },
+      ]
+);
+
 const tab = ref("demo");
 
 const onSelect = (v: { label: string; value: string }) => {

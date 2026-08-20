@@ -1,6 +1,5 @@
 <template>
   <div class="principle-page">
-    <!-- Cards -->
     <div class="principle-cards">
       <div
         v-for="(item, index) in principles"
@@ -13,27 +12,26 @@
         <div class="card-icon" :class="`card-icon--${index}`">
           <component :is="item.icon" size="28px" fill="#ffffff" />
         </div>
-        <div class="card-name">{{ item.name }}</div>
-        <div class="card-en font-quick">{{ item.en }}</div>
+        <div class="card-name">{{ isEn ? item.en : item.name }}</div>
+        <div class="card-en font-quick" v-if="!isEn">{{ item.en }}</div>
       </div>
     </div>
 
-    <!-- Content -->
     <div class="principle-content">
       <div class="content-bg" :class="`bg-${activeIndex}`"></div>
 
       <div class="content-header">
-        <div class="content-slogan">{{ principles[activeIndex].slogan }}</div>
-        <div class="content-desc">{{ principles[activeIndex].desc }}</div>
+        <div class="content-slogan">{{ active.slogan }}</div>
+        <div class="content-desc">{{ active.desc }}</div>
       </div>
 
       <div class="content-section">
         <div class="section-title">
           <span class="section-dot"></span>
-          核心要义
+          {{ isEn ? "Key Ideas" : "核心要义" }}
         </div>
         <div class="points-grid">
-          <div v-for="(p, i) in principles[activeIndex].points" :key="i" class="point-item">
+          <div v-for="(p, i) in active.points" :key="i" class="point-item">
             <div class="point-title">{{ p.title }}</div>
             <div class="point-text">{{ p.text }}</div>
           </div>
@@ -43,88 +41,53 @@
       <div class="content-section">
         <div class="section-title">
           <span class="section-dot"></span>
-          设计指南
+          {{ isEn ? "Design Guidelines" : "设计指南" }}
         </div>
         <ul class="guide-list">
-          <li v-for="(g, i) in principles[activeIndex].guides" :key="i">{{ g }}</li>
+          <li v-for="(g, i) in active.guides" :key="i">{{ g }}</li>
         </ul>
       </div>
     </div>
 
-    <!-- Relation -->
     <div class="principle-relation">
       <div class="relation-bg"></div>
-      <div class="relation-title">价值观的关系</div>
-      <div class="relation-desc">四个价值观并非独立存在，而是形成一个有机整体</div>
+      <div class="relation-title">{{ isEn ? "How the Values Relate" : "价值观的关系" }}</div>
+      <div class="relation-desc">
+        {{
+          isEn
+            ? "These four values are not isolated — they form one coherent system."
+            : "四个价值观并非独立存在，而是形成一个有机整体"
+        }}
+      </div>
       <div class="relation-chain">
-        <div class="chain-item">
-          <div class="chain-icon chain-icon--simple">
-            <component :is="principles[0].icon" size="20px" fill="#ffffff" />
+        <template v-for="(item, index) in relationItems" :key="item.key">
+          <div class="chain-item">
+            <div class="chain-icon" :class="item.iconClass">
+              <component :is="principles[index].icon" size="20px" fill="#ffffff" />
+            </div>
+            <span class="chain-label">{{ item.label }}</span>
+            <span class="chain-note">{{ item.note }}</span>
           </div>
-          <span class="chain-label">简约</span>
-          <span class="chain-note">是基础</span>
-        </div>
-        <div class="chain-arrow">
-          <svg width="40" height="12" viewBox="0 0 40 12" fill="none">
-            <path
-              d="M0 6H36M36 6L30 1M36 6L30 11"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-        <div class="chain-item">
-          <div class="chain-icon chain-icon--agree">
-            <component :is="principles[1].icon" size="20px" fill="#ffffff" />
+          <div class="chain-arrow" v-if="index < relationItems.length - 1">
+            <svg width="40" height="12" viewBox="0 0 40 12" fill="none">
+              <path
+                d="M0 6H36M36 6L30 1M36 6L30 11"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
           </div>
-          <span class="chain-label">一致</span>
-          <span class="chain-note">是保障</span>
-        </div>
-        <div class="chain-arrow">
-          <svg width="40" height="12" viewBox="0 0 40 12" fill="none">
-            <path
-              d="M0 6H36M36 6L30 1M36 6L30 11"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-        <div class="chain-item">
-          <div class="chain-icon chain-icon--natural">
-            <component :is="principles[2].icon" size="20px" fill="#ffffff" />
-          </div>
-          <span class="chain-label">自然</span>
-          <span class="chain-note">是目标</span>
-        </div>
-        <div class="chain-arrow">
-          <svg width="40" height="12" viewBox="0 0 40 12" fill="none">
-            <path
-              d="M0 6H36M36 6L30 1M36 6L30 11"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </div>
-        <div class="chain-item">
-          <div class="chain-icon chain-icon--grow">
-            <component :is="principles[3].icon" size="20px" fill="#ffffff" />
-          </div>
-          <span class="chain-label">生长</span>
-          <span class="chain-note">是动力</span>
-        </div>
+        </template>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, markRaw } from "vue";
+import { computed, ref, markRaw } from "vue";
+import { useData } from "vitepress";
 import { IconSubtractLine, IconCheckDoubleLine, IconLeafLine, IconSeedlingLine } from "birdpaper-icon";
 
 interface Point {
@@ -132,7 +95,7 @@ interface Point {
   text: string;
 }
 
-interface Principle {
+interface PrincipleLocale {
   name: string;
   en: string;
   slogan: string;
@@ -142,9 +105,11 @@ interface Principle {
   guides: string[];
 }
 
+const { lang } = useData();
+const isEn = computed(() => lang.value === "en");
 const activeIndex = ref(0);
 
-const principles: Principle[] = [
+const principlesZh: PrincipleLocale[] = [
   {
     name: "简约",
     en: "Simple",
@@ -165,7 +130,7 @@ const principles: Principle[] = [
   },
   {
     name: "一致",
-    en: "Agreed",
+    en: "Consistent",
     slogan: "统一语言，减少使用门槛",
     desc: "视觉和交互的一致性是人机交互的基础。在颜色、样式、交互流程中保持高度的一致性，遵循统一的设计标准，保持品牌认知的同时传达精确的系统逻辑，降低用户的上手成本。",
     icon: markRaw(IconCheckDoubleLine),
@@ -184,7 +149,7 @@ const principles: Principle[] = [
   },
   {
     name: "自然",
-    en: "Naturally",
+    en: "Natural",
     slogan: "好的设计让人忘记设计的存在。",
     desc: "追求元素之间的自然协调，对每个间距、尺寸、颜色都控制得恰到好处，减少视觉冲击和理解成本，让用户更容易养成使用习惯。界面的运转应符合用户的心理模型，而非强迫用户去适应系统。",
     icon: markRaw(IconLeafLine),
@@ -219,6 +184,101 @@ const principles: Principle[] = [
     ],
   },
 ];
+
+const principlesEn: PrincipleLocale[] = [
+  {
+    name: "简约",
+    en: "Simple",
+    slogan: "The best design is the one that does not over-design.",
+    desc: "Simplify ruthlessly. Remove noise, clarify interaction logic, and cut user effort while improving the experience. Every element should earn its place — if removing it does not hurt understanding or action, it should not exist.",
+    icon: markRaw(IconSubtractLine),
+    points: [
+      { title: "Less is more", text: "Every pixel should have a reason; avoid decorative noise." },
+      { title: "Focus attention", text: "Use hierarchy so the most important content is seen first." },
+      { title: "Reduce noise", text: "Keep paths clear and avoid flashy distractions." },
+    ],
+    guides: [
+      "Prefer whitespace over dividers to separate regions.",
+      "Keep interactive elements restrained — show only when needed.",
+      "Write concise copy; avoid redundant explanations.",
+      "Use visual weight to guide attention.",
+    ],
+  },
+  {
+    name: "一致",
+    en: "Consistent",
+    slogan: "One language, lower learning cost.",
+    desc: "Visual and interaction consistency is the foundation of usable interfaces. Keep colors, styles, and flows aligned to one design system so the brand stays recognizable and the product logic stays precise.",
+    icon: markRaw(IconCheckDoubleLine),
+    points: [
+      { title: "Visual unity", text: "Same capabilities look and behave the same across contexts." },
+      { title: "Predictable interaction", text: "What users learn in one place transfers elsewhere." },
+      { title: "Shared terminology", text: "The same concept uses the same name everywhere." },
+    ],
+    guides: [
+      "Color: one semantic maps to one color (e.g. danger = red).",
+      "Icons: reuse one family for related actions.",
+      "Spacing: follow the 4px grid and preset scales.",
+      "Feedback: same action types share the same response patterns.",
+      "Copy: keep tone consistent for buttons, titles, and tips.",
+    ],
+  },
+  {
+    name: "自然",
+    en: "Natural",
+    slogan: "Great design disappears into use.",
+    desc: "Seek natural harmony between spacing, size, and color. Reduce cognitive load so habits form easily. The interface should match users’ mental models instead of forcing them to adapt to the system.",
+    icon: markRaw(IconLeafLine),
+    points: [
+      { title: "Intuitive", text: "Actions and outcomes match expectations without extra learning." },
+      { title: "Harmonic rhythm", text: "Spacing, proportion, and motion form a natural visual beat." },
+      { title: "Smooth transitions", text: "State and page changes use appropriate motion — never abrupt." },
+    ],
+    guides: [
+      "Follow natural reading order (left-to-right, top-to-bottom).",
+      "Keep related elements close; separate unrelated ones.",
+      "Keep motion around 150–300ms with ease-out.",
+      "Anchor overlays spatially to their trigger.",
+    ],
+  },
+  {
+    name: "生长",
+    en: "Grow",
+    slogan: "Stay flexible, keep evolving, meet changing needs.",
+    desc: "Components stay alive by growing. Prefer expandable capabilities over a fixed, closed set of standards. Stay open and adaptable so complex business logic and interaction scenarios remain solvable.",
+    icon: markRaw(IconSeedlingLine),
+    points: [
+      { title: "Open extension", text: "Slots and options support product-side customization." },
+      { title: "Progressive enhancement", text: "Basics work out of the box; advanced features opt in." },
+      { title: "Forward compatible", text: "Protect existing usage across versions with smooth migration." },
+    ],
+    guides: [
+      "API design prefers convention over configuration, with escape hatches.",
+      "New features must not change defaults; gate them with props.",
+      "Provide clear migration paths and deprecation notes.",
+      "Design guidelines evolve with community feedback.",
+    ],
+  },
+];
+
+const principles = computed(() => (isEn.value ? principlesEn : principlesZh));
+const active = computed(() => principles.value[activeIndex.value]);
+
+const relationItems = computed(() =>
+  isEn.value
+    ? [
+        { key: "simple", label: "Simple", note: "foundation", iconClass: "chain-icon--simple" },
+        { key: "consistent", label: "Consistent", note: "guardrail", iconClass: "chain-icon--agree" },
+        { key: "natural", label: "Natural", note: "goal", iconClass: "chain-icon--natural" },
+        { key: "grow", label: "Grow", note: "momentum", iconClass: "chain-icon--grow" },
+      ]
+    : [
+        { key: "simple", label: "简约", note: "是基础", iconClass: "chain-icon--simple" },
+        { key: "consistent", label: "一致", note: "是保障", iconClass: "chain-icon--agree" },
+        { key: "natural", label: "自然", note: "是目标", iconClass: "chain-icon--natural" },
+        { key: "grow", label: "生长", note: "是动力", iconClass: "chain-icon--grow" },
+      ]
+);
 </script>
 
 <style lang="scss" scoped>

@@ -1,6 +1,52 @@
+const prefix = (link: string) => (link.startsWith("http") ? link : `/en${link}`);
+
 export const nav = [
-  { text: "Design", link: "/design/introduction", activeMatch: "/design/" },
-  { text: "指南", link: "/guide/easystart", activeMatch: "/guide/" },
-  { text: "组件", link: "/component/grid", activeMatch: "/component/" },
-  { text: "图标", link: "https://icon.birdpaper.design" },
+  {
+    text: "Design",
+    items: [
+      { text: "Introduction", link: prefix("/design/introduction") },
+      { text: "Color", link: prefix("/design/color") },
+      { text: "Principles", link: prefix("/design/principle") },
+      { text: "Style Guide", link: prefix("/design/guide") },
+      { text: "Dark Mode", link: prefix("/design/dark") },
+      {
+        text: "Resources",
+        items: [{ text: "Icons", link: "https://icon.birdpaper.design" }],
+      },
+    ],
+  },
+  {
+    text: "Develop",
+    items: [
+      {
+        items: [
+          { text: "Install", link: prefix("/develop/install") },
+          { text: "Quick Start", link: prefix("/develop/start") },
+          { text: "Theming", link: prefix("/develop/theme") },
+        ],
+      },
+      {
+        text: "Versions",
+        items: [
+          { text: "v2", link: "https://v2.birdpaper.design" },
+          { text: "Changelog", link: prefix("/develop/changelog") },
+        ],
+      },
+      {
+        text: "Guides",
+        items: [
+          { text: "Local Development", link: prefix("/develop/local-dev") },
+          { text: "Contributing", link: prefix("/develop/pr") },
+        ],
+      },
+    ],
+  },
+  {
+    text: "Components",
+    items: [
+      { text: "Catalog", link: prefix("/components/catalog") },
+      { text: "Config Provider", link: prefix("/components/config") },
+    ],
+  },
+  { text: "Sponsor", link: prefix("/donate") },
 ];

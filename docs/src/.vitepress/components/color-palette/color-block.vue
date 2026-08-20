@@ -2,8 +2,8 @@
   <div class="color-page">
     <!-- Copy mode -->
     <div class="color-toolbar">
-      <span class="color-toolbar__hint">点击色块复制 · 悬停查看完整色值</span>
-      <div class="color-mode" role="tablist" aria-label="复制格式">
+      <span class="color-toolbar__hint">{{ t.toolbarHint }}</span>
+      <div class="color-mode" role="tablist" :aria-label="t.copyFormatAria">
         <button
           type="button"
           role="tab"
@@ -20,7 +20,7 @@
           :class="{ active: copyMode === 'token' }"
           @click="copyMode = 'token'"
         >
-          CSS 变量
+          {{ t.cssVar }}
         </button>
       </div>
     </div>
@@ -28,8 +28,8 @@
     <!-- Functional colors -->
     <section class="color-section">
       <div class="color-section__head">
-        <h2>功能色</h2>
-        <p>品牌、成功、警告、危险四个语义色系，每系 10 阶，用于状态与反馈。</p>
+        <h2>{{ t.functionalTitle }}</h2>
+        <p>{{ t.functionalDesc }}</p>
       </div>
 
       <div class="family-tabs">
@@ -43,8 +43,8 @@
         >
           <span class="family-tab__swatch" :style="{ background: family.mainHex }"></span>
           <span class="family-tab__meta">
-            <strong>{{ family.name }}</strong>
-            <em>{{ family.en }}</em>
+            <strong>{{ familyDisplayName(family) }}</strong>
+            <em v-if="!isEn">{{ family.en }}</em>
           </span>
         </button>
       </div>
@@ -52,11 +52,11 @@
       <div class="family-panel glass-card">
         <div class="family-panel__hero" :style="{ background: active.mainHex }" @click="copyColor(active.mainHex, active.token)">
           <div class="family-panel__hero-text">
-            <span class="family-panel__name">{{ active.name }}</span>
+            <span class="family-panel__name">{{ familyDisplayName(active) }}</span>
             <span class="family-panel__token font-mono">{{ active.token }}</span>
             <span class="family-panel__hex font-mono">{{ formatHex(active.mainHex) }}</span>
           </div>
-          <span class="family-panel__badge">主色 · 6</span>
+          <span class="family-panel__badge">{{ t.mainBadge }}</span>
         </div>
 
         <div class="step-rail">
@@ -79,8 +79,8 @@
     <!-- Neutral -->
     <section class="color-section">
       <div class="color-section__head">
-        <h2>中性色</h2>
-        <p>文本、背景、边框与分割线的基础色阶，使用频率最高。</p>
+        <h2>{{ t.neutralTitle }}</h2>
+        <p>{{ t.neutralDesc }}</p>
       </div>
 
       <div class="gray-panel glass-card">
@@ -105,8 +105,8 @@
     <!-- Usage levels -->
     <section class="color-section">
       <div class="color-section__head">
-        <h2>色阶使用规范</h2>
-        <p>按用途划分层级，保证语义一致、可预期。</p>
+        <h2>{{ t.usageTitle }}</h2>
+        <p>{{ t.usageDesc }}</p>
       </div>
 
       <div class="usage-grid">
@@ -120,7 +120,7 @@
           </div>
           <div class="usage-card__index font-quick">{{ String(i + 1).padStart(2, "0") }}</div>
           <h3>{{ row.level }}</h3>
-          <p class="usage-card__step">色阶 {{ row.step }}</p>
+          <p class="usage-card__step">{{ t.stepLabel(row.step) }}</p>
           <p class="usage-card__desc">{{ row.usage }}</p>
         </div>
       </div>
@@ -129,8 +129,8 @@
     <!-- Code tips -->
     <section class="color-section">
       <div class="color-section__head">
-        <h2>变量用法</h2>
-        <p>优先使用语义变量；需要透明度时用 RGB 通道变量。</p>
+        <h2>{{ t.varsTitle }}</h2>
+        <p>{{ t.varsDesc }}</p>
       </div>
 
       <div class="code-grid">
@@ -141,10 +141,10 @@
             <span class="dot green"></span>
             <em>token.css</em>
           </div>
-          <pre><code><span class="tok-cmt">/* 基础用法 */</span>
+          <pre><code><span class="tok-cmt">{{ t.codeBasic }}</span>
 <span class="tok-prop">color</span>: <span class="tok-fn">var</span>(<span class="tok-var">--bp-primary-6</span>);
 
-<span class="tok-cmt">/* 带透明度 */</span>
+<span class="tok-cmt">{{ t.codeAlpha }}</span>
 <span class="tok-prop">background</span>: <span class="tok-fn">rgba</span>(<span class="tok-fn">var</span>(<span class="tok-var">--bp-primary-6-rgb</span>), <span class="tok-num">0.1</span>);</code></pre>
         </div>
 
@@ -155,16 +155,16 @@
             <span class="dot green"></span>
             <em>dark.css</em>
           </div>
-          <pre><code><span class="tok-cmt">/* 浅色模式 */</span>
+          <pre><code><span class="tok-cmt">{{ t.codeLight }}</span>
 <span class="tok-var">--bp-primary-6</span>: <span class="tok-str">#165dff</span>;
 
-<span class="tok-cmt">/* 深色模式（色阶方向反转） */</span>
+<span class="tok-cmt">{{ t.codeDark }}</span>
 <span class="tok-var">--bp-primary-dark-6</span>: <span class="tok-str">#3c7eff</span>;</code></pre>
         </div>
       </div>
 
       <p class="color-note">
-        深色模式变量带 <code>-dark-</code> 中缀；组件库会通过 CSS 变量自动适配，业务侧通常无需手动切换。
+        {{ t.darkTipBefore }}<code>-dark-</code>{{ t.darkTipAfter }}
       </p>
     </section>
   </div>
@@ -172,6 +172,7 @@
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
+import { useData } from "vitepress";
 import { Message } from "@birdpaper-ui/components";
 
 type CopyMode = "hex" | "token";
@@ -190,6 +191,67 @@ interface ColorFamily {
   token: string;
   steps: ColorStep[];
 }
+
+interface UsageLevel {
+  level: string;
+  step: string;
+  usage: string;
+  sampleSteps: number[];
+}
+
+const { lang } = useData();
+const isEn = computed(() => lang.value === "en");
+
+const t = computed(() => {
+  if (isEn.value) {
+    return {
+      toolbarHint: "Click a swatch to copy · Hover for the full value",
+      copyFormatAria: "Copy format",
+      cssVar: "CSS variable",
+      functionalTitle: "Functional colors",
+      functionalDesc:
+        "Brand, success, warning, and danger semantic families — 10 steps each — for status and feedback.",
+      mainBadge: "Main · 6",
+      neutralTitle: "Neutral colors",
+      neutralDesc: "Base steps for text, backgrounds, borders, and dividers — used most often.",
+      usageTitle: "Step usage guide",
+      usageDesc: "Levels by purpose for consistent, predictable semantics.",
+      stepLabel: (step: string) => `Steps ${step}`,
+      varsTitle: "Using variables",
+      varsDesc: "Prefer semantic variables; use RGB channel variables when you need opacity.",
+      codeBasic: "/* Basic usage */",
+      codeAlpha: "/* With opacity */",
+      codeLight: "/* Light mode */",
+      codeDark: "/* Dark mode (step direction reversed) */",
+      darkTipBefore: "Dark mode variables use a ",
+      darkTipAfter:
+        " infix; the component library adapts via CSS variables, so apps usually need no manual switch.",
+      copied: (text: string) => `Copied ${text}`,
+    };
+  }
+  return {
+    toolbarHint: "点击色块复制 · 悬停查看完整色值",
+    copyFormatAria: "复制格式",
+    cssVar: "CSS 变量",
+    functionalTitle: "功能色",
+    functionalDesc: "品牌、成功、警告、危险四个语义色系，每系 10 阶，用于状态与反馈。",
+    mainBadge: "主色 · 6",
+    neutralTitle: "中性色",
+    neutralDesc: "文本、背景、边框与分割线的基础色阶，使用频率最高。",
+    usageTitle: "色阶使用规范",
+    usageDesc: "按用途划分层级，保证语义一致、可预期。",
+    stepLabel: (step: string) => `色阶 ${step}`,
+    varsTitle: "变量用法",
+    varsDesc: "优先使用语义变量；需要透明度时用 RGB 通道变量。",
+    codeBasic: "/* 基础用法 */",
+    codeAlpha: "/* 带透明度 */",
+    codeLight: "/* 浅色模式 */",
+    codeDark: "/* 深色模式（色阶方向反转） */",
+    darkTipBefore: "深色模式变量带 ",
+    darkTipAfter: " 中缀；组件库会通过 CSS 变量自动适配，业务侧通常无需手动切换。",
+    copied: (text: string) => `已复制 ${text}`,
+  };
+});
 
 const copyMode = ref<CopyMode>("hex");
 const activeFamily = ref(0);
@@ -297,7 +359,7 @@ const grays: ColorStep[] = Array.from({ length: 11 }, (_, i) => {
   return { step: i, hex: hexes[i], token: `--bp-gray-${i}` };
 });
 
-const usageLevels = [
+const usageLevelsZh: UsageLevel[] = [
   { level: "浅底", step: "1 – 2", usage: "背景色、标签底色", sampleSteps: [1, 2] },
   { level: "边框", step: "3 – 4", usage: "边框、分割线", sampleSteps: [3, 4] },
   { level: "辅助", step: "5", usage: "hover 态、辅助元素", sampleSteps: [5] },
@@ -306,7 +368,20 @@ const usageLevels = [
   { level: "深色", step: "9 – 10", usage: "深色文本、深色背景", sampleSteps: [9, 10] },
 ];
 
+const usageLevelsEn: UsageLevel[] = [
+  { level: "Light base", step: "1 – 2", usage: "Backgrounds, tag fills", sampleSteps: [1, 2] },
+  { level: "Border", step: "3 – 4", usage: "Borders, dividers", sampleSteps: [3, 4] },
+  { level: "Assist", step: "5", usage: "Hover states, secondary elements", sampleSteps: [5] },
+  { level: "Main", step: "6", usage: "Primary icons, text, and buttons", sampleSteps: [6] },
+  { level: "Interactive", step: "7 – 8", usage: "Hover / active states", sampleSteps: [7, 8] },
+  { level: "Deep", step: "9 – 10", usage: "Dark text, dark backgrounds", sampleSteps: [9, 10] },
+];
+
+const usageLevels = computed(() => (isEn.value ? usageLevelsEn : usageLevelsZh));
+
 const active = computed(() => families[activeFamily.value]);
+
+const familyDisplayName = (family: ColorFamily) => (isEn.value ? family.en : family.name);
 
 const displayValue = (item: ColorStep) =>
   copyMode.value === "token" ? item.token : formatHex(item.hex);
@@ -325,7 +400,7 @@ const copyColor = async (hex: string, token: string) => {
     document.execCommand("copy");
     document.body.removeChild(input);
   }
-  Message.success({ content: `已复制 ${text}`, duration: 2000 });
+  Message.success({ content: t.value.copied(text), duration: 2000 });
 };
 </script>
 

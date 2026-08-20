@@ -23,16 +23,13 @@
 import sideBarCn from "../config/locales/zh-CN/sidebar";
 import sideBarEn from "../config/locales/en/sidebar";
 import { useData } from "vitepress";
-import { ref } from "vue";
+import { computed } from "vue";
 
 const clsBlockName = "catalog-index";
-const ctx = useData();
+const { lang } = useData();
 
-const list = ref<Record<string, any>>({});
-const init = () => {
-  const { lang } = ctx;
-  const data = lang.value === "zh-CN" ? sideBarCn["/components/"] : sideBarEn["/components/"];
-  list.value = data.slice(1);
-};
-init();
+const list = computed(() => {
+  const data = lang.value === "en" ? sideBarEn["/en/components/"] : sideBarCn["/components/"];
+  return data.slice(1);
+});
 </script>

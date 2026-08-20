@@ -8,6 +8,8 @@ export interface PropItem {
   name: string;
   /** 说明 */
   remark: string;
+  /** English remark (optional; falls back to remark) */
+  remarkEn?: string;
   /** 类型 */
   type: PropType[];
   /** 可选值，type 为 enum 时可用 */
@@ -26,6 +28,8 @@ export interface EventItem {
   name: string;
   /** 说明 */
   remark: string;
+  /** English remark (optional; falls back to remark) */
+  remarkEn?: string;
   /** 参数 */
   params?: string;
   /** 版本号 */
@@ -40,6 +44,8 @@ export interface MethodItem {
   name: string;
   /** 说明 */
   remark: string;
+  /** English remark (optional; falls back to remark) */
+  remarkEn?: string;
   /** 参数 */
   params?: string;
   /** 返回值 */
@@ -56,6 +62,8 @@ export interface SlotItem {
   name: string;
   /** 说明 */
   remark: string;
+  /** English remark (optional; falls back to remark) */
+  remarkEn?: string;
   /** 参数 */
   params?: string;
   /** 版本号 */
