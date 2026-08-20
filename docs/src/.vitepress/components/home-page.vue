@@ -74,7 +74,7 @@
           <div class="stage-float stage-float--picker glass">
             <div class="mock-picker">
               <div class="mock-picker__header">
-                <strong>{{ t.calendarMonth }}</strong>
+                <strong>{{ calendarMonth }}</strong>
                 <div class="mock-picker__navs">
                   <IconArrowLeftDoubleFill size="16" />
                   <IconArrowLeftSLine size="16" />
@@ -320,42 +320,39 @@ const localePath = (path: string) => {
   return `${prefix}${path}`;
 };
 
-/** Static August 2026 calendar (Sun-first), 19 selected */
-const calendarDays = [
-  { day: 26, muted: true },
-  { day: 27, muted: true },
-  { day: 28, muted: true },
-  { day: 29, muted: true },
-  { day: 30, muted: true },
-  { day: 31, muted: true },
-  { day: 1 },
-  { day: 2 },
-  { day: 3 },
-  { day: 4 },
-  { day: 5 },
-  { day: 6 },
-  { day: 7 },
-  { day: 8 },
-  { day: 9 },
-  { day: 10 },
-  { day: 11 },
-  { day: 12 },
-  { day: 13 },
-  { day: 14 },
-  { day: 15 },
-  { day: 16 },
-  { day: 17 },
-  { day: 18 },
-  { day: 19, today: true },
-  { day: 20 },
-  { day: 21 },
-  { day: 22 },
-  { day: 23 },
-  { day: 24 },
-  { day: 25 },
-  { day: 26 },
-  { day: 27 },
-  { day: 28 },
-  { day: 29 },
-];
+const EN_MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/** Build Sun-first month grid for the current system date */
+const buildCalendarDays = (now = new Date()) => {
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const today = now.getDate();
+  const firstWeekday = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const daysInPrev = new Date(year, month, 0).getDate();
+
+  const cells: Array<{ day: number; muted?: boolean; today?: boolean }> = [];
+
+  for (let i = firstWeekday - 1; i >= 0; i--) {
+    cells.push({ day: daysInPrev - i, muted: true });
+  }
+  for (let d = 1; d <= daysInMonth; d++) {
+    cells.push({ day: d, today: d === today });
+  }
+  const total = cells.length <= 35 ? 35 : 42;
+  let next = 1;
+  while (cells.length < total) {
+    cells.push({ day: next++, muted: true });
+  }
+  return cells;
+};
+
+const calendarDays = buildCalendarDays();
+
+const calendarMonth = computed(() => {
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  return lang.value === "en" ? `${year} ${EN_MONTHS[month]}` : `${year} ${month + 1}月`;
+});
 </script>

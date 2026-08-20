@@ -9,7 +9,6 @@ export type HomeLocale = {
   searchPlaceholder: string;
   messageSuccess: string;
   alertHint: string;
-  calendarMonth: string;
   calendarToday: string;
   weekdays: string[];
   principlesTitle: string;
@@ -67,7 +66,6 @@ export const homeLocales: Record<"zh-CN" | "en", HomeLocale> = {
     searchPlaceholder: "搜索关键词",
     messageSuccess: "操作成功",
     alertHint: "请完善必填项",
-    calendarMonth: "2026 8月",
     calendarToday: "今天",
     weekdays: ["日", "一", "二", "三", "四", "五", "六"],
     principlesTitle: "设计原则",
@@ -177,7 +175,6 @@ export const homeLocales: Record<"zh-CN" | "en", HomeLocale> = {
     searchPlaceholder: "Search keywords",
     messageSuccess: "Success",
     alertHint: "Complete required fields",
-    calendarMonth: "2026 Aug",
     calendarToday: "Today",
     weekdays: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
     principlesTitle: "Design principles",
