@@ -20,7 +20,7 @@ app.use(BirdpaperUI, {
   namespace: "bp", // CSS 命名空间
   locale: "zh-CN", // 语言
   size: "default", // 全局尺寸
-  zIndex: 2000, // 层级基准值
+  zIndex: 3000, // 层级基准值
   emptyText: "暂无数据", // 空状态文案
 });
 ```
@@ -48,7 +48,7 @@ provideGlobalConfig({
 | `namespace` | `string`        | `"bp"`       | CSS 类名命名空间，影响所有组件的 BEM 类名前缀（如 `bp-button`）                                               |
 | `locale`    | `string`        | `"zh-CN"`    | 全局语言代码，影响 DatePicker、TimePicker、Pagination 等组件的内部文案                                        |
 | `size`      | `ComponentSize` | `"default"`  | 全局默认尺寸，影响 Input、Select、Button 等表单类组件。可选值：`"mini"` / `"small"` / `"default"` / `"large"` |
-| `zIndex`    | `number`        | `2000`       | 弹出层组件（Modal、Drawer、Tooltip、Message）的 z-index 基准值                                                |
+| `zIndex`    | `number`        | `3000`       | 弹出层组件（Modal、Drawer、Tooltip、Message）的 z-index 基准值                                                |
 | `emptyText` | `string`        | `"暂无数据"` | Table、Select 等组件的空状态默认文案                                                                          |
 
 ### ComponentSize 类型
@@ -159,7 +159,7 @@ const config: ConfigProviderContext = {
   namespace: "bp",
   locale: "zh-CN",
   size: "default",
-  zIndex: 2000,
+  zIndex: 3000,
   emptyText: "暂无数据",
 };
 ```

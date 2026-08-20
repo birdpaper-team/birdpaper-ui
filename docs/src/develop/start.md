@@ -112,5 +112,5 @@ app.use(BirdpaperUI, { locale: "en" });
 
 - [组件目录](/components/catalog/) — 浏览所有可用组件
 - [全局配置](/components/config/) — 自定义前缀、尺寸、层级等
-- [定制主题](/develop/theme/) — 自定义颜色、字体、尺寸变量
+- [定制主题](/develop/theme/) — 用 CSS 变量自定义颜色、尺寸与深色模式
 - [更新日志](/develop/changelog/) — 查看版本更新记录

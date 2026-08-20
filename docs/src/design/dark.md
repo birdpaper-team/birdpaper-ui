@@ -6,7 +6,7 @@ Birdpaper UI 通过 CSS 变量实现深色模式，所有组件自动适配，�
 
 ## 实现原理
 
-深色模式通过在根元素添加 `.bp-dark` 类名切换。所有组件使用 CSS 变量引用颜色，变量值在浅色/深色模式下自动映射，组件代码无需任何修改。
+深色模式通过在根元素添加 `.dark` 类名切换。所有组件使用 CSS 变量引用颜色，变量值在浅色/深色模式下自动映射，组件代码无需任何修改。
 
 ```css
 /* 浅色模式 */
@@ -15,10 +15,10 @@ Birdpaper UI 通过 CSS 变量实现深色模式，所有组件自动适配，�
   --bp-gray-0: #ffffff;
 }
 
-/* 深色模式 */
-:root.bp-dark {
-  --bp-primary-dark-6: #3c7eff;
-  --bp-gray-dark-0: #141414;
+/* 深色模式：.dark 下会将语义变量映射到深色色板 */
+.dark {
+  --bp-primary-6: var(--bp-primary-dark-6); /* #3c7eff */
+  --bp-gray-0: var(--bp-gray-dark-0); /* #141414 */
 }
 ```
 
@@ -108,14 +108,14 @@ const adaptRuleData = [
 
 ### 切换深色模式
 
-通过在根元素添加 / 移除 `.bp-dark` 类名即可切换：
+通过在根元素添加 / 移除 `.dark` 类名即可切换：
 
 ```js
 // 添加深色类名
-document.documentElement.classList.add("bp-dark");
+document.documentElement.classList.add("dark");
 
 // 移除深色类名（切回浅色）
-document.documentElement.classList.remove("bp-dark");
+document.documentElement.classList.remove("dark");
 ```
 
 ### 切换状态持久化
@@ -125,14 +125,14 @@ document.documentElement.classList.remove("bp-dark");
 ```js
 // 切换时保存
 const toggleDark = () => {
-  const isDark = document.documentElement.classList.toggle("bp-dark");
+  const isDark = document.documentElement.classList.toggle("dark");
   localStorage.setItem("theme", isDark ? "dark" : "light");
 };
 
 // 页面加载时恢复
 const saved = localStorage.getItem("theme");
 if (saved === "dark") {
-  document.documentElement.classList.add("bp-dark");
+  document.documentElement.classList.add("dark");
 }
 ```
 
@@ -145,12 +145,12 @@ const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
 
 // 初始化时跟随系统
 if (prefersDark.matches) {
-  document.documentElement.classList.add("bp-dark");
+  document.documentElement.classList.add("dark");
 }
 
 // 监听系统偏好变化
 prefersDark.addEventListener("change", (e) => {
-  document.documentElement.classList.toggle("bp-dark", e.matches);
+  document.documentElement.classList.toggle("dark", e.matches);
 });
 ```
 
