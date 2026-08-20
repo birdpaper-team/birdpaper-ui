@@ -1,5 +1,6 @@
 import { ConfigProviderContext, provideGlobalConfig } from "@birdpaper-ui/components/config-provider";
 import type { App } from "vue";
+import { version } from "./package.json";
 
 export const installer = (components: any[] = []) => {
   const install = (app: App, options?: ConfigProviderContext) => {
@@ -15,8 +16,7 @@ export const installer = (components: any[] = []) => {
   };
 
   return {
-    // NOTE: Keep in sync with packages/birdpaper-ui/package.json version.
-    version: "3.0.0-alpha.47",
+    version,
     install,
   };
 };

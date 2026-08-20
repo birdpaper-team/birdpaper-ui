@@ -26,7 +26,7 @@
           <a class="btn btn--ghost" :href="localePath('/components/catalog')">{{ t.ctaBrowse }}</a>
         </div>
         <ul class="bp-home__meta">
-          <li>v{{ version }}</li>
+          <li v-if="version">v{{ version }}</li>
           <li>MIT License</li>
         </ul>
       </div>
@@ -290,8 +290,7 @@ import {
   IconSubtractLine,
 } from "birdpaper-icon";
 import { useData } from "vitepress";
-import { computed, markRaw, type Component } from "vue";
-import BirdpaperUI from "birdpaper-ui/index.ts";
+import { computed, markRaw, onMounted, ref, type Component } from "vue";
 import { homeLocales, type HomeLocale } from "./home-locales";
 
 const principleIcons: Component[] = [
@@ -309,7 +308,18 @@ const capabilityIcons: Record<string, Component> = {
 };
 
 const { lang } = useData();
-const version = BirdpaperUI.version;
+const version = ref("");
+
+onMounted(async () => {
+  try {
+    const res = await fetch("https://registry.npmjs.org/birdpaper-ui/latest");
+    if (!res.ok) return;
+    const data = (await res.json()) as { version?: string };
+    if (data.version) version.value = data.version;
+  } catch {
+    // keep empty when npm registry is unreachable
+  }
+});
 
 const t = computed<HomeLocale>(() =>
   lang.value === "en" ? homeLocales.en : homeLocales["zh-CN"],
