@@ -11,7 +11,6 @@ export default {
     { text: "安装", link: "/develop/install" },
     { text: "快速上手", link: "/develop/start" },
     { text: "定制主题", link: "/develop/theme" },
-    { text: "版本发布", link: "/develop/publish" },
     { text: "更新日志", link: "/develop/changelog" },
     { text: "本地开发", link: "/develop/local-dev" },
     { text: "参与贡献", link: "/develop/pr" },

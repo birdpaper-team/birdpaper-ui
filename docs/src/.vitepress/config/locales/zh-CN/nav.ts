@@ -27,7 +27,6 @@ export const nav = [
         text: "版本",
         items: [
           { text: "v2", link: "https://v2.birdpaper.design" },
-          { text: "版本发布", link: "/develop/publish" },
           { text: "更新日志", link: "/develop/changelog" },
         ],
       },

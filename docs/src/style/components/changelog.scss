@@ -1,0 +1,225 @@
+.bp-changelog-page .vp-doc {
+  --changelog-rail: 11px;
+  --changelog-gap: 24px;
+
+  position: relative;
+  max-width: 52em;
+  padding-left: calc(var(--changelog-rail) + var(--changelog-gap));
+  font-size: 13px;
+  line-height: 1.85;
+  letter-spacing: 0.02em;
+  color: var(--bp-gray-8);
+
+  /* continuous timeline line */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0.65em;
+    bottom: 0.65em;
+    left: 5px;
+    width: 1px;
+    background: rgba(var(--bp-gray-3-rgb), 0.9);
+  }
+
+  h2 {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin: 40px 0 14px;
+    padding: 0 0 12px;
+    border: none;
+    border-bottom: 1px solid rgba(var(--bp-gray-3-rgb), 0.55);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.4;
+    color: var(--bp-gray-10);
+  }
+
+  h2:first-of-type {
+    margin-top: 0;
+  }
+
+  /* timeline dot */
+  h2::before {
+    content: "";
+    position: absolute;
+    top: 0.45em;
+    left: calc(-1 * (var(--changelog-rail) + var(--changelog-gap)));
+    width: 11px;
+    height: 11px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background: var(--bp-gray-0);
+    border: 2px solid var(--bp-primary-6);
+    box-shadow: 0 0 0 3px rgba(var(--bp-primary-6-rgb), 0.12);
+    z-index: 1;
+  }
+
+  h2:first-of-type::before {
+    background: var(--bp-primary-6);
+    box-shadow: 0 0 0 4px rgba(var(--bp-primary-6-rgb), 0.16);
+  }
+
+  .changelog-version {
+    flex: 1;
+    min-width: 0;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    color: inherit;
+  }
+
+  .changelog-date {
+    flex-shrink: 0;
+    margin-left: auto;
+    font-size: 12px;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
+    color: var(--bp-gray-5);
+    line-height: 1.4;
+  }
+
+  /* keep anchor out of the space-between layout */
+  h2 .header-anchor {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  h3 {
+    margin: 22px 0 10px;
+    padding: 0;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    line-height: 1.55;
+    color: var(--bp-gray-9);
+  }
+
+  /* intro paragraph under version */
+  h2 + p {
+    margin: 0 0 18px;
+    font-size: 13px;
+    line-height: 1.9;
+    letter-spacing: 0.03em;
+    color: var(--bp-gray-6);
+  }
+
+  p {
+    margin: 0 0 14px;
+    font-size: 13px;
+    line-height: 1.9;
+    letter-spacing: 0.02em;
+    color: var(--bp-gray-6);
+  }
+
+  ul {
+    margin: 0 0 8px;
+    padding-left: 1.25em;
+  }
+
+  li {
+    margin: 0;
+    padding: 5px 0;
+    font-size: 13px;
+    line-height: 1.8;
+    letter-spacing: 0.02em;
+    color: var(--bp-gray-8);
+  }
+
+  li strong {
+    font-weight: 600;
+    color: var(--bp-gray-10);
+  }
+
+  a {
+    font-size: inherit;
+    letter-spacing: inherit;
+  }
+
+  code {
+    font-size: 12px;
+    letter-spacing: 0;
+    line-height: 1.5;
+    padding: 0.1em 0.35em;
+  }
+}
+
+.dark .bp-changelog-page .vp-doc {
+  color: var(--bp-gray-5);
+
+  &::before {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  h2 {
+    color: var(--bp-gray-1);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+
+  h2::before {
+    background: var(--vp-c-bg);
+    border-color: var(--bp-primary-5);
+    box-shadow: 0 0 0 3px rgba(var(--bp-primary-6-rgb), 0.2);
+  }
+
+  h2:first-of-type::before {
+    background: var(--bp-primary-5);
+  }
+
+  .changelog-date {
+    color: var(--bp-gray-4);
+  }
+
+  h3 {
+    color: var(--bp-gray-2);
+  }
+
+  h2 + p,
+  p {
+    color: var(--bp-gray-4);
+  }
+
+  li {
+    color: var(--bp-gray-3);
+  }
+
+  li strong {
+    color: var(--bp-gray-1);
+  }
+}
+
+@media (max-width: 640px) {
+  .bp-changelog-page .vp-doc {
+    --changelog-gap: 18px;
+    max-width: none;
+    line-height: 1.8;
+
+    h2 {
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      margin: 32px 0 12px;
+      padding-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .changelog-date {
+      width: 100%;
+      margin-left: 0;
+    }
+
+    h3 {
+      margin: 18px 0 8px;
+    }
+
+    li {
+      padding: 6px 0;
+    }
+  }
+}
