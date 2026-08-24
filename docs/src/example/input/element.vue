@@ -10,3 +10,7 @@
     </bp-input>
   </bp-space>
 </template>
+
+<script setup lang="ts">
+import { IconSearch2Line } from "birdpaper-icon";
+</script>

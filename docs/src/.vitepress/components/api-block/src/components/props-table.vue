@@ -45,6 +45,7 @@
 
 <script setup lang="ts">
 import { PropType } from "vue";
+import { IconInformationLine } from "birdpaper-icon";
 import { PropItem } from "../types";
 import { locales } from "../../../locales";
 

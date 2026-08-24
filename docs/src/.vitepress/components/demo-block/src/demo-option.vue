@@ -11,6 +11,8 @@
 </template>
 
 <script setup lang="ts">
+import { IconCodeLine, IconEditLine } from "birdpaper-icon";
+
 const model = defineModel<boolean>({ required: true });
 const props = defineProps({
   src: { type: String },

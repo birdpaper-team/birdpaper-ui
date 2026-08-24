@@ -7,5 +7,7 @@
 </template>
 
 <script setup lang="ts">
+import { IconUser3Line } from "birdpaper-icon";
+
 const sizeList = ["mini", "small", "default", "large"];
 </script>

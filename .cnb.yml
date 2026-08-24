@@ -61,4 +61,4 @@ $:
           commands: |
             coscli config set --secret_id ${TX_APP_SECRET_ID} --secret_key ${TX_APP_SECRET_KEY}
             coscli config add --init-skip=true -b birdpaper-ui-1251999712 -r ap-guangzhou
-            coscli cp ./docs/src/.vitepress/dist cos://birdpaper-ui-1251999712 -r
+            coscli cp ./docs/dist cos://birdpaper-ui-1251999712 -r

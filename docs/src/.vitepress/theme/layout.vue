@@ -13,12 +13,22 @@
 </template>
 
 <script setup lang="ts">
-import {
-  NolebaseEnhancedReadabilitiesMenu,
-  NolebaseEnhancedReadabilitiesScreenMenu,
-} from "@nolebase/vitepress-plugin-enhanced-readabilities/client";
+import { defineAsyncComponent } from "vue";
 import DefaultTheme from "vitepress/theme";
-import HomePage from "../components/home-page.vue";
 
-import "@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css";
+/** Lazy-load homepage so it stays out of the critical theme path. */
+const HomePage = defineAsyncComponent(() => import("../components/home-page.vue"));
+
+const loadNolebase = () =>
+  Promise.all([
+    import("@nolebase/vitepress-plugin-enhanced-readabilities/client"),
+    import("@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css"),
+  ]).then(([mod]) => mod);
+
+const NolebaseEnhancedReadabilitiesMenu = defineAsyncComponent(() =>
+  loadNolebase().then((m) => m.NolebaseEnhancedReadabilitiesMenu)
+);
+const NolebaseEnhancedReadabilitiesScreenMenu = defineAsyncComponent(() =>
+  loadNolebase().then((m) => m.NolebaseEnhancedReadabilitiesScreenMenu)
+);
 </script>

@@ -6,6 +6,9 @@ const config: import("vitepress").UserConfig = {
   ignoreDeadLinks: true,
   cleanUrls: true,
   appearance: true,
+  metaChunk: true,
+  /** Output to `docs/dist` (used by GitHub Pages / COS deploy). */
+  outDir: "../dist",
   cacheDir: ".vitepress/cache-local",
   locales,
   head,
@@ -25,6 +28,16 @@ const config: import("vitepress").UserConfig = {
     ],
     search: {
       provider: "local",
+      options: {
+        /**
+         * Keep search index lean: skip demo source fences and large code blocks
+         * that dominate page weight without helping keyword discovery.
+         */
+        _render(src, env, md) {
+          const withoutHeavyCode = src.replace(/```[\s\S]*?```/g, " ");
+          return md.render(withoutHeavyCode, env);
+        },
+      },
     },
   },
   markdown: {
@@ -32,6 +45,7 @@ const config: import("vitepress").UserConfig = {
       light: "min-light",
       dark: "min-dark",
     },
+    lineNumbers: false,
   },
 };
 
