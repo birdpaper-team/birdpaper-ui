@@ -1,13 +1,18 @@
 <p align="center">
   <a href="https://www.birdpaper.design">
-    <img class="logo" src="https://birdpaper-1251999712.cos.ap-guangzhou.myqcloud.com/design/assets/bp%2Bvue.png"/>
+    <img class="logo" src="https://birdpaper-1251999712.cos.ap-guangzhou.myqcloud.com/design/assets/bp%2Bvue.png" alt="Birdpaper UI" />
   </a>
 </p>
+
 <h1 align="center">Birdpaper UI</h1>
 
 <p align="center">
-  为企业中后台而生的 Vue 3 组件库<br/>
-  <em>A Vue 3 component library for enterprise admin interfaces</em>
+  A Vue 3 component library for enterprise admin interfaces
+</p>
+
+<p align="center">
+  <a href="./README.md">English</a> ·
+  <a href="./README.zh-CN.md">中文</a>
 </p>
 
 <p align="center">
@@ -19,37 +24,35 @@
 </p>
 
 <p align="center">
-  <a href="https://www.birdpaper.design">文档 Documentation</a> ·
-  <a href="https://www.birdpaper.design/en/">English Docs</a> ·
-  <a href="https://icon.birdpaper.design">图标 Icons</a> ·
+  <a href="https://www.birdpaper.design/en/">Documentation</a> ·
+  <a href="https://www.birdpaper.design">中文文档</a> ·
+  <a href="https://icon.birdpaper.design">Icons</a> ·
   <a href="https://www.npmjs.com/package/birdpaper-ui">npm</a>
 </p>
 
 ---
 
-## 简介 / Introduction
+## Introduction
 
-**Birdpaper UI**（v3 · Blue）面向企业级中后台场景，提供完整设计体系与高质量 Vue 3 组件。简洁、一致、高效，帮助你更快构建可信赖的产品界面。
+**Birdpaper UI** (v3 · Blue) is built for enterprise admin UIs. It ships a complete design system and high-quality Vue 3 components — simple, consistent, and efficient — so you can build trustworthy product interfaces faster.
 
-Birdpaper UI (v3 · Blue) is built for enterprise admin UIs: a complete design system and high-quality Vue 3 components — simple, consistent, and efficient.
+## Features
 
-## 特性 / Features
+- **Vue 3.5+** — Composition API with full TypeScript types
+- **Design system** — Reusable tokens for color, type, radius, shadow, motion, and elevation
+- **Dark mode** — Paired semantic colors + CSS variables; toggle with the `.dark` root class
+- **Theming** — Override `--bp-primary-*`, `--bp-size-*`, and related variables to match your brand
+- **On-demand import** — Tree-shakeable components and per-component styles
+- **Bilingual docs** — [English](https://www.birdpaper.design/en/) / [中文](https://www.birdpaper.design)
+- **Icons** — [birdpaper-icon](https://icon.birdpaper.design) (based on Remix Icon)
 
-- **Vue 3.5+** — Composition API、完整 TypeScript 类型
-- **设计体系** — 色彩、字号、圆角、阴影、动效与层级 Token 可复用
-- **深色模式** — 双套语义色 + CSS Variables，根节点切换 `.dark` 即可
-- **主题定制** — 覆盖 `--bp-primary-*`、`--bp-size-*` 等变量适配品牌
-- **按需引入** — 支持 Tree-shaking，可单独引入组件与对应样式
-- **中英双语文档** — [中文](https://www.birdpaper.design) / [English](https://www.birdpaper.design/en/)
-- **配套图标** — [birdpaper-icon](https://icon.birdpaper.design)（基于 Remix Icon）
-
-## 环境要求 / Requirements
+## Requirements
 
 - **Node.js** >= 18
 - **Vue** >= 3.5.0
-- 推荐使用 **pnpm**
+- **pnpm** recommended
 
-## 安装 / Install
+## Install
 
 ```bash
 # pnpm
@@ -62,7 +65,7 @@ npm install birdpaper-ui
 yarn add birdpaper-ui
 ```
 
-### 完整引入 / Full import
+### Full import
 
 ```ts
 // main.ts
@@ -82,7 +85,7 @@ app.mount("#app");
 </template>
 ```
 
-### 按需引入 / On-demand
+### On-demand import
 
 ```vue
 <script setup lang="ts">
@@ -95,78 +98,79 @@ import "birdpaper-ui/theme/button.css";
 </template>
 ```
 
-更多用法见文档：[安装](https://www.birdpaper.design/develop/install/) · [快速上手](https://www.birdpaper.design/develop/start/)
+See the docs for more: [Install](https://www.birdpaper.design/en/develop/install/) · [Quick Start](https://www.birdpaper.design/en/develop/start/)
 
-## 组件一览 / Components
+## Components
 
-| 分类 | 组件 |
-|------|------|
-| 通用 | Button、Icon、Link、Space、Grid |
-| 数据录入 | Form、Input、Textarea、InputNumber、InputTag、Select、Radio、Checkbox、Switch、Rate、DatePicker、TimePicker、ColorPicker、VerifyCode |
-| 数据展示 | Table、Tag、Badge、Avatar、Image、Statistic、Empty、Tooltip |
-| 导航 | Pagination、Dropdown、Steps |
-| 反馈 | Alert、Message、Modal、Drawer、Popconfirm、Spin、Trigger |
-| 其他 | ConfigProvider |
+| Category | Components |
+|----------|------------|
+| General | Button, Icon, Link, Space, Grid |
+| Data Entry | Form, Input, Textarea, InputNumber, InputTag, Select, Radio, Checkbox, Switch, Rate, DatePicker, TimePicker, ColorPicker, VerifyCode |
+| Data Display | Table, Tag, Badge, Avatar, Image, Statistic, Empty, Tooltip |
+| Navigation | Pagination, Dropdown, Steps |
+| Feedback | Alert, Message, Modal, Drawer, Popconfirm, Spin, Trigger |
+| Other | ConfigProvider |
 
-完整目录：[组件总览](https://www.birdpaper.design/components/catalog/)
+Full catalog: [Component Catalog](https://www.birdpaper.design/en/components/catalog/)
 
-## 本地开发 / Development
+## Development
 
-本仓库为 **pnpm monorepo**：
+This repo is a **pnpm monorepo**:
 
 ```text
 birdpaper-ui/
 ├── packages/
-│   ├── birdpaper-ui/     # 发布包入口
-│   ├── components/       # 组件源码
-│   ├── theme/            # 样式与设计 Token
-│   └── hooks/            # 公共 hooks
-├── docs/                 # VitePress 文档站
-└── scripts/              # 构建脚本
+│   ├── birdpaper-ui/     # Published package entry
+│   ├── components/       # Component source
+│   ├── theme/            # Styles and design tokens
+│   └── hooks/            # Shared hooks
+├── docs/                 # VitePress documentation site
+└── scripts/              # Build scripts
 ```
 
 ```bash
-# 安装依赖
+# Install dependencies
 pnpm install
 
-# 启动文档开发服务（默认 http://localhost:7070）
+# Start the docs dev server (default http://localhost:7070)
 pnpm docs:dev
 
-# 构建组件库
+# Build the component library
 pnpm build
 
-# 构建文档
+# Build the docs
 pnpm docs:build
 
-# 预览文档产物
+# Preview the docs build
 pnpm docs:preview
 
-# 单元测试
+# Unit tests
 pnpm test
 ```
 
-贡献指南：[参与贡献](https://www.birdpaper.design/develop/pr/) · [本地开发](https://www.birdpaper.design/develop/local-dev/)
+Contributing guides: [Contributing](https://www.birdpaper.design/en/develop/pr/) · [Local Development](https://www.birdpaper.design/en/develop/local-dev/)
 
-提交 PR 前请先同步默认分支并新建功能分支：
+Before opening a PR, sync the default branch and create a feature branch:
 
 ```bash
 git pull
 git checkout -b feat/your-topic
 ```
 
-## 浏览器支持 / Browser Support
+## Browser Support
 
-支持现代浏览器与最新两个版本的 Chromium / Firefox / Safari / Edge。不支持 IE。
+Modern browsers and the latest two versions of Chromium, Firefox, Safari, and Edge. IE is not supported.
 
-## 链接 / Links
+## Links
 
 | | |
 |---|---|
-| 官网文档 | https://www.birdpaper.design |
-| English Docs | https://www.birdpaper.design/en/ |
+| Documentation | https://www.birdpaper.design/en/ |
+| 中文文档 | https://www.birdpaper.design |
 | npm | https://www.npmjs.com/package/birdpaper-ui |
-| 图标库 | https://icon.birdpaper.design |
-| 更新日志 | https://www.birdpaper.design/develop/changelog/ |
+| Icons | https://icon.birdpaper.design |
+| Changelog | https://www.birdpaper.design/en/develop/changelog/ |
+| v2 Docs | https://v2.birdpaper.design |
 
 ## License
 
