@@ -1,0 +1,19 @@
+branch:
+  - reg: "main"
+    buttons:
+      - name: npm publish
+        description: 发布到 npm 仓库
+        event: web_trigger_one
+        inputs:
+          version:
+            name: 版本号
+            description: 输入版本号
+            required: true
+            type: input
+            default: 3.0.0
+
+  - reg: "main"
+    buttons:
+      - name: Docs publish
+        description: 发布文档
+        event: web_trigger_two

@@ -1,5 +1,6 @@
 $:
-  # tag push 时触发
+  # tag push 时触发，发布最新到预发布包
+  # https://cnb.cool/birdpaper-design/birdpaper-ui-preview/-/registries/birdpaper-ui
   tag_push:
     - docker:
         image: node:18
@@ -21,3 +22,43 @@ $:
             registry: https://npm.cnb.cool/birdpaper-design/birdpaper-ui-preview/-/packages/
             folder: ./dist/birdpaper-ui
             fail_on_version_conflict: true
+  web_trigger_one: # 发布到 npm 仓库
+    - docker:
+        image: node:18
+      stages:
+        - name: show version
+          script: node -v
+        - name: install
+          script: npm install -g pnpm && pnpm install --no-frozen-lockfile --verbose
+        - name: build
+          script: pnpm run build
+        - name: update version
+          script: cd ./dist/birdpaper-ui && npm version $version --no-git-tag-version
+        - name: npm publish
+          image: tencentcom/npm
+          imports: https://cnb.cool/birdpaper-design/bp-env/-/blob/main/npm.yml
+          settings:
+            username: $NPM_USER
+            token: $NPM_TOKEN
+            email: $NPM_EMAIL
+            folder: ./dist/birdpaper-ui
+            fail_on_version_conflict: true
+  web_trigger_two: # 发布文档
+    - stages:
+        - name: 安装与构建
+          jobs:
+            - name: execute-pnpm-command
+              image: node:22.13
+              script:
+                - npm install -g pnpm
+                - pnpm config set store-dir /lib/pnpm
+                - pnpm --version
+                - pnpm install --no-frozen-lockfile --verbose
+                - pnpm run docs:build
+        - name: 上传指定文件夹到COS
+          image: tencentcom/coscli
+          imports: https://cnb.cool/birdpaper-design/bp-env/-/blob/main/envs.yml
+          commands: |
+            coscli config set --secret_id ${TX_APP_SECRET_ID} --secret_key ${TX_APP_SECRET_KEY}
+            coscli config add --init-skip=true -b birdpaper-ui-1251999712 -r ap-guangzhou
+            coscli cp ./docs/src/.vitepress/dist cos://birdpaper-ui-1251999712 -r
