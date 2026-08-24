@@ -402,27 +402,51 @@ html.dark .VPNavBar.home {
   transform: translateY(-50%);
 }
 
+.bp-home__meta a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.bp-home__meta a:hover {
+  color: var(--home-brand);
+}
+
 /* Stage / product preview */
 .bp-home__stage {
   position: relative;
-  min-height: 440px;
   padding: 4px 0 8px;
   overflow: visible;
   animation: rise 1s var(--home-ease) 0.12s both;
+  container-type: inline-size;
+  --stage-width: 520px;
+  --stage-height: 430px;
+  --stage-scale: min(1, 100cqw / var(--stage-width));
+  display: flex;
+  justify-content: flex-end;
+}
+
+.stage-scaler {
+  position: relative;
+  width: calc(var(--stage-width) * var(--stage-scale));
+  height: calc(var(--stage-height) * var(--stage-scale));
+  flex-shrink: 0;
 }
 
 .stage-cluster {
-  position: relative;
-  width: min(100%, 520px);
-  height: 430px;
-  margin-left: auto;
-  transform: perspective(1800px) rotateY(-5deg) rotateX(2deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--stage-width);
+  height: var(--stage-height);
+  transform: perspective(1800px) rotateY(-5deg) rotateX(2deg) scale(var(--stage-scale));
+  transform-origin: top left;
   transform-style: preserve-3d;
   transition: transform 0.7s var(--home-ease);
 }
 
 .bp-home__stage:hover .stage-cluster {
-  transform: perspective(1800px) rotateY(-2deg) rotateX(1deg) translateY(-6px);
+  transform: perspective(1800px) rotateY(-2deg) rotateX(1deg) scale(var(--stage-scale)) translateY(-6px);
 }
 
 .stage-cluster .glass {
@@ -1253,8 +1277,8 @@ html.dark .VPNavBar.home {
   color: var(--home-faint);
 }
 
-/* Responsive */
-@media (max-width: 980px) {
+/* Responsive — stage keeps desktop composition; only scale to fit */
+@media (max-width: 1080px) {
   .bp-home__hero {
     grid-template-columns: 1fr;
     height: auto;
@@ -1263,39 +1287,16 @@ html.dark .VPNavBar.home {
   }
 
   .bp-home__stage {
-    min-height: 400px;
-    display: flex;
     justify-content: center;
     padding: 0;
   }
 
   .stage-cluster {
-    margin: 0 auto;
-    transform: none;
-    height: 400px;
-    width: min(100%, 480px);
+    transform: scale(var(--stage-scale));
   }
 
   .bp-home__stage:hover .stage-cluster {
-    transform: translateY(-4px);
-  }
-
-  .stage-panel--main {
-    width: min(280px, 72%);
-    left: 16px;
-    top: 64px;
-  }
-
-  .stage-float--picker {
-    left: auto;
-    right: 0;
-    top: 4px;
-    width: min(210px, 52%);
-  }
-
-  .stage-float--message {
-    top: auto;
-    bottom: 16px;
+    transform: scale(var(--stage-scale)) translateY(-4px);
   }
 
   .principle-grid,

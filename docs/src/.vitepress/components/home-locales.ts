@@ -32,6 +32,7 @@ export type HomeLocale = {
   footerQuickStart: string;
   footerGuide: string;
   footerChangelog: string;
+  author: string;
   principles: Array<{
     title: string;
     en: string;
@@ -87,6 +88,7 @@ export const homeLocales: Record<"zh-CN" | "en", HomeLocale> = {
     footerQuickStart: "快速上手",
     footerGuide: "样式指南",
     footerChangelog: "更新日志",
+    author: "Author by Sam",
     principles: [
       {
         title: "简约",
@@ -194,6 +196,7 @@ export const homeLocales: Record<"zh-CN" | "en", HomeLocale> = {
     footerQuickStart: "Quick start",
     footerGuide: "Style guide",
     footerChangelog: "Changelog",
+    author: "Author by Sam",
     principles: [
       {
         title: "Simple",

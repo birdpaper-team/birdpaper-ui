@@ -28,11 +28,15 @@
         <ul class="bp-home__meta">
           <li v-if="version">v{{ version }}</li>
           <li>MIT License</li>
+          <li>
+            <a href="https://moya.plus" target="_blank" rel="noopener noreferrer">{{ t.author }}</a>
+          </li>
         </ul>
       </div>
 
       <div class="bp-home__stage" :aria-label="t.stageAria">
-        <div class="stage-cluster">
+        <div class="stage-scaler">
+          <div class="stage-cluster">
           <div class="stage-panel stage-panel--main glass">
             <div class="stage-panel__bar">
               <span></span><span></span><span></span>
@@ -118,6 +122,7 @@
               <IconCheckboxCircleFill size="18" fill="#00b42a" />
               <span>{{ t.messageSuccess }}</span>
             </div>
+          </div>
           </div>
         </div>
       </div>
