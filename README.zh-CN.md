@@ -170,7 +170,6 @@ git checkout -b feat/your-topic
 | npm | https://www.npmjs.com/package/birdpaper-ui |
 | 图标库 | https://icon.birdpaper.design |
 | 更新日志 | https://www.birdpaper.design/develop/changelog/ |
-| v2 文档 | https://v2.birdpaper.design |
 
 ## License
 

@@ -21,12 +21,6 @@ export const nav = [
           { text: "安装", link: "/develop/install" },
           { text: "快速上手", link: "/develop/start" },
           { text: "定制主题", link: "/develop/theme" },
-        ],
-      },
-      {
-        text: "版本",
-        items: [
-          { text: "v2", link: "https://v2.birdpaper.design" },
           { text: "更新日志", link: "/develop/changelog" },
         ],
       },

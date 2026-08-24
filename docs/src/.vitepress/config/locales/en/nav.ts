@@ -23,12 +23,6 @@ export const nav = [
           { text: "Install", link: prefix("/develop/install") },
           { text: "Quick Start", link: prefix("/develop/start") },
           { text: "Theming", link: prefix("/develop/theme") },
-        ],
-      },
-      {
-        text: "Versions",
-        items: [
-          { text: "v2", link: "https://v2.birdpaper.design" },
           { text: "Changelog", link: prefix("/develop/changelog") },
         ],
       },

@@ -170,7 +170,6 @@ Modern browsers and the latest two versions of Chromium, Firefox, Safari, and Ed
 | npm | https://www.npmjs.com/package/birdpaper-ui |
 | Icons | https://icon.birdpaper.design |
 | Changelog | https://www.birdpaper.design/en/develop/changelog/ |
-| v2 Docs | https://v2.birdpaper.design |
 
 ## License
 
