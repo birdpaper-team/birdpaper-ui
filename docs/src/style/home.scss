@@ -304,7 +304,7 @@ html.dark .VPNavBar.home {
 }
 
 .bp-home__headline {
-  margin: 18px 0 0;
+  margin: 22px 0 0;
   font-size: clamp(22px, 2.6vw, 32px);
   font-weight: 600;
   letter-spacing: -0.02em;
@@ -312,10 +312,10 @@ html.dark .VPNavBar.home {
 }
 
 .bp-home__lead {
-  margin: 16px 0 0;
+  margin: 24px 0 0;
   max-width: 34em;
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--home-muted);
 }
 
@@ -848,9 +848,10 @@ html.dark .VPNavBar.home {
 }
 
 .section-head p {
-  margin: 10px 0 0;
+  margin: 24px 0 0;
   color: var(--home-muted);
   font-size: 15px;
+  line-height: 1.75;
 }
 
 .principle-grid {
@@ -870,7 +871,7 @@ html.dark .VPNavBar.home {
   animation-delay: var(--delay);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .principle:hover {
@@ -922,10 +923,10 @@ html.dark .VPNavBar.home {
 }
 
 .principle__slogan {
-  margin: 0;
+  margin: 6px 0 0;
   font-size: 13px;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--home-muted);
 }
 
@@ -996,7 +997,7 @@ html.dark .VPNavBar.home {
 }
 
 .cap-item h3 {
-  margin: 0 0 4px;
+  margin: 0 0 10px;
   font-size: 16px;
 }
 
@@ -1004,7 +1005,7 @@ html.dark .VPNavBar.home {
   margin: 0;
   font-size: 13px;
   color: var(--home-muted);
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .cap-item__arrow {
@@ -1044,18 +1045,14 @@ html.dark .VPNavBar.home {
 }
 
 .code-copy > p {
-  margin: 12px 0 0;
+  margin: 24px 0 0;
   color: var(--home-muted);
-  line-height: 1.7;
+  line-height: 1.75;
   max-width: 36em;
 }
 
-.code-steps {
-  margin: 24px 0 28px;
-  padding-left: 18px;
-  color: var(--home-muted);
-  line-height: 1.9;
-  text-align: left;
+.code-copy .btn {
+  margin-top: 36px;
 }
 
 .code-window {
@@ -1133,7 +1130,7 @@ html.dark .VPNavBar.home {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   padding: 18px 18px 40px;
   border-radius: 16px;
   text-decoration: none;
@@ -1161,10 +1158,10 @@ html.dark .VPNavBar.home {
 }
 
 .explore-card p {
-  margin: 0;
+  margin: 6px 0 0;
   color: var(--home-muted);
   font-size: 13px;
-  line-height: 1.55;
+  line-height: 1.65;
 }
 
 .explore-card__cta {
@@ -1204,7 +1201,7 @@ html.dark .VPNavBar.home {
   font-family: var(--font-quick), Quicksand, sans-serif;
   font-size: 20px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 }
 
 .footer-brand p {

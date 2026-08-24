@@ -16,8 +16,6 @@ export type HomeLocale = {
   capsLead: string;
   codeTitle: string;
   codeLead: string;
-  codeStepStyle: string;
-  codeStepBuild: string;
   codeCta: string;
   codeOpenDialog: string;
   codeConfirmTitle: string;
@@ -73,8 +71,6 @@ export const homeLocales: Record<"zh-CN" | "en", HomeLocale> = {
     capsLead: "从设计令牌到组件实现，一条可落地的产品链路",
     codeTitle: "几行代码，即刻上手",
     codeLead: "统一的 API 与完整类型提示，降低学习与协作成本。",
-    codeStepStyle: "引入样式与组件",
-    codeStepBuild: "开始构建界面",
     codeCta: "查看文档",
     codeOpenDialog: "打开对话框",
     codeConfirmTitle: "确认操作",
@@ -182,8 +178,6 @@ export const homeLocales: Record<"zh-CN" | "en", HomeLocale> = {
     capsLead: "From design tokens to components — a practical product delivery path",
     codeTitle: "A few lines to get started",
     codeLead: "Unified APIs and full type hints reduce learning and collaboration cost.",
-    codeStepStyle: "Import styles and components",
-    codeStepBuild: "Start building your UI",
     codeCta: "View docs",
     codeOpenDialog: "Open dialog",
     codeConfirmTitle: "Confirm action",

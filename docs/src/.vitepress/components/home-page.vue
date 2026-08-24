@@ -178,10 +178,6 @@
         <div class="code-copy">
           <h2>{{ t.codeTitle }}</h2>
           <p>{{ t.codeLead }}</p>
-          <ol class="code-steps">
-            <li>{{ t.codeStepStyle }}</li>
-            <li>{{ t.codeStepBuild }}</li>
-          </ol>
           <a class="btn btn--primary" :href="localePath('/develop/start')">
             <span>{{ t.codeCta }}</span>
             <IconArrowRightLine size="16" fill="#fff" />
