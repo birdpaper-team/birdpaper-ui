@@ -9,16 +9,15 @@ Thanks for your interest in Birdpaper UI. Issues, discussions, and Pull Requests
 - **Improve docs**: Typos, examples, translations, and outdated notes are all useful
 - **Contribute code**: Bug fixes, tests, new components, or enhancements
 
-Repository: [birdpaper-team/birdpaper-ui](https://github.com/birdpaper-team/birdpaper-ui) (main development branch: **`v3`**).
+Repository: [birdpaper-team/birdpaper-ui](https://github.com/birdpaper-team/birdpaper-ui).
 
 ## Before You Start
 
 1. Search existing Issues / PRs to avoid duplicate work
 2. For large changes (new components, breaking changes), open an Issue first
-3. Fork the repo and branch from the latest `v3`:
+3. Fork the repo and create a feature branch from the latest default branch:
 
 ```bash
-git checkout v3
 git pull
 git checkout -b feat/your-topic
 ```
@@ -90,7 +89,7 @@ For breaking changes, include `BREAKING CHANGE:` in the body, or discuss migrati
 ## Pull Requests
 
 1. Push your branch to your fork
-2. Open a Pull Request against **`v3`**
+2. Open a Pull Request against the repository **default branch**
 3. Prefer a description that includes:
    - **Summary**: What problem this solves
    - **Related Issue**: e.g. `Fixes #123`
@@ -119,7 +118,7 @@ Harassment, personal attacks, or inappropriate content are not acceptable. Maint
 
 ## License
 
-Contributions are licensed under the repository [MIT License](https://github.com/birdpaper-team/birdpaper-ui/blob/v3/LICENSE) by default. Do not contribute if you cannot accept that.
+Contributions are licensed under the repository [MIT License](https://github.com/birdpaper-team/birdpaper-ui/blob/HEAD/LICENSE) by default. Do not contribute if you cannot accept that.
 
 ## Need Help?
 

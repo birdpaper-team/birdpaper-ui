@@ -19,7 +19,6 @@ corepack prepare pnpm@8.10.4 --activate
 ```bash
 git clone https://github.com/birdpaper-team/birdpaper-ui.git
 cd birdpaper-ui
-git checkout v3   # 当前主开发分支为 v3
 pnpm install
 ```
 

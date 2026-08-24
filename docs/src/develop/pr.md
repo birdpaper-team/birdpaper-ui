@@ -9,16 +9,15 @@
 - **文档改进**：错别字、示例、翻译、过时说明都欢迎
 - **代码贡献**：修 bug、补测试、新组件或增强现有组件
 
-仓库地址：[birdpaper-team/birdpaper-ui](https://github.com/birdpaper-team/birdpaper-ui)（当前主开发分支：**`v3`**）。
+仓库地址：[birdpaper-team/birdpaper-ui](https://github.com/birdpaper-team/birdpaper-ui)。
 
 ## 开始之前
 
 1. 搜索是否已有相关 Issue / PR，避免重复劳动
 2. 较大改动（新组件、破坏性变更）建议先开 Issue 讨论
-3. Fork 仓库并基于最新 `v3` 建分支：
+3. Fork 仓库并基于最新默认分支创建功能分支：
 
 ```bash
-git checkout v3
 git pull
 git checkout -b feat/your-topic
 ```
@@ -91,7 +90,7 @@ docs: complete local development guide
 ## Pull Request
 
 1. 将分支推送到你的 Fork
-2. 向 **`v3`** 发起 Pull Request
+2. 向仓库**默认分支**发起 Pull Request
 3. PR 描述建议包含：
    - **改动说明**：解决了什么问题
    - **关联 Issue**：如 `Fixes #123`
@@ -120,7 +119,7 @@ docs: complete local development guide
 
 ## 许可证
 
-贡献的代码将默认以仓库 [MIT License](https://github.com/birdpaper-team/birdpaper-ui/blob/v3/LICENSE) 授权。若无法接受，请勿提交贡献。
+贡献的代码将默认以仓库 [MIT License](https://github.com/birdpaper-team/birdpaper-ui/blob/HEAD/LICENSE) 授权。若无法接受，请勿提交贡献。
 
 ## 需要帮助？
 

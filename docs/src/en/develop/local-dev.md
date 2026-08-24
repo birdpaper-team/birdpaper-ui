@@ -19,7 +19,6 @@ corepack prepare pnpm@8.10.4 --activate
 ```bash
 git clone https://github.com/birdpaper-team/birdpaper-ui.git
 cd birdpaper-ui
-git checkout v3   # Current main development branch is v3
 pnpm install
 ```
 
