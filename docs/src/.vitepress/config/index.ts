@@ -23,7 +23,7 @@ const config: import("vitepress").UserConfig = {
       { icon: "npm", link: "https://www.npmjs.com/package/birdpaper-ui" },
       {
         icon: "github",
-        link: "https://github.com/birdpaper-team/birdpaper-ui",
+        link: "https://github.com/liluanhui/birdpaper-ui",
       },
     ],
     search: {

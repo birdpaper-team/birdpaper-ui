@@ -3,12 +3,12 @@ import { ExtractPropTypes, PropType } from "vue";
 export const drawerProps = {
   /**
    * @type string
-   * @description Drawer title.
-   * @default "标题"
+   * @description Drawer title. Falls back to the ConfigProvider locale.
+   * @default ''
    */
   title: {
     type: String,
-    default: "标题",
+    default: "",
   },
   /**
    * @type string
@@ -75,21 +75,21 @@ export const drawerProps = {
   },
   /**
    * @type string
-   * @description The text of the confirm button.
-   * @default "确认"
+   * @description The text of the confirm button. Falls back to the ConfigProvider locale.
+   * @default ''
    */
   okText: {
     type: String,
-    default: "确认",
+    default: "",
   },
   /**
    * @type string
-   * @description The text of the cancel button.
-   * @default "取消"
+   * @description The text of the cancel button. Falls back to the ConfigProvider locale.
+   * @default ''
    */
   cancelText: {
     type: String,
-    default: "取消",
+    default: "",
   },
   /**
    * @type function

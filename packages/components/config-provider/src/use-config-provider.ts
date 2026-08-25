@@ -1,14 +1,23 @@
 import { App, computed, getCurrentInstance, MaybeRef, provide, unref } from "vue";
 import { ConfigProviderContext } from "./types";
-import { namespaceKey, prefixKey, localeKey, sizeKey, zIndexKey, emptyTextKey } from "@birdpaper-ui/hooks";
+import {
+  namespaceKey,
+  prefixKey,
+  localeKey,
+  sizeKey,
+  zIndexKey,
+  emptyTextKey,
+  localeMessagesKey,
+  mergeLocale,
+  resolveLocale,
+} from "@birdpaper-ui/hooks";
 
-const defaultConfig: Required<ConfigProviderContext> = {
+const defaultConfig: Required<Omit<ConfigProviderContext, "emptyText" | "localeMessages">> = {
   prefix: "Bp",
   namespace: "bp",
   locale: "zh-CN",
   size: "default",
   zIndex: 3000,
-  emptyText: "暂无数据",
 };
 
 export const provideGlobalConfig = (config: MaybeRef<ConfigProviderContext>, app?: App) => {
@@ -18,6 +27,13 @@ export const provideGlobalConfig = (config: MaybeRef<ConfigProviderContext>, app
   if (!provideFunction) return;
 
   const getConfig = () => ({ ...defaultConfig, ...unref(config) });
+
+  const messages = computed(() => {
+    const { locale, localeMessages } = getConfig();
+    return mergeLocale(resolveLocale(locale), localeMessages);
+  });
+
+  provideFunction(localeMessagesKey, messages);
 
   provideFunction(
     namespaceKey,
@@ -41,6 +57,6 @@ export const provideGlobalConfig = (config: MaybeRef<ConfigProviderContext>, app
   );
   provideFunction(
     emptyTextKey,
-    computed(() => getConfig().emptyText)
+    computed(() => getConfig().emptyText ?? messages.value.empty.description)
   );
 };

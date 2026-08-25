@@ -1,6 +1,5 @@
 import { build, type UserConfig } from "vite";
 import { esConfig, cjsConfig, bundleConfig, themeConfig } from "../config/vite.configs";
-import { copyAndConcatFilesPlugin } from "../plugins/build-plugins";
 import { resolve } from "path";
 import { distPkgRoot, bpUIRoot, themeRoot, projRoot } from "../paths";
 import { existsSync, rmSync, mkdirSync } from "fs";

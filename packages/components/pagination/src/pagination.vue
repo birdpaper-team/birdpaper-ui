@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import { useNamespace } from "@birdpaper-ui/hooks";
+import { useNamespace, useLocale } from "@birdpaper-ui/hooks";
 import { PaginationProps, paginationProps } from "./props";
 import prev from "./components/prev.vue";
 import next from "./components/next.vue";
@@ -27,6 +27,7 @@ import { PageinationComponent } from "./types";
 
 defineOptions({ name: "Pagination" });
 const { clsBlockName } = useNamespace("pagination");
+const { messages } = useLocale();
 
 const props: PaginationProps = defineProps(paginationProps);
 const emits = defineEmits<{
@@ -161,7 +162,7 @@ const sizesComponents = computed(() => {
       disabled: props.disabled,
       currentSize: currentPageSize.value,
       sizesList: props.sizesList,
-      tmpString: props.sizesTmpString,
+      tmpString: props.sizesTmpString || messages.value.pagination.pageSize,
     },
     eventName: "change",
     event: (size: number) => {
@@ -178,7 +179,7 @@ const jumperComponents = computed(() => {
       disabled: props.disabled,
       pages: totalPages.value,
       currentPage: currentPage.value,
-      tmpString: props.jumperTmpString,
+      tmpString: props.jumperTmpString || messages.value.pagination.jumper,
     },
     eventName: "change",
     event: (page: number) => {
@@ -192,7 +193,7 @@ const totalComponents = computed(() => {
   return {
     bind: {
       value: props.total,
-      tmpString: props.totalTmpString,
+      tmpString: props.totalTmpString || messages.value.pagination.total,
     },
     eventName: "",
     event: () => undefined,

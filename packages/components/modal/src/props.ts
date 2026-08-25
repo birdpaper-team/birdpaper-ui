@@ -144,12 +144,12 @@ export const modalProps = {
   },
   /**
    * @type string
-   * @description Confirm button content.
-   * @default "确认"
+   * @description Confirm button content. Falls back to the ConfigProvider locale.
+   * @default ''
    */
   okText: {
     type: String,
-    default: "确认",
+    default: "",
   },
   /**
    * @type Object
@@ -164,12 +164,12 @@ export const modalProps = {
   },
   /**
    * @type string
-   * @description Cancel button content.
-   * @default "取消"
+   * @description Cancel button content. Falls back to the ConfigProvider locale.
+   * @default ''
    */
   cancelText: {
     type: String,
-    default: "取消",
+    default: "",
   },
   /**
    * @type Object

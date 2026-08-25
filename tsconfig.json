@@ -27,7 +27,7 @@
     "paths": {
       "@birdpaper-ui/*": ["packages/*"]
     },
-    "typeRoots": ["./node_modules/@types", "./jsx-types.d.ts"]
+    "typeRoots": ["./node_modules/@types"]
   },
   "include": ["packages/**/*", "jsx-types.d.ts"],
   "exclude": ["node_modules", "dist", "**/*.js", "**/__tests__/**", "**/*.test.ts"]

@@ -9,7 +9,7 @@ Thanks for your interest in Birdpaper UI. Issues, discussions, and Pull Requests
 - **Improve docs**: Typos, examples, translations, and outdated notes are all useful
 - **Contribute code**: Bug fixes, tests, new components, or enhancements
 
-Repository: [birdpaper-team/birdpaper-ui](https://github.com/birdpaper-team/birdpaper-ui).
+Repository: [liluanhui/birdpaper-ui](https://github.com/liluanhui/birdpaper-ui).
 
 ## Before You Start
 
@@ -118,7 +118,7 @@ Harassment, personal attacks, or inappropriate content are not acceptable. Maint
 
 ## License
 
-Contributions are licensed under the repository [MIT License](https://github.com/birdpaper-team/birdpaper-ui/blob/HEAD/LICENSE) by default. Do not contribute if you cannot accept that.
+Contributions are licensed under the repository [MIT License](https://github.com/liluanhui/birdpaper-ui/blob/HEAD/LICENSE) by default. Do not contribute if you cannot accept that.
 
 ## Need Help?
 

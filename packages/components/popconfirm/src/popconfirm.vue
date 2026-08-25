@@ -16,9 +16,9 @@
         </div>
 
         <div :class="`${clsBlockName}-footer`">
-          <bp-button @click="handleCancel" size="mini" status="gray" type="plain">{{ cancelText }}</bp-button>
+          <bp-button @click="handleCancel" size="mini" status="gray" type="plain">{{ displayCancelText }}</bp-button>
           <bp-button @click="handleOk" :loading="okLoading" size="mini" type="normal" :status="btnStatus[type]">
-            {{ okText }}
+            {{ displayOkText }}
           </bp-button>
         </div>
       </div>
@@ -29,19 +29,23 @@
 <script setup lang="ts">
 import BpTrigger from "@birdpaper-ui/components/trigger/index";
 import BpButton from "@birdpaper-ui/components/button";
-import { useNamespace } from "@birdpaper-ui/hooks";
+import { useNamespace, useLocale } from "@birdpaper-ui/hooks";
 import { PopconfirmProps, popconfirmProps } from "./props";
 import type { PopconfirmType } from "./types";
 import type { ButtonStatus } from "@birdpaper-ui/components/button/src/types";
 import { IconCheckboxCircleFill, IconCloseCircleFill, IconErrorWarningFill, IconInformationFill } from "birdpaper-icon";
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 defineOptions({ name: "Popconfirm" });
 const { clsBlockName } = useNamespace("popconfirm");
+const { messages } = useLocale();
 
 const model = defineModel<boolean>({ default: false });
 const props: PopconfirmProps = defineProps(popconfirmProps);
 const emit = defineEmits(["cancel", "ok"]);
+
+const displayOkText = computed(() => props.okText || messages.value.popconfirm.ok);
+const displayCancelText = computed(() => props.cancelText || messages.value.popconfirm.cancel);
 
 const iconType = {
   info: IconInformationFill,

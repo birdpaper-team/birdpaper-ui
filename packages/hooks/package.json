@@ -1,12 +1,9 @@
 {
   "name": "@birdpaper-ui/hooks",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "private": true,
+  "description": "BirdpaperUI shared composables",
+  "main": "index.ts",
+  "types": "index.ts",
+  "license": "MIT"
 }

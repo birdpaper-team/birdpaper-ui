@@ -12,11 +12,11 @@
         :style="drawerStyle"
         role="dialog"
         aria-modal="true"
-        :aria-label="title || undefined"
+        :aria-label="displayTitle || undefined"
       >
         <div :class="`${clsBlockName}-header`">
           <slot name="header">
-            <span :class="`${clsBlockName}-header-title`">{{ title }}</span>
+            <span :class="`${clsBlockName}-header-title`">{{ displayTitle }}</span>
           </slot>
           <button
             v-if="!hideClose"
@@ -35,9 +35,9 @@
 
         <div v-if="!hideFooter" :class="`${clsBlockName}-footer`">
           <slot name="footer">
-            <bp-button @click="handleCancel" status="gray" type="secondary">{{ cancelText }}</bp-button>
+            <bp-button @click="handleCancel" status="gray" type="secondary">{{ displayCancelText }}</bp-button>
             <bp-button status="primary" type="normal" :loading="okLoading" @click="handleConfirm">
-              {{ okText }}
+              {{ displayOkText }}
             </bp-button>
           </slot>
         </div>
@@ -47,7 +47,7 @@
 </template>
 
 <script setup lang="ts">
-import { useNamespace, useModalZIndex, popupZIndexKey } from "@birdpaper-ui/hooks";
+import { useNamespace, useModalZIndex, popupZIndexKey, useLocale } from "@birdpaper-ui/hooks";
 import { DrawerProps, drawerProps } from "./props";
 import { useScrollLock, onKeyStroke } from "@vueuse/core";
 import { computed, onUnmounted, onMounted, provide, ref, watch, Transition } from "vue";
@@ -63,6 +63,10 @@ const props: DrawerProps = defineProps(drawerProps);
 const emit = defineEmits(["cancel", "confirm"]);
 
 const drawerRef = ref(null);
+const { messages } = useLocale();
+const displayTitle = computed(() => props.title || messages.value.drawer.title);
+const displayOkText = computed(() => props.okText || messages.value.drawer.ok);
+const displayCancelText = computed(() => props.cancelText || messages.value.drawer.cancel);
 provide(popupZIndexKey, computed(() => currentZIndex.value + 2));
 const isScrollLocked = typeof document !== "undefined" ? useScrollLock(document.body) : ref(false);
 let layerActive = false;

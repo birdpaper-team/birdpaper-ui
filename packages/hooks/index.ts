@@ -1,5 +1,6 @@
 export * from "./src/use-namespace";
 export * from "./src/config-keys";
+export * from "./src/locale";
 export * from "./src/use-word-count";
 export * from "./src/use-event-listener";
 export * from "./src/use-click-outside";
