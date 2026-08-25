@@ -1,10 +1,39 @@
 {
   "name": "birdpaper-ui",
   "version": "3.0.0-alpha.47",
-  "description": "",
-  "keywords": [],
-  "author": "",
+  "description": "A Vue 3 component library for enterprise admin interfaces. 为企业中后台而生的 Vue 3 组件库。",
+  "keywords": [
+    "vue",
+    "vue3",
+    "ui",
+    "ui-library",
+    "component-library",
+    "components",
+    "design-system",
+    "typescript",
+    "admin",
+    "birdpaper",
+    "birdpaper-ui"
+  ],
+  "author": "liluanhui",
   "license": "MIT",
+  "homepage": "https://www.birdpaper.design",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/liluanhui/birdpaper-ui.git"
+  },
+  "bugs": {
+    "url": "https://github.com/liluanhui/birdpaper-ui/issues"
+  },
+  "sideEffects": [
+    "dist/**",
+    "theme/**",
+    "**/*.css",
+    "**/*.scss"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
   "main": "lib/index.cjs",
   "module": "es/index.mjs",
   "types": "types/index.d.ts",
@@ -68,8 +97,11 @@
     "radash": "^12.1.0",
     "@vueuse/components": "^11.1.0",
     "@vueuse/core": "^11.1.0",
-    "birdpaper-icon": "^0.9.0",
+    "birdpaper-icon": "^1.0.0",
     "async-validator": "^4.2.5"
+  },
+  "peerDependencies": {
+    "vue": "^3.5.0"
   },
   "devDependencies": {
     "vue": "^3.5.22"

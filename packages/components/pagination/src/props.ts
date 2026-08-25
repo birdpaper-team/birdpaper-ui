@@ -67,22 +67,22 @@ export const paginationProps = {
   maxPager: { type: Number, default: 7 },
   /**
    * @type string
-   * @description The total copywriting template.
-   * @default "共 {total} 条"
+   * @description The total copywriting template. Falls back to the ConfigProvider locale.
+   * @default ''
    */
-  totalTmpString: { type: String, default: "共 {total} 条" },
+  totalTmpString: { type: String, default: "" },
   /**
    * @type string
-   * @description The jumper copywriting template.
-   * @default "前往{jumper}"
+   * @description The jumper copywriting template. Falls back to the ConfigProvider locale.
+   * @default ''
    */
-  jumperTmpString: { type: String, default: "前往{jumper}" },
+  jumperTmpString: { type: String, default: "" },
   /**
    * @type string
-   * @description The sizes copywriting template.
-   * @default "{value} 条/页"
+   * @description The sizes copywriting template. Falls back to the ConfigProvider locale.
+   * @default ''
    */
-  sizesTmpString: { type: String, default: "{value} 条/页" },
+  sizesTmpString: { type: String, default: "" },
 };
 
 export type PaginationProps = ExtractPropTypes<typeof paginationProps>;

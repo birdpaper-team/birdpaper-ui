@@ -57,10 +57,10 @@
             <div v-if="!hideFooter" :class="`${clsBlockName}-footer`">
               <slot name="footer">
                 <bp-button v-if="!hideCancel" v-bind="cancelBtnProps" @click="handleCancel">
-                  {{ cancelText }}
+                  {{ displayCancelText }}
                 </bp-button>
                 <bp-button v-bind="okBtnProps" :loading="okLoading" @click="handleConfirm">
-                  {{ okText }}
+                  {{ displayOkText }}
                 </bp-button>
               </slot>
             </div>
@@ -72,7 +72,7 @@
 </template>
 
 <script lang="ts" setup>
-import { useNamespace, useModalZIndex, popupZIndexKey } from "@birdpaper-ui/hooks";
+import { useNamespace, useModalZIndex, popupZIndexKey, useLocale } from "@birdpaper-ui/hooks";
 import BpButton from "@birdpaper-ui/components/button";
 import { computed, ref, watch, onMounted, onUnmounted, provide } from "vue";
 import { ModalProps, modalProps } from "./props";
@@ -94,6 +94,9 @@ const props: ModalProps = defineProps(modalProps);
 const emit = defineEmits(["cancel", "confirm"]);
 
 const modalRef = ref(null);
+const { messages } = useLocale();
+const displayOkText = computed(() => props.okText || messages.value.modal.ok);
+const displayCancelText = computed(() => props.cancelText || messages.value.modal.cancel);
 provide(popupZIndexKey, computed(() => currentZIndex.value + 2));
 const isScrollLocked = typeof document !== "undefined" ? useScrollLock(document.body) : ref(false);
 let layerActive = false;

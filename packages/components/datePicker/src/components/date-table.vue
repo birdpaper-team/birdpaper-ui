@@ -25,7 +25,7 @@
     </div>
 
     <div v-if="ctx?.showTime" class="time-area">
-      <div class="time-area-header">选择时间</div>
+      <div class="time-area-header">{{ messages.datePicker.selectTime }}</div>
       <time-table
         v-if="ctx?.showTime"
         ref="timeTableRef"
@@ -38,15 +38,19 @@
 
   <div :class="`${clsBlockName}-footer`" :style="{ 'justify-content': ctx?.showTime ? 'space-between' : 'center' }">
     <template v-if="ctx?.showTime">
-      <bp-button size="small" status="gray" type="secondary" @click="setNow"> 此刻 </bp-button>
-      <bp-button type="normal" size="small" status="primary" @click="confirmValue"> 确定 </bp-button>
+      <bp-button size="small" status="gray" type="secondary" @click="setNow"> {{ messages.datePicker.now }} </bp-button>
+      <bp-button type="normal" size="small" status="primary" @click="confirmValue">
+        {{ messages.datePicker.ok }}
+      </bp-button>
     </template>
-    <bp-button v-else type="text" status="primary" @click="handleSelect(toDay)"> 今天 </bp-button>
+    <bp-button v-else type="text" status="primary" @click="handleSelect(toDay)">
+      {{ messages.datePicker.today }}
+    </bp-button>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useNamespace } from "@birdpaper-ui/hooks";
+import { useNamespace, useLocale } from "@birdpaper-ui/hooks";
 import { ref, inject, onMounted } from "vue";
 import { DatePickerContext, DayCell, PanelType, dateInjectionKey } from "../types";
 import tableHeader from "./table-header.vue";
@@ -58,6 +62,7 @@ import dayjs from "dayjs";
 
 defineOptions({ name: "DateTable" });
 const { clsBlockName } = useNamespace("date-table");
+const { messages } = useLocale();
 
 const emits = defineEmits(["change-picker"]);
 

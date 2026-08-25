@@ -1,9 +1,8 @@
 {
   "name": "@birdpaper-ui/theme",
   "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "private": true,
+  "description": "BirdpaperUI design tokens and component styles",
+  "main": "src/index.scss",
   "license": "MIT"
 }

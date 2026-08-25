@@ -17,7 +17,7 @@ corepack prepare pnpm@8.10.4 --activate
 ## 克隆与安装
 
 ```bash
-git clone https://github.com/birdpaper-team/birdpaper-ui.git
+git clone https://github.com/liluanhui/birdpaper-ui.git
 cd birdpaper-ui
 pnpm install
 ```

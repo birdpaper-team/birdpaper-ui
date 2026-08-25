@@ -152,6 +152,6 @@ Theme overrides also apply in dark mode. To customize dark mode separately, scop
 
 ## Links
 
-- [GitHub repository](https://github.com/birdpaper-team/birdpaper-ui) — Source code and issue tracking
+- [GitHub repository](https://github.com/liluanhui/birdpaper-ui) — Source code and issue tracking
 - [Icon library](https://icon.birdpaper.design) — 2,000+ icon components
 - [Changelog](/develop/changelog) — Version history

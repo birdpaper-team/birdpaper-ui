@@ -27,7 +27,7 @@
                 <td :colspan="displayColumns.length + (gutterWidth > 0 ? 1 : 0)">
                   <slot name="empty"></slot>
                   <div :class="`${clsBlockName}-body-tbody-empty`" v-if="!slots.empty?.({})">
-                    <bp-empty :content="props.emptyText"></bp-empty>
+                    <bp-empty :content="props.emptyText || undefined"></bp-empty>
                   </div>
                 </td>
               </tr>

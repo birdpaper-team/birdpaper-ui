@@ -1,18 +1,14 @@
 {
-  "private": "false",
+  "private": true,
   "description": "BirdpaperUI Workspaces",
   "packageManager": "pnpm@8.10.4",
-  "workspaces": [
-    "packages/*",
-    "docs"
-  ],
   "scripts": {
     "cz": "czg emoji",
     "lint": "oxlint -D correctness -W suspicious",
     "docs:dev": "pnpm run -C docs dev",
     "docs:build": "pnpm run -C docs build",
     "docs:preview": "pnpm run -C docs preview",
-    "clean": "rimraf dist && pnpm run -r --parallel clean",
+    "clean": "rimraf dist",
     "build": "pnpm run clean && pnpm run -C scripts/build start",
     "yalc": "pnpm run clean && pnpm run build && cd dist/birdpaper-ui && yalc publish --push",
     "test": "vitest",
@@ -32,9 +28,6 @@
     "radash": "^12.1.0"
   },
   "devDependencies": {
-    "@pnpm/find-workspace-packages": "^4.0.16",
-    "@pnpm/types": "^8.4.0",
-    "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.19.25",
     "@unocss/reset": "^0.61.7",
     "@vitejs/plugin-vue": "^5.1.3",
@@ -42,16 +35,10 @@
     "@vitest/coverage-v8": "^1.6.0",
     "@vitest/ui": "1.6.0",
     "@vue/test-utils": "^2.0.0",
-    "@vue/tsconfig": "^0.1.3",
     "commitizen": "^4.3.0",
     "cz-git": "^1.3.8",
     "czg": "^1.3.8",
-    "gulp-autoprefixer": "^9.0.0",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-concat": "^2.6.1",
     "happy-dom": "12.10.3",
-    "jsdom": "16.4.0",
-    "merge-stream": "^2.0.0",
     "oxlint": "^0.6.1",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
@@ -59,11 +46,9 @@
     "tsx": "^4.7.1",
     "typescript": "^4.7.4",
     "unocss": "^0.61.7",
-    "unplugin-vue-macros": "^2.7.11",
     "vite": "^5.4.1",
     "vitest": "1.6.0",
     "vue": "^3.5.23",
-    "vue-router": "^4.0.16",
     "vue-tsc": "^0.38.2"
   },
   "config": {

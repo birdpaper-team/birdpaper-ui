@@ -5,7 +5,6 @@
     "start": "tsx build.ts"
   },
   "devDependencies": {
-    "@types/fs-extra": "^9.0.13",
     "@types/node": "^18.19.25",
     "fast-glob": "^3.3.2",
     "tsx": "^4.7.1",

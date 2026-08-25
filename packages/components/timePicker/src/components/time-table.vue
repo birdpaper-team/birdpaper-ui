@@ -23,16 +23,16 @@
     </div>
 
     <div v-if="!onlySelector" :class="`${clsBlockName}-footer`">
-      <bp-button size="mini" status="gray" type="secondary" @click="setNow">现在</bp-button>
+      <bp-button size="mini" status="gray" type="secondary" @click="setNow">{{ messages.timePicker.now }}</bp-button>
       <bp-button :disabled="confirmDisabled" size="mini" type="normal" status="primary" @click="handleSelect">
-        确认
+        {{ messages.timePicker.ok }}
       </bp-button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { useNamespace } from "@birdpaper-ui/hooks";
+import { useNamespace, useLocale } from "@birdpaper-ui/hooks";
 import BpButton from "@birdpaper-ui/components/button/index";
 import { computed, inject, ref, watch } from "vue";
 import type { Ref } from "vue";
@@ -44,6 +44,7 @@ import VirtualScroller from "@birdpaper-ui/components/utils/virtual-scroller.vue
 
 defineOptions({ name: "TimeTable" });
 const { clsBlockName } = useNamespace("time-table");
+const { messages } = useLocale();
 const ctx = ref<TimePickerContext>();
 
 const props: TimeTableProps = defineProps(timeTableProps);

@@ -1,8 +1,8 @@
 import { mount } from "@vue/test-utils";
 import { describe, expect, it } from "vitest";
 import { h, nextTick } from "vue";
-import Table from "./packages/components/table/src/table.vue";
-import TableColumn from "./packages/components/table/src/components/table-column.vue";
+import Table from "../src/table.vue";
+import TableColumn from "../src/components/table-column.vue";
 
 describe("Table Selection", () => {
   const data = [

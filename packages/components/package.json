@@ -1,6 +1,11 @@
 {
   "name": "@birdpaper-ui/components",
   "version": "3.0.0",
+  "private": true,
+  "description": "BirdpaperUI component sources",
+  "main": "index.ts",
+  "types": "index.ts",
+  "license": "MIT",
   "dependencies": {
     "@birdpaper-ui/theme": "workspace:*",
     "@birdpaper-ui/hooks": "workspace:*"

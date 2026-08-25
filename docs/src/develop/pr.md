@@ -9,7 +9,7 @@
 - **文档改进**：错别字、示例、翻译、过时说明都欢迎
 - **代码贡献**：修 bug、补测试、新组件或增强现有组件
 
-仓库地址：[birdpaper-team/birdpaper-ui](https://github.com/birdpaper-team/birdpaper-ui)。
+仓库地址：[liluanhui/birdpaper-ui](https://github.com/liluanhui/birdpaper-ui)。
 
 ## 开始之前
 
@@ -119,7 +119,7 @@ docs: complete local development guide
 
 ## 许可证
 
-贡献的代码将默认以仓库 [MIT License](https://github.com/birdpaper-team/birdpaper-ui/blob/HEAD/LICENSE) 授权。若无法接受，请勿提交贡献。
+贡献的代码将默认以仓库 [MIT License](https://github.com/liluanhui/birdpaper-ui/blob/HEAD/LICENSE) 授权。若无法接受，请勿提交贡献。
 
 ## 需要帮助？
 

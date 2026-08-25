@@ -26,7 +26,7 @@ const handleShowCode = () => {
 
 const toEdit = () => {
   window.open(
-    `https://github.com/birdpaper-team/birdpaper-ui/blob/v3/docs/src/${props.basePath}/${props.src}.vue`
+    `https://github.com/liluanhui/birdpaper-ui/blob/v3/docs/src/${props.basePath}/${props.src}.vue`
   );
 };
 </script>

@@ -9,7 +9,9 @@ dayjs.extend(localeData);
 
 export const useDayJs = (lang: LangsType, model: string) => {
   const localeDataApi = dayjs().locale(lang).localeData();
-  const toDay: DayCell = { value: dayjs().locale(lang).format("YYYY-MM-DD"), label: "今天", type: "normal" };
+  // label is not rendered anywhere (only `value` is consumed); keep it locale-neutral
+  // so no display string is hardcoded here. UI text comes from the ConfigProvider locale.
+  const toDay: DayCell = { value: dayjs().locale(lang).format("YYYY-MM-DD"), label: "", type: "normal" };
   const current = ref(!model ? dayjs().locale(lang) : dayjs(model).locale(lang));
   const currentMonth = computed(() => current.value.month());
   const currentYear = computed(() => current.value.year());

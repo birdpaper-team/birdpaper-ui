@@ -68,12 +68,12 @@ export const tableProps = {
   },
   /**
    * @type string
-   * @description The text when data is empty.
-   * @default "Empty."
+   * @description The text when data is empty. Falls back to the ConfigProvider locale.
+   * @default ''
    */
   emptyText: {
     type: String,
-    default: "暂无数据",
+    default: "",
   },
   /**
    * @type TableRowSelection

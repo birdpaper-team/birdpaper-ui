@@ -152,6 +152,6 @@ $defaultMargin: 10px; // 默认外边距
 
 ## 链接
 
-- [GitHub 仓库](https://github.com/birdpaper-team/birdpaper-ui) — 源码与 Issue 追踪
+- [GitHub 仓库](https://github.com/liluanhui/birdpaper-ui) — 源码与 Issue 追踪
 - [图标库](https://icon.birdpaper.design) — 2000+ 图标组件
 - [更新日志](/develop/changelog) — 版本变更记录

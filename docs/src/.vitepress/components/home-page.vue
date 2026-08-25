@@ -250,7 +250,7 @@
           </div>
           <div class="footer-col">
             <h4>{{ t.footerCommunity }}</h4>
-            <a href="https://github.com/birdpaper-team/birdpaper-ui" target="_blank" rel="noreferrer">GitHub</a>
+            <a href="https://github.com/liluanhui/birdpaper-ui" target="_blank" rel="noreferrer">GitHub</a>
             <a href="https://www.npmjs.com/package/birdpaper-ui" target="_blank" rel="noreferrer">npm</a>
           </div>
           <div class="footer-col">

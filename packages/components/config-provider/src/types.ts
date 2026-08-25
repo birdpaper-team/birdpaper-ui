@@ -1,3 +1,5 @@
+import type { PartialLocaleMessages } from "@birdpaper-ui/hooks";
+
 export type ComponentSize = "mini" | "small" | "default" | "large";
 
 export interface ConfigProviderProps {
@@ -7,11 +9,13 @@ export interface ConfigProviderProps {
   namespace: string;
   /** Global locale language code (e.g. "zh-CN", "en"). */
   locale: string;
+  /** Partial overrides applied on top of the resolved locale pack. */
+  localeMessages: PartialLocaleMessages;
   /** Global default size for all form-related components. */
   size: ComponentSize;
   /** Base z-index value for popup components (Modal, Drawer, Tooltip, Message). */
   zIndex: number;
-  /** Default empty-state text for Table, Select, Empty, etc. */
+  /** Default empty-state text for Table, Select, Empty, etc. Overrides the locale pack. */
   emptyText: string;
 }
 
