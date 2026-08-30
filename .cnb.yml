@@ -29,7 +29,7 @@ $:
         - name: show version
           script: node -v
         - name: install
-          script: npm install -g pnpm && pnpm install --no-frozen-lockfile --verbose
+          script: npm install -g pnpm && pnpm install --no-frozen-lockfile
         - name: build
           script: pnpm run build
         - name: update version
