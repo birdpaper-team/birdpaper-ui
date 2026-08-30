@@ -147,51 +147,182 @@ export async function buildTheme() {
   console.log("主题样式构建完成");
 }
 
+/** Theme shared/token CSS files — do not treat as component on-demand targets via filename. */
+const THEME_SHARED_STEMS = new Set([
+  "index",
+  "base",
+  "color",
+  "sizes",
+  "extend",
+  "function",
+  "mixins",
+  "zindex",
+]);
+
+function kebabToCamel(name: string): string {
+  return name.replace(/-([a-z])/g, (_, c: string) => c.toUpperCase());
+}
+
+/** Split UnoCSS vue-scoped output into per-scopeId chunks. */
+function splitCssByScope(css: string): Map<string, string> {
+  const map = new Map<string, string[]>();
+  const ruleRe = /([^{}]+)\{([^{}]*)\}/g;
+  let match: RegExpExecArray | null;
+
+  while ((match = ruleRe.exec(css))) {
+    const selector = match[1].trim();
+    const body = match[2];
+    const scopes = [...new Set(selector.match(/data-v-[0-9a-f]+/g) || [])];
+    if (scopes.length === 0) continue;
+
+    const rule = `${selector}{${body}}`;
+    for (const scope of scopes) {
+      const list = map.get(scope) || [];
+      list.push(rule);
+      map.set(scope, list);
+    }
+  }
+
+  return new Map([...map.entries()].map(([scope, rules]) => [scope, rules.join("")]));
+}
+
+/**
+ * Map each Vue SFC __scopeId to theme CSS stems that should receive its Uno styles.
+ * - Always: packages/components/{folder} → theme/{folder}.css (when present)
+ * - Also: vue filename camelCase → theme/{name}.css (e.g. date-table → dateTable.css),
+ *   skipping shared token files like index/sizes/base.
+ */
+async function collectScopeThemeTargets(): Promise<Map<string, Set<string>>> {
+  const themeDir = resolve(distPkgRoot, "theme");
+  const themeStems = new Set(
+    (await readdir(themeDir))
+      .filter((f) => f.endsWith(".css"))
+      .map((f) => f.replace(/\.css$/, "")),
+  );
+
+  const targets = new Map<string, Set<string>>();
+  const vueFiles = await glob("**/*.vue.mjs", {
+    cwd: resolve(distPkgRoot, "es"),
+    absolute: true,
+    onlyFiles: true,
+  });
+
+  for (const file of vueFiles) {
+    const content = await readFile(file, "utf-8");
+    const scopeMatch = content.match(/\["__scopeId",\s*"(data-v-[0-9a-f]+)"\]/);
+    if (!scopeMatch) continue;
+
+    const scopeId = scopeMatch[1];
+    const parts = file.split(/[/\\]/);
+    const compIdx = parts.lastIndexOf("components");
+    if (compIdx < 0 || compIdx + 1 >= parts.length) continue;
+
+    const folder = parts[compIdx + 1];
+    const baseName = file.replace(/\.vue\.mjs$/, "").split(/[/\\]/).pop() || "";
+    const camelName = kebabToCamel(baseName);
+
+    const stems = targets.get(scopeId) || new Set<string>();
+    if (themeStems.has(folder)) stems.add(folder);
+    if (themeStems.has(camelName) && !THEME_SHARED_STEMS.has(camelName)) {
+      stems.add(camelName);
+    }
+    if (stems.size > 0) targets.set(scopeId, stems);
+  }
+
+  return targets;
+}
+
+/** Merge UnoCSS into full theme entries and per-component on-demand CSS. */
+async function injectUnoStyles(unoCss: string) {
+  if (!unoCss.trim()) {
+    console.warn("未找到 UnoCSS 产物 (es/style.css)，跳过样式注入");
+    return;
+  }
+
+  const themeIndexPath = resolve(distPkgRoot, "theme/index.css");
+  const distIndexPath = resolve(distPkgRoot, "dist/index.css");
+  const themeSrcIndexPath = resolve(distPkgRoot, "theme/src/index.css");
+
+  let themeIndexContent = "";
+  if (existsSync(themeIndexPath)) {
+    themeIndexContent = await readFile(themeIndexPath, "utf-8");
+  }
+
+  const mergedIndexCss = `${themeIndexContent}\n${unoCss}`.trim() + "\n";
+  await writeFile(themeIndexPath, mergedIndexCss);
+
+  // Keep theme/src/index.css as the same full entry for any existing consumers.
+  await mkdir(resolve(distPkgRoot, "theme/src"), { recursive: true });
+  await writeFile(themeSrcIndexPath, mergedIndexCss);
+
+  await mkdir(resolve(distPkgRoot, "dist"), { recursive: true });
+  await writeFile(distIndexPath, mergedIndexCss);
+
+  // On-demand: append each component's scoped Uno rules to its theme/*.css
+  const cssByScope = splitCssByScope(unoCss);
+  const scopeTargets = await collectScopeThemeTargets();
+  const stemCss = new Map<string, string[]>();
+
+  for (const [scopeId, stems] of scopeTargets) {
+    const chunk = cssByScope.get(scopeId);
+    if (!chunk) continue;
+    for (const stem of stems) {
+      const list = stemCss.get(stem) || [];
+      list.push(chunk);
+      stemCss.set(stem, list);
+    }
+  }
+
+  let injectedCount = 0;
+  for (const [stem, chunks] of stemCss) {
+    if (THEME_SHARED_STEMS.has(stem)) continue;
+    const filePath = resolve(distPkgRoot, "theme", `${stem}.css`);
+    if (!existsSync(filePath)) continue;
+
+    const existing = await readFile(filePath, "utf-8");
+    const unoBlock = chunks.join("");
+    await writeFile(filePath, `${existing}\n${unoBlock}`.trim() + "\n");
+    injectedCount++;
+  }
+
+  console.log(
+    `UnoCSS 已合并至 theme/index.css、dist/index.css，并注入 ${injectedCount} 个按需主题文件`,
+  );
+}
+
 // 文件复制和样式合并
 export async function copyAndConcatFiles() {
-  // 确保目录存在
   const cssDir = resolve(distPkgRoot, "theme/src");
   const scssDir = resolve(distPkgRoot, "theme/scss");
-  
+
   if (!existsSync(cssDir)) await mkdir(cssDir, { recursive: true });
   if (!existsSync(scssDir)) await mkdir(scssDir, { recursive: true });
 
   try {
-    // 合并 SCSS 文件
     const indexScssPath = resolve(distPkgRoot, "theme/scss/index.scss");
     const esStylePath = resolve(distPkgRoot, "es/style.css");
-    
+
     let indexScssContent = "";
     let esStyleContent = "";
-    
+
     if (existsSync(indexScssPath)) {
       indexScssContent = await readFile(indexScssPath, "utf-8");
     }
-    
+
     if (existsSync(esStylePath)) {
       esStyleContent = await readFile(esStylePath, "utf-8");
     }
-    
+
     const mergedScss = indexScssContent + "\n" + esStyleContent;
     await writeFile(resolve(scssDir, "index.scss"), mergedScss);
-    
-    // 合并 CSS 文件
-    const indexPath = resolve(distPkgRoot, "theme/index.css");
-    
-    let indexContent = "";
-    if (existsSync(indexPath)) {
-      indexContent = await readFile(indexPath, "utf-8");
-    }
-    
-    const mergedCss = indexContent + "\n" + esStyleContent;
-    await writeFile(resolve(cssDir, "index.css"), mergedCss);
-    
-    console.log("样式文件合并完成");
+
+    await injectUnoStyles(esStyleContent);
   } catch (error) {
     console.error("样式文件合并失败:", error);
+    throw error;
   }
 
-  // 复制文件
+  // 复制文件（theme/index.css 已含 Uno，再同步到 dist/index.css 作为兜底）
   const files: Array<[string, string]> = [
     [resolve(distPkgRoot, "theme/index.css"), resolve(distPkgRoot, "dist/index.css")],
     [resolve(projRoot, "packages/birdpaper-ui/package.json"), resolve(distPkgRoot, "package.json")],
@@ -205,7 +336,6 @@ export async function copyAndConcatFiles() {
   ];
 
   try {
-    // 复制文件
     for (const [from, to] of files) {
       if (existsSync(from)) {
         const content = await readFile(from);
@@ -214,17 +344,17 @@ export async function copyAndConcatFiles() {
       }
     }
 
-    // 复制文件夹
     for (const [from, to] of folders) {
       if (existsSync(from)) {
         await copyFolder(from, to);
         console.log(`文件夹复制成功: ${from} -> ${to}`);
       }
     }
-    
+
     console.log("文件复制完成");
   } catch (error) {
     console.error("文件复制失败:", error);
+    throw error;
   }
 
   await patchTypesEntry();
